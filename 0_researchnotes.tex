@@ -1,0 +1,323 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 13 Jun 2016                                                                 %
+% 0_researchnotes.tex                                                         %
+% by: David Clarke                                                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Normal preamble stuff.
+\documentclass[12pt]{book}
+\usepackage[title]{appendix}
+\usepackage{mathtools,tensor,physics,slashed}
+
+% davitex and required packages
+\usepackage{amsmath,amssymb,graphicx,multirow,tabularx}
+\usepackage{davitex}
+
+% If you click on citations or equation references, you will be take
+% to the corresponding page. 
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=magenta,
+  urlcolor=blue,
+}
+
+% Put references at the end of each chapter, directly after the
+% end of the chapter, call them "References" instead of
+% "Bibliography", and use numbers with square brackets.
+\usepackage{url,natbib,chapterbib}
+\let\oldbibliography\bibliography
+\renewcommand{\bibliography}[1]{{%
+  \let\chapter\section%
+  \oldbibliography{#1}}}
+\renewcommand\bibname{References}
+\setcitestyle{numbers,square}
+
+% Make index.
+\usepackage{makeidx}
+\makeindex
+\usepackage[totoc]{idxlayout}
+
+% Prevent hyphenation.
+\setlength\parindent{15pt}
+\overfullrule=2cm
+
+% Theorems and stuff.
+\usepackage{amsthm}
+\usepackage[many]{tcolorbox}
+\tcbuselibrary{theorems}
+\newtcbtheorem[number within=section]{theorem}{Theorem}{%
+  breakable,
+  enhanced,
+  before skip=10pt,
+  colback=green!5,
+  colframe=green!35!black,
+  fonttitle=\bfseries}{thm}
+\newtcbtheorem[number within=section]{proposition}{Proposition}{%
+  breakable,
+  enhanced,
+  before skip=10pt,
+  colback=green!5,
+  colframe=green!35!black,
+  fonttitle=\bfseries}{prp}
+\newtcbtheorem[number within=section]{lemma}{Lemma}{%
+  breakable,
+  enhanced,
+  before skip=10pt,
+  colback=green!5,
+  colframe=green!35!black,
+  fonttitle=\bfseries}{lem}
+\newtcbtheorem[number within=section]{corollary}{Corollary}{%
+  breakable,
+  enhanced,
+  before skip=10pt,
+  colback=green!5,
+  colframe=green!35!black,
+  fonttitle=\bfseries}{cor}
+\newtcbtheorem[number within=section]{example}{Example}{%
+  breakable,
+  enhanced,
+  before skip=10pt,
+  colback=blue!5,
+  colframe=blue!35!black,
+  fonttitle=\bfseries}{cor}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+%\newtheorem*{example}{Example}
+
+% Some environments for some front matter.
+\newenvironment{frontstuff}
+  {\centering\chapter*{}}
+  {\clearpage}
+\newenvironment{listofabbrev}
+  {\chapter*{List of Abbreviations}}
+  {\clearpage}
+
+% Note that book class by default is formatted to be printed back-to-back.
+\title{\bf David's Research Notes} 
+\author{David Clarke}
+
+\begin{document}
+\frontmatter                            % roman page no., suppress chapter
+\pagenumbering{gobble}                  % suppress page no.
+\maketitle                              % print title page
+
+\begin{frontstuff} % ----------------------------------------------- FRONT STUFF
+
+\section*{Math Symbols}
+\begin{tabular}{ll}
+$\exists$       & There exists \\
+$\forall$       & For all \\
+$\in$           & Is a member of the set \\
+$\leq$          & Less than or equal to; is a subgroup of\\
+$\approx$       & Approximate equality \\
+$\cong$         & Isomorphic\\
+$\equiv$        & Is defined as; modular congruency \\
+$\sim$          & Equivalence relation \\
+$\simeq$        & Asymptotic equality \\
+$\mathbb{C}$    & Complex numbers \\
+$\co_x$         & $\cos(x)$ \\
+$\log$          & Natural logarithm \\
+$\mathbb{N}$    & Natural numbers \\
+$\mathcal{O}$   & Big O notation; topology on a set \\ 
+$\mathbb{Q}$    & Rational numbers \\
+$q$             & Gaussian or Student difference test; goodness-of-fit \\
+$\mathbb{R}$    & Real numbers \\
+$\s_x$          & $\sin(x)$ \\
+$\SU(N)$        & Special unitary group of degree $N$ \\
+$S_V$           & Symmetric group on the set $V$ \\
+$\tauint$       & Integrated autocorrelation time \\
+$\mathbb{Z}$    & Integers \\
+$\mathbb{Z}_n$  & Integers modulo $n$ \\
+\end{tabular}
+\clearpage
+
+\section*{Physics Symbols}
+\begin{tabular}{ll}
+$a$             & Lattice spacing \\
+$\beta$         & $\SU(N_c)$ coupling constant; beta function \\
+$\chi$          & Topological susceptibility; Polyakov loop susceptibility\\
+$c$             & Speed of light\\
+$G$             & A group; Newton's gravitational constant\\
+$g$             & A group element; $\SU(N_c)$ bare coupling\\
+$\hbar$         & Planck's constant \\
+$k_B$           & Boltzmann's constant \\
+$N_c$           & Number of colors \\
+$N_f$           & Number of fermion flavors \\
+$N_s$           & Lattice extension in a spatial direction \\
+$N_\tau$        & Lattice extension in temperature/Euclidean time direction\\
+$\sigma$        & String tension\\
+$\sigma_i$      & A Pauli matrix\\
+$T_c$           & Deconfining phase transition temperature\\
+\end{tabular}
+\clearpage
+
+\section*{High Energy Glossary}
+\begin{tabularx}{\linewidth}{lL}
+Baryogenesis&
+  Physical processes that must have occurred
+  during the early universe that are responsible for the imbalance between
+  the amount of matter and antimatter.
+\vspace{2mm}\\
+Baryon& 
+  Three quark hadron.
+\vspace{2mm}\\
+Baryon number (B)& 
+  (\# baryons $-$ \# anti-baryons)
+\vspace{2mm}\\
+Bottomness (B$'$)& 
+  $-$(\# bottom quarks $-$ \# bottom anti-quarks)
+\vspace{2mm}\\
+Branching ratio& 
+  Ratio of decay rate of particle along a particular channel
+  to the total decay rate of that particle.
+\vspace{2mm}\\
+Charm (C)& 
+  (\# charm quarks $-$ \# charm anti-quarks)
+\vspace{2mm}\\
+Effective field theory&
+  Field theory that is valid only at certain energy scales. The SM is 
+  therefore an effective field theory.
+\vspace{2mm}\\
+Field equation&
+  Any partial differential equation describing the dynamics of
+  some physical field.
+\vspace{2mm}\\
+Hadron& 
+  Color neutral particle made of multiple quarks. See e.g. meson, baryon, 
+  nucleon.
+\vspace{2mm}\\
+Lattice units&
+  Units where $a=1$ and is dimensionless.
+\vspace{2mm}\\
+Meson& 
+  Two quark hadron.
+\vspace{2mm}\\
+Naturalness&
+  The property that free parameters or physical constants appearing in a theory
+  should take relative values of order 1.
+\vspace{2mm}\\
+Nucleon& 
+  Baryons found in atomic nuclei.
+\vspace{2mm}\\
+Physical units& 
+  Units where $a$ carries length. 
+\vspace{2mm}\\
+Planck mass&
+  Mass at which the gravitational coupling becomes of order one.
+  $$
+    \alpha_G=\frac{GM_P^2}{\hbar c}\sim1~\Rightarrow~
+     M_P\sim\sqrt{\frac{\hbar c}{G}}\approx10^{19}~\text{GeV}
+  $$
+\end{tabularx}
+\clearpage
+\begin{tabularx}{\linewidth}{lL}
+Semi-leptonic decay& 
+  Weak decay of a hadron producing a lepton, corresponding neutrino,
+  and one or more hadrons. 
+\vspace{2mm}\\
+Strangeness (S)& 
+  $-$(\# strange quarks $-$ \# strange anti-quarks)
+\vspace{2mm}\\
+Topness (T)& 
+  (\# top quarks $-$ \# top anti-quarks)
+\end{tabularx}
+\clearpage
+
+\section*{Some Important Particles}
+\begin{tabularx}{\linewidth}{rLlc}
+{\it Name} & {\it Significance} & {\it Symbol} & {\it Composition}
+\vspace{2mm}\\
+B meson: & Light mesons with bottomness 1.
+                                     & $B^0$ &   $d\bar{b}$, 
+                                                   $b\bar{d}$ \\
+         & Can use weak decays to extract
+                                     & $B^+$ &   $u\bar{b}$ \\
+         & some CKM matrix elements. & $B^-$ &   $b\bar{u}$
+\vspace{2mm}\\
+D meson: & Light mesons with charm 1. Can
+                                     & $D^0$ &   $c\bar{u}$, 
+                                                   $u\bar{c}$ \\
+         & use weak decays to extract some
+                                     & $D^+$ &   $c\bar{d}$ \\
+         & CKM matrix elements.      & $D^-$ &   $d\bar{c}$
+\vspace{2mm}\\
+Eta:     & $\eta-\eta'$ mass difference can be
+                                     & $\eta$  &   $u\bar{u}
+                                                   +d\bar{d}
+                                                  -2s\bar{s}$ \\
+         & explained by topology.    & $\eta'$ &   $u\bar{u}
+                                                   +d\bar{d}
+                                                   +s\bar{s}$
+\vspace{2mm}\\
+Kaon:    & Light mesons with strangeness 1.
+                                     & $K^0$ &   $d\bar{s}$, 
+                                                   $s\bar{d}$ \\
+         & Can use weak decays to extract 
+                                     & $K^+$ &   $u\bar{s}$ \\
+         & some CKM matrix elements. Its 
+                                     & $K^-$ &   $s\bar{u}$ \\
+         & decay constant is used as a 
+                                     &       &              \\
+         & reference in lattice calculations.
+                                     &       &              
+\vspace{2mm}\\
+Pion:    & Lightest mesons. ``Would-be"
+                                     & $\pi^0$ &   $u\bar{u}$,
+                                                   $d\bar{d}$ \\
+         & Goldstone bosons of chiral& $\pi^+$ &   $u\bar{d}$ \\
+         & symmetry breaking.        & $\pi^-$ &   $d\bar{u}$
+\vspace{2mm}\\
+Psion:   & Discovery of the charm quark.
+         & $\text{J}/\psi$                     &   $c\bar{c}$ 
+\vspace{2mm}\\
+Upsilon: & Discovery of the bottom quark.
+         & $\Upsilon$                          &   $b\bar{b}$ \\
+\end{tabularx}
+\clearpage
+
+\end{frontstuff} % ----------------------------------------------------- PREFACE
+
+\chapter{Preface}
+This ``book" is a collection of research notes that I made while researching in
+physics. The first chapters are dedicated to mainly mathematics, and the last
+chapters are dedicated to mainly physics, with an aim toward lattice field
+theory. Attached at the end are also some appendices. 
+Appendix~\ref{ap:spec_math} includes some special topics in mathematics 
+that, while sometimes useful for a physicist, don't really fit in one of 
+the mathematics chapters at the beginning. Appendix~\ref{ap:spec_phys} includes
+special topics in physics that I find interesting, but aren't directly
+relevant to any research I work on. As I continue researching, I may want
+to develop some of these appendices into full chapters, if they ever
+become directly relevant to my research.
+
+Throughout this book, I assume the reader has some basic knowledge of 
+mathematics, for instance what it means for operations to be $associative$ or 
+$commutative$. The reader will also find it useful to have some basic knowledge
+of calculus, linear algebra, differential equations, and complex analysis.
+(Just enough to get by in undergraduate level physics classes.) 
+
+\tableofcontents                        % print table of contents
+\mainmatter                             % arabic page no., include chapter
+
+% These are the chapters of the book.
+\include{ch_group_theory}
+\include{ch_differential_geometry}
+\include{ch_probability_and_statistics}
+\include{ch_statistical_physics}
+\include{ch_QFT}
+\include{ch_LGT_prelim}
+\include{ch_LGT_MCMC}
+\include{ch_LFT_fermions}
+
+% Here are the appendices.
+\begin{appendices}
+%\include{ap_linear_algebra}
+\include{ap_special_topics}
+\include{ap_special_topics_phys}
+\end{appendices}
+
+\printindex
+
+\end{document}

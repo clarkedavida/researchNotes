@@ -1,0 +1,1787 @@
+\chapter{LGT: The Basics}\label{ch:preliminaries}
+
+LGT is introduced in Section~\ref{sec:LGT}
+by reviewing local gauge symmetries in QFT, regularizing a pure
+gauge theory on the lattice, discussing the true continuum limit,
+and introducing finite temperature. In Section~\ref{sec:refscales}, 
+reference scales are defined, and systematic error within the context
+of scale setting is explored. Topological observables are introduced
+in Section~\ref{sec:topinvar}, and effects of topology barriers
+are considered.
+
+\section{Lattice gauge theory}\label{sec:LGT}
+
+Physically, QFT is defined on a 4D Minkowskian space-time. In LGT 
+the 4D space-time is instead equipped with a Euclidean metric, which is 
+related to the original metric via a {\it Wick rotation}
+\begin{equation}
+  t\to i\tau.
+\end{equation} 
+Therefore we will work with a Euclidean metric
+and use downstairs summation indices. 
+We will also use {\it natural units}\index{natural units}
+$\hbar=c=k_B=1$. In natural units, every physical
+quantity has units of some power of length. For example
+time has units of length, while energy, mass, and momentum
+have units of inverse length. 
+We first work in the continuum, then 
+discretize the theory by defining the lattice.
+
+\subsection{Local gauge symmetries}
+
+Local gauge symmetries play a central role in the SM. 
+Starting from a Lagrangian that depends on the derivatives of
+some field, the requirement of local gauge invariance suggests that
+we introduce a \index{gauge!field}{\it gauge field}. 
+This gauge field allows one to define a {\it covariant derivative} 
+\index{covariant derivative} whose transformation law will 
+respect the local gauge symmetry.
+Excitations of the gauge field are gauge bosons,
+which are the force-carrying particles of the SM.
+
+As an example consider $N_c$ complex scalar fields $\phi_{i}(x)$ equipped with 
+a global $\SU(N_c)$ symmetry. The Lagrangian is
+\begin{equation}\label{eq:LagrM}
+  \Lagr_{M}=-\partial_{\mu}\phi^{\dagger}(x)\partial_{\mu}\phi(x)
+                +m^{2}\phi^{\dagger}(x)\phi(x),
+\end{equation}
+where $\phi(x)$ is the $N_c$-dimensional vector formed by these fields.
+$\Lagr_{M}$ becomes invariant under local $\SU(N_c)$ transformations, i.e. 
+transformations of the form
+\begin{equation}\label{eq:fxform}\index{gauge!transformation}
+  \phi(x)\to U(x)\phi(x),
+\end{equation}
+where $U(x)\in \SU(N_c)$, when one replaces the partial derivative by the 
+covariant derivative $D_\mu$, which transforms as
+\begin{equation}\label{eq:dxform}
+  D_\mu(x)\to U(x) D_{\mu}(x)U^{\dagger}(x).
+\end{equation}
+We define
+\begin{equation}\label{eq:covariantderivative}
+  D_{\mu}(x)\equiv\partial_{\mu}+A_{\mu}(x), \qquad 
+       A_{\mu}(x)\equiv-igA^{a}_{\mu}(x)T^{a},
+\end{equation}
+where $g$ is the bare coupling constant, $A_{\mu}(x)$ is the gauge field, and 
+$T^{a}$, $a=1,\dots,N^2-1$, are the generators of the $\SU(N_c)$ Lie algebra 
+$\mathfrak{su}(N_c)$. For notational convenience we now suppress dependence
+on $x$. 
+
+\begin{proposition}{}{gaugecovar}
+Using this definition of $D_\mu$, the gauge fields must change 
+according to
+$$A_{\mu}\to U A_{\mu}U^{\dagger}-(\partial_{\mu}U)U^{\dagger}.$$
+%If the covariant derivative transforms as $D_\mu\to U D_\mu U^\dagger$
+%under a gauge transformation, then the vector potential must
+%transform as $A_\mu\to U A_\mu U^\dagger-(\partial_\mu U)U^\dagger.$
+  \begin{proof} The transformed $D$ can be written
+  $U D_\mu U^\dagger=\partial_\mu'+A_\mu'$. Solving for $A_\mu'$ gives
+    \begin{equation*}
+    \begin{aligned}
+         A_\mu'
+         &=U(\partial_\mu+A_\mu)U^\dagger-\partial_\mu\\
+         &=U(\partial_\mu U^\dagger)
+               +U A_\mu U^\dagger-\partial_\mu\\
+         &=\partial_\mu-(\partial_\mu U)U^\dagger
+               +U A_\mu U^\dagger-\partial_\mu\\
+         &=U A_\mu U^\dagger
+                -(\partial_\mu U)U^\dagger.      
+    \end{aligned}
+    \end{equation*}
+  \end{proof}
+\end{proposition}
+
+The gauge field becomes dynamic by adding the kinetic part
+\begin{equation}\label{eq:lagrkin}
+  \Lagr_G=\frac{1}{4} F_{\mu\nu}^{a}F_{\mu\nu}^{a}
+         =-\frac{1}{2g^2}\tr F_{\mu\nu}F_{\mu\nu},
+\end{equation}
+where 
+\begin{equation}\label{eq:fieldstrength}
+          F_{\mu\nu}^a\equiv \partial_\mu A_\nu^a-\partial_\nu A_\mu^a
+                        +gf^{abc}A_\mu^b A_\nu^c,\qquad
+  F_{\mu\nu}\equiv-igF_{\mu\nu}^aT^a,
+\end{equation} 
+and $f^{abc}$ are the structure constants of $\SU(N_c)$.
+$\Lagr_{G}$ is also invariant 
+under the transformation of \eqref{eq:dxform}. One way to see this
+is to use the following fact.
+\begin{proposition}{}{fieldtensor}
+  $$F_{\mu\nu}=\left[D_\mu,D_\nu\right].$$
+  \begin{proof}
+    Use the definition of $D_\mu$ and apply the above commutator to some
+    field $\psi$. We get
+    \begin{equation*}
+    \begin{aligned}
+      \left[D_\mu,D_\nu\right]\psi
+         &=(\partial_\mu+A_\mu)(\partial_\nu\psi+A_\nu\psi)
+                     -(\mu\leftrightarrow\nu)\\
+         &=\partial_{\mu\nu}\psi+\partial_\mu A_\nu\psi
+           +A_\nu\partial_\mu\psi+A_\mu\partial_\nu\psi
+           +A_\mu A_\nu\psi-(\mu\leftrightarrow\nu)\\
+         &=\partial_\mu A_\nu\psi-\partial_\nu A_\mu\psi
+           +\left[A_\mu,A_\nu\right]\psi\\
+         &=-ig\left(\partial_\mu A_\mu^a-\partial_\nu A_\mu^a\right)T^a\psi
+           -ig^2A_\mu^bA_\nu^cf^{bca}T^a\psi\\
+         &=-ig\left(\partial_\mu A_\mu^a-\partial_\nu A_\mu^a
+                    +gf^{abc}A_\mu^bA_\nu^c\right)T^a\psi\\
+         &=F_{\mu\nu}\psi.
+    \end{aligned}
+    \end{equation*}
+  \end{proof}
+\end{proposition}
+
+Taken altogether, the gauge-invariant, dynamical, 
+scalar theory is described by the Lagrangian
+\begin{equation}
+  \Lagr=-(D_\mu\phi)^\dagger D_\mu\phi
+                +m^2\phi^\dagger\phi
+                -\frac{1}{2g^2}\tr F_{\mu\nu}F_{\mu\nu}.
+\end{equation}
+We would like
+to point out that the definitions~\eqref{eq:covariantderivative} and
+\eqref{eq:fieldstrength} are somewhat different than the convention
+of many QFT books such as Srednicki~\cite{srednicki_quantum_2007}.
+An advantage of the convention we have taken, which is also used in, 
+for instance, Montvay and
+M\"unster~\cite{montvay_quantum_1994}, is that one can explicitly see the
+dependence of the Lagrangian~\eqref{eq:lagrkin} on the coupling. 
+
+In this chapter we will be primarily interested in a theory with 
+$\Lagr_G$ only and gauge group $\SU(N_c)$; such a theory is referred
+to as {\it pure}\index{gauge!pure} $\SU(N_c)$.
+Often the gauge particles of pure $\SU(N_c)$ theories are referred
+to as ``gluons," even when $N_c\neq 3$. Because it
+is non-Abelian, it has nonzero structure constants, which means it
+contains self-interactions of the form $AAA$ and $AAAA$. 
+These self-interactions are responsible for confinement, which we discuss
+further in the next section. 
+For the purpose of a lattice study,
+it is helpful to look at a non-Abelian theory, which
+has a well-defined continuum limit.
+
+\subsection{Lattice regularization}\label{sec:latreg}
+We now define QFT on a lattice. Let $N_{1},N_{2},N_{3},N_{4}
+\in \mathbb{N}$. The {\it lattice} ${\L}$ is defined by
+\begin{equation}
+  {\L}\equiv\{x\,|\,x_\mu=a\,n_\mu,\,n_\mu\le N_\mu,\,
+      \mu=1,2,3,4\}.
+\end{equation}
+Here $a$ is called the \index{lattice spacing}{\it lattice spacing}. 
+After our Wick rotation, we identify $N_1$, $N_2$, and $N_3$
+as the extensions of the lattice in the spatial directions,
+and $N_4$ is taken to be the extension in the Euclidean time 
+direction. Matter fields and gauge 
+transformations are defined on the \index{site} {\it sites} $x\in\L$. We shall 
+take the lattice to have periodic boundary conditions (BCs), i.e.
+\begin{equation}\label{eq:PBC}
+  x+aN_{\mu}\hat{\mu}=x,
+\end{equation}
+where $\hat{\mu}$ is the unit vector in the direction indicated by $\mu$. 
+Since the lattice is discrete, one must replace partial derivatives 
+by finite differences, 
+\begin{equation}\label{eq:dertodiff}
+  \partial_\mu f(x)\to\Delta_{\mu}f(x)\equiv\frac{f(x+a\hat{\mu})
+                                                   -f(x-a\hat{\mu})}{2a},
+\end{equation}
+and similarly replace integrals with sums,
+\begin{equation}\label{eq:inttosum}
+  \int d^4x\to a^4\sum_x.
+\end{equation}
+Moreover the BCs~\eqref{eq:PBC} imply for every direction
+that the momentum is discretized as
+\begin{equation}
+  p_\mu=\frac{2\pi}{a}\frac{n_\mu}{N_\mu},
+\end{equation}
+which means that momentum space integrals must also be replaced by
+sums
+\begin{equation}
+  \int\frac{d^4p}{(2\pi)^4}\to
+  \frac{1}{a^4N_1N_2N_3N_4}\sum_p. 
+\end{equation}
+Putting QFT on a lattice regularizes the theory. 
+To see this, consider a field $\phi$ defined on the lattice. 
+Its Fourier transform
+\begin{equation}
+  \widetilde{\phi}(p)=a^4\sum_xe^{-ipx}\phi(x)
+\end{equation}
+is periodic in momentum space, which gives us the correspondence
+$p_\mu\leftrightarrow p_\mu+2\pi/a$. Hence we can restrict
+momenta to the \index{Brillouin zone}{\it first Brillouin zone},
+\begin{equation}
+ -\frac{\pi}{a}<p_\mu\le\frac{\pi}{a}
+\end{equation}
+and one obtains a UV cutoff $|p_\mu|\le\pi/a$.
+
+Now we define the building blocks necessary to construct paths on the 
+lattice. The directed {\it link}\index{link} connects $x$ with the 
+neighboring point $x+a\hat{\mu}$, and its corresponding {\it link variable} 
+$U_\mu(x)\in \SU(N_c)$ is defined by
+\begin{equation}
+  U_\mu(x)=e^{-aA_{\mu}(x)},
+\end{equation}
+where $A_{\mu}(x)\in\su(N_c)$. A link variable is
+depicted in Fig.~\ref{fig:links} (left).
+We associate to any path $\mathcal{C}$ 
+the ordered product of its link variables $U(\mathcal{C})$. 
+If we follow a path and then reverse our steps, we should end
+up back where we started; hence
+\begin{equation}
+  U_{-\mu}(x+a\hat{\mu})U_\mu(x)=\id.
+\end{equation}
+Furthermore $U^\dagger(x)U(x)=\id$, so we can see the effect
+of the dagger on link variables:
+\begin{equation}
+  U_\mu^\dagger(x)=U_{-\mu}(x+a\hat{\mu}).
+\end{equation}
+Let $\mathcal{C}_{x}$ be a path on the lattice that originates and 
+terminates at the point $x$. The corresponding {\it Wilson loop} is 
+defined by \index{Wilson!loop}$\tr U(\mathcal{C}_{x})$. 
+Under local gauge transformations, link variables 
+transform as
+\begin{equation}
+  U_\mu(x)\to U(x)U_\mu(x)U^{\dagger}(x+a\hat{\mu}),\qquad
+  U(x)\in\SU(N_c),
+\end{equation}
+which ensures the gauge invariance of Wilson loops.
+Maybe at this point it is worth pointing out that link variables will
+have a Lorentz index attached to them (they live on the links) but
+gauge transformations do not (they live on the sites). A \index{plaquette}
+{\it plaquette}, shown in Figure~\ref{fig:links} (middle), is the 
+smallest Wilson loop, an oriented square of side length $a$ with 
+corresponding link variable 
+\begin{equation}
+  U^\square_{\mu\nu}(x)=U_\mu(x)U_\nu(x+a\hat{\mu})
+                        U^\dagger_\mu(x+a\hat{\nu})U^\dagger_\nu(x).
+\end{equation}
+Every link variable in 4D LGT is part of six plaquettes. The remaining
+three edges of any particular plaquette are shaped like
+a staple; therefore we call the combination
+\begin{equation}\begin{aligned}\label{eq:staple}\index{staple}
+  U^\sqcup_\mu(x)=
+  \sum_{\nu\ne\mu}\Big[
+   &U_\nu(x)U_\mu(x+a\hat{\nu})U^\dagger_\nu(x+a\hat{\mu})\\
+   &+U^\dagger_\nu(x-a\hat{\nu})U_\mu(x-a\hat{\nu})
+                   U_\nu(x-a\hat{\nu}+a\hat{\mu})\Big]
+\end{aligned}\end{equation}
+the {\it staple matrix}. A 2D staple matrix is shown in
+Fig.~\ref{fig:links} (right); alternatively one can view it
+as one of the three terms in the sum~\eqref{eq:staple}.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figs/links.png}
+  \caption{Left: A link variable. Middle: A plaquette. 
+           Right: A staple matrix in 2D.}
+  \label{fig:links}
+\end{figure}
+
+Plaquettes are used to construct the gauge invariant $\SU(N_c)$ {\it Wilson 
+action} \cite{wilson_confinement_1974}, given by
+\begin{equation}\label{eq:wilsonaction}\index{Wilson!action}
+    S_W\equiv\beta\sum\limits_{x,\mu<\nu}\left(1
+         -\frac{1}{N_c}\Re\tr U^\square_{\mu\nu}(x)\right).
+\end{equation}
+The factor $\beta$ is given this name in analogy to the inverse temperature 
+in statistical mechanics. The Wilson action becomes identical with the
+pure $\SU(N_c)$ action in the continuum limit because the plaquette is
+directly related to the field tensor, which is proven in the following
+proposition. 
+\pagebreak
+\begin{proposition}{}{plaquette}
+$$
+U^\Box_{\mu\nu}(x)=\exp\left[-a^2F_{\mu\nu}(x)+\order{a^3}\right].
+$$
+  \begin{proof}
+    Starting with the definition of the plaquette variable, we have
+    \begin{equation*}\begin{aligned}
+      U^\Box_{\mu\nu}(x)&=U(x,x+a\hat\nu)U(x+a\hat\nu,x+a\hat\nu+a\hat\mu)\\
+               &~~~~\times U(x+a\hat\mu+a\hat\nu,x+a\hat\mu)U(x+a\hat\mu,x)\\
+            &=\exp\left[aA_\nu(x)\right]
+              \exp\left[aA_\mu(x+a\hat\nu)\right]\\
+               &~~~~\times\exp\left[-aA_\nu(x+a\hat\mu)\right]
+                \exp\left[-aA_\mu(x)\right]\\
+            &=\exp\left[aA_\nu(x)\right]
+               \exp\left[a\left( A_\mu(x)+a\Delta_\nu A_\mu(x) \right)
+                                 +\order{a^3}\right]\\
+               &~~~~\times
+               \exp\left[-a\left(A_\nu(x)+a\Delta_\mu A_\nu(x) \right)
+                                 +\order{a^3}\right]
+               \exp\left[-aA_\mu(x)\right]\\
+            &=\exp\left[aA_\nu+aA_\mu+a^2\Delta_\nu A_\mu
+                 +\frac{1}{2}\left[aA_\nu,aA_\mu\right]
+                 +\order{a^3}\right]\\
+            &~~~~\times\exp\left[-aA_\nu-a^2\Delta_\mu A_\nu-aA_\mu
+                 +\frac{1}{2}\left[-aA_\nu,-aA_\mu\right]
+                 +\order{a^3}\right]\\
+            &=\exp\left[a^2\Delta_\nu A_\mu+a^2\left[A_\mu,A_\nu\right]
+                 -a^2\Delta_\mu A_\nu+\order{a^3}\right]\\
+            &=\exp\left[-a^2F_{\mu\nu}+\order{a^3}\right].
+    \end{aligned}\end{equation*}
+    In the fourth step we applied the Campbell-Baker-Hausdorff formula and
+    dropped the $x$ dependence for notational convenience, since at this
+    step all the gauge fields depend on the same space-time point anyway.
+    The fifth step uses another application of the Campbell-Baker-Hausdorff
+    formula.
+  \end{proof}
+\end{proposition}
+After some algebra, the connection between the Wilson action and the action
+corresponding to eq.~\eqref{eq:lagrkin} becomes clear.
+\begin{proposition}{}{} 
+  $$S_W=-\frac{\beta}{4N_c}\sum_x a^4\tr F_{\mu\nu}(x)F_{\mu\nu}(x)
+                  +\order{a^5}.$$
+  \begin{proof} Using the definition~\eqref{eq:wilsonaction} and
+    Proposition~\ref{prp:plaquette} we have
+    \begin{equation*}
+    \begin{aligned}
+      S_W&=\beta\sum_{x,\mu<\nu}\left(1-\frac{1}{N_c}\Re\tr 
+            U_{\mu\nu}^\Box(x)\right)\\
+         &=\beta\sum_{x,\mu<\nu}\left(1-\frac{1}{2N_c}\tr 
+            \left[U_{\mu\nu}^\Box(x)+
+            U_{\mu\nu}^\Box(x)^\dagger\right]\right)\\
+         &=\beta\sum_{x,\mu<\nu}\left(1-\frac{1}{2N_c}\tr
+            \left[2\id+\frac{a^4}{2}F_{\mu\nu}(x)^2
+                  +\order{a^5}\right]\right)\\
+         &=\beta\sum_{x,\mu<\nu}\left(-\frac{a^4}{2N_c}\tr F_{\mu\nu}(x)^2
+                  +\order{a^5}\right)\\
+         &=-\frac{\beta}{4N}\sum_x a^4\tr F_{\mu\nu}(x)F_{\mu\nu}(x)
+                  +\order{a^5}.
+    \end{aligned}
+    \end{equation*}
+    The cancellation of the $\order{a^2}$ term can be seen
+    as follows: The role of the $\dagger$ in $\SU(N_c)$ is to take the inverse.
+    For a path of link variables, this is the same as following the path
+    in reverse.
+    Following a plaquette in reverse just interchanges $\mu$ and $\nu$,
+    which flips the sign of the leading term in the exponential
+    of Proposition~\ref{prp:plaquette} because $F_{\mu\nu}$
+    is antisymmetric.
+  \end{proof}
+\end{proposition}
+
+In the limit $a\to0$, the Wilson action coincides with the action
+$S_G=\int d^4x\,\Lagr_G$ when one identifies 
+\begin{equation}
+  \beta=\frac{2N_c}{g^2}.
+\end{equation}
+Because of this identification, $\beta$ is also (besides $g$) sometimes 
+referred to as the \index{coupling constant}{\it coupling constant}.
+
+We close this subsection with a remark about confinement.
+Let $\mathcal{C}_{RT}$ be a rectangular loop on the
+lattice of side lengths $R$ and $T$ and let $W(\mathcal{C}_{RT})$ be the
+corresponding Wilson loop. Then the {\it static quark potential}
+\index{static quark potential} $V(R)$ is defined by
+\begin{equation}
+  V(R)\equiv-\lim_{T\to\infty}\frac{1}{T}\log W(\mathcal{C}_{RT})  
+\end{equation}
+and gives the energy of the gauge field due to two color sources separated by
+a distance $R$. The {\it string tension}\index{string tension} 
+$\sigma$ is defined by
+\begin{equation}
+  \sigma\equiv\lim_{R\to\infty}\frac{1}{R}V(R).
+\end{equation}
+If the string tension is non-vanishing, then the potential scales linearly 
+with $R$ in the large $R$ limit; 
+this phenomenon has been observed in LGT 
+simulations~\cite{montvay_quantum_1994}.
+Thus we see one of the major successes
+of LGT: it proffers an explanation of confinement.  
+
+\subsection{Renormalization group and the continuum limit}
+\index{renormalization group}
+
+In the limit $a\to0$, physical quantities $P$ should agree with experimental
+results, which means they should become independent of $a$, ``forgetting"
+about the lattice structure. Since $P$ depends in general also on $g$,
+this means that changes in $a$ have to be compensated by changes in $g$
+to keep the physics constant. More precisely, it must be that 
+\begin{equation}
+  \lim_{a\to0}P\Big(g(a),a\Big)=P_0
+\end{equation}
+where $P_0$ is the physical quantity's experimental value.
+Both Callan~\cite{callan_broken_1970} and
+Symanzik~\cite{symanzik_small_1970,symanzik_small-distance-behaviour_1971}
+independently formulated the requirement of constant physics as
+a differential equation
+\begin{equation}\label{eq:RGflow}
+  \left(\frac{\partial}{\partial\log a}
+        +\frac{\partial g}{\partial\log a}
+         \,\frac{\partial}{\partial g}\right)P=0. 
+\end{equation}
+(The RHS of this equation is more precisely
+$\order{(a/\xi)^2\log(a/\xi)}$ for a lattice system
+with correlation length $\xi$~\cite{montvay_quantum_1994}.)
+Equation~\eqref{eq:RGflow} relates to a semi-group of scale 
+changing transformations called the {\it renormalization group} (RG). 
+The coefficient of the second term is called the {\it beta function},
+\begin{equation}\label{eq:betafunction}\index{beta function}
+  \beta\equiv-\frac{\partial g}{\partial\log a},
+\end{equation}
+and it measures how the bare coupling $g$ must change when $a$ changes.
+The use of the symbol $\beta$ here is unfortunately a convention; it
+is not to be confused with the coupling constant. It is usually clear
+from context what is meant. In practice $\beta$ can be determined
+from perturbation theory. An explicit dependence of $g$ on $a$ is then
+determined by solving the differential equation~\eqref{eq:betafunction}. 
+
+For example the pure $\SU(N_c)$ lattice beta function has been calculated 
+up to 3-loop order in perturbation theory. It is given by
+\begin{equation}\label{eq:blatgs}
+  \beta_L(g)=-b_0g^3-b_1g^5-b_2^Lg^7+\order{g^{9}}
+\end{equation}
+where
+\begin{equation}\label{eq:blat3loop}\begin{gathered}
+  b_{0}= \frac{11}{3}\frac{N_c}{16\pi^2}, \qquad
+  b_{1}= \frac{34}{3}\Bigg(\frac{N_c}{16\pi^2}\Bigg)^{2},\\
+  b_{2}^{L}=\Bigg(-366.2+\frac{1433.8}{N_c^2}-\frac{2143.0}{N_c^4}\Bigg)
+            \Bigg(\frac{N_c}{16\pi^2}\Bigg)^{3}
+\end{gathered}\end{equation}
+have been calculated at one-loop 
+\cite{gross_d.j._ultraviolet_1973,politzer_reliable_1973}, two-loop 
+\cite{belavin_calculation_1974,caswell_asymptotic_1974,jones_two-loop_1974},
+and three-loop order~\cite{alle_three-loop_1997}, respectively.
+The constants $b_0$ and $b_1$ are universal in the sense that they do not 
+depend on the regularization scheme; however $b_2$ does depend on the
+regularization scheme, with $b_2^L$ being the value using lattice
+regularization. The RG equation on the lattice is
+\begin{equation}
+  \beta_{L}(g)=-a\dv{g}{a},
+\end{equation}
+and its solution is given by
+\begin{equation}\label{eq:latRGEsoln}
+  a\Lambda_{L}
+   =\exp\Bigg(\int^g\frac{\dd g'}{\beta_{L}(g')}\Bigg) \\
+   =f_{as}\big(g^2\big)
+   \equiv f_{as}^0\big(g^2\big)\sum\limits_{i=0}^{\infty}
+     q_i\,g^{2i},
+\end{equation}
+where $q_0=1$, the other $q_i$ are coefficients that can be, in 
+principle, calculated perturbatively, and
+\begin{equation}\label{eq:f0}
+   f_{as}^0\big(g^2\big)\equiv\exp\Bigg(-\frac{1}{2b_{0}g^2}\Bigg)
+    (b_{0}g^{2})^{-b_{1}/2b_{0}^{2}}.
+\end{equation}
+In fact from eq.~\eqref{eq:blatgs} and \eqref{eq:blat3loop}, one obtains
+\begin{equation}\label{eq:q1value}
+  q_1=\frac{b_{1}^{2}-b_{2}^{L}b_{0}}{2b_{0}^{3}}=
+  \begin{cases}
+     0.08324 & \text{for}\ \SU(2) \\
+     0.18960 & \text{for}\ \SU(3).
+  \end{cases}
+\end{equation}
+The integration constant $\Lambda_{L}$ has units of mass and is called the
+{\it lattice $\Lambda$-parameter}.
+From eq.~\eqref{eq:latRGEsoln} one sees that
+\begin{equation}\label{eq:llat}
+  \Lambda_L=\lim_{g\to0}\frac{1}{a}f_{as}^0\big(g^2\big).
+\end{equation}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\linewidth]{figs/continuumlimit.png}
+  \caption{A schematic representation of the continuum limit. The
+           red object represents some physical quantity. As the
+           images progress to the right, the lattice spacing decreases
+           relative to the physical length, and the bare coupling
+           becomes weaker.}
+  \label{fig:climit}
+\end{figure}
+
+The fact that pure $\SU(N_c)$ theory has a negative beta function
+\eqref{eq:blatgs} has a profound physical implication. In particular 
+when we invert eq.~\eqref{eq:latRGEsoln} keeping only universal
+terms, we find
+\begin{equation}\label{eq:rgesoln}
+  g(a)^{-2}=b_0\log\left(a^{-2}\Lambda_L^{-2}\right) 
+            +\frac{b_1}{b_0}\log\log\left(a^{-2}\Lambda_L^{-2}\right)
+            +\order{1/\log\left(a^2\Lambda_L^2\right)}.
+\end{equation}
+Two consequences are that the coupling $g(a)$ is driven to zero
+as $a$ approaches zero (UV cutoff), which is known as 
+\index{asymptotic freedom}{\it asymptotic freedom}, while at low energies,
+$g(a)$ becomes too large for reliable perturbative analysis.
+
+From eq.~\eqref{eq:latRGEsoln} we see that taking $g\to0$ drives $a\to0$.
+However the limit $g\to0$ is not enough to ensure a well-defined continuum
+limit. The physical size of the lattice is proportional to $a^4$, and hence
+collapses to zero unless we also increase the number of sites. Therefore
+we extrapolate to the continuum limit by calculating our observable
+of interest at different values of the coupling constant, with the 
+extensions $N_1$, $N_2$, $N_3$, and $N_4$ chosen so that the physical 
+size of the lattice is large enough for a reliable calculation of 
+the observable of interest. A schematic representation is shown in
+Figure~\ref{fig:climit}. We note that two kinds of systematic uncertainty 
+arise in this context. Namely, to what extent do finite lattice
+spacing (which limits the smallest wavelength) and finite lattice
+size (which limits the largest wavelength) affect our results?
+These questions are discussed in detail in 
+Section~\ref{sec:refscales}.
+
+\subsection{Finite temperature}\label{sec:finitetemp}
+We now restrict
+our attention to lattices that have extension $N_1=N_2=N_3\equiv N_s$
+and $N_4\equiv N_\tau$.
+Expectation values of physical observables $X$ are given in 4D,
+Euclidean, pure $\SU(2)$ LGT at zero temperature by
+\begin{equation}\label{eq:0Tintegral}
+  \ev{X}=\frac{1}{Z}\int\DD{U}e^{-S(U)}X(U),
+\end{equation}
+where the action is related to the Lagrangian by
+\begin{equation}
+  S=\int\dd[4]{x}\Lagr,
+\end{equation}
+$Z$ is the {\it partition function}
+\begin{equation}
+  Z\equiv\int\DD{U}e^{-S(U)},
+\end{equation}
+and the integration measure, called the {\it Haar}\index{Haar measure} is
+\begin{equation}
+  \int\DD{U}\equiv\int\prod_{x,\mu}\dd{U_\mu(x)}.
+\end{equation}
+The quantities $X$ and $S$ appearing in the integral~\eqref{eq:0Tintegral}
+are functionals of the configuration $U$, and this integral is
+called a {\it functional integral}. The Haar measure is a product of
+measures, one measure per link, each running over all possible values of
+the link; in other words, the Haar measure runs over all possible
+configurations. The functional integral is therefore 
+a weighted average of the observable $X$ over all possible configurations,
+each configuration receiving a weighting factor $\int\DD{U}e^{-S}/Z$. 
+
+The functional integral for a 3D, 
+pure $\SU(2)$ LGT system in contact with a thermal reservoir at 
+temperature $T$ has the same structure, except that the corresponding 
+action is
+\begin{equation}\label{eq:Tintegral}
+  S(T)=\int_0^{1/T}\dd{x_4}\int\dd[3]{x}\Lagr,
+\end{equation}
+and the Haar measure runs over fields that are periodic in the
+$x_4$ direction. Because the functional integral for both systems is
+formally the same, we interpret a 4D system with $N_s\gg N_\tau$ as
+a 3D system at finite temperature, with $x_4$ running along a 
+temperature direction rather than a time direction. 
+The continuum limit of the finite temperature system corresponds
+to $a\to0$ with $aN_s$ and $aN_\tau$ fixed. The {\it physical
+temperature} is seen to be
+\begin{equation}
+  T=\frac{1}{aN_\tau}.
+\end{equation}
+
+\section{Reference scales}\label{sec:refscales}\index{scale setting}
+
+Lattice computations deliver dimensionless quantities $L=\ell/a$, where 
+$\ell$ is some physical length. The requirement that the theory has a 
+well-defined continuum limit means that for two length scales 
+$\ell_i$ and $\ell_j$
+\begin{equation}
+  r_{ij}\equiv\frac{\ell_i}{\ell_j}=\lim_{a\to 0}\frac{L_i}{L_j}
+        \equiv\lim_{a\to 0}R_{ij},
+\end{equation}
+i.e. in the continuum limit, length ratios attain their
+physical values.
+Continuum limit extrapolations of a particular length $\ell_i$ therefore
+depend on how one determines $R_{ij}$ and on the choice of the
+{\it reference scale} or {\it reference length} $\ell_j$. 
+Choosing a reference scale to use for continuum limit extrapolation
+is called {\it scale setting}, and commonly one says
+``we set the scale with $\ell_j$."
+
+Calculation of the constants $R_{ij}$ is prone to nontrivial statistical and
+systematic errors because they come from MCMC simulations performed on 
+finite lattices with nonzero spacing. Therefore it is desirable to set
+the scale with a quantity that is computable with low numerical effort,
+has small systematic uncertainties, and good statistical precision.
+Controlling systematic error is
+discussed in Section~\ref{sec:sysa}, while the
+discussion of statistical error is postponed to 
+Chapter~\ref{ch:MCMC}. We begin by introducing some reference scales. 
+
+\subsection{Defining reference scales}\label{sec:definescales}
+
+One choice of scale in this project is the {\it deconfining phase 
+transition temperature}\index{deconfinement temperature}
+\begin{equation}
+  T_c=\frac{1}{a(\beta_c)\,N_\tau}.
+\end{equation}
+For $T<T_c$ gluons are bound into  glueballs, while 
+at higher temperatures $T>T_c$ they exist in a gluon plasma. 
+The deconfining phase transition is a second-order phase transition for 
+$\SU(2)$ (see Engels et al.~\cite{engels_critical_1996} and
+references therein) and a first-order transition for $\SU(N_c)$ when $N_c>2$. 
+The order parameter for this transition is the \index{Polyakov loop}
+{\it Polyakov loop}, 
+\begin{equation}
+  P(\vec{x})=\tr\prod_\tau U_4(\vec{x},\tau),
+\end{equation}
+which is a straight 
+Wilson loop of length $N_\tau$ that is parallel to the Euclidean time 
+axis and closes due to the periodic BCs. In practice, 
+we determine $\beta_c$ by looking at plots of the Polyakov loop 
+susceptibility,
+\begin{equation}
+  \chi=N_s^3\left(\ev{|P|^2}-\ev{|P|}^2\right), \qquad\qquad 
+    P\equiv\sum\limits_{\vec{x}}P(\vec{x}),
+\end{equation}
+as a function of $\beta$ and estimating (in the infinite volume limit)
+where it diverges. Numerical estimates
+of $T_c$ are prone to systematic error because the simulations are
+performed at finite lattice size while $T$ is only sharp in the infinite
+volume limit. It is therefore necessary to extrapolate, for fixed $N_{\tau}$,
+the dependence of $\beta_c(N_\tau)$ on the spatial size $N_s$ to the
+infinite volume limit $N_s\to\infty$. Inverting $\beta_c(N_\tau)$ gives
+our first length scale $N_\tau(\beta)$, which we call the
+{\it deconfinement scale}.
+
+A reference scale due to L\"uscher \index{gradient flow}
+\cite{luscher_properties_2010} involves using 
+the {\it gradient flow}. We begin by introducing a
+fictitious {\it flow time} $t$ and evolve the system
+according to the evolution equation
+\begin{equation}\label{eq:Wflow}
+  \dot{V}_\mu(x,t)=-g^2V_\mu(x,t)\,\partial_{x,\,\mu}S[V(t)]
+\end{equation} 
+with initial condition
+\begin{equation}
+  V_\mu(x,0)=U_\mu(x).
+\end{equation}
+In the above, the $\SU(N_c)$ link derivatives are defined by
+\begin{equation}\begin{aligned}
+  \partial_{x,\,\mu}f(V)&\equiv
+     i\sum_aT^a\frac{d}{ds}f\left(e^{itX^a}V\right)\Big|_{t=0},\\
+    X^a(x',\mu')&\equiv
+    \begin{cases}
+       T^a & \text{if} (x',\mu')=(x,\mu)\\
+       0   & \text{otherwise.}
+    \end{cases}
+\end{aligned}\end{equation}
+L\"uscher showed that the gradient flow averages the gauge field
+$A_\mu$ over a sphere with mean-square radius $\sqrt{8t}$ in 4D. Hence
+$t$ has dimension length squared, and $\sqrt{8t}$ is interpreted
+as the {\it smoothing range} of the flow.
+From eq.~\eqref{eq:Wflow} we see that the gradient flow lowers the action. 
+For pure $\SU(2)$ the link derivative of the action takes the simple form
+\begin{equation}\label{eq:SU2gflow}
+  g^2\partial_{x,\mu}S(V)=\frac{1}{2}
+          \left(V_\mu^\Box(x)-V_\mu^\Box(x)^\dagger\right).
+\end{equation}
+
+After choosing an energy density discretization $E$ (for example
+one might use the Wilson action) a scale is defined by choosing an
+appropriate, fixed, dimensionless {\it target value} $y$ and integrating
+the gradient flow equation until 
+\begin{equation}\label{eq:tardef}
+  y=t^2 E(t).
+\end{equation}
+As a function of $\beta$, a {\it gradient scale}\index{gradient flow!scale}
+\begin{equation}\label{eq:s}
+  s(\beta)=\sqrt{t(\beta)}
+\end{equation}
+scales like a length, provided that
+\begin{enumerate}
+  \item lattice sizes are chosen so that $aN_{\min}\gg \sqrt{8t}$,
+        where $N_{\min}=\min\,N_i$
+        for simulations on an $N_1N_2N_3N_4$ lattice;
+  \item the target values are large enough so that $\sqrt{8t}\gg a$ 
+        for the smallest used flow time; and
+  \item the values of $\beta$ are large enough to be in the
+        $\SU(2)$ scaling region.
+\end{enumerate}
+In contrast to the deconfinement scale, the computation of 
+a gradient scale does not require fits or extrapolations.
+The only remaining ambiguity is how to choose a target value.
+
+An alternative to the gradient flow that is similar and 
+algorithmically simpler is known as {\it cooling}. 
+Cooling was introduced as part of an investigation of
+topological charge in the 2D O(3) sigma model \cite{berg_dislocations_1981}.
+Bonati and D'Elia showed that using cooling as a smoothing technique produces
+similar results for topological observables as the gradient flow
+for pure $\SU(3)$ LGT \cite{bonati_comparison_2014}.
+In pure SU(2) a standard cooling step is\index{cooling}
+\begin{equation}\label{eq:cool}
+  V_\mu(x,n_c)=\frac{V^\sqcup_\mu(x,n_c-1)}
+                    {\sqrt{\det V_\mu^\sqcup(x,n_c-1)}},
+\end{equation}
+where $n_c$ is the number of cooling steps. 
+The update \eqref{eq:cool} minimizes the local contribution to the
+action, so that the ``cooling flow" decreases the action. Like with
+the gradient flow, one picks a target value and iterates 
+eq.~\eqref{eq:cool} until
+\begin{equation}
+  y=t_c^2 E(t_c),
+\end{equation}
+and a {\it cooling scale}\index{cooling!scale} is given by
+\begin{equation}\label{eq:u}
+  u(\beta)=\sqrt{t_c(\beta)}.
+\end{equation}
+
+\subsection{Continuum limit and finite size scaling}
+\label{sec:sysa}
+
+One desires to know the ratio $r_{ij}$ of two scales in
+the continuum limit. In principle this could be estimated by simulating
+very near to the continuum limit. 
+The continuum limit of LGT is defined in the vicinity of a second order
+phase transition in the bare coupling. Because the correlation length
+diverges near critical points, subsequent configurations become more
+correlated, and it requires more configurations to obtain effectively
+independent data. This is called {\it critical slowing down}. 
+In practice, one therefore calculates
+$R_{ij}$ at multiple $\beta$ (hence multiple $a$) and extrapolates
+the continuum limit result based on these data. We now discuss
+two possible fitting forms for continuum limit extrapolation. 
+
+Using the Wilson action, ratios of observables that have
+units of length are known to scale as 
+\begin{equation}\label{eq:stdscaling}
+  R_{ij}\equiv\frac{L_i}{L_j}=\frac{\ell_i}{\ell_j}\Big(1+
+                     \order{a^2\Lambda_L^2}\Big).
+\end{equation}
+In the continuum limit, ratios
+of lengths approach their continuum limit values.
+Sometimes corrections depending on $a$, such as in the equation above, are
+referred to as \index{lattice artifact}{\it lattice artifacts}. 
+In general the approach to the
+continuum limit is thought to have lattice artifacts of power $p$
+(RG considerations show that these $a^p$ artifacts are modified by
+powers of logarithms~\cite{montvay_quantum_1994}) where $p$ 
+depends on the lattice discretization.
+The Wilson action in particular has $p=2$.
+Equation~\eqref{eq:stdscaling} suggests a two-parameter fit of the form
+\begin{equation}\label{eq:stdscalingfit}\index{standard scaling}
+  R_{ij}=r_{ij}+c_{ij}\,\left(\frac{1}{L_j}\right)^2,
+\end{equation}
+where $r_{ij}$ and $c_{ij}$ are the 
+fit parameters. We will refer to this behavior as {\it standard scaling}. 
+
+Another possibility for continuum limit extrapolation uses
+the asymptotic scaling relation~\eqref{eq:latRGEsoln}
+\begin{equation}\label{eq:asr}
+  a\Lambda_L=\fas(\beta).
+\end{equation}
+We start by noting that the scale
+$L_i$ calculated on the lattice is some function of the spacing,
+so it can be expanded as a power series in $a$:
+\begin{equation}
+  L_i=\frac{c_i}{a\Lambda_L}\left(1+\sum\limits_{k=1}^{\infty}
+                           \alpha_{i\,k}(a\Lambda_L)^k\right),
+\end{equation}
+where the $\alpha_{i\,k}$ are expansion coefficients.
+Allton suggested using this equation to fit the approach to the continuum
+limit~\cite{allton_lattice_1997}. Inserting eq.~\eqref{eq:asr}
+into the above power series yields
+\begin{equation}
+  L_i=\frac{c_i}{\fas(\beta)}
+              \left(1+\sum\limits_{k=1}^{\infty}
+                    \alpha_{i\,k}\,\fas(\beta)^{\,k}\right).
+\end{equation}
+In practice $\fas$ is only known up to three loops, so we must
+truncate it at some order $m$. Furthermore to have a finite number
+of fit parameters, we must truncate the power series at some order
+$n$. Hence, the approach of a length to the continuum limit can
+be fit according to 
+\begin{equation}\label{eq:lenasf}
+  L_i=\frac{c^{mn}_i}{\fas^m(\beta)}
+                    \left(1+\sum\limits_{k=1}^{n}
+                    \alpha^{mn}_{i\,k}\,\fas^m(\beta)^{\,k}\right),
+\end{equation}
+where upper indices $m$ and $n$ are attached to quantities that
+will change if $m$ or $n$ change. The fit parameters are
+$c^{mn}_i$ and the $\alpha_{ik}^{mn}$. 
+
+In general, asymptotic scaling would allow $\order{a}$ corrections. 
+In order to ensure non-perturbative corrections are 
+$\order{a^2}$, we improve on Allton by demanding that 
+all scales have the
+same $k=1$ term $\alpha^{mn}_{i,1}$; then terms of order $a$ cancel 
+in the ratio. Using eq.~\eqref{eq:lenasf} along with this restriction, 
+one obtains
+\begin{equation}\label{eq:ascalingfit}
+  R_{ij}=r_{ij}+\sum_{k=2}^n\kappa^{mn}_{i\,k}
+                  \,\fas^m\left(L_j\right)^{\,k},
+\end{equation}
+where the fit parameters are now $r_{ij}$ and the $\kappa_{i\,k}^{mn}$.
+One can switch the domain of $\fas^m$ from $\beta$ to the
+reference $L_j$ using, for instance, eq.~\eqref{eq:lenasf}.
+The continuum limit estimate $r_{ij}$ also depends on $m$ and $n$, but
+we have suppressed these indices for clearer comparison with
+the standard scaling fit~\eqref{eq:stdscalingfit}. We will refer
+to the behavior of eq.~\eqref{eq:lenasf} or \eqref{eq:ascalingfit}
+as \index{asymptotic scaling}{\it asymptotic scaling}.
+
+If we carry out a naive continuum limit without changing the
+extension of the lattice, its physical volume collapses to zero.
+Ideally, calculations would be performed in the {\it thermodynamic limit},
+where $N_s\to\infty$ and $N_\tau\to\infty$, and then take the limit
+$a\to0$. In practice, the infinite volume observable is determined
+by simulating at fixed $\beta$ on lattices of several sizes, then
+extrapolating to the thermodynamic limit.
+For some observables, the dependence on finite lattice size is known
+from theory. For example the critical coupling constant $\beta_c(N_\tau)$
+is known~\cite{engels_critical_1996} to depend on $N_s$ as
+\begin{equation}
+  \beta_c(N_\tau,N_s)=\beta_c(N_\tau)+a_1(N_\tau)N_s^{a_2(N_\tau)}.
+\end{equation}
+The $N_s=\infty$ result $\beta_c(N_\tau)$ can then
+be extracted from a fit of the three parameters $\beta_c(N_\tau)$,
+$a_1(N_\tau)$, and $a_2(N_\tau)$.
+
+\section{Topological invariants}\label{sec:topinvar}
+
+\subsection{Topological winding number}
+\index{topological!winding number}
+
+This section follows Chapter 93 of Srednicki~\cite{srednicki_quantum_2007}; 
+more details can be found there.
+We start by considering classical, pure $\SU(2)$ gauge theory
+\begin{equation}\label{eq:topaction}
+  \Lagr=-\frac{1}{2g^2}F_{\mu\nu}F_{\mu\nu}
+\end{equation}
+at fixed $x_4$, focusing for the moment on $U$ that are time-independent.
+Let $U\equiv U(\vec{x})\in\SU(2)$, and set the BC $U(\infty)=U_0$
+for some constant matrix $U_0$. 
+The {\it topological winding number} 
+or {\it Pontryagin index} \index{Pontryagin index}of the map $U$ is
+\begin{equation}\label{eq:wn}
+  n\equiv\frac{1}{24\pi^2}\int\dd[3]{x}\epsilon_{ijk}
+    \tr U\,\partial_iU^\dagger U\,\partial_jU^\dagger
+        U\,\partial_kU^\dagger.
+\end{equation}
+The winding number is invariant under coordinate changes since the Jacobian of
+the measure cancels the Jacobian of the partial derivatives.
+Given the BC, it is also invariant under smooth deformations of $U$. 
+To show this, we first establish a useful Lemma.
+
+\begin{lemma}{}{variationrule}
+  $$\var\left(U\partial_kU^\dagger\right)
+   =-U\partial_k\left(U^\dagger\var U\right)U^\dagger.$$
+\begin{proof} Note that $\var U^\dagger=-U^\dagger\var U\,U^\dagger$. Hence
+  \begin{alignat*}{2}
+   \var\left(U\partial_kU^\dagger\right)
+    &=\var U\partial_kU^\dagger&&+U\partial_k\var U^\dagger\\
+    &=                           &&-U\partial_k\left(U^\dagger\var
+                                                     U\,U^\dagger\right)\\
+    &=                           &&-U\left(\partial_kU^\dagger\var UU^\dagger
+                                        +U^\dagger\partial_k\var U\,U^\dagger
+                                        +U^\dagger\var U\partial_k
+                                         U^\dagger                     \right).
+  \end{alignat*}
+  Cancelling the first and last terms and using the product rule gives the
+  result.
+\end{proof}
+\end{lemma}
+
+\begin{theorem}{}{wndeform}
+The topological winding number is invariant under smooth
+deformations of $U$.
+\begin{proof} We integrate eq.~\eqref{eq:wn} over a time-slice of space-time,
+which we call $\Omega$. Then
+  \begin{align*}
+   \var n &=-\frac{1}{24\pi^2}~\var\int_\Omega\dd[3]{x}\epsilon_{ijk}\tr
+                U\partial_iU^\dagger\,
+                U\partial_jU^\dagger\,
+                U\partial_kU^\dagger\\
+            &=-\frac{1}{8\pi^2}\int_\Omega \dd[3]{x}\epsilon_{ijk}\tr
+                \var\left(U\partial_iU^\dagger\right)
+                            U\partial_jU^\dagger\,
+                            U\partial_kU^\dagger\\
+            &=+\frac{1}{8\pi^2}\int_\Omega \dd[3]{x}\epsilon_{ijk}\tr
+                \partial_i\left(U^\dagger\var U\right)
+                 U^\dagger\partial_jU\,
+                 U^\dagger\partial_kU\\
+            &=+\frac{1}{8\pi^2}\int_{\partial\Omega} \dd{S_i}\epsilon_{ijk}\tt
+r
+                U^\dagger\var U\,
+                U^\dagger\partial_j U\,
+                U^\dagger\partial_k U\\
+            &~~~~~-\frac{1}{8\pi^2}\int_\Omega \dd[3]{x}\epsilon_{ijk}\tr
+                U^\dagger\var U\partial_i\left[
+                U^\dagger\partial_j U\,
+                U^\dagger\partial_k U\right].
+  \end{align*}
+  In the second step we used that the trace is cyclic.
+  In the third step we used Lemma~\ref{lem:variationrule} as well as
+  $U\partial_\mu U^\dagger=-\partial_\mu UU^\dagger$. In the last step
+  we integrated by parts. The first integral is over the time-slice boundary
+  evaluated at infinity. Since $\partial_jU=\partial_jU_0=0$ there, this termm
+ 
+  vanishes. The integrand of the remaining integral is expanded as
+  \begin{equation*}\begin{aligned}
+    \epsilon_{ijk}\tr\Big[&
+     \partial_i U^\dagger\partial_j U U^\dagger\partial_k U
+     +\partial_j U^\dagger\partial_i U U^\dagger\partial_k U\\
+     &+U^\dagger\partial_{ij}UU^\dagger\partial_k U
+     +U^\dagger\partial_jUU^\dagger\partial_{ik}U\Big].
+  \end{aligned}\end{equation*}
+  Terms with double derivatives vanish, as they are symmetric with respect
+  to exchange of indices, while $\epsilon$ is antisymmetric. The remaining
+  terms are also shown to vanish using the antisymmetry of $\epsilon$
+  in addition to cyclically permuting terms under the trace.
+\end{proof}
+\end{theorem}
+
+The quantity~\eqref{eq:wn} is called a winding number because it counts
+the number of times the mapping $U$ ``winds around" or ``covers" 
+the integration region. Let us see how this works in the present case.
+The integration region is the 3D surface of space-time, which is
+homeomorphic to the 3-sphere $S^3$. A point $\hat{x}\in S^3$
+is specified by two polar angles $\chi$ and $\psi$ and an azimuthal
+angle $\phi$ as
+\begin{equation}
+  \hat{x}=\colvec{4}{\s_\chi\s_\psi\co_\phi}{\s_\chi\s_\psi\s_\phi}
+                    {\s_\chi\co_\psi}{\co_\chi}.
+\end{equation}
+Then the mapping $U:S^3\to\SU(2)$ given by
+\begin{equation}\label{eq:uexplicit}
+U(\hat{x})=\left(\begin{array}{cc}
+             \co_\chi+i\s_\chi\co_\psi     & i\s_\chi\s_\psi e^{-im\phi}\\
+             i\s_\chi\s_\psi e^{im\phi}& c_\chi-i\s_\chi\co_\psi 
+            \end{array}\right),
+\end{equation}
+has winding number $m$. Intuitively, one can see this in the following manner:
+Any $\SU(2)$ matrix can be written in terms of four real components as 
+\begin{equation}
+  U=a_4\id+i\vec{a}\cdot\vec{\sigma},
+\end{equation}
+where $a_\mu a_\mu=1$. The vector corresponding to the 
+map~\eqref{eq:uexplicit} is
+\begin{equation}
+  \hat{a}=\colvec{4}{\s_\chi\s_\psi\co_{m\phi}}{\s_\chi\s_\psi\s_{m\phi}}
+                    {\s_\chi\co_\psi}{\co_\chi}.
+\end{equation}
+We see that if we sweep through $\phi$, $\hat{x}$ sweeps over $S^3$ once
+while $\hat{a}$ sweeps over $S^3$ $m$ times. And indeed, one can see
+that eq.~\eqref{eq:wn} extracts the winding number by plugging in the 
+mapping~\eqref{eq:uexplicit}. This is done in the following Proposition.
+\begin{proposition}{}{wnproof}
+Consider the map $U:S^3\to\SU(2)$ given by
+$$
+U(\hat{x})=\left(\begin{array}{cc}
+             \co_\chi+i\s_\chi\co_\psi     & i\s_\chi\s_\psi e^{-im\phi}\\
+             i\s_\chi\s_\psi e^{im\phi}& c_\chi-i\s_\chi\co_\psi 
+            \end{array}\right).
+$$
+Then $U$ has winding number $m$.
+\begin{proof}
+  Plugging this map into eq.~\eqref{eq:wn} we find
+  \begin{equation*}
+  \begin{aligned}
+    n&=-\frac{1}{24\pi^2}\int_{S^3} \dd[3]{x}\epsilon_{ijk}\tr
+        U\partial_i U^\dagger\,U\partial_j U^\dagger\,U\partial_k U^\dagger\\
+     &=-\frac{1}{24\pi^2}\int_0^\pi\dd\chi\int_0^\pi\dd{\psi}\int_0^{2\pi}
+        \dd{\phi}\epsilon_{\alpha\beta\gamma}\tr
+        U\partial_\alpha U^\dagger\,U\partial_\beta U^\dagger\,
+        U\partial_\gamma U^\dagger,\\
+  \end{aligned}
+  \end{equation*}
+  where $\alpha,\,\beta,\,\gamma\in\{\chi,\,\psi,\,\phi\}$ and
+  $\epsilon_{\chi\psi\phi}\equiv+1$.
+  Since the trace is cyclic, all even permutations of $\chi,\,\psi,\,\phi$ give
+  the same contribution to the integral, and similarly for all odd
+  permutations. Hence
+  \begin{equation*}\begin{aligned}
+    n=-\frac{1}{8\pi^2}\int_0^\pi\dd{\chi}\int_0^\pi\dd\psi\int_0^{2\pi}
+        \dd{\phi}\epsilon_{\chi\psi\phi}&\tr\Big(
+        U\partial_\chi U^\dagger\,U\partial_\psi U^\dagger\,
+        U\partial_\phi U^\dagger\\
+        &~~~~~~-U\partial_\chi U^\dagger\,U\partial_\phi U^\dagger\,
+        U\partial_\psi U^\dagger\Big).
+  \end{aligned}\end{equation*}
+  Next we compute
+  \begin{equation*}
+  \begin{aligned}
+    U^\dagger&=\left(\begin{array}{cc}
+                  \co_\chi-i\s_\chi\co_\psi & -i\s_\chi\s_\psi e^{-im\phi}\\
+                 -i\s_\chi\s_\psi e^{im\phi}& c_\chi+i\s_\chi\co_\psi 
+                \end{array}\right)\\
+    \partial_\chi U^\dagger
+             &=\left(\begin{array}{cc}
+                  -\s_\chi-i\co_\chi\co_\psi  & -i\co_\chi\s_\psi e^{-im\phi}\\
+                 -i\co_\chi\s_\psi e^{im\phi} & -s_\chi+i\co_\chi\co_\psi 
+                \end{array}\right)\\
+    \partial_\psi U^\dagger
+             &=\left(\begin{array}{cc}
+                  +i\s_\chi\s_\psi & -i\s_\chi\co_\psi e^{-im\phi}\\
+                 -i\s_\chi\co_\psi e^{im\phi} & -i\s_\chi\s_\psi 
+                \end{array}\right)\\
+    \partial_\phi U^\dagger
+             &=\left(\begin{array}{cc}
+                  0 & -m\s_\chi\s_\psi e^{-im\phi}\\
+                 m\s_\chi\s_\psi e^{im\phi} & 0 
+                \end{array}\right)
+  \end{aligned}
+  \end{equation*}
+  and plug into the above equation. I didn't see any further simplification,
+  so all that remains is to multiply the matrices, take the trace, and
+  carry out the integrations. That seemed tedious, and I'm certain I would
+  make a mistake, so I just plugged this into Mathematica to find 
+  $$n=m.$$
+\end{proof}\end{proposition}
+
+Finally we prove another fact about the winding number that will be useful
+in the following section.
+\begin{proposition}{}{}
+  Let $U_n:S^3\to S^3$ have winding number $n$ and
+  $U_k:S^3\to S^3$ have winding number $k$. Then the map
+  $U_n U_k$ has winding number $n+k$.
+  \begin{proof}
+    The total winding number for the map $U_n U_k$ can be written
+    \begin{equation*}\begin{aligned}
+      w=\frac{1}{24\pi^2}\int_0^\pi\dd{\chi}\int_0^\pi\dd{\psi}
+          \left(\int_0^\pi+\int_\pi^{2\pi}\right)\dd{\phi}
+          \epsilon_{\alpha\beta\gamma}\tr\,
+          &U_nU_k\partial_\alpha(U_nU_k)^\dagger\\
+          &\times\left(\text{$\beta$ term}\right)
+          \left(\text{$\gamma$ term}\right).
+    \end{aligned}\end{equation*}
+    From Theorem~\ref{thm:wndeform}, we know we can smoothly
+    deform $U_n$ to $\id$ for $x_3<0$ without changing $w$.
+    Then for $0\leq\phi\leq\pi$, we have
+    $\partial_i U_k=0$ and $U_n U_k=U_k$, and we can clearly identify
+    the first contribution to the above integral as $k$.
+    Similarly, we smoothly deform $U_k$ to $\id$ for
+    $x_3>0$ and find the second contribution to be $n$. Thus,
+    $$w=n+k.$$
+  \end{proof}
+\end{proposition}
+
+
+\subsection{Theta vacua}
+Now we have shown that \eqref{eq:wn} is invariant under smooth deformations
+of $U$, and we can believe that it really extracts the number of times
+$U$ as a mapping covers the integration region. Next we want to understand
+how the winding number relates to physics. 
+Consider two maps $U$ and $U'$ that are gauge transformations of
+zero and with different winding numbers. Since the winding number
+is a topological invariant, the only way to deform $U$ to $U'$ is
+to pass through configurations with $F_{\mu\nu}\neq0$; in other
+words, there is an energy barrier between $U$ and $U'$. 
+The corresponding quantum theory therefore has degenerate
+vacuum states characterized by their winding numbers.
+
+Between two quantum states $\ket{n}$ and $\ket{n'}$, there is a 
+transition amplitude $\bra{n'}H\ket{n}$ where $H$ is the Hamiltonian. 
+Let us discuss its matrix elements. Since 
+\begin{enumerate}
+  \item the product of two maps with winding numbers $n$ and $k$ 
+        has winding number $n+k$, which one can see from eq.~\eqref{eq:wn}
+        by smoothly deforming $U_n$ to $\id$ for $x_3<0$ and
+        smoothly deforming $U_k$ to be $\id$ for $x_3>0$;
+  \item the winding number is odd under parity, which follows from the
+        fact that negative winding numbers reverse orientation; and
+  \item the Yang-Mills Hamiltonian is parity invariant,
+\end{enumerate}
+it follows that the tunneling amplitude depends on $|n-n'|$ only.
+This can be seen in a few steps. From the first point, we see that
+a gauge transformation $U_k$ maps a field configuration with
+winding number $n$ to one with winding number $n+k$. In the
+corresponding quantum theory, this transformation is achieved 
+through a unitary operator
+\begin{equation}\label{eq:qwn}
+  \mathcal{U}_k\ket{n}=\ket{n+k}.
+\end{equation}
+The pure $\SU(2)$ Hamiltonian is built out of gauge invariant
+field strengths, so we must have 
+\begin{equation}\label{eq:qid}
+  \mathcal{U}_kH\mathcal{U}_k^\dagger=H.
+\end{equation}
+Inserting factors of $\mathcal{U}_k^\dagger\mathcal{U}_k=\id$ into
+the matrix element $\bra{n}H\ket{n'}$ and using eq.~\eqref{eq:qwn}
+and \eqref{eq:qid} yields
+\begin{equation}
+  \bra{n}H\ket{n'}=\bra{n+k}H\ket{n'+k}.
+\end{equation}
+Hence the matrix element depends on $n-n'$ only. From the second and
+third points, we see that $P\ket{n}=\ket{-n}$ and $PHP^{-1}=H$;
+therefore we similarly find
+\begin{equation}
+  \bra{n}H\ket{n'}=\bra{-n}H\ket{-n'},
+\end{equation}
+showing that the matrix element depends on $|n-n'|$ only.
+One can use this fact to show that $H$ is diagonalized by 
+\index{theta vacua}{\it theta vacua}, which are states of the form
+\begin{equation}
+  \ket{\theta}\equiv\sum\limits_{n=-\infty}^\infty e^{-i n\theta}\ket{n}.
+\end{equation}
+\index{vacuum angle}
+The parameter $\theta$ is referred to as the {\it vacuum angle}. 
+
+\subsection{Topological charge and instantons}\index{topological!charge}
+
+We will now discuss the topology of gauge field
+configurations defined on all space-time. Let $r=(x_\mu x_\mu)^{1/2}$.
+We require that
+\begin{equation}
+  A_\mu(x)\to U(x)\partial_\mu U^\dagger(x)
+\end{equation}
+as $r\to\infty$ to keep the action finite. (Infinite actions are
+exponentially suppressed in the path integral.) The 3D integration
+region will be the surface of space-time at infinity.
+In addition to the BC $U(\infty)=U_0$, we specify $U$ at $x_4=-\infty$
+to have winding number $n_-$ and $U$ at $x_4=+\infty$ to have
+winding number $n_+$. The entire boundary is homeomorphic to
+$S^3$, and the winding number of $U$ is
+\begin{equation}
+  Q\equiv n_+-n_-, 
+\end{equation}
+where the relative minus sign is due to the surfaces at $x_4=\pm\infty$
+having opposite orientation. We indicate this winding number with a
+$Q$, and it is often called the {\it topological charge}.
+
+By viewing the integrand of eq.~\eqref{eq:wn} 
+as the surface integral over a 4D region, defining the 
+{\it Chern-Simons current}\index{Chern-Simons current}
+\begin{equation}
+  J_\mu^{CS}\equiv 2\epsilon_{\mu\nu\rho\sigma}\tr
+    \left(a_\nu F_{\rho\sigma} +\frac{2}{3}A_\nu A_\rho A_\sigma\right),
+\end{equation}
+and applying Gauss's theorem, one can identify the winding number as 
+an integral over the four-divergence of $J_\mu^{CS}$. We find
+\begin{equation}\label{eq:Q}
+  Q=\frac{1}{16\pi^2}\int\dd[4]{x}\tr\dual{F_{\mu\nu}}F_{\mu\nu}
+   \equiv \int\dd[4]{x}q,
+\end{equation}
+where
+\begin{equation} 
+\dual{F}_{\mu\nu}=\frac{1}{2}\epsilon_{\mu\nu\rho\sigma}F_{\rho\sigma}
+\end{equation}
+is the {\it dual} field strength tensor. The quantity
+$q$ is called the {\it topological charge density}. This form of the
+topological charge is helpful to look find vacuum solutions to the
+Euclidean field equations, and it also motivates one of the possible
+definitions for topological charge on the lattice. We prove it now.
+\begin{proposition}{}{wnfsproof}
+The topological charge can be written in terms of the field strength as
+$$
+  Q=\frac{1}{16\pi^2}\int\dd[4]{x}\tr\dual{F_{\mu\nu}}F_{\mu\nu}.
+$$
+  \begin{proof} Starting from the definition of the winding number we have
+    $$
+      Q=-\frac{1}{24\pi^2}\int\dd[3]{x}
+        \epsilon_{\nu\rho\sigma}\tr U\partial_\nu U^\dagger\,
+        U\partial_\rho U^\dagger\,U\partial_\sigma U^\dagger.
+    $$
+    Recasting this integral as a 4D surface integral and noting
+    that $\epsilon_{r\chi\psi\phi}=-1$, which by looking at the Jacobian
+    for this change of variables leads to an overall minus sign, we obtain
+    \begin{equation*}\begin{aligned}
+      Q&=\frac{1}{24\pi^2}\int\dd{S_\mu}
+        \epsilon_{\mu\nu\rho\sigma}\tr U\partial_\nu U^\dagger\,
+        U\partial_\rho U^\dagger\,U\partial_\sigma U^\dagger\\
+       &=\frac{1}{24\pi^2}\int\dd{S_\mu}
+        \epsilon_{\mu\nu\rho\sigma}\tr A_\nu A_\rho A_\sigma.
+    \end{aligned}\end{equation*}
+    From the BCs we know that $F_{\rho\sigma}=0$ on this surface, so
+    we are able to replace the integrand in the winding number
+    with $J^{CS}$. We get
+    $$
+      Q=\frac{1}{32\pi^2}\int\dd{S_\mu}J_\mu^{CS}
+       =\frac{1}{32\pi^2}\int\dd[4]{x}\partial_\mu J_\mu^{CS}
+    $$
+    by the divergence theorem.
+    It remains to compute $\partial_\mu J_\mu^{CS}$. We have
+    \begin{equation*}
+    \begin{aligned}
+      \partial_\mu J_\mu^{CS}
+       &=2\epsilon_{\mu\nu\rho\sigma}\tr\Big[\partial_\mu A_\nu F_{\rho\sigma}
+           +A_\nu\partial_\mu F_{\rho\sigma}\\
+       &~~~~~~~~~~~~~~~~~~+\frac{2}{3}\left(\partial_\mu A_\nu A_\rho A_\sigma
+              +A_\nu \partial_\mu A_\rho A_\sigma
+              +A_\nu A_\rho \partial_\mu A_\sigma\right)\Big]\\
+       &=2\epsilon_{\mu\nu\rho\sigma}\tr\Big[\partial_\mu A_\nu F_{\rho\sigma}
+           +A_\nu\partial_\mu F_{\rho\sigma}
+           +2\partial_\mu A_\nu A_\rho A_\sigma\Big]\\ 
+       &=\epsilon_{\mu\nu\rho\sigma}\tr\Big[\partial_\mu A_\nu F_{\rho\sigma}
+           -\partial_\nu A_\mu F_{\rho\sigma}
+           +2A_\nu\partial_\mu[A_\rho,A_\sigma]
+           +4\partial_\mu A_\nu A_\rho A_\sigma\Big]\\
+       &=\epsilon_{\mu\nu\rho\sigma}\tr\Big[\partial_\mu A_\nu F_{\rho\sigma}
+           -\partial_\nu A_\mu F_{\rho\sigma}\\
+           &~~~~~~~~~~~~~~~~~~+[A_\mu,A_\nu]
+                    \big(\partial_\rho A_\sigma-\partial_\sigma A_\rho
+                          +[A_\rho,A_\sigma]\big)\Big]\\
+       &=\epsilon_{\mu\nu\rho\sigma}\tr F_{\mu\nu}F_{\rho\sigma}\\
+       &=2\tr \dual{F_{\mu\nu}}F_{\mu\nu}.
+    \end{aligned}
+    \end{equation*}
+    To get to the second line, we used the fact that cyclic permutations
+    of products under the trace leave the trace unchanged; the fact that
+    $\epsilon$ is antisymmetric; and relabelled dummy indices. To get to
+    the third line, we expanded the field strength tensor; and used the fact
+    that terms with second-derivatives are symmetric and therefore vanish
+    when contracted with $\epsilon$. Finally to get to the fourth line,
+    one can use the same tricks as with the second line. In addition,
+    note that $\epsilon\tr AAAA=0$ because cyclic permutations of
+    four indices in $\epsilon$ flip the sign, while cyclic permutations
+    of the $AAAA$ indices under the trace leave it unchanged; therefore
+    we can add terms of this form inside the trace with impunity
+    and obtain the $[A,A][A,A]$ term.
+    Plugging this result back into our expression for the winding number
+    completes the proof.
+  \end{proof}
+\end{proposition}
+
+With eq.~\eqref{eq:Q} we can find vacuum solutions to the Euclidean
+field equations
+\begin{equation}
+  D_\mu F_{\mu\nu}=0.
+\end{equation}
+The trick is to construct a lower bound on the action. Then if we can
+find a solution saturating the bound, it must solve the field equations,
+since it minimizes the action. This is called a \index{Bogomolny bound}
+{\it Bogomolny bound}.
+Using eq.~\eqref{eq:topaction}, we find
+\begin{equation}\label{eq:bogo}
+  S\geq 8\pi^2|Q|/g^2,
+\end{equation}
+which becomes saturated when
+\begin{equation}\label{eq:efeq}
+  \dual{F_{\mu\nu}}=(\text{sign}\;n)F_{\mu\nu}.
+\end{equation}
+\begin{proposition}{}{}
+For configurations with topological charge $Q$,
+the action is bounded below by
+$$
+  S\geq\frac{8\pi^2|Q|}{g^2}.
+$$
+  \begin{proof}
+    Note that $\dual{F_{\mu\nu}}\dual{F_{\mu\nu}}=F_{\mu\nu}F_{\mu\nu}$, so
+    $$
+      \frac{1}{2}\tr\left(\dual{F_{\mu\nu}\pm F_{\mu\nu}}\right)^2
+       =\tr F_{\mu\nu}F_{\mu\nu}\pm\tr\dual{F_{\mu\nu}}F_{\mu\nu}.
+    $$
+    The LHS of the above equation is non-negative, so
+    $$
+      \int\dd^4x\,\tr F_{\mu\nu}F_{\mu\nu}\geq
+      \Bigg|\int\dd^4x\,\tr\dual{F_{\mu\nu}}F_{\mu\nu}\Bigg|.
+    $$
+    The LHS of the above equation is $2g^2S$ while the RHS
+    is, according to Proposition~\ref{prp:wnfsproof}, $16\pi^2|Q|$.
+    This completes the proof.
+  \end{proof}
+\end{proposition}
+
+We arrive at an explicit solution to the above equation using
+the map \eqref{eq:uexplicit} with $Q=1$ $(m=1)$.
+\begin{proposition}{}{}
+The equation
+$$
+\dual{F_{\mu\nu}}=F_{\mu\nu}
+$$
+is solved by
+$$
+  A_\mu(x)=\frac{r^2}{r^2+R^2}\,U(\hat{x})\partial_\mu U^\dagger(\hat{x}),
+$$
+where $\hat{x}=x/r.$
+  \begin{proof} We start with the ansatz
+    $$A_\mu(x)=f(r)U(\hat{x})\partial_\mu U^\dagger(\hat{x}),$$
+    with $f(\infty)=1$ and $f(0)=0$. Plugging this ansatz into the
+    field tensor, we get
+    \begin{equation*}
+    \begin{aligned}
+      F_{\mu\nu}
+        &=\partial_\mu f\,U\partial_\nu U^\dagger
+          +f\partial_\mu U\partial_\nu U^\dagger
+          +f^2U\partial_\mu U^\dagger U\partial_\nu U^\dagger
+          -(\mu\leftrightarrow\nu)\\
+        &=\partial_\mu f\,U\partial_\nu U^\dagger
+          +f(1-f)\partial_\mu U\partial_\nu^\dagger
+          -(\mu\leftrightarrow\nu).
+    \end{aligned}
+    \end{equation*}
+    Terms symmetric in $\mu$ and $\nu$ vanished, and we utilized
+    $\partial_\mu U^\dagger=-U^\dagger\partial_\mu UU^\dagger.$
+    To proceed, we need to know the components of $\partial$.
+    They are
+    \begin{equation*}
+     \partial=e_r\frac{\partial}{\partial r}
+     +e_\chi\frac{1}{r}\frac{\partial}{\partial \chi}
+     +e_\psi\frac{1}{rs_{\chi}}\frac{\partial}{\partial \psi}
+     +e_\phi\frac{1}{rs_{\chi}s_{\psi}}\frac{\partial}{\partial \phi},
+    \end{equation*}
+    where $e_i$ is the unit vector in direction $i$. Since $f$ is
+    a function of $r$ only and $U$ is a function of the angles
+    only, this implies
+    $$
+      F_{r\chi}=\frac{1}{r}f'U\partial_\chi U^\dagger
+    $$
+    and
+    $$
+      F_{\psi\phi}=\frac{1}{r^2s^2_\chi s_\psi}
+        f(1-f)\left(\partial_\psi U\partial_\phi U^\dagger
+                    -\partial_\phi U\partial_\psi U^\dagger\right).
+    $$
+    From the definition of the dual tensor, we have
+    $\dual{F_{r\chi}}=-F_{\psi\phi}$, since $\epsilon_{r\chi\psi\phi}=-1$.
+    To satisfy the instanton equation $\dual{F_{\mu\nu}}=F_{\mu\nu}$
+    we must therefore have $F_{r\chi}=-F_{\psi\phi}$. Because
+    the variables are separated in $F$, we conclude
+    $$
+      kf'=kf(1-f)
+    $$
+    and
+    $$
+      U\partial_\chi U^\dagger=-\frac{1}{cs_\chi^2s_\psi}
+               \left(\partial_\psi U\partial_\phi U^\dagger
+                    -\partial_\phi U\partial_\psi U^\dagger\right) 
+    $$
+    for some constant $k$. Plugging the explicit mapping into the
+    latter equation yields $k=2$. The former, ordinary differential
+    equation is then easily solved. The result is
+    $$
+      f(r)=\frac{r^2}{r^2+R^2},
+    $$
+    where $R$ is a constant of integration.
+\end{proof}
+\end{proposition}
+
+This solution is called the {\it instanton}~\cite{belavin_pseudoparticle_1975}
+\index{instanton}and the integration constant $R$ is called the 
+{\it instanton size}. 
+The instanton mediates between vacuum configurations at times
+$+\infty$ and $-\infty$ with winding numbers $n_+$ and $n_-$.
+When $Q=-1$ we have an {\it anti-instanton}.
+When $|Q|>1$, the mediating solution is constructed of multiple 
+instantons or anti-instantons. When separations are large compared
+to their sizes, we call this a {\it dilute gas} of instantons
+or anti-instantons. From eq.~\eqref{eq:bogo}
+we see that each instanton or anti-instanton contributes
+$8\pi^2/g^2$ to the Bogomolny bound.
+
+\index{topological!susceptibility}
+The {\it topological susceptibility} is defined as
+\begin{equation}
+  \chi_Q\equiv\int\dd[4]{x}\ev{q(x)q(0)},
+\end{equation}
+where $q$ is the topological charge density of eq.~\eqref{eq:Q}.
+The topological susceptibility gives evidence that the topological
+structure of the underlying gauge fields has phenomenological significance.
+In particular, by performing a calculation in the large $N_c$ limit, 
+Witten and Veneziano~\cite{witten_current_1979,veneziano_u1_1979} showed
+that at $N_c=\infty$ the $\eta'$ mass is related to 
+the topological susceptibility through
+\begin{equation}\index{Witten-Veneziano formula}
+  m_{\eta'}^2+m_\eta^2-2m_K=\frac{4N_f\chi_Q}{f_\pi^2},
+\end{equation}
+where $m_\eta$ is the $\eta$ mass, $m_K$ is the mass of the kaon, 
+$N_f$ is the number of fermion flavors, and $f_\pi$ is the
+pion decay constant. This mechanism can be used to explain the 
+$\eta-\eta'$ mass difference. 
+Plugging experimental values into the above
+formula for $N_f=3$, one finds
+\begin{equation}\label{eq:chivalue}
+  \chi_Q\approx(180~\text{MeV})^4.
+\end{equation}
+While a conventional derivation of the Witten-Veneziano formula depends
+on large $N_c$, lattice calculations for pure $\SU(2)$ and
+pure $\SU(3)$ land relatively close to eq.~\eqref{eq:chivalue}.
+
+\subsection{Topological charge on the lattice}
+
+It may seem counter-intuitive that a well-defined notion of topology
+exists at all on the lattice. By taking an open cover of the
+lattice as the manifold (e.g., one can associate a hypercube to
+each site, keeping periodic BCs) one can define a topological charge on the 
+lattice; the non-trivial topology is contained in transition functions
+connecting cells of the open cover. For example 
+L\"uscher~\cite{luscher_topology_1982} showed
+the existence of a well-defined topological charge, which approaches 
+$Q$ in the continuum limit, for configurations with a small action
+density, i.e., with
+\begin{equation}
+  \max\,\tr\left(\id-U^\Box\right)<\epsilon
+\end{equation}
+for some small $\epsilon>0$. The maximum is taken over all plaquettes.
+Configurations not satisfying this inequality are called 
+\index{exceptional configuration}{\it exceptional}. 
+Since
+\begin{equation}
+  \ev{\tr\left(\id-U^\Box\right)}=\frac{3}{8}g^2+\order{g^4},
+\end{equation} 
+one sees that exceptional configurations become suppressed 
+as the lattice spacing
+decreases. In order for a configuration of one topological charge to
+tunnel to another, it must pass through such an exceptional configuration;
+hence as $g$ decreases (as $\beta$ increases), it becomes increasingly 
+more difficult for a configuration to tunnel out of its topological sector. 
+This phenomenon is sometimes called {\it topological freezing}.
+
+Further definitions of topological charge on the lattice can be found 
+in reviews such as the review by Kronfeld~\cite{kronfeld_topological_1988}.
+For our definition of topological charge, we follow the example of 
+eq.~\eqref{eq:Q} using the rule~\eqref{eq:inttosum}. It is reasonable to 
+measure a topological charge on the lattice by
+\begin{equation}\label{eq:QL}
+  Q_L=a^4\sum_x q_L(x),
+\end{equation}
+where the sum is over all lattice sites and
+\begin{equation}\label{eq:QLdensity}
+  q_L(x) = -\frac{1}{2^9\pi^2}\sum\limits_{\mu\nu\rho\sigma=\pm 1}^{\pm 4}
+         \tilde{\epsilon}_{\mu\nu\rho\sigma}
+         \tr U^\Box_{\mu\nu}(x)U^\Box_{\rho\sigma}(x).
+\end{equation}
+Here $\tilde{\epsilon}=\epsilon$ for positive indices while
+$\tilde{\epsilon}_{\mu\nu\rho\sigma}=
+  -\tilde{\epsilon}_{(-\mu)\nu\rho\sigma}$ for negative indices.
+The summation over backwards indices along with the definition of
+$\tilde{\epsilon}$ ensures $q_L$ has negative parity.
+The restriction of generated configurations to a subset with some fixed
+topological charge is what we mean by \index{topological!sector}
+{\it topological sector}.
+The lattice expression for the topological susceptibility is
+\begin{equation}
+  \chi_L=a^4\sum_x\ev{q_L(x)q_L(0)}=\frac{1}{N^4}\ev{Q_L^2},
+\end{equation}
+where we have assumed a geometry $N\equiv N_1=N_2=N_3=N_4$
+and utilized the translational invariance due to periodic BCs.
+
+Lattice gauge theories typically experience
+local fluctuations of the gauge fields, which are produced stochastically. 
+These fluctuations blur the topological structure of the lattice, and 
+must therefore be stripped away from the configuration before measuring 
+$Q_L$. The signal is considerably improved by \index{smoothing}
+{\it smoothing}, where one replaces each link by a local average of links; 
+$Q_L$ is then constructed on the smoothed field. 
+
+Standard cooling minimizes the local contribution
+to the action, which forces a gauge field to take a more typical
+(smoother) value given its neighbors.
+As mentioned earlier, the gradient flow averages the gauge field over 
+a neighborhood, and therefore also has a smoothing effect. 
+Ideally, these methods work because they make local modifications,
+which therefore leave the global topological charge relatively intact.
+A delicate issue with these smoothing algorithms is that they can destroy 
+physical instantons; in fact after protracted cooling, a lattice will
+eventually be brought to $Q_L=0$. This happens because
+exceptional configurations or \index{topological!dislocation}
+{\it dislocations} do not allow
+for a well-defined topological charge. A lattice can then change
+its topological charge by passing through these exceptional configurations.
+In practice, one cools just enough
+that topological observables become {\it quasi-stable}, i.e. just
+enough that they do not change after many additional cooling sweeps.
+
+\section{The Polyakov loop}\index{Polyakov loop}
+
+\subsection{The Polyakov loop and deconfinement}\index{deconfinement}
+We begin with a brief review of some relevant properties of the
+Polyakov loop. For a theory with underlying $\SU(N_c)$ gauge group, we define
+the {\it Polyakov loop} by
+\begin{equation}\label{eq:ploop}
+  P_{\vec{x}}\equiv\frac{1}{N_c}\tr\prod_\tau U_4(\vec{x},\tau).
+\end{equation}
+Because of the trace and periodic BCs, the Polyakov loop is invariant under
+gauge transformations. For the purpose of, for instance, data analysis, it
+is convenient to define the spatial average of the Polyakov loop,
+\begin{equation}\label{eq:ploopav}
+  P\equiv\frac{1}{N_\sigma^3}\sum_{\vec{x}}P_{\vec{x}}.
+\end{equation}
+Finally, some quantities of interest to us are defined more
+naturally using the untraced Polyakov loop, or {\it thermal Wilson line}, 
+\index{thermal Wilson line} which is just
+\begin{equation}\label{eq:untracedPolyakov}
+  L_{\vec{x}}\equiv\prod_\tau U_4(\vec{x},\tau).
+\end{equation}
+Each of the above is also sometimes referred to as a Polyakov
+loop, which can be confusing because the untraced Polyakov loop is not
+gauge invariant.
+
+We now specialize to $\SU(3)$. The Polyakov loop relates to $F_{q\bar{q}}$,
+\index{free energy!quark-antiquark}
+the color-averaged free energy of a static quark-antiquark pair in
+equilibrium at temperature $T$ by
+\cite{mclerran_monte_1981,mclerran_quark_1981}
+\begin{equation}\label{eq:Fav}
+  \exp\left[-\frac{F_{q\bar{q}}(r,T)}{T}\right] 
+    =\ev{P_{\vec{x}}P^\dagger_{\vec{y}}},
+     \qquad rT=\left|\vec{x}-\vec{y}\tinysp\right|/N_\tau.
+\end{equation}
+At low temperatures with static quarks, the Polyakov loop expectation value
+$\ev{|P|}$ is zero. This can be seen from at least two viewpoints. First
+note that at large $r$, $P_{\vec{x}}$ and $P_{\vec{y}}$ become essentially
+uncorrelated; therefore one finds
+\begin{equation}\label{eq:ploop_decouple}
+  \ev{P_{\vec{x}}P^\dagger_{\vec{y}}}
+    \approx\ev{P_{\vec{x}}}\ev{P^\dagger_{\vec{y}}}
+    =\ev{P}\ev{P^\dagger}
+    =\ev{P}\ev{P}^\dagger
+    =\left|\ev{P}\right|^2,
+\end{equation}
+and from eq.~\eqref{eq:Fav} we can (at least schematically) write
+something like
+\begin{equation}
+  \left|\ev{P}\right|^2\sim\exp\left[-\frac{F_{q\bar{q}}(\infty,T)}{T}\right]. 
+\end{equation}
+Since $F_{q\bar{q}}$ is growing linearly with separation at low temperatures
+due to confinement, the RHS of the above equation is zero.
+Another viewpoint is as follows: $\ev{|P|}$ is zero due to the global
+$\mathbb{Z}_3$ symmetry of the gauge action. In particular one can show
+that the plaquette is unchanged when multiplying all temporal links in a
+given time slice $x_4=t_0$ with the same element $z\in\mathbb{Z}_3$, i.e.
+the gauge action is unchanged under
+\begin{equation}
+  U_4(\vec{x},t_0)\to zU_4(\vec{x},t_0).
+\end{equation}
+The Polyakov loop is in general changed by this transformation
+because it winds around the time direction. However since the action remains
+unchanged, one can write
+\begin{equation}\label{eq:centerzero}
+  \ev{P}=\frac{1}{3}\ev{P+zP+z^2P}=\frac{1}{3}\left(1+z+z^2\right)\ev{P}=0
+\end{equation}
+since the sum over the center elements is zero.
+
+At higher temperatures the first equality of eq.~\eqref{eq:centerzero}
+no longer holds. At the deconfinement temperature $T_c$, this center symmetry
+is spontaneously broken, and $\ev{|P|}$ acquires a nonzero value, signalling
+a finite static quark-antiquark free energy and hence deconfinement.
+At finite $N_\sigma$, $\ev{|P|}$ has an inflection point at $T_c$, and
+the slope at this point diverges in the infinite volume limit. The Polyakov
+loop susceptibility, defined as
+\begin{equation}\index{Polyakov loop!susceptibility}
+  \chi_{|P|}=N_\sigma^3\left(\ev{|P|^2}-\ev{|P|}^2\right).
+\end{equation}
+exhibits a pronounced peak in a finite volume $N_\sigma^3\times N_\tau$ at
+$T_c$. The peak height diverges in the infinite volume limit as
+$\chi^{\rm max}_{|P|}\sim N_\sigma^3$, reflecting the first order nature of
+the deconfinement phase transition in pure $\SU(3)$ gauge theory.
+
+One can argue that, as far as susceptibilities go, it is the 
+susceptibility of $\Re P$ rather than $|P|$ that more directly contains the
+relevant physics. This point can be seen as follows:
+By doing a hopping parameter expansion of the fermion determinant,
+which is valid in the limit of heavy quarks, and by doing a strong
+coupling expansion in the kinetic part, one finds the leading order
+contributions
+\begin{equation}
+  S=S_G+S_F\approx\sum_{\vec{x},\vec{y}}\tr L_{\vec{x}}\tr L_{\vec{y}}^\dagger
+          +h\sum_{\vec{x}}\left(\tr L_{\vec{x}}+\tr L_{\vec{x}}^\dagger\right),
+\end{equation}
+where $h$ is an effective coupling that we will treat like an external
+field strength. The first term in the fermionic part is coming from loops
+winding around the lattice in the positive temporal direction, while the
+second term comes from loops oriented in the negative temporal direction.
+With the action in this form, one can more easily see the analogy with
+an Ising model solid subject to an external magnetic field.
+The susceptibility is then by definition
+\begin{equation}
+  \chi=\frac{\partial^2\log Z}{\partial h^2},
+\end{equation}
+where
+\begin{equation}
+  Z=\int\DD U\,e^{-S(h;U)}
+\end{equation}
+is the partition function. We compute
+\begin{equation}
+  \frac{\partial Z}{\partial h}
+      =\int\DD U\sum_{\vec{x}}
+          \left(\tr L_{\vec{x}}+\tr L_{\vec{x}}^\dagger\right)e^{-S(h;U)}
+      =Z\ev{\sum_{\vec{x}}
+          \left(\tr L_{\vec{x}}+\tr L_{\vec{x}}^\dagger\right)}
+\end{equation}
+and similarly
+\begin{equation}
+  \frac{\partial^2 Z}{\partial h^2}
+      =Z\ev{\left\{\sum_{\vec{x}}
+          \left(\tr L_{\vec{x}}+\tr L_{\vec{x}}^\dagger\right)\right\}^2\,}.
+\end{equation}
+Hence
+\begin{equation}\begin{aligned}
+  \chi&=\frac{\partial^2\log Z}{\partial h^2}\\
+      &=\frac{1}{Z}\frac{\partial^2 Z}{\partial h^2}
+       -\frac{1}{Z^2}\left(\frac{\partial Z}{\partial h}\right)^2\\
+      &=\ev{\big\{\big\}^2}-\ev{\big\{\big\}}^2\\
+      &=N_\sigma^3\left(\ev{\Re P^2}-\ev{\Re P}^2\right).
+\end{aligned}\end{equation}
+So from this point of view, the susceptibility of $\Re P$ is what
+falls out the most naturally from the effective Polyakov loop action.
+According to Frithjof, looking at $\chi_{\,|P|}$ became popular because
+in quenched QCD in the confined phase, one finds two sectors with
+nonzero $\Im P$, and it is easier to just measure $|P|$ than to rotate
+measurements in these two sectors back to the real axis.
+
+
+\subsection{Free energy and Polyakov loop renormalization}
+The gauge invariant color-averaged Polyakov loop correlator can be decomposed
+into (in general gauge-dependent) color singlet $F_1$ and color octet $F_8$
+contributions\index{free energy!color singlet}\index{free energy!color octet}
+\cite{mclerran_monte_1981,mclerran_quark_1981,nadkarni_non-abelian_1986}.
+In particular
+\begin{equation}\label{eq:channels}
+  \exp\left[-\frac{F_{q\bar{q}}(r,T)}{T}\right]
+  =\frac{1}{9}\exp\left[-\frac{F_1(r,T)}{T}\right]
+   +\frac{8}{9}\exp\left[-\frac{F_8(r,T)}{T}\right],
+\end{equation}
+where
+\begin{equation}\begin{aligned}
+ \exp\left[-F_1(r,T)/T\right]
+   &=\frac{1}{3}\ev{\tr L_{\vec{x}}L^\dagger_{\vec{y}}}\\
+  \exp\left[-F_8(r,T)/T\right]
+    &=\frac{9}{8}\ev{P_{\vec{x}}P^\dagger_{\vec{y}}}
+     -\frac{1}{24}\ev{\tr L_{\vec{x}}L^\dagger_{\vec{y}}},
+\end{aligned}\end{equation}
+which clearly depend on the gauge.
+For small distances ($rT\ll1$ and $r\ll1/\Lambda_{\text{QCD}}$) it can
+be shown within zero temperature perturbation theory
+\cite{kaczmarek_heavy_2002} that
+\begin{equation}\label{eq:Fperturb}\begin{aligned}
+  F_1(r,T=0)\equiv V_{T=0}(r)
+            =-8F_8(r,T=0)+\order{g^4}
+            =-\frac{g^2}{3\pi r}\left(1+\order{g^2}\right).
+\end{aligned}\end{equation}
+The exponent in eq.~\eqref{eq:channels} is positive for the singlet channel
+but negative for the octet channel in this limit, which means $F_1$ dominates,
+and we find
+\begin{equation}
+  F_{q\bar{q}}-F_1=T\log 9.
+\end{equation}
+Therefore,
+\begin{equation}\label{eq:Tlog9}
+  \lim_{r\to0}~F_{q\bar{q}}-F_1=T\log 9\qquad\Forall T.
+\end{equation}
+
+The Polyakov loop requires a multiplicative renormalization. When each link
+is renormalized with factor $Z(\beta)$, it follows from
+eq.~\eqref{eq:ploop} that the Polyakov loop renormalizes as
+\begin{equation}\label{eq:renploop}
+  P^{\text{ren}}=Z(\beta)^{N_\tau}P.
+\end{equation}
+From eq.~\eqref{eq:Fav} it is then clear that $F_{q\bar{q}}$ requires an
+additive renormalization. We can write
+\begin{equation}\label{eq:renFav}
+  a\,F_{q\bar{q}}^{\text{ren}}=a\,F_{q\bar{q}}+c(\beta),
+\end{equation}
+and then by eq.~\eqref{eq:Tlog9} we can similarly write
+\begin{equation}
+  a\,F_1^{\text{ren}}=a\,F_1+c(\beta)
+\end{equation}
+with the same $c(\beta)$ for both. From eqs.~\eqref{eq:Fav},
+\eqref{eq:renploop}, and \eqref{eq:renFav} we can write
+\begin{equation}
+  c(\beta)=-2\log Z(\beta).
+\end{equation}
+
+In practice, renormalized Polyakov loops can be calculated using
+the $q\bar{q}$-scheme~\cite{kaczmarek_heavy_2002}. The additive
+renormalization is determined by matching the singlet free energy
+to the zero temperature potential at short distances, i.e.
+\begin{equation}
+  c(\beta)=a\,V_{T=0}(r_s)-a\,F_1(r_s,T),
+\end{equation}
+where $r_s$ is one of the shortest distances. (Often it is better to take
+the third or fourth shortest available distance because the shortest
+distance suffers the most from lattice artifacts.) The renormalized
+Polyakov loop is determined as follows:
+By eqs.~\eqref{eq:Fav} and \eqref{eq:ploop_decouple}
+\begin{equation}
+  \lim_{r\to\infty}F_{q\bar{q}}^{\text{ren}}(r,T)
+             =-T\log\left|\ev{P}\right|^2+c(\beta)T.
+\end{equation}
+Moreover as the distance between the pair increases, this free energy
+should approach that of two quarks that do not interact with each other, i.e.
+\begin{equation}
+  \lim_{r\to\infty}F_{q\bar{q}}^{\text{ren}}(r,T)=2F_q^{\text{ren}}(T),
+\end{equation}
+where $F_q$ is the free energy of a heavy, static quark in the thermal
+medium. The renormalized Polyakov loop is then recovered from its
+relationship to this free energy, namely
+\begin{equation}
+  P^{\text{ren}}=\exp\left[-\frac{F_q^{\text{ren}}(T)}{T}\right],
+\end{equation}
+and from the above three equations we finally find
+\begin{equation}
+  P^{\text{ren}}=\exp\left[-\frac{1}{2}\left(\log\left|\ev{P}\right|^2
+                                             -c(\beta)\right)\right].
+\end{equation}
+
+\subsection{Finite size scaling}
+In this section we discuss some finite volume effects related to the
+Polyakov loop.
+In the confined phase in pure $\SU(3)$, there are three sectors that $P$
+clusters around in the complex plane, corresponding to the three roots
+of unity. At finite quark mass, the real sector is preferred, which
+can be seen for example in Fig.~\ref{fig:ploopScatter}. I've been told
+that one can show from strong coupling arguments that the real sector
+is preferred at finite quark mass, but don't understand that yet.
+Also we expect $\ev{\Im P}=0$ at $\mu=0$. To see this note that for any
+action symmetric under $U\to U^\dagger$, we have
+\begin{equation}\begin{aligned}
+  \ev{\Im P}&=\int\DD U\,e^{-S(U)}\Im P(U)\\
+            &=\int\DD U^\dagger\,e^{-S(U^\dagger)}\Im P(U^\dagger)\\
+            &=-\int\DD U\,e^{-S(U)}\Im P(U)\\
+            &=-\ev{\Im P},
+\end{aligned}\end{equation}
+where in the third step we used the invariance of the Haar measure and
+the action. Finite chemical potential breaks the $U\to U^\dagger$ symmetry,
+so we can't anticipate that $\ev{\Im P}$ will vanish anymore.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]
+          {figs/ploopScatter_betaDependl568ms80.pdf}
+  \caption{Scatter plot of $P$ values for $56^3\times8$ HISQ configurations
+           with $N_f=2+1$ at $m_s/m_l=80$. Temperatures are listed in MeV. 
+           The real sector is preferred at finite quark mass.}
+  \label{fig:ploopScatter}
+\end{figure}
+
+Let us discuss the large $N_\sigma$ behavior of some other quantities.
+To simplify the notation a little, we introduce
+\begin{equation}
+x\equiv \Re P,~~~~y\equiv \Im P,~~~~\text{and}~~~~V\equiv N_\sigma^3.
+\end{equation}
+From the above discussion we have in this notation $\ev{y}=0$.
+Note that $\ev{y^2}$ is generally not zero,
+although it vanishes as $1/V$ with increasing V.
+One can see $\ev{y^2}\neq0$ in Fig.~\ref{fig:ploopScatter}.
+
+In particular one expects that $\ev{y^2}$ scales as
+$1/V$. This is because in general $\log Z$ is proportional
+to the free energy, so it is extensive and therefore scales as $V$;
+therefore cumulants of extensive observables, which are coefficients in
+the cumulant expansion, scale as $V$. It follows that the
+susceptibility of an {\it intensive} observable scales as $1/V$,
+and hence
+\begin{equation}\label{eq:fssim}
+  \ev{y^2}-\ev{y}^2 =\ev{y^2}=\frac{A}{V}
+\end{equation}
+for some volume-independent constant $A$. Indeed Fig.~\ref{fig:ImPvol} shows 
+$\ev{y^2}$ scales linearly with $1/V$.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{figs/ImP2_voldepend.pdf}
+  \caption{Volume dependence of the bare $\ev{\Im P^2}$ on $N_\tau=8$
+           lattices with $\beta=6.445$, $m_s/m_l=80$, and $N_\sigma=32$, 40,
+           and 56. The linear fit has
+           $\chi^2/\text{d.o.f.}=0.11$.}
+  \label{fig:ImPvol}
+\end{figure}
+
+It also follows from the scaling of terms in the cumulant expansion that
+\begin{equation}\label{eq:fssre}
+  \ev{x^2}-\ev{x}^2=\frac{B}{V}~~~~\text{and}~~~~\ev{x}=C
+\end{equation}
+for some volume-independent constants $B$ and $C$. By combining the two
+equations in~\eqref{eq:fssre} one sees
+\begin{equation}
+  \ev{x^2}=C^2+\frac{B}{V}.
+\end{equation}
+In Figure~\ref{fig:FSSScalingOfSuscs} some of these relations are seen
+to hold on $N_f=2+1$ HISQ lattices both above and below the chiral crossover.
+We also see in this figure that $\ev{|P|}$ does not scale with volume 
+in the same way as $\ev{\Re P}$ or $\ev{\Im P}$. This makes sense because
+extensive quantities should scale linearly with the system size, but
+absolute values are not linear. 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.45\textwidth]{figs/allSuscs_b6285.pdf}
+  \includegraphics[width=0.45\textwidth]{figs/allSuscs_b6445.pdf}
+  \caption{Finite size scaling of various susceptibilities
+           for $N_\tau=8$, $m_s/m_l=80$ lattices for
+           $\beta=6.285$ (left) and $\beta=6.445$ (right). Also shown are
+           linear fits in $1/N_\sigma^3$ along with the
+           infinite volume extrapolations.}
+  \label{fig:FSSScalingOfSuscs}
+\end{figure}
+\bibliographystyle{unsrtnat}
+\bibliography{bibliography}

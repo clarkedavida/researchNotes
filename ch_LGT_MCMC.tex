@@ -1,0 +1,489 @@
+\chapter{LGT: MCMC Simulations}\label{ch:MCMC}
+
+As discussed in Section~\ref{sec:finitetemp}, expectation values of 
+physical observables $X$ in pure $\SU(2)$ LGT
+are given by functional integrals
+\begin{equation}\label{eq:exobs}
+  \ev{X}=\frac{1}{Z}\int\DD{U}e^{-S(U)}X(U).
+\end{equation}
+Even though the integral~\eqref{eq:exobs} is well-defined on a lattice
+because there are 
+finitely many sites, it is not feasible to evaluate it numerically; even
+relatively small lattices have $4\times10^4$ links. The goal of an MCMC
+simulation is to estimate $\ev{X}$ by randomly generating configurations,
+distributed with probability $e^{-S}$,
+and on each configuration, making a measurement $X_i$. The average 
+\begin{equation}\label{eq:arithmeticaverage}
+  \bar{X}=\frac{1}{\nconf}\sum_{i=1}^{\nconf} X_i
+\end{equation}
+serves as the estimator.
+
+In Section~\ref{sec:MCMCintro} we introduce MCMC simulations as they 
+are applied to the project. Section~\ref{sec:statana} summarizes
+some of the tools needed to statistically analyze the generated data. 
+The final Section~\ref{sec:implement} provides 
+details of how our simulation is implemented on the computer.
+Further details can be found in, for instance, Berg~\cite{berg_markov_2004}. 
+
+
+\section{Markov chain Monte Carlo}\label{sec:MCMCintro}
+
+To generate our configurations, we start from some arbitrary configuration
+$C_0$ and construct a stochastic sequence of configurations. 
+Configuration $C_i$ is generated based on
+configuration $C_{i-1}$, which we call an {\it update} or {\it Monte Carlo
+step}. The result is a {\it Markov chain}
+\begin{equation}
+  C_0\to C_1\to C_2\to...
+\end{equation}
+of configurations. 
+
+\index{MCMC}
+{\it Markov chain Monte Carlo} (MCMC) is characterized by the probability 
+$W^{CC'}\equiv\pr{C'|C}$, the probability to jump to configuration 
+$C'$ given that the system started in configuration $C$.
+The MCMC {\it transition matrix}
+\begin{equation}
+  W\equiv\Big(W^{CC'}\Big)
+\end{equation}
+is constructed to bring the system to {\it equilibrium}.
+In equilibrium, the chain should have no sinks or sources of probability,
+which means that the probability of jumping into a configuration $C'$
+should be the same as jumping out of $C'$. This property
+is called {\it balance}
+\begin{equation}\label{eq:balance}
+    \sum\limits_CW^{CC'}\pr{C}=
+    \sum\limits_CW^{C'C}\pr{C'},
+\end{equation}
+with the LHS representing the total probability to end up in $C'$ and
+the RHS representing the probability to transition out of $C'$.
+If $W$ satisfies
+\begin{enumerate}
+  \item {\it ergodicity}, i.e.
+        \begin{equation}\label{eq:ergodicity}
+          \pr{C}>0\;\;\text{and}\;\;\pr{C'}>0\;\;\Rightarrow\;\;
+          \exists\;n\in\mathbb{N}\;\;\text{s.t.}\;\;\big(W^n\big)^{CC'}>0;
+        \end{equation}
+  \item {\it normalization}, i.e.
+        \begin{equation}
+          \sum\limits_{C'}W^{CC'}=1;
+        \end{equation}
+  \item and balance, 
+\end{enumerate}
+then the Markov process is guaranteed to bring the ensemble toward 
+equilibrium. Using normalization, one finds from eq.~\eqref{eq:balance}
+\begin{equation}\index{balance}
+    \sum\limits_CW^{CC'}\pr{C}=\pr{C'},
+\end{equation}
+which shows that the equilibrium distribution is a fixed point of
+the Markov chain. The first property, ergodicity, guarantees that it
+is possible to transition from $C$ to $C'$ in a finite number of steps.
+In realistic simulations, it is important that the $n$ appearing in
+eq.~\eqref{eq:ergodicity}\index{ergodic} is not too large. For example 
+the Markov chain may have difficulty connecting different topological sectors
+in configuration space.
+
+\subsection{Update: Metropolis and heat bath}\index{Metropolis}
+\index{heat bath}
+In this and the following subsection,
+we omit the Lorentz index and space-time point from link variables to
+avoid clutter.  We use $U$ to indicate the link to be updated, 
+$U^\sqcup$ to indicate the staple matrix attached to $U$, and
+$U'$ to indicate a trial link. We will use the Boltzmann
+distribution $\pr{C}\propto e^{-S_C}$.
+
+One trivial way to satisfy the balance condition~\eqref{eq:balance} is
+to find an update that satisfies it term-by-term. For such an update, 
+\begin{equation}\label{eq:detailedbalance}
+    W^{CC'}\pr{C}=W^{C'C}\pr{C'}.
+\end{equation}
+This property is known as {\it detailed balance}.
+One of the most well-known Monte Carlo updates that satisfies detailed
+balance is the {\it Metropolis algorithm}~\cite{metropolis_equation_1953}. 
+In the Metropolis algorithm, a trial configuration $C'$ is selected 
+with some probability distribution $\prt{C'|C}$. Then $C'$
+is accepted with likelihood
+\begin{equation}\label{eq:metupdate}
+  \pr{C\to C'}=\min\left[1,\frac{\prt{C|C'}e^{-S_{C'}}}
+    {\prt{C'|C}e^{-S_C}}\right],
+\end{equation}
+where $S_C$ is the action corresponding to $C$. 
+If $C'$ is rejected, the unchanged configuration is counted
+in the Markov chain. Using the fact that the total probability
+to transition from $C$ to $C'$ is $W^{CC'}=\prt{C'|C}\pr{C\to C'}$, one
+can show that this update satisfies detailed balance.
+
+Another update is the {\it heat bath} (HB). In our
+simulations, a new configuration is generated from an old one by updating one
+link. For the $\SU(2)$ HB algorithm, the trial link distribution is
+\begin{equation}\label{eq:PTdist}
+  \dd{\prt{U'}}\propto dU'\exp\left(\frac{\beta}{2}\,\tr\,
+  U'U^\sqcup\right)
+\end{equation}
+and the transition probability is
+\begin{equation}
+  \pr{C\to C'}=\min\left[1,e^{-(S_{C'}-S_C)}\right].
+\end{equation}
+This construction also satisfies detailed balance. The new configuration 
+is automatically accepted whenever it lowers the action, and
+increases in the action are exponentially suppressed.
+HB updates ensure local equilibrium, but they often 
+take more CPU time. For $\SU(2)$ the guarantee of local equilibrium
+turns out to be more impactful, so heat bath updates are more efficient
+than general Metropolis updates.
+
+Single link Metropolis or HB updates of links carried out in a systematic 
+(as opposed to random) order fulfill balance, but do not
+fulfill detailed balance.
+
+\subsection{Update: Over-relaxation}\index{over-relaxation}
+
+An additional useful update for $\SU(2)$ is the 
+{\it over-relaxation} (OR) update. 
+Adler introduced OR algorithms \cite{adler_over-relaxation_1981} and 
+they were further developed by Creutz \cite{creutz_overrelaxation_1987} 
+and others. The idea of the OR algorithm is to speed up relaxation 
+by generating a group element ``far away" from $U$ without
+destroying equilibrium, which is here achieved by keeping the action constant.
+
+More precisely let $U\in\SU(N_c)$ and suppose we have some method of
+choosing another link variable $U_0$ that maximizes
+the action for this staple.  We assume that this method of selection has no
+dependence on $U$.  Pick some element $V\in\SU(N_c)$ such that $U=VU_0$; viewed
+in this way, $U$ is ``on one side of $U_0$," and the element 
+``on the other side" is $U'=V^{-1}U_0$.  Note that
+\begin{equation}
+  V=U U_0^{-1},
+\end{equation}
+which implies
+\begin{equation}
+  U' = U_0 U^{-1} U_0.
+\end{equation}
+This manner of constructing a new link variable $U'$, which generates
+a group element ``far away" from $U$ without changing the action, 
+is what we mean by over-relaxation.
+
+In principle an OR update should be more efficient than a Monte
+Carlo update. This is because we chose the new link variable to be two
+group elements away from the old one, thrusting us further
+along configuration space. However unlike Metropolis updates, OR updates 
+only sample the subspace of constant action, and are therefore not ergodic. 
+Hence to ensure an approach to equilibrium, they must be supplemented with, 
+for instance, HB updates.
+
+We implement the $\SU(2)$ OR update by
+\begin{equation}
+  U\to U'=\frac{1}{\det U^\sqcup}\left(U^\sqcup UU^\sqcup\right)^\dagger.
+\end{equation}
+\begin{proposition}{}{OR}
+  This update does not change the $\SU(2)$ Wilson action.
+  \begin{proof}
+   Since $\det(kA)=k^n\det(A)$ for any constant $k$ and $n\times n$ matrix $A$,
+   one can show that the sum of two $\SU(2)$ matrices is proportional
+   to an $\SU(2)$ matrix. Hence we can write
+    $$
+      U^\sqcup=u^\sqcup\sqrt{\det U^\sqcup}
+    $$
+    where $u^\sqcup\in\SU(2)$. After updating, the local contribution
+    to the Wilson action becomes
+    \begin{equation*}
+      \tr U'U^\sqcup =\frac{1}{\det U^\sqcup}\tr
+                       \left(U^\sqcup UU^\sqcup\right)^\dagger
+                     =\tr U^\sqcup U\left(u^\sqcup\right)^\dagger u^\sqcup
+                     =\tr U^\sqcup U,
+    \end{equation*}
+    which is what it was originally.
+  \end{proof}
+\end{proposition}
+Since the action is unchanged, the proposal is always accepted. This simple 
+behavior is special to $\U(1)$ and $\SU(2)$ LGT. Its usefulness is 
+extended to $\SU(N_c)$ when $N_c>2$ via the method of Cabibbo and Marinari
+\cite{cabibbo_new_1982}.
+
+\section{Statistical analysis}\label{sec:statana}
+
+Since $C_i$ is generated based on $C_{i-1}$, measurements on subsequent
+configurations are correlated. In our simulations, these
+correlations are reduced in two ways:
+\begin{enumerate}
+  \item Subsequent configurations are separated by multiple updating sweeps;
+        and then
+  \item configurations are grouped into $\nconf$ blocks or bins.
+\end{enumerate}
+The final measurements $X_i$ used in data analysis are obtained by averaging
+within each block.
+To check whether the final data are effectively independent, one can use
+the integrated autocorrelation time. 
+For statistically independent measurements, we expect the variance 
+$\sigma^2_{\bar{X}}$ of $\bar{X}$ to be
+\begin{equation}
+  \sigma^2_{\bar{X}}=\frac{\sigma^2}{\nconf}
+\end{equation}
+due to the CLT. In practice, however, one finds 
+\begin{equation}
+  \sigma^2_{\bar{X}}=\frac{\sigma^2}{\nconf}\tauint.
+\end{equation}\index{autocorrelation time!integrated}
+The factor $\tauint$ is the integrated autocorrelation time. It is the 
+ratio between the estimated variance of the sample
+mean and what this variance would have been if the data were independent.
+For effectively independent data, $\tauint=1$.
+
+So, the final measurements are drawn from some
+distribution with mean $\ev{X}$ and variance $\sigma^2$
+and are effectively independent. The
+estimator $\bar{X}$ of the mean is the average~\eqref{eq:arithmeticaverage}, 
+while the unbiased estimator $\bar{\sigma}^2$ of the variance is
+\begin{equation}\label{eq:estimatorvariance}
+  \bar{\sigma}^2=\frac{1}{\nconf-1}\sum_{i=1}^{\nconf}
+      \left(X_i-\bar{X}\right)^2.
+\end{equation}
+An estimator is biased if its mean for finite $\nconf$ 
+does not agree with the exact result;
+the bias is the difference. Generally, problems with bias emerge whenever
+one wishes to estimate some non-linear function $f$ of the mean $\ev{X}$.
+Naively one might guess
+\begin{equation}
+  \bar{f}_\text{bad}=\frac{1}{\nconf}\sum_{i=1}^{\nconf}f(X_i)
+\end{equation}
+as an estimator; however it can be shown that the bias of 
+$\bar{f}_\text{bad}$ is $\order{1}$,
+i.e. it never converges to the exact result.
+An estimator for $f(\ev{X})$ that converges to its true value is
+\begin{equation}
+  \bar{f}=f(\bar{X});
+\end{equation}
+in particular, the bias of this estimator is $\order{1/\nconf}$.
+Therefore in the large $\nconf$ limit, the bias vanishes faster than the 
+statistical error bar.
+
+We have introduced a way to estimate the mean and variance of some
+operator, as well as a way to estimate the mean of some function of
+that operator. Now we need a way to estimate the error bar of that
+function. We cannot use
+\begin{equation}
+  \bar{\sigma}^2_{\bar{f}}=\frac{\bar{\sigma}^2_{\bar{f}}}{\nconf}
+    =\frac{1}{\nconf\,(\nconf-1)}\sum_{i=1}^{\nconf}
+     \left(f(X_i)-\bar{f}\right)^2
+\end{equation}
+because $f(X_i)$ is not a valid sample point.
+One could analytically produce an error bar for $\bar{f}$ 
+using error propagation. However when the function is complicated, 
+error propagation becomes extremely unwieldy.
+
+Jackknifing\index{jackknife} allows one to extract a mean and error bar,
+and it is straightforward to implement; 
+therefore it makes sense to use the jackknife method generally.
+The idea of jackknifing is to throw away the first measurement, 
+leaving $\nconf-1$ resampled values. Then we resample again, this
+time throwing out the second point, and so on. The resulting
+jackknife bins are
+\begin{equation}
+  X_{J,i}=\frac{1}{\nconf-1}\sum_{j\neq i}X_j.
+\end{equation}
+The jackknife estimator for $f(\ev{x})$ is then
+\begin{equation}
+  \bar{f}_J=\frac{1}{\nconf}\sum_{i=1}^{\nconf}f(X_{J,i}),
+\end{equation}
+while the estimator for the variance of $\bar{f}_J$ is
+\begin{equation}
+  \bar{\sigma}^2_{f_J}=\frac{\nconf-1}{\nconf}\sum_{i=1}^{\nconf}
+    \left(f(X_{J,i})-\bar{f}_J\right)^2.
+\end{equation}
+
+In many instances, we will need to compare two estimates 
+of the same quantity against each other and decide whether the difference 
+between them is significant. This can happen, for example, if we want to
+compare another group's results with our own. Let their result
+be $\bar{X}$ with uncertainty $\sigma_{\bar{X}}$ and ours be
+$\bar{Y}$ with uncertainty $\sigma_{\bar{Y}}$. Then the probability
+that these two estimates differ by at least $D$ is
+\begin{equation}\index{Gaussian difference test}
+  q=\pr{|\bar{X}-\bar{Y}|>D}
+    =1-\erf\left(\frac{D}{\sqrt{2
+     \left(\sigma_{\bar{X}}^2+\sigma_{\bar{Y}}^2\right)}}\right)
+\end{equation}
+assuming $\bar{X}$ and $\bar{Y}$ are normally distributed with
+the same mean. This is called a Gaussian difference test. 
+The quantity $q$ is called the q-value.
+In practice we take $q\leq0.05$ to be an indication of a possible 
+discrepancy between $\bar{X}$ and $\bar{Y}$, keeping in mind that 
+$q\leq0.05$ by chance one out of twenty times.
+
+In practice, the true variances $\sigma_{\bar{X}}$ and $\sigma_{\bar{Y}}$
+are not known. If one wishes to use the estimators $\bar{\sigma}_{\bar{X}}$
+and $\bar{\sigma}_{\bar{Y}}$ instead, one can perform a {\it Student
+difference test} or {\it t-test}\index{t-test} to investigate whether the 
+discrepancy $D$ is due to chance. Suppose the estimate $\bar{X}$ comes from 
+$M_{\text{conf}}$ data, while $\bar{Y}$ comes from $\nconf$ data.
+Assume $\sigma_{\bar{X}}=\sigma_{\bar{Y}}$, which
+happens when the sampling methods used are identical.
+We introduce the random variable
+\begin{equation}
+  t=\frac{D}{\bar{\sigma}_D},
+\end{equation}
+where $D=\bar{X}-\bar{Y}$, and
+\begin{equation}
+  \bar{\sigma}^2_D=\left(\frac{1}{M_{\text{conf}}}+\frac{1}{\nconf}\right)
+                   \frac{(M_{\text{conf}}-1)\,\bar{\sigma}_{\bar{X}}^2
+                    +(\nconf-1)\,\bar{\sigma}_{\bar{Y}}^2}
+                   {M_{\text{conf}}+\nconf-2}.
+\end{equation}
+Then the probability that these two estimates differ by at least $D$ is
+\begin{equation}
+ q=2
+ \begin{cases}
+ \,I\left(z,\frac{\nu}{2},\frac{1}{2}\right) & \text{for }t\leq 0, \\
+ \,1-\frac{1}{2}\,I\left(z,\frac{\nu}{2},\frac{1}{2}\right) & \text{otherwise},
+ \end{cases}
+\end{equation}
+where $I$ is the incomplete beta function, $\nu=M_{\text{conf}}+\nconf-2$,
+and
+\begin{equation}
+  z=\frac{\nu}{\nu+t^2}.
+\end{equation}
+
+To estimate finite size corrections and carry out continuum limit
+extrapolations, we need a way to fit data to curves.
+Consider a sample of $\nsimil$ Gaussian, independent data points $(X_i,Y_i)$,
+where the $Y_i$ have standard deviations $\sigma_i$ and the $X_i$ have
+no errors. For instance, if one is interested in a continuum limit
+extrapolation, the $X_i$ are $\beta$ values while the $Y_i$ are
+ratios of scales evaluated at that $\beta$.
+We model these data with a fit that depends on some set
+of $M$ parameters
+\begin{equation}
+  y=y(x;a),
+\end{equation}
+where $a=(a_1,...,a_M)$ is the vector of these parameters. Our goal
+is to estimate the $a_j$.
+Assuming that $y(x;a)$ is the exact law for the data, the probability
+distribution for the measurements $Y_i$ is 
+\begin{equation}
+  f(y_1,...,y_{\nsimil})=\prod_{i=1}^{\nsimil}\frac{1}{\sqrt{2\pi}\sigma_i}
+      \exp\left[\frac{-(y_i-y(x_i;a))^2}{2\sigma_i^2}\right].
+\end{equation}
+The probability that the data fall within a region near what was observed is
+\begin{equation}
+  \text{P}=\prod_{i=1}^{\nsimil}\frac{1}{\sqrt{2\pi}\sigma_i}
+      \exp\left[\frac{-(y_i-y(x_i;a))^2}{2\sigma_i^2}\right]dy_i.
+\end{equation}
+Our strategy for determining the correct fit will be to find the vector $a$
+that maximizes the above probability. This happens when
+\begin{equation}
+  \chi^2(a)\equiv\sum_{i=1}^{\nsimil}\frac{(y_i-y(x_i;a))^2}{2\sigma_i^2}
+\end{equation}
+is minimized. This strategy is an example of a {\it maximum likelihood method}.
+
+We now describe an iterative method to search for the minimum of $\chi^2$.
+Let $a_n$ be the vector of parameters for the $n^{\text{th}}$ iteration.
+As long as $a$ is in a small enough neighborhood of $a_n$, we can safely
+approximate
+\begin{equation}\label{eq:NRapprox}
+  \chi^2(a)\approx\chi^2(a_n)+(a-a_n)\cdot b
+           +\frac{1}{2}(a-a_n)\,A\,(a-a_n),
+\end{equation}
+where the coefficients of the vector $b$ and the $M\times M$ matrix $A$ 
+are given by the first and second derivatives of $\chi^2$ evaluated at $a_n$.
+In the {\it Newton-Raphson method}\index{Newton-Raphson}, the next 
+iteration $a_{n+1}$ is
+determined from the condition $\nabla\chi^2(a)|_{a=a_{n+1}}=0$,
+which yields
+\begin{equation}\label{eq:NR}
+  a_{n+1}=a_n-A^{-1}b.
+\end{equation}
+If the approximation~\eqref{eq:NRapprox} is not good, one can instead move
+a small step in the direction of the gradient by
+\begin{equation}\label{eq:SD}
+  a_{n+1}=a_n-c\,b,
+\end{equation}
+where $c$ is a constant that is small enough not to overshoot direction
+of steepest descent. This is an example of a {\it steepest descent method}.
+The Levenberg-Marquardt\index{Levenberg-Marquardt} 
+method~\cite{levenberg_method_1944,marquardt_algorithm_1963}, which is 
+our method of choice, varies smoothly between~\eqref{eq:NR} and 
+\eqref{eq:SD}. Steepest descent is used far from the minimum, and 
+then it switches to the Newton-Raphson method when the minimum is approached.
+
+\section{Computer implementation}\label{sec:implement}
+
+Now that we have introduced the general idea of MCMC, along with some specific
+updating schemes, and complications for statistical analysis, we are ready 
+to discuss the computer implementation. 
+
+As mentioned earlier, we design the simulation using {\it local updates}, which
+means we update the links one at a time. This is done in a systematic order,
+because there is some computational advantage compared to updating in a
+random order~\cite{berg_markov_2004}. 
+An updating {\it sweep}\index{sweep} updates every link on the lattice once. 
+To maximize efficiency while maintaining ergodicity, our updating sweeps 
+have a combination of HB and OR updating. We call this a 
+{\it Monte Carlo Over-relaxation} (MCOR) sweep.
+
+An MCMC simulation of LGT broadly consists of three essential steps:
+\begin{enumerate}
+  \item {\it Initialization}: The first thing to do is get everything ready for
+        the simulation. This includes initializing the random number generator,
+        and setting up an initial configuration.
+  \item {\it Equilibration}: To avoid over-sampling rare configurations, 
+        one must perform many sweeps to bring the system to its equilibrium 
+        distribution. The structure of this section looks like 
+        \begin{verbatim}
+        do from n=1 to n=nequi 
+          call MCOR update
+        end do
+        \end{verbatim}
+  \item {\it Measurements}: All observables of interest are measured on the
+        equilibrated configurations. To help reduce correlations between
+        measurements, multiple updating sweeps are performed in between.
+        This section is structured as
+        \begin{verbatim}
+        do from n=1 to n=nmeasurements
+          do from n=1 to n=ndiscarded
+            call MCOR update
+          end do
+          take measurement
+        end do
+        \end{verbatim}
+\end{enumerate}
+
+For simulations like what I did in grad school, it may take months (or years!) 
+for a single-processor MCMC simulation to
+generate enough data to get reasonable error bars. Therefore it is
+advantageous to divide the lattice into smaller sublattices, updating
+simultaneously on each sublattice, passing relevant information between the
+sublattices whenever necessary. {\it Parallelizing} in this way offers a speed
+up factor somewhat less than the number of sublattices used. A standard way to
+parallelize code is to use the Message Passing Interface (MPI). MPI allows
+for efficient exchange of information between processors and is easily included
+in Fortran or C programs.
+
+The goal of some simulations is to determine phase transition points. 
+Close to these points, on a finite lattice, the susceptibility of the 
+relevant order parameter attains its maximum. The most straightforward 
+strategy of estimating this maximum is to run multiple simulations 
+in the vicinity of the transition point. Because this strategy 
+requires multiple runs, it is inefficient.\index{reweighting} 
+{\it Reweighting} (see~\cite{ferrenberg_new_1989} and
+references therein) is an efficient alternative. Consider
+the expectation value of an observable $X$ calculated at $\beta'$. We have
+\begin{equation}\label{eq:RW}
+\begin{aligned}
+  \ev{X}_{\beta'}&=Z_{\beta'}^{-1}\int\dd{\phi}e^{-\beta'E(\phi)}X(\phi)
+                  e^{(\beta-\beta)E(\phi)}\\
+                 &=Z_{\beta'}^{-1}\int\dd{\phi}e^{(\beta-\beta')E(\phi)}
+                  X(\phi)e^{-\beta E(\phi)}\\
+                 &=Z_{\beta'}^{-1}Z_{\beta}\ev{e^{(\beta-\beta')E}X}_\beta\\
+                 &=\ev{\frac{Z_\beta}{Z_{\beta'}}e^{(\beta-\beta')E}X}_\beta.
+\end{aligned}
+\end{equation}
+We can calculate the expectation value in the last line
+using data from a time series generated at $\beta$, and this gives us an
+estimate for $\ev{X}_{\beta'}$. Reweighting is only useful when
+$E\Delta\beta=\order{1}$. Provided that the critical parameter $\beta_c$
+is sufficiently close to the simulation point $\beta$, it suffices
+to have only one simulation, estimating the maximum by reweighting to
+multiple nearby $\beta'$.
+
+\bibliographystyle{unsrtnat}
+\bibliography{bibliography}
+

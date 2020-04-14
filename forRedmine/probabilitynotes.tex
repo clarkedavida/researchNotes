@@ -1,0 +1,50 @@
+% Normal preamble stuff.
+\documentclass[12pt]{article}
+\usepackage{mathtools,tensor,physics,slashed}
+% davitex and required packages
+\usepackage{amsmath,amssymb,graphicx,multirow,tabularx}
+\usepackage{davitex}
+
+% If you click on citations or equation references, you will be take
+% to the corresponding page. 
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=magenta,
+  urlcolor=blue,
+}
+
+% Put references at the end of each chapter, directly after the
+% end of the chapter, call them "References" instead of
+% "Bibliography", and use numbers with square brackets.
+\usepackage{url,natbib,chapterbib}
+\let\oldbibliography\bibliography
+\renewcommand{\bibliography}[1]{{%
+  \let\chapter\section%
+  \oldbibliography{#1}}}
+\renewcommand\bibname{References}
+\setcitestyle{numbers,square}
+
+% Prevent hyphenation.
+\setlength\parindent{15pt}
+\overfullrule=2cm
+
+% Theorems and stuff.
+\usepackage{amsthm}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{example}{Example}
+
+\title{\bf Some Notes on Probability and Statistics} 
+\author{David Clarke}
+
+% Note that book class by default is formatted to be printed back-to-back.
+
+\begin{document}
+
+\include{ch_probability_and_statistics}
+
+\end{document}

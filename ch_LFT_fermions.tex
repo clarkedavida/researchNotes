@@ -1,0 +1,495 @@
+\chapter{LFT: Fermions}
+We will now introduce Fermions on the lattice. This presentation follows
+Chapter 5 of~\cite{gattringer_quantum_2010}. We will start in the continuum
+and introduce a naive discretization. Then we will go into detail, point
+out a problem with the naive discretization, and fix it. We will omit
+space-time dependence sometimes for the sake of brevity, but it should
+be clear which objects have space-time dependence anyway. Primarily
+we are interested in studying QCD, so $N_c=3$. This chapter uses Dirac
+algebra extensively, but the algebra is different when the metric
+is Euclidean. For details see Appendix~\ref{ap:spec_math}.
+
+In the continuum theory, the free fermion propagator is
+\begin{equation}
+  S_F=\int\dd[4]{x}\bar{\psi}(\slashed{\partial}+m)\psi.
+\end{equation}
+Using the rules~\eqref{eq:dertodiff} and \eqref{eq:inttosum}, one naively
+discretizes this action on the lattice as
+\begin{equation}\label{eq:naivefermact}
+  S_F=a^4\sum_x\bar{\psi}(x)\left(\sum_{\mu=1}^4\gamma_\mu
+       \frac{\psi(x+a\hat{\mu})-\psi(x-a\hat{\mu})}{2a}
+       +m\psi(x)\right).
+\end{equation}
+The fermionic partition function is
+\begin{equation}
+  Z_F=\int\DD{\psi}\DD{\bar{\psi}}e^{-S_F},
+\end{equation}
+with integration measure
+\begin{equation}
+  \int\DD{\psi}\DD{\bar{\psi}}
+   =\prod_{x,f,\alpha,c}\dd{\bar{\psi}^f_{\alpha c}(x)}
+                        \dd{\psi^f_{\alpha c}(x)},
+\end{equation}
+where $f$ runs over flavors, $\alpha$ runs over Dirac indices, and $c$
+runs over colors.
+
+In addition, we want the fermionic action to be gauge invariant. The
+gauge transformation for fermion fields
+\begin{equation}
+  \psi(x)\to U(x)\psi(x),~~~~~\bar{\psi}(x)\to\bar{\psi}(x)U(x)^\dagger
+\end{equation}
+with $U\in\SU(3)$ reminds us of the gauge transformation for scalar 
+fields given in Chapter~\ref{ch:preliminaries}. Working in the continuum 
+we introduce, just as before, a gauge field $A_\mu(x)$ so that the 
+fermionic action becomes
+\begin{equation}
+  S_F=\int\dd[4]{x}\bar{\psi}\big(\gamma_\mu(\partial_\mu+A_\mu)+m\big)\psi.
+\end{equation}
+The gauge-transformed fermionic action is
+\begin{equation}
+  S'_F=\int\dd[4]{x}\bar{\psi}\,U^\dagger
+        \big(\gamma_\mu(\partial_\mu+A'_\mu)+m\big)U\psi,
+\end{equation}
+so that the requirement of gauge invariance leads us to conclude
+\begin{equation}
+  (\partial_\mu+A_\mu)\psi=U^\dagger(\partial_\mu+A'_\mu)U\psi.
+\end{equation}
+Solving for $A'_\mu$ we find
+\begin{equation}
+  A'_\mu=(\partial_\mu U)U^\dagger-UA_\mu U^\dagger,
+\end{equation}
+just as we did before.
+
+On the lattice, link variables transform as
+\begin{equation}
+  U_\mu(x)\to U'_\mu(x)=U(x)U_\mu(x)U^\dagger(x+a\hat{\mu}),
+\end{equation}
+which ensures that closed loops of link variables are gauge invariant.
+In addition the discretized fermionic action becomes gauge invariant
+when it is written as
+\begin{equation}\label{eq:naivefermactgauge}
+  S_F=a^4\sum_x\bar{\psi}(x)\left(\sum_{\mu=1}^4\gamma_\mu
+       \frac{U_\mu(x)\psi(x+a\hat{\mu})-U_{-\mu}(x)\psi(x-a\hat{\mu})}{2a}
+       +m\psi(x)\right),
+\end{equation}
+where
+\begin{equation}
+  U_{-\mu}(x)=U_\mu(x-a\hat{\mu})^\dagger
+\end{equation}
+transforms as
+\begin{equation}
+  U_{-\mu}(x)\to U'_{-\mu}(x)=U(x)U_{-\mu}(x)U^\dagger(x-a\hat{\mu}).
+\end{equation}
+Since eq.~\eqref{eq:naivefermactgauge} is the gauge invariant action,
+this will be what we investigate for fermion doubling.
+
+\section{Grassmann numbers}\index{Grassman algebra}
+Fermions are objects that by definition anticommute with each other. 
+With this in mind, we introduce Grassmann numbers.
+We consider a set of numbers $\eta_i$, $1\leq i\leq N$ obeying
+\begin{equation}
+  \eta_i\eta_j=-\eta_j\eta_i
+\end{equation}
+for all $i$ and $j$. These are called {\it Grassmann numbers}.
+It follows that
+\begin{equation}\label{eq:gnilpotent}
+  \eta_i^2=0.
+\end{equation}
+If a power series of a function $f$ of the Grassmann numbers exists, then
+eq.~\eqref{eq:gnilpotent} guarantees that the series terminates almost
+immediately. In general we would write
+\begin{equation}\label{eq:grasspoly}
+  f(\eta)=a+\sum_ia_i\eta_i+\sum_{i<j}a_{ij}\eta_i\eta_j
+           +...+a_{1...N}\eta_1...\eta_N
+\end{equation}
+with $a,\,a_i,\,a_{ij},...,\,a_{1...N}\in\mathbb{C}$.
+We refer to eq.~\eqref{eq:grasspoly} as a {\it Grassmann polynomial}.
+Grassmann polynomials are closed under addition and multiplication,
+and are thus said to form a {\it Grassmann algebra}. The $\eta_i$
+are the {\it generators} of the Grassmann algebra.
+
+To learn how differentiation ought to work, we use the simple example
+$N=2$. Then
+\begin{equation}
+  f(\eta)=a+a_1\eta_1+a_{12}\eta_1\eta_2.
+\end{equation}
+A definition of the derivative that follows our intuition is
+\begin{equation}
+  \frac{\partial f}{\partial\eta_1}=a_1+a_{12}\eta_2.
+\end{equation}
+However, the defining characteristic of Grassmann numbers is that they
+anticommute. Therefore we could also have expanded $f$ as
+\begin{equation}
+  f(\eta)=a+a_1\eta_1-a_{12}\eta_2\eta_1.
+\end{equation}
+In order for the derivative $f$ to make sense we must therefore require
+\begin{equation}
+  \frac{\partial}{\partial\eta_1}\eta_2=
+  -\eta_2\frac{\partial}{\partial\eta_1}.
+\end{equation}
+Similarly if we take another derivative, this time with respect to $\eta_2$,
+we find that partial derivatives with respect to different Grassmann variables
+must also anticommute to maintain consistency. Altogether, the differentiation
+rules for Grassmann variables become
+\begin{equation}\begin{aligned}
+  \frac{\partial}{\partial\eta_i}1&=0;\\
+  \frac{\partial}{\partial\eta_i}\eta_i&=1;\\
+  \frac{\partial}{\partial\eta_i}\eta_j&=
+  -\eta_j\frac{\partial}{\partial\eta_i};\\
+  \frac{\partial^2}{\partial\eta_i\partial\eta_j}&=
+  -\frac{\partial^2}{\partial\eta_j\partial\eta_i}.
+\end{aligned}\end{equation}
+
+Next we move on to integration. We will construct integrals that work like
+integrals over subsets $\Omega\in\mathbb{R}^N$ for which 
+the integrand vanishes at the boundary $\partial\Omega$. 
+Thus we demand that the Grassmann integral is a complex number,
+\begin{equation}
+  \int\dd[N]{\eta}f\in\mathbb{C};
+\end{equation}
+that with $\lambda_1,\lambda_2\in\mathbb{C}$ it is linear,
+\begin{equation}\label{eq:grasslin}
+  \int\dd[N]{\eta}\left(\lambda_1f_1+\lambda_2f_2\right)
+       =\lambda_1\int\dd[N]{\eta}f_1
+         +\lambda_2\int\dd[N]{\eta}f_2;
+\end{equation}
+and that its integrand vanishes at the boundary,
+\begin{equation}\label{eq:grassBC}
+  \int\dd[N]{\eta}\frac{\partial}{\partial\eta_i}f=0.
+\end{equation}
+If some function $f$ of $N-1$ Grassmann numbers can be written as the 
+derivative of another function $g$ of $N$ Grassmann numbers, it follows
+from eq.~\eqref{eq:grassBC} that the integrand vanishes.
+An integral of a Grassmann polynomial of $N$ variables is therefore
+proportional to the coefficient $a_{1...N}$, since
+$\eta_1...\eta_N$ cannot be written as a derivative of $N$ variables.
+In particular if we demand a normalization
+\begin{equation}\label{eq:grassnorm}
+  \int\dd[N]{\eta}\eta_1...\eta_N=1,
+\end{equation}
+we obtain the rule
+\begin{equation}
+  \int\dd[N]{\eta}f=a_{1...N}.
+\end{equation}
+Finally to make Grassmann integration more analogous to the integration that
+we're used to, we define
+\begin{equation}
+  \dd[N]{\eta}\equiv\dd{\eta_N}...\dd{\eta_1}.
+\end{equation}
+Altogether then, the rules of Grassmann integration can be summarized by
+eq.~\eqref{eq:grasslin} along with
+\begin{equation}\label{eq:grassintrules}\begin{aligned}
+       \int\dd{\eta_i}1&=0;\\
+  \int\dd{\eta_i}\eta_i&=1;\\
+  \dd{\eta_i}\dd{\eta_j}&=-\dd{\eta_j}\dd{\eta_i}.
+\end{aligned}\end{equation}
+Using these properties we can define integration over subsets of Grassmann
+variables. Interestingly, the measures obey the same algebraic properties as
+the derivatives.
+
+Next let us discuss how Grassmann integrals behave under linear
+transformations. In general we can write such a change of variables as
+\begin{equation}\label{eq:grassxform}
+  \eta'_i=M_{ij}\eta_j,
+\end{equation}
+where $M$ is a complex $N\times N$ matrix. More succinctly, one writes 
+$\eta'=M\,\eta$. Applying this change of variables to the normalization
+eq.~\eqref{eq:grassnorm} we obtain
+\begin{equation}\begin{aligned}
+  \int\dd[N]{\eta}\eta_1...\eta_N
+     &=1\\
+     &=\int\dd[N]{\eta'}\eta'_1...\eta'_N\\
+     &=\int\dd[N]{\eta'}M_{1\,i_1}...M_{N\,i_N}\,\eta_{i_1}...\eta_{i_N}\\
+     &=\int\dd[N]{\eta'}M_{1\,i_1}...M_{N\,i_N}\,\epsilon_{i_1...i_N}
+               \eta_1...\eta_N\\
+     &=\int\dd[N]{\eta'}\det M\,\eta_1...\eta_N.
+\end{aligned}\end{equation}
+It follows that under the transformation~\eqref{eq:grassxform}, the measure
+transforms according to the rule
+\begin{equation}
+  \dd[N]{\eta}=\det M\dd[N]{\eta'},
+\end{equation}
+which is in some sense the ``opposite" of the usual transformation rule, where
+the $\det M$ would have been on the LHS.
+
+The stuff between the parentheses in the naive action~\eqref{eq:naivefermact}
+can be viewed as an operator. Keeping this in mind, we're going to show
+that the fermionic partition function can be viewed as a determinant.
+The setup is as follows: We have a Grassmann algebra with 2N generators
+$\bar{\eta}_i$ and $\eta_i$ that all anticommute with each other and
+an $N\times N$ linear transformation $M$.
+\begin{theorem}{Matthews-Salam formula}{}
+\index{Matthews-Salam formula}
+$$
+  \int\prod_{i=1}^N\dd{\eta_i}\dd{\bar{\eta}_i}e^{\bar{\eta}M\eta}=\det M.
+$$
+\begin{proof} Let $\eta'=M\eta$. Then from eq.~\eqref{eq:grassxform}
+  we have
+  \begin{equation*}\begin{aligned}
+  \int \prod_{i=1}^N\dd{\eta_i}\dd{\bar{\eta}_i}e^{\bar{\eta}M\eta}
+    &=\det M\int \prod_{i=1}^N\dd{\eta'_i}\dd{\bar{\eta}_i}
+       \exp\left(\sum_{j=1}^N\bar{\eta}_j\eta'_j\right)\\
+    &=\det M\int \prod_{i=1}^N\dd{\eta'_i}\dd{\bar{\eta}_i}
+       \exp\left(\bar{\eta}_i\eta'_i\right)\\
+    &=\det M\int \prod_{i=1}^N\dd{\eta'_i}\dd{\bar{\eta}_i}
+        (1+\bar{\eta}_i\eta'_i)\\
+    &=\det M.
+  \end{aligned}\end{equation*}
+  The second line follows since pairs $\bar{\eta}_i\eta_i$ commute with
+  each other, the third line is a power series expansion of the second
+  line, and the last line follows from eq.~\eqref{eq:grassintrules}.
+\end{proof}
+\end{theorem}
+If we replace $M$ with the Dirac operator, we see that the fermionic
+partition function is just the determinant of the Dirac operator.
+By the way, the ordering of the differentials in the measure should
+be $\dd{\eta}\dd{\bar{\eta}}$. This is because the $\bar{\eta}$ variables
+in the integrand will always come on the left. By placing the
+$\dd{\bar{\eta}}$ differentials on the right, it will always hit the
+$\bar{\eta}$ variables first.
+
+A generalization of this gives us the generating functional
+for fermions. Here we consider $4N$ Grassmann numbers $\bar{\eta}_i$,
+$\eta_i$, $\bar{\theta}_i$, and $\theta_i$. The $\bar{\theta}_i$
+and the $\theta_i$ are the source terms. We define
+\begin{equation}\label{eq:deffermgf}
+  W[\theta,\bar{\theta}]\equiv\int \prod_{i=1}^N\dd{\bar{\eta}_i}\dd{\eta_i}
+   e^{\bar{\eta}M\eta+\bar{\theta}\eta+\bar{\eta}\theta}
+\end{equation}
+\begin{theorem}{}{fermgf}
+$$
+   W[\theta,\bar{\theta}]=e^{-\bar{\theta}M^{-1}\theta}\det M.
+$$
+\begin{proof} Using the definition of the generating functional and
+completing the square, we have 
+$$
+  \int \prod_{i=1}^N\dd{\bar{\eta}_i}\dd{\eta_i}
+   e^{\bar{\eta}M\eta+\bar{\theta}\eta+\bar{\eta}\theta}
+   =\int \prod_{i=1}^N\dd{\bar{\eta}_i}\dd{\eta_i}
+   e^{(\bar{\eta}+\bar{\theta}M^{-1})\,M\,
+             (\eta+M^{-1}\theta)-\bar{\theta}M^{-1}\theta}.
+$$
+Now we define new variables $\bar{\eta}'=\bar{\eta}+\bar{\theta}M^{-1}$
+and $\eta'=\eta+M^{-1}\theta$. From eq.~\eqref{eq:grassintrules} it follows
+that
+$$
+  \int \prod_{i=1}^N\dd{\bar{\eta}_i}\dd{\eta_i}=
+  \int \prod_{i=1}^N\dd{\bar{\eta}'_i}\dd{\eta'_i}.
+$$
+Therefore by the Matthews-Salam formula,
+\begin{equation*}\begin{aligned}
+   \int \prod_{i=1}^N\dd{\bar{\eta}_i}\dd{\eta_i}
+   e^{(\bar{\eta}+\bar{\theta}M^{-1})\,M\,
+             (\eta+M^{-1}\theta)-\bar{\theta}M^{-1}\theta}
+   &=\int \prod_{i=1}^N\dd{\bar{\eta}'_i}\dd{\eta'_i}
+    e^{\bar{\eta}'M\eta'-\bar{\theta}M^{-1}\theta}\\
+   &=e^{-\bar{\theta}M^{-1}\theta}\det M.
+\end{aligned}\end{equation*}
+\end{proof}
+\end{theorem}
+With the knowledge we now have, we can derive Wick's theorem, which lets us
+calculate fermionic expectation values. First we define 
+\begin{equation}\label{eq:deffermev}
+  \ev{\eta_{i_1}\bar{\eta}_{j_1}...\eta_{i_n}\bar{\eta}_{j_n}}_F
+  \equiv\frac{1}{Z_F}\int\prod_{k=1}^N\dd{\eta_k}\dd{\bar{\eta}_k}
+        \bar{\eta}_{j_1}...\eta_{i_n}\bar{\eta}_{j_n}
+        e^{-\bar{\eta}M\eta}.
+\end{equation}
+\begin{theorem}{Wick's theorem}{}
+\index{Wick's theorem}
+$$
+  \ev{\eta_{i_1}\bar{\eta}_{j_1}...\eta_{i_n}\bar{\eta}_{j_n}}_F
+  =(-1)^n\sum_{P_{1,...,n}}\sign P\,
+   M^{-1}_{i_1,j_{P_1}}\,...\,M^{-1}_{i_n,j_{P_n}}.
+$$
+\begin{proof} From the definitions~\eqref{eq:deffermgf} and
+  \eqref{eq:deffermev} we have
+  $$
+    \ev{\eta_{i_1}\bar{\eta}_{j_1}...\eta_{i_n}\bar{\eta}_{j_n}}_F
+    =\frac{1}{Z_F}
+    \frac{\partial}{\partial\theta_{j_1}}
+    \frac{\partial}{\partial\bar{\theta}_{i_1}}\,...\,
+    \frac{\partial}{\partial\theta_{j_n}}
+    \frac{\partial}{\partial\bar{\theta}_{i_n}}W[\theta,\bar{\theta}]
+    \Big|_{\theta=\bar{\theta}=0}.
+  $$
+  Let us now apply Theorem~\ref{thm:fermgf} to the RHS and carry
+  out the derivatives. The $\det M$ will cancel with $Z_F$ because
+  of the Matthews-Salam formula. 
+\end{proof}
+\end{theorem}
+
+\section{Fermion doubling}
+Let us now discuss one of the important problems with the naive fermionic
+action. First we introduce some results about Fourier transformations on the
+lattice. Define
+\begin{equation}
+V\equiv N_1N_2N_3N_4
+\end{equation}
+with $N_\mu$ even.\index{BCs!toroidal}
+We generalize to {\it toroidal BCs}, i.e.
+\begin{equation}
+  f(x+aN_\mu\hat{\mu})=e^{2\pi i\theta_\mu}f(x).
+\end{equation}
+\index{BCs!anti-periodic}
+Periodic BCs then have $\theta_\mu=0$ and {\it anti-periodic BCs} have
+$\theta_\mu=1/2$. The momentum space becomes
+\begin{equation}
+  p_\mu=\frac{2\pi}{aN_\mu}(k_\mu+\theta_\mu),~~~~~~
+   -\frac{N_\mu}{2}<k_\mu\leq\frac{N_\mu}{2},
+\end{equation}
+which reduces to the first Brillouin zone when periodic BCs are employed. By
+including the boundary phases in the momentum definition, plane waves
+\begin{equation}
+  \exp(ip_\mu x_\mu)
+\end{equation}
+will also obey the BCs. Now we derive a basic formula for Fourier
+transformations on the lattice. Let $N$ be even and $\ell$ be an integer
+$0\leq\ell\leq N-1$.
+\begin{proposition}{}{}
+$$
+  \frac{1}{N}\sum_{j=-N/2+1}^{N/2}\exp(\frac{2\pi i\ell}{N})^j=\delta_{\ell 0}.
+$$
+\begin{proof} Since $N$ is even there are $N$ terms in the above sum,
+  so we find the LHS to be 1. For $\ell\neq 0$ let
+  $m\equiv j+N/2+1$ and define
+  $$
+    q\equiv\exp(\frac{2\pi i\ell}{N}).
+  $$
+  Then
+  \begin{equation*}\begin{aligned}
+    \frac{1}{N}\sum_{j=-N/2+1}^{N/2}\exp(\frac{2\pi i\ell}{N})
+      \propto\sum_{m=0}^{N-1}q^m
+      =\frac{1-q^N}{1-q}=0
+  \end{aligned}\end{equation*}
+  since $q^N=1$.
+\end{proof}
+\end{proposition}
+Applying this formula in each space-time direction, we arrive at
+\begin{equation}
+  \frac{1}{V}\sum_p\exp\big(ip_\mu(x-x')_\mu\big)
+  =\delta(x-x')
+  =\delta_{n_1n'_1}\delta_{n_2n'_2}\delta_{n_3n'_3}\delta_{n_4n'_4},
+\end{equation}
+where $x_\mu=an_\mu$, and
+\begin{equation}
+  \frac{1}{V}\sum_x\exp\big(i(p-p')_\mu x_\mu\big)
+  =\delta(p-p')
+  =\delta_{k_1k'_1}\delta_{k_2k'_2}\delta_{k_3k'_3}\delta_{k_4k'_4}.
+\end{equation}
+We define the Fourier transform as
+\begin{equation}\label{eq:latft}
+  \tilde{f}(p)=\frac{1}{\sqrt{V}}\sum_xf(x)\exp(-ip_\mu x_\mu).
+\end{equation}
+The inverse transform
+\begin{equation}\label{eq:latift}
+  f(x)=\frac{1}{\sqrt{V}}\sum_p\tilde{f}(p)\exp(ip_\mu x_\mu)
+\end{equation}
+can be verified by plugging the Fourier transform into the LHS.
+
+Using these results about Fourier transformations on the lattice, we
+can begin to investigate fermion doubling. We shall do this for
+a single flavor for notational convenience; the result clearly
+generalizes to a summation over flavors. 
+The gauge-invariant, naive
+fermion action~\eqref{eq:naivefermactgauge} is bilinear in $\psi$
+and $\bar{\psi}$, so it can be written as
+\begin{equation}
+  S_F=a^4\sum_{x,y}\sum_{\alpha,\beta,c_1,c_2}\bar{\psi}(x)_{\alpha c_1}
+      \,D(x|y)_{\alpha \beta c_1 c_2}\,\psi(y)_{\beta c_2},
+\end{equation}
+where $\alpha$ and $\beta$ are Dirac indices, $c_1$ and $c_2$ are
+color indices, and the Dirac operator on the lattice is
+\begin{equation}
+  D(x|y)_{\alpha\beta c_1c_2}\equiv\sum_{\mu=1}^4(\gamma_\mu)_{\alpha\beta}
+   \frac{U_\mu(x)_{c_1c_2}\delta_{x+a\hat{\mu},y}
+         -U_{-\mu}(x)_{c_1c_2}\delta_{x-a\hat{\mu},y}}{2a}
+   +m\delta_{\alpha\beta}\delta_{c_1c_2}\delta_{xy}.
+\end{equation}
+In this form, we can apply the Matthews-Salam formula or Wick's
+theorem by identifying $M=a^4D$. For simplicity, we set $U_\mu(x)=\id$
+for all links, just so we can see clearly how the doubling arises.
+Since we have free fermions, we may as well suppress color indices,
+and we will also use vector/matrix notation in Dirac space, so that
+Dirac indices are also suppressed. We find
+\begin{equation}\begin{aligned}
+  \tilde{D}(p|q)&=\frac{1}{V}\sum_{x,y}e^{-ipx}D(x|y)e^{-iqy}\\
+     &=\frac{1}{V}\sum_{x,y}e^{-ipx}\left(
+      \sum_\mu\gamma_\mu\frac{\delta_{x+a\hat{\mu},y}
+                             -\delta_{x-a\hat{\mu},y}}{2a}+m\delta_{x,y}\id
+      \right)e^{-iqy}\\
+     &=\frac{1}{V}\sum_xe^{-i(p+q)x}\left(
+      \sum_\mu\gamma_\mu\frac{e^{iq_\mu a}-e^{-iq_\mu a}}{2a}+m\id\right)\\
+     &=\delta(p+q)\left(\frac{i}{a}\sum_\mu
+                    \gamma_\mu\sin(q_\mu a)+m\id\right)\\
+     &\equiv\delta(p+q)\tilde{D}(q).
+\end{aligned}\end{equation}
+In Gattringer and Lang~\cite{gattringer_quantum_2010} they take the transform
+of the $y$ part to have opposite sign, which they say makes the similarity
+transformation unitary. For the purpose of seeing fermion doubling
+the sign does not make a difference; it only changes the delta
+function from $\delta(p-q)$ to $\delta(p+q)$. Therefore I decided to stick
+with the convention~\eqref{eq:latft}. If we want to use Wick's theorem,
+we will need to calculate the inverse of the Dirac operator. We find
+\begin{equation}\label{eq:latprop}
+  \tilde{D}(p)^{-1}=\frac{m\id-ia^{-1}\sum_\mu\gamma_\mu\sin(p_\mu a)}
+                         {m^2+a^{-2}\sum_\mu\sin(p_\mu a)^2},
+\end{equation}
+which can be verified by multiplying both sides by $\tilde{D}(p)$. This
+is the propagator for free fermions in momentum space. At $m=0$ we find
+as $a\to0$
+\begin{equation}
+  \tilde{D}(p)^{-1}\to\frac{-i\sum_\mu\gamma_\mu p_\mu}{p^2}.
+\end{equation}
+This propagator has a pole at $p=0$. Poles in propagators correspond
+to physical particles, so in the continuum theory, the propagator
+corresponds to a single particle satisfying the Dirac equation. On
+the lattice if the fermions are massless, eq.~\eqref{eq:latprop} has
+a pole anywhere $p_\mu a=\pi$. In the first Brillouin zone, this
+happens 15 places besides $p_\mu=0$. Hence on the lattice at finite
+spacing, the propagator has 15 unphysical poles that nevertheless
+correspond to some fermions. This is called {\it fermion doubling},
+\index{fermion doubling}
+and we call the 15 unwanted particles the {\it doublers}.
+
+This proliferation of extra particles can cause problems in the
+interacting theory. The additional states can be pair produced
+through interactions of the fermion field~\cite{montvay_quantum_1994}.
+For instance even if all particles on the external lines of a diagram
+are the real particles, the doublers can appear in virtual loops.
+Therefore one typically wants to remove the doublers.
+One way to remove the doublers is to introduce an extra term that
+cancels the doublers on the lattice, and still reduces to the
+correct continuum value. With this formulation, the lattice
+momentum space Dirac operator is
+\begin{equation}
+  \tilde{D}(p)=m\id+\frac{i}{a}\sum_\mu\gamma_\mu\sin(p_\mu a)
+                   +\frac{1}{a}\sum_\mu\id\big(1-\cos(p_\mu a)\big).
+\end{equation} 
+This second term is called the {\it Wilson term}. This formulation
+\index{Wilson!fermions}
+of fermions is called {\it Wilson fermions}. The complete Dirac
+operator using this formulation becomes 
+\begin{equation}
+  D(x|y)^f_{\alpha\beta c_1c_2}
+  =\left(m^f+\frac{4}{a}\right)\delta_{\alpha\beta}
+                               \delta_{c_1c_2}
+                               \delta_{xy}
+   -\frac{1}{2a}\sum_{\mu=\pm 1}^{\pm 4}(\id-\gamma_\mu)_{\alpha\beta}
+      U_\mu(x)_{c_1 c_2}\delta_{x+a\hat{\mu},y},
+\end{equation}
+where
+\begin{equation}
+  \gamma_{-\mu}\equiv-\gamma_{\mu}.
+\end{equation}
+
+\section{Questions}
+\begin{enumerate}
+  \item When can we find a power series expansion for a function of
+        Grassmann numbers?
+  \item Why do we want the integrand to vanish at the boundary?
+  \item Why do we know $\gamma_\mu$ and $U(x)\in\SU(N)$ commute?
+\end{enumerate}
+
+\bibliographystyle{unsrtnat}
+\bibliography{bibliography}

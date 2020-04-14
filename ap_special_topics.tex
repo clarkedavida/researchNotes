@@ -1,0 +1,426 @@
+\chapter{Special Topics in Mathematics}\label{ap:spec_math}
+
+\section{Hyperspherical coordinates}
+
+Here we work out how to compute spherical volumes in $N$ dimensions. 
+We warm up with 3D. In 3D we have the radial coordinate
+\begin{equation}
+  r^2=x^2+y^2+z^2,
+\end{equation}
+an {\it azimuthal angle} $\phi\in[0,2\pi]$ tracking the projection
+on the $x$-$y$ plane, and a {\it polar angle} $\theta\in[0,\pi]$ measuring
+the inclination from the $\hat{z}$ direction. 
+You can keep from mixing up the
+names by thinking of $\theta$ as measuring the distance from the North pole.
+The Cartesian coordinates are recovered from the spherical coordinates by
+\begin{equation}
+  \begin{aligned}
+    z&=r\co_\theta\\
+    x&=r\s_\theta\co_\phi\\
+    y&=r\s_\theta\s_\phi.
+  \end{aligned}
+\end{equation}
+The strange ordering of the coordinates will make sense when we move
+to $N$ dimensions. Now the Jacobian corresponding to the transformation between 
+Cartesian and spherical coordinates is
+\begin{equation}
+  \frac{\partial(x,y,z)}{\partial(r,\theta,\phi)}
+  =\left(\begin{array}{ccc}
+     \s_\theta\co_\phi & r\co_\theta\co_\phi & -r\s_\theta\s_\phi \\
+     \s_\theta\s_\phi  & r\co_\theta\s_\phi  & r\s_\theta\co_\phi \\
+     \co_\theta        & -r\s_\theta         & 0                  \\ 
+   \end{array}\right).
+\end{equation}
+Knowing the Jacobian, we compute the volume element
+\begin{equation}
+  \dd[3]{x}=\det\frac{\partial(x,y,z)}{\partial(r,\theta,\phi)}
+             \dd{r}\dd{\theta}\dd{\phi}
+      =r^2\dd{r}\s_\theta\dd{\theta}\dd{\phi}=r^2\dd{r}\dd{\Omega},
+\end{equation}
+where we will generically use $\dd\Omega$ to stand in for the solid angle,
+regardless of the dimension. Integrating over the solid angle gives
+\begin{equation}
+  \dd{\Omega}=\int_0^{2\pi}\dd{\phi}\int_0^{\pi}\s_\theta\dd{\theta}=4\pi,
+\end{equation}
+so that the surface area of the 3-ball becomes
+\begin{equation}\label{eq:3ds}
+  S_3=R^2\int\dd{\Omega}=4\pi R^2,
+\end{equation}
+and the corresponding volume is
+\begin{equation}\label{eq:3dv}
+  V_3=\int_0^R\dd{r}r^2\int\dd{\Omega}=\frac{4}{3}\pi R^3.
+\end{equation}
+
+Now let us work in $N>3$ dimensions. We define a radial coordinate
+\begin{equation}
+  r^2=\sum_{i=1}^N x_i^2
+\end{equation}
+with one azimuthal angle $\phi\in[0,2\pi]$ and $N-2$ polar angles 
+$\theta_i\in[0,\pi]$. To see that this mapping covers all of $\mathbb{R}^N$,
+note that the azimuthal angle covers an entire 2D plane; then one
+only has to sweep the 2D plane from 0 to $\pi$ to cover an entire
+3D hyperplane; and continuing in this way fills the entire $N$-dimensional 
+volume, because the entire $(N-1)$-dimensional hyperplane was filled out in 
+the preceding step. The Cartesian coordinates generalize the pattern
+of the 3D case as 
+\begin{equation}\label{eq:cartesianN}
+  \begin{aligned}
+        x_1&=r\co_{\theta_1}\\
+        x_2&=r\s_{\theta_1}\co_{\theta_2}\\
+     \vdots&\\
+    x_{N-2}&=r\s_{\theta_1}...\s_{\theta_{N-3}}\co_{\theta_{N-2}}\\
+    x_{N-1}&=r\s_{\theta_1}...\s_{\theta_{N-3}}\s_{\theta_{N-2}}\co_\phi\\
+        x_N&=r\s_{\theta_1}...\s_{\theta_{N-3}}\s_{\theta_{N-2}}\s_\phi,
+  \end{aligned}
+\end{equation}
+so that the coordinate we call ``$x_1$" is our new ``$z$" coordinate.
+
+At this step one could find the Jacobian and its determinant, and thus obtain
+the new integration measure. Looking at the coordinates~\eqref{eq:cartesianN}
+we see the volume element will generically separate as
+\begin{equation}
+  \dd[N]{x}=r^{N-1}\dd{\Omega},
+\end{equation}
+where the power $N-1$ is due to the fact that one column of the Jacobian has no
+$r$ dependence, because we differentiated with respect to it. Unfortunately
+proceeding directly in this manner would require us to explicitly calculate an
+$N\times N$ matrix, calculate its determinant, then integrate over the
+resulting solid angle, which seems tedious at best.
+Thankfully there is a clever way to do this calculation. 
+
+\begin{proposition}{}{nsolida}
+The solid angle in $N$ dimensions is
+$$
+  \int\dd{\Omega}=\frac{2\pi^{N/2}}{\Gamma(N/2)}.
+$$
+\begin{proof}
+  Recall 
+  $$
+    \int_{-\infty}^\infty\dd{x}e^{-x^2}=\pi^{1/2}.
+  $$
+  Therefore
+  $$ 
+    \int\prod_{i=1}^N\dd{x_i}e^{-x_i^2} 
+      =\left(\int_{-\infty}^\infty\dd{x}e^{-x^2}\right)^N=\pi^{N/2}.
+  $$
+  Switching to hyperspherical coordinates, carrying out
+  a substitution, and using the definition of the gamma function,
+  we can rewrite the LHS of the above as
+  \begin{equation*}\begin{aligned}
+    \int\prod_{i=1}^N\dd{x_i}e^{-x_i^2}
+       &=\int\dd{\Omega}&&\int_0^\infty\dd{r}r^{N-1}e^{-r^2}\\
+       &=&&\frac{1}{2}\int_0^\infty\dd{u}u^{N/2-1}e^u\\
+       &=&&\frac{1}{2}~\Gamma(N/2).
+  \end{aligned}\end{equation*}
+  Solving for the solid angle completes the proof. 
+\end{proof}
+\end{proposition}
+With this proposition, the surface area is easily dispatched,
+\begin{equation}
+  S_N=\frac{2\pi^{N/2}R^{N-1}}{\Gamma(N/2)},
+\end{equation}
+as is the volume of the $N$-ball,
+\begin{equation}
+  V_N=\frac{2\pi^{N/2}R^N}{N\Gamma(N/2)}.
+\end{equation}
+As expected, these formulas agree with eqs.~\eqref{eq:3ds}
+and \eqref{eq:3dv} when $N=3$.
+
+The Jacobian can be used to obtain the integration measure. For $N>3$
+dimensions, however, calculating the determinant can be a little
+unwieldy. An equivalent way of getting the measure right is to
+use wedge products. For example using properties like
+$\dd{x_1}\wedge\dd{x_2}=-\dd{x_2}
+  \wedge\dd{x_1}$ and $\dd{x_1}\wedge\dd{x_1}=0$, 
+one finds very quickly
+\begin{equation}
+  \dd{x_1}\wedge\dd{x_2}\wedge\dd{x_3}\wedge\dd{x_4}
+   =r^3\s_{\theta_1}^2s_{\theta_2} 
+     \dd{r}\wedge\dd{\theta_1}\wedge\dd{\theta_2}\wedge\dd{\phi}
+\end{equation}
+or, as it is usually written,
+\begin{equation}
+  \dd[4]{x}=r^3\s_{\theta_1}^2s_{\theta_2}
+             \dd{r}\dd{\theta_1}\dd{\theta_2}\dd{\phi}.
+\end{equation}
+Once we know the measure, we can also save ourselves some work
+finding the hyperspherical gradient operator. Each factor of the
+measure goes to the denominator of one of the terms. Make sure
+each denominator has units of length. In the present case, the
+gradient operator is read off from the measure to be
+\begin{equation}\label{eq:4dgrad}
+  \partial=e_r\frac{\partial}{\partial r}
+   +e_{\theta_1}\frac{1}{r}\frac{\partial}{\partial \theta_1}
+   +e_{\theta_2}\frac{1}{rs_{\theta_1}}\frac{\partial}{\partial \theta_2}
+   +e_\phi\frac{1}{rs_{\theta_1}s_{\theta_2}}\frac{\partial}{\partial \phi},
+\end{equation}
+where $e_i$ are unit vectors in direction $i$ and the $\partial$ on
+the LHS is meant to represent a vector, while $\partial$s on the RHS
+represents just the partial derivative operator.
+
+\section{Linear algebra reminders}
+
+  Let $F$ be a field. A {\it vector space}\index{vector space} over $F$ is a set
+  $V$ together with a binary operation $+$ under which $F$ is abelian and a
+  mapping $F\times V\to V$, denoted $av\ \Forall a\in F$ and $v\in V$,
+  satisfying
+  \begin{enumerate}
+    \item $(a+b)v=av+bv$,
+    \item $(ab)v=a(bv)$,
+    \item $a(v+w)=av+aw$, and
+    \item $1v=v$
+  \end{enumerate}
+  $\Forall a,b\in F$ and $v,w\in V$. The elements $v$ and $w$ are\index{vector}
+  called {\it vectors}\footnote{Note that within the contexts of high
+  energy physics and relativity, the word ``vector" has a slightly more
+  specific meaning: A ``vector" in those contexts is a vector in the
+  mathematical sense along with a demand on how it behaves under
+  Lorentz transformations.} A {\it subspace}\index{subspace} 
+  is a subset $W$ of
+  $V$ that still forms a vector space over $F$. I will become immediately
+  less formal and refer to the underlying field only if it's absolutely
+  necessary.
+  Let $V$ and $V'$ be vector spaces over a field $F$. A
+  {\it linear transformation}\index{transformation!linear} 
+  of $V$ to $V'$ is a mapping $T : V\to V'$ such that
+  \begin{enumerate}
+    \item $T(v+w)=T(v)+T(w)$ and
+    \item $T(av)=aT(v)$
+  \end{enumerate}
+  $\Forall a\in F$ and $v,w\in V$. We will often drop the parentheses
+  and simply write $T(v)=Tv$. A linear transformation mapping a
+  vector space to itself is called a {\it linear operator}.
+  \index{operator!linear}\index{null space}\index{kernel}
+  The {\it null space} or {\it kernel} of $T$ is
+  \begin{equation}
+    \mathcal{N}(T)\equiv\{v\in V:Tv=0\};
+  \end{equation}
+  i.e. it is the set of vectors annihilated by $T$. Finally $T$ is said
+  to be {\it idempotent}\index{idempotent} if $T^2=T$.
+To connect some of the above definitions to what we learned in
+Chapter~\ref{ch:group}, we see that a linear operator is an endomorphism.
+Furthermore we see that if a linear operator has an inverse, then it
+is an automorphism.
+
+  \index{function!distance}\index{metric}
+  Let $M$ be any set. A {\it distance function} or {\it metric}
+  is a function
+  $$d:M\times M\to \mathbb{R}$$
+  such that $\Forall x,y,z\in M$
+  \begin{enumerate}
+    \item $d(x,y)=0\Leftrightarrow x=y$,
+    \item $d(x,y)=d(y,x)$,
+    \index{triangle inequality}
+    \item $d(x,z)\leq d(x,y)+d(y,z)$ (this is called the {\it triangle
+          inequality}).
+  \end{enumerate}
+  \index{metric space}
+  A {\it metric space}, then, is a set $M$ equipped with a metric $d$.
+One can generalize the idea of a metric and relax some of these
+conditions. For now this definition is sufficient for our purposes.
+
+\begin{example*}{}{}
+ $\mathbb{R}^n$ forms a metric space when equipped with
+  \begin{equation}
+    d(x,y)=|x-y|=\sqrt{\sum\limits_{i=1}^n(x_i-y_i)^2}.
+  \end{equation}
+  \index{metric!Euclidean}
+  This known as the {\it Euclidean metric}.
+\end{example*}
+
+Next we turn to the concepts of orthogonality and dimensionality, which
+essentially tell us when two vectors are independent and how many independent
+generators it takes to make a vector space.
+We will formulate these ideas in terms of inner products.
+  \index{product!inner}\index{product!scalar}
+  Let $V$ be a vector space over $\mathbb{C}$. An {\it inner
+  product} or {\it scalar product} is a mapping
+  $(\ ,\ ):V\times V\to \mathbb{C}$
+  satisfying $\Forall x,y,z\in V$ and $\alpha \in F$
+  \begin{enumerate}
+    \item $(x,y)=(y,x)^{*}$,
+    \item $(x,y+z)=(x,y)+(x,z)$
+    \item $(x,\alpha y)=\alpha(x,y)$
+  \end{enumerate}
+  Note that the above properties also imply $(x+y,z)=(x,z)+(y,z)$ and
+  \index{vector!magnitude}\index{vector!norm}
+  $(\alpha x,y)=\alpha^{*}(x,y)$. The {\it magnitude} or {\it norm}
+  of a vector $x$ is $|x|\equiv(x,x)^{1/2}$. If $(x,y)=0$ then $x$
+  \index{orthogonal}\index{orthonormal}
+  and $y$ are said to be {\it orthogonal} and we write $x\perp y$.
+  If in addition $|x|=|y|=1$, then they are {\it orthonormal}.
+
+\begin{proposition}{}{orthog}
+  Let $V$ be a vector space with inner product and let $W$ a subspace
+  of $V$ with basis $\{w_1,...,w_N\}$. Consider the mapping $P:V\to W$
+  defined by
+  $$
+    Pv=\sum_{i=1}^N\frac{(v,w_i)}{|w_i|^2}w_i.
+  $$
+  Then $v-Pv\perp W.$
+  \begin{proof}
+    We have
+    \begin{equation*}
+      \begin{aligned}
+        (v-Pv,w_j)&=(v,w_j)-(Pv,w_j)\\
+          &=(v,w_j)-\sum_{i=1}^N\frac{(v,w_i)}{|w_i|^2}(w_i,w_j)\\
+          &=(v,w_j)-\frac{(v,w_j)}{|w_j|^2}|w_j|^2\\
+          &=(v,w_j)-(v,w_j)\\
+          &=0.
+      \end{aligned}
+    \end{equation*}
+    Since $v-Pv$ is orthogonal to every basis vector of $W$, it is
+    orthogonal to every vector in $W$.
+  \end{proof}
+\end{proposition}
+
+  The map of Proposition \ref{prp:orthog} is called the {\it orthogonal
+  projection}\index{orthogonal!projection}.
+  \index{transformation!hermitian}\index{transformation!unitary}
+  \index{transformation!orthogonal}
+  \index{transformation!positive semidefinite}
+  A linear transformation $U$ is {\it unitary} if $U^\dagger U=\id$.
+  It is {\it hermitian} if $U^\dagger=U$, and it is {\it orthogonal}
+  if $U^TU=\id$. A matrix is
+  {\it positive semidefinite} if its eigenvalues are nonnegative.
+
+\begin{theorem}{}{hermit}
+  Hermitian matrices are diagonalizable.
+\end{theorem}
+
+\begin{proposition}{}{}
+  Let $A$ and $B$ be $n\times n$ matrices with differentiable elements. Then
+  $$
+    \partial_\mu(AB)=(\partial_\mu A)B+A(\partial_\mu B).
+  $$
+  \begin{proof}
+    We use the summation convention and abuse notation slightly: in the
+    proposition statement $\partial_\mu$ has an identity matrix implicitly
+    attached to it, but in this proof this symbol will also be used to
+    denote the partial derivative operator. This is confusing, but
+    it is also very common. Now since the matrix elements obey the product
+    rule, we have
+    \begin{equation*}
+      \begin{aligned}
+        \big(\partial_\mu(AB)\big)_{mk}
+          &=\delta_{mn}\partial_\mu(A_{nl}B_{lk})\\
+          &=\delta_{mn}\big(\partial_\mu(A_{nl})B_{lk}
+                            +A_{nl}(\partial_\mu B_{lk})\big)\\
+          &=\big((\partial_\mu A)B+A(\partial_\mu B)\big)_{mk}.
+      \end{aligned}
+    \end{equation*}
+  \end{proof}
+\end{proposition}
+
+\index{determinant}
+The {\it determinant} of an $N\times N$ matrix $M$
+with entries $m_{ij}\in\mathbb{C}$ is given by
+\begin{equation}
+  \det M\equiv\epsilon_{i_1...i_N}m_{1\,i_1}...m_{N\,i_N}.
+\end{equation}
+
+
+\section{Dirac algebra}
+In this section we summarize Section 3.2 of \cite{peskin_introduction_1995}.
+{\it Gamma matrices} appear when one works with spin-$1/2$ representations of
+the Lorentz group. Here we remind the reader of algebraic properties of gamma
+matrices. We work in 4D Minkowski space and demand that
+\begin{equation}
+  \left\{\gamma^\mu,\gamma^\nu\right\}=2g^{\mu\nu}\id,
+\end{equation}
+where $\id\equiv\id_4$. The representation of the Lorentz algebra is then
+\begin{equation}
+  S^{\mu\nu}=\frac{i}{4}\left[\gamma^\mu,\gamma^\nu\right].
+\end{equation}
+An explicit 4D representation of the gamma matrices, called the {\it chiral} 
+\index{representation!chiral}\index{representation!Weyl}
+or {\it Weyl} representation, uses the Pauli matrices:
+\begin{equation}
+  \gamma^0=\left(\begin{array}{cc}
+                 0      & \id_2    \\
+                 \id_2  & 0
+           \end{array}\right), \qquad
+  \gamma^i=\left(\begin{array}{cc}
+                 0         & \sigma^i \\
+                 -\sigma^i & 0
+           \end{array}\right).
+\end{equation}
+In this representation, generators of boosts and rotations are, respectively,
+\begin{equation}
+  S^{0i}=\frac{i}{4}\left[\gamma^0,\gamma^i\right]
+        =-\frac{i}{2}
+         \left(\begin{array}{cc}
+           \sigma^i & 0        \\
+           0        & -\sigma^i
+         \end{array}\right)
+\end{equation}
+and
+\begin{equation}
+  S^{ij}=\frac{i}{4}\left[\gamma^i,\gamma^j\right]
+        =\frac{1}{2}\epsilon^{ijk}
+         \left(\begin{array}{cc}
+           \sigma^k & 0        \\
+           0        & \sigma^k
+         \end{array}\right).
+\end{equation}
+A four-component field that transforms under boosts and rotations according to
+\index{spinor}
+the above generators is called a {\it Dirac spinor}, which we usually denote
+with $\psi$. 
+
+Knowing a little bit about gamma matrices, we can introduce
+``Feynman slash" notation,\index{slash notation}
+\begin{equation}
+  \slashed{p}\equiv\gamma_\mu p^\mu,
+\end{equation}
+and we can then write the {\it Dirac equation} in natural units as
+\begin{equation}
+  (i\slashed{\partial}-m\id)\psi=0.
+\end{equation}
+Next we define
+\begin{equation}
+  \bar{\psi}\equiv\psi^\dagger\gamma^0,
+\end{equation}
+which allows us to write down the Lorentz scalar $\bar{\psi}\psi$ and
+the Lorentz vector $\bar{\psi}\gamma^\mu\psi$. The matrix
+\begin{equation}
+  \gamma_5=i\gamma^0\gamma^1\gamma^2\gamma^3
+\end{equation}
+allows us to define left-handed and right-handed projection operators
+\begin{equation}\label{eq:projdef}
+  P_L\equiv\frac{1}{2}(1-\gamma_5)~~~~\text{and}~~~~
+  P_R\equiv\frac{1}{2}(1+\gamma_5),
+\end{equation}
+which project out the left-handed and right-handed components of Dirac spinors
+like
+\begin{equation}\label{eq:projact}
+  \psi_R=P_R\psi,~~~~
+  \psi_L=P_L\psi,~~~~
+  \bar{\psi}_R=\bar{\psi}P_L,~~~~\text{and}~~~~
+  \bar{\psi}_L=\bar{\psi}P_R.
+\end{equation}
+The following Propositions tell us how to manipulate gamma matrices and
+projection operators.
+\begin{proposition}{}{gammatech}
+Gamma matrix identities in $4D$:
+\begin{center}\begin{tabular}{lrcl}
+1. &$\gamma_5^2$ &=& $\id$;\\
+2. &$\left\{\gamma^\mu,\gamma_5\right\}$ &=& $\zd$;\\
+3. &$\tr\left[\text{odd no. of $\gamma$s}\right]$ &=& $\zd$;\\
+4. &$\slashed{a}\slashed{b}$ &=& $-\slashed{b}\slashed{a}-2(ab)\id$;\\
+5. &$\tr\gamma^\mu\gamma^\nu$ &=& $-4g^{\mu\nu}\id$;\\
+6. &$\gamma_\mu\gamma^\mu$&=& $-4\id$. 
+\end{tabular}\end{center}
+\end{proposition}
+\begin{proposition}{}{projection}
+Projection operator identities:
+\begin{center}\begin{tabular}{lrcl}
+1. & $P_R^2$ &=& $P_R$;\\
+2. & $P_L^2$ &=& $P_L$;\\
+3. & $\gamma^\mu P_L$ &=& $P_R \gamma^\mu$;\\
+4. & $\gamma^\mu P_R$ &=& $P_L \gamma^\mu$.
+\end{tabular}\end{center}
+\end{proposition}
+
+\bibliographystyle{unsrtnat}
+\bibliography{bibliography}
