@@ -14,7 +14,7 @@ also pay attention to the location of Lorentz indices again, as we
 work with the physical Minkowski metric.
 
 Since this chapter was adapted from a project I did as a grad student in 2014,
-this section is likely not current.
+this chapter is likely not current.
 
 \section{Gauge invariance in QFT}
 
@@ -52,15 +52,16 @@ which is in general not invariant. This suggests that the gauge bosons are
 massless. While this is no contradiction for QED or QCD, this is in direct
 opposition of observation that weak vector bosons have mass. Furthermore
 electron mass terms of the form $\bar{\psi}_{L}\psi_{R}+
-\bar{\psi}_{R}\psi_{L}$ are not invariant under $SU(2)_{L}\times 
-U(1)_{Y}$ gauge transformations since left- and right-handed fermions
+\bar{\psi}_{R}\psi_{L}$ are not invariant under 
+$\SU(2)_{L}\times \U(1)_{Y}$ gauge transformations since left- and 
+right-handed fermions
 transform differently \cite{dittmaier_higgs_2013}.
 
 \section{The Higgs mechanism}
 
 Let us examine the mechanism responsible for reconciling the observation of 
 massive gauge bosons with the desire for our theory to be gauge invariant. For 
-the sake of simplicity, we consider a complex scalar field under a $U(1)$ 
+the sake of simplicity, we consider a complex scalar field under a $\U(1)$ 
 symmetry (scalar electrodynamics), but this procedure generalizes to 
 non-abelian theories \cite{srednicki_quantum_2007}. 
 We specify our Lagrangian by 
@@ -86,7 +87,7 @@ $m^2<0$. In this case, $V(\phi)$ takes its minimum on the circle defined by
 The physical vacuum state will correspond to a point on this circle. (This
 is the same case as depicted in Fig.~\ref{fig:ssb}.) Choosing a state 
 from among this continuum thus breaks the original
-$U(1)$ symmetry of the Lagrangian, which is an example of SSB. 
+$\U(1)$ symmetry of the Lagrangian, which is an example of SSB. 
 
 The vacuum expectation value (VEV) of the field is
 \begin{equation}
@@ -216,7 +217,7 @@ and $\Phi$ is a complex scalar doublet
   \end{pmatrix},
 \end{equation}
 where $\phi^{+}$ has charge $+e$ and $\phi^{0}$ has zero charge. We minimize
-\eqref{eq:Higgpot} and spontaneously break the $SU(2)_{L}\times U(1)_{Y}$ 
+eq. \eqref{eq:Higgpot} and spontaneously break the $\SU(2)_{L}\times\U(1)_{Y}$ 
 symmetry while requiring the minimum correspond to a VEV only of $\phi^{0}$.
 After expanding about the vacuum state in the unitary 
 gauge (thereby eliminating any Goldstone bosons) we can write
@@ -228,8 +229,8 @@ gauge (thereby eliminating any Goldstone bosons) we can write
     v+h
   \end{pmatrix}.
 \end{equation}
-To find the form of $\Lagr_{Higgs}$ in this gauge, we plug in 
-\eqref{eq:Higgsphi}
+To find the form of $\Lagr_{\rm Higgs}$ in this gauge, we plug in 
+eq. \eqref{eq:Higgsphi}
 as well as the definitions of $W^{\pm}_{\mu}$ and the {\it weak mixing angle} 
 $\theta_W$,
 \begin{equation}
@@ -240,17 +241,17 @@ to obtain
 \begin{equation}
   \label{eq:LagrHiggs}
   \begin{aligned}
-    \Lagr_{\rm Higgs}&=\frac{1}{2}(\partial^{\mu}h)(\partial_{\mu}h)
-                   +\frac{g^4}{4}(v+h)^{2}W^{+\mu}W^{-}_{\mu} \\
-       & ~~~~~     +\frac{g^2}{8c_{W}^{2}}(v+h)^{2}Z^{\mu}Z_{\mu}
+    \Lagr_{\rm Higgs}&=\frac{1}{2}\partial_{\mu}h\partial^{\mu}h
+                   +\frac{g^4}{4}(v+h)^{2}W^+_{\mu}W^{-\mu} \\
+       & ~~~~~     +\frac{g^2}{8c_{W}^{2}}(v+h)^{2}Z_{\mu}Z^{\mu}
                    +\Big(\frac{\mu^2}{2}-\frac{\lambda}{16}\Big)(v+h)^{2} \\
-       &=\frac{1}{2}(\partial^{\mu}h)(\partial_{\mu}h)
-         -\frac{1}{2}M_{h}^{2}h^2 + M_{W}^{2}W^{+\mu}W^{-}_{\mu} \\
-       & ~~~~~ +\frac{1}{2}M_{Z}^{2}Z^{\mu}Z_{\mu} 
-         + gM_{W}hW^{+\mu}W^{-}_{\mu}
-         +\frac{g^2}{4}h^{2}W^{+\mu}W^{-}_{\mu} \\
-       & ~~~~~ +\frac{gM_{Z}}{2c_{W}}hZ^{\mu}Z_{\mu}
-         +\frac{g^2}{4c_{W}^{2}}h^{2}Z^{\mu}Z_{\mu}
+       &=\frac{1}{2}\partial_{\mu}h\partial^{\mu}h
+         -\frac{1}{2}M_{h}^{2}h^2 + M_{W}^{2}W^+_{\mu}W^{-\mu} \\
+       & ~~~~~ +\frac{1}{2}M_{Z}^{2}Z_{\mu}Z^{\mu} 
+         + gM_{W}hW^+_{\mu}W^{-\mu}
+         +\frac{g^2}{4}h^{2}W^+_{\mu}W^{-\mu} \\
+       & ~~~~~ +\frac{gM_{Z}}{2c_{W}}hZ_{\mu}Z^{\mu}
+         +\frac{g^2}{4c_{W}^{2}}h^{2}Z_{\mu}Z^{\mu}
          -\frac{gM_{h}^2}{4M_W}h^3 - \frac{g^{2}M_{h}^2}{32M_{W}^2}h^4,
   \end{aligned}
 \end{equation}
@@ -263,16 +264,16 @@ Hence we see that through SSB, the Higgs field has
 lent mass terms to the previously massless weak vector bosons, and that the 
 photon has remained massless as desired. Perhaps more to the point of this 
 section, we are able to glean important phenomenological predictions about the 
-Higgs boson from the form of \eqref{eq:LagrHiggs}. Namely,
+Higgs boson from the form of eq. \eqref{eq:LagrHiggs}. Namely,
 \begin{enumerate}
   \item the term quadratic in $h$ shows the Higgs has a mass $M_h$;
   \item the Higgs is spin-0 because the Higgs field is a scalar;
   \item it is neutral, since it is a perturbation of the vacuum state,
         which we required to be neutral when we broke the 
-        $SU(2)_{L}\times U(1)_{Y}$ symmetry;
+        $\SU(2)_{L}\times\U(1)_{Y}$ symmetry;
   \item it is CP even since, again, it is a vacuum excitation, and thus 
         carries the same quantum numbers as the vacuum;
-  \item the three-vertex coupling of the Higgs to the V=W, Z bosons 
+  \item the three-vertex coupling of the Higgs to the $V=W,$ $Z$ bosons 
         is proportional to the mass of those bosons $M_V$, which we see from 
         $hV^{\dagger}V$ terms, while the four-vertex coupling is proportional
         to $M_{V}^2$, which comes from $h^{2}V^{\dagger}V$ terms (more
@@ -282,17 +283,18 @@ Higgs boson from the form of \eqref{eq:LagrHiggs}. Namely,
         to $M_{V}^{2}/v^{2}$); 
         \vspace{9mm}
   \item the last two terms show cubic and quartic Higgs self-interactions;
-  \item and the W boson mass, Z boson mass, and weak mixing angle are related 
-        by $$\cos(\theta_W)=\frac{m_W}{m_Z}.$$
+  \item and the $W$ boson mass, $Z$ boson mass, and weak mixing angle are 
+        related by $$\cos(\theta_W)=\frac{m_W}{m_Z}.$$
 \end{enumerate}
 
 Finally we consider the Yukawa part of the Standard Model Lagrangian. The
-$h.c.$ in $\Lagr_{Yuk}$ includes the hermitian conjugates of all the terms
+$h.c.$ in $\Lagr_{\rm Yuk}$ includes the hermitian conjugates of all the terms
 preceding it. $\ell$, $u$, and $d$ refer to charged leptons, up-type quarks
 (up, charm, top), and down-type quarks (down, strange, bottom), respectively.
 $\widetilde{\Phi}$ is the Higgs doublet with opposite quantum numbers as
 $\Phi$ and conjugated charge. The matrices $G_f$ mix left- and right-handed 
-parts of different generations of the fermion type $f$ \cite{dittmaier_higgs_2013}. 
+parts of different generations of the fermion type $f$ 
+\cite{dittmaier_higgs_2013}. 
 
 We can remove this mixing by transforming these matrices from the current 
 {\it flavor basis} to the basis in which they are diagonal, the {\it mass 
@@ -301,13 +303,14 @@ basis}. In this basis
   G_f=\frac{\sqrt{2}}{v}\diag(m_{f_1},m_{f_2},m_{f_3}), 
 \end{equation}
 and $m_{f_i}$ can be interpreted as the mass of fermion $f_i$. Substituting
-\eqref{eq:newphi} into $\Lagr_{Yuk}$ and transforming to the unitary gauge,
-the Yukawa term becomes
+eq. \eqref{eq:newphi} into $\Lagr_{\rm Yuk}$ and transforming to the 
+unitary gauge, the Yukawa term becomes
 \begin{equation}
-  \Lagr_{Yuk}=-\sum\limits_{f}m_{f}\Big(1+\frac{H}{v}\Big)
+  \Lagr_{\rm Yuk}=-\sum\limits_{f}m_{f}\Big(1+\frac{H}{v}\Big)
             (\bar{\psi}_{L_f}\psi_{R_f}+\bar{\psi}_{R_f}\psi_{L_f}),
 \end{equation} 
-where the sum is over all fermion flavors and all generations \cite{dittmaier_higgs_2013}. Cast
+where the sum is over all fermion flavors and all generations 
+\cite{dittmaier_higgs_2013}. Cast
 in this form, the Yukawa term gives us the prediction that
 \begin{enumerate}
   \setcounter{enumi}{7}
@@ -315,13 +318,13 @@ in this form, the Yukawa term gives us the prediction that
         This coupling constant is known as the {\it Yukawa coupling}.
 \end{enumerate}
 Hence we see that the issue of fermion masses has also been solved by the
-Higgs mechanism. As a quick aside we note that in the lepton sector, the
+Higgs mechanism. We note that in the lepton sector, the
 change of basis is furnished by the same matrices for neutrinos as it is for
 their corresponding charged particles only in the limit of massless neutrinos
 \cite{dittmaier_higgs_2013}.
 
 
-\section*{How to Find the Higgs}
+\section{How to find the Higgs}
 Armed with our predictions from the previous section, we are in a favorable
 position to motivate searches for the Higgs boson. We will see how searches for
 the Higgs helped place a tight window on its expected mass, even though the 
@@ -331,7 +334,8 @@ mass is, in principle, a free parameter.
   \includegraphics[width=0.75\textwidth,height=0.75\textheight,keepaspectratio]
                 {pictures/higgs_decays.png}
   \caption{Example decay modes of the Higgs boson. Image taken from Thomson
-           Figures 17.14 and 17.16  \cite{thomson_modern_2013}.} 
+           Figs. 17.14 and 17.16  \cite{thomson_modern_2013}.}
+  \label{fig:exhiggsdecays}
 \end{figure}
 
 A preliminary step in accomplishing this goal is to decide which search 
@@ -352,13 +356,15 @@ decay modes to look for. Looking at the vertex factors above, the Higgs
 can decay into fermion-antifermion pairs as well as $W^{+}W^{-}$ and $ZZ$.
 Furthermore the Higgs can decay into gluon-gluon and photon-photon pairs
 through virtual quark and weak vector boson loops. For example Higgs decay
-Feynman diagrams, see Figure 2.
+Feynman diagrams, see Fig.~\ref{fig:exhiggsdecays},
 
-As detailed in Dittmaier and Schumacher \cite{dittmaier_higgs_2013}, there were no tight
+As detailed in Dittmaier and Schumacher \cite{dittmaier_higgs_2013}, 
+there were no tight
 constraints on the Higgs mass prior to investigations at the Large Electron
 Positron Collider (LEP). The primary search
-channel there was ZH production via ``Higgs-strahlung", for which the diagram
-is shown in Figure 3. The signal used at LEP was based on the $H\to b\bar{b}$ 
+channel there was $ZH$ production via ``Higgs-strahlung", for which the diagram
+is shown in Fig.~\ref{fig:higgsstrahlung}. 
+The signal used at LEP was based on the $H\to b\bar{b}$ 
 decay, which is not surprising since the bottom quark is the most 
 massive fermion in the decay $H\to f\bar{f}$ for which $M_{h}>2M_{f}$. During
 the LEP1 era (1989-1995), the collider operated at a CM energy of about $M_Z$. 
@@ -378,6 +384,7 @@ least 95\% confidence.
                 {pictures/higgsstrahlung.png}
   \caption{Leading order diagram for the production channel Higgs-strahlung. 
            Image taken from Simon \cite{simon_prospects_2013}.}
+  \label{fig:higgsstrahlung}
 \end{figure}
 
 Besides electron-positron colliders, Higgs searches and exclusion experiments
@@ -387,7 +394,7 @@ energy of ~2 TeV. Running until 2011, the precision measurements at the
 Tevatron suggested that the Higgs mass is less than 150 GeV, and not likely
 larger than 200 GeV \cite{thomson_modern_2013}.
 
-\section*{Experimental Evidence for the Higgs}
+\section{Experimental evidence for the Higgs}
 Between results from the LEP collider and Tevatron, high energy physicists
 could have expected the Higgs mass to lie between 115 and 150 GeV. Nevertheless
 the LHC and its two experiments ATLAS and CMS were designed to explore the
@@ -402,11 +409,13 @@ TeV, a drastic improvement over the energies of previous particle accelerators.
                 {pictures/higgs_prod_hadrons.png}
   \caption{Leading order diagrams for the Higgs boson production channels
            (left) gluon fusion and (right) vector boson fusion. Image taken 
-           from Thomson Figure 17.17 \cite{thomson_modern_2013}.} 
+           from Thomson Fig. 17.17 \cite{thomson_modern_2013}.}
+  \label{fig:higgsfusion} 
 \end{figure}
 
 The primary search channels at the LHC were gluon fusion and vector boson
-fusion, the Feynman diagrams of which are shown in Figure 4. Because of the 
+fusion, the Feynman diagrams of which are shown in Fig.~\ref{fig:higgsfusion}. 
+Because of the 
 heavy masses of the top quarks, the gluon fusion process has a large cross 
 section. However the gluon fusion process also leads to QCD radiation, which 
 can make final states of this production channel difficult to distinguish from 
@@ -415,7 +424,8 @@ consist only of Higgs boson decay products and forward jets from the colliding
 protons, making them more easily identifiable. Similarly the most
 sensitive decay modes investigated were $H\to\gamma\gamma$, $H\to ZZ^{*}\to
 \ell_{1}^{+}\ell_{1}^{-}\ell_{2}^{+}\ell_{2}^{-}$ (where $\ell_i$ is an 
-electron or muon and the asterisk indicates that the Z-boson is off shell), and
+electron or muon and the asterisk indicates that the $Z$-boson is off 
+shell), and
 $H\to WW^{*}\to e\nu_{e}\mu\nu_{\mu}$ because they can be more easily
 distinguished from the background. The decays $H\to\gamma\gamma$ 
 and $H\to ZZ^{*}\to4\ell$ also have the advantage that the mass of the Higgs 
@@ -427,20 +437,21 @@ $WW^{*}$, $\tau^{+}\tau^{-}$, and $b\bar{b}$, the most significant data came
 from the $H\to \gamma\gamma$ and $H\to\ ZZ^{*}\to4\ell$ modes \cite{thomson_modern_2013}.
 The reconstructed invariant mass distributions from ATLAS and CMS provided
 statistically credible evidence for the existence of a new particle. Two
-of the most significant distributions are shown in Figure 5. In the ATLAS plot,
+of the most significant distributions are shown in 
+Fig.~\ref{fig:higgsevidence}. In the ATLAS plot,
 each event is weighted with the probability that it is kinematically compatible
 with Higgs production and decay \cite{thomson_modern_2013}. We can see in both plots more events
 than is expected from the background around a mass of 125 GeV, which we
 identify as the Higgs. The peak at 91 GeV in the CMS plot can be attributed
-to Z-boson production \cite{thomson_modern_2013}. 
+to $Z$-boson production \cite{thomson_modern_2013}. 
 
 Ultimately the discovered particle masses for each experiment were determined 
 \cite{dittmaier_higgs_2013} to be
 \begin{equation}
   \begin{aligned}
-  M_{h(ATLAS)}&=126.0\pm0.4(\text{stat})
+  M_{h({\rm ATLAS})}&=126.0\pm0.4(\text{stat})
                 \pm0.4(\text{sys})\ \text{GeV}, \\
-  M_{h(CMS)}&=125.3\pm0.4(\text{stat})\pm0.5(\text{sys})\ \text{GeV}.
+  M_{h({\rm CMS})}&=125.3\pm0.4(\text{stat})\pm0.5(\text{sys})\ \text{GeV}.
   \end{aligned}
 \end{equation}
 The fact that the new particle decays into a pair of particles with the same
@@ -463,10 +474,11 @@ almost certainly the Higgs boson.
            indicate background only expectation. The left corresponds to 
            $h\to\gamma\gamma$ decays measured at ATLAS while the right shows
            $h\to ZZ^{*}\to4\ell$ decays measured at CMS. Image taken from 
-           Thomson Figure 17.19 \cite{thomson_modern_2013}.}
+           Thomson Fig. 17.19 \cite{thomson_modern_2013}.}
+  \label{fig:higgsevidence}
 \end{figure}
 
-\section*{Future Searches and Conclusion}
+\section{Future searches and conclusion}
 The 2012 discovery of the Higgs was probably the biggest step toward completing
 the Standard Model in recent history. However there is still much about the
 Higgs we must investigate and properties we must verify. We don't know, for

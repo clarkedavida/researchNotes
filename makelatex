@@ -1,6 +1,6 @@
 #!/bin/bash
 rm *.aux
-pdflatex 0_researchnotes.tex
+pdflatex -interaction=batchmode -draftmode 0_researchnotes.tex
 makeindex 0_researchnotes
 for auxfile in ch_*.aux; do
     bibtex `basename $auxfile .aux`
@@ -8,6 +8,6 @@ done
 for auxfile in ap_*.aux; do
     bibtex `basename $auxfile .aux`
 done
-pdflatex 0_researchnotes.tex
-pdflatex 0_researchnotes.tex
+pdflatex -interaction=batchmode -draftmode 0_researchnotes.tex
+pdflatex -interaction=batchmode 0_researchnotes.tex
 ./distclean
