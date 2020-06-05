@@ -1,0 +1,96 @@
+\chapter{Special Topic: Bell's Theorem}\label{ap:bell}
+
+This chapter gives a brief introduction to Bell's theorem and its role in
+interpreting quantum mechanics (QM). The presentation in the first two sections
+is based mostly off the one given by Griffiths 
+\cite{griffiths_introduction_2005}. In the last section, I wanted to focus
+on one of the assumptions necessary to derive Bell's inequality because
+it's fun to think about philosophically in the context of free will.
+
+Let's recall what happens when you make a measurement in a quantum system.
+Generically speaking, you have a system whose state is given by a wave
+function. This wave function doesn't tell you exactly what the
+outcome of a measurement will be, but rather is related to a statistical
+distribution of possible outcomes. Only after you make a measurement do
+you know the unique state definitively, and we say the wave function collapses.
+
+But one may wonder whether this distribution merely stands in for some
+hidden knowledge that we don't have. For example when one throws a die
+in real life, one could, at least in principle, predict the outcome of
+the die throw, using classical mechanics, given some initial conditions.
+In practice we just say each face is equally likely and leave it at that.
+In QM, this viewpoint that there must be some attribute
+of the system that tells us what the measurement should be is called
+the {\it realist} viewpoint. The viewpoint that the act of measurement
+somehow ``creates" this attribute is the {\it orthodox} viewpoint.
+Of course one may feel that answering such a question falls outside the
+scope of physics entirely; this is the {\it agnostic} viewpoint.
+
+The orthodox view is the textbook interpretation of quantum
+measurements. Formally, the observable of interest does not have a
+well-defined value before measurement. This has lead to a powerful,
+consistent, predictive, successful theory. But it might make one 
+uncomfortable\footnote{It is important to emphasize that discomfort
+with a theory says nothing about its truth. But it can be enough of
+a motivation to at least consider other alternatives.} to
+think that the universe is fundamentally truly stochastic, and it
+may also seem strange that the act of measuring has such a special
+position in the theory. A more modern motivation to re-examine this
+viewpoint is that there are many serious, unsolved problems\footnote{In
+particular I have in mind that quantum field theories and gravity are
+not yet unified.} in physics today,
+and one may wonder whether these problems could be treated in a
+more complete theory that also explains these ambiguities.
+
+\section{The EPR paradox}
+Actually physicists have been uncomfortable with QM for a long time.
+In 1935 Einstein, Podolsky, and Rosen
+\cite{einstein_can_1935} published the {\it EPR paradox},
+which was designed to show that the realist viewpoint must be
+the correct one. The following variant of the EPR paradox seems to be
+rather popular, and is due to Bohm \cite{bohm_quantum_1951}.
+Consider the decay of a neutral pion to an electron and positron:
+\begin{equation}
+  \pi^0\to e^-+e^+.
+\end{equation}
+If the pion was at rest, the $e^+$ and $e^-$ will fly off in opposite
+directions with the same speed. Since the pion is spin-0, we know
+by conservation of angular momentum that the RHS is in the
+singlet configuration, i.e.
+\begin{equation}
+  \ket{\psi}\sim
+   \ket{\uparrow\downarrow}-\ket{\downarrow\uparrow},
+\end{equation}
+where the first and second components of the ket indicate the spins of
+the electron and positron, respectively.
+Since the system is in the singlet configuration, if an experimenter
+measures the spin of the positron, they know the spin of the electron
+immediately, and vice-versa, regardless of how separated they are.
+To reference this phenomenon, one sometimes speaks of {\it entanglement}.
+
+This is at least superficially surprising from the orthodox perspective.
+The reason is that special relativity tells us no influence can travel
+faster than light, i.e. our theory must be {\it local}; 
+otherwise it would violate causality. On the other
+hand, it must be that wave function collapse is instantaneous; otherwise
+one would, at least momentarily, violate angular momentum conservation.
+Finally, entangled particles are experimentally known to have perfectly
+correlated spins. 
+
+Einstein, Podolsky, and Rosen therefore conclude
+that the orthodox opinion is untenable. One can then suppose there is
+some kind of missing information, or {\it hidden variable}, which
+is in these discussions often labeled $\lambda$. The hidden variable
+could be a single number, but it could also be a collection
+of numbers.
+
+\section{Bell's inequality}
+In 1964, Bell proved that, given some very mild, highly intuitive assumptions,
+all local hidden variable theories are incompatible with QM
+\cite{bell_einstein_1964}. 
+
+\section{Superdeterminism}
+
+\bibliographystyle{unsrtnat}
+\bibliography{bibliography}
+
