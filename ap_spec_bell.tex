@@ -58,8 +58,8 @@ directions with the same speed. Since the pion is spin-0, we know
 by conservation of angular momentum that the RHS is in the
 singlet configuration, i.e.
 \begin{equation}
-  \ket{\psi}\sim
-   \ket{\uparrow\downarrow}-\ket{\downarrow\uparrow},
+  \ket{\psi}=\frac{1}{\sqrt{2}}\big(
+   \ket{\uparrow\downarrow}-\ket{\downarrow\uparrow}\big),
 \end{equation}
 where the first and second components of the ket indicate the spins of
 the electron and positron, respectively.
@@ -87,9 +87,127 @@ of numbers.
 \section{Bell's inequality}
 In 1964, Bell proved that, given some very mild, highly intuitive assumptions,
 all local hidden variable theories are incompatible with QM
-\cite{bell_einstein_1964}. 
+\cite{bell_einstein_1964}.
 
-\section{Superdeterminism}
+Bell proceeds as follows: We start with a generalization of Bohm's version
+of the EPR setup. A neutral pion decays into an electron and a positron.
+One experimenter measures the spin of the electron along the vector
+$\vec{a}$ and gets result $A$; the other measures the spin of the positron
+along vector $\vec{b}$ and gets result $B$. For simplicity we will record
+the spins in units of $\hbar/2$, which means $A$, $B\in\{-1,1\}$. We
+calculate the average of the product of these spins, which we label 
+$P_{\vec{a},\vec{b}}$.
+QM predicts
+\begin{equation}\label{eq:bellQM}
+  P_{\vec{a},\vec{b}}=-\vec{a}\cdot\vec{b}.
+\end{equation}
+
+Equation~\eqref{eq:bellQM} is what we expect with the theory as is, i.e. with
+no hidden variables.
+We will now suppose there exists some generic hidden variable $\lambda$ and see
+what we find. If there were a hidden variable, then $A$ and $B$ could now
+be considered functions\footnote{In ordinary QM, the $A$ and $B$ are
+purely stochastic.} that depend
+on $\lambda$, $\vec{a}$, and $\vec{b}$. Further suppose
+that $A$ is independent of the setting $b$ and
+vice-versa\footnote{This assumption is reasonable, since the setting 
+$\vec{b}$ can
+in principle be chosen just before the measurement $A$ is made, and therefore
+before any influence from the electron side can propagate to the positron side.
+This independence assumption can be circumvented, for example by considering
+an influence in the distant past of both the electron and positron's
+backwards light cones. But this implies a level of determinism that many
+are not comfortable with. See Section~\ref{sec:superdeterminism}.}; this
+assumption is sometimes called {\it independence}. With this modest
+assumption, we can write
+\begin{equation}\label{eq:bellindep}
+  A(\vec{a},\lambda)=\pm1~~~~\text{and}~~~~B(\vec{b},\lambda)=\pm1,
+\end{equation}
+and when the detectors are aligned, we should have by angular momentum 
+conservation
+\begin{equation}
+  A(\vec{a},\lambda)=-B(\vec{a},\lambda).
+\end{equation}
+
+Let us now compute the average $P_{\vec{a},\vec{b}}$. We don't know 
+exactly what $\lambda$ is, so our strategy will be to integrate over all 
+possibilities for $\lambda$
+could be, with a density $\rho(\lambda)$ controlling the system's propensity
+to take the particular value $\lambda$. In this language, impossible
+$\lambda$ have measure zero. We know that $\lambda$ must be allowed to
+change between experiments, because if perform the experiment ``measure $A$"
+twice, I will not in general get the same result twice. Since $\rho$ is to
+be interpreted as a frequency, it is non-negative\footnote{You calculate
+averages by adding together results, not by subtracting some.}.
+Moreover we can choose $\rho$ to be normalized WLOG. Thus
+\begin{equation}\label{eq:belldensity}
+  \rho(\lambda)\geq 0~~~~\text{and}~~~~\int\dd{\lambda}\rho(\lambda)=1.
+\end{equation}
+Then
+\begin{equation}\begin{aligned}
+  P_{\vec{a},\vec{b}}
+         &=\int\dd{\lambda}\rho(\lambda)A(\vec{a},\lambda)B(\vec{b},\lambda)\\
+         &=-\int\dd{\lambda}\rho(\lambda)A(\vec{a},\lambda)A(\vec{b},\lambda).
+\end{aligned}\end{equation}
+
+We now have all necessary information to derive the {\it Bell inequality}. 
+If $\vec{c}$ is any other vector, we obtain
+\begin{equation}\begin{aligned}
+  P_{\vec{a},\vec{b}}-P_{\vec{a},\vec{c}}
+   &=-\int\dd{\lambda}\rho(\lambda)
+      \left[A(\vec{a},\lambda)A(\vec{b},\lambda)-
+            A(\vec{a},\lambda)A(\vec{c},\lambda)\right]\\
+   &=-\int\dd{\lambda}\rho(\lambda)
+      A(\vec{a},\lambda)A(\vec{b},\lambda)
+      \left[1-A(\vec{b},\lambda)A(\vec{c},\lambda)\right]
+\end{aligned}\end{equation}
+since $A(\vec{b},\lambda)^2=1$. From eqs.~\eqref{eq:bellindep} and
+\eqref{eq:belldensity} we know that
+\begin{equation}
+  |A(\vec{a},\lambda)A(\vec{b},\lambda)|=1~~~~\text{and}~~~~
+  \rho(\lambda)\left[1-A(\vec{b},\lambda)A(\vec{c},\lambda)\right]\geq0,
+\end{equation}
+and it is a general property of integrable functions on generic
+measure spaces that
+\begin{equation}
+  \left|\int\dd{\mu}f(\mu)\right|\leq\int\dd{\mu}|f(\mu)|.
+\end{equation}
+Hence we can derive the bound
+\begin{equation}
+  |P_{\vec{a},\vec{b}}-P_{\vec{a},\vec{c}}\,|
+  \leq\int\dd{\lambda}\left[1-A(\vec{b},\lambda)A(\vec{c},\lambda)\right].
+\end{equation}
+Therefore
+\begin{theorem}{Bell's inequality}{}
+  $$
+  |P_{\vec{a},\vec{b}}-P_{\vec{a},\vec{c}}\,|
+  \leq1+P_{\,\vec{b},\vec{c}}.
+  $$
+\end{theorem}
+
+One can immediately see that Bell's inequality is incompatible with
+the QM prediction eq.~\eqref{eq:bellQM}. For suppose $\vec{a}$, $\vec{b}$,
+and $\vec{c}$ all lie in a plane in such a way that $\vec{a}$ and $\vec{b}$
+are orthogonal with $\vec{c}$ at an angle $\pi/4$ half way between
+$\vec{a}$ and $\vec{b}$. Then QM tells us
+\begin{equation}
+  P_{\vec{a},\vec{b}}=0~~~~\text{and}~~~~
+  P_{\vec{a},\vec{c}}=P_{\,\vec{b},\vec{c}}\approx-0.707,
+\end{equation}
+which violates Bell's inequality, since
+\begin{equation}
+  0.707\nleq1-0.707=0.293.
+\end{equation}
+This tells us something rather strong: either all local hidden variable 
+theories satisfying independence are wrong, or else QM is.
+
+To determine who is correct, one can carry out simple (at least conceptually
+simple) experiments to test Bell's inequality. One of the most famous
+is the experiment of Aspect, Grangier, and Roger
+\cite{}, which verifies the QM prediction. 
+
+
+\section{Superdeterminism}\label{sec:superdeterminism}
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
