@@ -71,7 +71,9 @@ To reference this phenomenon, one sometimes speaks of {\it entanglement}.
 This is at least superficially surprising from the orthodox perspective.
 The reason is that special relativity tells us no influence can travel
 faster than light, i.e. our theory must be {\it local}; 
-otherwise it would violate causality. On the other
+otherwise it would violate causality\footnote{This reasoning will need to
+be examined more carefully in Section~\ref{sec:interpretingBell}.}. 
+On the other
 hand, it must be that wave function collapse is instantaneous; otherwise
 one would, at least momentarily, violate angular momentum conservation.
 Finally, entangled particles are experimentally known to have perfectly
@@ -82,7 +84,8 @@ that the orthodox opinion is untenable. One can then suppose there is
 some kind of missing information, or {\it hidden variable}, which
 is in these discussions often labeled $\lambda$. The hidden variable
 could be a single number, but it could also be a collection
-of numbers.
+of numbers. We think of $\lambda$ as some kind of complete specification of
+the system at its source.
 
 \section{Bell's inequality}
 In 1964, Bell proved that, given some very mild, highly intuitive assumptions,
@@ -109,15 +112,14 @@ what we find. If there were a hidden variable, then $A$ and $B$ could now
 be considered functions\footnote{In ordinary QM, the $A$ and $B$ are
 purely stochastic.} that depend
 on $\lambda$, $\vec{a}$, and $\vec{b}$. Further suppose
-that $A$ is independent of the setting $b$ and
+that $A$ is independent of the setting $\vec{b}$ and
 vice-versa\footnote{This assumption is reasonable, since the setting 
 $\vec{b}$ can
 in principle be chosen just before the measurement $A$ is made, and therefore
 before any influence from the electron side can propagate to the positron side.
 This independence assumption can be circumvented, for example by considering
 an influence in the distant past of both the electron and positron's
-backwards light cones. But this implies a level of determinism that many
-are not comfortable with. See Section~\ref{sec:superdeterminism}.}; this
+backwards light cones. See Section~\ref{sec:interpretingBell}.}; this
 assumption is sometimes called {\it independence}. With this modest
 assumption, we can write
 \begin{equation}\label{eq:bellindep}
@@ -198,16 +200,116 @@ which violates Bell's inequality, since
 \begin{equation}
   0.707\nleq1-0.707=0.293.
 \end{equation}
-This tells us something rather strong: either all local hidden variable 
+This suggests something rather strong: either all local hidden variable 
 theories satisfying independence are wrong, or else QM is.
 
 To determine who is correct, one can carry out simple (at least conceptually
 simple) experiments to test Bell's inequality. One of the most famous
 is the experiment of Aspect, Grangier, and Roger
-\cite{}, which verifies the QM prediction. 
+\cite{aspect_experimental_1982}, which verifies the QM prediction. 
 
+\section{Reconciliation}\label{sec:interpretingBell}
 
-\section{Superdeterminism}\label{sec:superdeterminism}
+How can we reconcile Bell's inequality, QM, and the EPR paradox? Some
+physicists and philosophers have put a lot of thought into these questions,
+and even still carry out various Bell-type experiments;
+indeed this still seems to be an area of somewhat active research.
+There are many thorough analyses of the assumptions going into Bell's
+theorem, one of which is Ref.~\cite{platoStanfordBell}. Here I wish
+to focus on two possible resolutions, one because it is
+easy to understand, and another because it is philosophically interesting.
+
+Generally we choose to accept experimental results, because the way we
+learn things is through observation. In my view, and probably in the view
+of an overwhelming majority of physicists, observation is ultimately
+our source of knowledge. Therefore we should accept the experimental
+results and assume QM is correct. Hence one of the assumptions going into
+Bell's theorem must be rejected.
+
+\subsection{No local hidden variables}
+
+One resolution, and I guess this is the most widely accepted resolution,
+is to exclude local hidden variable theories. Under this interpretation,
+physics really is fundamentally stochastic, and there is no missing
+information. If there is no hidden variable, then wave function collapse
+must be actually instantaneous to conserve angular momentum, and the
+theory is in this sense fundamentally non-local. The question is thus:
+Does this violate special relativity?
+
+The requirement that influences not travel faster than light comes from
+the demand that causality be preserved. So in particular, any
+superluminal influence or motion that does not violate causality is
+permitted. An easy example of such motion is the propagation of a shadow.
+We imagine a person standing still with a light source moving in a semi-circle
+around them, thereby casting a shadow on a distant wall. The apparent
+speed of the shadow on the wall can be made arbitrarily large by putting
+the way arbitrarily far away. This does not violate causality because the
+no event in the shadow at the starting point causes any event in the
+shadow at the ending point. The moving light source causes both shadows,
+but at the speed of light, which is still allowed.
+
+It remains to argue that instantaneous wave function collapse does not violate
+causality. To see this, note that the only way that a particle's state
+can influence anything in its neighborhood is, by definition, to take a
+measurement. Furthermore according to QM, one can never know what the
+outcome of a single measurement will be. These two facts
+\begin{enumerate}
+  \item guarantee that whatever happens in, say, the positron neighborhood
+        requires first a measurement by the positron experimenter, so that
+        then anything resulting from that measurement is guaranteed to
+        be at a time-like separation from the measurement, and therefore 
+        not violate causality; and
+  \item guarantee that the experimenter at, say, the electron side cannot
+        cause anything to happen on the positron side, because this
+        experimenter cannot control their own outcome.
+\end{enumerate}
+More succinctly, the electron experimenter cannot cause the positron
+measurement to happen, nor can this experimenter choose any outcome.
+Hence no causal, superluminal influence can propagate between 
+these two space-time locations.
+
+\subsection{Superdeterminism}
+
+Another way to proceed is to reject independence, i.e. to reject
+eq. \eqref{eq:bellindep}. One could imagine\footnote{This is not necessarily
+the only way to reject independence.}, for example, that there
+is a region, common to the reverse light cones of the event ``choosing the
+setting $\vec{b}$" and the event ``the result of the electron measurement
+is $A$", in which something determines both the setting $\vec{b}$ and
+the outcome $A$. Taken to its extreme, one could imagine that {\it all}
+experimental outcomes are somehow determined, and could, in principle, be
+traced back all the way to one set of initial conditions. Theories like
+this are sometimes called {\it superdeterministic}.
+
+In superdeterminism, QM would be viewed as an effective or emergent theory
+with some completely deterministic theory underlying it. Hossenfelder
+and Palmer \cite{hossenfelder_rethinking_2020} make some arguments for
+why one should consider superdeterministic theories, explain some features
+of a class of superdeterministic theories they would like to consider, and
+address some common counterarguments to such theories. One of their arguments
+for considering such theories, besides better understanding some of these
+strange features of QM, is that physics right now is not yet complete,
+and they hope that perhaps superdeterministic theories can fill at least
+some of the gaps that current physics leaves void.
+
+One thing which is interesting about superdeterminism is, if it's true,
+it seems to formally rule out free will. Of course, free will was never
+guaranteed by our current theories of physics anyway; indeed if all your
+actions are determined by stochastic wave function collapses that 
+propagate up to some emergent behavior, you are not really making
+choices, at least not in the colloquial sense.
+
+If there is some underlying superdeterministic theory, there is no guarantee
+that it is discoverable. To me, things like Heisenberg's uncertainty relations
+and G\"odel's incompleteness theorems seem to suggest that there are
+fundamental limitations on our knowledge, inherent to the very nature of
+the universe and, even worse, to logic. So the possibility that such theories
+are forever out of our reach would not be surprising. Of course, a
+superdeterministic theory doesn't have to be complete in that sense, and 
+at least for the time being, it seems worthwhile to see if one can cook up
+some theory that can at least explain {\it more} than what our current
+physics explains, but not everything.
+
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
