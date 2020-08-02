@@ -34,6 +34,54 @@ important for the reader to know a little bit about them.
 This section follows a fairly well known and delightful lecture by Feynman
 \cite{caltech}.
 
+\section{The non-relativistic and classical limits}
+
+In this section I briefly give some intuition for how mundane Newtonian
+physics can be recovered from the more esoteric relativistic and quantum
+theories. Namely I want to focus on the following two phrases:
+\begin{enumerate}
+  \item The non-relativistic limit is $c\to\infty$.
+  \item The classical limit is $\hbar\to0$.
+\end{enumerate}
+I don't think I have the understanding to prove anything, but at least I
+can provide some ideas and examples that can make you believe these
+two statements.
+
+The non-relativistic limit is, I think, the easier to understand. When we
+learn about relativity, the speed of light $c$ is taken as a ``cosmic speed
+limit"; correspondingly, sending $c\to\infty$ lifts the speed limit, and
+so perhaps it's not surprising that Galilean physics is recovered.
+More explicitly, we can see what happens to the Lorentz factor $\gamma$ and
+Einstein velocity addition formula under these limits. For the former
+we find
+\begin{equation}
+  \lim_{c\to\infty}\gamma
+  =\lim_{c\to\infty}\frac{1}{\sqrt{1-v^2/c^2}}=1,
+\end{equation}
+i.e. there is no longer any time dilation or length contraction.
+Meanwhile when $c\gg v$, we find for the velocity addition formula 
+\begin{equation}
+  v_1\oplus v_2
+  =\frac{v_1/c + v_2/c}{1+v_1v_2/c^2}
+  \approx \frac{v_1}{c} + \frac{v_2}{c}, 
+\end{equation}
+i.e. it reduces to Galilean velocity addition.
+
+For the classical limit, one can look at specific, simple examples, such as
+the quantum harmonic oscillator. In QM, the energy levels of this system
+are given by
+\begin{equation}
+  E_n=\hbar\omega\left(n+\frac{1}{2}\right).
+\end{equation}
+In the $\hbar\to0$ limit, one therefore sees that the differences in energy
+become continuous rather than discrete. More generally one can look at
+the Heisenberg uncertainty relation,
+\begin{equation}
+  \Delta p\Delta x\geq \frac{\hbar}{2},
+\end{equation}
+and when $\hbar=0$, you are once again allowed to know position and
+momentum simultaneously.
+
 \section{The path integral}
 
 \bibliographystyle{unsrtnat}
