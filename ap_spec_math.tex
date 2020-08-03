@@ -324,9 +324,88 @@ with entries $m_{ij}\in\mathbb{C}$ is given by
   \det M\equiv\epsilon_{i_1...i_N}m_{1\,i_1}...m_{N\,i_N}.
 \end{equation}
 
+\index{Green's function}
+\section{Green's functions}
+Using Green's functions is a convenient way to solve differential equations.
+Here we follow some remarks about Green's functions in
+Ref.~\cite{mccomb_renormalization_2004}.
+
+Generically a differential equation can be written as
+\begin{equation}\label{eq:diffyq}
+  D_t\,x(t) = f(t),
+\end{equation}
+where $D$ is a linear differential operator, i.e. it can be written as
+a linear combination of derivatives with respect to the variable $t$;
+$x$ is some differentiable function of $t$; and $f$ is some other
+function of $t$. In physical contexts, differential equations are
+evolution laws; in the language I have just introduced, they tell you
+how some physical observable $x$ changes as the parameter $t$ changes.
+The function on the RHS usually plays the role of a force; therefore
+eq.~\eqref{eq:diffyq} tells you that $f$ induces some kind of response in 
+$x$. Maybe the simplest example of a differential equation like this
+is Newton's law, which expressed in these symbols looks like
+\begin{equation}
+  D_t\,x(t)=m\frac{\dd^2}{\dd t^2}x(t) = f(t).
+\end{equation}
+
+A possibility for $f$ is to use a Dirac delta function
+$\delta(t-t')$; in physical contexts, this can be interpreted as a 
+kick or {\it impulse}\index{impulse} delivered at time $t'$, and 
+the resulting behavior for $x$ is the system's {\it response}\index{response} 
+to the kick. This situation is depicted schematically in the top panel of
+Fig.~\ref{fig:impulse}. In such a case, the differential equation
+eq.~\eqref{eq:diffyq} would become
+\begin{equation}\label{eq:greenDelta}
+  D_t\,x(t)=\delta(t-t').
+\end{equation}
+Let's give a special name to the solution of eq.~\eqref{eq:greenDelta}: We
+are going to call it the {\it Green's function} $G(t-t')$, and it will
+therefore satisfy
+\begin{equation}\label{eq:greenDeltaSol}
+  D_t\,G(t-t')=\delta(t-t').
+\end{equation}
+But now we are in a position to solve a wide class of differential equations
+generally, by taking advantage of the fact that
+\begin{equation}\label{eq:deltaSift}
+  f(t)=\int\dd{t'}f(t')\delta(t-t').
+\end{equation}
+One way to interpret the above equation is that this force $f$ is being
+constructed from a series of impulses, which is depicted schematically
+in the bottom panel of Fig.~\ref{fig:impulse}. Breaking down the force
+in this way, the solution to our general equation eq.~\eqref{eq:diffyq} is
+\begin{equation}\label{eq:greenSol}
+  x(t)=\int\dd{t'}G(t-t')f(t').
+\end{equation}
+In other words, if we can solve eq.~\eqref{eq:greenDelta}, then we can
+solve eq.~\eqref{eq:diffyq} by using eq.~\eqref{eq:greenSol}, almost
+regardless of what $f$ is\footnote{I say ``almost" because $f$ must, for
+example, be well-behaved enough that the delta function sifting works.}.
+Equation~\eqref{eq:greenSol} takes the form of a convolution, and an
+intuitive way to look at this convolution is
+\begin{equation}
+  \text{``output"} = \text{``system response to kicks"} * \text{``input"}.
+\end{equation}
+
+In the following two subsections, we are going to solve some
+archetypal differential equations using Green's functions. These are
+extremely relevant for QFT, and hopefully will help your intuition there.
+
+\subsection{The diffusion equation}
+
+\subsection{Perturbation theory}
+
+\begin{figure}\label{fig:impulse}
+\centering
+\includegraphics[width=0.44\textwidth]{figs/impulse.png}\\
+\includegraphics[width=0.90\textwidth]{figs/manyimpulses.png}
+\caption{Top: The response of the variable $x$ to a delta function kick at 
+$t'$. Bottom: A general force $f$ thought of as the sum of many impulses.
+Figure taken from Quintin and Daniel's math methods notes.}
+\end{figure}
 
 \section{Dirac algebra}
-In this section we summarize Section 3.2 of \cite{peskin_introduction_1995}.
+In this section we summarize Section 3.2 of 
+Ref.~\cite{peskin_introduction_1995}.
 {\it Gamma matrices} appear when one works with spin-$1/2$ representations of
 the Lorentz group. Here we remind the reader of algebraic properties of gamma
 matrices. We work in 4D Minkowski space and demand that
