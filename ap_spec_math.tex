@@ -348,6 +348,15 @@ is Newton's law, which expressed in these symbols looks like
   D_t\,x(t)=m\frac{\dd^2}{\dd t^2}x(t) = f(t).
 \end{equation}
 
+\begin{figure}\label{fig:impulse}
+\centering
+\includegraphics[width=0.44\textwidth]{figs/impulse.png}\\
+\includegraphics[width=0.90\textwidth]{figs/manyimpulses.png}
+\caption{Top: The response of the variable $x$ to a delta function kick at 
+$t'$. Bottom: A general force $f$ thought of as the sum of many impulses.
+Figure taken from Quintin and Daniel's math methods notes.}
+\end{figure}
+
 A possibility for $f$ is to use a Dirac delta function
 $\delta(t-t')$; in physical contexts, this can be interpreted as a 
 kick or {\it impulse}\index{impulse} delivered at time $t'$, and 
@@ -390,18 +399,56 @@ In the following two subsections, we are going to solve some
 archetypal differential equations using Green's functions. These are
 extremely relevant for QFT, and hopefully will help your intuition there.
 
+\index{diffusion equation}
 \subsection{The diffusion equation}
 
-\subsection{Perturbation theory}
+We start with a quick reminder about general diffusion equations.
+The first core
+principle underlying diffusion equations is a conservation law, i.e.
+given some generic density $\rho$ depending on $\vec{x}$ and $t$,
+\index{continuity equation}
+one usually begins with a {\it continuity equation},
+\begin{equation}\label{eq:continuityEquation}
+  \frac{\partial\rho}{\partial t}+\nabla\cdot\left(\rho\vec{v}\right)=0,
+\end{equation}
+where $\vec{v}$ is the velocity of the stuff at position $\vec{x}$. 
+To interpret the continuity equation, one thinks about some finite region
+in space $V$ and makes use of the divergence theorem to find
+\begin{equation}
+  \frac{\partial}{\partial t}\int_V \dd[3]{x}\rho
+     +\int_{S}\dd{\vec{S}}\cdot\left(\rho\vec{v}\right)=0.
+\end{equation}
+The integral in the first term on the LHS is just the total amount of
+stuff enclosed in $V$, while the second term represents the amount of
+stuff which is leaving $V$, passing through its surface $S$. In other
+words, the continuity equation tells you that rate of change of stuff
+in a volume equals the amount of stuff entering it--a formal statement
+of an obvious\footnote{Actually while I called this fact obvious,
+I guess it isn't necessarily. For instance the discovery of mass conservation
+is often credited to Antoine Lavoisier, who in the 1770s showed that 
+the total mass of a burning system remains unchanged by weighing it
+in closed vessels. Before this discovery, the prevailing ``phlogiston"
+theory maintained that phlogiston, a conjectured fire-like element,
+was released during combustion. Lavoisier was ultimately beheaded
+during the French revolution~\cite{wiki:phlogiston,wiki:laviosier}.} fact. 
 
-\begin{figure}\label{fig:impulse}
-\centering
-\includegraphics[width=0.44\textwidth]{figs/impulse.png}\\
-\includegraphics[width=0.90\textwidth]{figs/manyimpulses.png}
-\caption{Top: The response of the variable $x$ to a delta function kick at 
-$t'$. Bottom: A general force $f$ thought of as the sum of many impulses.
-Figure taken from Quintin and Daniel's math methods notes.}
-\end{figure}
+The second core principle is that when stuff diffuses, it flows from regions
+of high concentration to regions of low concentration. This is
+sometimes referred to as {\it Fick's law}\index{Fick's law}, and it
+can be written as
+\begin{equation}\label{eq:ficksLaw}
+  \rho\vec{v}+D\nabla\rho=0,
+\end{equation}
+where $D$ is a constant called the {\it diffusion coefficient}. Combining
+eqs.~\eqref{eq:continuityEquation} and \eqref{eq:ficksLaw}, one finds
+\begin{equation}
+  \frac{\partial\rho}{\partial t}-D\nabla^2\rho = 0.
+\end{equation}
+This is the {\it diffusion equation} in 3+1 dimensions. For the remainder
+of this section, to keep the notation light, we will solve the diffusion
+equation in 1+1 dimensions.
+
+\subsection{Perturbation theory}
 
 \section{Dirac algebra}
 In this section we summarize Section 3.2 of 

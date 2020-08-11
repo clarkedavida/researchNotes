@@ -164,7 +164,7 @@ drawn from PDFs $f$ and $g$, respectively.
 
 A sequence $\{X_N\}$ of random variables 
 \index{converge!in probability}{\it converges in probability}
-toward the random variable $X$ if $\forall\epsilon>0$ 
+toward the random variable $X$ if $\Forall\epsilon>0$ 
 \begin{equation}
   \lim_{N\to\infty}\pr{|X_N-X|>\epsilon}=0,
 \end{equation}
@@ -264,6 +264,34 @@ is infinite.
   $$
 \end{theorem}
 
+Also in this section we list a sometimes useful fact about CDFs, which is
+for example helpful in interpreting the results of some statistical
+tests. (See e.g. Theorem~\ref{thm:gaudif}.) 
+
+\begin{proposition}{}{}
+  If a random variable $X$ is distributed according to the PDF $f$, then
+  the corresponding CDF $F$ is distributed uniformly in [0,1].
+  \begin{proof}
+    If a random variable $Y$ is distributed uniformly in [0,1], then
+    by definition we have $\Forall r\in [0,1]$
+    $$
+      \pr{0\leq Y\leq r}=r.
+    $$
+    So all we have to do is show that $F(X)$ behaves like $Y$. To that end,
+    let $r\in[0,1]$ and define $X^*\in\mathbb{R}$ by
+    $$
+      r=\int_\infty^{X^*}\dd{s}f(s).
+    $$
+    Then
+    $$
+      \pr{0\leq F(X)\leq r}
+      =\pr{-\infty\leq X\leq X^*}
+      =\int_{-\infty}^{X^*}\dd{s}f(s)
+      =r.
+    $$
+  \end{proof}
+\end{proposition}
+
 \section{The normal distribution}
 \index{PDF!normal}
 Now we're going to focus on results about the normal distribution specifically.
@@ -346,7 +374,7 @@ Now we can list some pretty powerful applications of the normal distribution.
 For instance one often must compare two empirical estimates of some mean.
 Usually these estimates are different, and one might wonder whether this
 disparity is real or just plain unlucky. More precisely:
-\begin{theorem}{Gaussian difference test}{}
+\begin{theorem}{Gaussian difference test}{}\label{thm:gaudif}
   Suppose $\bar{X}$ and $\bar{Y}$ are correct estimates of 
   some expectation
   value, i.e. they are normally distributed with the same mean, and call
