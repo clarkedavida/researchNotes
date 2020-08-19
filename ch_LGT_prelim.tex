@@ -888,8 +888,7 @@ which we call $\Omega$. Then
                 \partial_i\left(U^\dagger\var U\right)
                  U^\dagger\partial_jU\,
                  U^\dagger\partial_kU\\
-            &=+\frac{1}{8\pi^2}\int_{\partial\Omega} \dd{S_i}\epsilon_{ijk}\tt
-r
+            &=+\frac{1}{8\pi^2}\int_{\partial\Omega} \dd{S_i}\epsilon_{ijk}\tr
                 U^\dagger\var U\,
                 U^\dagger\partial_j U\,
                 U^\dagger\partial_k U\\
@@ -898,12 +897,12 @@ r
                 U^\dagger\partial_j U\,
                 U^\dagger\partial_k U\right].
   \end{align*}
-  In the second step we used that the trace is cyclic.
+  In the second step we used the product rule and the fact that the trace 
+  and Levi-Civita symbols are cyclic.
   In the third step we used Lemma~\ref{lem:variationrule} as well as
   $U\partial_\mu U^\dagger=-\partial_\mu UU^\dagger$. In the last step
   we integrated by parts. The first integral is over the time-slice boundary
-  evaluated at infinity. Since $\partial_jU=\partial_jU_0=0$ there, this termm
- 
+  evaluated at infinity. Since $\partial_jU=\partial_jU_0=0$ there, this term
   vanishes. The integrand of the remaining integral is expanded as
   \begin{equation*}\begin{aligned}
     \epsilon_{ijk}\tr\Big[&
