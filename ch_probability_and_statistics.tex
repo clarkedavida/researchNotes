@@ -611,7 +611,7 @@ the estimator is {\it unbiased}.
   as we wished to show.
   \end{proof}
 \end{proposition}
-
+\vspace{1cm}
 We saw that the bias of the naive variance estimator goes like $1/N$. 
 So one might wonder: How much bias does one typically expect to encounter? 
 Bias problems often appear whenever one wants to estimate some function 
@@ -620,17 +620,33 @@ mean. One might be tempted to take the estimator
 \begin{equation}
   \bar{f}_{\text{bad}}=\frac{1}{N}\sum_{i=1}^Nf_i,
 \end{equation}
-where $f_i\equiv f(X_i)$. However it turns out that
+where $f_i\equiv f(X_i)$. However such an estimator is usually biased,
+and even worse, we have in general that
 \begin{equation}
   \lim_{N\to\infty}\bar{f}_\text{bad}\neq\hat{f}.
 \end{equation}
 
 \begin{example}{}{} Consider $N$ measurements of a random variable $X$ that
-are drawn from a PDF with mean 0, and suppose we are interested in estimating 
-the random variable $X^2$. If we try the bad estimator, we find
+are drawn from a PDF with  $\hat{x}=0$, and suppose we are interested 
+in estimating the function $f(x)=x^2$. If we try the bad estimator, we find
 \begin{equation}
-  \bar{f}_\text{bad}
+  \bar{f}_\text{bad}=\frac{1}{N}\sum_{i=1}^N X_i^2,
 \end{equation}
+which is guaranteed to be larger than 0 for each $i$, since $X_i=0$
+with probability 0. In other words it is biased. For a more egregious example, 
+we consider the piecewise function
+\begin{equation*}
+  f(x)=
+  \begin{cases}
+  0 & x=0, \\
+  1 & \text{otherwise}.
+  \end{cases}
+\end{equation*}
+In this example, clearly $\hat{f}=0$, but again since $X_i=0$ with probability
+0 for each $i$, we will find
+\begin{equation*}
+  \lim_{N\to\infty}\bar{f}_\text{bad}=1.
+\end{equation*}
 \end{example}
 
 An estimator that never converges to its true value is called
@@ -640,7 +656,7 @@ So this bad estimator is not a consistent estimator. Note that a biased
 estimator is not necessarily inconsistent; for instance the biased estimator
 of the variance eq.~\eqref{eq:bad} is consistent. A consistent estimator
 of $\hat{f}$ is
-\begin{equation}
+\begin{equation}\label{eq:consistentEstimator}
   \bar{f}=f(\bar{X}).
 \end{equation} 
 We can prove the consistency of $\bar{f}$ for a wide class of functions.

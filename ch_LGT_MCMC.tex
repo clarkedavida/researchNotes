@@ -245,16 +245,31 @@ Naively one might guess
 \begin{equation}
   \bar{f}_\text{bad}=\frac{1}{\nconf}\sum_{i=1}^{\nconf}f(X_i)
 \end{equation}
-as an estimator; however it can be shown that the bias of 
-$\bar{f}_\text{bad}$ is $\order{1}$,
-i.e. it never converges to the exact result.
+as an estimator; however $\bar{f}_\text{bad}$ is not guaranteed
+to converge to the exact result\footnote{See for instance the discussion
+in Section~\ref{sec:bias}.}. 
 An estimator for $f(\ev{X})$ that converges to its true value is
-\begin{equation}
+\begin{equation}\label{eq:MCMCconsistentEst}
   \bar{f}=f(\bar{X});
 \end{equation}
 in particular, the bias of this estimator is $\order{1/\nconf}$.
 Therefore in the large $\nconf$ limit, the bias vanishes faster than the 
 statistical error bar.
+
+At this point it is worth commenting when it is appropriate to use
+the sample average~\eqref{eq:arithmeticaverage} and the estimator
+\eqref{eq:MCMCconsistentEst}. The sample average is the preferred 
+method to estimate an observable that can be directly calculated from 
+the configurations, i.e. when $X_i=X(C_i)$. 
+Such random variables are called {\it primary quantities},
+\index{primary quantity} and they include many simple observables such
+as the action, the absolute value of the Polyakov loop, and so on. 
+However some quantities can only be calculated 
+as functions of the sample average; these are called {\it secondary quantities}.
+\index{secondary quantity} An obvious example is the variance, which is defined
+only in terms of averages. But a less obvious example are particle masses,
+which cannot be directly calculated on any single configuration. In this
+case we are forced to use \eqref{eq:MCMCconsistentEst}.
 
 We have introduced a way to estimate the mean and variance of some
 operator, as well as a way to estimate the mean of some function of
