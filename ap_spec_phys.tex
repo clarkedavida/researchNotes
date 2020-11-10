@@ -492,19 +492,25 @@ the valence quark masses. Moreover since you know the physical values
 of $M_\pi$, $m_u$, and $m_d$, this equation can be used to crudely estimate
 $M_\pi$ for unphysical light quark masses.
 
-% Berg insight relating this stuff to pure SU(N): in our simulations we sample
-% A_\mu, so \partial_\mu + iA_\mu is well defined, which means
-% \gamma_\mu(\partial_\mu +iA_\mu) is well defined, which is the Dirac
-% operator. The Dirac operator is a matrix, so as long as it's diagonalizable
-% you can find eigenvectors. The fact that our action is pure SU(N) only really
-% changes the distribution of the A_\mu.
-%\section{Chiral symmetry on the lattice}\label{sec:cslat}
-%For light quarks, the fermion action is roughly invariant under the global
-%symmetry~\eqref{eq:SMglobalbUA}. Experimental findings do not reflect this
-%chiral symmetry, so we conclude it is broken spontaneously by QCD dynamics.
-%The small pion masses can be attributed to a further, slight breaking
-%of this symmetry. Since chiral symmetry breaking is important in high
-%energy phenomenology, it is worth implementing on the lattice.
+\begin{figure}[t]\label{fig:ndbd}
+\centering
+\includegraphics[width=0.6\textwidth]{figs/2560px-Double_beta_decay_feynman.svg.png}
+\caption{Example neutrinoless double beta decay diagram. Image taken
+         from Wikipedia \cite{wiki:ndbd}.}
+\end{figure}
+
+\section{Neutrinoless double beta decay}
+\index{neutrinoless double beta decay}
+
+Neutrinoless double beta decay ($0\nu\beta\beta$) is a proposed decay
+process that would verify that neutrinos are Majorana fermions, if
+it were discovered. Two neutrons can become two protons by emitting
+two $e^-$ and two $\nu_e$; finding $\nu_e$ in the final state is
+an example of neutrinoful double beta decay. If $\nu_e$ is a
+Majorana fermion, i.e. if it is its own antiparticle, then the
+emitted $\nu_e$ from one interaction can be absorbed by the other.
+This is the neutrinoless double beta decay; its Feynman diagram
+is shown in Fig.~\ref{fig:ndbd}.
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
