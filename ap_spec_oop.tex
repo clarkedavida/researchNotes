@@ -1,0 +1,146 @@
+\chapter{Special Topic: OOP}\label{ap:oop}
+
+The first programming language I used for serious scientific calculations
+\index{object-oriented programming}
+was Fortran. Fortran does not traditionally 
+allow\footnote{Actually I think more modern Fortran compilers 
+allow for OOP, but I get the impression that C++ is the preferred language
+in scientific computing for this.} for object-oriented programming (OOP); 
+instead, very roughly, Fortran only
+allows for two things:
+\begin{enumerate}
+  \item arrays or variables of some kind, along with 
+  \item some functions that map them into each other.
+\end{enumerate}
+Actually programming in Fortran is kind
+of a physicist's dream: it is very direct, and you can see exactly what
+operations the computer is going to carry out. I will call Fortran
+a {\it non-OOP} language.
+
+An OOP language is more general than this, and hence it is a bit more powerful.
+\index{compile-time}\index{runtime}
+For the following discussion, it is useful to introduce two terms,
+{\it compile-time}, which is the time during which the code you wrote
+is turned into an executable, and {\it runtime}, which is the time during
+which the executable runs.
+Again very roughly, an OOP language has instead three things:
+\begin{enumerate}
+  \item {\it objects}, which I will define as any runtime entity that 
+        takes up memory and has an address;
+  \item {\it functions} or {\it methods}, which map objects to other
+        objects; and
+  \item {\it classes}, which are an abstraction of objects and/or functions,
+        that do not take any space in memory or have an address.
+\end{enumerate}
+
+Ultimately an important goal of OOP is to try to make your code more closely
+mirror how things look in the real world, and maybe you can see that this
+goal is more readily accomplished under this paradigm.
+For example in point (1), you can see that variables
+and arrays were generalized to objects. This gives you more flexibility in
+coding, in case the real-world object you are thinking of is not easily
+imagined as a variable or an array. The way that we invent these objects
+is through point (3), the class. In addition to defining objects, the
+class is an important organizational tool, allowing you to collect all
+objects and functions that are related to some general idea, which
+\index{encapsulation}\index{abstraction}
+is sometimes called {\it encapsulation}. Both functions and classes
+are useful to hide implementation details from the programmer, minimizing
+the what the programmer needs to provide to the program, which is
+sometimes called {\it abstraction}.
+
+Encapsulation and abstraction are useful to programmers in part because
+they make the code much more readable (again because what you are typing
+more closely resembles how you think of things in the real world) and
+reduce code repetition. An important practical advantage is that you
+can (at least ideally) change the implementation details of that class
+without having to modify anything that utilizes it. The drawback is that
+it can be difficult to see precisely what operations the computer
+performs. In my experience, this trade-off is hugely worthwhile, and I think
+most modern software developers would agree.
+
+\section{OOP in C++} 
+Probably the best way to learn is through an example. To see the basics
+of OOP in action, we will implement a \texttt{CAT} class, and 
+introduce some new OOP jargon and concepts along the way.
+
+The first function we define, \texttt{narrate}, is not part of the class;
+actually it is there to make it easier to print to screen, which is
+an example of abstraction. We see that it made the code easier to
+read and reduced repetition.
+
+\lstinputlisting[firstline=1,lastline=39]{exampleCode/cat.cpp}
+
+The \texttt{CAT} class begins with the \texttt{public} keyword, which
+is a statement about accessibility. Anything that falls under the
+\texttt{public} heading can be used outside of the class\footnote{Another
+possibility is \texttt{private}. Anything under the \texttt{private} heading
+can only be seen by the class itself.}. Everything in the class falls
+under this heading in this example. The first group of three lines
+are variables stored inside the \texttt{CAT} class; such variables
+\index{attribute}\index{constructor}\index{destructor}\index{method}
+are called {\it attributes}. The next group of two functions are
+the {\it constructor} and the {\it destructor}, which I will explain
+shortly. Finally the last group of four \texttt{void} functions are 
+called {\it methods}. It is basically correct to think of a class as a
+collection of attributes and methods acting on them. 
+
+\lstinputlisting[firstline=40, lastline=52]{exampleCode/cat.cpp}
+
+To understand the constructor and destructor, let us turn to our main
+code where we will use this class. In the first line, we declare a
+\texttt{CAT}-type object, which we call \texttt{cat}. We say that we have
+{\it instantiated} \texttt{cat}, and \texttt{cat} is an {\it instance}
+\index{instantiation}
+of \texttt{CAT}. \texttt{CAT} is a class; therefore, as mentioned
+earlier, it takes up no memory and has no address associated to it.
+On the other hand, \texttt{cat} is an object, and hence has some
+memory associated to it at runtime. More precisely, it uses the
+amount of memory required to hold its attributes.
+
+The constructor is the function that is called every time an object is
+instantiated. If you look back at the \texttt{CAT} class, you can see that
+the constructor takes an argument called \texttt{name}. In the main,
+the string ``Chooky" is being fed into this argument. A constructor does
+not have to take an argument, or even explicitly do anything, but often
+it is useful to have a constructor set the attributes to some default values.
+That is what the constructor does in this case, and it also tells the
+user that it instantiated a \texttt{CAT} object.
+
+\lstinputlisting[language={}]{exampleCode/catOutput.txt}
+
+The destructor is the function called every time an object is destroyed.
+The two most common times an object is destroyed are when the object
+leaves scope and when the program ends. Scopes in C++ are defined by
+curly brackets $\{\}$. So for example if you define a new variable
+inside a function, and you only use this variable inside that function,
+the {\it scope} of that variable is the inside of the function. 
+Other examples of scope include
+the inside of \texttt{if} and \texttt{while} statements and the
+\index{scope}
+insides of classes. Look to \texttt{scope.cpp} to see constructors and
+destructors in action. Note the order of creation and destruction.
+
+Turning back to the main, we see that we can access attributes of
+\texttt{cat} such as \texttt{\_name} directly, and we can also call
+methods of \texttt{cat} like \texttt{speak()}. This is possible because
+we made these public attributes and methods. Note that inside the class,
+it is enough to use the attribute or method name by itself. Outside the
+class, i.e. inside the main, we have to use the object as an intermediary.
+
+\lstinputlisting[firstline=40, lastline=49]{exampleCode/scope.cpp}
+\lstinputlisting[language={}]{exampleCode/scopeOutput.txt}
+
+Hopefully this is enough for you to get at least an intuition for
+what OOP is, how it works, and why someone would want to use it. These
+few pages are just the beginning; there are many more advanced
+features available to C++ that make classes extremely generalizable.
+Besides the advantages of being object-oriented, C++ also has many
+features that make it valuable for high-performance computing.
+For example you can manipulate exactly where and how objects
+are stored in memory. There are lots of good references for OOP
+in C++ out there, but a good start might be Ref.~\cite{tp:cpp}.
+
+\bibliographystyle{unsrtnat}
+\bibliography{bibliography}
+

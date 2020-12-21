@@ -1,0 +1,9 @@
+And the Lord said 'Let there be Chooky'.
+User says 'hello' to Chooky.
+Chooky says 'meow'.
+User asks if Chooky is hungry.
+Chooky says 'meow'.
+User gives Chooky some tuna.
+Chooky eats tuna.
+Chooky is full of tuna.
+Chooky has perished.
