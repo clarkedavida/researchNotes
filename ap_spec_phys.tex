@@ -326,6 +326,7 @@ In the continuum, the massless fermion action for a single flavor reads
 S_F=\int\dd[4]{x}\Lagr_F=\int\dd[4]{x}\bar{\psi}\slashed{D}\psi. 
 \end{equation}
 We refer to $\slashed{D}$ as the {\it massless Dirac operator}. A 
+\index{rotation!chiral}
 {\it chiral rotation}\footnote{You may notice that the sign in the exponent
 is the same for both the spinor field and its conjugate field. This is a
 common feature whenever a $\gamma_5$ is in the exponent. Recall that
@@ -336,7 +337,7 @@ mapping
   \psi\to e^{i\alpha\gamma_5}\psi~~~~\text{and}~~~~
   \bar{\psi}\to\bar\psi e^{i\alpha\gamma_5},
 \end{equation}
-where $\alpha\in\mathbb{R}$. This is probably called a chiral rotation
+where $\alpha\in\R$. This is probably called a chiral rotation
 because $\gamma_5$ is used to define the operators~\eqref{eq:projdef},
 which project out the left-handed and right-handed components of the
 fermion field according to eq.~\eqref{eq:projact}. Using identity 2 of
@@ -361,6 +362,7 @@ If one were to include a mass term in $\Lagr_F$, it would decompose as
   m\bar{\psi}\psi=m\left(\bar{\psi}_R\psi_L+\bar{\psi}_L\psi_R\right),
 \end{equation}
 which mixes the chiral components, thereby breaking chiral symmetry.
+\index{chiral limit}
 This is why one refers to the limit $m\to0$ as the {\it chiral limit}.
 
 We now generalize these ideas to $N_f$ flavors of fermion. In Gattringer
@@ -403,6 +405,7 @@ we write $\gamma^\mu$ in eq.~\eqref{eq:nfact} what we really mean is
 I pray the reader forgives the notational perversion in the above equation.
 
 In the chiral limit, the action eq.~\eqref{eq:nfact} is again invariant under
+\index{rotations!axial vector}
 chiral rotations, also in this context called {\it axial vector rotations},
 taking the form
 \begin{gather}
@@ -414,9 +417,10 @@ taking the form
     \bar{\psi}\to\bar{\psi}e^{i\alpha\gamma_5 \id},
 \end{gather}
 where the $T^a$ are the $N_f^2-1$ generators of $\SU(N_f)$,
-$\id\equiv\id_{4N_f}$, and again $\alpha\in\mathbb{R}$.
+$\id\equiv\id_{4N_f}$, and again $\alpha\in\R$.
 In this limit the action is also invariant under the
-{\it vector transformations}
+\index{rotations!vector}
+{\it vector rotations}
 \begin{gather}
   \label{eq:SUNf}
   \psi\to e^{i\alpha T^a}\psi,\qquad
@@ -428,6 +432,7 @@ In this limit the action is also invariant under the
 This invariance under the above two equations extends to the case of degenerate
 masses, when $m_1=m_2=...=m_{N_f}\equiv m$, and is the familiar isospin
 symmetry generalized to $N_f$ flavors. The symmetry~\eqref{eq:U1V} holds for
+\index{baryon number}
 arbitrary masses, and the conserved quantity is the {\it baryon number}
 \begin{equation}
     B=\frac{1}{3}(n_q-n_{\bar{q}}).
@@ -443,7 +448,7 @@ represents the global symmetry group
   \SU(N_f)_L\times\SU(N_f)_R\times\U(1)_V\times\U(1)_A.
 \end{equation}
 Breaking the global symmetry group~\eqref{eq:SMfglobal} has important
-implications in QCD phenomonology. For example we will show that in the
+implications in QCD phenomenology. For example we will show that in the
 quantized, massless theory the fermion determinant changes
 under~\eqref{eq:U1A}, breaking the $\U(1)_A$ symmetry explicitly. The remaining
 symmetry is
@@ -485,7 +490,7 @@ relates the pion mass to the masses of the up and down quarks. I think
 this formula is derivable in chiral perturbation theory. The formula
 takes the form
 \begin{equation}
-  M_\pi^2= B(m_u+m_d)+\mathcal{O}(m^2).
+  M_\pi^2= B(m_u+m_d)+\order{m^2}.
 \end{equation}
 This formula directly shows that the pion mass is not simply the sum of
 the valence quark masses. Moreover since you know the physical values

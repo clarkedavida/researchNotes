@@ -1,4 +1,4 @@
-\chapter{LGT: The Basics}\label{ch:preliminaries}
+\chapter{LGT: Lattice without fermions}\label{ch:preliminaries}
 
 LGT is introduced in Section~\ref{sec:LGT}
 by reviewing local gauge symmetries in QFT, regularizing a pure
@@ -161,7 +161,7 @@ has a well-defined continuum limit.
 
 \subsection{Lattice regularization}\label{sec:latreg}
 We now define QFT on a lattice. Let $N_{1},N_{2},N_{3},N_{4}
-\in \mathbb{N}$. The {\it lattice} ${\L}$ is defined by
+\in \N$. The {\it lattice} ${\L}$ is defined by
 \begin{equation}
   {\L}\equiv\{x\,|\,x_\mu=a\,n_\mu,\,n_\mu\le N_\mu,\,
       \mu=1,2,3,4\}.
@@ -1461,6 +1461,15 @@ enough that they do not change after many additional cooling sweeps.
 
 \section{The Polyakov loop}\index{Polyakov loop}
 
+This section is dedicated to the Polyakov loop, an object of crucial
+historical and scientific significance in lattice calculations. The
+Polyakov loop is an order parameter of the confinement-deconfinement
+transition in pure $\SU(N_c)$ LGT. Since pure $\SU(N_c)$ physics is the 
+same as physics with infinitely heavy quarks, this was historically used
+as a means of getting some insight about the QCD transition. Nowadays
+the Polyakov loop has fallen out of favor for this purpose at physical
+quark masses and lower~\cite{clarke_polyakov_2020}.
+
 \subsection{The Polyakov loop and deconfinement}\index{deconfinement}
 We begin with a brief review of some relevant properties of the
 Polyakov loop. For a theory with underlying $\SU(N_c)$ gauge group, we define
@@ -1513,9 +1522,9 @@ something like
 Since $F_{q\bar{q}}$ is growing linearly with separation at low temperatures
 due to confinement, the RHS of the above equation is zero.
 Another viewpoint is as follows: $\ev{|P|}$ is zero due to the global
-$\mathbb{Z}_3$ symmetry of the gauge action. In particular one can show
+$\Z_3$ symmetry of the gauge action. In particular one can show
 that the plaquette is unchanged when multiplying all temporal links in a
-given time slice $x_4=t_0$ with the same element $z\in\mathbb{Z}_3$, i.e.
+given time slice $x_4=t_0$ with the same element $z\in\Z_3$, i.e.
 the gauge action is unchanged under
 \begin{equation}
   U_4(\vec{x},t_0)\to zU_4(\vec{x},t_0).

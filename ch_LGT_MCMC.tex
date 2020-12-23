@@ -1,4 +1,4 @@
-\chapter{LGT: MCMC Simulations}\label{ch:MCMC}
+\chapter{LGT: Computer Simulations}\label{ch:MCMC}
 
 As discussed in Section~\ref{sec:finitetemp}, expectation values of 
 physical observables $X$ in pure $\SU(2)$ LGT
@@ -30,7 +30,7 @@ Further details can be found in, for instance, Berg~\cite{berg_markov_2004}.
 
 To generate our configurations, we start from some arbitrary configuration
 $C_0$ and construct a stochastic sequence of configurations. 
-Configuration $C_i$ is generated based on
+Configuration $C_i$ is generated based on\index{update}
 configuration $C_{i-1}$, which we call an {\it update} or {\it Monte Carlo
 step}. The result is a {\it Markov chain}
 \begin{equation}
@@ -42,7 +42,7 @@ of configurations.
 {\it Markov chain Monte Carlo} (MCMC) is characterized by the probability 
 $W^{CC'}\equiv\pr{C'|C}$, the probability to jump to configuration 
 $C'$ given that the system started in configuration $C$.
-The MCMC {\it transition matrix}
+The MCMC {\it transition matrix}\index{transition matrix}
 \begin{equation}
   W\equiv\Big(W^{CC'}\Big)
 \end{equation}
@@ -50,7 +50,7 @@ is constructed to bring the system to {\it equilibrium}.
 In equilibrium, the chain should have no sinks or sources of probability,
 which means that the probability of jumping into a configuration $C'$
 should be the same as jumping out of $C'$. This property
-is called {\it balance}
+is called {\it balance}\index{balance}
 \begin{equation}\label{eq:balance}
     \sum\limits_CW^{CC'}\pr{C}=
     \sum\limits_CW^{C'C}\pr{C'},
@@ -59,12 +59,12 @@ with the LHS representing the total probability to end up in $C'$ and
 the RHS representing the probability to transition out of $C'$.
 If $W$ satisfies
 \begin{enumerate}
-  \item {\it ergodicity}, i.e.
+  \item {\it ergodicity},\index{ergodic} i.e.
         \begin{equation}\label{eq:ergodicity}
           \pr{C}>0\;\;\text{and}\;\;\pr{C'}>0\;\;\Rightarrow\;\;
-          \exists\;n\in\mathbb{N}\;\;\text{s.t.}\;\;\big(W^n\big)^{CC'}>0;
+          \exists\;n\in\N\;\;\text{s.t.}\;\;\big(W^n\big)^{CC'}>0;
         \end{equation}
-  \item {\it normalization}, i.e.
+  \item {\it normalization},\index{normalization} i.e.
         \begin{equation}
           \sum\limits_{C'}W^{CC'}=1;
         \end{equation}
@@ -84,7 +84,7 @@ the Markov chain may have difficulty connecting different topological sectors
 in configuration space.
 
 \subsection{Update: Metropolis and heat bath}\index{Metropolis}
-\index{heat bath}
+\index{heat bath}\index{Metropolis algorithm}
 In this and the following subsection,
 we omit the Lorentz index and space-time point from link variables to
 avoid clutter.  We use $U$ to indicate the link to be updated, 
@@ -94,7 +94,7 @@ distribution $\pr{C}\propto e^{-S_C}$.
 
 One trivial way to satisfy the balance condition~\eqref{eq:balance} is
 to find an update that satisfies it term-by-term. For such an update, 
-\begin{equation}\label{eq:detailedbalance}
+\begin{equation}\label{eq:detailedbalance}\index{detailed balance}
     W^{CC'}\pr{C}=W^{C'C}\pr{C'}.
 \end{equation}
 This property is known as {\it detailed balance}.
@@ -139,7 +139,7 @@ fulfill detailed balance.
 \subsection{Update: Over-relaxation}\index{over-relaxation}
 
 An additional useful update for $\SU(2)$ is the 
-{\it over-relaxation} (OR) update. 
+{\it over-relaxation}\index{over-relaxation} (OR) update. 
 Adler introduced OR algorithms \cite{adler_over-relaxation_1981} and 
 they were further developed by Creutz \cite{creutz_overrelaxation_1987} 
 and others. The idea of the OR algorithm is to speed up relaxation 
@@ -199,6 +199,46 @@ Since the action is unchanged, the proposal is always accepted. This simple
 behavior is special to $\U(1)$ and $\SU(2)$ LGT. Its usefulness is 
 extended to $\SU(N_c)$ when $N_c>2$ via the method of Cabibbo and Marinari
 \cite{cabibbo_new_1982}.
+
+\subsection{Update: Over-relaxation gauge fixing}\label{sec:ORgaugefix}
+
+\index{gauge fixing}
+In general expectation values of gauge-dependent quantities are zero.
+Nevertheless there are some rare occasions where it is useful to calculate
+a quantity in a particular gauge, which can then be related to some
+other physical quantity. In this section we cover an OR
+algorithm that fixes gauge configurations to the Coulomb or Lorentz gauges.
+
+\begin{proposition}{}{ORgf}
+A gauge satisfying $\partial_\mu A_\mu=0$ is achieved by extremizing
+$$
+  F\equiv-\Re\tr\sum_{x,\mu} g(x) U_\mu(x) g^\dagger(x+a\hat{\mu})
+$$
+\begin{proof}
+Any gauge matrix can be written
+$$
+  g=e^{is^aT^a},
+$$
+where $s^a\in\R$ and $T^a$ are the generators of the Lie group. We want
+to find the special $g_0$ that extremizes $F$; this is equivalent to finding
+the $s_0$ that extremizes it. We will look in the vicinity of such a
+gauge, i.e. look at gauges 
+$$e^{i\tau^a T^a}, \qquad\tau\equiv s-s_0$$
+with $\tau$ small. Then
+\begin{equation*}\begin{aligned}
+  F&=-\Re\tr\sum_{x,\mu}&&
+      e^{i\tau^a(x)T^a}\,e^{iaA^b_\mu(x)T^b}\,e^{-i\tau^c(x+a\hat\mu)T^c}\\
+   &\approx &&\big(\id+i\tau^a(x)T^a\big)
+        \big(\id+iaA_\mu^b(x)T^b\big)
+        \big(\id-i\tau^c(x+a\hat\mu)T^c\big)\\
+   &\approx && \big(\id+a\tau^c(x+a\hat\mu)A_\mu^b(x)T^bT^c
+                       -a\tau^a(x)A_\mu^b(x)T^aT^b\big),
+\end{aligned}\end{equation*} 
+where we have neglected $\order{a^2, a\tau, \tau^2}$ terms and use that
+the $T^a$ are traceless. At the extremum, derivatives with respect to $\tau$
+will vanish. Exchanging our dummy group summation indices, we find 
+\end{proof}
+\end{proposition}
 
 \section{Statistical analysis}\label{sec:statana}
 

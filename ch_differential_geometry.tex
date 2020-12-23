@@ -26,10 +26,10 @@ and only if $M-A$ is open.
           is given by $\topol{\text{chaotic}}=\{\emptyset,M\}$. On the 
           opposite end of the spectrum, the {\it discrete topology}
           \index{topology!discrete} is simply $\topol{\text{discrete}}=2^M$.
-    \item Consider $\mathbb{R}^n$ equipped with the Euclidean metric. The
+    \item Consider $\R^n$ equipped with the Euclidean metric. The
           {\it standard topology} \index{topology!standard} is 
           $$\topol{\text{standard}}=
-          \{U\in2^{\mathbb{R}^n}:\Forall p\in U,\ \Exists r>0\ 
+          \{U\in2^{\R^n}:\Forall p\in U,\ \Exists r>0\ 
           \text{with}\ B_r(p)\in U\}.$$ Note in this case that the topological
           definition of open set agrees with the definition that relies
           on limit points.
@@ -71,8 +71,8 @@ A map between two topological spaces $f:M\to N$ is called a
 \end{enumerate}
 If such a function exists, we say $M$ and $N$ are {\it homeomorphic}.
 So for example when a topological space is homeomorphic to
-$\mathbb{R}^d$, that topological space is essentially a warped version
-of $\mathbb{R}^d$. Also given a topological space, we can always make another
+$\R^d$, that topological space is essentially a warped version
+of $\R^d$. Also given a topological space, we can always make another
 one from a subset of that space. In fact
 \begin{proposition}{}{}
   Let $(M,\topol{M})$ be a topological space. Let $S\subseteq M$ and
@@ -80,10 +80,10 @@ one from a subset of that space. In fact
   $\topol{M}|_S=\{U\cap S:U\in\topol{M}\}$. Then $(S,\topol{M}|_S)$ forms
   a topological space.
 \end{proposition}
-Let $d\in\mathbb{N}$. A topological space $(M,\topol{M})$ is called a
+Let $d\in\N$. A topological space $(M,\topol{M})$ is called a
 {\it topological manifold of dimension d}\index{manifold} if $\Forall x\in M$, 
-$\Exists U$ containing $x$ that is homeomorphic to $\mathbb{R}^d$. Here
-$\mathbb{R}^d$ is taken with the standard topology. We say:
+$\Exists U$ containing $x$ that is homeomorphic to $\R^d$. Here
+$\R^d$ is taken with the standard topology. We say:
 \begin{enumerate}\index{chart}\index{atlas}\index{map!chart}
   \item $(U,f)$ is a {\it chart} of $(M,\topol{M})$.
   \item An {\it atlas} $\mathcal{A}$ is a collection of charts
@@ -123,7 +123,7 @@ The set of linear maps from $V$ to $W$ is denoted by Hom($V$,$W$).
 We will now learn about a very special vector space. Given $V$ along with
 this new vector space, we will be able to construct many other vector spaces.
 The {\it dual space}\index{dual space} 
-is given by $V^*\equiv\text{Hom}(V,\mathbb{R})$.
+is given by $V^*\equiv\text{Hom}(V,\R)$.
 An element of the dual space is called a {\it one-form} or {\it covector}.
 \index{one-form}\index{covector}
 Let $V$ be $n$-dimensional with basis $\{e^1,...,e^n\}$. If a basis
@@ -146,17 +146,17 @@ then it is called the {\it dual basis} of $V^*$.
 Perhaps you encountered tensors in physics and were told something useless
 like ``a tensor is an object that transforms like a tensor."
 You will now get to see a more illuminating definition.
-  Let $r,s\in\mathbb{N}$.\index{tensor}
+  Let $r,s\in\N$.\index{tensor}
   A {\it tensor of rank ($r$,$s$)} is a map
   $$T:\underbrace{V^*\times...\times V^*}_\text{$r$ times}\times
-      \underbrace{V\times...\times V}_\text{$s$ times}\to\mathbb{R}$$
+      \underbrace{V\times...\times V}_\text{$s$ times}\to\R$$
   that is linear in all its arguments.
 In other words, a tensor is a multilinear map that eats
 vectors and covectors and spits out a real number. Now, you may be used
 to (1,1) tensors being objects that take vectors to vectors. Given
 a tensor $T$, we can actually recover such a construction.
 \begin{example*}{}{}
-  Given a tensor $T:V^*\times V\to\mathbb{R}$, where $V$ is a vector space
+  Given a tensor $T:V^*\times V\to\R$, where $V$ is a vector space
   of finite dimension, define the map $\phi:V\to \big(V^*\big)^*=V$ by
   $$\phi(v)=T(\cdot,v),$$
   where $v\in V$ and the $\cdot$ represents an as-yet-unspecified covector. 

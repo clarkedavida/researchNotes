@@ -10,7 +10,7 @@ The set of all possible outcomes $\Omega$ of an experiment is called the
 {\it sample space}\index{sample space}. {\it Events}\index{event} $A$ 
 are aggregates of points in the sample space. If $\Omega$ is a measurable set, 
 then a {\it random variable}\index{random variable} is a 
-function $X:\Omega\to\mathbb{R}$. In this book we will try to always
+function $X:\Omega\to\R$. In this book we will try to always
 denote random variables with capital letters.
 
 Next we need a way to define probabilities. In the case that $|\Omega|<\infty$,
@@ -19,7 +19,7 @@ this instance, we say that the probability is {\it uniform}
 \index{PDF!uniform} since every point in the sample space is equally likely. 
 However this need not always be the case; one outcome might be more likely 
 than the other ones. In general for some integrable function 
-$f:\mathbb{R}\to\mathbb{R}$, we assign a 
+$f:\R\to\R$, we assign a 
 probability that $X$ lies in the interval $[a,b]$ by
 \begin{equation}
   \label{eq:cpr}
@@ -61,7 +61,7 @@ ways to characterize them. For example we can think about typical values taken
 by a random variable from some distribution. We can get some information
 from the mean and variance of a distribution. These are
 both special cases of a more general concept.
-In particular, let $n\in\mathbb{N}$.
+In particular, let $n\in\N$.
   The {\it $n^{th}$ moment} \index{moment}of the distribution $f(x)$ is
   \begin{equation}\label{dfn:mom}
     \ev{X^n}=\int_{-\infty}^\infty\dd{x}x^nf(x).
@@ -72,7 +72,7 @@ $\sigma^2=\ev{(X-\hat{x})^2}$. Sometimes we call the mean the {\it expected
 value} and sometimes we denote the variance $\variance$. Note that not all 
 probability distributions have well-defined moments. The Cauchy distribution is
 very ill-behaved in this regard, since its $n^{th}$ moment diverges
-$\Forall n\in\mathbb{N}$.
+$\Forall n\in\N$.
 Generally in the lab, one draws random variables from distributions
 about which one has no a priori knowledge. Therefore in principle one
 doesn't know the true moments these distributions. The
@@ -126,7 +126,7 @@ The next two propositions show us how to add expectation values and
 random variables. Let $X$ and $Y$ be independent random variables 
 drawn from PDFs $f$ and $g$, respectively.
 \begin{proposition}{}{}
-  Let $a,b\in\mathbb{R}$ be constants. Then
+  Let $a,b\in\R$ be constants. Then
   $$\ev{aX+bY}=a\ev{X}+b\ev{Y}.$$
   \begin{proof}
     Since $X$ and $Y$ are independent, their joint PDF is $fg$. Then
@@ -278,7 +278,7 @@ tests. (See e.g. Theorem~\ref{thm:gaudif}.)
       \pr{0\leq Y\leq r}=r.
     $$
     So all we have to do is show that $F(X)$ behaves like $Y$. To that end,
-    let $r\in[0,1]$ and define $X^*\in\mathbb{R}$ by
+    let $r\in[0,1]$ and define $X^*\in\R$ by
     $$
       r=\int_\infty^{X^*}\dd{s}f(s).
     $$
@@ -661,7 +661,7 @@ of $\hat{f}$ is
 \end{equation} 
 We can prove the consistency of $\bar{f}$ for a wide class of functions.
 \begin{proposition}{}{bias}
-  Suppose $f:\mathbb{R}\to\mathbb{R}$ has a convergent Taylor series 
+  Suppose $f:\R\to\R$ has a convergent Taylor series 
   in a region about $\hat{x}$. If $\bar{X}$ maps to this region, 
   then $\bar{f}$ has bias of order $1/N$.
   \begin{proof}
@@ -701,7 +701,7 @@ can be ignored.
 \section{Error propagation and covariance}\label{sec:prop}
 We will now reproduce the commonly used error propagation formula. We know
 that if we have a smooth function of $N$ variables 
-$f:\mathbb{R}^N\to\mathbb{R}$ we can Taylor expand
+$f:\R^N\to\R$ we can Taylor expand
 \begin{equation}
   f(x)=f(\hat{x})+\sum_{j=1}^N
         \frac{\partial f}{\partial x_j}\Bigg|_{x=\hat{x}}(x_j-\hat{x}_j)
@@ -1089,7 +1089,7 @@ i.e. $\bar{F}$ is an unbiased, consistent estimator.
 
 The {\it Kolmogorov statistic} is
 \begin{equation}
-  \Delta\equiv\max_{x\in\mathbb{R}}\left|\bar{F}(x)-F(x)\right|.
+  \Delta\equiv\max_{x\in\R}\left|\bar{F}(x)-F(x)\right|.
 \end{equation}
 Since $\bar{F}(x)\xrightarrow{\text{P}}F(x)$ for all $x$, it follows
 that $\Delta\xrightarrow{\text{P}}0$. An important but surprising
@@ -1110,7 +1110,7 @@ and Smirnov~\cite{smirnoff_sur_1939}.
     increasing. Then by making the variable change $y=F(x)$ we find
     \begin{equation*}
       \begin{aligned}
-      \Delta&=\max_{x\in\mathbb{R}}\left|\bar{F}(x)-F(x)\right|\\
+      \Delta&=\max_{x\in\R}\left|\bar{F}(x)-F(x)\right|\\
             &=\max_{y\in[0,1]}\left|
                 \bar{F}\left(F^{-1}(y)\right)-F\left(F^{-1}(y)\right)\right|\\
             &=\max_{y\in[0,1]}\left|
