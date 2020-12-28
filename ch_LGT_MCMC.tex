@@ -1,4 +1,4 @@
-\chapter{LGT: Computer Simulations}\label{ch:MCMC}
+\chapter{LGT: Computer Implementation}\label{ch:MCMC}
 
 As discussed in Section~\ref{sec:finitetemp}, expectation values of 
 physical observables $X$ in pure $\SU(2)$ LGT
@@ -172,13 +172,13 @@ Hence to ensure an approach to equilibrium, they must be supplemented with,
 for instance, HB updates.
 
 We implement the $\SU(2)$ OR update by
-\begin{equation}
+\begin{equation}\label{eq:ORupdate}
   U\to U'=\frac{1}{\det U^\sqcup}\left(U^\sqcup UU^\sqcup\right)^\dagger.
 \end{equation}
-\begin{proposition}{}{OR}
+\begin{proposition}{}{OR}\label{prp:OR}
   This update does not change the $\SU(2)$ Wilson action.
   \begin{proof}
-   Since $\det(kA)=k^n\det(A)$ for any constant $k$ and $n\times n$ matrix $A$,
+   Since $\det(kA)=k^n\det A$ for any constant $k$ and $n\times n$ matrix $A$,
    one can show that the sum of two $\SU(2)$ matrices is proportional
    to an $\SU(2)$ matrix. Hence we can write
     $$
@@ -207,10 +207,21 @@ In general expectation values of gauge-dependent quantities are zero.
 Nevertheless there are some rare occasions where it is useful to calculate
 a quantity in a particular gauge, which can then be related to some
 other physical quantity. In this section we cover an OR
-algorithm that fixes gauge configurations to the Coulomb or Lorentz gauges.
+algorithm that fixes gauge configurations to the {\it Coulomb} or 
+{\it Lorentz} gauges.\index{gauge!Coulomb}\index{gauge!Lorentz}
+In the continuum such gauges are given by the condition
+\begin{equation}
+  \partial_\mu A_\mu=0,
+\end{equation}
+where $\mu$ runs over only spatial directions for the Coulomb gauge, and
+over all four directions for the Lorentz gauge. On the lattice, these 
+{\it gauge conditions}\index{gauge!condition} are discretized as
+\begin{equation}
+  \Delta(x)\equiv A_\mu(x)-A_\mu(x-a\hat\mu) =0.
+\end{equation}
 
 \begin{proposition}{}{ORgf}
-A gauge satisfying $\partial_\mu A_\mu=0$ is achieved by extremizing
+A gauge satisfying $\Delta(x)=0$ is achieved by extremizing
 $$
   F\equiv-\Re\tr\sum_{x,\mu} g(x) U_\mu(x) g^\dagger(x+a\hat{\mu})
 $$
@@ -236,9 +247,51 @@ with $\tau$ small. Then
 \end{aligned}\end{equation*} 
 where we have neglected $\order{a^2, a\tau, \tau^2}$ terms and use that
 the $T^a$ are traceless. At the extremum, derivatives with respect to $\tau$
-will vanish. Exchanging our dummy group summation indices, we find 
+will vanish. Exchanging our dummy group summation indices and shifting
+the first term by one site (which is allowed because of 
+periodic BCs) we find
+\begin{equation*}\begin{aligned}
+  0=\frac{\partial F}{\partial\tau^d}
+     &=-\Re\tr\sum_{x,\mu}&&a\frac{\partial}{\partial\tau^d}
+        \left[A_\mu^b(x-a\hat\mu)\tau^c(x)-A_\mu^b(x)\tau^c(x)\right]T^bT^c\\
+     &= &&a\left[A_\mu^b(x-a\hat\mu)-A_\mu^b(x)\right]T^bT^d.
+\end{aligned}\end{equation*}
+In order for the above to vanish, the term in brackets has to vanish,
+which completes the proof.
 \end{proof}
 \end{proposition}
+The strategy from here is to minimize $F$. As you can clearly see from
+its definition, this can be accomplished through the replacement
+\begin{equation}\label{eq:gfORupdate}
+U\to U'=gU_\mu g^\dagger,
+\end{equation}
+which is reminiscent of the OR update~\eqref{eq:ORupdate}. Hence we employ
+again OR, i.e. we find the $g$ minimizing $F$ and make the
+replacement~\eqref{eq:gfORupdate}. In a similar strategy as
+Proposition~\ref{prp:OR}, we look at the local update to $F$,
+\begin{equation}
+  \Re\tr g(x)\sum_\mu\left[U_\mu(x)g^\dagger(x+a\hat\mu)
+                        +U_\mu^\dagger(x-a\hat\mu)g^\dagger(x-a\hat\mu)\right]
+  \equiv\Re\tr g(x)K(x).
+\end{equation}
+As before, $K(x)=\sqrt{\det K(x)}\hat K(x)$, where $\hat K(x)\in\SU(2)$.
+To extremize $F$, we search for the $g$ rotating everything under the
+trace to $\id$, which is clearly
+\begin{equation}
+  g(x)=K^\dagger(x)/\sqrt{\det K(x)}.
+\end{equation} 
+
+We will never achieve the condition $\Delta(x)=0$ on the computer exactly.
+A measure of how close we are to satisfying the gauge condition is
+\begin{equation}
+  \theta\equiv\frac{1}{N_c N_s^3}\sum_x\tr\Delta(x)\Delta^\dagger(x).
+\end{equation}
+This combination is constructed so that $\theta\in\R$. 
+
+For more information
+about using OR to gauge fix, see Ref.~\cite{mandula_efficient_1990}. 
+For information about how to implement this on multiple GPUs, see
+e.g. Ref.~\cite{schrock_coulomb_2013}.
 
 \section{Statistical analysis}\label{sec:statana}
 
