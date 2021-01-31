@@ -788,7 +788,7 @@ seem to agree with experiment.
 %  \item Why do we want the integrand to vanish at the boundary?
 %\end{enumerate}
 
-\subsection{Highly improved staggered fermions}\index{HISQ}
+\subsection{Highly improved staggered fermions}\index{action!HISQ}
 
 Highly improved staggered quarks (HISQ) were introduced in 2007 by
 Follana {\it et al.} \cite{follana_highly_2007}. This paper summarizes also
@@ -854,7 +854,7 @@ $d$. Table~\ref{tab:hisq} compares the suppression of taste exchange
 to other smearing programs. Before HISQ, ASQTAD was a popular dynamical
 fermion action, and one sees that, measured in this way, taste effects
 in the HISQ action are reduced by an order of magnitude.
-\begin{figure}
+\begin{figure}[t]
   \centering
   \includegraphics{figs/oneloop.eps}
   \caption{Some example one-loop processes contributing to taste exchange.
@@ -862,7 +862,7 @@ in the HISQ action are reduced by an order of magnitude.
            }
   \label{fig:oneLoopTasteExchange}
 \end{figure}
-\begin{table}[b]
+\begin{table}[t]
 \begin{tabularx}{\linewidth}{lCCCC} \hline\hline
         & \multicolumn{3}{c}{Unimproved} & Improved \\
          & ASQTAD & HISQ & HYP & ASQTAD \\ \hline
@@ -877,8 +877,190 @@ in the HISQ action are reduced by an order of magnitude.
 \label{tab:hisq}
 \end{table}
 
-\section{Overlap fermions}
+%\section{Overlap fermions}
 
+\section{Improved actions and interpolators}
+
+In LFT the correlation length $\xi$ is related to the mass $m$ of the lightest 
+\index{correlation length}
+particle by
+\begin{equation}
+  \xi=\frac{1}{ma}.
+\end{equation}
+This can be seen from looking at the spectral decomposition of the
+connected correlation function
+\begin{equation}\label{eq:spectralDecomp}
+  \ev{X(x)X(y)}_c=\sum_{n\geq 0} 
+                   \left|\bra{0}X\ket{n}\right|^2
+                    e^{-(E_n-E_0)\Delta t},
+\end{equation}
+which has been evaluated at $\vec{x}=\vec{y}=0$ for notational simplicity and
+we define $\Delta t$ as the temporal distance between $x$ and $y$.
+For large $\Delta t$ we find schematically
+\begin{equation}
+  \ev{X(x)X(y)}_c\sim e^{(E_1-E_0)\Delta t} =e^{-m\Delta t}=e^{-\Delta t/\xi}.
+\end{equation}
+
+Equation~\eqref{eq:spectralDecomp} measures how correlated the field 
+$X$ at $x$ is with the field at $y$. In the continuum limit, $\xi$ will 
+diverge since $m$ is constant, i.e. the system experiences a second-order 
+phase transition. Correspondingly the correlation function increases to
+maximum correlation. The divergence of $\xi$ implies a divergence in the
+integrated autocorrelation time
+\index{critical slowing down}\index{critical exponent!dynamical}
+\begin{equation}\label{eq:criticalSlowingDown}
+  \tau_{\text{int}, X} \sim \xi_X^z
+\end{equation}
+with {\it dynamical critical exponent} $z$ that depends on the algorithm 
+details. For $z\neq 0$, eq.~\eqref{eq:criticalSlowingDown} implies a
+deterioration in the efficacy of the updating process toward the
+continuum limit; this is {\it critical slowing down}.
+
+Due to critical slowing down, configuration generation becomes increasingly
+expensive as one lowers the lattice spacing.
+On the other hand, one wishes minimize discretization error. One way to
+proceed is as follows: There are multiple discretizations of a lattice action
+that will lead to the same continuum limit action, so one can design a lattice
+action where one suppresses the discretization effects by hand. Such actions
+are examples of {\it improved actions}. They are in general slower to generate
+configurations at a given $a$ than unimproved actions, but have the advantage
+of being in some sense ``closer to the continuum limit" than the unimproved
+actions at a given $N_\tau$.
+
+One knows that the Wilson action has
+$\order{a^2}$ discretization errors. If we add to the Wilson action some
+$\order{a^2}$ terms out, we will have eliminated all discretization error
+up to $\order{a^3}$. This is called an $\order{a^3}$ {\it improved action}
+or an $\order{a^4}$ {\it action}. Ultimately, our goal is to calculate
+expectation values, so we will generally also want to improve our 
+lattice interpolators. For instance suppose we find some $\order{a^p}$
+action $S_\text{lat}$ with $p\geq1$. Generically it is related to the 
+continuum action $S_{\text{cont}}$ by
+\begin{equation}
+  S_\text{lat}=S_\text{cont}+a^pS_p+\order{a^{p+1}},
+\end{equation}
+where $S_p$ is a correction term with dimension [fm$^{-p}$]. (Since masses are
+inverse lengths, this is often called {\it mass dimension}.) 
+\index{mass dimension} Similarly we will
+have for our interpolator $X_\text{lat}$ 
+\begin{equation}
+   X_\text{lat} = X_\text{cont}+a^qX_q +\order{a^{q+1}}
+\end{equation}
+with $q\geq1$. Expanding the exponential, one finds for the partition function
+\begin{equation}
+  e^{S_\text{lat}}=e^{S_\text{cont}}\left(1+a^pS_p+\order{a^{p+1}}\right),
+\end{equation}
+from which it follows that
+\begin{equation}
+\ev{X_\text{lat}}=\ev{X_\text{cont}}+\order{a^p,a^q},
+\end{equation}
+i.e. the discretization error in the expectation value is controlled by both
+the action and the interpolator, whichever is worse.
+
+In what follows, we will look at some improvement strategies, guided by 
+Chapter 10 of \cite{degrand_lattice_2006} and Chapter 9 of
+\cite{gattringer_quantum_2010}. Improvement schemes are rather technically
+involved, so I will not be able to verify all details carefully.
+
+\subsection{Symanzik improvement}
+
+The Symanzik improvement scheme 
+\cite{symanzik_continuum_1983,symanzik_continuum_1983-1} is a systematic way to
+improve lattices actions. Gattringer and Lang summarize the strategy as
+carrying out the following steps:
+\begin{enumerate}
+  \item Start with a discretized version of your quantity $Q$.
+  \item Identify correction terms using the continuum theory, keeping in mind
+        what it allowed given the symmetries of $Q$, and organize them according
+        to their mass dimension.
+  \item Add discretized versions of the correction terms, multiplied with
+        suitable coefficients, to the discretized version of $Q$ so that 
+        lattice artifacts vanish up to the desired order.
+\end{enumerate}
+There is often more than one way to pick correction terms.
+
+We begin by improving the gauge action. In the continuum theory, the gauge
+action is proportional to the dimension-four operator
+\begin{equation}
+  O_4 = \tr F_{\mu\nu}F_{\mu\nu}.
+\end{equation}
+Our first correction term is at $\order{a^2}$, and there are no dimension-five
+operators anyway, so we write the three dimension-six operators\footnote{You 
+can convince yourself this is all there is by keeping track of the
+dimensions of the comprising operators, for example $D_\mu$ has mass dimension
+one and $F_{\mu\nu}$ therefore has mass dimension two, and by demanding gauge
+and Lorentz invariance. In the end you need two $D_\mu$'s and two 
+$F_{\mu\nu}$'s, and there are three different ways to contract their 
+Lorentz indices.}
+\begin{equation}\begin{aligned}
+  O_{6a}&=\sum_{\mu\nu}\tr D_\mu F_{\mu\nu} D_\mu F_{\mu\nu},\\
+  O_{6b}&=\sum_{\mu\nu\rho}\tr D_\mu F_{\nu\rho} D_\mu F_{\nu\rho},\\
+  O_{6c}&=\sum_{\mu\nu\rho}\tr D_\mu F_{\mu\rho} D_\nu F_{\nu\rho}.
+\end{aligned}\end{equation}
+If we expand the plaquette in the lattice spacing, all of the above
+operators will appear:
+\begin{equation}
+  \tr U^\square = N_c + \frac{1}{2}a^4O_4+a^6\sum_i r_iO_{6i},
+\end{equation}
+where $i\in\{\text{a, b, c}\}$.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\linewidth]{figs/luescherWeisz.pdf}
+  \caption{Lattice dimension-six operators. The top is the rectangle, the
+           bottom-left is the parallelogram, and the bottom-right is the 
+           chair. Light grey lines are to guide the eye.}
+  \label{fig:dim6operators}
+\end{figure}
+To improve our gauge action thus requires at least three dimension-six
+lattice operators. The simplest are the rectangle ``rt", the parallelogram
+``pg", and the chair ``ch", which are depicted in 
+Fig.~\ref{fig:dim6operators}. Their multiplicities are listed in
+Table~\ref{tab:dim6operators}. An improvement on the Wilson action could
+then be written as
+\begin{equation}
+  S_\text{LW}=\frac{\beta}{3}\sum_i c_i \Re\tr\left(\id-U_i\right),
+\end{equation}
+where $i\in\{\text{pl, rt, pg, ch}\}$, with ``pl" standing for plaquette,
+and $U_i$ is the corresponding lattice operator. In their original paper,
+L\"uscher and Weisz chose the normalization
+\begin{equation}\label{eq:LWnorm}
+  c_\text{pl}+8c_\text{rt}+8c_\text{pg}+16c_\text{ch}=1.
+\end{equation}
+\begin{table}
+\begin{tabularx}{\linewidth}{LR} \hline\hline
+         Operator type & Number elements per site\\\hline
+         Rectangle & 12 \\
+         Parallelogram & 16 \\
+         Chair & 48\\
+        \hline\hline 
+\end{tabularx}
+\caption{Dimension-six operator multiplicities. Loops that differ by
+         orientation only are considered equal.}
+\label{tab:dim6operators}
+\end{table}
+To fix the coefficients, one chooses an improvement condition, for example
+that the zero-temperature static potential gives
+\begin{equation}
+  V(r)\approx\frac{1}{r}
+\end{equation}
+up to $\order{a^4}$. At tree level, this yields 
+\begin{equation}
+  c_\text{pg}=0~~~~\text{and}~~~~c_\text{rt}+c_\text{ch}=-\frac{1}{12}.
+\end{equation}
+Furthermore since there are the most chair operators, it is convenient
+to pick $c_\text{ch}=0$. According to the normalization condition
+eq.~\eqref{eq:LWnorm}, one thus finds
+\begin{equation}
+  c_\text{pl}=\frac{5}{3},~~~~c_\text{rt}=-\frac{1}{12},~~~~
+    c_\text{pg}=c_\text{ch}=0,
+\end{equation}
+which is called the \it{L\"uscher-Weisz} action.\index{action!L\"uscher-Weisz}
+
+\subsection{Tadpole improvement}
+\subsection{RG improvement}
+
+%\section{Chemical potential and the sign problem}
 
 
 \bibliographystyle{unsrtnat}
