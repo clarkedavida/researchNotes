@@ -959,13 +959,15 @@ the action and the interpolator, whichever is worse.
 
 In what follows, we will look at some improvement strategies, guided by 
 Chapter 10 of \cite{degrand_lattice_2006} and Chapter 9 of
-\cite{gattringer_quantum_2010}. Improvement schemes are rather technically
+\cite{gattringer_quantum_2010}, where there is also more discussion to 
+be found. Improvement schemes are rather technically
 involved, so I will not be able to verify all details carefully.
 
 \subsection{Symanzik improvement}
 
-The Symanzik improvement scheme 
-\cite{symanzik_continuum_1983,symanzik_continuum_1983-1} is a systematic way to
+The Symanzik improvement scheme \cite{symanzik_continuum_1983,
+symanzik_continuum_1983-1,curci_symanziks_1983,luscher_shell_1985} 
+is a systematic way to
 improve lattices actions. Gattringer and Lang summarize the strategy as
 carrying out the following steps:
 \begin{enumerate}
@@ -1027,6 +1029,7 @@ L\"uscher and Weisz chose the normalization
 \begin{equation}\label{eq:LWnorm}
   c_\text{pl}+8c_\text{rt}+8c_\text{pg}+16c_\text{ch}=1.
 \end{equation}
+
 \begin{table}
 \begin{tabularx}{\linewidth}{LR} \hline\hline
          Operator type & Number elements per site\\\hline
@@ -1039,6 +1042,7 @@ L\"uscher and Weisz chose the normalization
          orientation only are considered equal.}
 \label{tab:dim6operators}
 \end{table}
+
 To fix the coefficients, one chooses an improvement condition, for example
 that the zero-temperature static potential gives
 \begin{equation}
@@ -1055,7 +1059,42 @@ eq.~\eqref{eq:LWnorm}, one thus finds
   c_\text{pl}=\frac{5}{3},~~~~c_\text{rt}=-\frac{1}{12},~~~~
     c_\text{pg}=c_\text{ch}=0,
 \end{equation}
-which is called the \it{L\"uscher-Weisz} action.\index{action!L\"uscher-Weisz}
+which is called the {\it L\"uscher-Weisz} action~\cite{luscher_shell_1985}.
+\index{action!L\"uscher-Weisz}
+
+Next we turn to an improvement of the Wilson fermionic action. Now the leading
+correction is $\order{a}$, and owing to $\bar{\psi}\psi$ being dimension-three,
+there is now the possibility for dimension-five operators. Demanding that
+our operators satisfy the symmetries of the Wilson action, e.g.
+charge conjugation $\qconj$ and parity $\parity$, we end up in the
+continuum with 
+\begin{equation}\begin{aligned}
+  O_{5a}&=\bar\psi \sigma_{\mu\nu}F_{\mu\nu}\psi, \\
+  O_{5b}&=\bar\psi\left(\Dright_\mu\Dright_\mu
+                          +\Dleft_\mu\Dleft_\mu\right)\psi,\\ 
+  O_{5c}&=m \tr F_{\mu\nu}F_{\mu\nu},\\
+  O_{5d}&=m\bar\psi\left(\overrightarrow{\slashed{D}\strut}
+                         -\overleftarrow{\slashed{D}\strut}\right)\psi,\\
+  O_{5e}&=m^2 \bar\psi \psi,
+\end{aligned}\end{equation}
+where
+\begin{equation}
+  \sigma_{\mu\nu}\equiv\frac{1}{2i}[\gamma_\mu,\gamma_\nu].
+\end{equation}
+This list of operators can be reduced by using the field equation
+\begin{equation}
+ (\slashed{D}+m)\psi=0,
+\end{equation}
+from which it follows
+\begin{equation}
+  O_{5a}-O_{5b}+2O_{5e}=0~~~~\text{and}~~~~O_{5d}+2O_{5e}=0,
+\end{equation}
+i.e. $O_{5b}$ and $O_{5d}$ are linearly dependent on the other operators,
+and can therefore be eliminated. Of the remaining operators, $O_{5c}$ and
+$O_{5e}$ are, up to the factor $m$, present in the original action, so
+they can be absorbed in the original action by redefining the bare
+parameters $m$ and $g$.
+
 
 \subsection{Tadpole improvement}
 \subsection{RG improvement}
