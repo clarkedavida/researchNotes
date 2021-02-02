@@ -890,7 +890,7 @@ particle by
 This can be seen from looking at the spectral decomposition of the
 connected correlation function
 \begin{equation}\label{eq:spectralDecomp}
-  \ev{X(x)X(y)}_c=\sum_{n\geq 0} 
+  \ev{X(x)X(y)}_c=\sum_{n> 0} 
                    \left|\bra{0}X\ket{n}\right|^2
                     e^{-(E_n-E_0)\Delta t},
 \end{equation}
@@ -1095,6 +1095,51 @@ $O_{5e}$ are, up to the factor $m$, present in the original action, so
 they can be absorbed in the original action by redefining the bare
 parameters $m$ and $g$.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\linewidth]{figs/clover.pdf}
+  \caption{The ``clover" sum $Q_{\mu\nu}(x)$ used in the discretization of the
+           field strength $\hat{F}_{\mu\nu}$ in eq.~\eqref{eq:cloverField}.
+           The point $x$ is in the middle of the squares.}
+           
+  \label{fig:clover}
+\end{figure}
+
+Taken altogether, all that remains for improvement is the operator $O_{5a}$,
+so that the $\order{a}$ improved Wilson fermion action becomes
+\begin{equation}\label{eq:cloverAction}
+  S_\text{clover}=S_\text{Wilson}+\frac{c_\text{SW}}{2}
+               \,a^5\sum_{x;\,\mu<\nu}\bar{\psi}(x)
+                  \sigma_{\mu\nu}\hat{F}_{\mu\nu}\psi(x),
+\end{equation}
+with the real {\it Sheikholeslami-Wohlert} coefficient $c_\text{SW}$
+\cite{sheikholeslami_improved_1985} and $\hat{F}_{\mu\nu}$ being the
+\index{Sheikholeslami-Wohlert}
+following discretization of the field strength tensor:
+\begin{equation}\label{eq:cloverField}
+  \hat{F}_{\mu\nu}(x)\equiv
+    -\frac{i}{8a^2}\left(Q_{\mu\nu}(x)-Q_{\nu\mu}(x)\right)
+\end{equation}
+where $Q_{\mu\nu}(x)$ is the plaquette sum (see Fig.~\ref{fig:clover})
+\begin{equation}
+  Q_{\mu\nu}(x)\equiv U_{\mu\nu}(x)+U_{\nu,-\mu}(x)
+                 +U_{-\mu,-\nu}(x)+U_{-\nu,\mu}(x).
+\end{equation}
+Due to the shape of $Q_{\mu\nu}$, the latter term in 
+eq.~\eqref{eq:cloverAction} is called the {\it clover term}, and the
+action is said to be {\it clover-improved}.\index{action!clover-improved}
+This discretization of $F_{\mu\nu}$ is chosen because it is more
+symmetric than the simple plaquette discretization.
+The coefficient $c_\text{SW}$ can be calculated perturbatively; one finds
+\cite{sheikholeslami_improved_1985}
+\begin{equation}
+  c_\text{SW}=1+0.2659 g^2+\order{g^4}.
+\end{equation} 
+
+To round out our discussion of Symanzik improvement, we now turn to the
+improvement of some interpolators. The hitherto discussed action improvements
+suffice to improve on-shell quantities, e.g. hadron masses, at $\order{a}$. 
+However it is not enough for correlators.
 
 \subsection{Tadpole improvement}
 \subsection{RG improvement}
