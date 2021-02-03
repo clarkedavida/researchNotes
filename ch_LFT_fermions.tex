@@ -948,7 +948,7 @@ have for our interpolator $X_\text{lat}$
 \end{equation}
 with $q\geq1$. Expanding the exponential, one finds for the partition function
 \begin{equation}
-  e^{S_\text{lat}}=e^{S_\text{cont}}\left(1+a^pS_p+\order{a^{p+1}}\right),
+  Z_\text{lat}=Z_\text{cont}\left(1-a^p\ev{S_p}+\order{a^{p+1}}\right),
 \end{equation}
 from which it follows that
 \begin{equation}
@@ -1139,10 +1139,43 @@ The coefficient $c_\text{SW}$ can be calculated perturbatively; one finds
 To round out our discussion of Symanzik improvement, we now turn to the
 improvement of some interpolators. The hitherto discussed action improvements
 suffice to improve on-shell quantities, e.g. hadron masses, at $\order{a}$. 
-However it is not enough for correlators.
+For these on-shell quantities, only eigenstates of the Hamiltonian
+contribute. However it is not enough for off-shell quantities such as
+correlators, which have off-diagonal contributions, and their interpolators
+need to be improved. We will discuss now two examples, the isovector axial
+current $A_\mu^a$ and the pseudoscalar density $P^a$,
+\begin{equation}\begin{aligned}
+A_\mu^a&=\frac{1}{2}\bar{\psi}\gamma_\mu\gamma_5\sigma^a\psi,\\
+P^a&=\frac{1}{2}\bar{\psi}\gamma_5\sigma^a\psi.
+\end{aligned}\end{equation}
+The dimension-four operators needed to improve $A_\mu^a$ are
+\begin{equation}\begin{aligned}
+  O_{4a,\mu}^a&=\frac{1}{2}\bar{\psi}\gamma_5\sigma_{\mu\nu}
+                 \left(\Dright_\nu-\Dleft_\nu\right)\sigma^a\psi,\\
+  O_{4b,\mu}^a&=\frac{1}{2}\partial_\mu
+                  \left(\bar{\psi}\gamma_5\sigma^a\psi\right)\\
+  O_{4c,\mu}^a&=\frac{m}{2}\bar{\psi}\gamma_\mu\gamma_5\sigma^a\psi.
+\end{aligned}\end{equation}
+Again, as before, we can apply the Dirac equation to show $O_{4a,\mu}$ is
+linearly dependent on the other two, and again $O_{4c,\mu}$ is equal to
+the original current up to the factor $m$, so it can be absorbed
+in a redefinition. The improved current is therefore
+\begin{equation}
+  A_{\text{imp},\mu}^a=A_\mu^a+c_A a\hat{\partial}_\mu P^a,
+\end{equation}
+where $c_A\in\R$ and $\hat{\partial}$ is the symmetric difference
+discretization of the derivative. From perturbation theory one finds
+\begin{equation}
+  c_A=-0.00756g^2+\order{g^4}.
+\end{equation}
+With this discussion we see that the
+operator $O_{4c,\mu}$ can be absorbed into a redefinition of $P^a$, i.e.
+\begin{equation}
+  P_\text{imp}^a=P^a.
+\end{equation}
 
 \subsection{Tadpole improvement}
-\subsection{RG improvement}
+\subsection{Fat links}
 
 %\section{Chemical potential and the sign problem}
 
