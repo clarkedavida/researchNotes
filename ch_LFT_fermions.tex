@@ -882,7 +882,7 @@ in the HISQ action are reduced by an order of magnitude.
 \section{Improved actions and interpolators}
 
 In LFT the correlation length $\xi$ is related to the mass $m$ of the lightest 
-\index{correlation length}
+\index{correlation length}\index{improvement}
 particle by
 \begin{equation}
   \xi=\frac{1}{ma}.
@@ -918,7 +918,7 @@ continuum limit; this is {\it critical slowing down}.
 
 Due to critical slowing down, configuration generation becomes increasingly
 expensive as one lowers the lattice spacing.
-On the other hand, one wishes minimize discretization error. One way to
+On the other hand, one wishes to minimize discretization error. One way to
 proceed is as follows: There are multiple discretizations of a lattice action
 that will lead to the same continuum limit action, so one can design a lattice
 action where one suppresses the discretization effects by hand. Such actions
@@ -933,29 +933,30 @@ $\order{a^2}$ terms out, we will have eliminated all discretization error
 up to $\order{a^3}$. This is called an $\order{a^3}$ {\it improved action}
 or an $\order{a^4}$ {\it action}. Ultimately, our goal is to calculate
 expectation values, so we will generally also want to improve our 
-lattice interpolators. For instance suppose we find some $\order{a^p}$
-action $S_\text{lat}$ with $p\geq1$. Generically it is related to the 
-continuum action $S_{\text{cont}}$ by
-\begin{equation}
-  S_\text{lat}=S_\text{cont}+a^pS_p+\order{a^{p+1}},
-\end{equation}
-where $S_p$ is a correction term with dimension [fm$^{-p}$]. (Since masses are
-inverse lengths, this is often called {\it mass dimension}.) 
-\index{mass dimension} Similarly we will
-have for our interpolator $X_\text{lat}$ 
-\begin{equation}
-   X_\text{lat} = X_\text{cont}+a^qX_q +\order{a^{q+1}}
-\end{equation}
-with $q\geq1$. Expanding the exponential, one finds for the partition function
-\begin{equation}
-  Z_\text{lat}=Z_\text{cont}\left(1-a^p\ev{S_p}+\order{a^{p+1}}\right),
-\end{equation}
-from which it follows that
-\begin{equation}
-\ev{X_\text{lat}}=\ev{X_\text{cont}}+\order{a^p,a^q},
-\end{equation}
-i.e. the discretization error in the expectation value is controlled by both
-the action and the interpolator, whichever is worse.
+lattice interpolators. 
+%For instance suppose we find some $\order{a^p}$
+%action $S_\text{lat}$ with $p\geq1$. Generically it is related to the 
+%continuum action $S_{\text{cont}}$ by
+%\begin{equation}
+%  S_\text{lat}=S_\text{cont}+a^pS_p+\order{a^{p+1}},
+%\end{equation}
+%where $S_p$ is a correction term with dimension [fm$^{-p}$]. (Since masses are
+%inverse lengths, this is often called {\it mass dimension}.) 
+%\index{mass dimension} Similarly we will
+%have for our interpolator $X_\text{lat}$ 
+%\begin{equation}
+%   X_\text{lat} = X_\text{cont}+a^qX_q +\order{a^{q+1}}
+%\end{equation}
+%with $q\geq1$. Expanding the exponential, one finds for the partition function
+%\begin{equation}
+%  Z_\text{lat}=Z_\text{cont}\left(1-a^p\ev{S_p}+\order{a^{p+1}}\right),
+%\end{equation}
+%from which it follows that
+%\begin{equation}
+%\ev{X_\text{lat}}=\ev{X_\text{cont}}+\order{a^p,a^q},
+%\end{equation}
+%i.e. the discretization error in the expectation value is controlled by both
+%the action and the interpolator, whichever is worse.
 
 In what follows, we will look at some improvement strategies, guided by 
 Chapter 10 of \cite{degrand_lattice_2006} and Chapter 9 of
@@ -963,11 +964,11 @@ Chapter 10 of \cite{degrand_lattice_2006} and Chapter 9 of
 be found. Improvement schemes are rather technically
 involved, so I will not be able to verify all details carefully.
 
-\subsection{Symanzik improvement}
+\subsection{Symanzik improvement}\label{sec:symanzikImprovement}
 
 The Symanzik improvement scheme \cite{symanzik_continuum_1983,
 symanzik_continuum_1983-1,curci_symanziks_1983,luscher_shell_1985} 
-is a systematic way to
+is a systematic way to\index{improvement!Symanzik}
 improve lattices actions. Gattringer and Lang summarize the strategy as
 carrying out the following steps:
 \begin{enumerate}
@@ -1132,7 +1133,7 @@ This discretization of $F_{\mu\nu}$ is chosen because it is more
 symmetric than the simple plaquette discretization.
 The coefficient $c_\text{SW}$ can be calculated perturbatively; one finds
 \cite{sheikholeslami_improved_1985}
-\begin{equation}
+\begin{equation}\label{eq:SWcoeff}
   c_\text{SW}=1+0.2659 g^2+\order{g^4}.
 \end{equation} 
 
@@ -1174,7 +1175,103 @@ operator $O_{4c,\mu}$ can be absorbed into a redefinition of $P^a$, i.e.
   P_\text{imp}^a=P^a.
 \end{equation}
 
-\subsection{Tadpole improvement}
+\subsection{Tadpole improvement}\index{improvement!tadpole}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{figs/averageLink.png}
+  \caption{Expectation value of the trace of a link, evaluated in the
+           Landau gauge. Results are calculated by MCMC and in first-order
+           perturbation theory, expanding in two ``good" parameters
+           (see Ref.~\cite{lepage_viability_1993}) and the lattice
+           coupling. These were carried out for quenched configurations
+           with $\beta\geq5.7$. Image taken from 
+           Ref.~\cite{lepage_viability_1993}.}
+  \label{fig:averageLink}
+\end{figure}
+
+In the early 1990's, physicists working in lattice field theory encountered
+a somewhat troubling problem: Many quantities calculated perturbatively
+in the bare coupling constant $g\equiv g_\text{lat}$ turned out to differ
+substantially from MCMC results, even for rather small lattice spacing.
+An example of the failure was calculated by Lepage and Mackenzie
+\cite{lepage_viability_1993}, and is shown in Fig.~\ref{fig:averageLink}.
+In this paper, the authors argue that $g_\text{lat}$ is a poor expansion
+parameter, and they give two alternative couplings that converge better.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\linewidth]{figs/tadpole.png}
+  \caption{A tadpole diagram contributing to the fermion self-energy.}
+  \label{fig:tadpole}
+\end{figure}
+
+More pertinent to this discussion of action and interpolator improvement
+is the origin of this mismatch, which they also investigate. They argue as
+follows: In lattice perturbation theory one can expand the link variable as
+\begin{equation}
+  U_\mu(x)=\exp\left[igaA_\mu^a(x)T^a\right]
+          =\id+iagA_\mu^a(x)+\order{a^2g^2}.
+\end{equation}
+Superficially it seems as though we always get some power of $ag$, but for
+tadpole diagrams, their divergence in $a$ exactly cancels the power of $a$ 
+coming from the vertex. These diagrams therefore are suppressed by a
+power of $g$ only. An example tadpole is shown in Fig.~\ref{fig:tadpole}.
+These tadpoles come from the UV part of loop integrals. To obtain a
+better behaved perturbative expansion, one could imagine factoring out
+(integrating out) this UV contribution, so that the perturbative expansion
+would instead read
+\begin{equation}
+  U_\mu(x)\approx u_0\left(\id+iagA^{\text{IR},a}_\mu(x)T^a\right),
+\end{equation}
+with the {\it tadpole factor} $u_0$ and with the gauge field only including 
+IR modes. Here $u_0$ has to be a constant\footnote{Otherwise we are not
+guaranteed that $U_\mu(x)$ will work correctly as a gauge connection.}, 
+and it represents the average value of the link.
+
+In Section~\ref{sec:symanzikImprovement}, improvement coefficients were
+determined using perturbation theory. One can imagine that our coefficients
+will be better determined taking the influence of tadpoles into account.
+This is called {\it tadpole improvement}, and to employ it, we need to
+determine $u_0$\footnote{In general $u_0$ depends on the parameters of the
+theory.}. One could imagine extracting it from the average link; to do
+this one must fix to a particular gauge, since a single link is a
+gauge-dependent quantity that would therefore otherwise vanish. One
+can also measure it from gauge-invariant constructions such as
+\begin{equation}
+  u_0=\left(\frac{1}{N_c}\ev{\tr U^\square}\right)^{1/4}.
+\end{equation}
+Tadpole improvement then amounts to replacing all links $U_\mu$ in lattice
+expressions with $U_\mu/u_0$.
+
+As a simple example we present the tree-level, tadpole-improved, one-flavor
+clover Lagrangian density. We rescale the action by multiplying by 
+the hopping parameter
+\begin{equation}
+  2\kappa=\frac{1}{m+4/a},
+\end{equation}
+rescaling the fermion fields by the factor $\sqrt{m+4/a}$, and
+rescaling the link variables by the tadpole factor to get
+\begin{equation}\begin{aligned}
+  \Lagr_\text{clover}^\text{tad}=~&\bar{\psi}(x)\psi(x)\\
+    &-\frac{\kappa}{u_0}\frac{1}{a}\bar{\psi}(x)\sum_\mu
+     \left[(\id+\gamma_\mu)U_\mu(x)\psi(x)
+           +(\id-\gamma_\mu)U_\mu^\dagger(x)\psi(x+a\hat{\mu})\right]\\
+    &+\,\frac{\kappa}{u_0}\frac{c_\text{SW}}{u_0^3}
+               \,a^5\sum_{\mu<\nu}\bar{\psi}(x)
+                  \sigma_{\mu\nu}\hat{F}_{\mu\nu}\psi(x).
+\end{aligned}\end{equation}
+Using this Lagrangian in a simulation is exactly like using the original 
+clover Lagrangian in a simulation; one just has a new hopping parameter
+$\kappa'=\kappa/u_0$. From eq.~\eqref{eq:SWcoeff}, one finds the
+tree-level, tadpole-improved Sheikholeslami-Wohlert coefficient to be
+simply
+\begin{equation}
+  c_{SW}=\frac{1}{u_0^3}.
+\end{equation}
+One can improve beyond tree-level; for details I refer the reader
+to Ref.~\cite{degrand_lattice_2006}.
+
 \subsection{Fat links}
 
 %\section{Chemical potential and the sign problem}
