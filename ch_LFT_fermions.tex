@@ -788,7 +788,8 @@ seem to agree with experiment.
 %  \item Why do we want the integrand to vanish at the boundary?
 %\end{enumerate}
 
-\subsection{Highly improved staggered fermions}\index{action!HISQ}
+\subsection{Highly improved staggered fermions}\label{sec:HISQ}
+\index{action!HISQ}
 
 Highly improved staggered quarks (HISQ) were introduced in 2007 by
 Follana {\it et al.} \cite{follana_highly_2007}. This paper summarizes also
@@ -1049,7 +1050,7 @@ that the zero-temperature static potential gives
 \begin{equation}
   V(r)\approx\frac{1}{r}
 \end{equation}
-up to $\order{a^4}$. At tree level, this yields 
+up to $\order{a^4,g^2a^2}$. This yields 
 \begin{equation}
   c_\text{pg}=0~~~~\text{and}~~~~c_\text{rt}+c_\text{ch}=-\frac{1}{12}.
 \end{equation}
@@ -1254,9 +1255,9 @@ rescaling the fermion fields by the factor $\sqrt{m+4/a}$, and
 rescaling the link variables by the tadpole factor to get
 \begin{equation}\begin{aligned}
   \Lagr_\text{clover}^\text{tad}=~&\bar{\psi}(x)\psi(x)\\
-    &-\frac{\kappa}{u_0}\frac{1}{a}\bar{\psi}(x)\sum_\mu
-     \left[(\id+\gamma_\mu)U_\mu(x)\psi(x)
-           +(\id-\gamma_\mu)U_\mu^\dagger(x)\psi(x+a\hat{\mu})\right]\\
+    &-\frac{\kappa}{u_0}\frac{1}{a}\bar{\psi}(x)
+    \sum_{\mu=\pm1}^{\pm4}\left(\id-\gamma_\mu\right)U_\mu(x)
+           \delta(x+a\hat{\mu}-y)\,\psi(y)\\
     &+\,\frac{\kappa}{u_0}\frac{c_\text{SW}}{u_0^3}
                \,a^5\sum_{\mu<\nu}\bar{\psi}(x)
                   \sigma_{\mu\nu}\hat{F}_{\mu\nu}\psi(x).
@@ -1272,10 +1273,83 @@ simply
 One can improve beyond tree-level; for details I refer the reader
 to Ref.~\cite{degrand_lattice_2006}.
 
-\subsection{Fat links}
+\subsection{Fat links}\index{fat link}
 
-%\section{Chemical potential and the sign problem}
+Typically the gauge connection between two neighboring sites $x$ and $y$
+on the lattice is just a single link $U(x,y)$, which is in some sense the 
+most local connection imaginable. One can also relax this locality, so that 
+the gauge connection contains information from a larger region around 
+$x$ and $y$; for example the connection could depend on a general sum, 
+including many paths connecting $x$ and $y$. Let's call
+this sum $\Sigma(x,y)$. Then the gauge connection could be $V(x,y)$,
+where $V$ is chosen by extremizing $\tr V\Sigma^\dagger$. These gauge
+connections are called {\it fat links} \cite{blum_improving_1997}. 
+We encountered fat links
+already in Section~\ref{sec:HISQ}, where they were employed to reduce
+taste-breaking effects, and indeed one of the reasons to use a fat link
+is to correct hadron spectra. It should not surprise you that fat links
+modify particle spectra, since they amount to a change of the lattice 
+propagator.
 
+Replacing a link by some weighted sum connecting $x$ and $y$ is consistent
+with gauge invariance and hypercube symmetries of the lattice. These are
+smeared gauge links. Replacing a link by a weighted average that is displaced
+in directions perpendicular to the direction of the connection is a
+discretization of higher order derivatives $\partial^2_\nu A_\mu$
+\cite{blum_improving_1997} with $\mu\neq\nu$. For example the use of a
+fat link might amount to a change
+\begin{equation}
+  U_\mu\to \left[1+\frac{\epsilon a^2 \Delta^2}{n}\right]^n U_\mu,
+\end{equation} 
+where $n$ is a small integer and $\epsilon$ is a smearing parameter
+\cite{lepage:1997id}. This changes the gluon propagator by a factor
+$\exp[-\epsilon a^2q^2]$ in momentum space, i.e. UV modes are 
+significantly attenuated. One then sees a connection to Symanzik improvement:
+By choosing $\epsilon$ carefully, one can adjust, e.g., 
+$\order{a^2}$ corrections.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\linewidth]{figs/linkConstructs.pdf}
+  \caption{Example three-link, five-link, and seven-link constructs that
+           go into the AsqTad fat links. Light grey lines guide the eye.}
+  \label{fig:AsqTadConstructs}
+\end{figure}
+
+Here we present the AsqTad\index{action!AsqTad}
+action~\cite{orginos_variants_1999,lepage_flavor-symmetry_1999}, a staggered
+fermion action with nearest- and third-nearest-neighbor interactions
+\begin{equation}
+  \Delta_\mu-\frac{a^2}{6}\Delta_\mu^3,
+\end{equation}
+i.e. it uses the Naik term.
+The third-nearest-neighbor uses an ordinary link, but the nearest-neighbor
+uses the fat link
+\begin{equation}
+  V_\mu=~c_1U_\mu
+           +\sum_\nu\left[w_3S_{\mu\nu}^{(3)}
+           +\sum_\rho\left(w_5S_{\mu\nu\rho}^{(5)}
+           +\sum_\sigma w_7S^{(7)}_{\mu\nu\rho\sigma}\right)
+            +w_LS^{(L)}_{\mu\nu}\right],
+\end{equation}
+where the link constructs are given by
+\begin{equation}\begin{aligned}
+  S_{\mu\nu}^{(3)}(x)
+       &=U_\nu(x)U_\mu(x+a\hat{\nu})U_\nu^\dagger(x+a\hat{\mu}),\\
+  S_{\mu\nu\rho}^{(5)}(x)
+       &=U_\nu(x)S_{\mu\rho}^{(3)}(x+a\hat{\nu})U_\nu^\dagger(x+a\hat{\mu}),\\
+  S_{\mu\nu\rho\sigma}^{(7)}(x)
+       &=U_\nu(x)S_{\mu\rho\sigma}^{(5)}(x+a\hat{\nu})
+         U_\nu^\dagger(x+a\hat{\mu}),\\
+  S_{\mu\nu}^{(L)}(x)
+       &=U_\nu(x)S_{\mu\nu}^{(3)}(x+a\hat{\nu})U_\nu^\dagger(x+a\hat{\mu}).
+\end{aligned}\end{equation}
+Examples of these constructs are shown in Fig.~\ref{fig:AsqTadConstructs}.
+The tadpole-improved coefficients are
+\begin{equation}
+  c_1=8w_5=48w_7=\frac{1}{8}w_L=-\frac{1}{16}~~~~~~\text{and}~~~~~~
+     w_3=-\frac{5}{16}.
+\end{equation}
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
