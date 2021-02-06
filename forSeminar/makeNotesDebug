@@ -1,0 +1,10 @@
+#!/bin/bash
+rm *.aux
+pdflatex 0_seminarNotes.tex
+makeindex 0_seminarNotes
+for auxfile in temp_*.aux; do
+    bibtex `basename $auxfile .aux`
+done
+pdflatex 0_seminarNotes.tex
+pdflatex 0_seminarNotes.tex
+./distclean
