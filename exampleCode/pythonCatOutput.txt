@@ -1,0 +1,13 @@
+A class for good cats.
+And the Lord said 'Let there be Niclai'.
+User says 'hello' to Niclai.
+Niclai says 'meow'.
+User asks if Niclai is hungry.
+Niclai says 'meow'.
+User gives Niclai some savory salmon.
+Niclai eats savory salmon.
+Niclai is full of savory salmon.
+Here Niclai have some more fish.
+Niclai ignores User...
+Alright then.
+Niclai has perished.

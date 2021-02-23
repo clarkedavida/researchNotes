@@ -42,9 +42,9 @@ coding, in case the real-world object you are thinking of is not easily
 imagined as a variable or an array. The way that we invent these objects
 is through point (3), the class. In addition to defining objects, the
 class is an important organizational tool, allowing you to collect all
-objects and functions that are related to some general idea, which
-\index{encapsulation}\index{abstraction}
-is sometimes called {\it encapsulation}. Both functions and classes
+objects and functions that are related to some general idea,
+which\index{encapsulation}\index{abstraction} is sometimes called 
+{\it encapsulation}. Both functions and classes
 are useful to hide implementation details from the programmer, minimizing
 the what the programmer needs to provide to the program, which is
 sometimes called {\it abstraction}.
@@ -140,6 +140,55 @@ features that make it valuable for high-performance computing.
 For example you can manipulate exactly where and how objects
 are stored in memory. There are lots of good references for OOP
 in C++ out there, but a good start might be Ref.~\cite{tp:cpp}.
+
+\section{OOP in Python}
+
+We continue by discussing OOP in Python. In this section we will demonstrate
+a couple other important features of the OOP paradigm. In particular we will
+discuss {\it inheritance},\index{inheritance} the process by which a
+class (the {\it child}\index{child} class) inherits attributes and methods
+from a more general class (the {\it parent}),\index{parent} and
+{\it operator overloading}, \index{operator overloading} where one generalizes 
+operators such as $+$ to function with objects of the class you defined.
+
+\lstinputlisting[language=Python,firstline=1,lastline=29]{exampleCode/cat.py}
+
+Let us begin by implementing the \texttt{CAT} class from before in Python,
+which is shown in \texttt{cat.py}. One nice feature of Python classes
+is the \texttt{\_\_doc\_\_} attribute, which is set here as the first string
+in quotes, giving a description of the class. Note also that Python
+does not have the \texttt{private} or \texttt{public} distinction that
+C++ has. The constructor and destructor are identified with
+\texttt{\_\_init\_\_} and \texttt{\_\_del\_\_}, respectively. All of
+\texttt{\_\_init\_\_}, \texttt{\_\_del\_\_}, and \texttt{\_\_doc\_\_} 
+are examples of
+Python special functions, which will be discussed in a bit more detail
+when we get to operator overloading. Two more syntactical characteristics 
+to point out are that methods always take the \texttt{self} reference as 
+the first argument, and that this reference is always required to
+interact with class methods and attributes, even within the class itself.
+Example output code is shown below.
+
+\lstinputlisting[language=Python,firstline=43,lastline=55]{exampleCode/cat.py}
+\lstinputlisting[language={}]{exampleCode/pythonCatOutput.txt}
+
+To demonstrate inheritance, we consider a new kind of \texttt{CAT}, a
+\texttt{MEANCAT}. \texttt{MEANCAT}s prefer to hiss rather than meow and
+their \texttt{speak()} method should reflect this behavior. Nothing else
+about a \texttt{MEANCAT} is different. To indicate that \texttt{MEANCAT}
+should inherit from \texttt{CAT}, one just passes \texttt{CAT} as an argument
+in the class definition\footnote{It is also possible for a class to inherit
+from more than one parent. This is called {\it multiple inheritance}
+\index{inheritance!multiple}, and it can be accomplished in Python by passing
+multiple arguments to the definition, e.g. \texttt{MEANCAT(CAT,MAMMAL)}.}. 
+The redefinition of the \texttt{speak()} method
+in \texttt{MEANCAT} overrides that of its parent, \texttt{CAT}. One last
+feature to point out is the use of the \texttt{del} keyword, which lets you
+call an object's destructor.
+
+\lstinputlisting[language=Python,firstline=33,lastline=41]{exampleCode/cat.py}
+\lstinputlisting[language=Python,firstline=57,lastline=66]{exampleCode/cat.py}
+\lstinputlisting[language={}]{exampleCode/meanCatOutput.txt}
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
