@@ -1,0 +1,88 @@
+\chapter{LFT: Real physics on the lattice}
+
+We are now in a position to start tackling some real-world physics using the
+methods of LFT. Nowadays lattice calculations inform many branches of particle
+physics where ab initio, non-perturbative investigations are useful, for example
+when computing CKM matrix elements, when exploring the QCD phase diagram at
+low-to-moderate temperature near zero quark chemical potential, hadron
+spectroscopy, or learning about the muon anomalous magnetic moment, just to name
+a few applications.
+
+\section{QCD thermodynamics}  
+
+This chapter focuses on the phenomenology I worked on as a postdoc in
+Bielefeld, i.e. the phase diagram of QCD. There are many useful reviews
+on the market, for instance Ref.~\cite{ding_thermodynamics_2015}.
+
+In the following we will focus on $N_f=2+1$ QCD using HISQ fermions. We are
+interested in nonzero $\mu$, which is not accessibly directly by the lattice.
+One possible strategy is to expand in small $\muh\equiv\mu/T$. For the
+pressure, we find\footnote{Note that this combination on the LHS of 
+eq.~\eqref{eq:pxpac} is unitless. This is because area has units
+[MeV$^{-2}$] and force has units [MeV$^2$].}
+\begin{equation}\label{eq:pxpac}
+\frac{P}{T^4}=\sum_{ijk}\frac{1}{i!j!k!}\,\chi_{ijk}^{(u)(d)(s)}(T)\,
+               \muh_u^i\,\muh_d^j\,\muh_s^k,
+\end{equation}
+where we have defined the {\it generalized susceptibility}
+\begin{equation}
+\chi_{ijk}^{(u)(d)(s)}(T)
+  \equiv\frac{\partial^{\,i+j+k}\,P/T^4}{\partial\muh_u^i\partial\muh_d^j
+                                       \partial\muh_s^k}\Big|_{\muh=0}.
+\end{equation}
+Some example generalized susceptibilities could be
+\begin{equation}
+  \chi_2^u=\frac{\partial^2}{\partial\muh_u^2}\frac{P}{T^4}
+  ~~~~\text{or}~~~~
+  \chi_{11}^{us}=\frac{\partial^2}{\partial\muh_u\partial\muh_s}\frac{P}{T^4}.
+\end{equation}
+
+Another set of useful relations is between chemical potentials in the flavor
+$(u,d,s)$ basis and the conserved charge $(B,Q,S)$ basis, i.e. the basis
+of baryon number, electric charge, and strangeness. These relations 
+are\footnote{A mnemonic to remember these relations is to ask what each quark
+contributes to a system. For example a strange quark makes 1/3 of a baryon,
+adds charge -1/3, and subtracts 1 from the strangeness.}
+\begin{equation}\begin{aligned}\label{eq:quark-conservedCharge}
+  \mu_u &= \frac{1}{3}\mu_B + \frac{2}{3}\mu_Q\\
+  \mu_d &= \frac{1}{3}\mu_B - \frac{1}{3}\mu_Q\\
+  \mu_s &= \frac{1}{3}\mu_B - \frac{1}{3}\mu_Q - \mu_S.
+\end{aligned}\end{equation}
+These relations are needed whenever one is interested in {\it conserved
+charge fluctuations}, i.e. susceptibilities like
+\begin{equation}
+\chi_{ijk}^{(B)(Q)(S)}(T)
+  \equiv\frac{\partial^{\,i+j+k}\,P/T^4}{\partial\muh_B^i\partial\muh_Q^j
+                                       \partial\muh_S^k}\Big|_{\muh=0}.
+\end{equation}
+Since none of the conserved charges appears directly in the action, one
+instead must decompose a conserved charge derivative into quark derivatives
+using eq.~\eqref{eq:quark-conservedCharge}. For example for any quark
+flavor $f$ one finds
+\begin{equation}
+  \frac{\partial}{\partial\mu_B}
+   =\frac{\partial\mu_f}{\partial\mu_B}\frac{\partial}{\partial\mu_f}
+   =\frac{1}{3}\frac{\partial}{\partial\mu_f}.
+\end{equation}
+
+Now we will connect this to the partition function $Z$. We have
+\begin{equation}
+  \frac{P}{T^4}=\frac{1}{VT^3}\log Z,
+\end{equation}
+where as usual $V=(aN_s)^3$ and $T=1/aN_\tau$.
+Since we are working with $N_f=2+1$ and the HISQ action we have,
+according to eq.~\eqref{eq:HISQdist},
+\begin{equation}
+  Z=\int\DD U(\det D_l)^{1/2}\,(\det D_s)^{1/4}\,e^{S_G}
+\end{equation}
+and compute expectation values of the observable $X$ as
+\begin{equation}
+  \ev{X}=\frac{1}{Z}\int\DD U(\det D_l)^{1/2}\,(\det D_s)^{1/4}\,e^{S_G}X.
+\end{equation}
+
+We will now derive some formulas which are useful for calculations of this
+sort. You can find even more useful formulas for a system of $N_f$ identical
+fermion flavors in the appendix of Ref.~\cite{allton_thermodynamics_2005}.
+
+\bibliographystyle{unsrtnat}
+\bibliography{bibliography}
