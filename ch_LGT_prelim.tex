@@ -1520,7 +1520,13 @@ something like
   \left|\ev{P}\right|^2\sim\exp\left[-\frac{F_{q\bar{q}}(\infty,T)}{T}\right]. 
 \end{equation}
 Since $F_{q\bar{q}}$ is growing linearly with separation at low temperatures
-due to confinement, the RHS of the above equation is zero.
+due to confinement, the RHS of the above equation is zero\footnote{You may
+wonder how we jumped from $|\ev{P}|^2$ to $\ev{|P|}^2$, since it is generally
+speaking not mathematically permissible to move the absolute value inside the
+expectation value. It turns out that in the infinite volume limit this is
+permissible. The reason is that $\ev{(\Im P)^2}$
+will approach zero in the thermodynamic limit. We
+will demonstrate this in Section~\ref{sec:ploopfss}.}
 Another viewpoint is as follows: $\ev{|P|}$ is zero due to the global
 $\Z_3$ symmetry of the gauge action. In particular one can show
 that the plaquette is unchanged when multiplying all temporal links in a
@@ -1597,7 +1603,7 @@ Hence
       &=\frac{1}{Z}\frac{\partial^2 Z}{\partial h^2}
        -\frac{1}{Z^2}\left(\frac{\partial Z}{\partial h}\right)^2\\
       &=\ev{\big\{\big\}^2}-\ev{\big\{\big\}}^2\\
-      &=N_\sigma^3\left(\ev{\Re P^2}-\ev{\Re P}^2\right).
+      &=N_\sigma^3\left(\ev{(\Re P)^2}-\ev{\Re P}^2\right).
 \end{aligned}\end{equation}
 So from this point of view, the susceptibility of $\Re P$ is what
 falls out the most naturally from the effective Polyakov loop action.
@@ -1700,7 +1706,7 @@ and from the above three equations we finally find
                                              -c(\beta)\right)\right].
 \end{equation}
 
-\subsection{Finite size scaling}
+\subsection{Finite size scaling}\label{sec:ploopfss}
 In this section we discuss some finite volume effects related to the
 Polyakov loop.
 In the confined phase in pure $\SU(3)$, there are three sectors that $P$
@@ -1757,7 +1763,7 @@ $\ev{y^2}$ scales linearly with $1/V$.
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{figs/ImP2_voldepend.pdf}
-  \caption{Volume dependence of the bare $\ev{\Im P^2}$ on $N_\tau=8$
+  \caption{Volume dependence of the bare $\ev{(\Im P)^2}$ on $N_\tau=8$
            lattices with $\beta=6.445$, $m_s/m_l=80$, and $N_\sigma=32$, 40,
            and 56. The linear fit has
            $\chi^2/\text{d.o.f.}=0.11$.}
