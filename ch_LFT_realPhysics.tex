@@ -95,39 +95,65 @@ thermodynamics. You can find even more useful formulas for a system of
 $N_f$ identical
 fermion flavors in the appendix of Ref.~\cite{allton_thermodynamics_2005}.
 For these calculations we will often need the following formula for a
-matrix $A$:
+matrix $M$:
 \begin{theorem}{The exp-trace-log (ETL) formula}{}\label{thm:exptrlog} 
-  $$\det A = \exp \tr \log A$$
+  $$\det M = \exp \tr \log M$$
 \end{theorem}
-\begin{corollary}{}{} Let $M$ be any matrix with $\alpha$ a parameter that 
-$M$ depends on and $y\in\R$. Then
-$$
-  \partial_\alpha(\det M)^y = y(\det M)^y \tr M^{-1}\partial_\alpha M
-$$
-\begin{proof}
-\begin{equation*}\begin{aligned}
-  \partial_\alpha(\det M)^y &= y(\det M)^{y-1}&&\partial_\alpha\det M\\
-      &=  &&\exp\left[\tr\log M\right]\partial_\alpha\tr\log M
-\end{aligned}\end{equation*}
-Then just apply the ETL formula. 
-\end{proof}
-\end{corollary}
+Let $M$ be any matrix with a parameter $\alpha$ that a matrix 
+$M$ depends on and $y\in\R$. Then from the ETL formula
+\begin{equation}\begin{aligned}
+  \partial_\alpha(\det M)^y &= y(\det M)^{y-1}\partial_\alpha\det M\\
+      &= y(\det M)^{y-1}\exp\left[\tr\log M\right]\partial_\alpha\tr\log M\\
+      &= y(\det M)^y \tr M^{-1}\partial_\alpha M.
+\end{aligned}\end{equation}
+This formula is useful in evaluating derivatives of roots of the fermion
+matrix determinant. A final formula useful for matrix derivatives is
+\begin{equation}
+  \partial_\alpha M^{-1} = M^{-1}\left(\partial_\alpha M\right) M^{-1}.
+\end{equation}
 
 Our goal is to eventually take derivatives of expectation values, so from
 eq.~\eqref{eq:HISQev} we will need $\muh$-derivatives of the partition 
-function. Assuming $S_G$ has no $\muh$-dependence, we find
+function. For the following few formulas 
+I will assume arbitrarily many non-degenerate
+fermion flavors\footnote{I find this helpful to get prefactors that appear
+in terms in, e.g., $\chi_2^u$ correct.}. Assuming $S_G$ has no 
+$\muh$-dependence, we find
 \begin{equation}
-  \partial_{\muh}Z =   \frac{1}{2}\,Z\ev{\tr M_l^{-1}\partial_{\muh}M_l}
-                     + \frac{1}{4}\,Z\ev{\tr M_s^{-1}\partial_{\muh}M_s},
+  \partial_{\muh}Z = \frac{1}{4}\sum_f 
+                      Z\ev{\tr D_f^{-1}\partial_{\muh}D_f}
 \end{equation}
 and hence 
-\begin{equation}
+\begin{equation}\label{eq:dZinv}
   \partial_{\muh}Z^{-1} = -Z^{-2}\partial_{\muh}Z
-                        =   \frac{1}{2}\,Z\ev{\tr M_l^{-1}\partial_{\muh}M_l}
-                          + \frac{1}{4}\,Z\ev{\tr M_s^{-1}\partial_{\muh}M_s}.
+                        =\frac{1}{4}\sum_fZ\ev{\tr D_f^{-1}\partial_{\muh}D_f}.
 \end{equation}
+Using eq.~\eqref{eq:dZinv} one quickly derives the following useful formula
+for an observable $O$ calculated on $N_f=2+1$ HISQ configurations:
+\begin{proposition}{}{}\label{prop:dO}
+\begin{equation*} \partial_{\muh}\ev{O}
+       =   \ev{\partial_{\muh}O}
+        -\frac{1}{4}\sum_f\ev{\tr D_f^{-1}\partial_{\muh}D_f}\ev{O}
+         +\frac{1}{4}\sum_f\ev{O\tr D_f^{-1}\partial_{\muh}D_f}
+\end{equation*}
+\end{proposition} 
 
-\subsection{Practical facts about thermodynamic quantities}
+Note that if $\muh=\muh_f$ with $N_f$ degenerate flavors, 
+Proposition~\ref{prop:dO} reduces to eq. (A3)
+in Ref.~\cite{allton_thermodynamics_2005}. Using this Proposition along
+with our other useful formulas, one
+can start expressing generalized susceptibilities in terms of the fermion
+matrix. For example one finds for any flavor $f$
+\begin{equation}\begin{aligned}
+  VT^3\,\chi_2^f =\partial_{\muh_f}^{\,2}\log Z
+                 =\, & \frac{1}{16}\ev{\left(\tr D_f^{-1}D_f'\right)^2}
+                    +\frac{1}{16}\ev{\tr D_f^{-1}D_f'}^2\\
+                   & -\frac{1}{4}\ev{\tr \left(D_f^{-1} D_f'\right)^2}
+                    +\frac{1}{4}\ev{\tr D_f^{-1}D_f''},
+\end{aligned}\end{equation}
+where the prime here indicates a derivative w.r.t. $\muh_f$.
+
+%\subsection{Practical facts about thermodynamic quantities}
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
