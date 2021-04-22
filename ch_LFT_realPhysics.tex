@@ -76,13 +76,58 @@ according to eq.~\eqref{eq:HISQdist},
   Z=\int\DD U(\det D_l)^{1/2}\,(\det D_s)^{1/4}\,e^{S_G}
 \end{equation}
 and compute expectation values of the observable $X$ as
-\begin{equation}
+\begin{equation}\label{eq:HISQev}
   \ev{X}=\frac{1}{Z}\int\DD U(\det D_l)^{1/2}\,(\det D_s)^{1/4}\,e^{S_G}X.
 \end{equation}
 
-We will now derive some formulas which are useful for calculations of this
-sort. You can find even more useful formulas for a system of $N_f$ identical
+Recall that in the grand canonical ensemble, a particle number
+$N$ enters the Boltzmann factor as $\mu N$; so a particle number density 
+is extracted as\footnote{Remember that there is also
+an overall $1/T$ factor in the exponent in natural units.}
+\begin{equation}
+  n = \frac{1}{V}\,\partial_{\muh}\log Z
+\end{equation}
+
+\subsection{Derivative formulas}
+
+We will now derive some formulas which are useful for calculations in QCD
+thermodynamics. You can find even more useful formulas for a system of 
+$N_f$ identical
 fermion flavors in the appendix of Ref.~\cite{allton_thermodynamics_2005}.
+For these calculations we will often need the following formula for a
+matrix $A$:
+\begin{theorem}{The exp-trace-log (ETL) formula}{}\label{thm:exptrlog} 
+  $$\det A = \exp \tr \log A$$
+\end{theorem}
+\begin{corollary}{}{} Let $M$ be any matrix with $\alpha$ a parameter that 
+$M$ depends on and $y\in\R$. Then
+$$
+  \partial_\alpha(\det M)^y = y(\det M)^y \tr M^{-1}\partial_\alpha M
+$$
+\begin{proof}
+\begin{equation*}\begin{aligned}
+  \partial_\alpha(\det M)^y &= y(\det M)^{y-1}&&\partial_\alpha\det M\\
+      &=  &&\exp\left[\tr\log M\right]\partial_\alpha\tr\log M
+\end{aligned}\end{equation*}
+Then just apply the ETL formula. 
+\end{proof}
+\end{corollary}
+
+Our goal is to eventually take derivatives of expectation values, so from
+eq.~\eqref{eq:HISQev} we will need $\muh$-derivatives of the partition 
+function. Assuming $S_G$ has no $\muh$-dependence, we find
+\begin{equation}
+  \partial_{\muh}Z =   \frac{1}{2}\,Z\ev{\tr M_l^{-1}\partial_{\muh}M_l}
+                     + \frac{1}{4}\,Z\ev{\tr M_s^{-1}\partial_{\muh}M_s},
+\end{equation}
+and hence 
+\begin{equation}
+  \partial_{\muh}Z^{-1} = -Z^{-2}\partial_{\muh}Z
+                        =   \frac{1}{2}\,Z\ev{\tr M_l^{-1}\partial_{\muh}M_l}
+                          + \frac{1}{4}\,Z\ev{\tr M_s^{-1}\partial_{\muh}M_s}.
+\end{equation}
+
+\subsection{Practical facts about thermodynamic quantities}
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
