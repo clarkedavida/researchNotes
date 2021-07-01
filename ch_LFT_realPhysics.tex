@@ -74,11 +74,11 @@ where as usual $V=(aN_s)^3$ and $T=1/aN_\tau$.
 Since we are working with $N_f=2+1$ and the HISQ action we have,
 according to eq.~\eqref{eq:HISQdist},
 \begin{equation}
-  Z=\int\DD U(\det D_l)^{1/2}\,(\det D_s)^{1/4}\,e^{S_G}
+  Z=\int\DD U(\det D_l)^{1/2}\,(\det D_s)^{1/4}\,e^{-S_G}
 \end{equation}
 and compute expectation values of the observable $X$ as
 \begin{equation}\label{eq:HISQev}
-  \ev{X}=\frac{1}{Z}\int\DD U(\det D_l)^{1/2}\,(\det D_s)^{1/4}\,e^{S_G}X.
+  \ev{X}=\frac{1}{Z}\int\DD U(\det D_l)^{1/2}\,(\det D_s)^{1/4}\,e^{-S_G}X.
 \end{equation}
 
 Recall that in the grand canonical ensemble, a particle number
@@ -86,7 +86,7 @@ $N$ enters the Boltzmann factor as $\mu N$; so a particle number density
 is extracted as\footnote{Remember that there is also
 an overall $1/T$ factor in the exponent in natural units.}
 \begin{equation}
-  n = \frac{1}{V}\,\partial_{\muh}\log Z
+  \ev{n} = \frac{1}{V}\,\partial_{\muh}\log Z
 \end{equation}
 
 \subsection{Derivative formulas}
@@ -163,11 +163,20 @@ potential $\muh_f$. Similarly for two flavors $f\neq g$
                    & -\frac{1}{16}\ev{\tr D_f^{-1}D_f'}\ev{\tr D_g^{-1}D_g'}.
 \end{aligned}\end{equation}
 Using an $N_f=2+1$ HISQ action with $m_l\equiv m_u=m_d$ along with 
-eq.~\eqref{eq:quark-conservedCharge}, one can then obtain, e.g., $\chi_2^B$ in
-terms of the generalized susceptibilities as
+eq.~\eqref{eq:quark-conservedCharge}, one can figure out how to 
+express\footnote{Note that when carrying out calculations like these, to avoid making mistakes,
+one should always work with non-degenerate flavors, then allow the flavors to be
+degenerate at the end. This way one correctly distinguishes between e.g.
+$\chi_{11}^{ll}$ and $\chi_2^l$.} conserved charge fluctuations in terms of 
+generalized susceptibilities, such as
 \begin{equation}
-  VT^3\,\chi_2^B=\frac{1}{9}\left(2\chi_2^l+\chi_2^s+2\chi_{11}^{ll}+4\chi_{11}^{ls}\right).
+  VT^3\,\chi_2^B=\frac{1}{9}\left(2\chi_2^l+\chi_2^s+2\chi_{11}^{ll}+4\chi_{11}^{ls}\right)
 \end{equation}
+and
+\begin{equation}
+  VT^3\,\chi_2^Q=\frac{1}{9}\left(5\chi_2^l+\chi_2^s-4\chi_{11}^{ll}-2\chi_{11}^{ls}\right).
+\end{equation}
+
 
 %\subsection{Practical facts about thermodynamic quantities}
 
