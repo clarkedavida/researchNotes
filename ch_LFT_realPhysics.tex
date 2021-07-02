@@ -71,22 +71,29 @@ Now we will connect this to the partition function $Z$. We have
   \frac{P}{T^4}=\frac{1}{VT^3}\log Z,
 \end{equation}
 where as usual $V=(aN_s)^3$ and $T=1/aN_\tau$.
-Since we are working with $N_f=2+1$ and the HISQ action we have,
+When there are $N_f$ flavors and when we use the HISQ action we have,
 according to eq.~\eqref{eq:HISQdist},
 \begin{equation}
-  Z=\int\DD U(\det D_l)^{1/2}\,(\det D_s)^{1/4}\,e^{-S_G}
+  Z=\int\DD U\prod_f (\det D_f)^{1/4}\,e^{-S_G}
 \end{equation}
 and compute expectation values of the observable $X$ as
 \begin{equation}\label{eq:HISQev}
-  \ev{X}=\frac{1}{Z}\int\DD U(\det D_l)^{1/2}\,(\det D_s)^{1/4}\,e^{-S_G}X.
+  \ev{X}=\frac{1}{Z}\int\DD U\prod_f(\det D_f)^{1/4}\,e^{-S_G}X.
 \end{equation}
 
 Recall that in the grand canonical ensemble, a particle number
 $N$ enters the Boltzmann factor as $\mu N$; so a particle number density 
-is extracted as\footnote{Remember that there is also
+for a quark flavor $f$ is extracted as\footnote{Remember that there is also
 an overall $1/T$ factor in the exponent in natural units.}
+\begin{equation}\label{eq:nfdensity}
+  \frac{1}{V}\,\partial_{\muh_f}\log Z
+  =\frac{1}{VZ}\,\partial_{\muh} Z
+  =\ev{n_f}.
+\end{equation}
+In the staggered formulation, all the dependence on $\muh_f$ will be
+hidden in $D_f$, so for $f\neq g$ we get
 \begin{equation}
-  \ev{n} = \frac{1}{V}\,\partial_{\muh}\log Z
+  \partial_{\muh_f}D_g = 0.
 \end{equation}
 
 \subsection{Derivative formulas}
@@ -133,7 +140,12 @@ and
 \begin{equation}\label{eq:dlogZ}
   \partial_{\muh}\log Z=\frac{1}{4}\sum_f\ev{\tr D_f^{-1}\partial_{\muh}D_f}.
 \end{equation}
-Using eq.~\eqref{eq:dZinv} one quickly derives the following useful formula
+Comparing eq.~\eqref{eq:dlogZ} with eq.~\eqref{eq:nfdensity} we find in
+the staggered formulation
+\begin{equation}
+  n_f=\frac{1}{4V}\tr D_f^{-1}\partial_{\muh_f}D_f.
+\end{equation} 
+Finally using eq.~\eqref{eq:dZinv} one quickly derives the following useful formula
 for an observable $O$ calculated on HISQ configurations:
 \begin{proposition}{}{}\label{prop:dO}
 \begin{equation*} \partial_{\muh}\ev{O}
