@@ -1,0 +1,8 @@
+(4+0j) 0j
+0j (2+0j)
+(1+0j) 0j
+0j (1+0j)
+Traceback (most recent call last):
+  File "exampleCode/SU2.py", line 55, in <module>
+    print(g.__e00)
+AttributeError: 'SU2' object has no attribute '__e00'
