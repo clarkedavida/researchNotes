@@ -1,9 +1,11 @@
 #include <string>
 #include <iostream>
 
+
 void narrate(std::string sentence) {
   std::cout << sentence << std::endl;
 }
+
 class CAT {
 public:
 

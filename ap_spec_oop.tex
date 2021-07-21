@@ -64,13 +64,15 @@ most modern software developers would agree.
 Probably the best way to learn is through an example. To see the basics
 of OOP in action, we will implement a \texttt{CAT} class, and 
 introduce some new OOP jargon and concepts along the way.
+The example code definitely works for C++14~\cite{cppDocumentation},
+but it likely also works for earlier standards.
 
 The first function we define, \texttt{narrate}, is not part of the class;
 actually it is there to make it easier to print to screen, which is
 an example of abstraction. We see that it made the code easier to
-read and reduced duplication.
+read and reduced duplication.\\
 
-\lstinputlisting[firstline=1,lastline=39]{exampleCode/cat.cpp}
+\lstinputlisting[firstline=1,lastline=41]{exampleCode/cat.cpp}
 
 The \texttt{CAT} class begins with the \texttt{public} keyword, which
 is a statement about accessibility. Anything that falls under the
@@ -84,9 +86,9 @@ are called {\it attributes}. The next group of two functions are
 the {\it constructor} and the {\it destructor}, which I will explain
 shortly. Finally the last group of four \texttt{void} functions are 
 called {\it methods}. It is basically correct to think of a class as a
-collection of attributes and methods acting on them. 
+collection of attributes and methods acting on them.\\
 
-\lstinputlisting[firstline=40, lastline=52]{exampleCode/cat.cpp}
+\lstinputlisting[firstline=42, lastline=54]{exampleCode/cat.cpp}
 
 To understand the constructor and destructor, let us turn to our main
 code where we will use this class. In the first line, we declare a
@@ -106,7 +108,7 @@ the string ``Chooky" is being fed into this argument. A constructor does
 not have to take an argument, or even explicitly do anything, but often
 it is useful to have a constructor set the attributes to some default values.
 That is what the constructor does in this case, and it also tells the
-user that it instantiated a \texttt{CAT} object.
+user that it instantiated a \texttt{CAT} object.\\
 
 \lstinputlisting[language={}]{exampleCode/catOutput.txt}
 
@@ -127,10 +129,8 @@ Turning back to the main, we see that we can access attributes of
 methods of \texttt{cat} like \texttt{speak()}. This is possible because
 we made these public attributes and methods. Note that inside the class,
 it is enough to use the attribute or method name by itself. Outside the
-class, i.e. inside the main, we have to use the object as an intermediary.
-
-\lstinputlisting[firstline=40, lastline=49]{exampleCode/scope.cpp}
-\lstinputlisting[language={}]{exampleCode/scopeOutput.txt}
+class, i.e. inside the main, we have to use the object as an 
+intermediary.
 
 Hopefully this is enough for you to get at least an intuition for
 what OOP is, how it works, and why someone would want to use it. These
@@ -140,13 +140,17 @@ Besides the advantages of being object-oriented, C++ also has many
 features that make it valuable for high-performance computing.
 For example you can manipulate exactly where and how objects
 are stored in memory. There are lots of good references for OOP
-in C++ out there, but a good start might be Ref.~\cite{tp:cpp}.
+in C++ out there, but a good start might be Ref.~\cite{tp:cpp}.\\
+
+\lstinputlisting[firstline=40, lastline=49]{exampleCode/scope.cpp}
+\lstinputlisting[language={}]{exampleCode/scopeOutput.txt}
 
 \section{OOP in Python}
 
 We continue by discussing OOP in Python. Python is a rather friendly language
 and it is popular for scientific programming, so you can find lots of useful
-tutorials online, for instance here \cite{pythonOOP}.
+tutorials online, for instance here~\cite{pythonOOP}. We will use
+Python3~\cite{python3}.
 
 In this section we will demonstrate
 a couple other important features of the OOP paradigm. In particular we will
@@ -159,8 +163,7 @@ Inheritance is useful organizationally as it helps you think of some class
 as a special case of a more general class. Furthermore it reduces code
 repetition, since the child has access to all methods and attributes defined in
 the parent. Operator overloading enhances readability, for example by
-helping your code more closely mirror mathematical notation.
-
+helping your code more closely mirror mathematical notation.\\
 
 \lstinputlisting[language=Python,firstline=1,lastline=31]{exampleCode/cat.py}
 
@@ -173,7 +176,12 @@ C++ has; indeed all attributes and methods in Python OOP are effectively
 public\footnote{You can obfuscate attributes by leading with a double 
 underscore \texttt{\_\_} so that it is not as easily accessible. Still, there 
 are ways to access such attributes.}.
-The constructor and destructor are identified with
+The constructor and destructor\footnote{Python does not treat scope the same
+way as C++, so an object is not destroyed automatically when you e.g.
+exit a \texttt{for} loop. Automatic object destruction in Python 
+happens through \index{garbage collection}
+its {\it garbage collector}, for example when the program terminates,
+or when an object loses its reference by being reassigned.} are identified with
 \texttt{\_\_init\_\_} and \texttt{\_\_del\_\_}, respectively. All of
 \texttt{\_\_init\_\_}, \texttt{\_\_del\_\_}, and \texttt{\_\_doc\_\_} 
 are examples of
@@ -185,7 +193,7 @@ to point out are that methods always take the \texttt{self}\footnote{The
 the called method.} reference as 
 the first argument, and that this reference is always required to
 interact with class methods and attributes, even within the class itself.
-%Some example output code using the \texttt{CAT} class is shown below.
+Some example output code using the \texttt{CAT} class is shown below.\\
 
 \lstinputlisting[language=Python,firstline=43,lastline=55]{exampleCode/cat.py}
 \lstinputlisting[language={}]{exampleCode/pythonCatOutput.txt}
@@ -202,30 +210,29 @@ multiple arguments to the definition, e.g. \texttt{MEANCAT(CAT,MAMMAL)}.}.
 The redefinition of the \texttt{speak()} method
 in \texttt{MEANCAT} overrides that of its parent, \texttt{CAT}. One last
 feature to point out is the use of the \texttt{del} keyword, which lets you
-call an object's destructor.
+call an object's destructor.\\
 
 \lstinputlisting[language=Python,firstline=33,lastline=41]{exampleCode/cat.py}
 \lstinputlisting[language=Python,firstline=57,lastline=66]{exampleCode/cat.py}
 \lstinputlisting[language={}]{exampleCode/meanCatOutput.txt}
 
 Finally we will have a look at operator overloading. For this example we
-will create a class for a simple math object of interest to high energy
-physics: the $\SU(2)$ matrix.
+will create a (rudimentary and wildly incomplete) class for a simple math 
+object of interest to high energy physics: the $\SU(2)$ matrix.\\
 
 \lstinputlisting[language=Python,firstline=1,lastline=42]{exampleCode/SU2.py}
 
 Here the attributes are the elements of the matrix. 
 I have opted to use double underscores \texttt{\_\_} in front of
 the attribute names. As mentioned in an earlier footnote, this hides the
-attributes from the user as shown below:
-
-\lstinputlisting[language=Python,firstline=54,lastline=55]{exampleCode/SU2.py}
-\lstinputlisting[language={},firstline=5,lastline=8]{exampleCode/SU2Output.txt}
-
+attributes from the user as shown below.
 Hiding these attributes is important for the \texttt{SU2} class, because the
 elements should always be \texttt{complex}, and I want to make sure the
 user cannot accidentally change the type. The \texttt{complex} type is
 enforced here through the \texttt{setElement} method.
+\pagebreak
+\lstinputlisting[language=Python,firstline=53,lastline=55]{exampleCode/SU2.py}
+\lstinputlisting[language={},firstline=5,lastline=8]{exampleCode/SU2Output.txt}
 
 To use operator overloading, each binary operator has a special function name.
 In the \texttt{SU2} class example, we overloaded the + operator. Its special
@@ -236,8 +243,9 @@ In our example, we have edited the \texttt{\_\_str\_\_} operator, which
 controls how an \texttt{SU2} object is printed to screen.
 
 Below we give some quick examples of this \texttt{SU2} class in use. Note that
-the copy constructor works already as one would expect without having to
-do any extra programming.
+the = sign here is not a copy constructor; instead both \texttt{g} and
+\texttt{h} are references to the same \texttt{SU2} object. This means that
+if you change \texttt{g}, \texttt{h} will change as well. Be careful!\\ 
 
 \lstinputlisting[language=Python,firstline=46,lastline=52]{exampleCode/SU2.py}
 \lstinputlisting[language={},firstline=1,lastline=4]{exampleCode/SU2Output.txt}

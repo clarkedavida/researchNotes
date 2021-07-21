@@ -12,19 +12,18 @@ class SU2:
     self.__e01=complex(0.,0.)
     self.__e10=complex(0.,0.)
     self.__e11=complex(1.,0.)
-
   def __init__(self):
     pass 
 
   def setElement(self, i, j, z):
     if i==0 and j==0:
-      self.__e00=z+0j
+      self.__e00=complex(z)
     elif i==0 and j==1:
-      self.__e01=z+0j
+      self.__e01=complex(z)
     elif i==1 and j==0:
-      self.__e10=z+0j
+      self.__e10=complex(z)
     elif i==1 and j==1:
-      self.__e11=z+0j
+      self.__e11=complex(z)
     else:
       print("setElement: ERROR--invalid component.")
       exit(-1)
