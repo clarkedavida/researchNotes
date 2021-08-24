@@ -2,18 +2,18 @@ class SU2:
 
   "SU2 group elements as matrices."
 
-  __e00=complex(1.,0.)
-  __e01=complex(0.,0.)
-  __e10=complex(0.,0.)
-  __e11=complex(1.,0.)
+  def __init__(self):
+    self.__e00=complex(1.,0.)
+    self.__e01=complex(0.,0.)
+    self.__e10=complex(0.,0.)
+    self.__e11=complex(1.,0.)
 
   def one(self):
     self.__e00=complex(1.,0.)
     self.__e01=complex(0.,0.)
     self.__e10=complex(0.,0.)
     self.__e11=complex(1.,0.)
-  def __init__(self):
-    pass 
+
 
   def setElement(self, i, j, z):
     if i==0 and j==0:

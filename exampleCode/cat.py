@@ -2,11 +2,10 @@ class CAT:
 
   "A class for good cats."
 
-  _isHungry = True
-  _stomachContents = ""
-
   def __init__(self, name):
     self._name = name
+    self._isHungry = True
+    self._stomachContents = ""
     print("And the Lord said 'Let there be "+self._name+"'.")
 
   def __del__(self):

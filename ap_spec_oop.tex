@@ -195,7 +195,7 @@ the first argument, and that this reference is always required to
 interact with class methods and attributes, even within the class itself.
 Some example output code using the \texttt{CAT} class is shown below.\\
 
-\lstinputlisting[language=Python,firstline=43,lastline=55]{exampleCode/cat.py}
+\lstinputlisting[language=Python,firstline=44,lastline=55]{exampleCode/cat.py}
 \lstinputlisting[language={}]{exampleCode/pythonCatOutput.txt}
 
 To demonstrate inheritance, we consider a new kind of \texttt{CAT}, a
@@ -212,8 +212,8 @@ in \texttt{MEANCAT} overrides that of its parent, \texttt{CAT}. One last
 feature to point out is the use of the \texttt{del} keyword, which lets you
 call an object's destructor.\\
 
-\lstinputlisting[language=Python,firstline=33,lastline=41]{exampleCode/cat.py}
-\lstinputlisting[language=Python,firstline=57,lastline=66]{exampleCode/cat.py}
+\lstinputlisting[language=Python,firstline=32,lastline=41]{exampleCode/cat.py}
+\lstinputlisting[language=Python,firstline=56,lastline=66]{exampleCode/cat.py}
 \lstinputlisting[language={}]{exampleCode/meanCatOutput.txt}
 
 Finally we will have a look at operator overloading. For this example we
@@ -230,7 +230,7 @@ Hiding these attributes is important for the \texttt{SU2} class, because the
 elements should always be \texttt{complex}, and I want to make sure the
 user cannot accidentally change the type. The \texttt{complex} type is
 enforced here through the \texttt{setElement} method.
-\pagebreak
+
 \lstinputlisting[language=Python,firstline=53,lastline=55]{exampleCode/SU2.py}
 \lstinputlisting[language={},firstline=5,lastline=8]{exampleCode/SU2Output.txt}
 
