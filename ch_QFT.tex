@@ -16,10 +16,11 @@ Figure~\ref{fig:SM} gives a schematic overview of the SM.
 The SM has a long history of experimental confirmations culminating
 in the 2012 discovery of the Higgs boson by the ATLAS and CMS
 experiments~\cite{aad_observation_2012,chatrchyan_observation_2012}.
+% TODO: maybe it would be fun to include a history here
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.95\linewidth]{figs/SM.png}
+  \includegraphics[width=0.80\linewidth]{figs/SM.png}
   \caption{Summary of elementary SM particles. The first three columns give
            the three generations of matter particles. Image taken
            from the Physics Institute at University of 
@@ -30,9 +31,75 @@ experiments~\cite{aad_observation_2012,chatrchyan_observation_2012}.
 The theoretical framework underlying the SM is an example of a Quantum 
 Field Theory (QFT). QFTs are consistent with both quantum mechanics and
 relativity. Lattice gauge theories are a kind of QFT; therefore it is
-important for the reader to know a little bit about them.
+important for the reader to know a little bit about them. There are a lot
+of different resources one can use to learn about QFT; for example when I was a
+grad student I used Peskin and Schroeder~\cite{peskin_introduction_1995}
+and Srednicki~\cite{srednicki_quantum_2007}.
+Nowadays there are also some very high quality lectures on YouTube,
+for instance a series by Tong~\cite{tongQFT}, which I found had some other nice
+introductory remarks.
+
+\section{Introductory remarks about QFT} 
+
+Here I just want to list some things that seem to be true about the universe,
+and therefore our underlying theory should reflect these things. For example:
+\begin{enumerate}
+  \item Causal influences seem to be {\it local}, i.e. there is no
+        action-at-a-distance.
+  \item Elementary particles are completely and perfectly indistinguishable.
+\end{enumerate}
+One way to make sense of these two points is to assume the existence of 
+{\it fields},\index{field} math objects whose pre-image is all space-time.
+That the field value depends on its space-time coordinate allows it to be local,
+and all elementary particles are viewed as excitations of the field. Since all
+particles are excitations of the same object, it is therefore unsurprising that
+they would be indistinguishable.
+
+Related to point (1) above, and as already mentioned in the introduction, we
+would like our theories to have this property:
+\begin{enumerate}
+  \setcounter{enumi}{2}
+  \item QFT should be consistent with special relativity.
+\end{enumerate}
+Demand (3) leads in part to the Klein-Gordon and Dirac equations, and from these
+we will find that particle number is not conserved.
+A fundamental QFT length scale can be heuristically derived from this statement 
+as follows: Consider an elementary particle in a box of length $L$. By the 
+uncertainty principle, we have
+\begin{equation}
+  \Delta p\gtrsim \hbar/2L,
+\end{equation}
+which means according to relativity,
+\begin{equation}
+  \Delta E\gtrsim \hbar c/2L.
+\end{equation}
+If the energy uncertainty is large enough, i.e. large enough to support a
+particle-antiparticle pair, we conclude
+\begin{equation}
+  \Delta E\approx 2mc^2 \gtrsim\hbar c/2L.
+\end{equation}
+Appearing in this equation is the {\it Compton wavelength}\footnote{I guess if
+one uses $\hbar$ instead of $h$ this is rather the {\it reduced} Compton
+wavelength. But I somehow always work using $\hbar$ instead of $h$, so I opted
+to abuse this convention a little.}\index{wavelength!Compton}
+$\lambda_c=\hbar/mc$. This delivers an interpretation for the Compton wavelength:
+\begin{equation}
+  L \gtrsim \lambda_c/4
+\end{equation}
+is a distance threshold\footnote{I have also seen $\lambda_c/2$ as the threshold,
+which comes when you think the energy uncertainty only has to be large enough to
+support a single particle. But in QFT particles are always created from the
+vacuum in particle-antiparticle pairs due to conservation laws.} below which 
+you have to worry about QFT. Below this scale, you are likely to detect
+particle-antiparticle pairs of the species you are examining, which you cannot
+distinguish, and it becomes difficult to speak a unique particle at all. In that
+sense the Compton wavelength gives a characteristic length scale for a
+particle. One can compare this with the particle's de Broglie wavelength
+\index{wavelength!de Broglie}$\lambda_v=\hbar/mv$, where it behaves in a well-defined way as a wave.
+
 
 \section{The principle of stationary action}
+
 
 This section follows a fairly well known and delightful lecture by Feynman
 \cite{caltech}.
