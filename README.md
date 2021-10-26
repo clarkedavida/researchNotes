@@ -3,4 +3,4 @@ This "book" is a collection of research notes that I made while researching in p
 
 You can look into the 0_researchnotes.tex files to see what packages this uses, but I think if you install texlive-full, you should have all the packages you need.
 
-This compiles with ./makelatex
+This compiles with ./makelatex. Feel free to make an Issue if you have any problems!
