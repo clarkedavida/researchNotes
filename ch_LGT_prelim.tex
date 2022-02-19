@@ -198,7 +198,14 @@ sums
   \int\frac{d^4p}{(2\pi)^4}\to
   \frac{1}{a^4N_1N_2N_3N_4}\sum_p. 
 \end{equation}
-Putting QFT on a lattice regularizes the theory. 
+Putting QFT on a lattice regularizes\footnote{Maybe it is worth
+emphasizing here that this is a non-perturbative regularization. 
+In particular, when one normally regularizes in QFT, it's because
+one encounters some divergence when doing a perturbative
+expansion. One then defines a regulator to parameterize this
+divergence and tries to figure out which Feynman diagrams 
+cancel it. In the case of LGT, the regulator is not tied to
+any perturbative expansion.} the theory. 
 To see this, consider a field $\phi$ defined on the lattice. 
 Its Fourier transform
 \begin{equation}
@@ -417,13 +424,24 @@ The coefficient of the second term is called the {\it beta function},
 \begin{equation}\label{eq:betafunction}\index{beta function}
   \beta\equiv-\frac{\partial g}{\partial\log a},
 \end{equation}
-and it measures how the bare coupling $g$ must change when $a$ changes.
+and it measures how the bare
+coupling $g$ must change when $a$ changes.
 The use of the symbol $\beta$ here is unfortunately a convention; it
 is not to be confused with the coupling constant. It is usually clear
-from context what is meant. In practice $\beta$ can be determined
-from perturbation theory. An explicit dependence of $g$ on $a$ is then
-determined by solving the differential equation~\eqref{eq:betafunction}. 
+from context what is meant. 
 
+Usually in QFT one likes to label
+a coupling that changes with some cutoff as a ``renormalized" coupling.
+But in this case it really is the bare coupling that is changing with $a$.
+One way to see this is that $a$ is not corresponding to any real-world
+observable; the lattice spacing is just a calculational crutch. If changes
+in a crutch need to be compensated by changes in another quantity,
+the other quantity better also be a crutch, and indeed, bare quantities
+are the ones that aren't measurable.
+
+In practice $\beta$ can be determined
+from lattice perturbation theory. An explicit dependence of $g$ on $a$ is then
+determined by solving the differential equation~\eqref{eq:betafunction}. 
 For example the pure $\SU(N_c)$ lattice beta function has been calculated 
 up to 3-loop order in perturbation theory. It is given by
 \begin{equation}\label{eq:blatgs}
@@ -497,7 +515,7 @@ terms, we find
             +\order{1/\log\left(a^2\Lambda_L^2\right)}.
 \end{equation}
 Two consequences are that the coupling $g(a)$ is driven to zero
-as $a$ approaches zero (UV cutoff), which is known as 
+as $a$ approaches zero, which is known as 
 \index{asymptotic freedom}{\it asymptotic freedom}, while at low energies,
 $g(a)$ becomes too large for reliable perturbative analysis.
 
