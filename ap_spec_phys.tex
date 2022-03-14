@@ -42,10 +42,12 @@ In the simplest case we have $N_f=2$ and consider the lightest quarks
 $u$ and $d$. The $\SU(2)$ isospin symmetry is only approximate because 
 the $u$ and $d$ quarks have slightly different masses. The isospin 
 doublet then has a $u$ component and a $d$ component. Generally with
-$N_f$ flavors of fermion, the symmetry group is $\SU(N_f)$ and we
-form $N_f$ component multiplets in flavor space, one component per flavor.
+$N_f$ flavors of fermion with degenerate masses, the symmetry group is 
+$\SU(N_f)$ and we
+form $N_f$-component multiplets in flavor space, one component per flavor.
 
-Let's introduce the $s$ quark and do the $N_f=3$ case.
+Let's introduce the $s$ quark, assuming it has the same mass as the
+$u$ and $d$ quarks, and do the $N_f=3$ case.
 Using the Pauli matrices and the fact that $\SU(3)$ has 8 generators, you can
 figure out what the Gell-Mann matrices are. We will say that $u$, $d$, and $s$
 are eigenvectors of isospin and write
@@ -132,33 +134,28 @@ The new isospin and total isospin operators are
 In the case of $\SU(2)$, the operators $I_i$ do not commute, and therefore are
 not simultaneously diagonalizable. For $\SU(3)$ in the Gell-Mann basis,
 $I_3$ and $I_8$ are both diagonal, so they correspond to compatible
-observables. The observable we associate with $I_8$ is rescaled as
+observables. The observable $I_3$ is itself sometimes referred to
+as isospin or weak isospin. The observable we associate with $I_8$ is rescaled as
 \begin{equation}
   Y=\frac{1}{\sqrt{3}}\lambda_8,
 \end{equation}
-and $Y$ is called the {\it hypercharge}.
+and $Y$ is called the {\it hypercharge}.\index{hypercharge} 
+We can quickly obtain the isopins and hypercharges of
+our lightest quarks: 
+\begin{equation}\begin{aligned}
+\hat{I_3}\,u =\frac{1}{2}u ~~~ &\text{and}~~~\hat{Y}u=\frac{1}{3}u,\\
+\hat{I_3}\,d =-\frac{1}{2}d ~~~ &\text{and}~~~\hat{Y}d=\frac{1}{3}d,\\
+\hat{I_3}\,s = 0           ~~~ &\text{and}~~~\hat{Y}s=-\frac{2}{3}s.
+\end{aligned}\end{equation}
+One can summarize this pattern of conserved charges in the following formula:
 \begin{theorem}{Gell-Mann-Nishijima Formula}{}
 \index{Gell-Mann-Nishijima formula}
-  The electric charge Q of a particle is related to its isospin and
+  The electric charge $Q$ of a particle is related to its isospin and
   hypercharge by
   \begin{equation*}
     Q=I_3+\frac{1}{2}Y
   \end{equation*}
 \end{theorem}
-%The Higgs doublet has its hypercharge fixed to $Y=1$. Since the first and
-%second components have $I_3=\pm1/2$, respectively, we can deduce from this
-%formula that the first component has $Q=1$ and the second component has $Q=0$.
-
-%The fact that $\SU(3)$ is also the symmetry corresponding to color means that
-%much of the same discussion above also holds for gluons. Instead of $u$, $d$,
-%and $s$, we have the colors red ($r$), green ($g$), and blue ($b$).
-%The {\it colorless} state is just the color singlet
-%\begin{equation}
-%  r\bar{r}+b\bar{b}+g\bar{g}
-%\end{equation}
-%(up to normalization factors).
-%Note that the colorless state is a matrix because the antiparticle bar will
-%transpose these vectors, so that this state is a sum of outer products.
 
 \section{Spontaneous symmetry breaking}\label{sec:ssb}
 \index{spontaneous symmetry breaking}
