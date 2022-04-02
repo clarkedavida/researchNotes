@@ -3,6 +3,7 @@
 LGT is introduced in Section~\ref{sec:LGT}
 by reviewing local gauge symmetries in QFT, regularizing a pure
 gauge theory on the lattice, discussing the true continuum limit,
+\index{limit!continuum}
 and introducing finite temperature. In Section~\ref{sec:refscales}, 
 reference scales are defined, and systematic error within the context
 of scale setting is explored. Topological observables are introduced
@@ -13,13 +14,13 @@ are considered.
 
 Physically, QFT is defined on a 4D Minkowskian space-time. In LGT 
 the 4D space-time is instead equipped with a Euclidean metric, which is 
-related to the original metric via a {\it Wick rotation}
+related to the original metric via a \index{rotation!Wick}{\it Wick rotation}
 \begin{equation}
   t\to i\tau.
 \end{equation} 
 Therefore we will work with a Euclidean metric
 and use downstairs summation indices. 
-We will also use {\it natural units}\index{natural units}
+We will also use {\it natural units}\index{units!natural}
 $\hbar=c=k_B=1$. In natural units, every physical
 quantity has units of some power of length. For example
 time has units of length, while energy, mass, and momentum
@@ -373,7 +374,12 @@ $S_G=\int d^4x\,\Lagr_G$ when one identifies
 Because of this identification, $\beta$ is also (besides $g$) sometimes 
 referred to as the \index{coupling constant}{\it coupling constant}.
 
-We close this subsection with a remark about confinement.
+
+\subsection{Heavy quark free energy}\label{sec:hqfe}
+
+
+The lattice formulation gives an explanation for confinement,
+which we will explain here.
 Let $\mathcal{C}_{RT}$ be a rectangular loop on the
 lattice of side lengths $R$ and $T$ and let $W(\mathcal{C}_{RT})$ be the
 corresponding Wilson loop. Then the {\it static quark potential}
@@ -394,8 +400,10 @@ simulations~\cite{montvay_quantum_1994}.
 Thus we see one of the major successes
 of LGT: it proffers an explanation of confinement.  
 
+
 \subsection{Renormalization group and the continuum limit}
-\index{renormalization group}
+\index{renormalization!group}\index{limit!continuum}
+
 
 In the limit $a\to0$, physical quantities $P$ should agree with experimental
 results, which means they should become independent of $a$, ``forgetting"
@@ -584,7 +592,9 @@ temperature} is seen to be
   T=\frac{1}{aN_\tau}.
 \end{equation}
 
-\section{Reference scales}\label{sec:refscales}\index{scale setting}
+
+\section{Scale setting}\label{sec:refscales}\index{scale!setting}
+
 
 Lattice computations deliver dimensionless quantities $L=\ell/a$, where 
 $\ell$ is some physical length. The requirement that the theory has a 
@@ -594,14 +604,14 @@ $\ell_i$ and $\ell_j$
   r_{ij}\equiv\frac{\ell_i}{\ell_j}=\lim_{a\to 0}\frac{L_i}{L_j}
         \equiv\lim_{a\to 0}R_{ij},
 \end{equation}
-i.e. in the continuum limit, length ratios attain their
-physical values.
+i.e. in the continuum limit, length ratios attain their physical values.
 Continuum limit extrapolations of a particular length $\ell_i$ therefore
 depend on how one determines $R_{ij}$ and on the choice of the
-{\it reference scale} or {\it reference length} $\ell_j$. 
+{\it reference scale} or {\it reference length}\index{scale!reference} $\ell_j$. 
 Choosing a reference scale to use for continuum limit extrapolation
 is called {\it scale setting}, and commonly one says
 ``we set the scale with $\ell_j$."
+
 
 Calculation of the constants $R_{ij}$ is prone to nontrivial statistical and
 systematic errors because they come from MCMC simulations performed on 
@@ -613,7 +623,10 @@ discussed in Section~\ref{sec:sysa}, while the
 discussion of statistical error is postponed to 
 Chapter~\ref{ch:MCMC}. We begin by introducing some reference scales. 
 
-\subsection{Defining reference scales}\label{sec:definescales}
+
+
+\subsection{Deconfinement temperature}
+
 
 One choice of scale in this project is the {\it deconfining phase 
 transition temperature}\index{deconfinement temperature}
@@ -647,10 +660,14 @@ volume limit. It is therefore necessary to extrapolate, for fixed $N_{\tau}$,
 the dependence of $\beta_c(N_\tau)$ on the spatial size $N_s$ to the
 infinite volume limit $N_s\to\infty$. Inverting $\beta_c(N_\tau)$ gives
 our first length scale $N_\tau(\beta)$, which we call the
-{\it deconfinement scale}.
+\index{scale!deconfinement}{\it deconfinement scale}.
+
+
+\subsection{Gradient and cooling scales}
+
 
 A reference scale due to L\"uscher \index{gradient flow}
-\cite{luscher_properties_2010} involves using 
+\cite{luscher_properties_2010}\index{scale!gradient} involves using 
 the {\it gradient flow}. We begin by introducing a
 fictitious {\it flow time} $t$ and evolve the system
 according to the evolution equation
@@ -727,13 +744,15 @@ eq.~\eqref{eq:cool} until
 \begin{equation}
   y=t_c^2 E(t_c),
 \end{equation}
-and a {\it cooling scale}\index{cooling!scale} is given by
+and a {\it cooling scale}\index{scale!cooling} is given by
 \begin{equation}\label{eq:u}
   u(\beta)=\sqrt{t_c(\beta)}.
 \end{equation}
 
-\subsection{Continuum limit and finite size scaling}
+
+\subsection{The scaling region and the continuum limit}
 \label{sec:sysa}
+
 
 One desires to know the ratio $r_{ij}$ of two scales in
 the continuum limit. In principle this could be estimated by simulating
@@ -765,11 +784,13 @@ powers of logarithms~\cite{montvay_quantum_1994}) where $p$
 depends on the lattice discretization.
 The Wilson action in particular has $p=2$.
 Equation~\eqref{eq:stdscaling} suggests a two-parameter fit of the form
-\begin{equation}\label{eq:stdscalingfit}\index{standard scaling}
+\begin{equation}\label{eq:stdscalingfit}
   R_{ij}=r_{ij}+c_{ij}\,\left(\frac{1}{L_j}\right)^2,
 \end{equation}
 where $r_{ij}$ and $c_{ij}$ are the 
-fit parameters. We will refer to this behavior as {\it standard scaling}. 
+fit parameters. We will refer to this behavior 
+\index{scaling!standard}
+as {\it standard scaling}. 
 
 Another possibility for continuum limit extrapolation uses
 the asymptotic scaling relation~\eqref{eq:latRGEsoln}
@@ -824,11 +845,12 @@ The continuum limit estimate $r_{ij}$ also depends on $m$ and $n$, but
 we have suppressed these indices for clearer comparison with
 the standard scaling fit~\eqref{eq:stdscalingfit}. We will refer
 to the behavior of eq.~\eqref{eq:lenasf} or \eqref{eq:ascalingfit}
-as \index{asymptotic scaling}{\it asymptotic scaling}.
+as \index{scaling!asymptotic}{\it asymptotic scaling}.
 
 If we carry out a naive continuum limit without changing the
 extension of the lattice, its physical volume collapses to zero.
-Ideally, calculations would be performed in the {\it thermodynamic limit},
+Ideally, calculations would be performed in 
+\index{thermodynamic!limit} the {\it thermodynamic limit},
 where $N_s\to\infty$ and $N_\tau\to\infty$, and then take the limit
 $a\to0$. In practice, the infinite volume observable is determined
 by simulating at fixed $\beta$ on lattices of several sizes, then
