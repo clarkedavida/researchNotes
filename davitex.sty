@@ -38,6 +38,8 @@
   }
   {\mathinner{\mathcal{D}\IfNoValueTF{#1}{}{^{#1}}#2} \IfNoValueTF{#3}{}{(#3)}}
 }
+
+
   % Probability
 \newcommand{\pr}[1]{\operatorname{P}\left(#1\right)}
 \newcommand{\prt}[1]{\operatorname{T}\left(#1\right)}
@@ -49,6 +51,8 @@
 \DeclareMathOperator{\Cov}{cov}
 \DeclareMathOperator{\variance}{var}
 \newcommand{\chidof}{\chi^2/\text{d.o.f.}}
+
+
   % Physics
 \newcommand{\Lagr}{\mathcal{L}} 
 \newcommand{\MS}{\overline{\text{MS}}}
@@ -63,23 +67,33 @@
 \newcommand{\Dleft}{\overleftarrow{D\strut}}
 \newcommand{\pbp}{\bar{\psi}\psi}         % chiral condensate
 \newcommand{\muh}{\hat{\mu}}              % mu/T
+\newcommand{\plaq}{U^\square}
+
   % Group and algebra names
 \renewcommand{\O}{\text{O}}
 \DeclareMathOperator{\SU}{SU}
 \DeclareMathOperator{\U}{U}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\su}{\mathfrak{su}}
+
+
   % Nice looking exists and forall
 \DeclareMathOperator{\Exists}{\exists}
 \DeclareMathOperator{\Forall}{\forall}
+
+
   % Sine and cosine shorthand
 \DeclareMathOperator{\s}{s}
 \DeclareMathOperator{\co}{c}
+
+
   % Corporate branding
 \newcommand{\simulat}{\texttt{SIMULATeQCD}}
 
+
   % Some other useful stuff
 \newcommand{\tinysp}{\hspace{0.1mm}}
+
 
 % This section defines colvec, which lets me make column
 % vectors more easily. \colvec{N}{a1}{a2}...{aN}

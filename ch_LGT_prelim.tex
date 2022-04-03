@@ -258,7 +258,7 @@ gauge transformations do not (they live on the sites). A \index{plaquette}
 smallest Wilson loop, an oriented square of side length $a$ with 
 corresponding link variable 
 \begin{equation}
-  U^\square_{\mu\nu}(x)=U_\mu(x)U_\nu(x+a\hat{\mu})
+  \plaq_{\mu\nu}(x)=U_\mu(x)U_\nu(x+a\hat{\mu})
                         U^\dagger_\mu(x+a\hat{\nu})U^\dagger_\nu(x).
 \end{equation}
 Every link variable in 4D LGT is part of six plaquettes. The remaining
@@ -287,7 +287,7 @@ Plaquettes are used to construct the gauge invariant $\SU(N_c)$ {\it Wilson
 action} \cite{wilson_confinement_1974}, given by
 \begin{equation}\label{eq:wilsonaction}\index{Wilson!action}
     S_W\equiv\beta\sum\limits_{x;\,\mu<\nu}\left(1
-         -\frac{1}{N_c}\Re\tr U^\square_{\mu\nu}(x)\right).
+         -\frac{1}{N_c}\Re\tr \plaq_{\mu\nu}(x)\right).
 \end{equation}
 The factor $\beta$ is given this name in analogy to the inverse temperature 
 in statistical mechanics. The Wilson action becomes identical with the
@@ -378,28 +378,70 @@ referred to as the \index{coupling constant}{\it coupling constant}.
 \subsection{Heavy quark free energy}\label{sec:hqfe}
 
 
-The lattice formulation gives an explanation for confinement,
-which we will explain here.
-Let $\mathcal{C}_{RT}$ be a rectangular loop on the
-lattice of side lengths $R$ and $T$ and let $W(\mathcal{C}_{RT})$ be the
-corresponding Wilson loop. Then the {\it static quark potential}
-\index{static quark potential} $V(R)$ is defined by
+When one thinks about the potential\footnote{At finite temperature
+one distinguishes between potential energy and free energy.}
+energy between a static quark-antiquark pair, \index{static quark}
+i.e. a pair of infinitely heavy quarks, one imagines
+a Wilson loop $W(\mathcal{C}_{rt})$
+where $\mathcal{C}_{rt}$ is a rectangular loop of side lengths 
+$r$ and $t$ parallel
+to the Euclidean time direction. When
+viewing this Wilson loop in the temporal gauge, one argues that
+the edges parallel to the Euclidean time direction correspond to
+a static quark-antiquark pair.
+Then the {\it static quark potential}
+\index{static quark potential} $V(r)$ is defined by
 \begin{equation}
-  V(R)\equiv-\lim_{T\to\infty}\frac{1}{T}\log W(\mathcal{C}_{RT})  
+  V(r)\equiv-\lim_{t\to\infty}\frac{1}{t}\log W(\mathcal{C}_{rt})  
 \end{equation}
 and gives the energy of the gauge field due to two color sources separated by
-a distance $R$. The {\it string tension}\index{string tension} 
-$\sigma$ is defined by
-\begin{equation}
-  \sigma\equiv\lim_{R\to\infty}\frac{1}{R}V(R).
-\end{equation}
-If the string tension is non-vanishing, then the potential scales linearly 
-with $R$ in the large $R$ limit; 
-this phenomenon has been observed in LGT 
-simulations~\cite{montvay_quantum_1994}.
-Thus we see one of the major successes
-of LGT: it proffers an explanation of confinement.  
+a distance $r$. 
 
+
+We will argue the static quark potential has the form
+\begin{equation}\label{eq:staticpotential}
+  V(r)=A+\frac{B}{r}+\sigma r,
+\end{equation}
+which is sometimes called the {\it Cornell potential}\index{potential!Cornell},
+where $A$ and $B$ are constants and
+$\sigma$ is the {\it string tension}\index{string tension}. 
+If the string tension is non-vanishing, then the potential scales linearly 
+with $r$ in the large $r$ limit; 
+this phenomenon has been observed in LGT 
+simulations~\cite{montvay_quantum_1994},
+and we thus see LGT proffers an explanation of confinement.  
+
+
+The Coulomb-like term in eq.~\eqref{eq:staticpotential} can be seen
+mnemonically as follows. From eq.~\eqref{eq:fieldstrength}
+one sees that the $\SU(N_c)$ field strength tensor has the same form
+as the $\U(1)$ tensor, except for the last term, which is due to
+$\SU(N_c)$ being non-abelian, and which comes with a factor $g$.
+Hence in the small coupling limit, we recover the QED field
+strength tensor. We know QED has a Coulomb term in its potential,
+so we should a expect the $1/r$ term.
+
+
+Conversely we argue for the linearly rising term in the strong
+coupling limit. For arbitrary path $\mathcal{C}$ we expand the Wilson
+loop expectation value as
+\begin{equation}
+  \ev{W_\mathcal{C}}=\frac{1}{Z}\int\DD U
+    \exp\left(-\frac{\beta}{3}\sum_\square\Re\tr\left[\id-\plaq\right]\right)
+    \tr\prod_{l\in\mathcal{C}}U_l,
+\end{equation}
+where the sum runs over plaquettes of some orientation and the product over
+links in the Wilson loop. We factor out the sum over $\id$ appearing in the
+both the numerator and the partition function to get
+\begin{equation}\begin{aligned}
+  \ev{W_\mathcal{C}}&=\frac{1}{Z'}\int\DD U
+    \exp\left(\frac{\beta}{3}\sum_\square\Re\tr \plaq\right)
+    \tr\prod_{l\in\mathcal{C}}U_l\\
+                    &=\frac{1}{Z'}\int\DD U
+    \exp\left(\frac{\beta}{6}\sum_\square\left(\tr \plaq+\tr
+     \plaq^{\,\dagger}\right)\right)
+    \tr\prod_{l\in\mathcal{C}}U_l.
+\end{aligned}\end{equation}
 
 \subsection{Renormalization group and the continuum limit}
 \index{renormalization!group}\index{limit!continuum}
@@ -638,14 +680,17 @@ at higher temperatures $T>T_c$ they exist in a gluon plasma.
 The deconfining phase transition is a second-order phase transition for 
 $\SU(2)$ (see Engels et al.~\cite{engels_critical_1996} and
 references therein) and a first-order transition for $\SU(N_c)$ when $N_c>2$. 
-The order parameter for this transition is the \index{Polyakov loop}
-{\it Polyakov loop}, 
-\begin{equation}
-  P(\vec{x})=\tr\prod_\tau U_4(\vec{x},\tau),
+The order parameter\footnote{We will argue this in Sec.~\ref{sec:ploop}.} 
+for this transition is the \index{Polyakov loop}
+Polyakov loop~\eqref{eq:ploop}
+\index{Polyakov loop} {\it Polyakov loop}, 
+\begin{equation}\label{eq:ploop}
+  P(\vec{x})\sim\tr\prod_\tau U_4(\vec{x},\tau),
 \end{equation}
-which is a straight 
-Wilson loop of length $N_\tau$ that is parallel to the Euclidean time 
-axis and closes due to the periodic BCs. In practice, 
+which is a straight Wilson loop of length $N_\tau$ that is 
+parallel to the Euclidean time 
+axis and closes due to the periodic BCs. 
+In practice, 
 we determine $\beta_c$ by looking at plots of the Polyakov loop 
 susceptibility,
 \begin{equation}
@@ -1499,7 +1544,7 @@ In practice, one cools just enough
 that topological observables become {\it quasi-stable}, i.e. just
 enough that they do not change after many additional cooling sweeps.
 
-\section{The Polyakov loop}\index{Polyakov loop}
+\section{The Polyakov loop}\index{Polyakov loop}\label{sec:ploop}
 
 This section is dedicated to the Polyakov loop, an object of crucial
 historical and scientific significance in lattice calculations. The
@@ -1513,7 +1558,7 @@ quark masses and lower~\cite{clarke_polyakov_2020}.
 \subsection{The Polyakov loop and deconfinement}\index{deconfinement}
 We begin with a brief review of some relevant properties of the
 Polyakov loop. For a theory with underlying $\SU(N_c)$ gauge group, we define
-the {\it Polyakov loop} by
+the Polyakov loop by\index{Polyakov loop}
 \begin{equation}\label{eq:ploop}
   P_{\vec{x}}\equiv\frac{1}{N_c}\tr\prod_\tau U_4(\vec{x},\tau).
 \end{equation}
