@@ -1,14 +1,23 @@
 #!/bin/bash
-rm *.aux
+
 pdflatex -interaction=batchmode -draftmode 0_researchnotes.tex
-for auxfile in ch_*.aux; do
-    bibtex `basename $auxfile .aux`
-done
-for auxfile in ap_*.aux; do
-    bibtex `basename $auxfile .aux`
-done
-pdflatex -interaction=batchmode -draftmode 0_researchnotes.tex
+
+# If the bibliography file didn't change, we don't need to
+# compile these again. An attempt to speed up compilation.
+diff bibliography.bib .bibreference.bib &>/dev/null
+if [ $? -eq 1 ]; then
+  for auxfile in ch_*.aux; do
+      bibtex `basename $auxfile .aux`
+  done
+  for auxfile in ap_*.aux; do
+      bibtex `basename $auxfile .aux`
+  done
+  pdflatex -interaction=batchmode -draftmode 0_researchnotes.tex
+fi
+
 makeindex 0_researchnotes
 pdflatex -interaction=batchmode -draftmode 0_researchnotes.tex
 pdflatex -interaction=batchmode 0_researchnotes.tex
 ./distclean
+
+cp bibliography.bib .bibreference.bib

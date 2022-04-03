@@ -1,3 +1,6 @@
+# LaTeX stuff not needed for repository
+*.bbl
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
