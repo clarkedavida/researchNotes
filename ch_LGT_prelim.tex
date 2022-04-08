@@ -1,13 +1,13 @@
 \chapter{LGT: Lattice without fermions}\label{ch:preliminaries}
 
-LGT is introduced in Section~\ref{sec:LGT}
+LGT is introduced in \secref{sec:LGT}
 by reviewing local gauge symmetries in QFT, regularizing a pure
 gauge theory on the lattice, discussing the true continuum limit,
 \index{limit!continuum}
-and introducing finite temperature. In Section~\ref{sec:refscales}, 
+and introducing finite temperature. In \secref{sec:refscales}, 
 reference scales are defined, and systematic error within the context
 of scale setting is explored. Topological observables are introduced
-in Section~\ref{sec:topinvar}, and effects of topology barriers
+in \secref{sec:topinvar}, and effects of topology barriers
 are considered.
 
 \section{Lattice gauge theory}\label{sec:LGT}
@@ -104,7 +104,7 @@ where
 \end{equation} 
 and $f^{abc}$ are the structure constants of $\SU(N_c)$.
 $\Lagr_{G}$ is also invariant 
-under the transformation of \eqref{eq:dxform}. One way to see this
+under the transformation of \equatref{eq:dxform}. One way to see this
 is to use the following fact.
 \begin{proposition}{}{fieldtensor}
   $$F_{\mu\nu}=\left[D_\mu,D_\nu\right].$$
@@ -333,12 +333,12 @@ $$
   \end{proof}
 \end{proposition}
 After some algebra, the connection between the Wilson action and the action
-corresponding to eq.~\eqref{eq:lagrkin} becomes clear.
+corresponding to \equatref{eq:lagrkin} becomes clear.
 \begin{proposition}{}{} 
   $$S_W=-\frac{\beta}{4N_c}\sum_x a^4\tr F_{\mu\nu}(x)F_{\mu\nu}(x)
                   +\order{a^5}.$$
   \begin{proof} Using the definition~\eqref{eq:wilsonaction} and
-    Proposition~\ref{prp:plaquette} we have
+    \propref{prp:plaquette} we have
     \begin{equation*}
     \begin{aligned}
       S_W&=\beta\sum_{x,\mu<\nu}\left(1-\frac{1}{N_c}\Re\tr 
@@ -361,7 +361,7 @@ corresponding to eq.~\eqref{eq:lagrkin} becomes clear.
     in reverse.
     Following a plaquette in reverse just interchanges $\mu$ and $\nu$,
     which flips the sign of the leading term in the exponential
-    of Proposition~\ref{prp:plaquette} because $F_{\mu\nu}$
+    of \propref{prp:plaquette} because $F_{\mu\nu}$
     is antisymmetric.
   \end{proof}
 \end{proposition}
@@ -435,7 +435,7 @@ are the defining properties of the Haar measure.
 
 In what follows our integrals run over $\SU(N_c)$
 and $V$ and $W$ are arbitrary $\SU(N_c)$ elements.
-Using eq.~\eqref{eq:haarcommute} it follows for any 
+Using \equatref{eq:haarcommute} it follows for any 
 integrable function $f$ on $\SU(N_c)$ that
 \begin{equation}
   \int\dd Uf(U)=\int\dd Uf(VU)=\int\dd Uf(UV).
@@ -453,9 +453,9 @@ useful integrals:
        &=& $\frac{1}{6}\epsilon_{ace}\epsilon_{bdf}$.
   \end{tabular}\end{center}
 \end{proposition}
-In Sec.~\ref{sec:hqfe} we will encounter products of Wilson
+In \secref{sec:hqfe} we will encounter products of Wilson
 loops that have one link in common. The third formula in
-Prop.~\ref{prp:haar} delivers the following equation, allowing
+\propref{prp:haar} delivers the following equation, allowing
 us to integrate out the common link in such situations:
 \begin{equation}
   \int \dd U\tr VU\tr U^\dagger W=\frac{1}{3}\tr VW
@@ -498,8 +498,8 @@ simulations~\cite{montvay_quantum_1994},
 and we thus see LGT proffers an explanation of confinement.  
 
 
-The Coulomb-like term in eq.~\eqref{eq:staticpotential} can be seen
-mnemonically as follows. From eq.~\eqref{eq:fieldstrength}
+The Coulomb-like term in \equatref{eq:staticpotential} can be seen
+mnemonically as follows. From \equatref{eq:fieldstrength}
 one sees that the $\SU(N_c)$ field strength tensor has the same form
 as the $\U(1)$ tensor, except for the last term, which is due to
 $\SU(N_c)$ being non-abelian, and which comes with a factor $g$.
@@ -525,16 +525,16 @@ both the numerator and the partition function to get
     \tr\prod_{l\in\mathcal{C}}U_l\\
                     &=\frac{1}{Z'}\int\DD U
     \exp\left(\frac{\beta}{6}\sum_\square\left(\tr \plaq+\tr
-     \plaq^{\,\dagger}\right)\right)
+     U^{\square\,\dagger}\right)\right)
     \tr\prod_{l\in\mathcal{C}}U_l.
 \end{aligned}\end{equation}
 Now we expand the exponential:
 \begin{equation}\begin{gathered}
     \exp\left(\frac{\beta}{6}\sum_\square\left(\tr \plaq+\tr
-     \plaq^{\,\dagger}\right)\right)~~~~~~~~~~~~~~~~~~~~
+     U^{\square\,\dagger}\right)\right)~~~~~~~~~~~~~~~~~~~~
        ~~~~~~~~~~~~\\
-    =\sum_{i,j=0}^{\infinity}\frac{1}{i!j!}\left(\frac{\beta}{6}\right)^{i+j}
-      \left(\sum_\square\tr\plaq\right)^i\left(\sum_{\square'}\tr\plaq^{'\,\dagger}\right)^j
+    =\sum_{i,j=0}^{\infty}\frac{1}{i!j!}\left(\frac{\beta}{6}\right)^{i+j}
+      \left(\sum_\square\tr\plaq\right)^i\left(\sum_{\square'}\tr\U^{\square'\,\dagger}\right)^j
 \end{gathered}\end{equation}
 
 
@@ -625,7 +625,7 @@ principle, calculated perturbatively, and
    f_{as}^0\big(g^2\big)\equiv\exp\Bigg(-\frac{1}{2b_{0}g^2}\Bigg)
     (b_{0}g^{2})^{-b_{1}/2b_{0}^{2}}.
 \end{equation}
-In fact from eq.~\eqref{eq:blatgs} and \eqref{eq:blat3loop}, one obtains
+In fact from \equatref{eq:blatgs} and \eqref{eq:blat3loop}, one obtains
 \begin{equation}\label{eq:q1value}
   q_1=\frac{b_{1}^{2}-b_{2}^{L}b_{0}}{2b_{0}^{3}}=
   \begin{cases}
@@ -635,7 +635,7 @@ In fact from eq.~\eqref{eq:blatgs} and \eqref{eq:blat3loop}, one obtains
 \end{equation}
 The integration constant $\Lambda_{L}$ has units of mass and is called the
 {\it lattice $\Lambda$-parameter}.
-From eq.~\eqref{eq:latRGEsoln} one sees that
+From \equatref{eq:latRGEsoln} one sees that
 \begin{equation}\label{eq:llat}
   \Lambda_L=\lim_{g\to0}\frac{1}{a}f_{as}^0\big(g^2\big).
 \end{equation}
@@ -653,7 +653,7 @@ From eq.~\eqref{eq:latRGEsoln} one sees that
 
 The fact that pure $\SU(N_c)$ theory has a negative beta function
 \eqref{eq:blatgs} has a profound physical implication. In particular 
-when we invert eq.~\eqref{eq:latRGEsoln} keeping only universal
+when we invert \equatref{eq:latRGEsoln} keeping only universal
 terms, we find
 \begin{equation}\label{eq:rgesoln}
   g(a)^{-2}=b_0\log\left(a^{-2}\Lambda_L^{-2}\right) 
@@ -665,7 +665,7 @@ as $a$ approaches zero, which is known as
 \index{asymptotic freedom}{\it asymptotic freedom}, while at low energies,
 $g(a)$ becomes too large for reliable perturbative analysis.
 
-From eq.~\eqref{eq:latRGEsoln} we see that taking $g\to0$ drives $a\to0$.
+From \equatref{eq:latRGEsoln} we see that taking $g\to0$ drives $a\to0$.
 However the limit $g\to0$ is not enough to ensure a well-defined continuum
 limit. The physical size of the lattice is proportional to $a^4$, and hence
 collapses to zero unless we also increase the number of sites. Therefore
@@ -679,7 +679,7 @@ arise in this context. Namely, to what extent do finite lattice
 spacing (which limits the smallest wavelength) and finite lattice
 size (which limits the largest wavelength) affect our results?
 These questions are discussed in detail in 
-Section~\ref{sec:refscales}.
+\secref{sec:refscales}.
 
 \subsection{Finite temperature}\label{sec:finitetemp}
 
@@ -729,9 +729,9 @@ finite lattices with nonzero spacing. Therefore it is desirable to set
 the scale with a quantity that is computable with low numerical effort,
 has small systematic uncertainties, and good statistical precision.
 Controlling systematic error is
-discussed in Section~\ref{sec:sysa}, while the
+discussed in \secref{sec:sysa}, while the
 discussion of statistical error is postponed to 
-Chapter~\ref{ch:MCMC}. We begin by introducing some reference scales. 
+\chref{ch:MCMC}. We begin by introducing some reference scales. 
 
 
 
@@ -748,7 +748,7 @@ at higher temperatures $T>T_c$ they exist in a gluon plasma.
 The deconfining phase transition is a second-order phase transition for 
 $\SU(2)$ (see Engels et al.~\cite{engels_critical_1996} and
 references therein) and a first-order transition for $\SU(N_c)$ when $N_c>2$. 
-The order parameter\footnote{We will argue this in Sec.~\ref{sec:ploop}.} 
+The order parameter\footnote{We will argue this in \secref{sec:ploop}.} 
 for this transition is the \index{Polyakov loop}
 Polyakov loop~\eqref{eq:ploop}
 \index{Polyakov loop} {\it Polyakov loop}, 
@@ -805,7 +805,7 @@ L\"uscher showed that the gradient flow averages the gauge field
 $A_\mu$ over a sphere with mean-square radius $\sqrt{8t}$ in 4D. Hence
 $t$ has dimension length squared, and $\sqrt{8t}$ is interpreted
 as the {\it smoothing range} of the flow.
-From eq.~\eqref{eq:Wflow} we see that the gradient flow lowers the action. 
+From \equatref{eq:Wflow} we see that the gradient flow lowers the action. 
 For pure $\SU(2)$ the link derivative of the action takes the simple form
 \begin{equation}\label{eq:SU2gflow}
   g^2\partial_{x,\mu}S(V)=\frac{1}{2}
@@ -853,7 +853,7 @@ where $n_c$ is the number of cooling steps.
 The update \eqref{eq:cool} minimizes the local contribution to the
 action, so that the ``cooling flow" decreases the action. Like with
 the gradient flow, one picks a target value and iterates 
-eq.~\eqref{eq:cool} until
+\equatref{eq:cool} until
 \begin{equation}
   y=t_c^2 E(t_c),
 \end{equation}
@@ -919,7 +919,7 @@ so it can be expanded as a power series in $a$:
 \end{equation}
 where the $\alpha_{i\,k}$ are expansion coefficients.
 Allton suggested using this equation to fit the approach to the continuum
-limit~\cite{allton_lattice_1997}. Inserting eq.~\eqref{eq:asr}
+limit~\cite{allton_lattice_1997}. Inserting \equatref{eq:asr}
 into the above power series yields
 \begin{equation}
   L_i=\frac{c_i}{\fas(\beta)}
@@ -945,7 +945,7 @@ In order to ensure non-perturbative corrections are
 $\order{a^2}$, we improve on Allton by demanding that 
 all scales have the
 same $k=1$ term $\alpha^{mn}_{i,1}$; then terms of order $a$ cancel 
-in the ratio. Using eq.~\eqref{eq:lenasf} along with this restriction, 
+in the ratio. Using \equatref{eq:lenasf} along with this restriction, 
 one obtains
 \begin{equation}\label{eq:ascalingfit}
   R_{ij}=r_{ij}+\sum_{k=2}^n\kappa^{mn}_{i\,k}
@@ -953,11 +953,11 @@ one obtains
 \end{equation}
 where the fit parameters are now $r_{ij}$ and the $\kappa_{i\,k}^{mn}$.
 One can switch the domain of $\fas^m$ from $\beta$ to the
-reference $L_j$ using, for instance, eq.~\eqref{eq:lenasf}.
+reference $L_j$ using, for instance, \equatref{eq:lenasf}.
 The continuum limit estimate $r_{ij}$ also depends on $m$ and $n$, but
 we have suppressed these indices for clearer comparison with
 the standard scaling fit~\eqref{eq:stdscalingfit}. We will refer
-to the behavior of eq.~\eqref{eq:lenasf} or \eqref{eq:ascalingfit}
+to the behavior of \equatref{eq:lenasf} or \eqref{eq:ascalingfit}
 as \index{scaling!asymptotic}{\it asymptotic scaling}.
 
 If we carry out a naive continuum limit without changing the
@@ -1026,7 +1026,7 @@ To show this, we first establish a useful Lemma.
 \begin{theorem}{}{wndeform}
 The topological winding number is invariant under smooth
 deformations of $U$.
-\begin{proof} We integrate eq.~\eqref{eq:wn} over a time-slice of space-time,
+\begin{proof} We integrate \equatref{eq:wn} over a time-slice of space-time,
 which we call $\Omega$. Then
   \begin{align*}
    \var n &=-\frac{1}{24\pi^2}~\var\int_\Omega\dd[3]{x}\epsilon_{ijk}\tr
@@ -1052,7 +1052,7 @@ which we call $\Omega$. Then
   \end{align*}
   In the second step we used the product rule and the fact that the trace 
   and Levi-Civita symbols are cyclic.
-  In the third step we used Lemma~\ref{lem:variationrule} as well as
+  In the third step we used \lemref{lem:variationrule} as well as
   $U\partial_\mu U^\dagger=-\partial_\mu UU^\dagger$. In the last step
   we integrated by parts. The first integral is over the time-slice boundary
   evaluated at infinity. Since $\partial_jU=\partial_jU_0=0$ there, this term
@@ -1102,7 +1102,7 @@ map~\eqref{eq:uexplicit} is
 \end{equation}
 We see that if we sweep through $\phi$, $\hat{x}$ sweeps over $S^3$ once
 while $\hat{a}$ sweeps over $S^3$ $m$ times. And indeed, one can see
-that eq.~\eqref{eq:wn} extracts the winding number by plugging in the 
+that \equatref{eq:wn} extracts the winding number by plugging in the 
 mapping~\eqref{eq:uexplicit}. This is done in the following Proposition.
 \begin{proposition}{}{wnproof}
 Consider the map $U:S^3\to\SU(2)$ given by
@@ -1114,7 +1114,7 @@ U(\hat{x})=\left(\begin{array}{cc}
 $$
 Then $U$ has winding number $m$.
 \begin{proof}
-  Plugging this map into eq.~\eqref{eq:wn} we find
+  Plugging this map into \equatref{eq:wn} we find
   \begin{equation*}
   \begin{aligned}
     n&=-\frac{1}{24\pi^2}\int_{S^3} \dd[3]{x}\epsilon_{ijk}\tr
@@ -1185,7 +1185,7 @@ in the following section.
           &\times\left(\text{$\beta$ term}\right)
           \left(\text{$\gamma$ term}\right).
     \end{aligned}\end{equation*}
-    From Theorem~\ref{thm:wndeform}, we know we can smoothly
+    From \thmref{thm:wndeform}, we know we can smoothly
     deform $U_n$ to $\id$ for $x_3<0$ without changing $w$.
     Then for $0\leq\phi\leq\pi$, we have
     $\partial_i U_k=0$ and $U_n U_k=U_k$, and we can clearly identify
@@ -1198,7 +1198,7 @@ in the following section.
 
 
 \subsection{Theta vacua}
-Now we have shown that \eqref{eq:wn} is invariant under smooth deformations
+Now we have shown that \equatref{eq:wn} is invariant under smooth deformations
 of $U$, and we can believe that it really extracts the number of times
 $U$ as a mapping covers the integration region. Next we want to understand
 how the winding number relates to physics. 
@@ -1215,7 +1215,7 @@ transition amplitude $\bra{n'}H\ket{n}$ where $H$ is the Hamiltonian.
 Let us discuss its matrix elements. Since 
 \begin{enumerate}
   \item the product of two maps with winding numbers $n$ and $k$ 
-        has winding number $n+k$, which one can see from eq.~\eqref{eq:wn}
+        has winding number $n+k$, which one can see from \equatref{eq:wn}
         by smoothly deforming $U_n$ to $\id$ for $x_3<0$ and
         smoothly deforming $U_k$ to be $\id$ for $x_3>0$;
   \item the winding number is odd under parity, which follows from the
@@ -1237,7 +1237,7 @@ field strengths, so we must have
   \mathcal{U}_kH\mathcal{U}_k^\dagger=H.
 \end{equation}
 Inserting factors of $\mathcal{U}_k^\dagger\mathcal{U}_k=\id$ into
-the matrix element $\bra{n}H\ket{n'}$ and using eq.~\eqref{eq:qwn}
+the matrix element $\bra{n}H\ket{n'}$ and using \equatref{eq:qwn}
 and \eqref{eq:qid} yields
 \begin{equation}
   \bra{n}H\ket{n'}=\bra{n+k}H\ket{n'+k}.
@@ -1279,7 +1279,7 @@ where the relative minus sign is due to the surfaces at $x_4=\pm\infty$
 having opposite orientation. We indicate this winding number with a
 $Q$, and it is often called the {\it topological charge}.
 
-By viewing the integrand of eq.~\eqref{eq:wn} 
+By viewing the integrand of \equatref{eq:wn} 
 as the surface integral over a 4D region, defining the 
 {\it Chern-Simons current}\index{Chern-Simons current}
 \begin{equation}
@@ -1372,7 +1372,7 @@ $$
   \end{proof}
 \end{proposition}
 
-With eq.~\eqref{eq:Q} we can find vacuum solutions to the Euclidean
+With \equatref{eq:Q} we can find vacuum solutions to the Euclidean
 field equations
 \begin{equation}
   D_\mu F_{\mu\nu}=0.
@@ -1381,7 +1381,7 @@ The trick is to construct a lower bound on the action. Then if we can
 find a solution saturating the bound, it must solve the field equations,
 since it minimizes the action. This is called a \index{Bogomolny bound}
 {\it Bogomolny bound}.
-Using eq.~\eqref{eq:topaction}, we find
+Using \equatref{eq:topaction}, we find
 \begin{equation}\label{eq:bogo}
   S\geq 8\pi^2|Q|/g^2,
 \end{equation}
@@ -1407,7 +1407,7 @@ $$
       \Bigg|\int\dd^4x\,\tr\dual{F_{\mu\nu}}F_{\mu\nu}\Bigg|.
     $$
     The LHS of the above equation is $2g^2S$ while the RHS
-    is, according to Proposition~\ref{prp:wnfsproof}, $16\pi^2|Q|$.
+    is, according to \propref{prp:wnfsproof}, $16\pi^2|Q|$.
     This completes the proof.
   \end{proof}
 \end{proposition}
@@ -1495,7 +1495,7 @@ When $Q=-1$ we have an {\it anti-instanton}.
 When $|Q|>1$, the mediating solution is constructed of multiple 
 instantons or anti-instantons. When separations are large compared
 to their sizes, we call this a {\it dilute gas} of instantons
-or anti-instantons. From eq.~\eqref{eq:bogo}
+or anti-instantons. From \equatref{eq:bogo}
 we see that each instanton or anti-instanton contributes
 $8\pi^2/g^2$ to the Bogomolny bound.
 
@@ -1504,7 +1504,7 @@ The {\it topological susceptibility} is defined as
 \begin{equation}
   \chi_Q\equiv\int\dd[4]{x}\ev{q(x)q(0)},
 \end{equation}
-where $q$ is the topological charge density of eq.~\eqref{eq:Q}.
+where $q$ is the topological charge density of \equatref{eq:Q}.
 The topological susceptibility gives evidence that the topological
 structure of the underlying gauge fields has phenomenological significance.
 In particular, by performing a calculation in the large $N_c$ limit, 
@@ -1525,7 +1525,7 @@ formula for $N_f=3$, one finds
 \end{equation}
 While a conventional derivation of the Witten-Veneziano formula depends
 on large $N_c$, lattice calculations for pure $\SU(2)$ and
-pure $\SU(3)$ land relatively close to eq.~\eqref{eq:chivalue}.
+pure $\SU(3)$ land relatively close to \equatref{eq:chivalue}.
 
 \subsection{Topological charge on the lattice}
 
@@ -1560,7 +1560,7 @@ This phenomenon is sometimes called {\it topological freezing}.
 Further definitions of topological charge on the lattice can be found 
 in reviews such as the review by Kronfeld~\cite{kronfeld_topological_1988}.
 For our definition of topological charge, we follow the example of 
-eq.~\eqref{eq:Q} using the rule~\eqref{eq:inttosum}. It is reasonable to 
+\equatref{eq:Q} using the rule~\eqref{eq:inttosum}. It is reasonable to 
 measure a topological charge on the lattice by
 \begin{equation}\label{eq:QL}
   Q_L=a^4\sum_x q_L(x),
@@ -1667,7 +1667,7 @@ uncorrelated; therefore one finds
     =\ev{P}\ev{P}^\dagger
     =\left|\ev{P}\right|^2,
 \end{equation}
-and from eq.~\eqref{eq:Fav} we can (at least schematically) write
+and from \equatref{eq:Fav} we can (at least schematically) write
 something like
 \begin{equation}
   \left|\ev{P}\right|^2\sim\exp\left[-\frac{F_{q\bar{q}}(\infty,T)}{T}\right]. 
@@ -1679,7 +1679,7 @@ speaking not mathematically permissible to move the absolute value inside the
 expectation value. It turns out that in the infinite volume limit this is
 permissible. The reason is that $\ev{(\Im P)^2}$
 will approach zero in the thermodynamic limit. We
-will demonstrate this in Section~\ref{sec:ploopfss}.}.
+will demonstrate this in \secref{sec:ploopfss}.}.
 Another viewpoint is as follows: $\ev{|P|}$ is zero due to the global
 $\Z_3$ symmetry of the gauge action. In particular one can show
 that the plaquette is unchanged when multiplying all temporal links in a
@@ -1696,7 +1696,7 @@ unchanged, one can write
 \end{equation}
 since the sum over the center elements is zero.
 
-At higher temperatures the first equality of eq.~\eqref{eq:centerzero}
+At higher temperatures the first equality of \equatref{eq:centerzero}
 no longer holds. At the deconfinement temperature $T_c$, this center symmetry
 is spontaneously broken, and $\ev{|P|}$ acquires a nonzero value, signalling
 a finite static quark-antiquark free energy and hence deconfinement.
@@ -1794,7 +1794,7 @@ be shown within zero temperature perturbation theory
             =-8F_8(r,T=0)+\order{g^4}
             =-\frac{g^2}{3\pi r}\left(1+\order{g^2}\right).
 \end{aligned}\end{equation}
-The exponent in eq.~\eqref{eq:channels} is positive for the singlet channel
+The exponent in \equatref{eq:channels} is positive for the singlet channel
 but negative for the octet channel in this limit, which means $F_1$ dominates,
 and we find
 \begin{equation}
@@ -1807,20 +1807,20 @@ Therefore,
 
 The Polyakov loop requires a multiplicative renormalization. When each link
 is renormalized with factor $Z(\beta)$, it follows from
-eq.~\eqref{eq:ploop} that the Polyakov loop renormalizes as
+\equatref{eq:ploop} that the Polyakov loop renormalizes as
 \begin{equation}\label{eq:renploop}
   P^{\text{ren}}=Z(\beta)^{N_\tau}P.
 \end{equation}
-From eq.~\eqref{eq:Fav} it is then clear that $F_{q\bar{q}}$ requires an
+From \equatref{eq:Fav} it is then clear that $F_{q\bar{q}}$ requires an
 additive renormalization. We can write
 \begin{equation}\label{eq:renFav}
   a\,F_{q\bar{q}}^{\text{ren}}=a\,F_{q\bar{q}}+c(\beta),
 \end{equation}
-and then by eq.~\eqref{eq:Tlog9} we can similarly write
+and then by \equatref{eq:Tlog9} we can similarly write
 \begin{equation}
   a\,F_1^{\text{ren}}=a\,F_1+c(\beta)
 \end{equation}
-with the same $c(\beta)$ for both. From eqs.~\eqref{eq:Fav},
+with the same $c(\beta)$ for both. From \equatref{eq:Fav},
 \eqref{eq:renploop}, and \eqref{eq:renFav} we can write
 \begin{equation}
   c(\beta)=-2\log Z(\beta).
@@ -1837,7 +1837,7 @@ where $r_s$ is one of the shortest distances. (Often it is better to take
 the third or fourth shortest available distance because the shortest
 distance suffers the most from lattice artifacts.) The renormalized
 Polyakov loop is determined as follows:
-By eqs.~\eqref{eq:Fav} and \eqref{eq:ploop_decouple}
+By \equatref{eq:Fav} and \eqref{eq:ploop_decouple}
 \begin{equation}
   \lim_{r\to\infty}F_{q\bar{q}}^{\text{ren}}(r,T)
              =-T\log\left|\ev{P}\right|^2+c(\beta)T.
@@ -1928,7 +1928,7 @@ It also follows from the scaling of terms in the cumulant expansion that
   \ev{x^2}-\ev{x}^2=\frac{B}{V}~~~~\text{and}~~~~\ev{x}=C
 \end{equation}
 for some volume-independent constants $B$ and $C$. By combining the two
-equations in~\eqref{eq:fssre} one sees
+equations in~\equatref{eq:fssre} one sees
 \begin{equation}
   \ev{x^2}=C^2+\frac{B}{V}.
 \end{equation}

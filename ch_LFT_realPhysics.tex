@@ -18,7 +18,7 @@ In the following we will focus on $N_f=2+1$ QCD using HISQ fermions. We are
 interested in nonzero $\mu$, which is not accessible directly by the lattice.
 One possible strategy is to expand in small $\muh\equiv\mu/T$. For the
 pressure, we find\footnote{Note that this combination on the LHS of 
-eq.~\eqref{eq:pxpac} is unitless. This is because area has units
+\equatref{eq:pxpac} is unitless. This is because area has units
 [MeV$^{-2}$] and force has units [MeV$^2$].}
 \begin{equation}\label{eq:pxpac}
 \frac{P}{T^4}=\sum_{ijk}\frac{1}{i!j!k!}\,\chi_{ijk}^{(u)(d)(s)}(T)\,
@@ -43,7 +43,7 @@ $(u,d,s)$ basis and the conserved charge $(B,Q,S)$ basis\footnote{Yet a further
 possible basis of conserved charges is the $(B,I,S)$ basis with isospin $I\equiv I_3$.
 For the purpose of distinguishing between $u$ and $d$ quarks only, one can use
 either $I$ or $Q$.
-To learn more in detail about isospin, see Section~\ref{sec:isohyper}.}, i.e. the basis
+To learn more in detail about isospin, see \secref{sec:isohyper}.}, i.e. the basis
 of baryon number, electric charge, and strangeness. These relations 
 are\footnote{A mnemonic to remember these relations is to ask what each quark
 contributes to a system. For example a strange quark makes 1/3 of a baryon,
@@ -67,7 +67,7 @@ charge fluctuations},\index{conserved charge fluctuation} i.e. susceptibilities 
 \end{equation}
 Since none of the conserved charges appears directly in the action, one
 instead must decompose a conserved charge derivative into quark derivatives
-using eq.~\eqref{eq:quark-conservedCharge}. For example 
+using \equatref{eq:quark-conservedCharge}. For example 
 one finds
 \begin{equation}
   \frac{\partial}{\partial\mu_B}
@@ -81,7 +81,7 @@ Now we will connect this to the partition function $Z$. We have
 \end{equation}
 where as usual $V=(aN_s)^3$ and $T=1/aN_\tau$.
 When there are $N_f$ flavors and when we use the HISQ action we have,
-according to eq.~\eqref{eq:HISQdist},
+according to \equatref{eq:HISQdist},
 \begin{equation}
   Z=\int\DD U\prod_f (\det D_f)^{1/4}\,e^{-S_G}
 \end{equation}
@@ -129,7 +129,7 @@ matrix determinant. A final formula useful for matrix derivatives is
 \end{equation}
 
 Our goal is to eventually take derivatives of expectation values, so from
-eq.~\eqref{eq:HISQev} we will need $\muh$-derivatives of the partition 
+\equatref{eq:HISQev} we will need $\muh$-derivatives of the partition 
 function. For the following few formulas 
 I will assume arbitrarily many non-degenerate
 fermion flavors\footnote{I find this helpful to get prefactors that appear
@@ -148,12 +148,12 @@ and
 \begin{equation}\label{eq:dlogZ}
   \partial_{\muh}\log Z=\frac{1}{4}\sum_f\ev{\tr D_f^{-1}\partial_{\muh}D_f}.
 \end{equation}
-Comparing eq.~\eqref{eq:dlogZ} with eq.~\eqref{eq:nfdensity} we find in
+Comparing \equatref{eq:dlogZ} with \equatref{eq:nfdensity} we find in
 the staggered formulation
 \begin{equation}
   n_f=\frac{1}{4V}\tr D_f^{-1}\partial_{\muh_f}D_f.
 \end{equation} 
-Finally using eq.~\eqref{eq:dZinv} one quickly derives the following useful formula
+Finally using \equatref{eq:dZinv} one quickly derives the following useful formula
 for an observable $O$ calculated on HISQ configurations:
 \begin{proposition}{}{}\label{prop:dO}
 \begin{equation*} \partial_{\muh}\ev{O}
@@ -163,9 +163,9 @@ for an observable $O$ calculated on HISQ configurations:
 \end{equation*}
 \end{proposition} 
 Note that if $\muh=\muh_f$ with $N_f$ degenerate flavors, 
-Proposition~\ref{prop:dO} reduces to eq. (A3)
+\propref{prop:dO} reduces to eq. (A3)
 in Ref.~\cite{allton_thermodynamics_2005}. Using this Proposition along
-with eq.~\eqref{eq:dlogZ}, one 
+with \equatref{eq:dlogZ}, one 
 can start expressing generalized susceptibilities in terms of the fermion
 matrix. For example one finds for any flavor $f$
 \begin{equation}\begin{aligned}
@@ -183,7 +183,7 @@ potential $\muh_f$. Similarly for two flavors $f\neq g$
                    & -\frac{1}{16}\ev{\tr D_f^{-1}D_f'}\ev{\tr D_g^{-1}D_g'}.
 \end{aligned}\end{equation}
 Using an $N_f=2+1$ HISQ action with $m_l\equiv m_u=m_d$ along with 
-eq.~\eqref{eq:quark-conservedCharge}, one can figure out how to 
+\equatref{eq:quark-conservedCharge}, one can figure out how to 
 express\footnote{Note that when carrying out calculations like these, to avoid making mistakes,
 one should always work with non-degenerate flavors, then allow the flavors to be
 degenerate at the end. This way one correctly distinguishes between e.g.

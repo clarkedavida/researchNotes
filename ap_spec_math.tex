@@ -128,7 +128,7 @@ as is the volume of the $N$-ball,
 \begin{equation}
   V_N=\frac{2\pi^{N/2}R^N}{N\Gamma(N/2)}.
 \end{equation}
-As expected, these formulas agree with eqs.~\eqref{eq:3ds}
+As expected, these formulas agree with \equatref{eq:3ds}
 and \eqref{eq:3dv} when $N=3$.
 
 The Jacobian can be used to obtain the integration measure. For $N>3$
@@ -203,7 +203,7 @@ represents just the partial derivative operator.
   i.e. it is the set of vectors annihilated by $T$. Finally $T$ is said
   to be {\it idempotent}\index{idempotent} if $T^2=T$.
 To connect some of the above definitions to what we learned in
-Chapter~\ref{ch:group}, we see that a linear operator is an endomorphism.
+\chref{ch:group}, we see that a linear operator is an endomorphism.
 Furthermore we see that if a linear operator has an inverse, then it
 is an automorphism.
 
@@ -279,7 +279,7 @@ We will formulate these ideas in terms of inner products.
   \end{proof}
 \end{proposition}
 
-  The map of Proposition \ref{prp:orthog} is called the {\it orthogonal
+  The map of \propref{prp:orthog} is called the {\it orthogonal
   projection}\index{orthogonal!projection}.
   \index{transformation!hermitian}\index{transformation!unitary}
   \index{transformation!orthogonal}
@@ -341,7 +341,7 @@ function of $t$. In physical contexts, differential equations are
 evolution laws; in the language I have just introduced, they tell you
 how some physical observable $x$ changes as the parameter $t$ changes.
 The function on the RHS usually plays the role of a force; therefore
-eq.~\eqref{eq:diffyq} tells you that $f$ induces some kind of response in 
+\equatref{eq:diffyq} tells you that $f$ induces some kind of response in 
 $x$. Maybe the simplest example of a differential equation like this
 is Newton's law, which expressed in these symbols looks like
 \begin{equation}
@@ -363,11 +363,11 @@ kick or {\it impulse}\index{impulse} delivered at time $t'$, and
 the resulting behavior for $x$ is the system's {\it response}\index{response} 
 to the kick. This situation is depicted schematically in the top panel of
 Fig.~\ref{fig:impulse}. In such a case, the differential equation
-eq.~\eqref{eq:diffyq} would become
+\equatref{eq:diffyq} would become
 \begin{equation}\label{eq:greenDelta}
   D_t\,x(t)=\delta(t-t').
 \end{equation}
-Let's give a special name to the solution of eq.~\eqref{eq:greenDelta}: We
+Let's give a special name to the solution of \equatref{eq:greenDelta}: We
 are going to call it the {\it Green's function} $G(t-t')$, and it will
 therefore satisfy
 \begin{equation}\label{eq:greenDeltaSol}
@@ -381,12 +381,12 @@ generally, by taking advantage of the fact that
 One way to interpret the above equation is that this force $f$ is being
 constructed from a series of impulses, which is depicted schematically
 in the bottom panel of Fig.~\ref{fig:impulse}. Breaking down the force
-in this way, the solution to our general equation eq.~\eqref{eq:diffyq} is
+in this way, the solution to our general equation \equatref{eq:diffyq} is
 \begin{equation}\label{eq:greenSol}
   x(t)=\int\dd{t'}G(t-t')f(t').
 \end{equation}
-In other words, if we can solve eq.~\eqref{eq:greenDelta}, then we can
-solve eq.~\eqref{eq:diffyq} by using eq.~\eqref{eq:greenSol}, almost
+In other words, if we can solve \equatref{eq:greenDelta}, then we can
+solve \equatref{eq:diffyq} by using \equatref{eq:greenSol}, almost
 regardless of what $f$ is\footnote{I say ``almost" because $f$ must, for
 example, be well-behaved enough that the delta function sifting works.}.
 Equation~\eqref{eq:greenSol} takes the form of a convolution, and an
@@ -440,7 +440,7 @@ can be written as
   \rho\vec{v}+D\nabla\rho=0,
 \end{equation}
 where $D$ is a constant called the {\it diffusion coefficient}. Combining
-eqs.~\eqref{eq:continuityEquation} and \eqref{eq:ficksLaw}, one finds
+\equatref{eq:continuityEquation} and \eqref{eq:ficksLaw}, one finds
 \begin{equation}
   \frac{\partial\rho}{\partial t}-D\nabla^2\rho = 0.
 \end{equation}
@@ -451,7 +451,7 @@ equation in 1+1 dimensions.
 \subsection{Perturbation theory}
 
 \section{Dirac algebra}
-In this section we summarize Section 3.2 of 
+In this section we summarize Section~3.2 of 
 Ref.~\cite{peskin_introduction_1995}.
 {\it Gamma matrices} appear when one works with spin-$1/2$ representations of
 the Lorentz group. Here we remind the reader of algebraic properties of gamma

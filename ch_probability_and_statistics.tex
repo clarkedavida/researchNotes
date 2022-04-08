@@ -85,7 +85,7 @@ Suppose you draw a sample $X_1,...,X_N$:
 In the case $n=1$ we obtain the ordinary arithmetic average.
 We use the hat to distinguish true values from estimators, which will
 generally be denoted with a bar. For estimators of moments besides the
-mean, we must be more careful; this is discussed in Section~\ref{sec:bias}.
+mean, we must be more careful; this is discussed in \secref{sec:bias}.
 
 Consider two intervals $[a,b]$ and $[c,d]$ and two random variables
 $X$ and $Y$ drawn from PDFs $f$ and $g$, respectively. Then $X$ and $Y$ are
@@ -148,7 +148,7 @@ drawn from PDFs $f$ and $g$, respectively.
     h(z)=\int_{-\infty}^\infty\dd{x}f(x)g(z-x)
   \end{equation*}
   \begin{proof}
-    The CDF of $Y$ is, according to eq.~\eqref{dfn:ind},
+    The CDF of $Y$ is, according to \equatref{dfn:ind},
     \begin{equation*}
       H(y)=\int_{x+y\leq z}\dd{x}\dd{y}f(x)g(y)
           =\int_{-\infty}^\infty\dd{x}f(x)\int_{-\infty}^{z-x}
@@ -249,7 +249,7 @@ The above proof relies on the PDF having a finite
 variance. As it turns out, the Weak LLN is true
 even when the variance is infinite! This can be proved
 using characteristic functions. But since we don't introduce characteristic
-functions until Section~\ref{sec:CLT}, and since we assume in practice
+functions until \secref{sec:CLT}, and since we assume in practice
 that our data are drawn from PDFs with finite variance anyway,
 we direct the reader elsewhere. For example, a proof can be
 found on Wikipedia~\cite{Wiki_LLN}.
@@ -266,7 +266,7 @@ is infinite.
 
 Also in this section we list a sometimes useful fact about CDFs, which is
 for example helpful in interpreting the results of some statistical
-tests. (See e.g. Theorem~\ref{thm:gaudif}.) 
+tests. (See e.g. \thmref{thm:gaudif}.) 
 
 \begin{proposition}{}{}
   If a random variable $X$ is distributed according to the PDF $f$, then
@@ -322,7 +322,7 @@ standard deviations $\sigma_1$ and $\sigma_2$.
   The random variable $Y=X_1+X_2$ is normally distributed with mean
   $\hat{x}_1+\hat{x}_2$ and variance $\sigma_1^2+\sigma_2^2$.
   \begin{proof}
-    By Proposition \ref{prp:addvars}, the sum $Y$ has the distribution
+    By \propref{prp:addvars}, the sum $Y$ has the distribution
     \begin{equation*}
       g(y)=\frac{1}{2\pi\sigma_1\sigma_2}
            \int_{-\infty}^\infty\dd{x}\exp\left[
@@ -342,7 +342,7 @@ standard deviations $\sigma_1$ and $\sigma_2$.
     $$
     where $C$ is just a bunch of stuff that doesn't depend on $x$.
     Therefore you can make the substitution $u=x+C$ with $\dd u=\dd x$ and
-    carry out the new integral using Proposition \ref{prp:gauss}.
+    carry out the new integral using \propref{prp:gauss}.
     The result is
     \begin{equation*}
       g(y)=\frac{1}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}}
@@ -386,10 +386,10 @@ disparity is real or just plain unlucky. More precisely:
        {\sqrt{2(\sigma_X^2+\sigma_Y^2)}}\right).
   \end{equation*}
   \begin{proof}
-    From Proposition \ref{prp:addgauss}, the random variable
+    From \propref{prp:addgauss}, the random variable
     $\bar{X}-\bar{Y}$ is normally distributed with mean 0 
     and variance $\sigma_D^2=\sigma_X^2+\sigma_Y^2$. Therefore by
-    eq.~\eqref{eq:gaussCDF}, the probability that $\bar{X}$ and 
+    \equatref{eq:gaussCDF}, the probability that $\bar{X}$ and 
     $\bar{Y}$ are at most $D$ apart is
     \begin{equation*}
       \begin{aligned}
@@ -482,7 +482,7 @@ the true mean. Here is the precise statement.
     corresponding to $\gau(s,0,\sigma/\sqrt{N})$, then we are finished.
     In order to show this, we first need the characteristic function for
     the distribution $\gau(s,0,\sigma/\sqrt{N})$. By completing the
-    square and using Proposition \ref{prp:gauss}, we find 
+    square and using \propref{prp:gauss}, we find 
     \begin{equation*}
       \begin{aligned}
         \phi_{\text{gau}}
@@ -496,7 +496,7 @@ the true mean. Here is the precise statement.
       \end{aligned}
     \end{equation*}
     where $C$ is a number that doesn't depend on $s$. It remains to show 
-    $\phi_S=\phi_{\text{gau}}$. By Proposition \ref{prp:addchars} we have
+    $\phi_S=\phi_{\text{gau}}$. By \propref{prp:addchars} we have
     $$
       \phi_S(t)=\phi_{\frac{1}{N}\sum X_i-\hat{x}}(t)
                =\left[\phi_{X-\hat{x}}\left(\frac{t}{N}\right)\right]^N,
@@ -654,7 +654,7 @@ An estimator that never converges to its true value is called
 \index{estimator!consistent}
 So this bad estimator is not a consistent estimator. Note that a biased
 estimator is not necessarily inconsistent; for instance the biased estimator
-of the variance eq.~\eqref{eq:bad} is consistent. A consistent estimator
+of the variance \equatref{eq:bad} is consistent. A consistent estimator
 of $\hat{f}$ is
 \begin{equation}\label{eq:consistentEstimator}
   \bar{f}=f(\bar{X}).
@@ -691,7 +691,7 @@ We can prove the consistency of $\bar{f}$ for a wide class of functions.
 \end{proposition}
 According to the above proposition, the bias vanishes as $N\to\infty$, which
 shows that $\bar{f}$ is consistent. For large $N$, $\bar{X}$ is very likely
-to be close to $\hat{x}$ by the CLT, so Proposition \ref{prp:bias} will 
+to be close to $\hat{x}$ by the CLT, so \propref{prp:bias} will 
 essentially hold whenever $N$ is large and $f$ is a nice enough function.
 There is another important consequence to this proposition: the bias
 decreases faster than the statistical error bar, which you will recall
@@ -736,7 +736,7 @@ Meanwhile the variance of $Y_i$ is given by
 In the case that the $X_j$ and $X_k$ are independent, $\Cov(X_j,X_k)=0$.
 Furthermore if $Y_i$ is a linear function of the $X_j$, we 
 can associate the $a_{ij}$ with partial derivatives. Then 
-eq.~\eqref{eq:linprop} becomes
+\equatref{eq:linprop} becomes
 \begin{equation}\label{eq:errprop}\index{error propagation formula}
   \sigma^2_{Y_i}=
    \sum_{j=1}^N\frac{\partial\,Y_i}{\partial X_j}\sigma_{X_j}^2.
@@ -745,7 +745,7 @@ This is the {\it error propagation formula} as it's usually stated.
 Berg~\cite{berg_markov_2004} emphasizes that this relation is 
 mnemonic because it doesn't make 
 sense to take derivatives with respect to random variables. 
-In practice we can apply eq.~\eqref{eq:errprop} when we
+In practice we can apply \equatref{eq:errprop} when we
 \begin{enumerate}
   \item know how some function $f$ depends on some variables $x_i$
         (then taking derivatives with respect to these new variables
@@ -759,7 +759,7 @@ In practice we can apply eq.~\eqref{eq:errprop} when we
 Oftentimes in physics you'll find yourself in a situation where you want
 to calculate several functions of the same random variables $X_j$. If
 the $X_j$ are close enough to their means, or if the $Y_i$ are linear
-functions of the $X_j$, this is a situation in which \eqref{eq:lintran} 
+functions of the $X_j$, this is a situation in which \equatref{eq:lintran} 
 applies. Intuitively one might expect the $Y_i$ to be correlated; this
 turns out to be the case. In particular
 \begin{equation}
@@ -778,14 +778,14 @@ Let us consider a sample of independent measurements
 $X_1,...,X_N$ from some distribution with mean $\hat{x}$ and 
 variance $\sigma^2$ and a function $f$ that has a Taylor series 
 expansion near $\hat{x}$, but isn't necessarily linear.
-From Section \ref{sec:bias} we know that $\bar{f}=f(\bar{X})$ is
+From \secref{sec:bias} we know that $\bar{f}=f(\bar{X})$ is
 a consistent estimator of $\hat{f}=f(\hat{x})$. 
 
-The discussion of Section \ref{sec:prop} gives us a way to propagate 
+The discussion of \secref{sec:prop} gives us a way to propagate 
 uncertainty from the random variables to $f$, but it is effectively 
 unusable whenever $f$ becomes sufficiently complicated. 
 Even when $f$ is simple, if the original data are correlated, the 
-error propagation formula eq.~\eqref{eq:errprop} is still 
+error propagation formula \equatref{eq:errprop} is still 
 unwieldy. These are some motivations for using the jackknife.
 The jackknife method is pretty simple to implement, and jackknife error 
 bars agree with usual error bars when there is no bias.
@@ -829,7 +829,7 @@ variance of $\bar{f}_J$ is
 \end{example*}
 
 Next let's see how the jackknife lets us estimate bias.\index{jackknife!bias}
-From Proposition \ref{prp:bias} we know the bias of the estimator $\bar{f}$ 
+From \propref{prp:bias} we know the bias of the estimator $\bar{f}$ 
 is of order $1/N$, which we will write
 \begin{equation}\label{eq:bias}
   \text{bias}\;\bar{f}=\frac{A}{N}+\order{\frac{1}{N^2}}
@@ -872,13 +872,13 @@ for some constant $A$. Let us determine the bias of $\bar{f}_J$.
     $$
   \end{proof}
 \end{proposition}
-Comparing the final steps of Propositions \ref{prp:bias} and \ref{prp:Jbias},
+Comparing the final steps of \propref{prp:bias} and \ref{prp:Jbias},
 we see that they have the same lowest order contribution, except that $N$
 is replaced by $N-1$. Therefore we can write
 \begin{equation}
   \text{bias}\;\bar{f}_J=\frac{A}{N-1}+\order{\frac{1}{N^2}}
 \end{equation}
-with the same constant $A$ as with eq.~\eqref{eq:bias}. Combining both
+with the same constant $A$ as with \equatref{eq:bias}. Combining both
 of these equations, we conclude
 \begin{equation}
   A=N(N-1)\left(\ev{\bar{f}}-\ev{\bar{f}_J}\right)
@@ -896,7 +896,7 @@ error bar. However it can happen that if $A$ is large, and if $N$ is
 relatively small, the bias is non-negligible. In practice one should
 be concerned if the bias is of the same order as the error bar. In such
 a case one should attempt to correct for this bias. Using 
-eq.~\eqref{eq:biasest} it follows that
+\equatref{eq:biasest} it follows that
 \begin{equation}
   \bar{f}_C\equiv \bar{f}-\overline{\text{bias}}
 \end{equation}
@@ -921,7 +921,7 @@ bias estimators and bias-corrected estimators with
 \end{equation}
 With these definitions, we can then calculate estimators for the mean
 and variance of the mean using the same machinery as the original
-jackknife, i.e. from eq.~\eqref{eq:jackmean} and \eqref{eq:jackvar}.
+jackknife, i.e. from \equatref{eq:jackmean} and \eqref{eq:jackvar}.
 We get
 \begin{equation}
   \bar{f}_{CJ}=\frac{1}{N}\sum_{i=1}^N f_{CJ,i}~~~~\text{and}~~~~
@@ -948,12 +948,12 @@ is to estimate the $a_j$ and their error bars, and then determine whether
 this fit is consistent with the data.
 
 Assuming that $y(x,a)$ is the exact law for the data, the joint PDF
-of the measurements $Y_i$ is given by eq.~\eqref{dfn:ind} to be
+of the measurements $Y_i$ is given by \equatref{dfn:ind} to be
 \begin{equation}\label{eq:chi2NC}
   f(y_1,...,y_N)=\prod_{i=1}^N\frac{1}{\sqrt{2\pi}\sigma_i}
       \exp\left[\frac{-(y_i-y(x_i;a))^2}{2\sigma_i^2}\right].
 \end{equation}
-The PDF given by eq.~\eqref{eq:chi2NC} is an example of the 
+The PDF given by \equatref{eq:chi2NC} is an example of the 
 {\it non-central $\chi^2$ distribution}. Generally this distribution
 has random variable
 \begin{equation}
@@ -1001,7 +1001,7 @@ Switching to hyperspherical coordinates, this becomes
               \int\dd{\Omega}\int_0^\chi\dd{r}r^{N-1}e^{-r^2/2}.
 \end{equation}
 The RHS looks similar to the gamma function. With this in mind,
-we can make the substitution $t=r^2/2$ and use Proposition~\ref{prp:nsolida}
+we can make the substitution $t=r^2/2$ and use \propref{prp:nsolida}
 to obtain
 \begin{equation}\label{eq:chi2num}
   F(\chi^2)=\frac{1}{\Gamma(N/2)}\int_0^{\chi^2/2}\dd{r}t^{N/2-1}e^{-t}.
@@ -1095,7 +1095,7 @@ Since $\bar{F}(x)\xrightarrow{\text{P}}F(x)$ for all $x$, it follows
 that $\Delta\xrightarrow{\text{P}}0$. An important but surprising
 fact about $\Delta$ is that it is {\it distribution free}.
 The proof is relatively straightforward and given in
-Theorem~\ref{thm:koldf}. Theorem~\ref{thm:kolprb} gives
+\thmref{thm:koldf}. \thmref{thm:kolprb} gives
 the probability that the difference between the empirical and true
 CDFs is at least as extreme as what we calculate. This proof is
 tedious and not particularly enlightening, so it has been omitted.
@@ -1167,7 +1167,7 @@ and Smirnov~\cite{smirnoff_sur_1939}.
 \end{theorem}
 
 We now have all the ingredients we need to carry out a Kolmogorov test,
-and by Theorem~\ref{thm:koldf} we are guaranteed it will work, regardless
+and by \thmref{thm:koldf} we are guaranteed it will work, regardless
 of the underlying distribution, under the modest assumption that its
 CDF is continuous. In practice one can proceed as follows:
 \begin{enumerate}
@@ -1178,10 +1178,10 @@ CDF is continuous. In practice one can proceed as follows:
         $\bar{F}(X_2)=2/N$.
   \item Compute the exact PDF. For instance if we think the
         data come from $\Gau(x,0,\sigma)$, we can compute the exact CDF
-        using eq.~\eqref{eq:gaussCDF}; or if we think the data come from the 
+        using \equatref{eq:gaussCDF}; or if we think the data come from the 
         uniform distribution on $[0,1]$, we can just heapsort them.
   \item Determine $\Delta$.
-  \item Calculate $\pr{\Delta>D}$ using Theorem~\ref{thm:kolprb}.
+  \item Calculate $\pr{\Delta>D}$ using \thmref{thm:kolprb}.
         If the calculation of the exact probability is slow, you can
         use the approximation, but only if $N$ is big enough, say larger
         than 100 or so.
@@ -1243,7 +1243,7 @@ exponential behavior; i.e. for all $i$
 \end{equation}
 $\tau_\text{exp}$ is called the {\it exponential autocorrelation time}.
 
-Plugging definition \eqref{dfn:acov} into eq.~\eqref{eq:tsvar} we have 
+Plugging definition \eqref{dfn:acov} into \equatref{eq:tsvar} we have 
 \begin{equation}
   \sigma^2_{\bar{X}}=\frac{1}{N^2}\sum_{i,j}c(X_i,X_j).
 \end{equation}
@@ -1267,12 +1267,12 @@ The quantity
 \end{equation}
 is called the {\it integrated autocorrelation time}.
 
-From eq.~\eqref{eq:IAC} we see that $\tauint$ is just the ratio between the
+From \equatref{eq:IAC} we see that $\tauint$ is just the ratio between the
 estimated variance of the sample mean and what this variance would have been 
 if the data were uncorrelated. 
 
 In practice, we often don't know the true mean $\hat{x}$ of the time series.
-Therefore along the lines of eq.~\eqref{eq:umv}, we construct an unbiased
+Therefore along the lines of \equatref{eq:umv}, we construct an unbiased
 estimator of the autocovariance
 \begin{equation}
   \bar{c}(t)=\frac{N}{(N-1)(N-t)}
@@ -1293,9 +1293,9 @@ $\gamma(t)$ has only one exponential term, one can prove
 \begin{equation}
   \lim_{N\to\infty}\tau_\text{int}=1+2\sum_{t=1}^\infty\gamma(t),
 \end{equation}
-which parallels eq.~\eqref{eq:IACest} more closely. To construct a final
+which parallels \equatref{eq:IACest} more closely. To construct a final
 estimator for $\tauint$, one looks for a window in $n$ for which
-eq.~\eqref{eq:IACest} becomes roughly independent of $n$. This serves
+\equatref{eq:IACest} becomes roughly independent of $n$. This serves
 as the final $\bar{\tau}_\text{int}$.
 
 \bibliographystyle{unsrtnat}

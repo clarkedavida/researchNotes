@@ -3,11 +3,11 @@ This chapter is a collection of miscellaneous physics topics that I
 found interesting. I found the sections to be too short to be
 chapters in their own right. In the future, they could be expanded
 into chapters, or incorporated into already existing chapters.
-Section~\Ref{sec:isohyper} follows Chapter~9 of 
+\secref{sec:isohyper} follows Chapter~9 of 
 Thomson~\cite{thomson_modern_2013}. 
-Section~\Ref{sec:ssb} follows Section~11.1 of Peskin and 
+\secref{sec:ssb} follows Section~11.1 of Peskin and 
 Schroeder~\cite{peskin_introduction_1995}.
-Section~\Ref{sec:cscont} follows Chapter 7 of Gattringer and 
+\secref{sec:cscont} follows Chapter 7 of Gattringer and 
 Lang~\cite{gattringer_quantum_2010}. 
 
 \section{Isospin and hypercharge}\label{sec:isohyper}
@@ -225,7 +225,7 @@ the subgroup $\text{O}(N-1)$."
 \end{figure}
 
 Let's try to gain some geometric intuition for this phenomenon. 
-Looking at eq.~\eqref{eq:phidir}, we see that in $\phi$ space, the $\sigma$
+Looking at \equatref{eq:phidir}, we see that in $\phi$ space, the $\sigma$
 field corresponds to oscillations of $\phi$ orthogonal to the $N-1$
 dimensional hypersurface, while the massless $\pi_k$ fields
 corresponds to oscillations along the hypersurface. 
@@ -247,7 +247,7 @@ SSB. This is a special example of a general result
 known as Goldstone's theorem. The generated massless particles are
 referred to as \index{Goldstone!boson}{\it Goldstone bosons}. 
 Many light bosons can be interpreted
-as approximate Goldstone bosons; as we will see in Section~\Ref{sec:cscont},
+as approximate Goldstone bosons; as we will see in \secref{sec:cscont},
 the pion can be viewed in this manner.
 \begin{theorem}{Goldstone's theorem}{}
 \index{Goldstone!theorem}
@@ -273,7 +273,7 @@ Goldstone boson.
   $$
   The differences $\phi-\phi_\text{min}$ give the new fields of the
   theory after SSB; for example in the linear sigma model this difference
-  is, from equations~\eqref{eq:phidir} and \eqref{eq:phishift},
+  is, from \equatref{eq:phidir} and \eqref{eq:phishift},
   $$
     \phi-\phi_\text{min}=(\pi_1,...,\pi_{N-1},\sigma).
   $$
@@ -337,8 +337,8 @@ mapping
 where $\alpha\in\R$. This is probably called a chiral rotation
 because $\gamma_5$ is used to define the operators~\eqref{eq:projdef},
 which project out the left-handed and right-handed components of the
-fermion field according to eq.~\eqref{eq:projact}. Using identity 2 of
-Proposition~\Ref{prp:gammatech}, we find that $\Lagr_F$ transforms under this
+fermion field according to \equatref{eq:projact}. Using identity 2 of
+\propref{prp:gammatech}, we find that $\Lagr_F$ transforms under this
 rotation as
 \begin{equation}
   \Lagr_F\to\bar{\psi}e^{i\alpha\gamma_5}\slashed{D}e^{i\alpha\gamma_5}\psi
@@ -346,7 +346,7 @@ rotation as
          =\Lagr_F,
 \end{equation}
 i.e. it is invariant under chiral rotations. Using
-Proposition~\Ref{prp:projection}, one can decompose $\Lagr_F$ into its
+\propref{prp:projection}, one can decompose $\Lagr_F$ into its
 left-handed and right-handed parts as
 \begin{equation}
   \Lagr_F=\bar{\psi}_L\slashed{D}\psi_L
@@ -389,7 +389,7 @@ in the Lorentz transformation sense) looking something like
   \psi=\colvec{4}{\psi_1}{\psi_2}{\vdots}{\psi_{N_f}},
 \end{equation}
 where each $\psi_i$ is a 4-component Dirac spinor, and presumably when
-we write $\gamma^\mu$ in eq.~\eqref{eq:nfact} what we really mean is
+we write $\gamma^\mu$ in \equatref{eq:nfact} what we really mean is
 \begin{equation}
   \gamma^\mu=\gamma^\mu\id_{N_f}
             =\left(\begin{array}{cccc}
@@ -401,7 +401,7 @@ we write $\gamma^\mu$ in eq.~\eqref{eq:nfact} what we really mean is
 \end{equation}
 I pray the reader forgives the notational perversion in the above equation.
 
-In the chiral limit, the action eq.~\eqref{eq:nfact} is again invariant under
+In the chiral limit, the action \equatref{eq:nfact} is again invariant under
 \index{rotation!axial vector}
 chiral rotations, also in this context called {\it axial vector rotations},
 taking the form
@@ -439,7 +439,7 @@ quarks, and hence has $B=1$. Anti-quarks have $B=-1$, and
 mesons have $B=0$.
 
 Returning once again to the massless limit, the invariance of the action under
-eqs.~\eqref{eq:SUNfc}, \eqref{eq:U1A}, \eqref{eq:SUNf}, and \eqref{eq:U1V}
+\equatref{eq:SUNfc}, \eqref{eq:U1A}, \eqref{eq:SUNf}, and \eqref{eq:U1V}
 represents the global symmetry group
 \begin{equation}\label{eq:SMfglobal}
   \SU(N_f)_L\times\SU(N_f)_R\times\U(1)_V\times\U(1)_A.
@@ -447,7 +447,7 @@ represents the global symmetry group
 Breaking the global symmetry group~\eqref{eq:SMfglobal} has important
 implications in QCD phenomenology. For example we will show that in the
 quantized, massless theory the fermion determinant changes
-under~\eqref{eq:U1A}, breaking the $\U(1)_A$ symmetry explicitly. The remaining
+under~\equatref{eq:U1A}, breaking the $\U(1)_A$ symmetry explicitly. The remaining
 symmetry is
 \begin{equation}\label{eq:SMglobalbUA}
   \SU(N_f)_L\times\SU(N_f)_R\times\U(1)_V.
@@ -467,7 +467,7 @@ The typical QCD scale is $\sim1~\text{GeV}$ (think protons, which have a
 mass of about 940~MeV) so the $u$, $d$, and $s$ quarks have masses that
 are relatively small (about 5~MeV, 5~MeV, and 100~MeV, respectively).
 Since these masses are so close to zero on this scale, we can say that
-when $N_f=2$, and partly for $N_f=3$, eq.~\eqref{eq:SMglobalbUA} is
+when $N_f=2$, and partly for $N_f=3$, \equatref{eq:SMglobalbUA} is
 an approximate symmetry. If the $u$ and $d$ quarks were massless, this symmetry
 would be exact, and it can be argued~\cite{gattringer_quantum_2010} that
 a nucleon and its negative parity partner should have the same mass. 

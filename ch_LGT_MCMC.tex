@@ -1,6 +1,6 @@
 \chapter{LGT: Computer Implementation}\label{ch:MCMC}
 
-As discussed in Section~\ref{sec:finitetemp}, expectation values of 
+As discussed in \secref{sec:finitetemp}, expectation values of 
 physical observables $X$ in pure $\SU(2)$ LGT
 are given by functional integrals
 \begin{equation}\label{eq:exobs}
@@ -18,10 +18,10 @@ and on each configuration, making a measurement $X_i$. The average
 \end{equation}
 serves as the estimator.
 
-In Section~\ref{sec:MCMCintro} we introduce MCMC simulations as they 
-are applied to the project. Section~\ref{sec:statana} summarizes
+In \secref{sec:MCMCintro} we introduce MCMC simulations as they 
+are applied to the project. \secref{sec:statana} summarizes
 some of the tools needed to statistically analyze the generated data. 
-The final Section~\ref{sec:implement} provides 
+The final \secref{sec:implement} provides 
 details of how our simulation is implemented on the computer.
 Further details can be found in, for instance, Berg~\cite{berg_markov_2004}. 
 
@@ -71,7 +71,7 @@ If $W$ satisfies
   \item and balance, 
 \end{enumerate}
 then the Markov process is guaranteed to bring the ensemble toward 
-equilibrium. Using normalization, one finds from eq.~\eqref{eq:balance}
+equilibrium. Using normalization, one finds from \equatref{eq:balance}
 \begin{equation}\index{balance}
     \sum\limits_CW^{CC'}\pr{C}=\pr{C'},
 \end{equation}
@@ -79,7 +79,7 @@ which shows that the equilibrium distribution is a fixed point of
 the Markov chain. The first property, ergodicity, guarantees that it
 is possible to transition from $C$ to $C'$ in a finite number of steps.
 In realistic simulations, it is important that the $n$ appearing in
-eq.~\eqref{eq:ergodicity}\index{ergodic} is not too large. For example 
+\equatref{eq:ergodicity}\index{ergodic} is not too large. For example 
 the Markov chain may have difficulty connecting different topological sectors
 in configuration space.
 
@@ -268,7 +268,7 @@ U\to U'=gU_\mu g^\dagger,
 which is reminiscent of the OR update~\eqref{eq:ORupdate}. Hence we employ
 again OR, i.e. we find the $g$ minimizing $F$ and make the
 replacement~\eqref{eq:gfORupdate}. In a similar strategy as
-Proposition~\ref{prp:OR}, we look at the local update to $F$,
+\propref{prp:OR}, we look at the local update to $F$,
 \begin{equation}
   \Re\tr g(x)\sum_\mu\left[U_\mu(x)g^\dagger(x+a\hat\mu)
                         +U_\mu^\dagger(x-a\hat\mu)g^\dagger(x-a\hat\mu)\right]
@@ -340,7 +340,7 @@ Naively one might guess
 \end{equation}
 as an estimator; however $\bar{f}_\text{bad}$ is not guaranteed
 to converge to the exact result\footnote{See for instance the discussion
-in Section~\ref{sec:bias}.}. 
+in \secref{sec:bias}.}. 
 An estimator for $f(\ev{X})$ that converges to its true value is
 \begin{equation}\label{eq:MCMCconsistentEst}
   \bar{f}=f(\bar{X});
@@ -362,7 +362,7 @@ as functions of the sample average; these are called {\it secondary quantities}.
 \index{secondary quantity} An obvious example is the variance, which is defined
 only in terms of averages. But a less obvious example are particle masses,
 which cannot be directly calculated on any single configuration. In this
-case we are forced to use \eqref{eq:MCMCconsistentEst}.
+case we are forced to use \equatref{eq:MCMCconsistentEst}.
 
 We have introduced a way to estimate the mean and variance of some
 operator, as well as a way to estimate the mean of some function of
@@ -508,7 +508,7 @@ where $c$ is a constant that is small enough not to overshoot direction
 of steepest descent. This is an example of a {\it steepest descent method}.
 The Levenberg-Marquardt\index{Levenberg-Marquardt} 
 method~\cite{levenberg_method_1944,marquardt_algorithm_1963}, which is 
-our method of choice, varies smoothly between~\eqref{eq:NR} and 
+our method of choice, varies smoothly between~\equatref{eq:NR} and 
 \eqref{eq:SD}. Steepest descent is used far from the minimum, and 
 then it switches to the Newton-Raphson method when the minimum is approached.
 
