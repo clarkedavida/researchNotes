@@ -1,4 +1,4 @@
-\chapter{LGT: Lattice without fermions}\label{ch:preliminaries}
+\chapter{LGT: Lattice without Fermions}\label{ch:preliminaries}
 
 LGT is introduced in \secref{sec:LGT}
 by reviewing local gauge symmetries in QFT, regularizing a pure
@@ -534,7 +534,7 @@ Now we expand the exponential:
      U^{\square\,\dagger}\right)\right)~~~~~~~~~~~~~~~~~~~~
        ~~~~~~~~~~~~\\
     =\sum_{i,j=0}^{\infty}\frac{1}{i!j!}\left(\frac{\beta}{6}\right)^{i+j}
-      \left(\sum_\square\tr\plaq\right)^i\left(\sum_{\square'}\tr\U^{\square'\,\dagger}\right)^j
+      \left(\sum_\square\tr\plaq\right)^i\left(\sum_{\square'}\tr U^{\square'\,\dagger}\right)^j
 \end{gathered}\end{equation}
 
 
@@ -831,7 +831,7 @@ scales like a length, provided that
   \item the target values are large enough so that $\sqrt{8t}\gg a$ 
         for the smallest used flow time; and
   \item the values of $\beta$ are large enough to be in the
-        $\SU(2)$ scaling region.
+        $\SU(N_c)$ scaling region.
 \end{enumerate}
 In contrast to the deconfinement scale, the computation of 
 a gradient scale does not require fits or extrapolations.
@@ -905,60 +905,6 @@ fit parameters. We will refer to this behavior
 \index{scaling!standard}
 as {\it standard scaling}. 
 
-Another possibility for continuum limit extrapolation uses
-the asymptotic scaling relation~\eqref{eq:latRGEsoln}
-\begin{equation}\label{eq:asr}
-  a\Lambda_L=\fas(\beta).
-\end{equation}
-We start by noting that the scale
-$L_i$ calculated on the lattice is some function of the spacing,
-so it can be expanded as a power series in $a$:
-\begin{equation}
-  L_i=\frac{c_i}{a\Lambda_L}\left(1+\sum\limits_{k=1}^{\infty}
-                           \alpha_{i\,k}(a\Lambda_L)^k\right),
-\end{equation}
-where the $\alpha_{i\,k}$ are expansion coefficients.
-Allton suggested using this equation to fit the approach to the continuum
-limit~\cite{allton_lattice_1997}. Inserting \equatref{eq:asr}
-into the above power series yields
-\begin{equation}
-  L_i=\frac{c_i}{\fas(\beta)}
-              \left(1+\sum\limits_{k=1}^{\infty}
-                    \alpha_{i\,k}\,\fas(\beta)^{\,k}\right).
-\end{equation}
-In practice $\fas$ is only known up to three loops, so we must
-truncate it at some order $m$. Furthermore to have a finite number
-of fit parameters, we must truncate the power series at some order
-$n$. Hence, the approach of a length to the continuum limit can
-be fit according to 
-\begin{equation}\label{eq:lenasf}
-  L_i=\frac{c^{mn}_i}{\fas^m(\beta)}
-                    \left(1+\sum\limits_{k=1}^{n}
-                    \alpha^{mn}_{i\,k}\,\fas^m(\beta)^{\,k}\right),
-\end{equation}
-where upper indices $m$ and $n$ are attached to quantities that
-will change if $m$ or $n$ change. The fit parameters are
-$c^{mn}_i$ and the $\alpha_{ik}^{mn}$. 
-
-In general, asymptotic scaling would allow $\order{a}$ corrections. 
-In order to ensure non-perturbative corrections are 
-$\order{a^2}$, we improve on Allton by demanding that 
-all scales have the
-same $k=1$ term $\alpha^{mn}_{i,1}$; then terms of order $a$ cancel 
-in the ratio. Using \equatref{eq:lenasf} along with this restriction, 
-one obtains
-\begin{equation}\label{eq:ascalingfit}
-  R_{ij}=r_{ij}+\sum_{k=2}^n\kappa^{mn}_{i\,k}
-                  \,\fas^m\left(L_j\right)^{\,k},
-\end{equation}
-where the fit parameters are now $r_{ij}$ and the $\kappa_{i\,k}^{mn}$.
-One can switch the domain of $\fas^m$ from $\beta$ to the
-reference $L_j$ using, for instance, \equatref{eq:lenasf}.
-The continuum limit estimate $r_{ij}$ also depends on $m$ and $n$, but
-we have suppressed these indices for clearer comparison with
-the standard scaling fit~\eqref{eq:stdscalingfit}. We will refer
-to the behavior of \equatref{eq:lenasf} or \eqref{eq:ascalingfit}
-as \index{scaling!asymptotic}{\it asymptotic scaling}.
 
 If we carry out a naive continuum limit without changing the
 extension of the lattice, its physical volume collapses to zero.
@@ -978,7 +924,9 @@ The $N_s=\infty$ result $\beta_c(N_\tau)$ can then
 be extracted from a fit of the three parameters $\beta_c(N_\tau)$,
 $a_1(N_\tau)$, and $a_2(N_\tau)$.
 
+
 \section{Topological invariants}\label{sec:topinvar}
+
 
 \subsection{Topological winding number}
 \index{topological!winding number}

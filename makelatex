@@ -15,7 +15,7 @@ if [ $? -eq 1 ]; then
   pdflatex -interaction=batchmode -draftmode 0_researchnotes.tex
 fi
 
-makeindex 0_researchnotes
+makeindex -s indexHeader.ist 0_researchnotes
 pdflatex -interaction=batchmode -draftmode 0_researchnotes.tex
 pdflatex -interaction=batchmode 0_researchnotes.tex
 ./distclean

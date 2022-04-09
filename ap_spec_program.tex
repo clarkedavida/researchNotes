@@ -1,4 +1,21 @@
-\chapter{Special Topic: OOP}\label{ap:oop}
+\chapter{Special Topic: Aspects of Programming}\label{ap:oop}
+
+The focus of these research notes is on LFT, which employs programming heavily.
+In particular the computationally demanding MCMC code we write spurs us to
+write code that is
+\begin{enumerate}
+  \item easy to read,
+  \item well organized,
+  \item future-proof, and
+  \item high performance.
+\end{enumerate}
+Furthermore we must carry out statistical analysis of observables measured on
+configurations produced by this MCMC code. In this Appendix we collect
+some information on these topics.
+
+
+\section{Object oriented programming}
+
 
 The first programming language I used for serious scientific calculations
 \index{object-oriented programming}
@@ -60,7 +77,7 @@ it can be difficult to see precisely what operations the computer
 performs. In my experience, this trade-off is hugely worthwhile, and I think
 most modern software developers would agree.
 
-\section{OOP in C++} 
+\subsection{OOP in C++} 
 Probably the best way to learn is through an example. To see the basics
 of OOP in action, we will implement a \texttt{CAT} class, and 
 introduce some new OOP jargon and concepts along the way.
@@ -145,7 +162,7 @@ in C++ out there, but a good start might be Ref.~\cite{tp:cpp}.\\
 \lstinputlisting[firstline=40, lastline=49]{exampleCode/scope.cpp}
 \lstinputlisting[language={}]{exampleCode/scopeOutput.txt}
 
-\section{OOP in Python}
+\subsection{OOP in Python}
 
 We continue by discussing OOP in Python. Python is a rather friendly language
 and it is popular for scientific programming, so you can find lots of useful

@@ -64,7 +64,7 @@
 \renewcommand\bibname{References}
 \setcitestyle{numbers,square}
 
-% Make index.
+% Make index and let it appear in table of contents.
 \usepackage{makeidx}
 \makeindex
 \usepackage[totoc]{idxlayout}
@@ -148,6 +148,7 @@ $\sim$          & Equivalence relation \\
 $\simeq$        & Asymptotic equality \\
 $\propto$       & Is proportional to \\
 $\mathbb{C}$    & Complex numbers \\
+$\pr{X}$        & Probability of event $X$ \\
 $\co_x$         & $\cos(x)$ \\
 $\oplus$        & Direct sum; relativistic velocity addition  \\
 $\otimes$       & Direct product \\ 
@@ -159,6 +160,8 @@ $q$             & Gaussian or Student difference test; goodness-of-fit \\
 $\mathbb{R}$    & Real numbers \\
 $\s_x$          & $\sin(x)$ \\
 $\SU(N)$        & Special unitary group of degree $N$ \\
+$\U(N)$         & Unitary group of degree $N$ \\
+O$(N)$         & Orthogonal group of dimension $N$ \\
 $S_V$           & Symmetric group on the set $V$ \\
 $\tauint$       & Integrated autocorrelation time \\
 $\mathbb{Z}$    & Integers \\
@@ -169,8 +172,8 @@ $\mathbb{Z}_n$  & Integers modulo $n$ \\
 \section*{Physics Symbols}
 \begin{tabular}{ll}
 $a$             & Lattice spacing \\
-$\beta$         & $\SU(N_c)$ coupling constant; beta function \\
-$\chi$          & Topological susceptibility; Polyakov loop susceptibility\\
+$\beta$         & $\SU(N_c)$ coupling constant; beta function; critical exponent \\
+$\chi_O$        & Susceptibility of observable $O$\\
 $c$             & Speed of light\\
 $G$             & A group; Newton's gravitational constant\\
 $g$             & A group element; $\SU(N_c)$ bare coupling\\
@@ -234,56 +237,58 @@ $m_p$    & $1.67262\times 10^{-27}$ & [kg]
 \end{tabularx}
 \clearpage
 
-\section*{High Energy Glossary}
-\begin{tabularx}{\linewidth}{lL}
-Baryon number (B)& 
-  (\# baryons $-$ \# anti-baryons)
-\vspace{2mm}\\
-Bottomness (B$'$)& 
-  $-$(\# bottom quarks $-$ \# bottom anti-quarks)
-\vspace{2mm}\\
-Branching ratio& 
-  Ratio of decay rate of particle along a particular channel
-  to the total decay rate of that particle.
-\vspace{2mm}\\
-Charm (C)& 
-  (\# charm quarks $-$ \# charm anti-quarks)
-\vspace{2mm}\\
-Effective field theory&
-  Field theory that is valid only at certain energy scales. The SM is 
-  therefore an effective field theory.
-\vspace{2mm}\\
-Field equation&
-  Any partial differential equation describing the dynamics of
-  some physical field.
-\vspace{2mm}\\
-Lattice units&
-  Units where $a=1$ and is dimensionless.
-\vspace{2mm}\\
-Naturalness&
-  The property that free parameters or physical constants appearing in a theory
-  should take relative values of order 1.
-\vspace{2mm}\\
-Physical units& 
-  Units where $a$ carries length. 
-\vspace{2mm}\\
-Planck mass&
-  Mass at which the gravitational coupling becomes of order one.
-  $$
-    \alpha_G=\frac{GM_P^2}{\hbar c}\sim1~\Rightarrow~
-     M_P\sim\sqrt{\frac{\hbar c}{G}}\approx10^{19}~\text{GeV}
-  $$
-\vspace{2mm}\\
-Semi-leptonic decay& 
-  Weak decay of a hadron producing a lepton, corresponding neutrino,
-  and one or more hadrons. 
-\vspace{2mm}\\
-Strangeness (S)& 
-  $-$(\# strange quarks $-$ \# strange anti-quarks)
-\vspace{2mm}\\
-Topness (T)& 
-  (\# top quarks $-$ \# top anti-quarks)
-\end{tabularx}
+
+%\section*{High Energy Glossary}
+%\begin{tabularx}{\linewidth}{lL}
+%Baryon number (B)& 
+%  (\# baryons $-$ \# anti-baryons)
+%\vspace{2mm}\\
+%Bottomness (B$'$)& 
+%  $-$(\# bottom quarks $-$ \# bottom anti-quarks)
+%\vspace{2mm}\\
+%Branching ratio& 
+%  Ratio of decay rate of particle along a particular channel
+%  to the total decay rate of that particle.
+%\vspace{2mm}\\
+%Charm (C)& 
+%  (\# charm quarks $-$ \# charm anti-quarks)
+%\vspace{2mm}\\
+%Effective field theory&
+%  Field theory that is valid only at certain energy scales. The SM is 
+%  therefore an effective field theory.
+%\vspace{2mm}\\
+%Field equation&
+%  Any partial differential equation describing the dynamics of
+%  some physical field.
+%\vspace{2mm}\\
+%Lattice units&
+%  Units where $a=1$ and is dimensionless.
+%\vspace{2mm}\\
+%Naturalness&
+%  The property that free parameters or physical constants appearing in a theory
+%  should take relative values of order 1.
+%\vspace{2mm}\\
+%Physical units& 
+%  Units where $a$ carries length. 
+%\vspace{2mm}\\
+%Planck mass&
+%  Mass at which the gravitational coupling becomes of order one.
+%  $$
+%    \alpha_G=\frac{GM_P^2}{\hbar c}\sim1~\Rightarrow~
+%     M_P\sim\sqrt{\frac{\hbar c}{G}}\approx10^{19}~\text{GeV}
+%  $$
+%\vspace{2mm}\\
+%Semi-leptonic decay& 
+%  Weak decay of a hadron producing a lepton, corresponding neutrino,
+%  and one or more hadrons. 
+%\vspace{2mm}\\
+%Strangeness (S)& 
+%  $-$(\# strange quarks $-$ \# strange anti-quarks)
+%\vspace{2mm}\\
+%Topness (T)& 
+%  (\# top quarks $-$ \# top anti-quarks)
+%\end{tabularx}
+
 
 \section*{Some Important Particles}
 \begin{tabularx}{\linewidth}{rLlc}
@@ -350,10 +355,10 @@ chapters are dedicated to mainly physics, with an aim toward lattice field
 theory. 
 
 Attached at the end are also some appendices. 
-Appendix~\ref{ap:oop} is a brief introduction to object-oriented programming.
-Appendix~\ref{ap:spec_math} includes some special topics in mathematics 
+\apref{ap:oop} is a brief introduction to object-oriented programming.
+\apref{ap:spec_math} includes some special topics in mathematics 
 that, while sometimes useful for a physicist, don't really fit in one of 
-the mathematics chapters at the beginning. Appendix~\ref{ap:spec_phys} includes
+the mathematics chapters at the beginning. \apref{ap:spec_phys} includes
 special topics in physics that fill in some of my gaps of knowledge. Usually
 these topics are relevant to my research, but I didn't really feel they fit
 well in other chapters, and are not developed enough to stand as chapters
@@ -362,12 +367,10 @@ to develop some sections of these appendices into full chapters.
 Later appendices are for topics in physics that I found interesting but are
 not particularly relevant to my research.
 
-The reader will find it useful to have some basic knowledge
-of calculus, linear algebra, differential equations, and complex analysis.
-(Just enough to get by in undergraduate physics classes.) 
 
 \tableofcontents                        % print table of contents
 \mainmatter                             % arabic page no., include chapter
+
 
 % These are the chapters of the book.
 \include{ch_group_theory}
@@ -388,9 +391,9 @@ of calculus, linear algebra, differential equations, and complex analysis.
 \include{ap_spec_phys}
 \include{ap_spec_neutrino}
 \include{ap_spec_higgs}
-\include{ap_spec_cosmology}
+%\include{ap_spec_cosmology}
 \include{ap_spec_bell}
-\include{ap_spec_oop}
+\include{ap_spec_program}
 \end{appendices}
 
 \printindex
