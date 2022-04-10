@@ -799,13 +799,16 @@ systematic errors because they come from MCMC simulations performed on
 finite lattices with nonzero spacing. Therefore it is desirable to set
 the scale with a quantity that is computable with low numerical effort,
 has small systematic uncertainties, and good statistical precision.
-Controlling systematic error is
-discussed in \secref{sec:sysa}, while the
-discussion of statistical error is postponed to 
-\chref{ch:MCMC}. We begin by introducing some reference scales. 
+We begin by introducing some reference scales. 
 
 
 \subsection{String tension}\index{string!tension}
+
+
+One of the first reference scales used in lattice calculations was the string
+tension. The string tension is loosely related to physics experiment; it can be
+extracted from Regge trajectories, but its value in MeV is somewhat
+model-dependent~\cite{smit_introduction_2002}.
 
 
 \subsection{Deconfinement temperature}\index{temperature!deconfinement}
@@ -849,6 +852,40 @@ infinite volume limit $N_s\to\infty$. Inverting $\beta_c(N_\tau)$ gives
 $N_\tau(\beta)$, which we call the
 \index{scale!deconfinement}{\it deconfinement scale}.
 
+
+\subsection{Sommer scales}\index{scale!Sommer}
+
+One of the difficulties of using $\sigma$ to set the scale is that it suffers
+from relatively large systematic error, since it is defined in the limit that
+the temporal edge of the Wilson loop goes to infinity.
+In this section we will look at a scale that does not experience such a
+systematic error.
+
+We begin by computing the force\footnote{This differs from the usual
+force definition by a minus sign.} corresponding to the Cornell
+potential~\eqref{eq:cornellpotential},
+\begin{equation}
+  F(r)=\frac{\dd}{\dd r}V(r)
+      =\frac{\dd}{\dd r}\left(A+\frac{B}{r}+\sigma r\right)
+      =-\frac{B}{r^2}+\sigma,
+\end{equation}
+then multiply through by $r^2$ to make a dimensionless equation
+\begin{equation}
+  r^2F(r)=-B+\sigma r^2.
+\end{equation}
+The {\it Sommer scale} is the distance $r_c$ such that
+\begin{equation}
+  r_c^2F(r_c)=c
+\end{equation}
+with $r_{1.65}\equiv r_0$. This choice of RHS corresponds to
+about $r_0\approx 0.5$ fm.
+
+In lattice units, the Sommer scale $r_c$ is given by
+\begin{equation}
+  \frac{r_c}{a}=\sqrt{\frac{c+B}{\sigma a^2}}.
+\end{equation}
+Hence one can extract $r_c/a$ once one knows $B$. One way to obtain $B$ is
+to simply carry out a fit to $aV(r)$.
 
 \subsection{Gradient and cooling scales}
 
