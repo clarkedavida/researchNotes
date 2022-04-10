@@ -472,12 +472,18 @@ a Wilson loop $W(\mathcal{C}_{rt})$
 where $\mathcal{C}_{rt}$ is a rectangular loop of side lengths 
 $r$ and $t$ parallel
 to the Euclidean time direction. When
-viewing this Wilson loop in the temporal gauge, one argues that
+viewing this Wilson loop in the temporal gauge, \index{gauge!temporal}
+defined on the lattice by\footnote{In the Euclidean continuum theory,
+the temporal gauge is defined by $A_4=0$.}
+\begin{equation}
+  U_4(x)=\id,
+\end{equation}
+one argues that
 the edges parallel to the Euclidean time direction correspond to
 a static quark-antiquark pair.
 Then the {\it static quark potential}
 \index{static quark potential} $V(r)$ is defined by
-\begin{equation}
+\begin{equation}\label{eq:staticpotential}
   V(r)\equiv-\lim_{t\to\infty}\frac{1}{t}\log W(\mathcal{C}_{rt})  
 \end{equation}
 and gives the energy of the gauge field due to two color sources separated by
@@ -485,20 +491,21 @@ a distance $r$.
 
 
 We will argue the static quark potential has the form
-\begin{equation}\label{eq:staticpotential}
+\begin{equation}\label{eq:cornellpotential}
   V(r)=A+\frac{B}{r}+\sigma r,
 \end{equation}
 which is sometimes called the {\it Cornell potential}\index{potential!Cornell},
 where $A$ and $B$ are constants and
-$\sigma$ is the {\it string tension}\index{string tension}. 
+$\sigma$ is the {\it string tension}\index{string!tension}. 
 If the string tension is non-vanishing, then the potential scales linearly 
 with $r$ in the large $r$ limit; 
 this phenomenon has been observed in LGT 
-simulations~\cite{montvay_quantum_1994},
-and we thus see LGT proffers an explanation of confinement.  
+simulations\footnote{Some studies are quoted in e.g.
+Ref.~\cite{montvay_quantum_1994}},
+and we thus see LGT proffers an explanation of confinement.
 
 
-The Coulomb-like term in \equatref{eq:staticpotential} can be seen
+The Coulomb-like term in \equatref{eq:cornellpotential} can be seen
 mnemonically as follows. From \equatref{eq:fieldstrength}
 one sees that the $\SU(N_c)$ field strength tensor has the same form
 as the $\U(1)$ tensor, except for the last term, which is due to
@@ -511,7 +518,7 @@ so we should a expect the $1/r$ term.
 Conversely we argue for the linearly rising term in the strong
 coupling limit. For arbitrary path $\mathcal{C}$ we expand the Wilson
 loop expectation value as
-\begin{equation}
+\begin{equation}\label{eq:evWC}
   \ev{W_\mathcal{C}}=\frac{1}{Z}\int\DD U
     \exp\left(-\frac{\beta}{3}\sum_\square\Re\tr\left[\id-\plaq\right]\right)
     \tr\prod_{l\in\mathcal{C}}U_l,
@@ -529,14 +536,73 @@ both the numerator and the partition function to get
     \tr\prod_{l\in\mathcal{C}}U_l.
 \end{aligned}\end{equation}
 Now we expand the exponential:
-\begin{equation}\begin{gathered}
+\begin{equation}\begin{gathered}\label{eq:wilsonloopexpexpand}
     \exp\left(\frac{\beta}{6}\sum_\square\left(\tr \plaq+\tr
      U^{\square\,\dagger}\right)\right)~~~~~~~~~~~~~~~~~~~~
        ~~~~~~~~~~~~\\
     =\sum_{i,j=0}^{\infty}\frac{1}{i!j!}\left(\frac{\beta}{6}\right)^{i+j}
-      \left(\sum_\square\tr\plaq\right)^i\left(\sum_{\square'}\tr U^{\square'\,\dagger}\right)^j
+      \left(\sum_\square\tr\plaq\right)^i\left(\sum_{\square'}\tr
+        U^{\square'\,\dagger}\right)^j.
 \end{gathered}\end{equation}
+Using this expansion, we can get the leading order contribution to the
+denominator of \equatref{eq:evWC}. The zeroth order term is 1. The first
+order term is zero due to the first statement of \propref{prp:haar}. Hence,
+\begin{equation}
+  Z'=1+\order{\beta^2}.
+\end{equation}
 
+
+To see where the linear behavior in \equatref{eq:cornellpotential} comes from,
+we apparently need to apply this expansion to \equatref{eq:staticpotential}.
+Hence we consider the rectangular contour $\mathcal{C}_{rt}$ with spatial
+edge $r=an_r$ and $t=an_t$.
+We will use the third statement in \propref{prp:haar} to calculate
+the product of this exponential with the Wilson loop. 
+
+
+The two plaquette sums
+appearing in \equatref{eq:wilsonloopexpexpand} have opposite orientations, so
+according to this Proposition, only one of those two sums can contribute when hitting
+the Wilson loop.
+\begin{figure}\label{fig:erasePlaquette}
+  \centering
+  \includegraphics[width=0.9\linewidth]{figs/plaquetteTimesWilson.pdf}
+  \caption{Integrating over the product of the Wilson loop $W(\mathcal{C}_{rt})$
+           with an oppositely oriented plaquette. The resulting contour on the
+           right comes with a factor 1/3 due to \propref{prp:haar}.}
+\end{figure}
+When a plaquette with non-vanishing contribution hits the loop,
+the common link disappears, and the remainder of the plaquette is stitched to
+the Wilson loop, as shown in Fig.~\ref{fig:erasePlaquette}.
+If in our sum there remains even one link that does integrate against a corresponding
+plaquette, the integral will vanish according to statement 1 of
+\propref{prp:haar}. Hence the only contributing terms are those terms in our
+sum with a product of $n_A\equiv n_r n_r$ unique plaquettes that lie within
+the boundary of the Wilson line. There are $n_A!$ such terms. Hence
+\begin{equation}\begin{aligned}
+  \ev{W(C_{rt})}
+      &\approx\int\DD U\frac{1}{n_A!}\left(\frac{\beta}{6}\right)^{n_A}
+            \left(\sum_\square\tr U^{\square\,\dagger}\right)^{n_A}
+            \tr\prod_{l\in\mathcal{C}_{rt}}U_l\\
+      &=\tr\id\left(\frac{\beta}{6}\right)^{n_A}\left(\frac{1}{3}\right)^{n_A}
+\end{aligned}\end{equation}
+If we look in the large $t$ limit and compare the above equation with 
+\equatref{eq:staticpotential} we conclude at leading order in $\beta$
+\begin{equation}
+  V(r)\sim-\frac{r}{a^2}\log\left(\frac{\beta}{18}\right)\left(1+\order{\beta}\right)
+          \equiv\sigma r,
+\end{equation}
+i.e. we identify this factor multiplying $r$ as the leading order expression
+for the string tension. 
+
+
+With static quarks, the consequence of this is that
+the potential between a quark-antiquark pair diverges as you separate the pair.
+With dynamical fermions, this potential energy eventually becomes larger than
+the mass of a quark-antiquark pair, and it eventually becomes energetically
+favorable to create such a pair out of the vacuum that binds to the two original
+quarks forming two mesons. This phenomenon is known as 
+{\it string breaking}\index{string!breaking}.
 
 
 \subsection{Renormalization group and the continuum limit}
@@ -570,25 +636,30 @@ The coefficient of the second term is called the {\it beta function},
 \begin{equation}\label{eq:betafunction}\index{beta function}
   \beta\equiv-\frac{\partial g}{\partial\log a},
 \end{equation}
-and it measures how the bare
-coupling $g$ must change when $a$ changes.
-The use of the symbol $\beta$ here is unfortunately a convention; it
-is not to be confused with the coupling constant. It is usually clear
-from context what is meant. 
-
-Usually in QFT one likes to label
+and it measures how the bare\footnote{Usually in QFT one likes to label
 a coupling that changes with some cutoff as a ``renormalized" coupling.
 But in this case it really is the bare coupling that is changing with $a$.
 One way to see this is that $a$ is not corresponding to any real-world
 observable; the lattice spacing is just a calculational crutch. If changes
 in a crutch need to be compensated by changes in another quantity,
 the other quantity better also be a crutch, and indeed, bare quantities
-are the ones that aren't measurable.
+are the ones that aren't measurable.}
+coupling $g$ must change when $a$ changes.
+The use of the symbol $\beta$ here is unfortunately a convention; it
+is not to be confused with the coupling constant. It is usually clear
+from context what is meant. 
+
 
 In practice $\beta$ can be determined
 from lattice perturbation theory. An explicit dependence of $g$ on $a$ is then
 determined by solving the differential equation~\eqref{eq:betafunction}. 
-For example the pure $\SU(N_c)$ lattice beta function has been calculated 
+For example the pure $\SU(N_c)$ lattice beta function\footnote{In a theory
+with $N_f$ fermion flavors, the 1-loop contribution is
+$$
+  b_0=\left(\frac{11N_c}{3}-\frac{2N_f}{3}\right)\frac{1}{16\pi^2}.
+$$
+Hence when introducing fermions, one loses asymptotic freedom
+whenever $N_f\geq 11N_c/2$.} has been calculated 
 up to 3-loop order in perturbation theory. It is given by
 \begin{equation}\label{eq:blatgs}
   \beta_L(g)=-b_0g^3-b_1g^5-b_2^Lg^7+\order{g^{9}}
@@ -734,20 +805,23 @@ discussion of statistical error is postponed to
 \chref{ch:MCMC}. We begin by introducing some reference scales. 
 
 
+\subsection{String tension}\index{string!tension}
 
-\subsection{Deconfinement temperature}
+
+\subsection{Deconfinement temperature}\index{temperature!deconfinement}
 
 
-One choice of scale in this project is the {\it deconfining phase 
-transition temperature}\index{deconfinement temperature}
+Another choice of scale for pure gauge systems is the 
+{\it deconfining phase transition temperature}
 \begin{equation}
   T_c=\frac{1}{a(\beta_c)\,N_\tau}.
 \end{equation}
 For $T<T_c$ gluons are bound into  glueballs, while 
 at higher temperatures $T>T_c$ they exist in a gluon plasma. 
 The deconfining phase transition is a second-order phase transition for 
-$\SU(2)$ (see Engels et al.~\cite{engels_critical_1996} and
-references therein) and a first-order transition for $\SU(N_c)$ when $N_c>2$. 
+$\SU(2)$~\cite{engels_critical_1996} and
+and a first-order transition for $\SU(N_c)$ when $N_c>2$
+~\cite{svetitsky_critical_1982}. 
 The order parameter\footnote{We will argue this in \secref{sec:ploop}.} 
 for this transition is the \index{Polyakov loop}
 Polyakov loop~\eqref{eq:ploop}
@@ -772,7 +846,7 @@ performed at finite lattice size while $T$ is only sharp in the infinite
 volume limit. It is therefore necessary to extrapolate, for fixed $N_{\tau}$,
 the dependence of $\beta_c(N_\tau)$ on the spatial size $N_s$ to the
 infinite volume limit $N_s\to\infty$. Inverting $\beta_c(N_\tau)$ gives
-our first length scale $N_\tau(\beta)$, which we call the
+$N_\tau(\beta)$, which we call the
 \index{scale!deconfinement}{\it deconfinement scale}.
 
 
@@ -794,7 +868,7 @@ with initial condition
 In the above, the $\SU(N_c)$ link derivatives are defined by
 \begin{equation}\begin{aligned}
   \partial_{x,\,\mu}f(V)&\equiv
-     i\sum_aT^a\frac{d}{ds}f\left(e^{itX^a}V\right)\Big|_{t=0},\\
+     i\sum_aT^a\frac{\dd}{\dd s}f\left(e^{itX^a}V\right)\Big|_{t=0},\\
     X^a(x',\mu')&\equiv
     \begin{cases}
        T^a & \text{if} (x',\mu')=(x,\mu)\\
