@@ -1,9 +1,9 @@
 \chapter{Physics: Quantum Field Theories}
 
 The Standard Model (SM) of particle physics classifies all known
-\index{particle!elementary}
+\index{particle!elementary}\index{Standard Model}
 {\it elementary particles}, i.e. particles with no known substructure,
-and describes three fundamental forces: the electromagnetic,
+and describes three fundamental forces:\index{force!fundamental} the electromagnetic,
 weak, and strong forces. Elementary particles can be divided into
 \index{particle!matter}
 {\it matter particles} (quarks and leptons); {\it gauge bosons}, which mediate
@@ -13,20 +13,6 @@ whose field interacts directly with elementary particles that thereby
 acquire their mass. For each particle there exists a corresponding
 antiparticle; sometimes a particle is its own antiparticle.
 Figure~\ref{fig:SM} gives a schematic overview of the SM.
-The SM has a long history of experimental confirmations culminating
-in the 2012 discovery of the Higgs boson by the ATLAS and CMS
-experiments~\cite{aad_observation_2012,chatrchyan_observation_2012}.
-% TODO: maybe it would be fun to include a history here
-
-% brief history according to tong
-% e.g. how did QFT start? pauli dirac jordan etc 1920s-30s how to quantize
-% fields. Start basically along with discovery of QM. Failing to have 
-% theory with infinite num of dof, leading into 2nd world war.
-% then tomonaga, schwinger, dyson, feynman. Can renormalize, QED discovered.
-% 1970s golden age: asymptotic freedom, infinites understood through
-% renormalization group wilson and kadanoff. Progress on understanding geometry
-% and topology in QFT.
-
 
 \begin{figure}
   \centering
@@ -47,7 +33,121 @@ grad student I used Peskin and Schroeder~\cite{peskin_introduction_1995}
 and Srednicki~\cite{srednicki_quantum_2007}.
 Nowadays there are also some very high quality lectures on YouTube,
 for instance a series by Tong~\cite{tongQFT}, which I found had some other nice
-introductory remarks.
+introductory remarks. 
+A timeline of particle discoveries can be found in
+Ref.~\cite{wiki_particle_discoveries}.
+
+\section{An approximate history of the SM}
+
+% TODO: maybe it would be fun to include a history here
+% brief history according to tong
+% e.g. how did QFT start? pauli dirac jordan etc 1920s-30s how to quantize
+% fields. Start basically along with discovery of QM. Failing to have 
+% theory with infinite num of dof, leading into 2nd world war.
+% then tomonaga, schwinger, dyson, feynman. Can renormalize, QED discovered.
+% 1970s golden age: asymptotic freedom, infinites understood through
+% renormalization group wilson and kadanoff. Progress on understanding geometry
+% and topology in QFT.
+%
+
+
+\subsection{Strong sector}\index{interaction!strong}
+
+An atomic nucleus is made of protons and neutrons, i.e. it is made of particles
+that have only positive or zero electric charge. Hence for some time, physicists
+knew there must be some {\it strong force}\index{force!strong} that opposes
+Coulomb repulsion and binds nucleons into nuclei.
+Such particles held together by strong interactions are called
+{\it hadrons}.\index{hadron} Nowadays we also use the terms {\it meson}
+\index{meson} and {\it baryon}\index{baryon} to refer to hadrons made of 
+two quarks and three quarks, respectively.
+
+In the late 1940s and early 1950s, the {\it kaon} ($K$)~\cite{rochester_evidence_1947}
+\index{kaon} and {\it lambda} ($\Lambda$)~\cite{hopper_evidence_1950}\index{lambda} 
+hadrons were discovered\footnote{A kaon
+consists of light quark and a strange, while a lambda baryon binds two light
+quarks with one from a higher generation. {\it Strangeness} was originally
+proposed as a conserved quantity to explain the relatively long
+lifetimes of these particles~\cite{pais_remarks_1952,gell-mann_isotopic_1953,
+pais_baryon-meson-photon_1953,tadao_charge_1953}.}.
+Ne'eman~\cite{neeman_derivation_1961}, 
+Gell-Mann~\cite{gell-mann_symmetries_1962}, and 
+Zweig~\cite{zweig_su3_1964} proposed that these hadrons could be classified
+according to the irreducible representations of $\SU(3)$, a viewpoint which
+Gell-Mann called the \index{eightfold way}{\it eightfold way}\footnote{This
+name is inspired by the eightfold path of Buddhism.}, examples of which are 
+illustrated in \figref{fig:eightfold}. Gell-Mann
+referred to the fundamental units as {\it quarks}\footnote{Gell-Mann borrows
+this name from an excerpt of James Joyce's {\it Finnegan's Wake} that begins
+``Three quarks for Muster Mark".
+Gell-Mann was a bit of a fanciful guy I guess.}.
+At first it was not clear that this quark viewpoint was more than a
+purely mathematical construction, however deep inelastic 
+scattering\index{scattering!deep inelastic}
+experiments at the Stanford Linear Accelerator (SLAC) showed that
+protons are made of smaller particles, and are therefore not 
+elementary~\cite{bloom_high-energy_1969,breidenbach_observed_1969}.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.48\linewidth]{figs/Meson_octet.png}
+  \includegraphics[width=0.48\linewidth]{figs/Baryon_decuplet.png}
+  \caption{{\it Left}: Pseudo-scalar meson octet. {\it Right}:
+           The $J=3/2$ baryon decuplet. The $s$ represents strangeness,
+           with all particles in the same horizontal row having the
+           same strangeness. Electric charge is represented by $q$,
+           with all particles along the diagonal having the same
+           electric charge. Images taken from
+           Wikipedia~\cite{wiki_eightfold}.}
+  \label{fig:eightfold}
+\end{figure}
+
+From here it was shown possible to formulate a QFT for the strong interaction
+based on $\SU(3)$~\cite{fritzsch_advantages_1973}, which we
+call quantum chromodynamics (QCD).\index{quantum chromodynamics} 
+The mediators are called
+{\it gluons}\index{gluon} with the adjoint representation delivering
+eight possible color combinations.
+Gross, Wilczek~\cite{gross_d.j._ultraviolet_1973} and
+Politzer~\cite{politzer_reliable_1973} demonstrated {\it asymptotic freedom}
+\index{asymptotic freedom} in this QFT, i.e. they showed that the
+strong coupling decreases with increasing interaction strength, which is
+consistent with the fact that one does not observe free quarks\footnote{At
+least not at typical temperatures and densities.}.
+This theoretical observation is buttressed by strong coupling
+expansions in the lattice formulation, which show that the potential
+energy between two infinitely heavy quarks grows linearly
+(see \secref{sec:hqfe}).
+
+
+\subsection{Weak sector}\index{interaction!weak}
+
+%   WEAK SECTOR
+% - fermi formulates first beta-decay theory
+% - parity violation observed by wu
+% - feynman and gell-mann make fermi theory chiral
+% - tree-level results agree with experiment, loop corrections infinite
+% - massive particles <--> finite interaction range?
+% - need massive gauge bosons, nambu applies ginzburg-landau SSB to
+%   particle physics, implies existence of goldstone modes that
+%   are not seen
+% - brout englert higgs note that suitable choice of gauge eliminates
+%   goldstone modes, adds mass term to gauge bosons, adds higgs boson.
+% - was only for massive qed, generalized to non-abelian theories by kibble
+% - glashow 1961 SU(2)xU(1)
+% - weinberg and salam apply kibble results to glashow idea, show it
+%   produces masses for electrons, muons, gauge bosons
+% - theory predicted neutral weak currents, discovered in 73 by the
+%   gargamelle experiment
+% - veltman and t'hooft show theory is renormalizable
+% - quark mixing in weak interactions (cabibbo 1963) explanation for
+%   lifetimes of heavier hadrons, cabibbo-suppression
+% - kobayashi maskawa predict third generation existence b/c quark mixing
+%   with three generations minimal model allowing CP violation
+% - third generation discovered, tau 75, bottom 77, top 95, tauneut 2000
+%
+%
+\cite{aad_observation_2012,chatrchyan_observation_2012}.
 
 \section{Introductory remarks about QFT} 
 
