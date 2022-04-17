@@ -14,6 +14,8 @@ along with future possibilities for neutrino physics research.
 Since this chapter was adapted from a project I did as a grad student in 2015,
 the experiments are likely not current. Maybe the status of measurements
 such as PMNS matrix elements could be updated in the future.
+It follows Thomson~\cite{thomson_modern_2013} and a similar project by
+my friend A. Yunesi.
 
 \index{solar neutrino problem}
 \section{The solar neutrino problem}
@@ -28,18 +30,19 @@ such as PMNS matrix elements could be updated in the future.
 \end{figure}
 Roughly $2\times10^{38}$ $\nu_e$ are produced by nuclear fusion in the sun
 each second. One of the main processes by which this occurs is the pp-cycle,
-$\text{p}+\text{p}\to\text{D}+\text{e}^++\nu_e$. However experiments detecting
+\begin{equation}
+ \text{p}+\text{p}\to\text{D}+e^++\nu_e.
+\end{equation} However experiments detecting
 solar neutrinos tend to focus on rarer reactions, such as the
-$\prescript{7}{}{\text{Be}}$ electron capture process, pep-process, and
-$\prescript{8}{}{\text{B}}$ $\beta$-decay, which are, respectively,
+\ce{^7Be} electron capture process, pep-process, and
+\ce{^8B} $\beta$-decay, which are, respectively,
 \begin{equation}
   \begin{aligned}
-    \prescript{7}{}{\text{Be}}+\text{e}^-&\to\prescript{7}{}{\text{Li}}+\nu_e,
+    \ce{^7Be}+e^-&\to\ce{^7Li}+\nu_e,
     \\
-    \text{p}+\text{e}^-+\text{p}&\to\prescript{2}{}{\text{H}}+\nu_e, 
+    \text{p}+e^-+\text{p}&\to\ce{^2H}+\nu_e, 
     \\
-    \prescript{8}{5}{\text{B}}&\to\prescript{8}{4}{\text{Be}}^*+\text{e}^+
-      +\nu_e.
+    \ce{^8_5B}&\to\ce{^8_4Be}^*+e^++\nu_e.
   \end{aligned}
 \end{equation}
 As illustrated in \figref{fig:solar}, these processes tend to produce 
@@ -58,11 +61,10 @@ had a 615 ton tank full of dry-cleaning fluid, $\text{C}_2\text{Cl}_4$,
 which was chosen for the interaction mentioned below.
 Mines are prime real estate for neutrino experiments because being underground
 helps isolate them from cosmic rays. The number of captured solar neutrinos
-was measured by counting the $\prescript{37}{}{\text{Ar}}$ atoms produced in
+was measured by counting the $\ce{^{37}Ar}$ atoms produced in
 the process
 \begin{equation}
-  \nu_e+\prescript{37}{17}{\text{Cl}}\to
-        \prescript{37}{18}{\text{Ar}}+\text{e}^-.
+  \nu_e+\ce{^{37}_{17}Cl}\to\ce{^{37}_{18}Ar}+e^-.
 \end{equation}
 The minimum energy an electron neutrino needs to participate in the above
 process is about 0.81 MeV, which excludes neutrinos produced by the pp-cycle.
@@ -93,7 +95,7 @@ a wake where those disturbances constructively interfere. Elementary
 geometry shows that if the medium has index of refraction $n$, the angle
 at which this radiation is emitted is given by $\co=1/n\beta$. Water
 \v{C}erenkov detectors work by measuring this angle as leptons propagate
-through water. This in turn gives a measure of $\beta$, and hence the energy.
+through water. This gives a measure of $\beta$, and hence the energy.
 A schematic of a \v{C}erenkov ring is given in \figref{fig:cerenkov} (b).
 
 \begin{figure}
@@ -124,14 +126,19 @@ approximately 5 MeV, but also detect particle orientations, which gives Super-K
 an advantage over radiochemical experiments. A schematic of this setup
 is shown in \figref{fig:cerenkov} (a).
 The neutrinos are detected through the elastic scattering (ES) process
-$\nu_ee^-\to\nu_ee^-$. One might expect to also see neutrinos interact
+\begin{equation}
+  \nu_ee^-\to\nu_ee^-. 
+\end{equation}
+One might expect to also see neutrinos interact
 using oxygen, in particular through the charged current (CC) process
-$\nu_e+\prescript{16}{8}{\text{O}}\to\prescript{16}{9}{\text{F}}+e^-$.
+\begin{equation}
+  \nu_e+\ce{^{16}_8O}\to\ce{^{16}_9F}+e^-.
+\end{equation}
 But oxygen is more stable than the fluorine isotope, making the process
 kinematically forbidden to the relatively low energy solar neutrinos. The 5
 MeV threshold, which is a result of radioisotope $\beta$ decay background,
  makes Super-K primarily sensitive to neutrinos produced by
-the $\prescript{8}{}{\text{B}}$ process.
+the $\ce{^8B}$ process.
 
 The left plot of \figref{fig:superKdata} is a graph of the electron 
 direction with respect to the
@@ -162,12 +169,17 @@ in Canada took these experiments a step further by measuring the
 electron neutrino flux and total neutrino flux from the sun. SNO had a 12m
 diameter tank filled with 1 kiloton of $\text{D}_2\text{O}$, which was used
 because deuteron has a small binding energy compared to the energies of
-neutrinos produced by $\prescript{8}{}{\text{B}}$. Electron neutrinos can then
+neutrinos produced by $\ce{^8B}$. Electron neutrinos can then
 be detected through
-$\nu_e+\text{D}\to\text{e}^-+\text{p}+\text{p}$,
+\begin{equation}
+  \nu_e+\text{D}\to e^-+\text{p}+\text{p}
+\end{equation}
 the CC interaction, and neutrinos of all flavors
 interact with the deuteron via the neutral current (NC) interaction
-$\nu_\ell+\text{D}\to\nu_\ell+\text{n}+\text{p}$ and ES interactions. The NC
+\begin{equation}
+ \nu_\ell+\text{D}\to\nu_\ell+\text{n}+\text{p}
+\end{equation} 
+and ES interactions. The NC
 interaction is equally sensitive to all flavors of neutrino, but the ES
 interaction is more sensitive to electron neutrinos because $\nu_\mu$ and
 $\nu_\tau$ only interact through the NC ES process. In total the interaction
@@ -188,7 +200,9 @@ electron orientation is essentially uncorrelated with the sun's direction.
 The ES interaction is also detected through \v{C}erenkov rings, but these
 leptons correlate with the sun's direction as in the Super-K. For the NC
 interaction, the produced neutron is eventually captured in the process
-$\text{n}+\prescript{2}{1}{\text{H}}\to\prescript{3}{1}{\text{H}}+\gamma$.
+\begin{equation}
+ \text{n}+\ce{^2_1H}\to\ce{^3_1H}+\gamma.
+\end{equation}
 The photon then produces electrons through subsequent interactions that are
 then detected by \v{C}erenkov rings. Ultimately SNO found
 \begin{equation}
@@ -616,7 +630,7 @@ radioisotopes, which then emit electron neutrinos during $\beta$ decays.
 Electron antineutrinos are detected through the process
 \begin{equation}
   \label{eq:betadecay}
-  \bar{\nu}_e+\text{p}\to\text{e}^++\text{n},
+  \bar{\nu}_e+\text{p}\to e^++\text{n},
 \end{equation}
 but they will not be detected if they oscillate to other flavors, because
 the neutrino energy will be too small to produce a muon or tau lepton in

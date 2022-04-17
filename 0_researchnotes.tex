@@ -3,11 +3,13 @@
 % by: David A. Clarke                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 % Normal preamble stuff.
 \documentclass[12pt]{book}
 \usepackage[title]{appendix}
-\usepackage{mathtools,tensor,physics,slashed,textcomp}
+\usepackage{mathtools,tensor,physics,slashed,textcomp,mhchem}
 \usepackage{microtype} % should help with hyphenation
+
 
 % This section is for making C++ code.
 \usepackage[dvipsnames]{xcolor}
@@ -38,9 +40,11 @@
   title=\lstname
 }
 
+
 % davitex and required packages
 \usepackage{amsmath,amssymb,graphicx,multirow,tabularx}
 \usepackage{davitex}
+
 
 % If you click on citations or equation references, you will be take
 % to the corresponding page. 
@@ -51,6 +55,7 @@
   citecolor=magenta,
   urlcolor=blue,
 }
+
 
 % Put references at the end of each chapter, directly after the
 % end of the chapter, call them "References" instead of
@@ -63,14 +68,17 @@
 \renewcommand\bibname{References}
 \setcitestyle{numbers,square}
 
+
 % Make index and let it appear in table of contents.
 \usepackage{makeidx}
 \makeindex
 \usepackage[totoc]{idxlayout}
 
+
 % Prevent hyphenation.
 \setlength\parindent{15pt}
 \overfullrule=2cm
+
 
 % Theorems and stuff.
 \usepackage{amsthm}
@@ -113,7 +121,7 @@
   fonttitle=\bfseries}{cor}
 \theoremstyle{definition}
 \newtheorem*{defn}{Definition}
-%\newtheorem*{example}{Example}
+
 
 % Some environments for some front matter.
 \newenvironment{frontstuff}
@@ -123,16 +131,19 @@
   {\chapter*{List of Abbreviations}}
   {\clearpage}
 
+
 % Note that book class by default is formatted to be printed back-to-back.
 \title{\bf Lattice Research Notes} 
 \author{David Clarke}
 
+
 \begin{document}
 \frontmatter                            % roman page no., suppress chapter
-%\pagenumbering{gobble}                  % suppress page no.
 \maketitle                              % print title page
 
+
 \begin{frontstuff} % ----------------------------------------------- FRONT STUFF
+
 
 \section*{Math Symbols}
 \begin{tabular}{ll}
@@ -168,6 +179,7 @@ $\mathbb{Z}_n$  & Integers modulo $n$ \\
 \end{tabular}
 \clearpage
 
+
 \section*{Physics Symbols}
 \begin{tabular}{ll}
 $a$             & Lattice spacing \\
@@ -187,6 +199,7 @@ $\sigma_i$      & A Pauli matrix\\
 $T_c$           & Deconfining phase transition temperature\\
 \end{tabular}
 \clearpage
+
 
 \section*{Abbreviations}
 \begin{tabular}{ll}
@@ -214,6 +227,7 @@ UV      &       Ultraviolet \\
 WLOG    &       Without loss of generality
 \end{tabular}
 \clearpage
+
 
 \section*{Constants in Various Unit Systems}
 \begin{tabularx}{\linewidth}{LlLll}
@@ -289,63 +303,65 @@ $m_p$    & $1.67262\times 10^{-27}$ & [kg]
 %\end{tabularx}
 
 
-\section*{Some Important Particles}
-\begin{tabularx}{\linewidth}{rLlc}
-{\it Name} & {\it Significance} & {\it Symbol} & {\it Composition}
-\vspace{2mm}\\
-B meson: & Light mesons with bottomness 1.
-                                     & $B^0$ &   $d\bar{b}$, 
-                                                   $b\bar{d}$ \\
-         & Can use weak decays to extract
-                                     & $B^+$ &   $u\bar{b}$ \\
-         & some CKM matrix elements. & $B^-$ &   $b\bar{u}$
-\vspace{2mm}\\
-D meson: & Light mesons with charm 1. Can
-                                     & $D^0$ &   $c\bar{u}$, 
-                                                   $u\bar{c}$ \\
-         & use weak decays to extract some
-                                     & $D^+$ &   $c\bar{d}$ \\
-         & CKM matrix elements.      & $D^-$ &   $d\bar{c}$
-\vspace{2mm}\\
-Eta:     & $\eta-\eta'$ mass difference can be
-                                     & $\eta$  &   $u\bar{u}
-                                                   +d\bar{d}
-                                                  -2s\bar{s}$ \\
-         & explained by topology.    & $\eta'$ &   $u\bar{u}
-                                                   +d\bar{d}
-                                                   +s\bar{s}$
-\vspace{2mm}\\
-Hyperon: & Any baryon with one or more $s$,
-                                     & $Y$   & \\
-         & but no $c$, $t$, or $b$.  &       &
-\vspace{2mm}\\
-Kaon:    & Light mesons with strangeness 1.
-                                     & $K^0$ &   $d\bar{s}$, 
-                                                   $s\bar{d}$ \\
-         & Can use weak decays to extract 
-                                     & $K^+$ &   $u\bar{s}$ \\
-         & some CKM matrix elements. Its 
-                                     & $K^-$ &   $s\bar{u}$ \\
-         & decay constant is used as a 
-                                     &       &              \\
-         & reference in lattice calculations.
-                                     &       &              
-\vspace{2mm}\\
-Pion:    & Lightest mesons. ``Would-be"
-                                     & $\pi^0$ &   $u\bar{u}$,
-                                                   $d\bar{d}$ \\
-         & Goldstone bosons of chiral& $\pi^+$ &   $u\bar{d}$ \\
-         & symmetry breaking.        & $\pi^-$ &   $d\bar{u}$
-\vspace{2mm}\\
-Psion:   & Discovery of the charm quark.
-         & $\text{J}/\psi$                     &   $c\bar{c}$ 
-\vspace{2mm}\\
-Upsilon: & Discovery of the bottom quark.
-         & $\Upsilon$                          &   $b\bar{b}$ \\
-\end{tabularx}
-\clearpage
+%\section*{Some Important Particles}
+%\begin{tabularx}{\linewidth}{rLlc}
+%{\it Name} & {\it Significance} & {\it Symbol} & {\it Composition}
+%\vspace{2mm}\\
+%B meson: & Light mesons with bottomness 1.
+%                                     & $B^0$ &   $d\bar{b}$, 
+%                                                   $b\bar{d}$ \\
+%         & Can use weak decays to extract
+%                                     & $B^+$ &   $u\bar{b}$ \\
+%         & some CKM matrix elements. & $B^-$ &   $b\bar{u}$
+%\vspace{2mm}\\
+%D meson: & Light mesons with charm 1. Can
+%                                     & $D^0$ &   $c\bar{u}$, 
+%                                                   $u\bar{c}$ \\
+%         & use weak decays to extract some
+%                                     & $D^+$ &   $c\bar{d}$ \\
+%         & CKM matrix elements.      & $D^-$ &   $d\bar{c}$
+%\vspace{2mm}\\
+%Eta:     & $\eta-\eta'$ mass difference can be
+%                                     & $\eta$  &   $u\bar{u}
+%                                                   +d\bar{d}
+%                                                  -2s\bar{s}$ \\
+%         & explained by topology.    & $\eta'$ &   $u\bar{u}
+%                                                   +d\bar{d}
+%                                                   +s\bar{s}$
+%\vspace{2mm}\\
+%Hyperon: & Any baryon with one or more $s$,
+%                                     & $Y$   & \\
+%         & but no $c$, $t$, or $b$.  &       &
+%\vspace{2mm}\\
+%Kaon:    & Light mesons with strangeness 1.
+%                                     & $K^0$ &   $d\bar{s}$, 
+%                                                   $s\bar{d}$ \\
+%         & Can use weak decays to extract 
+%                                     & $K^+$ &   $u\bar{s}$ \\
+%         & some CKM matrix elements. Its 
+%                                     & $K^-$ &   $s\bar{u}$ \\
+%         & decay constant is used as a 
+%                                     &       &              \\
+%         & reference in lattice calculations.
+%                                     &       &              
+%\vspace{2mm}\\
+%Pion:    & Lightest mesons. ``Would-be"
+%                                     & $\pi^0$ &   $u\bar{u}$,
+%                                                   $d\bar{d}$ \\
+%         & Goldstone bosons of chiral& $\pi^+$ &   $u\bar{d}$ \\
+%         & symmetry breaking.        & $\pi^-$ &   $d\bar{u}$
+%\vspace{2mm}\\
+%Psion:   & Discovery of the charm quark.
+%         & $\text{J}/\psi$                     &   $c\bar{c}$ 
+%\vspace{2mm}\\
+%Upsilon: & Discovery of the bottom quark.
+%         & $\Upsilon$                          &   $b\bar{b}$ \\
+%\end{tabularx}
+%\clearpage
+
 
 \end{frontstuff} % ----------------------------------------------------- PREFACE
+
 
 \chapter{Preface}
 This ``book" is a collection of research notes that I made while researching in
@@ -390,6 +406,8 @@ to develop some sections of these appendices into full chapters.
 \include{ap_spec_program}
 \end{appendices}
 
+
 \printindex
+
 
 \end{document}
