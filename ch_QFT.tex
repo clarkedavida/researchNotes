@@ -52,7 +52,12 @@ Ref.~\cite{wiki_particle_discoveries}.
 One could argue that the beginning of the SM history coincides with the
 beginnings of modern particle physics. Since that depends on unifying
 relativity, quantum mechanics, and field theory, one could arguably even take
-Maxwell's equations as a starting point. Given that ambiguity and the fact
+Maxwell's equations as a starting point. 
+There were also many interesting ideas that were not pursued or turned out
+not to be correct yet still played some role in the history; I will not
+discuss these. In some cases I may miss some discoveries that were also
+important but less celebrated.
+Given these ambiguities and the fact
 that I am not at all a real historian, 
 I would rather call what follows an ``approximate" history.
 
@@ -68,20 +73,25 @@ Such particles held together by strong interactions are called
 two quarks and three quarks, respectively.
 
 In the late 1940s and early 1950s, the {\it kaon} ($K$)~\cite{rochester_evidence_1947}
-\index{kaon} and {\it lambda} ($\Lambda$)~\cite{hopper_evidence_1950}\index{lambda} 
-hadrons were discovered\footnote{A kaon
+\index{meson!K} and {\it lambda} ($\Lambda$)~\cite{hopper_evidence_1950}
+\index{baryon!lambda} hadrons were discovered\footnote{A kaon
 consists of light quark and a strange, while a lambda baryon binds two light
-quarks with one from a higher generation. {\it Strangeness} was originally
-proposed as a conserved quantity to explain the relatively long
+quarks with one from a higher generation. {\it Strangeness} \index{strangeness}
+was originally proposed as a conserved quantity to explain the relatively long
 lifetimes of these particles~\cite{pais_remarks_1952,gell-mann_isotopic_1953,
-pais_baryon-meson-photon_1953,tadao_charge_1953}.}.
-Ne'eman~\cite{neeman_derivation_1961}, 
+pais_baryon-meson-photon_1953,tadao_charge_1953}.
+We now identify strangeness $S$ as
+$$
+  S\equiv\#\,\text{anti-strange quarks}-\#\,\text{strange quarks}.
+$$}. Ne'eman~\cite{neeman_derivation_1961}, 
 Gell-Mann~\cite{gell-mann_symmetries_1962}, and 
-Zweig~\cite{zweig_su3_1964} proposed that these hadrons could be classified
+Zweig~\cite{zweig_su3_1964} proposed\footnote{Gell-Mann would receive the 1969
+Nobel for his contributions to understanding elementary particle
+classification.} that these hadrons could be classified
 according to the irreducible representations of $\SU(3)$, a viewpoint which
 Gell-Mann called the \index{eightfold way}{\it eightfold way}\footnote{This
 name is inspired by the eightfold path of Buddhism.}, examples of which are 
-illustrated in \figref{fig:eightfold}. Gell-Mann
+illustrated graphically in \figref{fig:eightfold}. Gell-Mann
 referred to the fundamental units as {\it quarks}\footnote{Gell-Mann borrows
 this name from an excerpt of James Joyce's {\it Finnegan's Wake} that begins
 ``Three quarks for Muster Mark".
@@ -92,6 +102,8 @@ scattering\index{scattering!deep inelastic}
 experiments at the Stanford Linear Accelerator (SLAC) showed that
 protons are made of smaller particles, and are therefore not 
 elementary~\cite{bloom_high-energy_1969,breidenbach_observed_1969}.
+This alone did not convince the community that quarks were real, but
+subsequent discoveries would solidify the quark model.
 
 \begin{figure}[t]
   \centering
@@ -114,7 +126,8 @@ The mediators are called
 {\it gluons}\index{gluon} with the adjoint representation delivering
 eight possible color combinations.
 Gross, Wilczek~\cite{gross_d.j._ultraviolet_1973} and
-Politzer~\cite{politzer_reliable_1973} demonstrated {\it asymptotic freedom}
+Politzer~\cite{politzer_reliable_1973} demonstrated 
+{\it asymptotic freedom}\footnote{They got the 2004 Nobel for this.}
 \index{asymptotic freedom} in this QFT, i.e. they showed that the
 strong coupling decreases with increasing interaction strength, which is
 consistent with the fact that one does not observe free quarks\footnote{At
@@ -124,27 +137,97 @@ expansions in the lattice formulation, which show that the potential
 energy between two infinitely heavy quarks grows linearly
 (see \secref{sec:hqfe}).
 
+We round out this section with a short timeline of discoveries of the
+remaining QCD particles. In 1974 the discovery of the 
+$J/\Psi$-meson\index{psion} or {\it psion}\footnote{The $J/\Psi$ consists
+of a $\bar{c}c$ pair. This is also sometimes called {\it charmonium}.
+\index{charmonium}} at both Brookhaven National Lab (BNL) and
+SLAC~\cite{augustin_discovery_1974,aubert_experimental_1974} demonstrated
+the existence of the charm quark\footnote{Richter and Ting got the 1974
+Nobel prize in physics for this.}, adding further evidence to
+the validity of the quark model. The $J/\Psi$ discovery marks the beginning of a
+period of rapid discoveries in particle physics sometimes referred to as the
+``November Revolution".\index{November Revolution} The existence of the bottom
+quark was demonstrated in 1977 at Fermilab~\cite{herb_observation_1977} when the 
+$Y$-meson\footnote{A $Y$-meson\index{meson!Y} is a $\bar{b}b$ bound state. This is
+sometimes called \index{bottomonium}{\it bottomonium}.} was discovered.
+In 1979 we found experimental evidence for the
+gluon via indirect observations~\cite{barber_discovery_1979} at the
+Deutsches Elektronen-Synchrotron (DESY). In part because it is the
+heaviest quark, the top quark would not be discovered until
+1995~\cite{abachi_observation_1995,abe_observation_1995}
+at Fermilab.
 
-\subsection{Weak sector}\index{interaction!weak}
+\subsection{Electroweak and Higgs sectors}\index{interaction!weak}
 
+In the early 1930s, Fermi published\footnote{Apparently he originally attempted
+to publish it in {\it Nature}, but they rejected it because
+it because ``it contained speculations too remote from reality to be of interest
+to the reader".} his theory of $\beta$-decay,
+\index{decay!beta} which is any decay emitting an $e^+$ or $e^-$ from
+an atomic nucleus, for example
+\begin{equation}
+  n\to\text{p}+e^-+\bar{\nu}_e.
+\end{equation}
+His theory was an effective 4-point interaction directly linking the four
+particles in the above process.
+Shortly thereafter, Yukawa~\cite{yukawa_interaction_1935} put forward that this
+interaction should include another field with corresponding quantum that
+mediates this interaction\footnote{Nowadays we designate as
+{\it Yukawa interaction} any interaction between
+Dirac fields and scalar fields of the form\index{interaction!Yukawa}
+$g\bar{\psi}\phi\psi$ or $g\bar{\psi}i\gamma_5\phi\psi$.}, 
+sort of like how the photon mediates the
+electromagnetic interaction. Another salient point of this paper is
+the introduction of the {\it Yukawa potential}\index{potential!Yukawa}
+giving the potential of a gauge boson of mass $m$:
+\begin{equation}
+  V(r)=-g^2\frac{e^{-\alpha m r}}{r}.
+\end{equation}
+Here $g$ is the gauge coupling and $r$ is the interaction range. One sees that
+massless gauge bosons have a Coulomb-like potential, while massive ones
+are suppressed exponentially\footnote{One can also show that the Fourier
+transform of this potential is the propagator, which we will discuss later.}. 
+Finally this paper was the first to
+postulate the existence of mesons\footnote{And got him the 1949 Nobel prize.}.
 
 In the mid 1950s, Lee and Yang~\cite{lee_question_1956} suggested possible
-experimental tests to search for parity violation in weak interaction processes.
+experimental tests to search for parity violation in weak interaction 
+processes\footnote{Lee and Yang won the 1957 Nobel prize for this}.
 Shortly thereafter, Wu et al.~\cite{wu_experimental_1957} demonstrated parity
 violation in the $\beta$-decay of \ce{^{60}Co}~\cite{wu_experimental_1957},
 a result which was verified by Garwin et al.~\cite{garwin_observations_1957}. 
-%   WEAK SECTOR
-% - fermi formulates first beta-decay theory
-% - feynman and gell-mann make fermi theory chiral
-% - tree-level results agree with experiment, loop corrections infinite
-% - massive particles <--> finite interaction range?
-% - need massive gauge bosons, nambu applies ginzburg-landau SSB to
-%   particle physics, implies existence of goldstone modes that
-%   are not seen
-% - brout englert higgs note that suitable choice of gauge eliminates
-%   goldstone modes, adds mass term to gauge bosons, adds higgs boson.
+The theory of the weak interaction was extended by Gell-Mann and
+Feynman~\cite{feynman_theory_1958} to accommodate parity violation by
+introducing vector-axial currents.
+That $\beta$-decay proceeds through vector-axial currents was
+experimentally verified shortly thereafter~\cite{goldhaber_helicity_1958}.
+
+The unification of the weak and electromagnetic forces began already with
+Glashow in 1961~\cite{glashow_partial-symmetries_1961}, where
+he puts forward the $\SU(2)\times \U(1)$ symmetry group\footnote{This
+paper has more than 9,000 citations.}. Still, this theory was not known
+to be renormalizable.
+Also the weak interaction is short range, but this suggests that the mediating boson 
+should be massive according to Yukawa. On the other hand, 
+massive gauge bosons superficially spoil gauge invariance.
+
+In superconductivity, Ginzburg-Landau theory~\cite{ginzburg_theory_1950}
+gives solutions with effective mass. Nambu applied\footnote{2008 Nobel prize.} 
+this to particle
+physics~\cite{nambu_axial_1960,nambu_dynamical_1961,nambu_dynamical_1961-1},
+but this implied the existence of Goldstone modes that are not observed.
+Higgs~\cite{higgs_broken_1964} and Brout and Englert~\cite{englert_broken_1964}
+noticed\footnote{Higgs and Englert received the 2013 Nobel for this.} 
+that by strategically choosing 
+the gauge, one can simultaneously
+eliminate the Goldstone modes, add a mass term to gauge bosons, and a scalar
+boson, the Higgs boson.\index{boson!Higgs}
+We will discuss spontaneous symmetry breaking and Goldstone's theorem
+\index{spontaneous symmetry breaking} in \secref{sec:ssb}. The Higgs
+mechanism is discussed in detail in \apref{ap:spec_higgs}.
+
 % - was only for massive qed, generalized to non-abelian theories by kibble
-% - glashow 1961 SU(2)xU(1)
 % - weinberg and salam apply kibble results to glashow idea, show it
 %   produces masses for electrons, muons, gauge bosons
 % - theory predicted neutral weak currents, discovered in 73 by the
@@ -154,9 +237,7 @@ a result which was verified by Garwin et al.~\cite{garwin_observations_1957}.
 %   lifetimes of heavier hadrons, cabibbo-suppression
 % - kobayashi maskawa predict third generation existence b/c quark mixing
 %   with three generations minimal model allowing CP violation
-% - third generation discovered, tau 75, bottom 77, top 95, tauneut 2000
-%
-%
+
 \cite{aad_observation_2012,chatrchyan_observation_2012}.
 
 \section{Introductory remarks about QFT} 
