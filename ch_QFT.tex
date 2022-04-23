@@ -35,19 +35,10 @@ Nowadays there are also some very high quality lectures on YouTube,
 for instance a series by Tong~\cite{tongQFT}, which I found had some other nice
 introductory remarks. 
 A timeline of particle discoveries can be found in
-Ref.~\cite{wiki_particle_discoveries}.
+Ref.~\cite{wiki_particle_discoveries}. Another detailed historical overview
+of the SM is given in Chapter 1 of Ref.~\cite{griffiths_introduction_2007}.
 
-\section{An approximate history of the SM}
-
-% TODO: maybe it would be fun to include a history here
-% brief history according to tong
-% e.g. how did QFT start? pauli dirac jordan etc 1920s-30s how to quantize
-% fields. Start basically along with discovery of QM. Failing to have 
-% theory with infinite num of dof, leading into 2nd world war.
-% then tomonaga, schwinger, dyson, feynman. Can renormalize, QED discovered.
-% 1970s golden age: infinites understood through
-% renormalization group wilson and kadanoff. Progress on understanding geometry
-% and topology in QFT.
+\section{An mnemonic history of the SM}
 
 One could argue that the beginning of the SM history coincides with the
 beginnings of modern particle physics. Since that depends on unifying
@@ -57,108 +48,75 @@ There were also many interesting ideas that were not pursued or turned out
 not to be correct yet still played some role in the history; I will not
 discuss these. In some cases I may miss some discoveries that were also
 important but less celebrated.
+
 Given these ambiguities and the fact
 that I am not at all a real historian, 
-I would rather call what follows an ``approximate" history.
+one might call what follows an ``approximate" history.
+As I was writing this, I realized that I was trying to tell a story, i.e.
+to write it in a way that one development would make sense or feel
+motivated given a previous development. Usually that is a bit of an
+oversimplification, but it helps me remember why certain discoveries were
+significant, where some nomenclature comes from, and what it means. Hopefully it
+also helps reveal how physicists think, how we are led to discoveries, and
+ultimately why we believe our theories. So with these advantages in mind, I
+rather decided to call it a ``mnemonic" history. 
 
-\subsection{Strong sector}\index{interaction!strong}
 
-An atomic nucleus is made of protons and neutrons, i.e. it is made of particles
-that have only positive or zero electric charge. Hence for some time, physicists
+%\subsection{Early discoveries}
+
+% brief history according to tong
+% e.g. how did QFT start? pauli dirac jordan etc 1920s-30s how to quantize
+% fields. Start basically along with discovery of QM. Failing to have 
+% theory with infinite num of dof, leading into 2nd world war.
+% then tomonaga, schwinger, dyson, feynman. Can renormalize, QED discovered.
+% 1970s golden age: infinites understood through
+% renormalization group wilson and kadanoff. Progress on understanding geometry
+% and topology in QFT.
+
+In 1897 J.J. Thomson did experiments with cathode rays\footnote{In a small
+vacuum chamber with two electrodes, if a voltage is applied between them,
+electrons will move between them. Televisions used to work by cathode ray tubes,
+\index{cathode ray tube} where these electrons are deflected by magnetic fields
+to make images on the screen.}
+from which he concluded that electric charge must be carried by particles
+with high charge-to-mass ratio, the electrons\footnote{He received the 1906
+Nobel in physics for this work.} 
+To explain why atoms are overall electrically neutral, Thomson guessed that
+electrons are distributed in a sea of positive charge, which is the
+well known {\it plum pudding model}.\index{plum pudding model} This was
+disproved by Rutherford in his famous gold foil
+experiment~\cite{rutherford_scattering_1911}, in which he discovered
+the atomic nucleus. Shortly thereafter, he discovered the
+proton~\cite{rutherford_collision_1919}.
+Bohr proposed his model~\cite{bohr_constitution_1913}
+of hydrogen, supposing it to be made of a proton and an electron, which agreed
+well with experiment\footnote{He got the 1922 physics Nobel for his
+contributions understanding atomic structure.}. Extending this theory to 
+heavier elements by supposing
+they are also made of only protons and neutrons however fails, since e.g. helium
+is four times as heavy as hydrogen. This difficulty would not be sorted out
+until the early 1930s, when Chadwick discovered~\cite{chadwick_possible_1932}
+the neutron\footnote{1935 Nobel for him.}.
+
+
+These early discoveries successfully explained many details of the atom; however
+the fact that atomic nuclei are made of particles with only positive or zero
+electric charge still required explanation.
+Hence for some time, physicists
 knew there must be some {\it strong force}\index{force!strong} that opposes
 Coulomb repulsion and binds nucleons into nuclei.
 Such particles held together by strong interactions are called
 {\it hadrons}.\index{hadron} Nowadays we also use the terms {\it meson}
-\index{meson} and {\it baryon}\index{baryon} to refer to hadrons made of 
-two quarks and three quarks, respectively.
+\index{meson} and {\it baryon}\index{baryon} to refer to hadrons made of
+two quarks and three quarks, respectively\footnote{This naming scheme
+comes from particle weights. At the time, known leptons were light, 
+baryons were heavy, and mesons were somewhere in the middle. In retrospect it
+would have been nicer to name them something like $n$-hadrons, but alas it would
+take several decades for us to see that hadrons are made of quarks.}.
 
-In the late 1940s and early 1950s, the {\it kaon} ($K$)~\cite{rochester_evidence_1947}
-\index{meson!K} and {\it lambda} ($\Lambda$)~\cite{hopper_evidence_1950}
-\index{baryon!lambda} hadrons were discovered\footnote{A kaon
-consists of light quark and a strange, while a lambda baryon binds two light
-quarks with one from a higher generation. {\it Strangeness} \index{strangeness}
-was originally proposed as a conserved quantity to explain the relatively long
-lifetimes of these particles~\cite{pais_remarks_1952,gell-mann_isotopic_1953,
-pais_baryon-meson-photon_1953,tadao_charge_1953}.
-We now identify strangeness $S$ as
-$$
-  S\equiv\#\,\text{anti-strange quarks}-\#\,\text{strange quarks}.
-$$}. Ne'eman~\cite{neeman_derivation_1961}, 
-Gell-Mann~\cite{gell-mann_symmetries_1962}, and 
-Zweig~\cite{zweig_su3_1964} proposed\footnote{Gell-Mann would receive the 1969
-Nobel for his contributions to understanding elementary particle
-classification.} that these hadrons could be classified
-according to the irreducible representations of $\SU(3)$, a viewpoint which
-Gell-Mann called the \index{eightfold way}{\it eightfold way}\footnote{This
-name is inspired by the eightfold path of Buddhism.}, examples of which are 
-illustrated graphically in \figref{fig:eightfold}. Gell-Mann
-referred to the fundamental units as {\it quarks}\footnote{Gell-Mann borrows
-this name from an excerpt of James Joyce's {\it Finnegan's Wake} that begins
-``Three quarks for Muster Mark".
-Gell-Mann was a bit of a fanciful guy I guess.}.
-At first it was not clear that this quark viewpoint was more than a
-purely mathematical construction, however deep inelastic 
-scattering\index{scattering!deep inelastic}
-experiments at the Stanford Linear Accelerator (SLAC) showed that
-protons are made of smaller particles, and are therefore not 
-elementary~\cite{bloom_high-energy_1969,breidenbach_observed_1969}.
-This alone did not convince the community that quarks were real, but
-subsequent discoveries would solidify the quark model.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=0.48\linewidth]{figs/Meson_octet.png}
-  \includegraphics[width=0.48\linewidth]{figs/Baryon_decuplet.png}
-  \caption{{\it Left}: Pseudo-scalar meson octet. {\it Right}:
-           The $J=3/2$ baryon decuplet. The $s$ represents strangeness,
-           with all particles in the same horizontal row having the
-           same strangeness. Electric charge is represented by $q$,
-           with all particles along the diagonal having the same
-           electric charge. Images taken from
-           Wikipedia~\cite{wiki_eightfold}.}
-  \label{fig:eightfold}
-\end{figure}
+%\subsection{Electroweak and Higgs sectors}\index{interaction!weak}
 
-From here it was shown possible to formulate a QFT for the strong interaction
-based on $\SU(3)$~\cite{fritzsch_advantages_1973}, which we
-call quantum chromodynamics (QCD).\index{quantum chromodynamics} 
-The mediators are called
-{\it gluons}\index{gluon} with the adjoint representation delivering
-eight possible color combinations.
-Gross, Wilczek~\cite{gross_d.j._ultraviolet_1973} and
-Politzer~\cite{politzer_reliable_1973} demonstrated 
-{\it asymptotic freedom}\footnote{They got the 2004 Nobel for this.}
-\index{asymptotic freedom} in this QFT, i.e. they showed that the
-strong coupling decreases with increasing interaction strength, which is
-consistent with the fact that one does not observe free quarks\footnote{At
-least not at typical temperatures and densities.}.
-This theoretical observation is buttressed by strong coupling
-expansions in the lattice formulation, which show that the potential
-energy between two infinitely heavy quarks grows linearly
-(see \secref{sec:hqfe}).
-
-We round out this section with a short timeline of discoveries of the
-remaining QCD particles. In 1974 the discovery of the 
-$J/\Psi$-meson\index{psion} or {\it psion}\footnote{The $J/\Psi$ consists
-of a $\bar{c}c$ pair. This is also sometimes called {\it charmonium}.
-\index{charmonium}} at both Brookhaven National Lab (BNL) and
-SLAC~\cite{augustin_discovery_1974,aubert_experimental_1974} demonstrated
-the existence of the charm quark\footnote{Richter and Ting got the 1974
-Nobel prize in physics for this.}, adding further evidence to
-the validity of the quark model. The $J/\Psi$ discovery marks the beginning of a
-period of rapid discoveries in particle physics sometimes referred to as the
-``November Revolution".\index{November Revolution} The existence of the bottom
-quark was demonstrated in 1977 at Fermilab~\cite{herb_observation_1977} when the 
-$Y$-meson\footnote{A $Y$-meson\index{meson!Y} is a $\bar{b}b$ bound state. This is
-sometimes called \index{bottomonium}{\it bottomonium}.} was discovered.
-In 1979 we found experimental evidence for the
-gluon via indirect observations~\cite{barber_discovery_1979} at the
-Deutsches Elektronen-Synchrotron (DESY). In part because it is the
-heaviest quark, the top quark would not be discovered until
-1995~\cite{abachi_observation_1995,abe_observation_1995}
-at Fermilab.
-
-\subsection{Electroweak and Higgs sectors}\index{interaction!weak}
 
 In the early 1930s, Fermi published\footnote{Apparently he originally attempted
 to publish it in {\it Nature}, but they rejected it because
@@ -171,6 +129,8 @@ an atomic nucleus, for example
 \end{equation}
 His theory was an effective 4-point interaction directly linking the four
 particles in the above process.
+Around the same time, Heisenberg~\cite{heisenberg_uber_1932}.
+
 Shortly thereafter, Yukawa~\cite{yukawa_interaction_1935} put forward that this
 interaction should include another field with corresponding quantum that
 mediates this interaction\footnote{Nowadays we designate as
@@ -195,7 +155,7 @@ In the mid 1950s, Lee and Yang~\cite{lee_question_1956} suggested possible
 experimental tests to search for parity violation in weak interaction 
 processes\footnote{Lee and Yang won the 1957 Nobel prize for this}.
 Shortly thereafter, Wu et al.~\cite{wu_experimental_1957} demonstrated parity
-violation in the $\beta$-decay of \ce{^{60}Co}~\cite{wu_experimental_1957},
+violation in the $\beta$-decay of \ce{^{60}Co},
 a result which was verified by Garwin et al.~\cite{garwin_observations_1957}. 
 The theory of the weak interaction was extended by Gell-Mann and
 Feynman~\cite{feynman_theory_1958} to accommodate parity violation by
@@ -250,7 +210,99 @@ corresponds to reality, rather than being just a mathematical trick to
 consistently approach massive elementary particles.
 
 
-\subsection{Lepton mixing}
+%\subsection{Strong sector}\index{interaction!strong}
+
+
+
+In the late 1940s and early 1950s, the {\it kaon} ($K$)~\cite{rochester_evidence_1947}
+\index{meson!K} and {\it lambda} ($\Lambda$)~\cite{hopper_evidence_1950}
+\index{baryon!lambda} hadrons were discovered\footnote{A kaon
+consists of light quark and a strange, while a lambda baryon binds two light
+quarks with one from a higher generation. {\it Strangeness} \index{strangeness}
+was originally proposed as a conserved quantity to explain the relatively long
+lifetimes of these particles~\cite{pais_remarks_1952,gell-mann_isotopic_1953,
+pais_baryon-meson-photon_1953,tadao_charge_1953}.
+We now identify strangeness $S$ as
+$$
+  S\equiv\#\,\text{anti-strange quarks}-\#\,\text{strange quarks}.
+$$}. Ne'eman~\cite{neeman_derivation_1961},
+Gell-Mann~\cite{gell-mann_symmetries_1962}, and
+Zweig~\cite{zweig_su3_1964} proposed\footnote{Gell-Mann would receive the 1969
+Nobel for his contributions to understanding elementary particle
+classification.} that these hadrons could be classified
+according to the irreducible representations of $\SU(3)$, a viewpoint which
+Gell-Mann called the \index{eightfold way}{\it eightfold way}\footnote{This
+name is inspired by the eightfold path of Buddhism.}, examples of which are
+illustrated graphically in \figref{fig:eightfold}. Gell-Mann
+referred to the fundamental units as {\it quarks}\footnote{Gell-Mann borrows
+this name from an excerpt of James Joyce's {\it Finnegan's Wake} that begins
+``Three quarks for Muster Mark".
+Gell-Mann was a bit of a fanciful guy I guess.}.
+At first it was not clear that this quark viewpoint was more than a
+purely mathematical construction, however deep inelastic
+scattering\index{scattering!deep inelastic}
+experiments at the Stanford Linear Accelerator (SLAC) showed that
+protons are made of smaller particles, and are therefore not
+elementary~\cite{bloom_high-energy_1969,breidenbach_observed_1969}.
+This alone did not convince the community that quarks were real, but
+subsequent discoveries would solidify the quark model.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.48\linewidth]{figs/Meson_octet.png}
+  \includegraphics[width=0.48\linewidth]{figs/Baryon_decuplet.png}
+  \caption{{\it Left}: Spin-0 pseudo-scalar meson octet. {\it Right}:
+           Spin-3/2 baryon decuplet. The $s$ represents strangeness,
+           with all particles in the same horizontal row having the
+           same strangeness. Electric charge is represented by $q$,
+           with all particles along the diagonal having the same
+           electric charge. Images taken from
+           Wikipedia~\cite{wiki_eightfold}.}
+  \label{fig:eightfold}
+\end{figure}
+
+From here it was shown possible to formulate a QFT for the strong interaction
+based on $\SU(3)$~\cite{fritzsch_advantages_1973}, which we
+call quantum chromodynamics (QCD).\index{quantum chromodynamics}
+The mediators are called
+{\it gluons}\index{gluon} with the adjoint representation delivering
+eight possible color combinations.
+Gross, Wilczek~\cite{gross_d.j._ultraviolet_1973} and
+Politzer~\cite{politzer_reliable_1973} demonstrated
+{\it asymptotic freedom}\footnote{They got the 2004 Nobel for this.}
+\index{asymptotic freedom} in this QFT, i.e. they showed that the
+strong coupling decreases with increasing interaction strength, which is
+consistent with the fact that one does not observe free quarks\footnote{At
+least not at typical temperatures and densities.}.
+This theoretical observation is buttressed by strong coupling
+expansions in the lattice formulation, which show that the potential
+energy between two infinitely heavy quarks grows linearly
+(see \secref{sec:hqfe}).
+
+We round out this section with a short timeline of discoveries of the
+remaining QCD particles. In 1974 the discovery of the
+$J/\Psi$-meson\index{psion} or {\it psion}\footnote{The $J/\Psi$ consists
+of a $\bar{c}c$ pair. This is also sometimes called {\it charmonium}.
+\index{charmonium}} at both Brookhaven National Lab (BNL) and
+SLAC~\cite{augustin_discovery_1974,aubert_experimental_1974} demonstrated
+the existence of the charm quark\footnote{Richter and Ting got the 1974
+Nobel prize in physics for this.}, adding further evidence to
+the validity of the quark model. The $J/\Psi$ discovery marks the beginning of a
+period of rapid discoveries in particle physics sometimes referred to as the
+``November Revolution".\index{November Revolution} The existence of the bottom
+quark was demonstrated in 1977 at Fermilab~\cite{herb_observation_1977} when the
+$Y$-meson\footnote{A $Y$-meson\index{meson!Y} is a $\bar{b}b$ bound state. This is
+sometimes called \index{bottomonium}{\it bottomonium}.} was discovered.
+In 1979 we found experimental evidence for the
+gluon via indirect observations~\cite{barber_discovery_1979} at the
+Deutsches Elektronen-Synchrotron (DESY). In part because it is the
+heaviest quark, the top quark would not be discovered until
+1995~\cite{abachi_observation_1995,abe_observation_1995}
+at Fermilab.
+
+
+%\subsection{Lepton mixing}
+
 
 In 1963, Cabibbo introduced the {\it Cabibbo angle}\index{Cabibbo angle} allowing
 for quark mixing in weak interactions~\cite{cabibbo_unitary_1963} to

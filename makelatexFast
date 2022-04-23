@@ -18,6 +18,7 @@ fi
 makeindex -s indexHeader.ist 0_researchnotes
 pdflatex -interaction=batchmode -draftmode 0_researchnotes.tex
 pdflatex -interaction=batchmode 0_researchnotes.tex
+
 ./distclean
 
 cp bibliography.bib .bibreference.bib
