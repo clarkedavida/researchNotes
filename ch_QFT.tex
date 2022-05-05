@@ -68,16 +68,13 @@ prizes for some reason. By the time I realized doing this is tedious and doesn't
 teach much, I somehow already felt pot-committed, so I ended up seeing this habit
 through to the bitter end. 
 
-\subsection{Early discoveries}
+\subsection{The fundamentals}
 
-% brief history according to tong
-% e.g. how did QFT start? pauli dirac jordan etc 1920s-30s how to quantize
-% fields. Start basically along with discovery of QM. Failing to have 
-% theory with infinite num of dof, leading into 2nd world war.
+% pauli, jordan etc 1920s-30s how to quantize fields. 
+% Failing to have theory with infinite num of dof,
 % then tomonaga, schwinger, dyson, feynman. Can renormalize, QED discovered.
 % 1970s golden age: infinites understood through
-% renormalization group wilson and kadanoff. Progress on understanding geometry
-% and topology in QFT.
+% renormalization group wilson and kadanoff.
 
 In 1897 J.J. Thomson did experiments with cathode rays\footnote{In a small
 vacuum chamber with two electrodes, if a voltage is applied between them,
@@ -176,31 +173,57 @@ to the wavefunction~\cite{Dirac:1928hu,Dirac:1928ej}. The result is the
 i\hbar\slashed{\partial}\psi=mc\psi.
 \end{equation}
 
-% TODO: Here discuss antiparticles (Srednicki) , positron discovery. 
-%
-% @article{Stueckelberg:1941rg,
-%    author = "Stueckelberg, E. C. G.",
-%    title = "{Remarks on the creation of pairs of particles in the theory of relativity}",
-%    journal = "Helv. Phys. Acta",
-%    volume = "14",
-%    pages = "588--594",
-%    year = "1941"
-%}
-%
+The corresponding Hamiltonian for the Dirac equation is traceless, which
+tells you that the energy eigenvalues cancel out, i.e. 
+it suggests there are states of
+negative energy. These negative energy states indicate that the theory
+has no ground state. In order to prevent this infinite cascade into increasingly
+negative energies, he speculated that these infinitely many states are already
+occupied, which is referred to as \index{Dirac sea}the {\it Dirac sea}; 
+the Pauli exclusion principle then prevents this infinite descent. 
+If an electron in the sea were excited, it would leave behind a vacancy
+that would manifest itself as a positively charged particle. This was the
+prediction of the existence of the \index{positron}positron, which
+was discovered\footnote{1936 Nobel.} in 1932 by Anderson~\cite{Anderson:1933mb}.
+Later St\"uckelberg~\cite{Stueckelberg:1941rg} and
+Feynman~\cite{feynman_theory_1949} would introduce the modern interpretation
+of the positron: rather than being a hole left in the Dirac sea,
+the previously negative energy states are to be understood as the
+positive energy states of a different particle.
 
-%\subsection{Electroweak and Higgs sectors}\index{interaction!weak}
 
+One of the last kinds of fermions needed to complete our particle collection
+are the neutrinos. Before 1930, there was a problem with $\beta$-decay
+\index{decay!beta} 
+which is any decay emitting an $e^+$ or $e^-$ from
+an atomic nucleus: Energy was not conserved. In particular if one assumes
+a general $\beta$-decay process functions like
+\begin{equation}
+  A\to B+e^-,
+\end{equation}
+one can use conservation of four-momentum to find the electron energy.
+The measured energy was found to fluctuate and be smaller than what four-momentum
+conservation delivers. Pauli
+suggested\footnote{Rather than being documented in a publication, this seems to
+come from a letter written by Pauli addressed to a conference in T\"ubingen.
+It opens, ``Liebe Radioaktive Damen und Herren".} that this missing energy
+lies with an as-yet-undetected, weakly interacting particle, the
+electron neutrino. The electron neutrino would not be 
+discovered\footnote{1995 Nobel.}\index{neutrino!electron}
+until the mid 1950s by Cowan and Reines~\cite{Cowan:1956rrn}.
 
+\subsection{Weak and strong forces}
+
+\index{interaction!weak}
 In the early 1930s, Fermi published\footnote{Apparently he originally attempted
 to publish it in {\it Nature}, but they rejected it because
 it because ``it contained speculations too remote from reality to be of interest
-to the reader".} his theory of $\beta$-decay~\cite{fermi_tentativo_1934},
-\index{decay!beta} which is any decay emitting an $e^+$ or $e^-$ from
-an atomic nucleus, for example
+to the reader".} his theory of the 
+\index{decay!beta}$\beta$-decay~\cite{fermi_tentativo_1934}
 \begin{equation}
   n\to\text{p}+e^-+\bar{\nu}_e.
 \end{equation}
-His theory was an effective 4-point interaction directly linking the four
+He introduced an effective 4-point interaction directly linking the four
 particles in the above process.
 Shortly thereafter, Yukawa~\cite{yukawa_interaction_1935} put forward that this
 interaction should include another field with corresponding quantum that
@@ -259,81 +282,22 @@ on his team. Furthermore this prize credits him for his ``development of
 photographic method for studying nuclear processes", even though this method was
 pioneered by other physicists such as Blau and Wambacher.}.
 
-In the mid 1950s, Lee and Yang~\cite{lee_question_1956} suggested possible
-experimental tests to search for parity violation in weak interaction 
-processes\footnote{Lee and Yang won the 1957 Nobel prize for this.}.
-Shortly thereafter, Wu et al.~\cite{wu_experimental_1957} demonstrated parity
-violation in the $\beta$-decay of \ce{^{60}Co},
-a result which was verified by Garwin et al.~\cite{garwin_observations_1957}. 
-The theory of the weak interaction was extended by Gell-Mann and
-Feynman~\cite{feynman_theory_1958} to accommodate parity violation by
-introducing vector-axial currents.
-That $\beta$-decay proceeds through vector-axial currents was
-experimentally verified shortly thereafter~\cite{goldhaber_helicity_1958}.
 
-The unification of the weak and electromagnetic forces began already with
-Glashow in 1961~\cite{glashow_partial-symmetries_1961}, where
-he puts forward the $\SU(2)\times \U(1)$ symmetry group. 
-Still, this theory was not known to be renormalizable.
-Also the weak interaction is short range, but this suggests that the mediating boson 
-should be massive according to Yukawa. On the other hand, 
-massive gauge bosons superficially spoil gauge invariance.
-
-In superconductivity, Ginzburg-Landau theory~\cite{ginzburg_theory_1950}
-gives solutions with effective mass. Nambu applied\footnote{2008 Nobel prize.} 
-this to particle
-physics~\cite{nambu_axial_1960,nambu_dynamical_1961,nambu_dynamical_1961-1},
-but this implied the existence of Goldstone modes that are not observed.
-Higgs~\cite{higgs_broken_1964} and Brout and Englert~\cite{englert_broken_1964}
-noticed\footnote{Higgs and Englert received the 2013 Nobel for this.} 
-that by strategically choosing 
-the gauge, one can simultaneously
-eliminate the Goldstone modes, add a mass term to gauge bosons, and a scalar
-boson, the Higgs boson.\index{boson!Higgs}
-We will discuss spontaneous symmetry breaking and Goldstone's theorem
-\index{spontaneous symmetry breaking} in \secref{sec:ssb}. The Higgs
-mechanism is discussed in detail in \apref{ap:spec_higgs}.
-
-The original Higgs-Brout-Englert mechanism was demonstrated only for massive
-QED; Kibble extended this idea to non-abelian
-groups~\cite{kibble_symmetry_1967}. Weinberg~\cite{weinberg_model_1967}
-and Salam~\cite{salam_weak_1968} applied Kibble's results to Glashow's
-$\SU(2)\times\U(1)$ idea\footnote{And shared the 1979 Nobel for it.}. 
-They demonstrated that one can generate masses
-for weak gauge bosons along with electrons and muons, while still leaving
-neutrinos massless. This approach also predicted neutral weak currents,
-which were discovered shortly thereafter by the Gargamelle
-experiment~\cite{hasert_observation_1974}. The $W$ and $Z$ bosons would
-be discovered at the European Organization for Nuclear Research (CERN)
-in the early 1980s~\cite{aubert_ratio_1983,arnison_experimental_1983}.
-
-Around this time, t'Hooft and Veltman
-also showed\footnote{1999 Nobel prize for them.} these theories are
-renormalizable~\cite{t_hooft_regularization_1972}; together the Higgs mechanism
-and renormalizability of the SM allow one to consistently generate gauge boson
-masses while ensuring its applicability at all energy scales.
-Furthermore CERN's 2012 discovery of the Higgs 
-boson~\cite{aad_observation_2012,chatrchyan_observation_2012} shows that Higgs mechanism
-corresponds to reality, rather than being just a mathematical trick to 
-consistently approach massive elementary particles.
-
-
-%\subsection{Strong sector}\index{interaction!strong}
-
-
-
+\index{interaction!strong}
 In the late 1940s and early 1950s, the {\it kaon} ($K$)~\cite{rochester_evidence_1947}
 \index{meson!K} and {\it lambda} ($\Lambda$)~\cite{hopper_evidence_1950}
-\index{baryon!lambda} hadrons were discovered\footnote{A kaon
+\index{baryon!lambda} hadrons were discovered. A kaon
 consists of light quark and a strange, while a lambda baryon binds two light
-quarks with one from a higher generation. {\it Strangeness} \index{strangeness}
+quarks with one from a higher generation. {\it Strangeness}\footnote{We now 
+\index{strangeness}
+identify strangeness $S$ as
+$$
+  S\equiv\#\,\text{anti-strange quarks}-\#\,\text{strange quarks}.
+$$}
 was originally proposed as a conserved quantity to explain the relatively long
 lifetimes of these particles~\cite{pais_remarks_1952,gell-mann_isotopic_1953,
 pais_baryon-meson-photon_1953,tadao_charge_1953}.
-We now identify strangeness $S$ as
-$$
-  S\equiv\#\,\text{anti-strange quarks}-\#\,\text{strange quarks}.
-$$}. Ne'eman~\cite{neeman_derivation_1961},
+Ne'eman~\cite{neeman_derivation_1961},
 Gell-Mann~\cite{gell-mann_symmetries_1962}, and
 Zweig~\cite{zweig_su3_1964} proposed\footnote{Gell-Mann would receive the 1969
 Nobel for his contributions to understanding elementary particle
@@ -352,7 +316,10 @@ scattering\index{scattering!deep inelastic}
 experiments at the Stanford Linear Accelerator (SLAC) showed that
 protons are made of smaller particles, and are therefore not
 elementary~\cite{bloom_high-energy_1969,breidenbach_observed_1969}.
-This alone did not convince the community that quarks were real, but
+This alone did not convince the community that quarks were 
+real\footnote{For a while it was fashionable to refer to rather refer to
+nucleon constituents as {\it partons}\index{parton}, a term coined
+by Feynman.}, but
 subsequent discoveries would solidify the quark model.
 
 \begin{figure}[t]
@@ -383,9 +350,13 @@ strong coupling decreases with increasing interaction strength, which is
 consistent with the fact that one does not observe free quarks\footnote{At
 least not at typical temperatures and densities.}.
 This theoretical observation is buttressed by strong coupling
-expansions in the lattice formulation, which show that the potential
-energy between two infinitely heavy quarks grows linearly
+expansions in the lattice formulation, introduced by 
+Wilson~\cite{wilson_confinement_1974}, which show that the potential
+energy between two infinitely heavy quarks grows linearly with
+increasing separation
 (see \secref{sec:hqfe}).
+%creutz_monte_1980
+%wilson_RG 1 and 2
 
 We round out this section with a short timeline of discoveries of the
 remaining QCD particles. In 1974 the discovery of the
@@ -409,7 +380,59 @@ heaviest quark, the top quark would not be discovered until
 at Fermilab.
 
 
-%\subsection{Lepton mixing}
+\subsection{Unification}
+
+
+In the mid 1950s, Lee and Yang~\cite{lee_question_1956} suggested possible
+experimental tests to search for parity violation in weak interaction 
+processes\footnote{Lee and Yang won the 1957 Nobel prize for this.}.
+Shortly thereafter, Wu et al.~\cite{wu_experimental_1957} demonstrated parity
+violation in the $\beta$-decay of \ce{^{60}Co},
+a result which was verified by Garwin et al.~\cite{garwin_observations_1957}. 
+The theory of the weak interaction was extended by Gell-Mann and
+Feynman~\cite{feynman_theory_1958} to accommodate parity violation by
+introducing vector-axial currents.
+That $\beta$-decay proceeds through vector-axial currents was
+experimentally verified shortly thereafter~\cite{goldhaber_helicity_1958}.
+
+
+The unification of the weak and electromagnetic forces began already with
+Glashow in 1961~\cite{glashow_partial-symmetries_1961}, where
+he puts forward the $\SU(2)\times \U(1)$ symmetry group. 
+Still, this theory was not known to be renormalizable.
+Also the weak interaction is short range, but this suggests that the mediating boson 
+should be massive according to Yukawa. On the other hand, 
+massive gauge bosons superficially spoil gauge invariance.
+
+
+In superconductivity, Ginzburg-Landau theory~\cite{ginzburg_theory_1950}
+gives solutions with effective mass. Nambu applied\footnote{2008 Nobel prize.} 
+this to particle
+physics~\cite{nambu_axial_1960,nambu_dynamical_1961,nambu_dynamical_1961-1},
+but this implied the existence of Goldstone modes that are not observed.
+Higgs~\cite{higgs_broken_1964} and Brout and Englert~\cite{englert_broken_1964}
+noticed\footnote{Higgs and Englert received the 2013 Nobel for this.} 
+that by strategically choosing 
+the gauge, one can simultaneously
+eliminate the Goldstone modes, add a mass term to gauge bosons, and a scalar
+boson, the Higgs boson.\index{boson!Higgs}
+We will discuss spontaneous symmetry breaking and Goldstone's theorem
+\index{spontaneous symmetry breaking} in \secref{sec:ssb}. The Higgs
+mechanism is discussed in detail in \apref{ap:spec_higgs}.
+
+
+The original Higgs-Brout-Englert mechanism was demonstrated only for massive
+QED; Kibble extended this idea to non-abelian
+groups~\cite{kibble_symmetry_1967}. Weinberg~\cite{weinberg_model_1967}
+and Salam~\cite{salam_weak_1968} applied Kibble's results to Glashow's
+$\SU(2)\times\U(1)$ idea\footnote{And shared the 1979 Nobel for it.}. 
+They demonstrated that one can generate masses
+for weak gauge bosons along with electrons and muons, while still leaving
+neutrinos massless. This approach also predicted neutral weak currents,
+which were discovered shortly thereafter by the Gargamelle
+experiment~\cite{hasert_observation_1974}. The $W$ and $Z$ bosons would
+be discovered at the European Organization for Nuclear Research (CERN)
+in the early 1980s~\cite{aubert_ratio_1983,arnison_experimental_1983}.
 
 
 In 1963, Cabibbo introduced the {\it Cabibbo angle}\index{Cabibbo angle} allowing
@@ -426,6 +449,18 @@ is known as the CKM matrix.\index{CKM matrix} Neutrino mixing is also handled
 through a mixing matrix, the so-called PMNS matrix.\index{PMNS matrix} 
 We discuss neutrino mixing in detail
 in \apref{ap:spec_neutrino}.
+
+
+In the early 1970s, t'Hooft and Veltman
+showed\footnote{1999 Nobel prize for them.} these theories are
+renormalizable~\cite{t_hooft_regularization_1972}. Together the Higgs mechanism
+and renormalizability of the SM allow one to consistently generate gauge boson
+masses while ensuring its applicability at all energy scales.
+Furthermore CERN's 2012 discovery of the Higgs 
+boson~\cite{aad_observation_2012,chatrchyan_observation_2012} shows that Higgs mechanism
+corresponds to reality, rather than being just a mathematical trick to 
+consistently approach massive elementary particles.
+
 
 
 \section{Introductory remarks about QFT} 
