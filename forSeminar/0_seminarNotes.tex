@@ -1,7 +1,7 @@
 % Normal preamble stuff.
 \documentclass[12pt]{book}
 \usepackage[title]{appendix}
-\usepackage{mathtools,tensor,physics,slashed,textcomp}
+\usepackage{mathtools,tensor,physics,slashed,textcomp,mhchem}
 
 % This section is for making C++ code.
 \usepackage[dvipsnames]{xcolor}
@@ -107,7 +107,6 @@
   fonttitle=\bfseries}{cor}
 \theoremstyle{definition}
 \newtheorem*{defn}{Definition}
-%\newtheorem*{example}{Example}
 
 % Some environments for some front matter.
 \newenvironment{frontstuff}
@@ -118,14 +117,16 @@
   {\clearpage}
 
 % Note that book class by default is formatted to be printed back-to-back.
-\title{\bf HISQ and Symanzik Improvement Notes} 
+%\title{\bf HISQ and Symanzik Improvement Notes} 
+\title{\bf Notes on SM History} 
 \author{David Clarke}
 
 \begin{document}
 \maketitle                              % print title page
 
-\include{temp_stag}
-\include{temp_improve}
+%\include{temp_stag}
+%\include{temp_improve}
+\include{temp_history}
 
 \printindex
 

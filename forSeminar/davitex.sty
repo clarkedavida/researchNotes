@@ -13,6 +13,8 @@
 %\usepackage{graphicx,multirow,tabularx}
 
   % General mathematics
+\newcommand{\degree}{^{\circ}}
+\newcommand{\nth}{{}^{\rm th}} % nth
 \renewcommand{\Re}{\mathop{\mathrm{Re}}}
 \renewcommand{\Im}{\mathop{\mathrm{Im}}}
 \newcommand{\R}{\mathbb{R}}
@@ -37,6 +39,8 @@
   }
   {\mathinner{\mathcal{D}\IfNoValueTF{#1}{}{^{#1}}#2} \IfNoValueTF{#3}{}{(#3)}}
 }
+
+
   % Probability
 \newcommand{\pr}[1]{\operatorname{P}\left(#1\right)}
 \newcommand{\prt}[1]{\operatorname{T}\left(#1\right)}
@@ -47,6 +51,9 @@
 \DeclareMathOperator{\Cau}{Cau}
 \DeclareMathOperator{\Cov}{cov}
 \DeclareMathOperator{\variance}{var}
+\newcommand{\chidof}{\chi^2/\text{d.o.f.}}
+
+
   % Physics
 \newcommand{\Lagr}{\mathcal{L}} 
 \newcommand{\MS}{\overline{\text{MS}}}
@@ -59,20 +66,44 @@
 \newcommand{\parity}{\mathcal{P}}
 \newcommand{\Dright}{\overrightarrow{D\strut}}
 \newcommand{\Dleft}{\overleftarrow{D\strut}}
+\newcommand{\pbp}{\bar{\psi}\psi}         % chiral condensate
+\newcommand{\muh}{\hat{\mu}}              % mu/T
+\newcommand{\plaq}{U^\square}
+
   % Group and algebra names
 \renewcommand{\O}{\text{O}}
 \DeclareMathOperator{\SU}{SU}
 \DeclareMathOperator{\U}{U}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\su}{\mathfrak{su}}
+
+
   % Nice looking exists and forall
 \DeclareMathOperator{\Exists}{\exists}
 \DeclareMathOperator{\Forall}{\forall}
+
+
   % Sine and cosine shorthand
 \DeclareMathOperator{\s}{s}
 \DeclareMathOperator{\co}{c}
+
+
+  % Corporate branding
+\newcommand{\simulat}{\texttt{SIMULATeQCD}}
+
+
   % Some other useful stuff
 \newcommand{\tinysp}{\hspace{0.1mm}}
+\newcommand{\secref}[1]{Section~\ref{#1}}
+\newcommand{\chref}[1]{Chapter~\ref{#1}}
+\newcommand{\apref}[1]{Appendix~\ref{#1}}
+\newcommand{\propref}[1]{Proposition~\ref{#1}}
+\newcommand{\thmref}[1]{Theorem~\ref{#1}}
+\newcommand{\lemref}[1]{Lemma~\ref{#1}}
+\newcommand{\equatref}[1]{eq.~\eqref{#1}}
+\newcommand{\figref}[1]{Fig.~\ref{#1}}
+\newcommand{\tabref}[1]{Table~\ref{#1}}
+
 
 % This section defines colvec, which lets me make column
 % vectors more easily. \colvec{N}{a1}{a2}...{aN}
