@@ -121,14 +121,16 @@ would have been nicer to name them something like $n$-hadrons, but alas it would
 take several decades for us to see that hadrons are made of quarks.}.
 
 
-% references: Planck, Einstein, Millikan, Compton
 Around this time, physicists were also beginning to see the particle nature of
-light. In particular, Planck proposed that light may come in discrete packets of
+light. In particular, Planck proposed~\cite{Planck:1901tja} 
+that light may come in discrete packets of
 energy in order to avoid the \index{ultraviolet catastrophe}ultraviolet 
 catastrophe\footnote{1918 Nobel.}.
-Einstein took this proposal seriously, and used it to explain the photoelectric
+Einstein took this proposal seriously~\cite{Einstein:1905cc}, 
+and used it to explain the photoelectric
 effect\footnote{1922 Nobel for him. No Nobel for relativity, interestingly.}. 
-A careful study of the photoelectric effect by Millikan showed that
+A careful study~\cite{millikan_direct_1916} of the photoelectric effect by 
+Millikan showed that
 Einstein's interpretation explained the photoelectric effect well\footnote{He
 got the 1923 Nobel in part for this reason.}. Finally
 Compton showed\footnote{He shared the 1927 Nobel for this.} 
@@ -138,15 +140,53 @@ wavelength\index{wavelength!Compton}
   \lambda_c=\frac{\hbar}{2mc},
 \end{equation}
 where $m$ is the target particle's mass, which one can derive by assuming light
-is made of particles with zero rest mass.
+is made of particles with zero rest mass~\cite{Compton:1923zz}.
 Altogether these discoveries convinced physicists light behaves as a particle
 at short enough length scales, which is the usual photon.\index{photon}
 
 
 If light is to be quantized, it requires a theory that knows about both quantum
 mechanics and special relativity, i.e. it needs QFT. 
-% Here discuss antiparticles, positron discovery. 
+The standard line of thinking can be cast in this way: One starts with
+the Schr\"odinger 
+equation~\cite{Schrodinger:1926gei,Schrodinger:1926vbi,Schrodinger:1926qnk,Schrodinger:1926xyk}
+for a spinless, non-relativistic particle
+of mass $m$ in the position basis,
+\index{Schr\"odinger equation}
+\begin{equation}
+i\hbar\partial_t\psi=-\frac{\hbar^2}{2m}\nabla^2\psi.
+\end{equation}
+If we instead use a relativistic Hamiltonian and square the differential
+operators on each side, we get the 
+{\it Klein-Gordon equation}~\cite{Klein:1926tv,gordon_comptoneffekt_1926}
+\index{Klein-Gordon equation}
+\begin{equation}
+-\hbar^2\partial_t^2\psi=\left(-\hbar^2c^2\nabla^2+m^2c^4\right)\psi.
+\end{equation} 
+While this is at least relativistically sensible, one can show that this
+squaring of operators
+leads to state normalization being time-dependent, i.e. probability is not
+conserved. The situation was finally rescued by Dirac\footnote{Dirac
+and Schr\"odinger shared the 1933 Nobel.}, who realized that
+one could have a relativistically sensible equation that is first-order
+in its operators by introducing some matrices and a spin component
+to the wavefunction~\cite{Dirac:1928hu,Dirac:1928ej}. The result is the 
+{\it Dirac equation}\index{Dirac equation}
+\begin{equation}
+i\hbar\slashed{\partial}\psi=mc\psi.
+\end{equation}
 
+% TODO: Here discuss antiparticles (Srednicki) , positron discovery. 
+%
+% @article{Stueckelberg:1941rg,
+%    author = "Stueckelberg, E. C. G.",
+%    title = "{Remarks on the creation of pairs of particles in the theory of relativity}",
+%    journal = "Helv. Phys. Acta",
+%    volume = "14",
+%    pages = "588--594",
+%    year = "1941"
+%}
+%
 
 %\subsection{Electroweak and Higgs sectors}\index{interaction!weak}
 
@@ -503,9 +543,11 @@ the Heisenberg uncertainty relation,
 and when $\hbar=0$, you are once again allowed to know position and
 momentum simultaneously.
 
-\section{The path integral}
+% TODO: path integral classical limit
 
-\section{Discrete symmetries}\label{sec:discreteSymm}
+%\section{The path integral}
+
+%\section{Discrete symmetries}\label{sec:discreteSymm}
 
 \section{Isospin and hypercharge}\label{sec:isohyper}
 \index{hypercharge}\index{isospin}
