@@ -7,12 +7,11 @@ to make direct analogies with statistical mechanical systems, and in
 particular, to utilize powerful techniques like renormalization group (RG)
 analysis.
 
-I could have combined this chapter with the statistical physics chapter, but I
-decided that since RG analysis is a field {\it sui generis},
-it deserves its own chapter.  This chapter will generally try to follow 
-lectures by Frithjof Karsch, but I will also use details from a nice
-book I found Bauerschmidt, Brydges, and Slade \cite{Bauerschmidt_2019}.
-In that book, in their introduction, they give a nice overview of the idea
+This chapter will generally try to follow 
+lectures by F. Karsch, as well as the book by Binney et
+al.~\cite{binney_theory_1992}, but I will also use details from a nice
+book I found Bauerschmidt et al.~\cite{Bauerschmidt_2019}.
+In that book, they give a nice overview of the idea
 behind RG transformations, saying
 \begin{quote}
 Two paramount features of critical phenomena are scale invariance and 
@@ -27,12 +26,187 @@ points correspond to different universality classes. The analysis of the
 dynamical system at and near the fixed point provides a means to compute 
 universal quantities such as critical exponents. 
 \end{quote} 
+\clearpage
 The goal of this chapter is to try to understand this quote in more detail,
 and to learn how to carry out and interpret RG calculations that often
 appear in the context of lattice field theory.
 
 \section{Spin systems}
 
+\section{Scaling laws}
+All critical exponents\index{critical exponent} can be written as functions 
+of the number of dimensions $d$ as well as $\nu$ and $\eta$. Given the reduced 
+temperature\index{temperature!reduced}
+\begin{equation}
+  t\equiv\frac{T-T_c}{T_c}
+\end{equation}
+and external magnetic field $h$ one gets the 
+relationships~\tabref{tab:scaling}.
+These are equivalent to the {\it hyperscaling relations}
+\index{hyperscaling relation}
+\begin{equation}\begin{aligned}
+2\beta+\gamma&=2-\alpha,\\
+2\beta\delta-\gamma&=2-\alpha,\\
+\gamma&=\nu(2-\eta),\\
+\nu d&=2-\alpha.
+\end{aligned}\end{equation}
+These can be derived from the {\it scaling hypothesis}\index{scaling
+hypothesis}, which we will now show for a large class of RG transformations.
+\begin{table}
+\begin{tabularx}{\linewidth}{lCr} \hline\hline
+       Exponent & Definition & Value\\[3pt]\hline
+$\alpha$ & $C_V\sim|t|^{-\alpha}$  & $2-\nu d$\\[3pt] 
+$\beta$ & $m\sim|t|^{\beta}$ & $\frac{1}{2}\nu(d+\eta-2)$\\[3pt]
+$\gamma$ & $\chi\sim|t|^{-\gamma}$  & $\nu(2-\eta)$\\[3pt] 
+$\delta$ & $m\sim h^{1/\delta}$ &  $\frac{d+2-\eta}{d-2+\eta}$\\[3pt]
+$\nu$ & $\xi\sim |t|^{-\nu}$ & \\[3pt]
+        \hline\hline
+\end{tabularx}
+\caption{Relationships among the critical exponents. Table adapted from 
+         from Ref.~\cite{binney_theory_1992}. In each case one coupling is
+         small while the other is fixed to zero. For $\beta$, $t$ approaches
+         zero from below.}
+\label{tab:scaling}
+\end{table}
+
+Suppose we start with a system of variables $\set{\sigma}$ with Hamiltonian $H$
+and $n$ couplings $\vec{k}=(k_1,...,k_n)^t$. After one RG step, we obtain
+a new system of spins $\set{\sigma'}$ with $H'$ and $\vec{k}'$. We want
+that expectation values remain unchanged after an RG step.
+Thinking about block transformations in particular, one can
+achieve this by collecting 
+all those original configurations $\set{\sigma}$ that lead to the same
+renormalized configuration $\set{\sigma}$\footnote{For example in the 2$d$
+Ising model, if one blocks three up-spins and one down spin, there are 
+four possible ways to get the same effective spin via majority rule.}, which can be
+summarized as
+\begin{equation}
+  e^{-H'\left(\set{\sigma'},~\vec{k}'\right)}
+     =e^{-\beta G(\vec{k})}\sum_{\set{\sigma}~
+                        {\rm giving}~\set{\sigma'}}
+      e^{-H\left(\set{\sigma},~\vec{k}\right)}.
+\end{equation}
+Here we have expressed an overall normalization as $e^{-\beta G}$, which will
+be convenient later. When we sum over all $\set{\sigma'}$ we then get
+\begin{equation}
+  Z'(\vec{k}')=e^{-\beta G(\vec{k})} Z(\vec{k}),
+\end{equation}
+or in terms of free energies,
+\begin{equation}
+  F'(\vec{k}')=F(\vec{k})-G(\vec{k}).
+\end{equation}
+Now $F$ is extensive, so we can write
+\begin{equation}
+  F(\vec{k})=Nf(\vec{k})
+\end{equation}
+where $N$ is the number of spins on the original lattice and $f$ is intensive.
+Similarly one can write
+\begin{equation}
+  F'(\vec{k}')=\frac{N}{b^d}f(\vec{k}')~~~~\text{and}~~~~G(\vec{k})=Ng(\vec{k}),
+\end{equation}
+where $b$ is the {\it scale factor}\index{scale factor}, which represents the
+factor by which the lattice spacing changes. That $F$ and $F'$ are proportional
+to the same intensive function with different couplings follows from the fact
+that the effective Hamiltonian $H'$ has the same functional form as $H$.
+Hence
+\begin{equation}\label{eq:widom1}
+f(\vec{k}')=b^d\left(f(\vec{k})-g(\vec{k})\right).
+\end{equation}
+
+
+Next, let's think about how to relate the couplings $\vec{k}'$ and $\vec{k}$
+near the fixed point $\vec{k}_0$. 
+We can Taylor expand $\vec{R}$ in the vicinity of $\vec{k}_0$ to find
+\begin{equation}
+  \vec{k}_0+\delta\vec{k}'=\vec{R}\left(\vec{k}_0+\delta\vec{k}\right)
+                          \approx\vec{R}(\vec{k}_0)
+                           +\frac{\partial R_i(\vec{k})}{\partial k_j}
+                              \Big|_{\vec{k}=\vec{k}_0}\delta\vec{k}.
+\end{equation}
+The first-order term defines a matrix $M$.
+Since the effect of the renormalization action
+$\vec{R}$ on the fixed point is $\vec{R}(\vec{k}_0)=\vec{k}_0$, we can write
+\begin{equation}
+  \delta\vec{k}'=M\delta\vec{k}.
+\end{equation}
+Now let's switch to a basis in which $M$ is diagonal. In this basis, our
+original system contains new couplings $\vec{x}$, and hence the renormalized
+couplings $\vec{x}'$ are given according to the eigenvalues of $M$ as
+\begin{equation}
+  x_i'=\lambda_i x_i~~~~\text{no summation}.
+\end{equation}
+Hence we can recast eq.~\eqref{eq:widom1} as
+\begin{equation}\label{eq:widom1}
+f(\lambda_1x_1,\lambda_2x_2,...)=b^d\left(f(x_1,x_2,...)-g(x_1,x_2,...)\right).
+\end{equation}
+
+
+Now $f$ and $g$ are some kinds of functions of $\vec{x}$. Generally speaking
+there will be some part that is expressible as a Taylor series in the $\vec{x}$;
+this is called the {\it regular} part.\index{regular} There must also be some
+part not expressible as a Taylor series in order that we can obtain the power
+law behavior one finds in the vicinity of a phase transition; this is
+called the {\it singular} part.\index{singular} In order to proceed we make
+the following assumption: The singular part is completely contained in
+$f$. This is not true of all RG transformations, but it is true
+of many; for example it can be shown that this assumption holds for any
+RG transformation whose renormalized block variables depend linearly
+on the original ones. Under this assumption we can write
+\begin{equation}\label{eq:widom2}
+  \fsing(\lambda_1x_1,\lambda_2x_2,...)=b^d\fsing(x_1,x_2,...).
+\end{equation}
+
+
+Finally we specialize to our couplings $t$ and $h$. Sufficiently close to the
+critical point, these can be identified with two of these eigendirections, say
+$x_1=t$ and $x_2=h$. Furthermore the action of the RG transform will not abruptly
+change the direction of the flow; this is equivalent to $\lambda_t>0$ and
+$\lambda_h>0$. Since these eigenvalues are positive and $b$ is positive we
+can introduce $\lambda_i=b^{\,y_i}$. Hence,
+\begin{equation}\label{eq:widom3}
+  \fsing(b^{\,y_t}t,b^{\,y_h}h,...)=b^d\fsing(t,h,...).
+\end{equation}
+Since the system is supposed to be scale-invariant, you are free to choose $b$
+as you like; e.g. you are free to set the length scale of your blocking
+procedure in your RG step. Hence we can choose
+\begin{equation}
+  b=|t|^{-1/y_t}~~~~\text{or}~~~~b=h^{-1/y_t}.
+\end{equation} 
+If we restrict our attention to the critical surface $x_i=$ for all $i\geq2$
+we obtain finally the scaling hypothesis:
+\begin{theorem}{Widom scaling hypothesis}{}
+  \begin{equation*}\begin{aligned}
+    \fsing(t,h)&=|t|^{d/y_t}\fsing\left(\pm1,|t|^{-y_h/y_t}h\right)\\
+    \fsing(t,h)&=h^{d/y_h}\fsing\left(h^{-y_t/y_h},1\right).
+  \end{aligned}\end{equation*}
+\end{theorem}
+
+Let's derive the critical exponents from
+the scaling hypothesis. We choose one or the other of the above forms
+strategically depending on the observable we're looking at:
+\begin{equation}\begin{aligned}
+  C_V&=\partial_T^2 F
+     \sim\partial_t^2 |t|^{d/y_t}\fsing\left(\pm1,|t|^{-y_h/y_t}h\right)
+     \sim|t|^{d/y_t-2}
+     \equiv|t|^{-\alpha}\\
+  m\big|_{h=0}&=\partial_h F\big|_{h=0}
+     \sim\partial_h |t|^{d/y_t}\fsing\left(\pm1,|t|^{-y_h/y_t}h\right)\big|_{h=0}
+     \sim|t|^{d/y_t-y_h/y_t}
+     \equiv|t|^{\beta}\\
+  \chi\big|_{h=0}&=\partial^2_h F\big|_{h=0}
+     \sim\partial^2_h |t|^{d/y_t}\fsing\left(\pm1,|t|^{-y_h/y_t}h\right)\big|_{h=0}
+     \sim|t|^{d/y_t-2y_h/y_t}
+     \equiv|t|^{-\gamma}\\
+  m\big|_{t=0}&=\partial_h F\big|_{t=0}
+     \simh^{d/y_h}\fsing\left(h^{-y_t/y_h},1\right)\big|_{t=0}
+     \sim h^{d/y_h-y_t/y_h}
+     \equiv h^{1/\delta}.
+\end{aligned}\end{equation}
+One can eliminate the unknown variables $y_h$, $y_t$, and $d$ to obtain
+the first two hyperscaling relations.
+
+
+\section{Classification of observables}
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
