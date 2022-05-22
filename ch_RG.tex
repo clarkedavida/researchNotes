@@ -177,12 +177,13 @@ we obtain finally the scaling hypothesis:
 \begin{theorem}{Widom scaling hypothesis}{}
   \begin{equation*}\begin{aligned}
     \fsing(t,h)&=|t|^{d/y_t}\fsing\left(\pm1,|t|^{-y_h/y_t}h\right)\\
-    \fsing(t,h)&=h^{d/y_h}\fsing\left(h^{-y_t/y_h},1\right).
+    \fsing(t,h)&=h^{d/y_h}\fsing\left(h^{-y_t/y_h},1\right)
   \end{aligned}\end{equation*}
 \end{theorem}
 
-Let's derive the critical exponents from
-the scaling hypothesis. We choose one or the other of the above forms
+One can see from the scaling hypothesis that the order parameter, its
+susceptibility, and $C_V$ will scale according to critical exponents
+near the critical point. We choose one or the other of the above forms
 strategically depending on the observable we're looking at:
 \begin{equation}\begin{aligned}
   C_V&=\partial_T^2 F
@@ -207,6 +208,42 @@ the first two hyperscaling relations.
 
 
 \section{Classification of observables}
+
+
+Owing to the powerful connection with statistical physics, RG techniques are of
+considerable use in LFT. For example one can look at the scaling of various
+observables near a continuous phase transition to figure out the universality
+class of that transition. In order to do so, one has to figure out which
+observables are analogous to, say, the magnetization. In this context one
+distinguishes between {\it energy-like}\index{energy-like} and {\it
+magnetization-like}\index{magnetization-like} quantities. Energy-like
+observables are those that have the same scaling behavior as the energy density
+in spin systems, while magnetization-like quantities scale like the
+magnetization.
+
+In order to utilize these tools, one needs to correctly classify the observable
+of interest. In the context of global symmetry breaking, magnetization-like
+quantities are those explicitly break the symmetry, while energy-like quantities
+remain unchanged.
+
+We take as an example the QCD chiral phase transition and try to classify some
+observables and couplings with respect to it. Let's see how the fermionic
+number operator in a Euclidean metric $\bar{\psi}\gamma_4\psi$ changes under
+chiral rotations~\eqref{eq:SUNfc} and \eqref{eq:U1A}:
+\begin{equation}
+  \bar{\psi}'\gamma_4\psi'
+    =\bar{\psi}e^{i\alpha\gamma_5T^a}\gamma_4e^{i\alpha\gamma_5T^a}\gamma_4\psi.
+\end{equation}
+The $T^a$ carry no Dirac indices, so they will commute with the $\gamma_i$,
+meanwhile $\gamma_4$ and $\gamma_5$ anti-commute. Hence
+\begin{equation}
+  \bar{\psi}'\gamma_4\psi'
+    =\bar{\psi}\gamma_4e^{-i\alpha\gamma_5T^a}e^{i\alpha\gamma_5T^a}\gamma_4\psi.
+    =\bar{\psi}\gamma_4\psi,
+\end{equation}
+which tells us the number operator is energy-like and that the quark chemical
+potential is an energy-like coupling.
+
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
