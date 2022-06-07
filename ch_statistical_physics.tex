@@ -1,11 +1,15 @@
 \chapter{Physics: Statistical Physics}
 
+One regime of interest for lattice QCD calculations is the application
+of lattice formalism to hot, dense nuclear systems; this is the realm
+of thermodynamics\index{thermodynamics} and statistical physics. In this chapter I try to
+offer some reminders of statistical physics, especially those that
+are directly relevant to modern lattice investigations of the QCD
+phase diagram. Some references I drew from include
+Ref.~\cite{tahir-kheli_general_2012} and \cite{kardar_statistical_2007}.
 
 \section{Equations of state}\label{sec:EoS}
 
-This section follows parts of chapter~8 of
-Ref.~\cite{tahir-kheli_general_2012}. More details can be found in this 
-book. You can also look at the references therein.
 
 Probably the equation of state that you are most familiar with is the 
 ideal gas law,
@@ -18,13 +22,14 @@ Meanwhile the pressure $P$ and the temperature $T$ are {\it intensive}
 \index{intensive}, i.e. they do not scale with the system.
 
 There is an equation of state for each intensive variable required for the
-description of thermodynamic states. For example since
+description of thermodynamic states. For example from the
+first law of thermodynamics,
 \begin{equation}\label{eq:fslaw}
-  \dd{U}=T\dd{S}-P\dd{V}+\mu\dd{N},
+  \dd{U}=T\dd{S}-P\dd{V}+\sum_i\mu_i\dd{N}_i,
 \end{equation}
-we know that
+we know that\index{thermodynamics!first law}
 \begin{equation}
-  T=\frac{\partial U}{\partial S}.
+  T=\pder[U]{S}.
 \end{equation}
 This intensive variable $T$ depends on only the extensive variables; 
 generally we could write
@@ -120,18 +125,32 @@ because it guarantees that the derivative is monotonic.
   \end{enumerate}
 \end{proposition}
 
-\section{Helmholtz free energy}\index{free energy!Helmholtz}
+Now that we have some intuition for why one might want to do a
+Legendre transform, we are going to see how some other useful
+thermodynamic potentials arise from carrying them out.
+
+\subsection{Helmholtz free energy}
+\index{free energy!Helmholtz}
 Let us now return to our issue of dropping $S$ in favor
-of $T=\partial U/\partial S$. According to the above section if we
+of $T$. According to the above section if we
 Legendre transform $U(S)$ out of the variable $S$, then the minimization
 will guarantee that the new independent variable is $T$. Calling
 this new function $F$, we obtain
-\begin{equation}
+\begin{equation}\label{eq:helmholtz}
   F=U-ST.
 \end{equation}
 This new function is guaranteed to be a thermodynamic potential, and
 we give it a special name: the {\it Helmholtz free energy}.
+From \equatref{eq:helmholtz} and the first law, we get
+\begin{equation}
+  \dd F = -S\dd T-P\dd V+\sum_i\mu_i\dd{N}_i.
+\end{equation}
 
+We can derive some useful thermodynamic relations from these. For
+instance
+\begin{equation}
+  -T^2\pder[(F/T)]{T}=
+\end{equation}
 
 \section{Cumulants}
 

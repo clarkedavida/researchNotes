@@ -704,7 +704,7 @@ that if we have a smooth function of $N$ variables
 $f:\R^N\to\R$ we can Taylor expand
 \begin{equation}
   f(x)=f(\hat{x})+\sum_{j=1}^N
-        \frac{\partial f}{\partial x_j}\Bigg|_{x=\hat{x}}(x_j-\hat{x}_j)
+        \pder[f]{x_j}\Bigg|_{x=\hat{x}}(x_j-\hat{x}_j)
         +\order{x^2}
 \end{equation}
 where $x=(x_1,...,x_N)$ and $\hat{x}=(\hat{x}_1,...,\hat{x}_N)$. So if 
@@ -739,7 +739,7 @@ can associate the $a_{ij}$ with partial derivatives. Then
 \equatref{eq:linprop} becomes
 \begin{equation}\label{eq:errprop}\index{error propagation formula}
   \sigma^2_{Y_i}=
-   \sum_{j=1}^N\frac{\partial\,Y_i}{\partial X_j}\sigma_{X_j}^2.
+   \sum_{j=1}^N\left(\pder[Y_i]{X_j}\right)^2\sigma_{X_j}^2.
 \end{equation}
 This is the {\it error propagation formula} as it's usually stated. 
 Berg~\cite{berg_markov_2004} emphasizes that this relation is 

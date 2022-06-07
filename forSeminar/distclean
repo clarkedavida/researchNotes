@@ -1,3 +1,0 @@
-#!/bin/bash
-
-rm -f *.{aux,toc,dvi,lof,lot,log,lom,bbl,blg,ps,out,idx,ilg,ind} *~

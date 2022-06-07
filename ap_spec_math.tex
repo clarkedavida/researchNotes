@@ -29,7 +29,7 @@ The strange ordering of the coordinates will make sense when we move
 to $N$ dimensions. Now the Jacobian corresponding to the transformation between 
 Cartesian and spherical coordinates is
 \begin{equation}
-  \frac{\partial(x,y,z)}{\partial(r,\theta,\phi)}
+  \pder[(x,y,z)]{(r,\theta,\phi)}
   =\left(\begin{array}{ccc}
      \s_\theta\co_\phi & r\co_\theta\co_\phi & -r\s_\theta\s_\phi \\
      \s_\theta\s_\phi  & r\co_\theta\s_\phi  & r\s_\theta\co_\phi \\
@@ -38,7 +38,7 @@ Cartesian and spherical coordinates is
 \end{equation}
 Knowing the Jacobian, we compute the volume element
 \begin{equation}
-  \dd[3]{x}=\det\frac{\partial(x,y,z)}{\partial(r,\theta,\phi)}
+  \dd[3]{x}=\det\pder[(x,y,z)]{(r,\theta,\phi)}
              \dd{r}\dd{\theta}\dd{\phi}
       =r^2\dd{r}\s_\theta\dd{\theta}\dd{\phi}=r^2\dd{r}\dd{\Omega},
 \end{equation}
@@ -154,10 +154,10 @@ measure goes to the denominator of one of the terms. Make sure
 each denominator has units of length. In the present case, the
 gradient operator is read off from the measure to be
 \begin{equation}\label{eq:4dgrad}
-  \partial=e_r\frac{\partial}{\partial r}
-   +e_{\theta_1}\frac{1}{r}\frac{\partial}{\partial \theta_1}
-   +e_{\theta_2}\frac{1}{rs_{\theta_1}}\frac{\partial}{\partial \theta_2}
-   +e_\phi\frac{1}{rs_{\theta_1}s_{\theta_2}}\frac{\partial}{\partial \phi},
+  \partial=e_r\pder{r}
+   +e_{\theta_1}\frac{1}{r}\pder{\theta_1}
+   +e_{\theta_2}\frac{1}{rs_{\theta_1}}\pder{\theta_2}
+   +e_\phi\frac{1}{rs_{\theta_1}s_{\theta_2}}\pder{\phi},
 \end{equation}
 where $e_i$ are unit vectors in direction $i$ and the $\partial$ on
 the LHS is meant to represent a vector, while $\partial$s on the RHS
@@ -409,13 +409,13 @@ given some generic density $\rho$ depending on $\vec{x}$ and $t$,
 \index{continuity equation}
 one usually begins with a {\it continuity equation},
 \begin{equation}\label{eq:continuityEquation}
-  \frac{\partial\rho}{\partial t}+\nabla\cdot\left(\rho\vec{v}\right)=0,
+  \pder[\rho]{t}+\nabla\cdot\left(\rho\vec{v}\right)=0,
 \end{equation}
 where $\vec{v}$ is the velocity of the stuff at position $\vec{x}$. 
 To interpret the continuity equation, one thinks about some finite region
 in space $V$ and makes use of the divergence theorem to find
 \begin{equation}
-  \frac{\partial}{\partial t}\int_V \dd[3]{x}\rho
+  \pder{t}\int_V \dd[3]{x}\rho
      +\int_{S}\dd{\vec{S}}\cdot\left(\rho\vec{v}\right)=0.
 \end{equation}
 The integral in the first term on the LHS is just the total amount of
@@ -442,7 +442,7 @@ can be written as
 where $D$ is a constant called the {\it diffusion coefficient}. Combining
 \equatref{eq:continuityEquation} and \eqref{eq:ficksLaw}, one finds
 \begin{equation}
-  \frac{\partial\rho}{\partial t}-D\nabla^2\rho = 0.
+  \pder[\rho]{t}-D\nabla^2\rho = 0.
 \end{equation}
 This is the {\it diffusion equation} in 3+1 dimensions. For the remainder
 of this section, to keep the notation light, we will solve the diffusion

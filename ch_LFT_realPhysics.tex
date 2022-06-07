@@ -47,12 +47,7 @@ To learn more in detail about isospin, see \secref{sec:isohyper}.}, i.e. the bas
 of baryon number, electric charge, and strangeness. These relations 
 are\footnote{A mnemonic to remember these relations is to ask what each quark
 contributes to a system. For example a strange quark makes 1/3 of a baryon,
-adds charge -1/3, and subtracts 1 from the strangeness. Alternatively
-you can write the relations between the conserved charges and quark numbers,
-write $\vec{\mu}^{\,C}=T\vec{\mu}^{\,f}$, where $\vec\mu$ is being 
-represented in the conserved charge or quark number basis,
-and utilize that $\vec{\mu}\cdot\vec{N}$ should be the same regardless
-of basis.}
+adds charge -1/3, and subtracts 1 from the strangeness.}
 \begin{equation}\begin{aligned}\label{eq:quark-conservedCharge}
   \mu_u &= \frac{1}{3}\mu_B + \frac{2}{3}\mu_Q\\
   \mu_d &= \frac{1}{3}\mu_B - \frac{1}{3}\mu_Q\\
@@ -70,9 +65,9 @@ instead must decompose a conserved charge derivative into quark derivatives
 using \equatref{eq:quark-conservedCharge}. For example 
 one finds
 \begin{equation}
-  \frac{\partial}{\partial\mu_B}
-   =\sum_f\frac{\partial\mu_f}{\partial\mu_B}\frac{\partial}{\partial\mu_f}
-   =\frac{1}{3}\sum_f\frac{\partial}{\partial\mu_f}.
+  \pder{\mu_B}
+   =\sum_f\pder[\mu_f]{\mu_B}\pder{\mu_f}
+   =\frac{1}{3}\sum_f\pder{\mu_f}.
 \end{equation}
 
 Now we will connect this to the partition function $Z$. We have
@@ -104,6 +99,10 @@ hidden in $D_f$, so for $f\neq g$ we get
 \begin{equation}
   \partial_{\muh_f}D_g = 0.
 \end{equation}
+Finally we note that, for the purpose of doing Taylor series expansions, it is
+useful to remember that the QCD partition function should be blind to charge
+conjugation at $\mu_B=0$. This tells us that we should expect only even powers
+of $\mu_B$ when using that as the expansion parameter. 
 
 \subsection{Derivative formulas}
 
@@ -155,7 +154,7 @@ the staggered formulation
 \end{equation} 
 Finally using \equatref{eq:dZinv} one quickly derives the following useful formula
 for an observable $O$ calculated on HISQ configurations:
-\begin{proposition}{}{}\label{prop:dO}
+\begin{proposition}{}{prop:dO}
 \begin{equation*} \partial_{\muh}\ev{O}
        =   \ev{\partial_{\muh}O}
         -\frac{1}{4}\sum_f\ev{\tr D_f^{-1}\partial_{\muh}D_f}\ev{O}
@@ -163,7 +162,7 @@ for an observable $O$ calculated on HISQ configurations:
 \end{equation*}
 \end{proposition} 
 Note that if $\muh=\muh_f$ with $N_f$ degenerate flavors, 
-\propref{prop:dO} reduces to eq. (A3)
+\propref{prop:dO} reduces to eq.~(A3)
 in Ref.~\cite{allton_thermodynamics_2005}. Using this Proposition along
 with \equatref{eq:dlogZ}, one 
 can start expressing generalized susceptibilities in terms of the fermion

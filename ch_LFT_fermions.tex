@@ -116,7 +116,7 @@ $N=2$. Then
 \end{equation}
 A definition of the derivative that follows our intuition is
 \begin{equation}
-  \frac{\partial f}{\partial\eta_1}=a_1+a_{12}\eta_2.
+  \pder[f]{\eta_1}=a_1+a_{12}\eta_2.
 \end{equation}
 However, the defining characteristic of Grassmann numbers is that they
 anticommute. Therefore we could also have expanded $f$ as
@@ -125,18 +125,18 @@ anticommute. Therefore we could also have expanded $f$ as
 \end{equation}
 In order for the derivative $f$ to make sense we must therefore require
 \begin{equation}
-  \frac{\partial}{\partial\eta_1}\eta_2=
-  -\eta_2\frac{\partial}{\partial\eta_1}.
+  \pder{\eta_1}\eta_2=
+  -\eta_2\pder{\eta_1}.
 \end{equation}
 Similarly if we take another derivative, this time with respect to $\eta_2$,
 we find that partial derivatives with respect to different Grassmann variables
 must also anticommute to maintain consistency. Altogether, the differentiation
 rules for Grassmann variables become
 \begin{equation}\begin{aligned}
-  \frac{\partial}{\partial\eta_i}1&=0;\\
-  \frac{\partial}{\partial\eta_i}\eta_i&=1;\\
-  \frac{\partial}{\partial\eta_i}\eta_j&=
-  -\eta_j\frac{\partial}{\partial\eta_i};\\
+  \pder{\eta_i}1&=0;\\
+  \pder{\eta_i}\eta_i&=1;\\
+  \pder{\eta_i}\eta_j&=
+  -\eta_j\pder{\eta_i};\\
   \frac{\partial^2}{\partial\eta_i\partial\eta_j}&=
   -\frac{\partial^2}{\partial\eta_j\partial\eta_i}.
 \end{aligned}\end{equation}
@@ -156,7 +156,7 @@ that with $\lambda_1,\lambda_2\in\mathbb{C}$ it is linear,
 \end{equation}
 and that its integrand vanishes at the boundary,
 \begin{equation}\label{eq:grassBC}
-  \int\dd[N]{\eta}\frac{\partial}{\partial\eta_i}f=0.
+  \int\dd[N]{\eta}\pder{\eta_i}f=0.
 \end{equation}
 If some function $f$ of $N-1$ Grassmann numbers can be written as the 
 derivative of another function $g$ of $N$ Grassmann numbers, it follows
@@ -308,10 +308,10 @@ $$
   $$
     \ev{\eta_{i_1}\bar{\eta}_{j_1}...\eta_{i_n}\bar{\eta}_{j_n}}_F
     =\frac{1}{Z_F}
-    \frac{\partial}{\partial\theta_{j_1}}
-    \frac{\partial}{\partial\bar{\theta}_{i_1}}\,...\,
-    \frac{\partial}{\partial\theta_{j_n}}
-    \frac{\partial}{\partial\bar{\theta}_{i_n}}W[\theta,\bar{\theta}]
+    \pder{\theta_{j_1}}
+    \pder{\bar{\theta}_{i_1}}\,...\,
+    \pder{\theta_{j_n}}
+    \pder{\bar{\theta}_{i_n}}W[\theta,\bar{\theta}]
     \Big|_{\theta=\bar{\theta}=0}.
   $$
   Let us now apply Theorem~\ref{thm:fermgf} to the RHS and carry
