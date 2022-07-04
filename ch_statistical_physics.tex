@@ -149,12 +149,100 @@ From \equatref{eq:helmholtz} and the first law, we get
 We can derive some useful thermodynamic relations from these. For
 instance
 \begin{equation}
-  -T^2\pder[(F/T)]{T}=
+  -T^2\pder[(F/T)]{T}=U.
 \end{equation}
 
-\section{Cumulants}
+%\section{Cumulants}
 
+\section{Ideal quantum gas}
 
+\subsection{Canonical formulation}
+
+\index{gas!bose}\index{gas!fermi}
+\begin{equation}
+\eta=
+  \begin{cases}
+     +1 & \text{bosonic gas} \\
+     -1 & \text{fermionic gas}.
+  \end{cases}
+\end{equation}
+
+\subsection{Grand canonical formulation}
+
+\index{fugacity}
+\begin{equation}
+  z=e^{-N\mu}
+\end{equation}
+
+\section{Relativistic quantum gases}
+
+Relativistic quantum gases are especially interesting for us
+to consider especially because of their
+application to low temperatures of the QCD phase diagram. There, the medium
+behaves approximately like a relativistic gas of hadronic bound states.
+This allows for a cross check against lattice QCD at low temperatures
+and at finite densities. Following some lecture notes by F. Karsch,
+we are going to derive the
+pressure. From this we can derive other thermodynamic quantities
+using standard thermodynamic relations.
+
+We use units $\hbar=c=k_B=1$ and consider a gas of a single species
+with spin $s$ and rest mass $m$. Working in the rest frame of the gas,
+we have
+\begin{equation}\label{eq:dispersion}
+  E=\sqrt{p^2+m^2}.  
+\end{equation}
+From the grand canonical formulation,
+doing the momentum integral in spherical coordinates, the pressure is
+\begin{equation}
+  \frac{P}{T}=-\frac{4\pi\eta g}{(2\pi)^3}\int_0^\infty 
+      \dd{p}p^2\log\left(1-\eta z e^{-E/T}\right),
+\end{equation}
+where $g=2s+1$ is the {\it degeneracy factor}. \index{degeneracy factor}
+Solving the dispersion relation
+for $p$ and substituting it into the pressure gives
+\begin{equation}
+  \frac{P}{T}=-\frac{4\pi\eta g}{(2\pi)^3}\int_m^\infty 
+      \dd{E}E\left(E^2-m^2\right)^{1/2}\log\left(1-\eta z e^{-E/T}\right).
+\end{equation}
+Expanding the logarithm yields
+\begin{equation}\label{eq:pressE}
+  \frac{P}{T}=\frac{4\pi g}{(2\pi)^3}\sum_{k=1}^\infty\eta^{k+1}\frac{z^k}{k}\int_m^\infty 
+      \dd{E}E\left(E^2-m^2\right)^{1/2}\right)e^{-kE/T},
+\end{equation}
+which is of course only valid for $\eta z\exp(-E/T)<1$.
+
+Let us now evaluate the integral in \equatref{eq:pressE}. We introduce
+$x\equiv E/m$. Performing this variable change and integrating by parts gives
+\begin{equation}\label{eq:pressint}
+  \int_m^\infty\dd{E}E\left(E^2-m^2\right)^{1/2}\right)e^{-kE/T}
+  =\frac{km^4}{3T}\int_1^\infty\dd x\left(x^2-1\right)^{3/2}e^{-mkx/T}.
+\end{equation}
+This integral can now be expressed in terms of the
+{\it modified Bessel functions}\index{Bessel function!modified}
+\begin{equation}
+  K_\nu(a)=\frac{\pi^{1/2}(a/2)^\nu}{\Gamma(\nu+1/2)}
+             \int_1^\infty\dd x(x^2-1)^{\nu-1/2}e^{-ax}.
+\end{equation}
+In particular we see upon comparison with \equatref{eq:pressint}
+that our integral contains $K_2(mk/T)$. Combining everything,
+using $\Gamma(5/2)=3\pi^{1/2}/4$, we obtain
+\begin{equation}\label{eq:pressrelQM}
+  \frac{P}{T}=\frac{m^2gT}{\pi^2}\sum_{k=1}^\infty\eta^{k+1}z^k
+                         \frac{K_2\left(mk/T\right)}{k^2},
+\end{equation}
+which is a form that is well suited for computer calculations.
+
+\subsection{Hadron resonance gas}\label{sec:HRG}\index{gas!hadron resonance}
+
+Knowing the pressure \equatref{eq:pressrelQM}, we are now ready to write down
+some expressions for the {\it hadron resonance gas} (HRG) model,
+following Ref.~\cite{karsch_probing_2011}.
+
+The HRG model is a low temperature model, in the sense we imagine we are working
+in a phase where quarks are confined, so that the only degrees of freedom are
+hadronic bound states. To a good approximation, this means we need only include
+stable mesons, baryons, and their antiparticles.
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}

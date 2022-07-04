@@ -294,11 +294,14 @@ action} \cite{wilson_confinement_1974}, given by
          -\frac{1}{N_c}\Re\tr \plaq_{\mu\nu}(x)\right).
 \end{equation}
 The factor $\beta$ is given this name in analogy to the inverse temperature 
-in statistical mechanics. The Wilson action becomes identical with the
+in statistical mechanics. Note that in this notation, the action has the
+minimal value 0\footnote{This can be seen as follows: Go to a basis in which
+$\plaq$ is diagonal. Since it is unitary, we see that its diagonal
+entries must be pure phases. Hence $|\Re\tr\plaq|\leq N_c$.}. 
+The Wilson action becomes identical with the
 pure $\SU(N_c)$ action in the continuum limit because the plaquette is
 directly related to the field tensor, which is proven in the following
 proposition. 
-\pagebreak
 \begin{proposition}{}{plaquette}
 $$
 U^\Box_{\mu\nu}(x)=\exp\left[-a^2F_{\mu\nu}(x)+\order{a^3}\right].
@@ -469,7 +472,7 @@ us to integrate out the common link in such situations:
 
 
 When one thinks about the potential\footnote{At finite temperature
-one distinguishes between potential energy and free energy.}
+one distinguishes between potential energy and free energy since $F=U-TS$.}
 energy between a static quark-antiquark pair, \index{static quark}
 i.e. a pair of infinitely heavy quarks, one imagines
 a Wilson loop $W(\mathcal{C}_{rt})$
