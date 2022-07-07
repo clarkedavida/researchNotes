@@ -197,7 +197,53 @@ and
 \end{equation}
 
 
-%\subsection{Practical facts about thermodynamic quantities}
+\subsection{Dealing with the sign problem}\index{sign problem}
+
+\begin{figure}
+\centering
+\vspace{-1cm}
+\includegraphics[width=0.4\linewidth]{figs/3d_phase_diag_Gauss.003.pdf}
+\vspace{-1cm}
+\caption{Schematic phase diagram of QCD. Indicated are the pseudocritical transition temperature 
+$\Tpc$ of QCD at physical quark mass and the critical transition temperature $\Tc$ in the 
+chiral limit. Dashed lines indicate crossovers, thick, solid lines are lines of second-order phase 
+transitions, and a first-order surface is indicated in grey. A possible critical endpoint 
+is indicated in teal. Figure by C. Schmidt.}
+\label{fig:pdiag}
+\end{figure}
+
+At sufficiently high $T$ and/or $\mu_B$, nucleons dissociate into their constituents, 
+and nuclear matter changes phase from a gas of hadrons to quark-gluon plasma.
+At low enough temperature, one eventually encounters with increasing $\mu_B$ a line of 
+first-order transitions, which is expected to terminate at a second-order critical 
+endpoint belonging to the 3-$d$, $\Z_2$ universality class, as shown in the rear 
+plane of Fig.~\ref{fig:pdiag}.
+
+
+Unfortunately at $\mu_B>0$, the Boltzmann factor becomes complex, and a direct estimate of the path 
+integral through MCMC is no longer possible--this is the infamous {\it sign problem}.
+This limitation is a special hindrance when looking out for the possible critical 
+endpoint at nonzero $\mu_B$ mentioned above. 
+Nevertheless many approaches have been developed to at least partially circumvent this limitation, 
+each with its own merits, drawbacks, and regions of applicability.
+Two popular approaches include Taylor expansions of the equation of state in 
+$\muh\equiv\mu_B/T$~\cite{Allton:2002zi, Allton:2003vx, Gavai:2003mf} and analytic continuation 
+from purely imaginary chemical potential  $\muh=i\muh_I$~\cite{deForcrand:2002hgr, DElia:2002tig}.
+
+When viewed from the plane of complex $\muh$, the Taylor expansion approach is limited by the 
+location of the nearest zero of the QCD partition function $\ZQCD$, i.e. the nearest singularity 
+of the free energy in the complex plane. 
+In terms of the universal scaling in the vicinity of a critical point, the nearest singularity 
+might be identified with the Lee-Yang edge\index{Lee-Yang singularity} 
+singularity~\cite{yang_statistical_1952,lee_statistical_1952}, which is a branch cut 
+singularity of the universal scaling function \cite{fonseca_zamolodchikov}. 
+Two of these (complex conjugated) singularities pinch the real axis as $T$ approaches its 
+critical value $\Tc$. The extended analyticity conjecture (due to Fonseca and Zamolodchikov) 
+posits that, for $T < \Tc$, the Lee-Yang edge singularities are the closest singularities to 
+the real axis of the symmetry breaking field $H$.
+Thus understanding the analytic structure of the QCD free energy gives crucial insight on both
+the convergence radius of these $\muh$-expansions and universal critical behaviour 
+in the vicinity of the phase transitions.
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
