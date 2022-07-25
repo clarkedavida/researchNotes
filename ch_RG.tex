@@ -33,7 +33,7 @@ appear in the context of lattice field theory.
 
 \section{Spin systems}
 
-\section{Scaling laws}
+\section{The scaling hypothesis}
 All critical exponents\index{critical exponent} can be written as functions 
 of the number of dimensions $d$ as well as $\nu$ and $\eta$. Given the reduced 
 temperature\index{temperature!reduced}
@@ -243,6 +243,27 @@ meanwhile $\gamma_4$ and $\gamma_5$ anti-commute. Hence
 \end{equation}
 which tells us the number operator is energy-like and that the quark chemical
 potential is an energy-like coupling.
+
+\section{Scaling of observables}
+
+
+The strategy now is to use the Taylor expansions of $f_f$ in the regimes
+$z\to\pm\infty$ and $z\approx 0$~\cite{Engels:2011km} to derive the
+behavior of $c_T$ for small $H$. When $T<T_c$, using their
+notation for the Taylor coefficients and letting $m\geq1$,
+we obtain for the $z$-derivatives
+\begin{equation}
+    f_f^{(m)}=(-z)^{2-\alpha-m}
+    \times\sum_{n=0}^\infty c_n^-(-z)^{-n\Delta/2}\prod_{\ell=1}^m\left(\alpha-3+\ell+\frac{n\Delta}{2}\right).
+\end{equation}
+Meanwhile when $T\approx T_c$ we have 
+\begin{equation}
+    f_f^{(m)}=\sum_{n=m}^\infty a_n\frac{n!}{(n-m)!}z^{n-m}.
+\end{equation}
+Finally when $T>T_c$,
+\begin{equation}
+    f_f^{(m)}=z^{2-\alpha-m}\sum_{n=0}^\infty c_n^+z^{-2n\Delta}\prod_{\ell=1}^m\left(3-\alpha-\ell-2n\Delta\right).
+\end{equation}
 
 
 \bibliographystyle{unsrtnat}
