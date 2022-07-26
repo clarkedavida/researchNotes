@@ -267,6 +267,104 @@ if you change \texttt{g}, \texttt{h} will change as well. Be careful!\\
 \lstinputlisting[language=Python,firstline=46,lastline=52]{exampleCode/SU2.py}
 \lstinputlisting[language={},firstline=1,lastline=4]{exampleCode/SU2Output.txt}
 
+
+\section{Dealing with binary files}
+
+\index{binary}\index{binary!file}
+The configurations that we generate store lots of information, and to make a
+file human-readable costs extra storage space. Hence we must store
+configurations as binary, to save space. Unfortunately\footnote{I feel your
+pain, and I wish I could hug you right now. I'm so, so sorry.} for you,
+this means you will have to learn in detail how a computer reads and writes data
+to a machine.
+
+\index{bit}\index{byte}
+We start with the basics. A {\it bit} is the smallest unit of data a computer
+can process or store. Each bit is represented as a 0 (false) or 1 (true).
+Eight adjacent bits are organized into a {\it byte}.
+Since the fundamental information unit has two possibilities, storage
+sizes must exist in powers of two. For this reason, the naming scheme
+for larger numbers of bytes is collected in powers of $2^{10}=1024$
+instead of 1000 like it usually goes with the metric system.
+In \tabref{tab:byte} we collect the tower of storage sizes
+along with some references to get a feeling for how much information
+they store. This whole two-bit numbering system is, as you probably
+already know, called {\it binary}.
+
+\index{byte!peta}
+\index{byte!exa}
+\index{byte!zetta}
+\begin{table}
+\centering
+\caption{Converting bits to bytes.}
+\begin{tabularx}{\linewidth}{lCLr}
+\hline\hline
+Name & Abbreviation & Bits & Information of...\\
+\hline
+kilobyte & KB & $1024$ & page of text \\
+megabyte & MB & $1024^2$ & pop song MP3 \\
+gigabyte & GB & $1024^3$ & computer game \\
+terabyte & TB & $1024^4$ & laptop's storage \\
+petabyte & PB & $1024^5$ & library of congress \\
+exabyte  & EB & $1024^6$ & Google's storage capacity \\
+zettabyte  & ZB & $1024^7$ & all data on internet \\
+\hline\hline
+\end{tabularx}
+\label{tab:byte}
+\end{table}
+
+\index{hexadecimal}
+Besides the binary numbering system another common system organizes things in
+base 16. This is the {\it hexadecimal} system. Since we have only ten numerals,
+this requires the introduction of some letters for its representation,
+as shown in \tabref{tab:hexadecimal}. In C and C++ programming,
+hexadecimal numbers are preceded by an indentifier \texttt{0x} to
+indicate that it's hexadecimal\footnote{Instead it is preceded
+by \texttt{0b} if it's binary.}.
+Since hexadecimal is base 16, it follows that each hex digit is equivalent
+to four bits. Hence the length of a hexadecimal number in C and C++
+depends on the size of the object it represents. Finally, sometimes
+a hexadecimal can be appended with a string like \texttt{ull} to
+indicate it represents an \texttt{unsigned long long} object. 
+
+\begin{table}
+\centering
+\caption{Converting decimal to hexadecimal.}
+\begin{tabularx}{\linewidth}{CCCCCCCCCCCCCCCC}
+\hline\hline
+0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15\\
+0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & a & b & c & d & e & f\\
+\hline\hline
+\end{tabularx}
+\label{tab:hexadecimal}
+\end{table}
+
+In any such numbering system, numbers are represented with the least significant
+digit in the right-most place. For example one has for decimal, binary, and
+hexadecimal, respectively
+\begin{equation*}\begin{aligned}
+  \texttt{11} &= 1\times10^1+1\times10^0, \\
+  \texttt{101} &= 1\times2^2+0\times2^1+1\times2^0,~\text{and} \\
+  \texttt{0xf0} &= 15\times16^1+0\times16^0.
+\end{aligned}\end{equation*}
+While this is the way humans read significant digits, how the computer stores
+binary depends on a convention called the {\it endianness}.
+The storage is {\it big endian} \index{endian!big} if the most significant digit 
+is at the smallest memory address. Conversely the
+{\it little endian} \index{endian!little} convention specifies the least
+significant digit is at the smallest memory address\footnote{I guess the way
+to remember this is whether the smallest memory address starts at the most
+significant digit, i.e. the big end, or the other way around.}.
+
+\index{bit!mask}
+Sometimes you may encounter {\it bit masking}. The idea is that one compares
+two binary numbers bit-by-bit, and new binary is created by a logical operator
+applied to each bit. For example
+\begin{equation*}
+  \texttt{001 \& 111} = \texttt{001}. 
+\end{equation*}
+
+
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
 
