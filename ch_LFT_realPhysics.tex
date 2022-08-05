@@ -247,9 +247,31 @@ in the vicinity of the phase transitions.
 
 \subsection{Speed of sound}
 
-In this section, we follow the introduction of Ref.~\cite{He:2022kbc}, which has
-a lot of good references and context for calculating the speed of sound in QCD
-matter.
+%In this section, we follow the introductions of Ref.~\cite{He:2022kbc}
+%and Ref.~\cite{sorensen_speed_2021}, which have
+%a lot of good references and context for calculating the speed of sound in QCD
+%matter.
+
+The speed of sound at fixed control parameter $X$ is defined as
+\begin{equation}
+  c_X^2=\left(\pder[p]{\epsilon}\right)_X.
+\end{equation}
+In a simple (1+1)-$d$ isotropic model of a heavy ion collision, 
+sometimes referred to as \index{Bjorken flow}{\it Bjorken flow}, 
+assuming a constant $c_s^2$, one can show~\cite{bjorken_highly_1983} 
+that the energy density will decrease with proper time $\tau$ as
+\begin{equation}
+  \epsilon(\tau)=\epsilon(\tau_0)\left(\frac{\tau_0}{\tau}\right)^{1+c_s^2}.
+\end{equation}
+In this picture one thus finds the system cools with longitudinal expansion
+of the fireball according to the speed of sound. % Henrik's thesis is nice
+Also in the context of heavy ion collisions, it can be used to look out
+for a long-lived fireball, which may coincide with a {\it softest point}
+\index{softest point} where the pressure-to-energy-density ratio,
+and hence $c_s^2$, attains a minimum~\cite{hung_hydrodynamics_1995}.
+In the context of neutron stars, $c_s^2$ is interesting since the relationship
+between the star masses and radii is influenced by how $c_s^2$ changes with
+$n_B$~\cite{ozel_masses_2016}.
 
 The speed of sound has been calculated at $\mu_B=0$ on the 
 lattice~\cite{borsanyi_qcd_2010,bazavov_equation_2014,borsanyi_full_2014}.
