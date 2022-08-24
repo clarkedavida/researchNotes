@@ -1,0 +1,83 @@
+\chapter{Math: Complex Analysis} 
+
+Here we review some basics of complex analysis that often appear in physics
+calculation. Some useful resources for this include
+Ref.~\cite{brown_complex_2003,weber_essentials_2012}.
+
+\section{Preliminaries}
+
+We are interested in functions $f:\C\to\C$. Derivatives are defined similarly as
+with real, $1D$ functions. The limit
+\begin{equation}\label{eq:cderiv}
+  \dv{f}{z}\equiv\lim_{w\to z}\frac{f(w)-f(z)}{w-z}
+\end{equation}
+can be approached in infinitely many ways in $\C$. We call \equatref{eq:cderiv} the
+the derivative of $f$ when this limit exists and is independent of the chosen
+path\footnote{This analogous to how the derivative can only be well defined in
+$\R$ if the limit is the same whether one approaches from the left or right.}.
+The function is said to be {\it holomorphic}. If it can be expanded as a
+convergent Taylor series, it is {\it analytic}.
+\index{analytic}\index{holomorphic}
+
+Let
+\begin{equation}
+  f(z)=f(x+iy)=u(x,y)+iv(x,y),
+\end{equation}
+where $x,y\in\R$ and $u,v:\R\to\R$. \index{Cauchy-Riemann equations}
+\begin{theorem}{Cauchy-Riemann equations}{}
+$f$ is holomorphic if and only if
+$$
+  \pdv{u}{x}=\pdv{v}{y},~~~~~~~~\pdv{u}{y}=-\pdv{v}{x}.
+$$
+\begin{proof}
+If the derivative exists, then by definition
+it exists along a pure imaginary, vertical path approaching $z$, as well
+as a pure real, horizontal path approaching $z$.
+Then using \equatref{eq:cderiv} one obtains
+$$
+\pdv{u}{x}+i\pdv{v}{x}=\dv{f}{z}=-i\pdv{u}{y}+\pdv{v}{y},
+$$
+from which the result immediately follows.
+\end{proof}
+\end{theorem}
+
+Since the definition in $\C$ is analogous to that in $\R$, the derivative obeys
+the product and chain rules. The Cauchy-Riemann equations are a convenient way
+to determine whether a complex function is holomorphic. For instance you can
+use them to show $|z|^2$ is not holomorphic. 
+It is also useful to note that $\exp(z)$ is holomorphic in $\C$.
+
+Moving on to integration, complex integrals are in general path-dependent.
+This integral can be defined using a Riemann sum, but in practice one usually
+parameterizes the curve and computes the integral that way.
+It follows that the integral is linear, and that the sign of an integral
+flips when the orientation of the contour changes.
+The following Proposition establishes an integral that appears frequently
+in complex analysis.
+\begin{proposition}{}{}
+Let $C_R(z_0)$ denote the circle of radius $R$ centered at $z_0\in\C$
+and let $n\in\Z$. Then
+$$
+\oint_{C_R(z_0)}\dd{z}(z-z_0)^n=
+\begin{cases}
+ 2\pi i & n=-1\\
+ 0      & \text{otherwise}.
+\end{cases}
+$$
+\begin{proof}
+We can parameterize the contour with $z(\theta)=z_0+Re^{i\theta}$
+with $\theta\in[0,2\pi)$. The integral evaluates to
+\begin{equation*}\begin{aligned}
+\oint_{C_R(z_0)}\dd{z}(z-z_0)^n&=
+i\int_0^{2\pi}\dd{\theta} R^{n+1}e^{i(n+1)\theta}\\
+&=
+\begin{cases}
+ 2\pi i & n=-1\\
+ \frac{R^{n+1}}{n+1}e^{i(n+1)\theta}\,\big|_0^{2\pi} & \text{otherwise}. 
+\end{cases}
+\end{aligned}\end{equation*}
+\end{proof}
+\end{proposition}
+
+\bibliographystyle{unsrtnat}
+\bibliography{bibliography}

@@ -20,7 +20,7 @@ of analytic or differentiable.} \index{function!regular}
 function $f(x,y,z)$
 and calculate its partial derivative,
 \begin{equation}
-\pder[f]{x},
+\pdv{f}{x},
 \end{equation} 
 it means that all other variables, in this case $y$ and $z$, are treated as
 constants.
@@ -34,36 +34,36 @@ is being held fixed. For example if we are interested in $\partial_x y$, we
 could hold $z$ fixed, but we more generally hold some function
 $w(x,y,z)$ fixed. In this case we obtain
 \begin{equation}\label{eq:chainw}
-\left(\pder[x]{y}\right)_w
-\left(\pder[y]{z}\right)_w
-=\left(\pder[x]{z}\right)_w
+\left(\pdv{x}{y}\right)_w
+\left(\pdv{y}{z}\right)_w
+=\left(\pdv{x}{z}\right)_w
 \end{equation}
 and
 \begin{equation}\label{eq:inv}
-\left(\pder[x]{y}\right)_w
-=\left(\pder[y]{x}\right)_w^{-1}.
+\left(\pdv{x}{y}\right)_w
+=\left(\pdv{y}{x}\right)_w^{-1}.
 \end{equation}
 Note that \equatref{eq:chainw} and \eqref{eq:inv} have always the same
 fixed quantity $w$. This is to be distinguished from the following
 situation. 
 \begin{proposition}{The constrained chain rule}{prp:chainconstrain}
 $$
-\left(\pder[x]{y}\right)_z
-\left(\pder[y]{z}\right)_x
-\left(\pder[z]{x}\right)_y
+\left(\pdv{x}{y}\right)_z
+\left(\pdv{y}{z}\right)_x
+\left(\pdv{z}{x}\right)_y
 =-1
 $$
 \begin{proof}
 From the constraint, we have
 \begin{equation*}
 0=\dd f=
- \left(\pder[f]{x}\right)_{y,z}\dd x
-+\left(\pder[f]{y}\right)_{x,z}\dd y
-+\left(\pder[f]{z}\right)_{x,y}\dd z.
+ \left(\pdv{f}{x}\right)_{y,z}\dd x
++\left(\pdv{f}{y}\right)_{x,z}\dd y
++\left(\pdv{f}{z}\right)_{x,y}\dd z.
 \end{equation*}
 If we hold e.g. $z$ fixed, we find $\dd z=0$, and therefore
 \begin{equation*}
-\left(\pder[x]{y}\right)_z=-\left(\pder[f]{y}\right)_{x,z}\left(\pder[f]{x}\right)_{y,z}^{-1}.
+\left(\pdv{x}{y}\right)_z=-\left(\pdv{f}{y}\right)_{x,z}\left(\pdv{f}{x}\right)_{y,z}^{-1}.
 \end{equation*}
 Similar equations hold for the other two derivatives, and multiplying them
 together yields the desired result.
@@ -95,7 +95,7 @@ The strange ordering of the coordinates will make sense when we move
 to $N$ dimensions. Now the Jacobian corresponding to the transformation between 
 Cartesian and spherical coordinates is
 \begin{equation}
-  \pder[(x,y,z)]{(r,\theta,\phi)}
+  \pdv{(x,y,z)}{(r,\theta,\phi)}
   =\left(\begin{array}{ccc}
      \s_\theta\co_\phi & r\co_\theta\co_\phi & -r\s_\theta\s_\phi \\
      \s_\theta\s_\phi  & r\co_\theta\s_\phi  & r\s_\theta\co_\phi \\
@@ -104,7 +104,7 @@ Cartesian and spherical coordinates is
 \end{equation}
 Knowing the Jacobian, we compute the volume element
 \begin{equation}
-  \dd[3]{x}=\det\pder[(x,y,z)]{(r,\theta,\phi)}
+  \dd[3]{x}=\det\pdv{(x,y,z)}{(r,\theta,\phi)}
              \dd{r}\dd{\theta}\dd{\phi}
       =r^2\dd{r}\s_\theta\dd{\theta}\dd{\phi}=r^2\dd{r}\dd{\Omega},
 \end{equation}
@@ -220,10 +220,10 @@ measure goes to the denominator of one of the terms. Make sure
 each denominator has units of length. In the present case, the
 gradient operator is read off from the measure to be
 \begin{equation}\label{eq:4dgrad}
-  \partial=e_r\pder{r}
-   +e_{\theta_1}\frac{1}{r}\pder{\theta_1}
-   +e_{\theta_2}\frac{1}{rs_{\theta_1}}\pder{\theta_2}
-   +e_\phi\frac{1}{rs_{\theta_1}s_{\theta_2}}\pder{\phi},
+  \partial=e_r\pdv{r}
+   +e_{\theta_1}\frac{1}{r}\pdv{\theta_1}
+   +e_{\theta_2}\frac{1}{rs_{\theta_1}}\pdv{\theta_2}
+   +e_\phi\frac{1}{rs_{\theta_1}s_{\theta_2}}\pdv{\phi},
 \end{equation}
 where $e_i$ are unit vectors in direction $i$ and the $\partial$ on
 the LHS is meant to represent a vector, while $\partial$s on the RHS
@@ -475,13 +475,13 @@ given some generic density $\rho$ depending on $\vec{x}$ and $t$,
 \index{continuity equation}
 one usually begins with a {\it continuity equation},
 \begin{equation}\label{eq:continuityEquation}
-  \pder[\rho]{t}+\nabla\cdot\left(\rho\vec{v}\right)=0,
+  \pdv{\rho}{t}+\nabla\cdot\left(\rho\vec{v}\right)=0,
 \end{equation}
 where $\vec{v}$ is the velocity of the stuff at position $\vec{x}$. 
 To interpret the continuity equation, one thinks about some finite region
 in space $V$ and makes use of the divergence theorem to find
 \begin{equation}
-  \pder{t}\int_V \dd[3]{x}\rho
+  \pdv{t}\int_V \dd[3]{x}\rho
      +\int_{S}\dd{\vec{S}}\cdot\left(\rho\vec{v}\right)=0.
 \end{equation}
 The integral in the first term on the LHS is just the total amount of
@@ -508,7 +508,7 @@ can be written as
 where $D$ is a constant called the {\it diffusion coefficient}. Combining
 \equatref{eq:continuityEquation} and \eqref{eq:ficksLaw}, one finds
 \begin{equation}
-  \pder[\rho]{t}-D\nabla^2\rho = 0.
+  \pdv{\rho}{t}-D\nabla^2\rho = 0.
 \end{equation}
 This is the {\it diffusion equation} in 3+1 dimensions. For the remainder
 of this section, to keep the notation light, we will solve the diffusion
