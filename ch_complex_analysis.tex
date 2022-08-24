@@ -4,6 +4,7 @@ Here we review some basics of complex analysis that often appear in physics
 calculation. Some useful resources for this include
 Ref.~\cite{brown_complex_2003,weber_essentials_2012}.
 
+
 \section{Preliminaries}
 
 We are interested in functions $f:\C\to\C$. Derivatives are defined similarly as
@@ -19,12 +20,17 @@ The function is said to be {\it holomorphic}. If it can be expanded as a
 convergent Taylor series, it is {\it analytic}.
 \index{analytic}\index{holomorphic}
 
-Let
+Following the spirit of the above discussion, many of the facts we will learn
+about complex analysis can be inherited from facts about real analysis. With
+that in mind, for the rest of the chapter we will introduce for the complex
+function $f$ the notation
 \begin{equation}
   f(z)=f(x+iy)=u(x,y)+iv(x,y),
 \end{equation}
-where $x,y\in\R$ and $u,v:\R\to\R$. \index{Cauchy-Riemann equations}
-\begin{theorem}{Cauchy-Riemann equations}{}
+where $x,y\in\R$ and $u,v:\R\to\R$. We start with a fact about when complex
+functions are holomorphic.
+\index{Cauchy-Riemann equations}
+\begin{theorem}{Cauchy-Riemann (CR) equations}{}
 $f$ is holomorphic if and only if
 $$
   \pdv{u}{x}=\pdv{v}{y},~~~~~~~~\pdv{u}{y}=-\pdv{v}{x}.
@@ -42,7 +48,7 @@ from which the result immediately follows.
 \end{theorem}
 
 Since the definition in $\C$ is analogous to that in $\R$, the derivative obeys
-the product and chain rules. The Cauchy-Riemann equations are a convenient way
+the product and chain rules. The CR equations are a convenient way
 to determine whether a complex function is holomorphic. For instance you can
 use them to show $|z|^2$ is not holomorphic. 
 It is also useful to note that $\exp(z)$ is holomorphic in $\C$.
@@ -78,6 +84,37 @@ i\int_0^{2\pi}\dd{\theta} R^{n+1}e^{i(n+1)\theta}\\
 \end{aligned}\end{equation*}
 \end{proof}
 \end{proposition}
+
+A region $B\subset\C$ is {\it path connected} if any two points in the region
+can be joined by a path. A {\it simply connected} region is a path connected
+\index{path connected}\index{simply connected}
+region and any loop path can be contracted to a point\footnote{In other words,
+there are no holes.}. It turns out that a wide class of complex integrals
+over such regions evaluate to zero.
+
+\index{Cauchy integral theorem}
+\begin{theorem}{Cauchy integral theorem}{}
+Let $B\subset\C$ be a bounded and simply connected region. Let $f:B\to\C$ be
+holomorphic in $B$ and $C$ be a closed curve fully contained in $B$. Then
+$$
+  \oint_C\dd{z}f(z)=0.
+$$
+\begin{proof}
+We have
+\begin{equation*}\begin{aligned}
+\oint_C\dd{z}f(z)=&\oint_C\left(\dd{x}u(x,y)-\dd{y}v(x,y)\right)\\
+                 &+i\oint_C\left(\dd{y}u(x,y)+\dd{x}v(x,y)\right).
+\end{aligned}\end{equation*}
+Let $A$ be the area enclosed by $C$. By Stokes' theorem, we get
+\begin{equation*}
+\oint_C\dd{z}f(z)=\iint_A\dd{x}\dd{y}\left(-\pdv{v}{x}-\pdv{u}{y}\right)
+                   +i\iint_A\dd{x}\dd{y}\left(\pdv{u}{x}-\pdv{v}{y}\right).
+\end{equation*}
+Since $f$ is holomorphic, the integrands vanish by the CR equations.
+\end{proof}
+\end{theorem}
+
+\section{Pad\'e approximants}
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
