@@ -9,7 +9,7 @@
 \usepackage[title]{appendix}
 \usepackage{mathtools,tensor,physics,slashed,textcomp,mhchem}
 \usepackage{microtype} % should help with hyphenation
-
+\usepackage{color,feynmf,subcaption} % stuff for feynman diagrams
 
 % This section is for making C++ code.
 \usepackage[dvipsnames]{xcolor}
@@ -44,6 +44,11 @@
 % davitex and required packages
 \usepackage{amsmath,amssymb,graphicx,multirow,tabularx}
 \usepackage{davitex}
+
+% I don't want to use this in general; I was just too lazy to make the
+% replacements when porting code over.
+\newcommand{\ct}{c_{\theta}}
+\newcommand{\st}{s_{\theta}}
 
 
 % If you click on citations or equation references, you will be take
@@ -130,6 +135,11 @@
 \newenvironment{listofabbrev}
   {\chapter*{List of Abbreviations}}
   {\clearpage}
+
+
+% Feynman rule references
+\definecolor{light}{gray}{.85}
+\newcommand{\F}[1]{\colorbox{light}{{F}{#1}}}
 
 
 % Note that book class by default is formatted to be printed back-to-back.
@@ -400,6 +410,7 @@ to develop some sections of these appendices into full chapters.
 \include{ap_spec_math}
 \include{ap_spec_neutrino}
 \include{ap_spec_higgs}
+\include{ap_spec_SM}
 %\include{ap_spec_cosmology}
 \include{ap_spec_bell}
 \include{ap_spec_program}

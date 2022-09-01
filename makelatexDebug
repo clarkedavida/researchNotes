@@ -7,6 +7,16 @@ done
 for auxfile in ap_*.aux; do
     bibtex `basename $auxfile .aux`
 done
+
+#
+# feynman diagrams
+#
+diagrams=(fr123 fr4to17 fr18to21 fr22to25 fr26 prob1 prob2)
+for diagram in "${diagrams[@]}"; do
+  rm ${diagram}*
+  mf ${diagram}
+done
+
 pdflatex 0_researchnotes.tex
 makeindex 0_researchnotes
 pdflatex 0_researchnotes.tex

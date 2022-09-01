@@ -1,0 +1,1186 @@
+\chapter{Special Topic: The Standard Model}\label{ap:spec_SM}
+
+For this appendix we will roughly write the Lagrangian for the Standard Model in the
+$R_\xi$ gauge and write down some of the corresponding Feynman rules. We will
+make some general considerations involving two particle decays. Next we
+specialize to the Feynman gauge and calculate decay rates for some of
+the most important decay channels of the Higgs. 
+%Finally we will compare our
+%results to some known values to see how we did.
+
+\section{The SM Lagrangian}
+This section is based heavily off of Bardin and 
+Passarino~\cite{bardin_standard_1999}. Unlike
+them, however, we will use the metric with signature $(+\ -\ -\ -)$ and we will
+\index{gauge!fixing}
+define the gauge-fixing term slightly differently when we come to it.
+Ultimately our Feynman rules should agree with Peskin and 
+Schroeder~\cite{peskin_introduction_1995}.
+
+We begin with the electroweak sector. The fields include a triplet of vector
+bosons $B_{\mu}^{a}$ and a vector singlet $B_{\mu}^{0}$; a complex scalar
+\index{Faddeev-Popov ghost}
+doublet $K$; Faddeev-Popov (FP) ghost fields $X^{\pm}$, $Y^Z$, $Y^A$; and
+fermions. The physical fields $Z$ and $A$ are given by
+\begin{equation}
+  \left(\begin{array}{c}
+    Z \\
+    A
+  \end{array}\right)
+  =
+  \left(\begin{array}{cc}
+    \ct & -\st \\
+    \st & \ct
+  \end{array}\right)
+  \left(\begin{array}{c}
+    B^3 \\
+    B^0
+  \end{array}\right),
+\end{equation}
+where $\st\coloneqq\sin\big(\theta_{W}\big)$,
+$\ct\coloneqq\cos\big(\theta_{W}\big)$, and $\theta_W$ is the weak
+mixing angle. The scalar field for the minimal Higgs model is
+\begin{equation}
+  \label{eq:Hsf}
+  K=\frac{1}{\sqrt{2}}
+  \left(\begin{array}{c}
+    H+2M_{W}/g+i\phi^0 \\
+    \sqrt{2}i\phi^-
+  \end{array}\right),
+\end{equation}
+where $H$ is the physical Higgs field, $M_W$ is the bare $W$-boson mass, and
+$g$ is the bare $SU(2)$ coupling. The first part of the Lagrangian is
+\begin{equation}
+  \Lagr_{gauge}=\Lagr_{YM}+\Lagr_{H},
+\end{equation}
+where
+% what is \epsilon?
+\begin{equation}
+  \begin{aligned}
+    \Lagr_{YM}&=-\frac{1}{4}F_{\mu\nu}^{a}F^{\mu\nu,a}
+                -\frac{1}{4}F_{\mu\nu}^{0}F^{\mu\nu,0} \\
+    \Lagr_{H}&=-\big(D_{\mu}K\big)^{\dagger}\big(D^{\mu}K\big)
+               -\mu^2 K^{\dagger}K 
+               -\frac{\lambda}{2}\big(K^{\dagger}K\big)^2 \\
+    F_{\mu\nu}^{a}&=\partial_{\mu}B_{\nu}^{a}-\partial_{\nu}B_{\mu}^{a}
+                   +g\epsilon^{abc}B_{\mu}^{b}B_{\nu}^{c} \\
+    F_{\mu\nu}^{0}&=\partial_{\mu}B_{\nu}^{0}-\partial_{\nu}B_{\mu}^{0}
+  \end{aligned}
+\end{equation}
+and we need $\lambda>0$ (to have a ground state) and $\mu^2<0$ (for spontaneous
+symmetry breaking). The $SU(2)\times U(1)$ gauge covariant derivative is
+\begin{equation}
+  \label{eq:SU2U1cd}
+  D_{\mu}=\partial_{\mu}-\frac{i}{2}gB_{\mu}^{a}\sigma^{a}
+                       -\frac{i}{2}gg'B_{\mu}^{0},
+\end{equation}
+where $\sigma^{a}$ are the Pauli matrices, and $g'=-\st/\ct$.
+Also \eqref{eq:Hsf} can be rewritten as
+\begin{equation}
+  \label{eq:Hsf2}
+  K=\frac{1}{\sqrt{2}}\Big(H+\frac{2M_W}{g}+i\phi^{a}\sigma^{a}\Big)
+  \left(\begin{array}{c}
+    1 \\
+    0
+  \end{array}\right).
+\end{equation}
+
+Next let us write
+\begin{equation}
+  \Lagr_{gauge}=\Lagr_{YM}-\big(D_{\mu}K\big)^{\dagger}\big(D^{\mu}K\big)
+                 +\Lagr_{int}.
+\end{equation}
+If we were to calculate $\big(D_{\mu}K\big)^{\dagger}\big(D^{\mu}K\big)$ using
+\eqref{eq:SU2U1cd} and \eqref{eq:Hsf2}, collect terms proportional to $v^2$,
+where
+\begin{equation}
+  v=\frac{2M_W}{g},
+\end{equation}
+and use the field definitions
+\begin{equation}
+  W_{\mu}^{\pm}\coloneqq\frac{1}{\sqrt{2}}\big(B_{\mu}^1 \mp iB_{\mu}^2\big)
+  \qquad
+  \phi^{\pm}\coloneqq\frac{1}{\sqrt{2}}\big(\phi^1 \mp i\phi^2 \big),
+\end{equation}
+we would get
+\begin{equation}
+  \begin{aligned}
+    \big(D_{\mu}K\big)^{\dagger}\big(D^{\mu}K\big)&=-\frac{g^2 v^2}{8}
+      \Bigg(\frac{1}{\ct^2}Z_{\mu}Z^{\mu}+2W^+_{\mu}W^{-\mu}\Bigg)+...\\
+    &=-\frac{1}{2}M_Z^2 Z_{\mu}Z^{\mu}-M_W^2 W_{\mu}^+ W^{-\mu}+...
+  \end{aligned}
+\end{equation}
+where
+\begin{equation}
+  M_Z \coloneqq\frac{gv}{2\ct}=\frac{M_W}{\ct}.
+\end{equation}
+Hence we see that through the Higgs mechanism the $W$- and $Z$-bosons
+acquired mass.
+Now let us focus on terms of $(D_{\mu}K\big)^{\dagger}\big(D^{\mu}K\big)$ that
+do not have any power of $g$ (besides kinetic terms). We get
+\begin{equation}
+  \label{eq:zmp}
+  \big(D_{\mu}K\big)^{\dagger}\big(D^{\mu}K\big)=-M_W \Bigg(
+     \frac{1}{\ct}Z_{\mu}\partial^{\mu}\phi^0 +W_{\mu}^+ \partial^{\mu}\phi^-
+     +W_{\mu}^- \partial^{\mu}\phi^+ \Bigg).
+\end{equation}
+This part of the Lagrangian contains $Z$-$\phi^0$ and
+$W^{\pm}$-$\phi^{\pm}$ interactions, and although they are zeroth order
+in the field, they must be summed over when we develop perturbation theory.
+Here the Lagrangian is badly divergent.
+
+To fix this problem, we follow the usual prescription of introducing a 
+gauge-fixing term, then introducing FP ghost fields to maintain gauge invariance. We
+\index{gauge!fixing}
+work in the generalized $R_{\xi}$ gauge. (The Feynman gauge corresponds to
+$\xi=1$, the Lorenz to $\xi=0$, and the unitary to $\xi\to\infty$.) In this
+gauge, the gauge-fixing piece is
+\begin{equation}
+  \Lagr_{gf}=-\frac{1}{2}C^a C^a -\frac{1}{2}\big(C^0\big)^2
+            =-C^+ C^- -\frac{1}{2}\Big(\big(C^3\big)^2\big(C^0\big)^2\Big),
+\end{equation}
+where the gauge-fixing function is
+\begin{equation}
+  C^a =\frac{1}{\sqrt{\xi}}\big(\partial_{\mu}B^{a\mu}
+                -\xi M_W \phi^a \big)
+\end{equation}
+and
+\begin{equation}
+  \label{eq:cdefs}
+  C^{\pm}=\frac{1}{\sqrt{\xi}}\big(\partial_{\mu}W^{\pm\mu}
+                   -\xi M_W \phi^{\pm}\big) \qquad
+  C^{0}=\frac{1}{\sqrt{\xi}}\big(\partial_{\mu}B^{0\mu}
+                   -\xi\frac{\st}{\ct}M_W \phi^{0}\big).
+\end{equation}
+Then we write
+\begin{equation}
+  -\frac{1}{2}\Big(\big(C^3\big)^2 +\big(C^0\big)^2\Big)
+       =-\frac{1}{2}C_Z^2 -\frac{1}{2}C_A^2
+\end{equation}
+so that in the so-called $Z$-$A$ basis
+\begin{equation}
+  \label{eq:zadefs}
+  C_A=\frac{1}{\sqrt{\xi}}\partial_{\mu}A^{\mu} \qquad
+  C_Z=\frac{1}{\sqrt{\xi}}\partial_{\mu}Z^{\mu}-\xi\frac{M_W}{\ct}\phi^0.
+\end{equation}
+The Lagrangian including gauge-fixing terms is thus
+\begin{equation}
+  \Lagr_{YM}=-\big(D_{\mu}K\big)^{\dagger}\big(D^{\mu}K\big)-C^+ C^-
+               -\frac{1}{2}C_Z^2-\frac{1}{2}C_Z^2
+            =\Lagr_{prop}+\Lagr_{int}^{bos}
+\end{equation}
+and contains no divergent terms such as those in \eqref{eq:zmp}. $\Lagr_{prop}$
+contains the terms that give rise to gauge EW propagators as well as mass
+terms. Let us examine some terms relevant to Higgs processes. We have
+\begin{equation}
+  \begin{aligned}
+  \Lagr_{prop}=&-\partial_{\mu}W_{\nu}^+ \partial^{\mu}W^{-\nu}
+     +\Bigg(1-\frac{1}{\xi}\Bigg)\partial_{\mu}W^{+\mu}\partial_{\nu}W^{-\nu}
+     -M_W^2 W_{\mu}^+ W^{-\mu} \\
+    &-\frac{1}{2}\partial_{\mu}Z_{\nu}\partial^{\mu}Z^{\nu}
+     +\frac{1}{2}\Bigg(1-\frac{1}{\xi}\Bigg)\big(\partial_{\mu}Z^{\mu}\big)^2
+     -\frac{1}{2}M_Z^2 Z_{\mu}Z^{\mu} \\
+    &-\partial_{\mu}\phi^+ \partial^{\mu}\phi^- -\xi M_W^2\phi^+ \phi^-
+     +...
+  \end{aligned}
+\end{equation}
+First of all we see that the Goldstone boson mass is proportional $\sqrt{\xi}$,
+which means it's unphysical. (We would find the same for $\phi^0$.) Furthermore
+the first line, second line, and third line yield respectively the Feynman
+rules
+\begin{equation*}
+  \frac{-ig^{\mu\nu}}{k^2-M_W^2+i\epsilon}~~\F1~~~~~~~~
+  \frac{-ig^{\mu\nu}}{k^2-M_Z^2+i\epsilon}~~\F2~~~~~~~~
+  \frac{i}{p^2-\xi M_W^2+i\epsilon}~~\F3
+\end{equation*}
+\begin{figure}
+  \centering
+  \begin{fmffile}{fr123}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(70,60)
+        \fmfleft{i}
+        \fmfright{o}
+        \fmflabel{$\mu$}{i}
+        \fmflabel{$\nu$}{o}
+        \fmf{photon,label=$W^\pm$}{i,o}
+      \end{fmfgraph*}
+    \caption*{\F1}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(70,60)
+        \fmfleft{i}
+        \fmfright{o}
+        \fmflabel{$\mu$}{i}
+        \fmflabel{$\nu$}{o}
+        \fmf{photon,label=$Z$}{i,o}
+      \end{fmfgraph*}
+    \caption*{\F2}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(70,60)
+        \fmfleft{i}
+        \fmfright{o}
+        \fmf{dashes,label=$\phi^\pm$}{i,o}
+      \end{fmfgraph*}
+    \caption*{\F3}
+    \end{subfigure}
+  \end{fmffile}
+  \caption{Electroweak gauge boson propagators (except photon) and Goldstone
+           boson propagator.}
+\end{figure}
+
+Meanwhile $\Lagr_{int}^{bos}$ contains the interaction terms of the vector
+bosons with each other and the Higgs. We will focus on the terms
+\begin{equation}
+  \begin{aligned}
+    \Lagr_{int}^{bos}=&-ig\ct\Big\{\partial_\nu Z_\mu W^{[+\mu}W^{-\nu ]}
+                       -Z_\nu W_\mu^{[+}\partial^\nu W^{-\mu ]}
+                       +Z_\mu W_\nu^{[+}\partial^\nu W^{-\mu ]}\Big\}\\
+                      &-ie\Big\{\partial_\nu A_\mu W^{[+\mu}W^{-\nu]}
+                       -A_\nu W_\mu^{[+}\partial^\nu W^{-\mu ]}
+                       +A_\mu W_\nu^{[+}\partial^\nu W^{-\mu ]}\Big\}\\
+                      &+e^2 \Big\{A_\mu A_\nu W^{+\mu}W^{-\nu}
+                       +A_\mu A^\mu W^+_\nu W^{-\nu}\Big\}\\
+                      &+eg\ct\Big\{A_\mu Z_\nu W^{[+\mu}W^{-\nu ]}
+                       -2A_\mu Z^\mu W^+_\nu W^{-\nu}\Big\}\\
+                      &+ig\frac{\ct^2-\st^2}{\ct}Z_\mu
+                         \Big\{\phi^+ \partial^\mu \phi^-
+                               -\phi^- \partial^\mu \phi^+ \Big\}\\
+                      &+\frac{1}{2}g
+                         \Big\{W_\mu^+\big(H\partial^\mu\phi^- 
+                               -\phi^-\partial^\mu H\big)
+                              -W_\mu^-\big(H\partial^\mu\phi^+ 
+                               -\phi^+\partial^\mu H\big)\Big\}\\
+                      &+ieM_W A_\mu W^{[+\mu}\phi^{-]}
+                       -igM_Z \st^2 Z_\mu W^{[+\mu}\phi^{-]}
+                       -gM_W H W_\mu^+ W_\nu^- \\
+                      &-e^2 A_\mu A^\mu \phi^+ \phi^-
+                       +\frac{i}{2}egA_\mu HW^{[+\mu}\phi^{-]}
+                       -eg\frac{\ct^2-\st^2}{\ct}Z_\mu A^\mu \phi^+ \phi^- \\
+                      &+ieA_\mu \big(\phi^+\partial^\mu\phi^-
+                                     -\phi^-\partial^\mu\phi^+\big)
+                       +...
+  \end{aligned}
+\end{equation}
+where $e=g\st$ and $A^{[+}B^{-]}=A^+ B^- -B^- A^+$. The corresponding Feynman
+rules are
+\begin{gather*}
+  ig\ct\big(g^{\alpha\beta}(p-k)^\mu+g^{\beta\mu}(k-q)^\mu
+            +g^{\mu\alpha}(q-p)^\beta\big)~~\F4 \\
+  -ie\big(g^{\alpha\beta}(p-k)^\mu+g^{\beta\mu}(k-q)^\mu
+          +g^{\mu\alpha}(q-p)^\beta\big)~~\F5 \\
+  -ie^2\big(2g^{\alpha\beta}g^{\mu\nu}-g^{\alpha\mu}g^{\beta\nu}
+            -g^{\alpha\nu}g^{\beta\mu}\big)~~\F6 \\
+  ieg\ct\big(2g^{\alpha\beta}g^{\mu\nu}-g^{\alpha\mu}g^{\beta\nu}
+            -g^{\alpha\nu}g^{\beta\mu}\big)~~\F7 \\
+  ig\frac{\cos(2\theta_W)}{2\ct}(p_+-p_-)^\mu~~\F8~~~~~~~~
+  \mp\frac{ig}{2}(k-p)^\mu~~\F9~~~~~~~~
+  -ieM_Wg^{\mu\nu}~~\F{10} \\
+  -igM_Z \st^2 g^{\mu\nu}~~\F{11}~~~~~~~~
+  igM_Wg^{\mu\nu}~~\F{12}~~~~~~~~
+  2ie^2g^{\mu\nu}~~\F{13} \\
+  -\frac{i}{2}egg^{\mu\nu}~~\F{14}~~~~~~~~
+  -ieg\frac{\cos(2\theta_W)}{\ct}g^{\mu\nu}~~\F{15}~~~~~~~~
+  -ie(p_+-p_-)^\mu~~\F{16}
+\end{gather*}
+\begin{figure}
+  \centering
+  \begin{fmffile}{fr4to17}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{photon,label=$k$}{i1,v}
+        \fmf{photon,label=$p$}{i2,v}
+        \fmf{photon,label=$q$}{v,o}
+        \fmflabel{$W_\beta^+$}{i1}
+        \fmflabel{$W_\alpha^-$}{i2}
+        \fmflabel{$Z_\mu$}{o}
+      \end{fmfgraph*}
+    \caption*{\F4}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{photon,label=$k$}{i1,v}
+        \fmf{photon,label=$p$}{i2,v}
+        \fmf{photon,label=$q$}{v,o}
+        \fmflabel{$W_\beta^+$}{i1}
+        \fmflabel{$W_\alpha^-$}{i2}
+        \fmflabel{$A_\mu$}{o}
+      \end{fmfgraph*}
+    \caption*{\F5}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o1,o2}
+        \fmf{photon}{i1,v}
+        \fmf{photon}{i2,v}
+        \fmf{photon}{v,o1}
+        \fmf{photon}{v,o2}
+        \fmflabel{$W_\alpha^+$}{i2}
+        \fmflabel{$A_\mu$}{i1}
+        \fmflabel{$W_\beta^-$}{o2}
+        \fmflabel{$A_\nu$}{o1}
+      \end{fmfgraph*}
+    \caption*{\F6}
+    \end{subfigure} \\
+    \vspace{12mm}
+   \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o1,o2}
+        \fmf{photon}{i1,v}
+        \fmf{photon}{i2,v}
+        \fmf{photon}{v,o1}
+        \fmf{photon}{v,o2}
+        \fmflabel{$W_\alpha^+$}{i2}
+        \fmflabel{$A_\mu$}{i1}
+        \fmflabel{$W_\beta^-$}{o2}
+        \fmflabel{$Z_\nu$}{o1}
+      \end{fmfgraph*}
+    \caption*{\F7}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{dashes,label=$p_-$}{i1,v}
+        \fmf{dashes,label=$p_+$}{i2,v}
+        \fmf{photon}{v,o}
+        \fmflabel{$\phi^-$}{i1}
+        \fmflabel{$\phi^+$}{i2}
+        \fmflabel{$Z_\mu$}{o}
+      \end{fmfgraph*}
+    \caption*{\F8}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{dashes,label=$p$}{i1,v}
+        \fmf{dashes,label=$k$}{i2,v}
+        \fmf{photon}{v,o}
+        \fmflabel{$\phi^\mp$}{i1}
+        \fmflabel{$H$}{i2}
+        \fmflabel{$W^\pm_\mu$}{o}
+      \end{fmfgraph*}
+    \caption*{\F9}
+    \end{subfigure} \\
+    \vspace{12mm}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{photon}{i1,v}
+        \fmf{dashes}{i2,v}
+        \fmf{photon}{v,o}
+        \fmflabel{$W_\nu^\pm$}{i1}
+        \fmflabel{$\phi^\mp$}{i2}
+        \fmflabel{$A_\mu$}{o}
+      \end{fmfgraph*}
+    \caption*{\F{10}}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{photon}{i1,v}
+        \fmf{dashes}{i2,v}
+        \fmf{photon}{v,o}
+        \fmflabel{$W_\nu^\pm$}{i1}
+        \fmflabel{$\phi^\mp$}{i2}
+        \fmflabel{$Z_\mu$}{o}
+      \end{fmfgraph*}
+    \caption*{\F{11}}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{photon}{i1,v}
+        \fmf{dashes}{i2,v}
+        \fmf{photon}{v,o}
+        \fmflabel{$W_\nu^\mp$}{i1}
+        \fmflabel{$H$}{i2}
+        \fmflabel{$W_\mu^\pm$}{o}
+      \end{fmfgraph*}
+    \caption*{\F{12}}
+    \end{subfigure} \\
+    \vspace{12mm}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o1,o2}
+        \fmf{dashes}{i1,v}
+        \fmf{dashes}{i2,v}
+        \fmf{photon}{v,o1}
+        \fmf{photon}{v,o2}
+        \fmflabel{$\phi^+$}{i2}
+        \fmflabel{$\phi^-$}{i1}
+        \fmflabel{$A_\mu$}{o2}
+        \fmflabel{$A_\nu$}{o1}
+      \end{fmfgraph*}
+    \caption*{\F{13}}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o1,o2}
+        \fmf{dashes}{i1,v}
+        \fmf{dashes}{i2,v}
+        \fmf{photon}{v,o1}
+        \fmf{photon}{v,o2}
+        \fmflabel{$\phi^\pm$}{i2}
+        \fmflabel{$H$}{i1}
+        \fmflabel{$W_\mu^\mp$}{o2}
+        \fmflabel{$A_\nu$}{o1}
+      \end{fmfgraph*}
+    \caption*{\F{14}}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o1,o2}
+        \fmf{dashes}{i1,v}
+        \fmf{dashes}{i2,v}
+        \fmf{photon}{v,o1}
+        \fmf{photon}{v,o2}
+        \fmflabel{$\phi^+$}{i2}
+        \fmflabel{$\phi^-$}{i1}
+        \fmflabel{$Z_\mu$}{o2}
+        \fmflabel{$A_\nu$}{o1}
+      \end{fmfgraph*}
+    \caption*{\F{15}}
+    \end{subfigure} \\
+    \vspace{12mm}
+   \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{dashes,label=$p_-$}{i1,v}
+        \fmf{dashes,label=$p_+$}{i2,v}
+        \fmf{photon}{v,o}
+        \fmflabel{$\phi^-$}{i1}
+        \fmflabel{$\phi^+$}{i2}
+        \fmflabel{$A_\mu$}{o}
+      \end{fmfgraph*}
+    \caption*{\F{16}}
+    \end{subfigure}
+    \begin{subfigure}{0.3\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{dashes,label=$p_-$}{i1,v}
+        \fmf{dashes,label=$p_+$}{i2,v}
+        \fmf{dashes}{v,o}
+        \fmflabel{$\phi^-$}{i1}
+        \fmflabel{$\phi^+$}{i2}
+        \fmflabel{$H$}{o}
+      \end{fmfgraph*}
+    \caption*{\F{17}}
+    \end{subfigure}
+  \end{fmffile}
+  \caption{Some interaction diagrams between electroweak bosons, Goldstone
+           bosons, and the Higgs. Momentum arrows are taken to be toward
+           the vertex center.}
+\end{figure}
+
+The interactions among only Higgs and Goldstone fields emerge from the Higgs
+potential
+\begin{equation}
+  \Lagr_{int}^H=-\mu^2 K^\dagger K-\frac{\lambda}{2}\big(K^\dagger K\big)^2
+\end{equation}
+after spontaneous symmetry breaking. The only one from this sector that we
+will need is
+\begin{equation}
+  \Lagr_{int}^H=\frac{1}{2}g\frac{M_H^2}{M_W}H\phi^+ \phi^- +...
+\end{equation}
+and the corresponding Feynman rule is
+\begin{gather*}
+  -\frac{ig}{2}\frac{M_H^2}{M_W}~~\F{17}
+\end{gather*}
+
+
+To finish off the scalar part of the electroweak sector, we introduce the FP
+Lagrangian, which we accomplish by taking gauge transformations of the $C^a$.
+The gauge transformations of the bosonic fields are
+\begin{gather}
+  B_\mu^a\to B_\mu^a+g\epsilon^{abc}\Lambda^bB^c_\mu \qquad
+  B^0_\mu\to B^0_\mu-\partial_\mu\Lambda^0 \\
+  K\to \Bigg(1-\frac{ig}{2}\Lambda^2\sigma^a-\frac{i}{2}gg'\Lambda^0\Bigg)K
+\end{gather}
+The $\Lambda^i,i=0,1,2,3$ are the group gauge transformation parameters. The
+physical gauge transformation parameters $\Lambda^j,j=+,-,Z,A$ are
+specified by
+\begin{gather}
+  \label{eq:lparam}
+  \Lambda^1=\frac{1}{\sqrt{2}}\big(\Lambda^++\Lambda^-\big) \qquad
+  \Lambda^2=\frac{i}{\sqrt{2}}\big(\Lambda^+-\Lambda^-\big) \\
+  \nonumber
+  \Lambda^3=\ct\Lambda^Z+\st\Lambda^A \qquad
+  \Lambda^0=-\st\Lambda^Z+\ct\Lambda^A \\
+  \nonumber
+  \Lambda^3+g'\Lambda^0=\frac{1}{\ct}\Lambda^Z \qquad
+  -\Lambda^3+g'\Lambda^0=-\frac{\ct^2-\st^2}{\ct}\Lambda^Z-2\st\Lambda^A.
+\end{gather}
+Using \eqref{eq:lparam} we can derive the gauge transformations of the
+physical fields in terms of the physical parameters. Combining this with
+\eqref{eq:cdefs} and \eqref{eq:zadefs}, we get the gauge transformations of
+$C^\pm,C^A,$ and $C^Z$ in terms of physical parameters. For the purposes
+of this exam, the most important part is
+\begin{equation}
+  \label{eq:cxform}
+  C^\pm \to C^\pm +\frac{1}{\sqrt{\xi}}\big(\Box\Lambda^\pm
+                         +\xi M_W^2 \Lambda^\pm\big)+...
+\end{equation}
+where $\Box$ is the D'Alembertian operator. Just as in the case of gauge
+fields, we associate with each physical gauge parameter
+$\Lambda^\pm,\Lambda^Z,\Lambda^A$ a ghost field $X^\pm,Y^Z,Y^A$ by
+\begin{gather}
+  X^1=\frac{1}{\sqrt{2}}\big(X^++X^-\big), \qquad
+  X^2=\frac{1}{\sqrt{2}}\big(X^+-X^-\big), \\
+  X^3=\ct Y^Z+\st Y^A, \qquad
+  X^0=-\st Y^Z +\ct Y^A. \nonumber
+\end{gather}
+The gauge
+invariance $C^\pm\to C^\pm$ is restored if we identify the first term in
+\eqref{eq:cxform} as the ghost propagator
+\begin{gather*}
+  \frac{i}{k^2-\xi M_W^2+i\epsilon}~~\F{18}
+\end{gather*}
+and identify ghost field interactions of the form
+\begin{equation}
+  g\overline{X}^i L^{ij} X^j, \qquad i,j=+,-,Z,A.
+\end{equation}
+The interaction Lagrangian for the electroweak ghosts then becomes (again
+we're only looking at some of the terms)
+\begin{gather}
+  \Lagr_{int}^{gf}=ie\frac{1}{\sqrt{\xi}}A_\mu
+                       \big(\partial^\mu \overline{X}^+X^+
+                            -\partial^\mu \overline{X}^-X^-\big)
+                   +ig\ct\frac{1}{\sqrt{\xi}}Z_\mu
+                       \big(\partial^\mu \overline{X}^+X^+
+                            -\partial^\mu \overline{X}^-X^-\big)\\
+                   -\frac{1}{2}g\sqrt{\xi}M_W H
+                   \big(\overline{X}^+X^+ -\overline{X}^-X^-\big)+...\nonumber
+\end{gather}
+with Feynman rules
+\begin{gather*}
+ \mp iep^\mu~~\F{19}~~~~~~~~
+ \pm ig\ct p^\mu~~\F{20}~~~~~~~~
+ -\frac{ig}{2}\sqrt{\xi}M_W~~\F{21}
+\end{gather*}
+\begin{figure}
+  \begin{fmffile}{fr18to21}
+  \centering
+    \begin{subfigure}{0.45\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i}
+        \fmfright{o}
+        \fmf{dots,label=$X^\pm$}{i,o}
+      \end{fmfgraph*}
+    \caption*{\F{18}}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{dots}{i1,v}
+        \fmf{dots,label=$p$}{i2,v}
+        \fmf{photon}{v,o}
+        \fmflabel{$X^\pm$}{i1}
+        \fmflabel{$X^\pm$}{i2}
+        \fmflabel{$A_\mu$}{o}
+      \end{fmfgraph*}
+    \caption*{\F{19}}
+    \end{subfigure} \\
+    \vspace{12mm}
+    \begin{subfigure}{0.45\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{dots}{i1,v}
+        \fmf{dots,label=$p$}{i2,v}
+        \fmf{photon}{v,o}
+        \fmflabel{$X^\pm$}{i1}
+        \fmflabel{$X^\pm$}{i2}
+        \fmflabel{$Z_\mu$}{o}
+      \end{fmfgraph*}
+    \caption*{\F{20}}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{dots}{i1,v}
+        \fmf{dots}{i2,v}
+        \fmf{photon}{v,o}
+        \fmflabel{$X^\pm$}{i1}
+        \fmflabel{$X^\pm$}{i2}
+        \fmflabel{$H$}{o}
+      \end{fmfgraph*}
+    \caption*{\F{21}}
+    \end{subfigure}
+  \end{fmffile}
+  \caption{The ghost propagator and some ghost-electroweak boson interaction
+           terms.}
+\end{figure}
+\noindent
+It's worth noting that the ghost field mass terms are proportional to
+$\sqrt{\xi}$, which makes them not physical.
+
+
+Next we move to fermions. We start with
+\begin{gather}
+  \label{eq:ferms}
+  \Psi=
+  \left(\begin{array}{c}
+    u \\
+    d
+  \end{array}\right) \qquad
+  \Psi_{L,R}=\frac{1}{2}(1\pm\gamma_5)\Psi \\
+  \nonumber
+  D_\mu\Psi_L=\big(\partial_\mu+gB_\mu^iT^i\big)\Psi_L \qquad
+  T^a=-\frac{i}{2}\sigma^a \qquad
+  T^0=-\frac{i}{2}g_2I \\
+  \nonumber
+  D_\mu\Psi_R=\big(\partial_\mu+gB_\mu^it^i\big)\Psi_R \qquad
+  t^a=0 \qquad
+  t^0=-\frac{1}{2}
+  \left(\begin{array}{cc}
+    g_3 & 0  \\
+    0   & g_4
+  \end{array}\right),
+\end{gather}
+where $i=0,1,2,3$.
+The part of the Lagrangian corresponding to interactions between fermions
+and weak vector bosons is
+\begin{equation}
+  \Lagr_{int}^{vfer}=-\overline{\Psi}_L \slashed{D}\Psi_L
+                     -\overline{\Psi}_R \slashed{D}\Psi_R, \qquad
+               g_i=-\frac{\st}{\ct}\lambda_i.
+\end{equation}
+The parameters $\lambda_i$ are fixed by the requirement that the EM current
+take the form $iQ_f e \bar{f}\gamma_\mu f$. We get
+\begin{equation}
+  \lambda_2=1-2Q_u=1-2Q_d, \qquad \lambda_3=-2Q_u, 
+            \qquad \text{and} \qquad \lambda_4=-2Q_d,
+\end{equation}
+and we define $I_f^{(3)}$ by
+\begin{equation}
+  Q_f=2I_f^{(3)}|Q_f|.
+\end{equation}
+With these definitions we can recast \eqref{eq:ferms} in a more transparent
+form. The parts that interest us are
+\begin{equation}
+  \label{eq:vfer}
+  \Lagr_{int}^{vfer}=\sum\limits_f\Bigg[ieQ_fA_\mu \bar{f}\gamma_\mu f
+                      +\frac{ig}{2\ct}Z_\mu\bar{f}\gamma^\mu
+                        \Big(I_f^{(3)}-2Q_f\st^2+I_f^{(3)}\gamma_5\Big)f\Bigg]
+                      +...
+\end{equation}
+where the sum is over possible fermion types. The Feynman rules corresponding
+to these two terms are
+\begin{gather*}
+  -ieQ_f \gamma^\mu~~\F{22}~~~~~~~~
+  \frac{ig}{2\ct}\gamma^\mu\Big(I_f^{(3)}
+                                -2Q_f\st^2+I_f^{(3)}\gamma_5\Big)~~\F{23}
+\end{gather*}
+\begin{figure}
+  \begin{fmffile}{fr22to25}
+  \centering
+    \begin{subfigure}{0.45\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{fermion}{i1,v,i2}
+        \fmf{photon}{v,o}
+        \fmflabel{$\bar{f}$}{i1}
+        \fmflabel{$f$}{i2}
+        \fmflabel{$A_\mu$}{o}
+      \end{fmfgraph*}
+    \caption*{\F{22}}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{fermion}{i1,v,i2}
+        \fmf{photon}{v,o}
+        \fmflabel{$\bar{f}$}{i1}
+        \fmflabel{$f$}{i2}
+        \fmflabel{$Z_\mu$}{o}
+      \end{fmfgraph*}
+    \caption*{\F{23}}
+    \end{subfigure} \\
+    \vspace{12mm}
+    \begin{subfigure}{0.45\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{fermion}{i1,v,i2}
+        \fmf{dashes}{v,o}
+        \fmflabel{$\bar{f}$}{i1}
+        \fmflabel{$f$}{i2}
+        \fmflabel{$H$}{o}
+      \end{fmfgraph*}
+    \caption*{\F{24}}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i}
+        \fmfright{o}
+        \fmf{fermion,label=$f$}{i,o}
+      \end{fmfgraph*}
+    \caption*{\F{25}}
+    \end{subfigure}
+  \end{fmffile}
+  \caption{Some fermion-boson interactions and the fermion propagator.}
+\end{figure}
+
+For the fermionic Higgs sector let
+\begin{equation}
+  \label{eq:ktilde}
+  \widetilde{K}=-\frac{1}{\sqrt{2}}
+  \left(\begin{array}{c}
+    \sqrt{2}i\phi^+ \\
+    H+2M_{W}/g-i\phi^0
+  \end{array}\right).
+\end{equation}
+This part of the SM Lagrangian is
+\begin{equation}
+  \label{eq:lsferm}
+  \Lagr_S^{ferm}=-\alpha_f \overline{\Psi}_L Ku_R
+                 -\beta_f \overline{\Psi}_L\widetilde{K}d_R+\text{h.c.},
+\end{equation}
+where $\alpha_f$ and $\beta_f$ are Yukawa couplings. Thus we see
+\eqref{eq:ktilde} allows us to give masses to down type fermions. Plugging
+\eqref{eq:ktilde} into \eqref{eq:lsferm} and using equations like
+\begin{equation}
+  \bar{u}_R d_L=\frac{\bar{u}}{2}(1+\gamma_5)d, \qquad
+  \bar{u}_L d_R=\frac{\bar{u}}{2}(1-\gamma_5)d \qquad
+\end{equation}
+we obtain
+\begin{equation}
+  \Lagr_S^{ferm}=-\frac{\alpha_f}{\sqrt{2}}\Bigg(\frac{2M_W}{g}\Bigg)\bar{u}u
+                -\frac{\beta_f}{\sqrt{2}}\Bigg(\frac{2M_W}{g}\Bigg)\bar{d}d
+                +...
+\end{equation}
+from which we see
+\begin{equation}
+  \alpha_f=\frac{gm_u}{\sqrt{2}M_W}, \qquad
+  \alpha_f=-\frac{gm_d}{\sqrt{2}M_W}.
+\end{equation}
+With this identification we can write
+\begin{equation}
+  \label{eq:sferm}
+  \Lagr_S^{ferm}=-\sum\limits_f 
+          \Bigg(m_f+\frac{1}{2}gH\frac{m_f}{M_W}\Bigg)\bar{f}f+...
+\end{equation}
+whose second term gives the Feynman rule
+\begin{gather*}
+  -\frac{igm_f}{2M_W}~~\F{24}
+\end{gather*}
+Also note that from \eqref{eq:vfer} and
+\eqref{eq:sferm} we have the terms necessary to build the propagator for
+any fermion
+\begin{gather*}
+  \frac{i(\slashed{p}+m_f)}{p^2-m_f^2+i\epsilon}~~\F{25}
+\end{gather*}
+
+To complete the SM Lagrangian, at least to the extent necessary to do this
+exam, we briefly cover the QCD sector. Let $a,b,c=1,...,8$; $i,j=1,2,3$.
+Then the first two pieces of the QCD Lagrangian read
+\begin{gather}
+  \Lagr_{gauge}^{QCD}=-\frac{1}{2}\partial_\nu G_\mu^a\partial^\nu G^{a\mu}
+           -g_S f^{abc}\partial_\mu G_\nu^aG^{b\mu}G^{c\nu}
+           -\frac{1}{4}g_S^2 f^{abc}f^{ade}G_\mu^bG_{\nu}^cG^{d\mu}G^{e\nu} \\
+  \Lagr_{ferm}^{QCD}=\frac{1}{2}ig_S\sum\limits_\sigma
+         \big(\bar{q}_i^\sigma\gamma^\mu\lambda_{ij}^aq_j^\sigma\big)G^a_\mu,
+          \nonumber
+\end{gather}
+where the sum in $\Lagr_{ferm}^{QCD}$ runs over quark types. There will also
+need to be a gauge fixing term and a ghost field, but we don't need to
+bother with these details for this final. From $\Lagr_{ferm}^{QCD}$ we can
+read off the last needed Feynman rule
+\begin{gather*}
+  ig_S\big(\gamma^\mu\big)_{\beta\alpha}G^a_{ij}~~\F{26}
+\end{gather*}
+Adding together all the mentioned pieces gives the SM Lagrangian.
+\begin{figure}
+  \begin{fmffile}{fr26}
+  \centering
+    \begin{subfigure}{\textwidth}
+      \centering
+      \begin{fmfgraph*}(60,60)
+        \fmfleft{i1,i2}
+        \fmfright{o}
+        \fmf{fermion}{i1,v,i2}
+        \fmf{gluon}{v,o}
+        \fmflabel{$\alpha,j$}{i1}
+        \fmflabel{$\beta,i$}{i2}
+        \fmflabel{$\mu,a$}{o}
+      \end{fmfgraph*}
+    \caption*{\F{26}}
+    \end{subfigure}
+  \end{fmffile}
+  \caption{Quark-gluon vertex.}
+\end{figure}
+
+\section{Some discussion of Higgs decays}
+{\it The interactions between the Higgs boson and the EW gauge bosons were
+derived in the previous rules. In the case $M_{H}\approx\text{125 GeV}$, we
+have $M_{H}<2M_W$ and $M_{H}<2M_Z$. But the branching ratios $\Br(H\to WW)$ and
+$\Br(H\to ZZ)$ are nonzero in this range. What do they correspond to? How would
+you calculate these rates?}\vspace{5mm}
+
+If $M_H<2M_W$ or $M_H<2M_Z$ then one of the product particles must be
+off-shell, which makes it virtual. Therefore this is not a decay we can
+directly observe. Thankfully if the virtual particle decays into on-shell
+particles, we can observe those. There are a few constraints:
+\begin{enumerate}
+  \item Whatever the final products are in $H\to ZX$ or $H\to WX$ (where $X$ is
+        a currently unspecified collection of particles), they had better be
+        kinematically allowed. Thus $M_H\geq m_{products}$.
+  \item The decay of the virtual boson has to use valid Feynman rules.
+  \item The decay products can't be Goldstone or ghost particles because these
+        are unphysical.
+\end{enumerate}
+Let us consider the two cases.
+
+\underline{$H\to WW^*$}: Here $M_X\leq\text{45~GeV}$. Kinematically, $\gamma$,
+$g$, and all fermions except $t$ are allowed. We have to eliminate $\gamma$
+because there is no coupling to $W^*$ that doesn't involve another $W$ or $Z$.
+$W^*$ doesn't couple to $g$, so it is also eliminated. Therefore at tree level,
+the only contributing diagrams are the ones in Figure 6a, where
+$|Q_{f_1}-Q_{f_2}|=1$, $f_1$ and $f_2$ have different flavors and the same
+lepton number. By \F{12}, \F{27}, and \F1, the value of this diagram is
+\begin{equation}
+  i\ME_{f_1,f_2}=i\frac{g}{\sqrt{2}}\gamma^\mu
+    \Bigg(\frac{1-\gamma_5}{2}\Bigg)\Bigg(\frac{-ig_{\mu\nu}}{k^2-M_W^2}\Bigg)
+       \big(igM_Z\st^2\big)\bar{u}_{s_2}(\vec{p}_2)v_{s_1}(\vec{p}_1)
+       g^{\nu\rho}\epsilon^*_\rho(p_W).
+\end{equation}
+Hence,
+\begin{equation}
+  i\ME=i\sum\limits_{f_1,f_2}\ME_{f_1,f_2},
+\end{equation}
+where the sum runs over all $f_1$ and $f_2$ subject to the above restrictions.
+
+\underline{$H\to ZZ^*$}: The $Z$-boson is not much heavier than $W$, and it
+can't
+decay directly into $g$ or $\gamma$ for the same reasons as before. At tree
+level, the only relevant Feynman diagrams are the ones in Figure 6b because
+the $Z$-boson changes neither color nor flavor. Therefore
+\begin{equation}
+  i\ME=\sum\limits_f\left(\frac{ig}{2\ct}\gamma^\mu\big(I_f^{(3)}
+                 -2Q_f\st^2+I_f^{(3)}\gamma_5\big)\frac{-ig_{\mu\nu}}
+                 {k^2-M_Z^2}\Bigg(\frac{ig}{\ct}M_Zg^{\nu\rho}\Bigg)
+                 \epsilon^*_\rho(p_Z)\bar{u}_{s_2}(\vec{p}_2)
+                 v_{s_1}(\vec{p}_1)\right)
+\end{equation}
+\begin{figure}
+  \setlength{\abovecaptionskip}{15pt plus 3pt minus 2pt}
+  \begin{fmffile}{prob1}
+  \centering
+    \begin{subfigure}{.45\textwidth}
+    \setlength{\abovecaptionskip}{25pt plus 3pt minus 2pt}
+      \centering
+      \begin{fmfgraph*}(90,60)
+        \fmfleft{i}
+        \fmfright{o1,o2,o3}
+        \fmf{dashes,tension=2}{i,v1}
+        \fmf{photon}{v1,o1}
+        \fmf{photon,label=$W^*$}{v1,v2}
+        \fmf{fermion,tension=1}{o3,v2,o2}
+        \fmflabel{$H$}{i}
+        \fmflabel{$W$}{o1}
+        \fmflabel{$f_2$}{o2}
+        \fmflabel{$f_1$}{o3}
+      \end{fmfgraph*}
+     \caption{}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+    \setlength{\abovecaptionskip}{25pt plus 3pt minus 2pt}
+      \centering
+      \begin{fmfgraph*}(90,60)
+        \fmfleft{i}
+        \fmfright{o1,o2,o3}
+        \fmf{dashes,tension=2}{i,v1}
+        \fmf{photon}{v1,o1}
+        \fmf{photon,label=$Z^*$}{v1,v2}
+        \fmf{fermion,tension=1}{o3,v2,o2}
+        \fmflabel{$H$}{i}
+        \fmflabel{$Z$}{o1}
+        \fmflabel{$f$}{o2}
+        \fmflabel{$\bar{f}$}{o3}
+      \end{fmfgraph*}
+    \caption{}
+    \end{subfigure}
+  \end{fmffile}
+  \caption{Off-shell Higgs decays into (a) $WW^*$ and (b) $ZZ^*$.}
+\end{figure}
+
+{\it Calculate $\Gamma(H\to Q\overline{Q})$, where $Q$ is an arbitrary quark.}
+\vspace{5mm}
+
+We work in the rest frame of the Higgs. For a general particle decay in this
+frame we have \cite[p.107]{PS}
+\begin{equation}
+  \text{dLIPS}=\frac{d\Omega}{16\pi^2}\frac{|\vec{p}|}{E_{CM}},
+\end{equation}
+where $E_{CM}$ is the total initial energy and $\vec{p}$ is the spatial
+momentum of either of the final state particles. Therefore the decay rate
+$\Gamma(H\to\text{2 particles})$ is generally
+\begin{equation}
+  \label{eq:gam}
+  \Gamma=\frac{1}{2m_H}\int\frac{d\Omega}{16\pi^2}
+             \frac{|\vec{p}|}{m_H}|\ME|^2
+        =\frac{4\pi}{16\pi^2 m_H^2}|\ME|^2|\vec{p}|
+        =\frac{|\vec{p}||\ME|^2}{8\pi m_H^2}.
+\end{equation}
+In the present case, the contributing diagram is \F{24}. Therefore the matrix
+element is
+\begin{equation}
+  i\ME=-\frac{ig}{2}{m_Q}{M_W}\bar{u}_s(\vec{p})v_{s'}(\vec{p}').
+\end{equation}
+Summing over final spin states and keeping in mind that the quark-antiquark
+pair has three possible color-anticolor combinations, we get by the
+completeness relation
+\begin{equation}
+  \label{eq:ME2}
+  \begin{aligned}
+    \left< |\ME|^2 \right>&=3\frac{g^2 m_Q^2}{4M_W^2}\sum\limits_{s,s'}
+      \Tr u_s(\vec{p})\bar{u}_s(\vec{p})
+          v_{s'}(\vec{p}')\bar{v}_{s'}(\vec{p}') \\
+    &=\frac{3g^2 m_Q^2}{4M_W^2}\Tr(\slashed{p}+m_Q)(\slashed{p}'-m_Q) \\
+    &=\frac{3g^2 m_Q^2}{4M_W^2}\Tr(\slashed{p}\slashed{p}'-m_Q^2) \\
+    &=\frac{3g^2 m_Q^2}{M_W^2}\Tr(pp'-m_Q^2) \\
+    &=\frac{3g^2 m_Q^2}{M_W^2}\Bigg(-\frac{s}{2}-m_Q^2-m_Q^2\Bigg) \\
+    &=\frac{3g^2 m_Q^2}{M_W^2}\Bigg(-\frac{m_H^2}{2}-2m_Q^2\Bigg) \\
+    &=\frac{3g^2 m_Q^2 m_H^2}{M_W^2}\Bigg(1-\frac{4m_Q^2}{m_H^2}\Bigg).
+  \end{aligned}
+\end{equation}
+Combining \eqref{eq:gam} and \eqref{eq:ME2} yields
+\begin{equation}
+  \label{eq:gamQ}
+  \begin{aligned}
+    \Gamma&=\frac{1}{8\pi m_H^2}{m_H}\Bigg(1-\frac{4m_Q^2}{m_H^2}\Bigg)^{1/2}
+            \frac{3g^2m_Q^2m_H^2}{M_W^2}\Bigg(1-\frac{4m_Q^2}{m_H^2}\Bigg)\\
+          &=\frac{3g^2m_Q^2m_H}{8\pi M_W^2}
+               \Bigg(1-\frac{4m_Q^2}{m_H^2}\Bigg)^{3/2}.
+  \end{aligned}
+\end{equation}
+
+{\it The Higgs can also decay into gluons, $H\to gg$. This cannot happen at
+tree level, but it can happen at the one-loop level. How? Calculate
+$\Gamma(H\to gg)$. You can leave your result in a form that depends on a
+Feynman parameter integral.}
+\vspace{5mm}
+
+\begin{figure}
+  \begin{fmffile}{prob2}
+    \centering
+    \begin{subfigure}{.95\textwidth}
+    \centering
+    \begin{fmfgraph*}(90,60)
+      \fmfleft{i}
+      \fmfright{o1,o2}
+      \fmf{dashes,tension=2,label=$p+k$}{i,v1}
+      \fmf{fermion}{v1,v3}
+      \fmf{fermion,tension=0,label=$l$}{v3,v2}
+      \fmf{fermion}{v2,v1}
+      \fmf{photon,label=$k$,tension=2}{v2,o1}
+      \fmf{photon,label=$p$,tension=2}{v3,o2}
+      \fmflabel{$H$}{i}
+      \fmflabel{$g$}{o1}
+      \fmflabel{$g$}{o2}
+    \end{fmfgraph*}
+    \end{subfigure}
+  \end{fmffile}
+  \vspace{8mm}
+  \caption{Gluon production via quark loop.}
+\end{figure}
+
+At the one loop level, the Higgs can decay via the mechanism of Figure 7,
+which is determined by rules \F{24}, \F{25}, and \F{26}. There is also a
+crossed diagram whose amplitude should equal the amplitude of the first by
+symmetry, which cancels the factor of 2 due to \F{24}. Hence the matrix
+element for this process is given by
+
+\begin{gather}
+  i\ME=\frac{igm_Q}{M_W}\int\frac{d^4l}{(2\pi)^4}\Tr\left[
+        \frac{i(\slashed{l}-\slashed{k}+m_Q)}{(l-k)^2-m_Q^2}ig_S\gamma^\mu
+        \frac{i(\slashed{l}+m_Q)}{l^2-m_Q^2}ig_S\gamma^\nu
+        \frac{i(\slashed{l}+\slashed{p}+m_Q)}{(l+p)^2-m_Q^2}\right] \\
+        \times\Tr\big[G^aG^b\big]\epsilon^{\lambda '}_\mu(k)
+                           \epsilon^{\lambda }_\nu(p).
+\end{gather}
+The numerator can be simplified using Form (see Appendix A) to
+\begin{equation}
+  \label{eq:3num}
+  ig_S^2N^{\mu\nu}=4im_Qg_S^2\big(p^\mu k^\nu-k^\mu p^\nu+2l^\mu k^\nu
+                     -2k^\mu l^\nu+4l^\mu l^\nu-g^{\mu\nu}pk-g^{\mu\nu}l^2
+                     +g^{\mu\nu}m_Q^2\big).
+\end{equation}
+Meanwhile we can rewrite the denominator using Feynman parameters, $p^2=k^2=0$,
+and $pk=m_H^2/2$ as
+\begin{equation}
+  \frac{1}{\big((l-k)^2-m_Q^2\big)\big(l^2-m_Q^2\big)\big((l+p)^2-m_Q^2\big)}
+    =\int_0^1dx\int_o^{1-x}dy\frac{2}{\big(q^2-D\big)^3},
+\end{equation}
+where
+\begin{equation}
+  q^\mu\coloneqq l^\mu-\big(xk^\mu-yp^\mu\big),\qquad D\coloneqq m_Q^2-xym_H^2.
+\end{equation}
+We arrived at these definitions by completing the square; namely
+\begin{equation}
+  \begin{aligned}
+    l^2-2l(xk-yp)&=(l-(xk-yp))^2-(xk-yp)^2 \\
+                 &=q^2+2xypk \\
+                 &=q^2+xym_H^2.
+  \end{aligned}
+\end{equation}
+
+Now in order to integrate \eqref{eq:3num}, we need to express $N^{\mu\nu}$
+in terms of $q^\mu$. Since the denominator is a function of $q^2$, terms
+proportional to $q^\mu$ will vanish. Furthermore polarization vectors are
+perpendicular to the direction of gluon propagation, and $\vec{p}_1$ and
+$\vec{p}_2$ must be antiparallel by momentum conservation, so
+$\epsilon^*(p_i)\cdot p_j=0$ with $i,j=1,2$. Let $N'^{\mu\nu}$ represent
+$N^{\mu\nu}$ with these terms dropped. Then
+\begin{equation}
+  \begin{aligned}
+    N'^{\mu\nu}&=4m_Q\Big(4l^\mu l^\nu-l^2g^{\mu\nu}
+                    +g^{\mu\nu}\big(m_Q^2-pk\big)\Big) \\
+               &=4m_Q\Bigg(\Big(m_Q^2
+                    +\Big(xy-\tfrac{1}{2}\Big)m_H^2-q^2\Big)g^{\mu\nu}
+                    +4q^\mu q^\nu\Bigg).
+  \end{aligned}
+\end{equation}
+\begin{equation}
+  \begin{aligned}
+    N'^{\mu\nu}&=4m_Q\Big(4l^\mu l^\nu-l^2g^{\mu\nu}
+                    +g^{\mu\nu}\big(m_Q^2-pk\big)\Big) \\
+               &=4m_Q\Bigg(\Big(m_Q^2
+                    +\Big(xy-\tfrac{1}{2}\Big)m_H^2-q^2\Big)g^{\mu\nu}
+                    +4q^\mu q^\nu\Bigg).
+  \end{aligned}
+\end{equation}
+Since $l$ and $q$ differ additively by terms independent of $l$ or $q$,
+$d^4l=d^4q$. Furthermore $\Tr G^aG^b=\delta^{ab}/2$, so
+\begin{equation}
+  \label{eq:53}
+  i\ME=-\frac{gg_S^2m_Q}{M_W}\delta^{ab}\epsilon^{\lambda'*}_\mu(k)
+           \epsilon^{\lambda*}_\nu(p)\int\frac{d^4q}{(2\pi)^4}
+           \int_0^1dx\int_0^{1-x}dy\frac{N'^{\mu\nu}}{\big(q^2-D\big)^3}.
+\end{equation}
+Under the $d^4q$ integral, the $q^\mu q^\nu$ term gets replaced by
+$g^{\mu\nu}q^2/d$. One might think that this would cancel the other $q^2$
+term, but in fact the integral is more subtle, and we will have to
+employ dimensional regularization to compute it. Replacing
+$d\to d-2\epsilon$ we have by \cite[A.45]{PS}
+\begin{equation}
+  \label{eq:54}
+  \begin{aligned}
+    \int\frac{d^{4-2\epsilon}q}{(2\pi)^{4-2\epsilon}}
+        \frac{q^2}{\big(q^2-D\big)^3}\Bigg(\frac{4}{4-2\epsilon}-1\Bigg)
+     &=\frac{(-1)^2i}{(4\pi)^{2-\epsilon}}\Bigg(\frac{4-2\epsilon}{2}\Bigg)
+        \frac{\Gamma(\epsilon)}{\Gamma(3)}\Bigg(\frac{1}{D}\Bigg)^\epsilon
+        \Bigg(\frac{4}{4-2\epsilon}-1\Bigg) \\
+     &\approx\Bigg(\frac{4\pi}{D}\Bigg)^\epsilon\frac{i}{(4\pi)^2}
+        \Bigg(1-\frac{\epsilon}{2}\Bigg)\Gamma(\epsilon)
+        \Bigg(1+\frac{\epsilon}{2}+\mathcal{O}\big(\epsilon^2\big)-1\Bigg) \\
+     &\approx\frac{i}{(4\pi)^2}\Big(1+\mathcal{O}\big(\epsilon\big)\Big)
+        \Bigg(1-\frac{\epsilon}{2}\Bigg)\Bigg(\frac{1}{\epsilon}-\gamma
+        +\mathcal{O}\big(\epsilon\big)\Bigg)\frac{\epsilon}{2} \\
+     &\to\frac{i}{2(4\pi)^2}
+  \end{aligned}
+\end{equation}
+in the $\epsilon\to 0$ limit. (Here $\gamma$ is the Euler-Mascheroni constant.)
+Meanwhile for the integral over the constant terms, we have by
+\cite[A.44]{PS}
+\begin{equation}
+  \label{eq:55}
+  \int\frac{d^4q}{(2\pi)^4}\frac{1}{\big(q^2-D\big)^3}
+      =\frac{(-1)^3i}{(4\pi)^2}\frac{\Gamma(1)}{\Gamma(3)}\frac{1}{D}
+      =\frac{-i}{2(4\pi)^2D}.
+\end{equation}
+Combining \eqref{eq:53}, \eqref{eq:54}, and \eqref{eq:55} we arrive at
+\begin{equation}
+  \label{eq:56}
+  \begin{aligned}
+    i\ME&=-\frac{gg_S^2m_Q}{M_W}\delta^{ab}\epsilon^{\lambda'*}_\mu(k)
+             \epsilon^{\lambda*}_\nu(p)\frac{4m_Qi}{(4\pi)^2} \\
+        &~~~~~~~~~~~~\times\int_0^1dx\int_0^{1-x}dy\frac{1}{D}
+             \Bigg[\frac{1}{2}\Big(m_Q^2-xym_H^2\Big)
+              -\frac{1}{2}\Big(m_Q^2+\big(xy-\tfrac{1}{2}\big)m_H^2\Big)\Bigg]
+             \\
+        &=-\frac{4igg_S^2m_Q^2}{(4\pi)^2M_W}\delta^{ab}
+               \epsilon^{\lambda'*}_\mu(k)\epsilon^{\lambda*}_\nu(p)
+               \int_0^1dx\int_0^{1-x}dy
+               \frac{m_H^2\big(\tfrac{1}{4}-xy\big)}{m_Q^2-xym_H^2} \\
+        &=-\frac{igg_S^2m_H^2}{(4\pi)^2M_W}\delta^{ab}
+               \epsilon^{\lambda'*}_\mu(k)\epsilon^{\lambda*}_\nu(p)
+               I\Big(\frac{m_H}{m_Q}\Big),  
+  \end{aligned}
+\end{equation}
+where
+\begin{equation}
+  I(z)\coloneqq\int_0^1dx\int_0^{1-x}dy\frac{1-4xy}{1-xyz^2}.
+\end{equation}
+Finally taking the magnitude of \eqref{eq:56}, summing over color indices,
+and summing over the two possible polarizations $+-$ and $-+$ we obtain
+\begin{equation}
+  \label{eq:58}
+  \big<|\ME|^2\big>=\frac{g^2g_S^4m_H^4}{(4\pi)^4M_W^2}(8)(2)
+      \Big|I\Big(\frac{m_H}{m_Q}\Big)\Big|^2.
+\end{equation}
+Therefore for a generic quark we have by \eqref{eq:gam} and \eqref{eq:58}
+\begin{equation}
+  \label{eq:56}
+  \Gamma_Q=\frac{1}{2}m_H\frac{1}{8\pi m_H^2}
+            \frac{g^2 g_S^4m_H^4}{(4\pi)^4 M_W^2}(8)
+            \Big|I\Big(\frac{m_H}{m_Q}\Big)\Big|^2
+          =\frac{2g^2 g_S^4m_H^3}{(4\pi)^5 M_W^2}
+            \Big|I\Big(\frac{m_H}{m_Q}\Big)\Big|^2.
+\end{equation}
+The total decay width can then be found by summing \eqref{eq:56} over all
+quarks. Hence we ultimately find for the decay rate of $H\to gg$
+\begin{equation}
+  \Gamma=\frac{2g^2 g_S^4m_H^3}{(4\pi)^5 M_W^2}
+          \Big|\sum\limits_Q I\Big(\frac{m_H}{m_Q}\Big)\Big|^2.
+\end{equation}
+
+
+
+\bibliographystyle{unsrtnat}
+\bibliography{bibliography}

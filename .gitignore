@@ -1,6 +1,10 @@
 # LaTeX stuff not needed for repository
 *.bbl
 Exported\ Items.bib
+*.tf
+*.tfm
+*.600pk
+*.mf
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
