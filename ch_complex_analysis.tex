@@ -52,15 +52,53 @@ the product and chain rules. The CR equations are a convenient way
 to determine whether a complex function is holomorphic. For instance you can
 use them to show $|z|^2$ is not holomorphic. 
 It is also useful to note that $\exp(z)$ is holomorphic in $\C$.
+It also follows from the CR equations that both $u$ and $v$ satisfy
+\index{Laplace's equation}
+Laplace's equation, i.e.
+\begin{equation}
+\left(\partial_x^2+ \partial_y^2\right)u = \left(\partial_x^2
++\partial_y^2\right\right))v = 0.
+\end{equation}
+Hence if you specify $f$ on the boundary of some region, this fixes the solution
+in the region uniquely.
 
-Moving on to integration, complex integrals are in general path-dependent.
+Before moving on to integration, it is useful to discuss {\it isolated singularities} of
+\index{singularity!isolated}
+complex functions, i.e. isolated\footnote{``Isolated" in this context means that if
+$z_0$ is a singularity, there exists a neighborhood of $z_0$ free of any other
+singularities. This can be contrasted with e.g. $f(z)=z^{1/2}$, which is
+singular along the entire negative real axis.} 
+points where these functions are not well defined
+or well behaved. As we will see later, these singularities can limit Taylor
+expansions, and they contribute to complex integrals. 
+Let the region $B\subset\C$ be open, let $z_0\in B$ be a singularity of $f$, 
+and let $f$ be holomorphic in $B-z_0$. Complex singularities
+can be classified as follows:
+\begin{itemize}
+  \index{singularity!removable}
+  \item $z_0$ is a {\it removable singularity} of $f$ if there exists a
+        holomorphic function $g$ defined on $B$ such that $f(z) = g(z)$ for all
+        $z\in B-z_0$.
+  \index{singularity!pole}
+  \item $z_0$ is a {\it pole} of $f$ if there exists a holomorphic function $g$
+        defined on $B$ with $g(z_0)\neq0$ and an $n\in\N$ such that 
+        $f(z) = g(z) / (z-z_0)^n$ for all $z\in B-z_0$. The smallest such $n$ 
+        is called the {\it order} of the pole. A {\it meromorphic} function
+        \index{meromorphic} is analytic everywhere in $\C$ except at a finite
+        number of poles.
+  \index{singularity!essential}
+  \item $z_0$ is an {\it essential singularity} if it is neither removable nor a
+        pole.
+\end{itemize}
+
+Complex integrals are in general path-dependent.
 This integral can be defined using a Riemann sum, but in practice one usually
 parameterizes the curve and computes the integral that way.
 It follows that the integral is linear, and that the sign of an integral
 flips when the orientation of the contour changes.
 The following Proposition establishes an integral that appears frequently
-in complex analysis.
-\begin{proposition}{}{}
+in complex analysis. Note that the integrand has a pole at $z_0$.
+\begin{proposition}{}{circleIntegral}
 Let $C_R(z_0)$ denote the circle of radius $R$ centered at $z_0\in\C$
 and let $n\in\Z$. Then
 $$
@@ -85,6 +123,13 @@ i\int_0^{2\pi}\dd{\theta} R^{n+1}e^{i(n+1)\theta}\\
 \end{proof}
 \end{proposition}
 
+Later this chapter we will construct paths that have circles around singular
+points, and \propref{prp:circleIntegral} is extremely useful in those contexts.
+For example it will later be used to prove the residue \index{residue theorem}
+theorem, and we can see that the $2\pi i$ factor that appears there can be traced
+back to parameterizing this closed path with an angle.  
+
+We now move on to some more general facts about complex integrals.
 A region $B\subset\C$ is {\it path connected} if any two points in the region
 can be joined by a path. A {\it simply connected} region is a path connected
 \index{path connected}\index{simply connected}
@@ -92,7 +137,7 @@ region and any loop path can be contracted to a point\footnote{In other words,
 there are no holes.}. It turns out that a wide class of complex integrals
 over such regions evaluate to zero.
 
-\index{Cauchy integral theorem}
+\index{Cauchy!integral theorem}
 \begin{theorem}{Cauchy integral theorem}{}
 Let $B\subset\C$ be a bounded and simply connected region. Let $f:B\to\C$ be
 holomorphic in $B$ and $C$ be a closed curve fully contained in $B$. Then
@@ -114,7 +159,62 @@ Since $f$ is holomorphic, the integrands vanish by the CR equations.
 \end{proof}
 \end{theorem}
 
-\section{Pad\'e approximants}
+\index{Cauchy!integral formula}
+\begin{theorem}{Cauchy integral formula}{}
+Let $B\subset\C$ be bounded and simply connected region. Let $f:B\to\C$ be
+holomorphic in $B$ and continuous on the boundary $\partial B$.
+Then $\Forall n\in\N$ we get
+$$
+  \oint_{\partial B}\dd{z}\frac{f(z)}{(z-z_0)^{n+1}}=
+\begin{cases}
+\frac{2\pi i}{n!}f^{(n)}(z_0) & z_0\in B \\
+ 0            & \text{otherwise}.
+\end{cases}
+$$
+\begin{proof} When $z_0\notin B$, we get 0 by the Cauchy integral theorem.
+Therefore we consider for the remainder of the proof $z_0\in B$.
+We start with the $n=0$ case, then derive general $n$ from that.
+Let $z-z_0=\epsilon e^{i\phi}$.
+\begin{equation*}\begin{aligned}
+  \oint_{\partial B}\dd{z}\frac{f(z)}{z-z_0}
+&=-\lim_{\epsilon\to 0}\int_{2\pi}^0\dd{\phi}
+     i\epsilon e^{i\phi}\frac{f(z_0+\epsilon e^{i\phi})}{\epsilon e^{i\phi}}\\
+&=i\lim_{\epsilon\to 0}\int_{0}^{2\pi}\dd{\phi}f(z_0+\epsilon e^{i\phi})\\
+&=i\int_{0}^{2\pi}\dd{\phi}f(z_0)\\
+&=2\pi if(z_0).\\
+\end{aligned}\end{equation*}
+From here, all one has to do is take partial derivatives of this result 
+w.r.t. $z_0$.
+\end{proof} 
+\end{theorem}
+
+\section{The residue theorem}\index{residue theorem}
+
+Let $f$ be holomorphic in the annulus ${z\in\C : 0\leq r<|z-z_0|<R}$
+where $r,R>0$.
+Define $\Forall\rho : r<\rho<R$ and $\Forall k\in\Z$
+\begin{equation}
+  a_k\equiv\oint\dd{z}\frac{f(z)}{(z-z_0)^{k+1}}.
+\end{equation}
+Then the {\it Laurent expansion}\index{Laurent expansion} of $f$ is
+\begin{equation}
+  f(z)=\sum_{k=-\infty}^\infty a_k(z-z_0)^k.
+\end{equation}
+Note that if $f$ permits a Taylor expansion, this Taylor series is the Laurent
+series, with $a_k=0$ whenever $k<0$.
+
+
+
+\section{Pad\'e approximants}\index{Pad\'e approximant}
+
+To define the Pad\'e approximant, we introduce\footnote{One can always force
+the first coefficient in the denominator to be 1 by factoring it out of all
+the other coefficients in both the numerator and denominator.} first the {\it rational
+function of order} $[m,n]$, $m,n\in\N$ as \index{function!rational}
+\begin{equation}
+  R_n^m(x)\equiv\frac{\sum_i_0^m a_ix^i}{1+\sum_{j=1}^nb_jx^j}.
+\end{equation}
+
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}

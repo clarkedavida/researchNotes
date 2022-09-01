@@ -182,14 +182,20 @@ guarantee the others in the set are fixed.}
 \end{equation}
 
 The {\it grand potential} is\index{grand potential}
-\begin{equation}
+\begin{equation}\label{eq:grand}
   \Phi\left(V,T,\vec{\mu}\right)=U-TS-\sum_i\mu_i N_i=-T\log\grandZ
 \end{equation}
 from which one gets
 \begin{equation}
   \dd\Phi=-P\dd V-S\dd T-\sum_i N_i\dd\mu_i.
 \end{equation}
-
+Reorganizing \equatref{eq:grand} yields the Gibbs-Duhem relation
+\index{Gibbs-Duhem relation}
+\begin{equation}
+  s=\frac{\epsilon}{T}+\frac{1}{V}\log\grandZ-\sum_i\frac{\mu_i}{T}n_i,
+\end{equation}
+where $s\equiv S/V$ is the entropy density, and $\epsilon$ and $n_i$
+are the energy and number densities.
 
 \section{Relativistic quantum gases}
 
