@@ -365,6 +365,59 @@ applied to each bit. For example
 \end{equation*}
 
 
+\section{Evaluating performance}
+
+Lattice projects are extremely computationally demanding; for instance
+a recent HotQCD study utilized ensembles that required
+$\order{2000}$ GPU-years of compute time and take up 2.4 PB of storage 
+space~\cite{Bollweg:2021vqf}. Meeting this computational demands is
+not cheap, so it is crucially important that your code is highly
+optimized to get the most bang for your buck.
+In this section we'll review some key concepts and terminology
+relevant to assessing the performance of code
+in high-performance computing (HPC). 
+
+In this context, it is useful to define a few terms. A floating
+point operation\index{FLOP} is a calculation of floating point arithmetic. In a
+scientific context, this type is very common, so FLOPs are a good indicator
+of the amount of arithmetic a code is doing. Any scientific code you write will
+be in effect processing data. The rate at which data is processed
+is called the {\it throughput},\index{throughput} 
+and it can be measured in, for instance, FLOPs
+per second, sometimes indicated\footnote{Please take care not to
+mix up FLOPs with FLOP/s.} FLOP/s. The rate at which data is
+transferred is called the {\it bandwidth},\index{bandwidth}
+which can be measured in bytes/s.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figs/Roofline-intro.png}
+  \caption{Schematic example of a roofline analysis.
+           Image taken from Ref.~\cite{roofline}.
+           The light purple line indicates the theoretical
+           maximum performance under this model.}
+  \label{fig:roofline}
+\end{figure}
+
+
+\subsection{Roofline performance model}
+\index{roofline performance analysis}
+
+
+Obviously performance is limited by the hardware carrying out a calculation, for
+instance the CPU, but it is also limited by the rate at which things are loaded
+and extracted from memory. The {\it roofline performance model} is an elementary
+way to see where your code stands with respect to these two limitations.
+
+The {\it arithmetic intensity}\index{arithmetic intensity} of some code is
+\begin{equation}
+  \text{AI}=\frac{\text{\# FLOPs}}{\text{data movement in bytes}},
+\end{equation}
+where the numerator represents the number of FLOPs needed by that code, and the
+denominator represents how much data you need to move in bytes in order to
+support those FLOPs.
+
+
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
 
