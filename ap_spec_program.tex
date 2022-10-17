@@ -415,7 +415,15 @@ The {\it arithmetic intensity}\index{arithmetic intensity} of some code is
 \end{equation}
 where the numerator represents the number of FLOPs needed by that code, and the
 denominator represents how much data you need to move in bytes in order to
-support those FLOPs.
+support those FLOPs. From this equation it's clear that the attainable
+FLOP/s scales linearly with arithmetic intensity.
+
+Fig.~\ref{fig:roofline} shows a sketch of this model. The vertical
+dashed line gives the {\it machine balance point}.\index{machine balance point}
+This analysis is useful to try to diagnose whether one should look into
+memory efficiency or algorithm improvement to try to speed up the code.
+Code in the purple region to the left of the machine balance point
+tends to be limited by bandwidth.
 
 
 \bibliographystyle{unsrtnat}
