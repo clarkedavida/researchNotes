@@ -8,6 +8,22 @@ are directly relevant to modern lattice investigations of the QCD
 phase diagram. Some references I drew from include
 Ref.~\cite{tahir-kheli_general_2012} and \cite{kardar_statistical_2007}.
 
+\section{The laws of thermodynamics}\index{law of thermodynamics}
+
+In thermodynamics, one usually divides the universe into a system under
+consideration and its surroundings. Let $U$ be the energy of a system,
+$Q$ the heat added to it, and
+$W$ the work done on it. Then
+\begin{theorem}{First law of thermodynamics}{}
+  $$\dd U=Q+W$$
+\end{theorem}
+
+A process is {\it adiabatic}\index{adiabatic} if $Q=0$ throughout that process
+and {\it reversible}\index{reversible} if $Q=T\\dS$, where $T$ is the
+temperature and $S$ is the entropy. It follows that reversible,
+adiabatic processes are isentropic. 
+
+
 \section{Equations of state}\label{sec:EoS}
 
 
@@ -27,7 +43,7 @@ first law of thermodynamics,
 \begin{equation}\label{eq:fslaw}
   \dd{U}=T\dd{S}-P\dd{V}+\sum_i\mu_i\dd{N}_i,
 \end{equation}
-we know that\index{thermodynamics!first law}
+we know that
 \begin{equation}
   T=\pdv{U}{S}.
 \end{equation}
@@ -36,8 +52,9 @@ generally we could write
 \begin{equation}
   T=T(U,S,V,N).
 \end{equation}
-This is what we call an {\it equation of state}\index{equation of state}. 
-Knowing every equation 
+This is what we call an {\it equation of state}\index{equation of state}
+(EoS). The arguments are sometimes referred to as 
+{\it control parameters}\index{control parameter}. Knowing every equation 
 of state is enough to reconstruct the fundamental equation, and therefore 
 enough to determine the physics of the system.
 
@@ -45,10 +62,10 @@ enough to determine the physics of the system.
 
 Equation~\eqref{eq:fslaw} tells us that we can think of the internal energy
 $U$ of a system in equilibrium at $(T,P,\mu)$ as a function of $S$, $V$, and
-$N$. However one of these extensive variables, such as $S$, may be
+$N$. However one of the control parameters, such as $S$, may be
 difficult or impossible to measure, and therefore we would rather
 think in terms of the more accessible quantity $T$, which 
-is the derivative of $U$ with respect to $S$. 
+is the derivative of $U$ with respect to $S$; 
 Hence we want 
 \begin{enumerate}
 \item to look at $U$ in terms of a derivative with respect to $S$ rather 
@@ -159,6 +176,31 @@ guarantee the others in the set are fixed.}
 \end{equation}
 
 %\section{Cumulants}
+
+\section{Bulk properties of matter}
+
+One of the experimental goals of statistical physics is to predict some
+properties of thermodynamic systems. Historically one considered e.g.
+the air, which is a gas of particles. In these research notes, the focus
+is rather on the bulk thermodynamics of strongly interacting matter.
+A commonly used procedure is to calculate the pressure, giving
+you the EoS, and to derive other thermodynamic quantities from that.
+In this section we will discuss some of these quantities.
+
+\subsection{Pressure waves}
+%TODO: check formula
+The {\it speed of sound}\index{speed of sound} at fixed control parameter $X$
+is given by
+\begin{equation}
+  c_X^2=\atFixed{\pdv{P}{\epsilon}}{X}.
+\end{equation}
+The {\it compressibility}\index{compressibility} at fixed $X$ is
+\begin{equation}
+  \kappa_X=-\frac{1}{V}\atFixed{\pdv{V}{P}},
+\end{equation}
+which captures how much the volume changes under a change of pressure.
+Substances that take a lot of pressure to change the volume are not
+very compressible; hence the minus sign.
 
 \section{Ideal quantum gas}
 

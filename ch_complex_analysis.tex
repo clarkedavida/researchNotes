@@ -4,8 +4,7 @@ Here we review some basics of complex analysis that often appear in physics
 calculation. Some useful resources for this include
 Ref.~\cite{brown_complex_2003,weber_essentials_2012}.
 
-
-\section{Preliminaries}
+\section{Preliminaries}\label{sec:complexPrelim}
 
 We are interested in functions $f:\C\to\C$. Derivatives are defined similarly as
 with real, $1D$ functions. The limit
@@ -57,7 +56,7 @@ It also follows from the CR equations that both $u$ and $v$ satisfy
 Laplace's equation, i.e.
 \begin{equation}
 \left(\partial_x^2+ \partial_y^2\right)u = \left(\partial_x^2
-+\partial_y^2\right))v = 0.
++\partial_y^2\right)v = 0.
 \end{equation}
 Hence if you specify $f$ on the boundary of some region, this fixes the solution
 in the region uniquely.
@@ -78,7 +77,7 @@ can be classified as follows:
   \index{singularity!removable}
   \item $z_0$ is a {\it removable singularity} of $f$ if there exists a
         holomorphic function $g$ defined on $B$ such that $f(z) = g(z)$ for all
-        $z\in B-z_0$.
+        $z\in B-z_0$.  
   \index{singularity!pole}
   \item $z_0$ is a {\it pole} of $f$ if there exists a holomorphic function $g$
         defined on $B$ with $g(z_0)\neq0$ and an $n\in\N$ such that 
@@ -95,7 +94,9 @@ Complex integrals are in general path-dependent.
 This integral can be defined using a Riemann sum, but in practice one usually
 parameterizes the curve and computes the integral that way.
 It follows that the integral is linear, and that the sign of an integral
-flips when the orientation of the contour changes.
+flips when the orientation\footnote{We use the convention
+that curves give positive contributions if they are oriented CCW, while a
+negative contribution when oriented CW.} of the contour changes.
 The following Proposition establishes an integral that appears frequently
 in complex analysis. Note that the integrand has a pole at $z_0$.
 \begin{proposition}{}{circleIntegral}
@@ -159,6 +160,51 @@ Since $f$ is holomorphic, the integrands vanish by the CR equations.
 \end{proof}
 \end{theorem}
 
+It's good that we now know how to integrate analytic functions in $\C$. We will
+next try integrating functions with a pole singularity. We consider a function
+of the form
+\begin{equation}\label{eq:simplePole}
+\frac{f(z)}{z-z_0}
+\end{equation}
+defined in some bounded, simply connected region $B\subset\C$ with boundary
+$\partial B$, where it is continuous. Here $f$ should be holomorphic in $B$.
+The strategy, which is a
+common one when calculating integrals in complex analysis, is to define a new
+contour $C'$ that excises the pole $z_0$, like shown in \figref{fig:cauchy}.
+The function~\eqref{eq:simplePole} is then holomorphic in the region
+enclosed by $C'$, and hence it vanishes along $C'$ by the Cauchy integral
+theorem.
+What remains is to figure out what the difference is between $C'$ and 
+$\partial B$.
+
+\begin{figure}
+\includegraphics[width=\linewidth]{figs/cauchy_integral-cropped.pdf}
+\caption{Contour $C'$ that excises the pole $z_0$ of the
+function~\eqref{eq:simplePole}. Following the notation of
+\propref{prp:circleIntegral}, $\overline{C}_{\epsilon}(z_0)$ is a circle of
+radius $\epsilon$ centered on $z_0$, with the bar indicating that it has a CW
+orientation.}
+\label{fig:cauchy}
+\end{figure}
+
+We choose our excision to have arbitrarily small radius $\epsilon$.
+In the limit $\epsilon\to0$, we have
+\begin{equation}
+  C'=\partial B + L_1 + \overline{C}_{\epsilon}(z_0) + L_2.
+\end{equation}
+In this limit, $L_1$ and $L_2$ will cancel since they have opposite
+orientations.
+We can now parameterize $z$ on $\overline{C}_{\epsilon}(z_0)$ 
+by $z-z_0=\epsilon e^{i\phi}$, and putting everything together, we find
+\begin{equation}\begin{aligned}\label{eq:cauchyn0}
+  \oint_{\partial B}\dd{z}\frac{f(z)}{z-z_0}
+&=-\lim_{\epsilon\to 0}\int_{2\pi}^0\dd{\phi}
+     i\epsilon e^{i\phi}\frac{f(z_0+\epsilon e^{i\phi})}{\epsilon e^{i\phi}}\\
+&=i\lim_{\epsilon\to 0}\int_{0}^{2\pi}\dd{\phi}f(z_0+\epsilon e^{i\phi})\\
+&=i\int_{0}^{2\pi}\dd{\phi}f(z_0)\\
+&=2\pi if(z_0).
+\end{aligned}\end{equation}
+
 \index{Cauchy!integral formula}
 \begin{theorem}{Cauchy integral formula}{}
 Let $B\subset\C$ be bounded and simply connected region. Let $f:B\to\C$ be
@@ -173,35 +219,167 @@ $$
 $$
 \begin{proof} When $z_0\notin B$, we get 0 by the Cauchy integral theorem.
 Therefore we consider for the remainder of the proof $z_0\in B$.
-We start with the $n=0$ case, then derive general $n$ from that.
-Let $z-z_0=\epsilon e^{i\phi}$.
-\begin{equation*}\begin{aligned}
-  \oint_{\partial B}\dd{z}\frac{f(z)}{z-z_0}
-&=-\lim_{\epsilon\to 0}\int_{2\pi}^0\dd{\phi}
-     i\epsilon e^{i\phi}\frac{f(z_0+\epsilon e^{i\phi})}{\epsilon e^{i\phi}}\\
-&=i\lim_{\epsilon\to 0}\int_{0}^{2\pi}\dd{\phi}f(z_0+\epsilon e^{i\phi})\\
-&=i\int_{0}^{2\pi}\dd{\phi}f(z_0)\\
-&=2\pi if(z_0).\\
-\end{aligned}\end{equation*}
+The $n=0$ case is given by \equatref{eq:cauchyn0}. 
 From here, all one has to do is take partial derivatives of this result 
 w.r.t. $z_0$.
 \end{proof} 
 \end{theorem}
 
-\section{The residue theorem}\index{residue theorem}
+\section{The residue theorem}\index{residue!theorem}\label{sec:residueThm}
 
 Let $f$ be holomorphic in the annulus ${z\in\C : 0\leq r<|z-z_0|<R}$
 where $r,R>0$.
 Define $\Forall\rho : r<\rho<R$ and $\Forall k\in\Z$
-\begin{equation}
-  a_k\equiv\oint\dd{z}\frac{f(z)}{(z-z_0)^{k+1}}.
+\begin{equation}\label{eq:laurentCoeff}
+  a_k\equiv\frac{1}{2\pi i}\oint_{C_{\rho}(z_0)}\dd{z}\frac{f(z)}{(z-z_0)^{k+1}}.
 \end{equation}
 Then the {\it Laurent expansion}\index{Laurent expansion} of $f$ is
-\begin{equation}
+\begin{equation}\label{eq:laurentExpansion}
   f(z)=\sum_{k=-\infty}^\infty a_k(z-z_0)^k.
 \end{equation}
-Note that if $f$ permits a Taylor expansion, this Taylor series is the Laurent
+The $a_k$ are unique and independent of $\rho$, and the Laurent expansion
+defines $f$ in the annulus.
+If $f$ permits a Taylor expansion, this Taylor series is the Laurent
 series, with $a_k=0$ whenever $k<0$.
+
+To get some intuition for why this is true, we can at least show that the
+definition~\eqref{eq:laurentCoeff} is consistent.
+Plugging \equatref{eq:laurentExpansion} into \equatref{eq:laurentCoeff}
+and applying the Cauchy integral formula, we find
+\begin{equation}
+  a_k\equiv\frac{1}{2\pi i}\sum_{l=-\infty}^\infty\oint_{C_{\rho}(z_0)}
+  \dd{z}\frac{a_l}{(z-z_0)^{k-l+1}}
+     = \sum_{l=-\infty}^\infty a_l\delta_{k-l,0}=a_k.
+\end{equation}
+
+Laurent series can also be used to classify the isolated singularities
+of \secref{sec:complexPrelim}. In particular $f$ has at $z_0$
+\begin{itemize}
+  \item a removable singularity if $a_k=0$ $\Forall k<0$;
+  \item a pole of order $m$ if the first, non-vanishing coefficient
+        is $a_{-m}$; and
+  \item an essential singularity if there is no first, non-vanishing
+        coefficient $a_{-m}$.
+\end{itemize}
+
+Suppose $f$ has a Laurent expansion in an annulus about $z_0$.
+Then the\index{residue} {\it residue} of $f$ at $z_0$ is
+\begin{equation}
+ \Res f(z_0)=a_{-1}=\frac{1}{2\pi i}\oint_{C_{\rho}(z_0)}\dd{z}f(z).
+\end{equation}
+
+\begin{figure}
+\includegraphics[width=\linewidth]{figs/residue_theorem-cropped.pdf}
+\caption{Contour $C'$ that excises all isolated singularities of
+the residue theorem. Each singularity is excised by the circle
+$\overline{C}_{\rho_k}(z_k)$.}
+\label{fig:residue}
+\end{figure}
+
+\begin{theorem}{Residue theorem}{residueThm}
+Let $B\subset\C$ be an area bounded by a finite number of piecewise
+continuous curves. Let $f$ be holomorphic on $\partial B$ 
+holomorphic in $B$, except for a finite number of isolated 
+singularities $z_1$, ..., $z_n\in B$. Then
+$$
+\oint_{\partial B}\dd{z}f(z)=2\pi i\sum_{k=1}^n\Res f(z_k).
+$$
+\begin{proof}
+We construct the contour $C'$ indicated in \figref{fig:residue}
+created by excising the singularities. Each singularity is
+excised with contour $\overline{C}_{\rho_k}(z_k)$, with the
+radius $\rho_k$ chosen such that the Laurent expansion
+of $f$ converges there. To complete the proof, we use the Laurent
+expansion of $f$ around each singularity.
+\begin{equation*}
+  \oint\dd{z}f(z)&=\sum_{k=1}^n\sum_{l=-\infty}^\infty 
+                    a_l^{(k)}\oint_{C_{\rho_k}(z_k)}(z-z_k)^l.
+\end{equation*}
+According to \propref{prp:circleIntegral}, each integral will contribute 
+only if $l=-1$; there it contributes $2\pi i$. That the residue is
+$a_{-1}$ by definition completes the proof.
+\end{proof}
+\end{theorem}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.75\linewidth]{figs/principal_value-cropped.pdf}
+\caption{Example contour used to assign a principal value to a real integral.
+Here the semicircle $c_2$ has radius $\epsilon$ and excises the singularity
+$x_0$ on the real axis. The semicircle $c_4$ has radius $R$, and the function 
+$f$ is asked to decay sufficiently quickly so that the contribution on 
+$c_4$ will vanish as $R\to\infty$.}
+\label{fig:principalValue}
+\end{figure}
+
+The residue theorem is extremely powerful for the evaluation of many integrals,
+including real-valued ones. In particular it can be used to assign a number to
+a sum of separately divergent, real-valued integrals. 
+We begin with an example 
+that does not require the residue theorem:
+\begin{equation}\label{eq:principalEasy}
+  \principal\int_{-a}^a\dd{x}\frac{1}{x}=0
+\end{equation} 
+with $a>0$, which you can convince yourself of since the integrand is odd. On
+the other hand, if one were to split this into a contribution over negative and
+positive numbers, each contribution would diverge.
+
+In the above we have introduced the {\it principal value}\index{principal value}
+symbol $\principal$. More formally let $f$ be defined in the interval $[a,b]$
+with the possible exception $c$, $a<c<b$. Then 
+\begin{equation}
+  \principal\int_a^b\dd{x}f(x)\equiv\lim_{\epsilon\to0}
+     \left(\int_a^{c-\epsilon}\dd{x}f(x)+\int_{c+\epsilon}^b\dd{x}f(x)\right).
+\end{equation}
+
+The example~\eqref{eq:principalEasy} was pretty straightforward. A more
+interesting example would be
+\begin{equation}
+  \frac{f(x)}{x-x_0},
+\end{equation}
+where $f(z)$, $z=x+iy$, has no poles on the real axis. We will also require $f$
+to decay in absolute value sufficiently quickly as we move away from the origin.
+To determine the principal value, we can use a contour like the one
+shown\footnote{If you like, you can also choose $c_2$ to close below the real
+axis. Then the singularity $x_0$ will have to be considered in your residue
+theorem. The result is the same in either case.}
+in \figref{fig:principalValue}. The contours $c_1$ and $c_3$ combine to give
+the principal value, and we therefore have by the residue theorem
+\begin{equation}
+  \principal\int_{-\infty}^{\infty}\dd{x}\frac{f(x)}{x-x_0}
+   +\left(\int_{c_2}+\int_{c_4}\right)\dd{z}\frac{f(z)}{z-x_0}
+   =2\pi i\sum_k\Res \frac{f(z_k)}{z_k-x_0}. 
+\end{equation}
+If $f$ decays fast enough, it will vanish on $c_4$, so that term can be
+neglected. It remains to evaluate $f$ on $c_2$. We find
+\begin{equation}
+ \int_{c_2}\dd{z}\frac{f(z)}{z-x_0}
+  =\lim_{\epsilon\to0}i\epsilon\int_\pi^0\dd{\phi}
+      \frac{f(x_0+\epsilon e^{i\phi})}{\epsilon e^{i\phi}}=-\pi i f(x_0),
+\end{equation}
+and consequently,
+\begin{equation}
+  \principal\int_{-\infty}^{\infty}\dd{x}\frac{f(x)}{x-x_0}
+   =\pi i f(x_0)+2\pi i\sum_k\Res \frac{f(z_k)}{z_k-x_0}. 
+\end{equation}
+
+In the special case where $f$ is analytic in the upper half plane,
+there are no residues, and hence
+\begin{equation}
+  f(x_0)=\frac{1}{\pi i}\,\principal
+     \int_{-\infty}^{\infty}\dd{x}\frac{f(x)}{x-x_0}.
+\end{equation}
+If we write $f(x)=\Re f(x)+i\Im f(x)$, we get from the above
+\begin{equation}\begin{aligned}\label{eq:kramerKronig}
+\Re f(x_0)&=\frac{1}{\pi}\,\principal
+     \int_{-\infty}^{\infty}\dd{x}\frac{\Im f(x)}{x-x_0}\\
+\Im f(x_0)&=-\frac{1}{\pi}\,\principal
+     \int_{-\infty}^{\infty}\dd{x}\frac{\Re f(x)}{x-x_0}.
+\end{aligned}\end{equation}
+We call \equatref{eq:kramerKronig} the 
+{\it Kramers-Kronig relations}.\index{Kramers-Kronig relations}
+They show that the real and imaginary parts of a function $f$ with the given
+properties are closely related to each other along the real line.
 
 
 

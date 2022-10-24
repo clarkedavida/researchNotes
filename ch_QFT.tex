@@ -73,6 +73,8 @@ through to the bitter end.
 % pauli, jordan etc 1920s-30s how to quantize fields. 
 % Failing to have theory with infinite num of dof,
 % then tomonaga, schwinger, dyson, feynman. Can renormalize, QED discovered.
+%   measurement of Lamb shift 1947. Bethe has explanation that gets refined
+%   in QED, helps establish QFT.
 % 1970s golden age: infinites understood through
 % renormalization group wilson and kadanoff.
 
@@ -585,6 +587,72 @@ momentum simultaneously.
 
 %\section{Discrete symmetries}\label{sec:discreteSymm}
 
+\section{Vacuum polarization}\label{sec:VP}\index{vacuum polarization}
+
+For this section we closely follow Ref.~\cite{}, which I found to be quite
+a nice introduction to vacuum polarization.
+
+The simplest case of {\it vacuum polarization} is a one-loop effect in
+$e^+e^-$ scattering in QED. If the virtual photon has enough energy,
+an $e^+e^-$ pair can be emitted and reabsorbed, and this
+pair will effectively screen\footnote{The name can be remembered in analogy to
+the application of an external magnetic field on a dielectric material.
+In this case the polarized molecules in the material will also screen
+the external field inside the material.} the electromagnetic field, reducing the force
+carried by the photon.
+
+Any possible charged particle-antiparticle pair must be considered,
+for instance $\mu^+\mu^-$ and $\tau^+\tau^-$. Their effects are small compared
+to $e^+e^-$ due to their comparatively large masses, and are hence
+only noticeable for large\index{virtuality} {\it virtuality}, or $q^2$,
+of the exchanged photon. 
+Contributions to VP coming from strongly interacting particles
+is referred to as\index{vacuum polarization!hadronic} 
+{\it hadronic vacuum polarization}.
+Their effect can be computed perturbatively at large $q^2$,
+but at small $q^2$ this of course fails.
+
+The first experimental indication of HVP was found at LAL-Orsay~\cite{},
+which measured the cross section for $e^+e^-\to\mu^+\mu^-$.
+There a characteristic interference pattern was found for
+the $\phi(1020)$ resonance, in concordance with the
+$\phi$ HVP contribution. CERN had a series of experiments
+starting in 1958~\cite{}, culminating
+in the measurement of the\index{anomalous magnetic moment!muon}
+{\it muon anomalous magnetic moment},
+\begin{equation}
+  a_\mu=\frac{g_\mu-2}{2},
+\end{equation}
+where $g_\mu$ is the muon gyromagnetic ratio,
+which agreed at the time with the SM~\cite{}.
+
+Since then,
+higher precision was achieved at Brookhaven~\cite{},
+exhibiting XX tension against the SM.
+This program of increased experimental precision
+is being continued at Fermilab and J-PARC;
+the state-of-the-art determination from 
+Fermilab~\cite{}
+places experimental searches at XX tension
+against so-called dispersive methods,
+which we will discuss shortly.
+At the same time, the BMW collaboration achieved
+the (at that time) highest precision lattice determination
+of (HVP?), results that XX with the SM~\cite{};
+since then many other lattice determinations 
+by the XX group, YY group,... ~\cite{} have
+confirmed their result.
+(Also explain any limitations?)
+
+It is abundantly clear that this situation is in dire need
+of clarification. (Especially with respect to the above
+limitations, what is the new thing your calculation provides?)
+
+\subsection{Dispersive methods}
+
+
+
+
 \section{Isospin and hypercharge}\label{sec:isohyper}
 \index{hypercharge}\index{isospin}
 
@@ -748,9 +816,10 @@ scalar fields $\phi^i(x)$. Then the Lagrangian
        \equiv\frac{1}{2}\left(\partial_\mu\phi\right)^2
         +V(\phi)
 \end{equation}
-is invariant under $O(N)$. (Recall orthogonal transformations are the
-ones with $R^TR=\id$.) This is the Lagrangian of the {\it linear
-sigma model}. Note that is is a generalization of $\phi^4$ theory,
+is invariant under the orthogonal group\footnote{Recall orthogonal 
+transformations\index{group!orthogonal} $R$ are the ones with 
+$R^TR=\id$.} O$(N)$. This is the Lagrangian of the\index{sigma model}
+{\it linear sigma model}. Note that is is a generalization of $\phi^4$ theory,
 but we have replaced the positive mass parameter $m^2$ with a
 negative parameter $-\mu^2$ and rescaled $\lambda$ to eliminate a factor of 6.
 Classically, the potential is minimized when $\phi$ lies
