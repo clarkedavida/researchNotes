@@ -33,7 +33,17 @@ To generate our configurations, we start from some arbitrary configuration
 $C_0$ and construct a stochastic sequence of configurations. 
 Configuration $C_i$ is generated based on\index{update}
 configuration $C_{i-1}$, which we call an {\it update} or {\it Monte Carlo
-step}. The result is a {\it Markov chain}
+step}\footnote{The idea of Monte Carlo algorithms dates back to the 1940s.
+Stanislav Ulam wanted to know the probability of winning a game of Solitaire.
+The calculation turned out to be too complicated to do by hand, so he wanted to
+estimate this by playing repeated games, then calculating
+$$
+{\rm win\ chance}\approx\frac{\rm number\ of\ wins}{\rm number\ of\ games}.
+$$
+Of course this is tremendously tedious; it is much more appropriate for a
+computer. Other scientists working with him at Los Alamos such as John von
+Neumann and Nicholas Metropolis are early pioneers of this method.}. 
+The result is a {\it Markov chain}
 \begin{equation}
   C_0\to C_1\to C_2\to...
 \end{equation}

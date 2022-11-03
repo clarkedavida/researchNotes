@@ -426,6 +426,49 @@ Code in the purple region to the left of the machine balance point
 tends to be limited by bandwidth.
 
 
+\section{Random number generators}\index{random number generator}
+
+True random numbers are not easily available. This could be accomplished in
+principle through e.g. radioactive decay, but the problem with this method in
+particular is that the signal is noisy, and since the results are truly
+stochastic, they cannot be reproduced, which is important for cross-checking
+and debugging.
+Instead one relies on algorithms that produce {\it pseudorandom} 
+numbers\index{pseudorandom numbers}, i.e. sequences that appear statistically
+random, but are in fact produced through some deterministic procedure.
+Since this distinction is quite well known, it is common to refer to
+pseudorandom number generators simply as random number generators (RNG).
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{figs/linear_congruence.pdf} 
+  \caption{Example generation of pseudorandom numbers using the linear
+           congruence algorithm. This layout reveals in the upper panel
+           a strong correlation given a poor choice of parameters
+           $a$, $b$, and $m$.}
+  \label{fig:RNG} 
+\end{figure} 
+
+
+Perhaps the earliest known RNG is the {\it linear congruence 
+generator}~\cite{lehmer_mathematical_1951,thomson_modified_1958},
+which\index{linear congruence} was developed in the 1950s.
+This is a pedagogically interesting generator since it is fast,
+easy to understand, and contains a hidden pitfall. 
+One starts with some {\it seed}\index{seed}
+$x_0$, then generates the sequence of pseudorandom numbers
+recursively through
+\begin{equation}
+x_n=(ax_{n-1}+b)\mod m,
+\end{equation}
+where $a$, $b$, and $m$ are input parameters that determine the
+sequence. If one is not careful about the choice of input
+parameters, there is a strong, hidden correlation that is revealed when plotting
+pseudorandom number $2n+1$ against $2n$, which
+is illustrated in \figref{fig:RNG}.
+
+
+
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
 

@@ -11,13 +11,17 @@ with real, $1D$ functions. The limit
 \begin{equation}\label{eq:cderiv}
   \dv{f}{z}\equiv\lim_{w\to z}\frac{f(w)-f(z)}{w-z}
 \end{equation}
-can be approached in infinitely many ways in $\C$. We call \equatref{eq:cderiv} the
+can be approached in infinitely many ways in $\C$. We call \equatref{eq:cderiv}
 the derivative of $f$ when this limit exists and is independent of the chosen
 path\footnote{This analogous to how the derivative can only be well defined in
 $\R$ if the limit is the same whether one approaches from the left or right.}.
 The function is said to be {\it holomorphic}. If it can be expanded as a
-convergent Taylor series, it is {\it analytic}.
-\index{analytic}\index{holomorphic}
+convergent Taylor series, it is {\it analytic}\footnote{It turns out
+that if a function is holomorphic in a region of $\C$, it is also
+automatically analytic there, and vice versa.}.
+\index{analytic}\index{holomorphic} A function that is holomorphic
+everywhere in the complex plane is said to be\index{entire} {\it entire}.
+
 
 Following the spirit of the above discussion, many of the facts we will learn
 about complex analysis can be inherited from facts about real analysis. With
@@ -393,6 +397,9 @@ function of order} $[m,n]$, $m,n\in\N$ as \index{function!rational}
   R_n^m(x)\equiv\frac{\sum_{i=0}^m a_ix^i}{1+\sum_{j=1}^nb_jx^j}.
 \end{equation}
 
+% baker thm 1.1, 2.4, 9.1, corollary 9.1, thm 9.2, 9.3, 9.4 (?) 
+%       riemann sphere stuff
+%       thm 11.1
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}

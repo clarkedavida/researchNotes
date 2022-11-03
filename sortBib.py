@@ -1,3 +1,5 @@
+#!/bin/python3
+
 #
 # Quick script to clean up a bibliography. I know I could figure out
 # how bibtex works instead of writing a python script, but I just
@@ -34,6 +36,8 @@ for line in bib:
   elif line.strip().startswith('urldate'):
     continue
   elif line.strip().startswith('issn'):
+    continue
+  elif line.strip().startswith('collaborator'):
     continue
 
   out.write(line)
