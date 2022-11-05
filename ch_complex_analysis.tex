@@ -386,6 +386,57 @@ They show that the real and imaginary parts of a function $f$ with the given
 properties are closely related to each other along the real line.
 
 
+\section{The Riemann sphere}\index{Riemann sphere}
+
+
+In this section we introduce a projection of the complex plane called the {\it
+Riemann sphere}. It is shown in \figref{fig:riemann}.
+The complex plane bisects the Riemann sphere, which is a sphere of unit radius,
+and we define a bijective mapping from every point of the $\C$ to the sphere as
+follows: Let $(\xi,\eta,\zeta)$ be the coordinates on the surface of the sphere
+with respect to its center, so that $\xi^2+\eta^2+\zeta^2=1$.
+Then by geometry,
+\begin{equation}\label{eq:planeToSphere}
+  z=\frac{\xi+i\eta}{1-\zeta},~~~~~~
+  \xi+i\eta=\frac{2z}{1+|z|^2},~~~~~~~
+  \zeta=\frac{|z|^2-1}{|z|^2+1}.
+\end{equation}
+The opposite end of a diameter through $(\xi,\eta,\zeta)$ is
+$(-\xi,-\eta,-\zeta)$, which corresponds $-1/z^*$.
+
+It is useful to introduce an idea of distance on the Riemann sphere.
+A natural choice is the chord length between two points $z$ and $w$
+projected onto the sphere. From \equatref{eq:planeToSphere} 
+the chord length on the sphere is
+\begin{equation}
+  D^2(z,w)=\frac{4|z-w|^2}{|1+z^*w|^2+|z-w|^2}.
+\end{equation}
+This distance satisfies $0<D\leq2$, 
+which means we can also about distances to infinity.
+
+This definition of distance can be used to characterize convergence of a
+sequence of complex numbers on the sphere. In particular 
+a sequence of complex numbers $z_n$ is said to\index{converge!on the sphere}
+{\it converge on the sphere} if $\Forall\epsilon>0$ $\Exists N\in\N$
+such that
+\begin{equation}
+  D^2(z_n,z_m)\leq\epsilon^2
+\end{equation}
+$\Forall n,m\geq N$.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/riemann.pdf}
+\caption{{\it Top}: Example mappings of the complex plane to the Riemann sphere.
+Filled dots indicate points on the complex planes and stars indicate points on
+the surface of the sphere. Hence red lines pierce the sphere and land outside,
+while blue lines terminate on the surface. {\it Middle}: A side view of the
+Riemann sphere, along with similar triangles to map coordinates on the complex
+plane to coordinates on the sphere. {\it Bottom}: Top view of the Riemann
+sphere.}
+\label{fig:riemann}
+\end{figure}
+
 
 \section{Pad\'e approximants}\index{Pad\'e approximant}
 
@@ -396,10 +447,89 @@ function of order} $[m,n]$, $m,n\in\N$ as \index{function!rational}
 \begin{equation}
   R_n^m(x)\equiv\frac{\sum_{i=0}^m a_ix^i}{1+\sum_{j=1}^nb_jx^j}.
 \end{equation}
+Rational functions can be used instead of Taylor series to approximate
+functions with low numbers of terms. They sometimes may have a larger range of
+validity than a truncated Taylor series: The intuition is that the coefficients
+in the denominator capture some of the contributions from higher order terms.
 
-% baker thm 1.1, 2.4, 9.1, corollary 9.1, thm 9.2, 9.3, 9.4 (?) 
-%       riemann sphere stuff
-%       thm 11.1
+Let $f$ have a formal Taylor series
+\begin{equation}
+  f(x)=\sum_{i=0}^\infty c_kx^k.
+\end{equation}
+Then the {\it Pad\'e approximant} of order $[m,n]$ is the rational function
+$R_n^m$ with coefficients so that
+\begin{enumerate}
+  \item there are no common factors between the numerator and denominator
+  \item and it equals the Taylor series up to order $m+n$.
+\end{enumerate}
+This definition gives a relationship between the coefficients $a_i$, $b_j$, and
+$c_k$. We will use this to characterize in which sense Pad\'e approximants
+converge to the function they approximate.
+
+Sometimes one does not have access to higher order Taylor coefficients.
+One can introduce further constraints by asking that a Pad\'e approximant to agree
+with the Taylor series at multiple points, which can be useful if it's easier to
+determine lower orders at multiple points than a higher order at a single
+one\footnote{This is the situation for lattice determinations of the QCD
+pressure expansion in $\mu_B/T$.}. This is the so-called
+{\it multi-point Pad\'e}\index{Pad\'e approximant!multi-point}.
+
+\subsection{Rigorous properties}
+
+Here we collect a few known, easy to understand 
+facts about Pad\'e approximants. For proofs, we refer
+the reader to Ref.~\cite{baker_essentials_1975}. This thorough reference also
+contains other useful rigorous properties of Pad\'es. A more up-to-date, brief
+article about Pad\'es by the same author can be found in
+Ref.~\cite{Jr:2012}.
+
+\begin{theorem}{Uniqueness}{padeUniq}
+When it exists, the $[m,n]$ Pad\'e approximant to any Taylor series is unique.
+\end{theorem}
+
+\begin{theorem}{Existence}{padeExist}
+Given any formal power series with $c_0\neq0$,
+then: $\Forall n\in\N$ there exists an infinite sequence of $m_j$ for which the
+$[m_j,n]$ Pad\'e exists; $\Forall m\in\N$ there exists an infinite sequence of $n_j$ for
+which the $[m,n_j]$ Pad\'e exists; and $\Forall q\in\N$ there exists an infinite
+sequence of $m_j$ for which the $[m_j + q/m_j]$ Pad\'e exists.
+\end{theorem}
+
+\begin{theorem}{Montessus de Ballore's Theorem}{}
+Let $f(z)$ be regular inside the circle $|z|<R$ except for poles of total
+multiplicity $n$. Then $\Forall R>0$
+the $[m,n]$ Pad\'e converges uniformly
+to $f(z)$ on the sphere in $|z|\leq R$ as $m\to\infty$.
+\end{theorem}
+
+Montessus de Ballore's theorem guarantees convergence of Pad\'es for meromorphic
+functions. It is desirable to use Pad\'es in contexts where functions have more
+exotic singularities, for example functions with essential singularities and
+branch cuts. Unfortunately it is hard to find practical, rigorous results for
+these. For these issues we use numerical experiments to try to glean a few
+intuitive or apparent, empirical properties. 
+
+
+\subsection{Unrigorous properties}
+
+
+
+Pad\'e approximants are continuous, except at their poles. That it makes sense
+to represent functions with simple poles using Pad\'e approximants is guaranteed
+by Montessus de Ballore's theorem. On the other hand,
+there may be cases where one constructs a Pad\'e approximant for a function with
+an essential singularity or a branch cut, and one may wonder how such
+singularities manifest in the approximant.
+
+Since Pad\'e approximants are continuous except at their poles, it must be that
+all singularities are somehow represented by poles in the approximant. An
+essential singularity, which is an isolated singularity, is represented by a
+pole in the approximant. The more interesting case is the branch cut; the only
+way the Pad\'e can feel the cut is by a line of poles. The number of points
+along the cut is limited by the order $n$ of the $[m,n]$ approximant, and the
+rough intuition is that cut is ``recovered" as $n\to\infty$.
+
+
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
