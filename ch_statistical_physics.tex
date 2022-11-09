@@ -2,13 +2,13 @@
 
 One regime of interest for lattice QCD calculations is the application
 of lattice formalism to hot, dense nuclear systems; this is the realm
-of thermodynamics\index{thermodynamics} and statistical physics. In this chapter I try to
+of thermodynamics\index{thermodynamic} and statistical physics. In this chapter I try to
 offer some reminders of statistical physics, especially those that
 are directly relevant to modern lattice investigations of the QCD
 phase diagram. Some references I drew from include
 Ref.~\cite{tahir-kheli_general_2012} and \cite{kardar_statistical_2007}.
 
-\section{The laws of thermodynamics}\index{law of thermodynamics}
+\section{The laws of thermodynamics}\index{thermodynamic!laws}
 
 In thermodynamics, one usually divides the universe into a system under
 consideration and its surroundings. Let $U$ be the energy of a system,
@@ -79,7 +79,7 @@ what makes thermodynamic potentials such as $U$ special is that you're
 supposed to be able to determine state variables like $T$ from them. 
 Since no information is lost, Legendre transforms guarantee that 
 thermodynamic potentials get transformed to other thermodynamic potentials.
-\index{thermodynamic potential} 
+\index{thermodynamic!potential}\index{potential!thermodynamic}
 
 Before we define a Legendre transformation, let's look at an example
 due to Markus Deserno~\cite{deserno} where a naive transformation can go
@@ -296,7 +296,11 @@ using $\Gamma(5/2)=3\pi^{1/2}/4$, we obtain
   \frac{P}{T}=\frac{m^2gT}{2\pi^2}\sum_{k=1}^\infty\frac{\eta^{k+1}z^k}{k^2}
                          K_2\left(\frac{mk}{T}\right),
 \end{equation}
-which is a form that is well suited for computer calculations.
+which is a form that is well suited for computer calculations\footnote{What
+one does is keep some number of terms of the above sum, usually depending
+on the mass $m$; in particular $K_2$ falls off sharply for large $m$.
+For very large $m$, one may choose to keep only the $k=1$ contribution,
+which is the\index{Boltzmann approximation} {\it Boltzmann approximation}.}.
 
 Other thermodynamic quantities can be derived straightforwardly
 from the pressure in this form. In this context it is useful to know
