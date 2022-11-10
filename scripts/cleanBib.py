@@ -7,10 +7,19 @@
 # very, very tired.
 #
 
+
+from common import countLines
+
+
+startlines = countLines('bibliography.bib')
+
+
 bib=open('bibliography.bib','r')
 out=open('temp.bib','w')
 
-
+#
+# Remove uninteresting bibliographic information.
+#
 for line in bib:
 
   # too many authors --> et al
@@ -39,9 +48,18 @@ for line in bib:
     continue
   elif line.strip().startswith('collaborator'):
     continue
-
+  elif line.strip().startswith('file'):
+    continue
+  elif line.strip().startswith('note'):
+    continue
+  elif line.strip().startswith('reportNumber'):
+    continue
   out.write(line)
 
 
 bib.close()
 out.close()
+
+
+endlines = countLines('temp.bib')
+print('Eliminated',startlines-endlines,'useless lines of bibliographic information')

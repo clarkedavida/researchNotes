@@ -598,7 +598,33 @@ momentum simultaneously.
 
 %\section{Discrete symmetries}\label{sec:discreteSymm}
 
-\section{Vacuum polarization}\label{sec:VP}\index{vacuum polarization}
+
+\section{Anomalous magnetic moment}
+The {\it magnetic moment}\footnote{This is the dipole contribution to the
+magnetic moment. Higher order moments, such as the quadrupole, are forbidden.
+In particular this multipole expansion, which can be expressed in
+terms of spherical harmonics $Y_l^m$, has its $l$ limited to $l=1$
+since the only particles we consider are spin-1/2.}\index{magnetic moment} 
+of a particle $X$, $\vec{M}_X$,
+with $X\in\{e,\mu,\tau\}$
+determines how it responds to an external magnetic field $\vec{B}$. In particular it
+gives a contribution to the energy $-\vec{M}_X\cdot\vec{B}$.
+The magnetic moment itself comes from the particle's intrinsic spin $\vec{S}_X$,
+\begin{equation}
+  \vec{M}_X=g_X\frac{q_X}{2m_X}\vec{S}_X,
+\end{equation}
+where $g_X$ is a constant called the {\it g-factor}\index{g-factor}
+or {\it gyromagnetic ratio}\index{gyromagnetic ratio} and
+$m_X$ and $q_X$ are the particle's mass and charge, respectively.
+Using relativistic quantum mechanics, one can argue $g_X=2$. Any
+deviation from 2 is thus called the {\it anomalous magnetic moment},
+\index{magnetic moment!anomalous}
+\begin{equation}
+  a_X=\frac{g_X-2}{2}.
+\end{equation}
+
+
+\subsection{Vacuum polarization}\label{sec:VP}\index{vacuum polarization}
 
 For this section we closely follow Ref.~\cite{maiani_hadron_2016}, 
 which I found to be quite
@@ -613,6 +639,21 @@ In this case the polarized molecules in the material will also screen
 the external field inside the material.} the electromagnetic field, reducing the force
 carried by the photon.
 
+\begin{figure}
+\centering
+\includegraphics[width=0.8\linewidth]{figs/HVP.pdf}
+\caption{HVP contribution to $a_\mu$. It arises from the two
+contributions shown in this figure. {\it Top}: Quark-line
+connected contribution, which is a virtual quark
+bubble inserted in photon propagator. {\it Bottom}:
+Quark-line disconnected contribution, which consists of
+virtual quark bubbles connected by gluons. The bubbles
+include all possible QED interactions.
+Image taken from Ref.~\cite{FermilabLattice:2022izv}.}
+\label{fig:HVPmuon}
+\end{figure}
+
+
 Any possible charged particle-antiparticle pair must be considered,
 for instance $\mu^+\mu^-$ and $\tau^+\tau^-$. Their effects are small compared
 to $e^+e^-$ due to their comparatively large masses, and are hence
@@ -620,24 +661,23 @@ only noticeable for large\index{virtuality} {\it virtuality}, or $q^2$,
 of the exchanged photon. 
 Contributions to VP coming from strongly interacting particles
 is referred to as\index{vacuum polarization!hadronic} 
-{\it hadronic vacuum polarization}.
+{\it hadronic vacuum polarization} (HVP).
 Their effect can be computed perturbatively at large $q^2$,
 but at small $q^2$ this of course fails.
+The HVP contribution to $a_\mu$ is shown in \figref{fig:HVPmuon}.
 
-The first experimental indication of HVP was found at LAL-Orsay~\cite{},
+The first experimental indication of HVP was found at 
+LAL-Orsay~\cite{augustin_evidence_1973},
 which measured the cross section for $e^+e^-\to\mu^+\mu^-$.
 There a characteristic interference pattern was found for
-the $\phi(1020)$ resonance, in concordance with the
+the $\phi(1020)$ resonance\footnote{A {\it phi meson} $\phi$
+is\index{meson!phi} a strange-antistrange pair.}, in concordance with the
 $\phi$ HVP contribution. CERN had a series of experiments
-starting in 1958~\cite{}, culminating
-in the measurement of the\index{anomalous magnetic moment!muon}
-{\it muon anomalous magnetic moment},
-\begin{equation}
-  a_\mu=\frac{g_\mu-2}{2},
-\end{equation}
-where $g_\mu$ is the muon gyromagnetic ratio,
-which agreed at the time with the SM~\cite{}.
-We will discuss this in more detail in \secref{sec:anomMuon}
+starting in 
+1958~\cite{charpak_measurement_1961,bailey_precise_1971,bailey_anomalous_1977}, 
+culminating in a measurement of $a_\mu$, which agreed at the time with the 
+SM~\cite{calmet_anomalous_1977}.
+
 
 Since then,
 higher precision was achieved at Brookhaven~\cite{},
@@ -660,16 +700,6 @@ confirmed their result.
 It is abundantly clear that this situation is in dire need
 of clarification. (Especially with respect to the above
 limitations, what is the new thing your calculation provides?)
-
-% section 6 of that nice review
-\subsection{Muon anomalous magnetic moment}\label{sec:anomMuon}
-
-\begin{equation}
-  \vec{M}=g_\mu\frac{e}{2m_\mu}\vec{S}
-\end{equation}
-\begin{equation}
-  a_\mu^{\rm SM}
-\end{equation}
 
 
 
