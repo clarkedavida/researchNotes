@@ -1,11 +1,35 @@
 \chapter{Physics: Renormalization Group}
 
+Critical temperatures in fluids were discovered by T. 
+Andrews\footnote{He seems to be the one who coined the
+term ``critical point".}~\cite{andrews_bakerian_1869}.
+J. D. van der Waals\footnote{Apparently, van der Waals grew up working
+class, which at that time in Amsterdam precluded him from attending
+university. As a result, he started off as a school teacher, and did not
+obtain his PhD until he was in his late 30s. His PhD thesis seems to be
+the work that won him the 1910 Nobel prize.}
+was, to my knowledge, the first to attempt to
+model the existence of criticality~\cite{van_der_waals_over_1873}.
+Beginning with such work, analyses of critical singularities 
+focused largely on static properties, such as equilibrium
+expectation values. However it is also the case that dynamical properties,
+such as transport coefficients and responses to time-dependent perturbations,
+which cannot be derived from the equilibrium distribution, also contain
+critical behavior. In this context one can distinguish between
+\index{critical phenomena}
+{\it static critical phenomena} and {\it dynamic critical phenomena}.
+
 These research notes were made from the perspective of a researcher working
 in lattice field theory, and one advantage of the lattice, which will be
 discussed later in \chref{ch:preliminaries}, is that it allows one
 to make direct analogies with statistical mechanical systems, and in
 particular, to utilize powerful techniques like renormalization group (RG)
-analysis.
+analysis. On the lattice, one is dealing with the equilibrium distribution,
+and hence we will restrict our attention to only static critical 
+phenomena\footnote{If you want to learn about dynamic critical phenomena, a very
+friendly introduction can be found in Ref.~\cite{halperin_theory_2019}.
+A landmark paper introduces the classification system for dynamical
+critical phenomena is Ref.~\cite{hohenberg_theory_1977}.}.
 
 This chapter will generally try to follow 
 lectures by F. Karsch, as well as the book by Binney et
@@ -26,7 +50,6 @@ points correspond to different universality classes. The analysis of the
 dynamical system at and near the fixed point provides a means to compute 
 universal quantities such as critical exponents. 
 \end{quote} 
-\clearpage
 The goal of this chapter is to try to understand this quote in more detail,
 and to learn how to carry out and interpret RG calculations that often
 appear in the context of lattice field theory.

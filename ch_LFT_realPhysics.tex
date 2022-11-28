@@ -245,6 +245,35 @@ Thus understanding the analytic structure of the QCD free energy gives crucial i
 the convergence radius of these $\muh$-expansions and universal critical behaviour 
 in the vicinity of the phase transitions.
 
+
+The goal of some simulations is to determine phase transition points. 
+Close to these points, on a finite lattice, the susceptibility of the 
+relevant order parameter attains its maximum. The most straightforward
+strategy of estimating this maximum is to run multiple simulations
+in the vicinity of the transition point. Because this strategy
+requires multiple runs, it is inefficient.\index{reweighting}
+{\it Reweighting} (see~\cite{ferrenberg_new_1989} and
+references therein) is an efficient alternative. Consider
+the expectation value of an observable $X$ calculated at $\beta'$. We have
+\begin{equation}\label{eq:RW}
+\begin{aligned}
+  \ev{X}_{\beta'}&=Z_{\beta'}^{-1}\int\dd{\phi}e^{-\beta'E(\phi)}X(\phi)
+                  e^{(\beta-\beta)E(\phi)}\\
+                 &=Z_{\beta'}^{-1}\int\dd{\phi}e^{(\beta-\beta')E(\phi)}
+                  X(\phi)e^{-\beta E(\phi)}\\
+                 &=Z_{\beta'}^{-1}Z_{\beta}\ev{e^{(\beta-\beta')E}X}_\beta\\
+                 &=\ev{\frac{Z_\beta}{Z_{\beta'}}e^{(\beta-\beta')E}X}_\beta.
+\end{aligned}
+\end{equation}
+We can calculate the expectation value in the last line
+using data from a time series generated at $\beta$, and this gives us an
+estimate for $\ev{X}_{\beta'}$. Reweighting is only useful when
+$E\Delta\beta=\order{1}$. Provided that the critical parameter $\beta_c$
+is sufficiently close to the simulation point $\beta$, it suffices
+to have only one simulation, estimating the maximum by reweighting to
+multiple nearby $\beta'$.
+
+
 \subsection{Speed of sound}
 
 %In this section, we follow the introductions of Ref.~\cite{He:2022kbc}
@@ -309,13 +338,15 @@ As an example, the leading HVP contribution $\amuhvp$ in the
 \begin{equation}\label{eq:amuhvp}
   \amuhvp=\left(\frac{\alpha}{\pi}\right)^2\int\dd{t}\tilde{K}(t)G(t),
 \end{equation}
-where $G(t)$ is the spatially summed correlation function of the EM current
+where $G(t)$ is the spatially summed correlation function of the EM 
+current\footnote{According to the notation of \secref{sec:discreteSymm}
+this is a vector current.}
 \begin{equation}\begin{aligned}
   G(t) &=-\frac{a^3}{3}\sum_{k=1}^3\sum_{\vec{x}}\ev{j_k(t,\vec{x})j_k(0)},\\
-  j_\mu&=\sum_fq_f\bar{\psi}_f\gamma_\mu\psi,
+  j_\mu&=\sum_fq_f\bar{\psi}_f\gamma_\mu\psi_f,
 \end{aligned}\end{equation}
 where $q_f$ is the electric charge of the quark species $f$,
-and $\tilde{K}(t)$ is a known kernel function. 
+and $\tilde{K}(t)$ is a known kernel function.
 
 In this case a window observable
 can be constructed by multiplying the integrand of \equatref{eq:amuhvp} by some

@@ -288,7 +288,9 @@ other, sitting at about 106~MeV and 140~MeV, respectively.}
 as the meson that Yukawa suggested. An experiment in the late 1940s showed that
 the muon does not interact very strongly with atomic
 nuclei~\cite{conversi_disintegration_1947}, which rules it out as the strong
-force mediator. Thankfully for Yukawa the pion was
+force mediator. Thankfully for Yukawa the
+pion\footnote{Pions\index{pion}\index{meson!pi@$\pi$} are the lightest
+mesons. They are made of pairs of up and down quarks.} was
 discovered~\cite{lattes_processes_1947} in 1947\footnote{And got Powell
 the 1950 Nobel for it. It is actually a bit puzzling that he is the only
 recipient of this prize, most obviously because only three other scientists were
@@ -299,8 +301,8 @@ pioneered by other physicists such as Blau and Wambacher.}.
 
 \index{interaction!strong}
 In the late 1940s and early 1950s, the {\it kaon} ($K$)~\cite{rochester_evidence_1947}
-\index{meson!K} and {\it lambda} ($\Lambda$)~\cite{hopper_evidence_1950}
-\index{baryon!lambda} hadrons were discovered. A kaon
+\index{meson!K@$K$} and {\it lambda} ($\Lambda$)~\cite{hopper_evidence_1950}
+\index{baryon!l@$\Lambda$} hadrons were discovered. A kaon
 consists of light quark and a strange, while a lambda baryon binds two light
 quarks with one from a higher generation. {\it Strangeness}\footnote{We now 
 \index{strangeness}
@@ -596,7 +598,51 @@ momentum simultaneously.
 
 %\section{The path integral}
 
-%\section{Discrete symmetries}\label{sec:discreteSymm}
+\section{The Dirac equation}\index{Dirac equation}
+
+% dirac equation
+% in order to be lorentz invariant we need gamma_0
+% slash notation, maybe algebra rules
+% solutions to dirac eq. look like plane waves (3.45)
+% helicity as interpretation of spin against momentum
+% a dirac spinor can be broken down into into creation/annihilation
+% operators over all possible momenta (fourier), sum over all spins,
+% attached to plane wave u.
+
+\section{Discrete symmetries}\label{sec:discreteSymm}
+
+A general local meson operator (current) has the form
+\begin{equation}\label{eq:mesonInterp}
+  \bar{\psi}^f(x)\Gamma\psi^g(x)
+\end{equation}
+for fermion flavors $f$ and $g$.
+
+% you can then think about what P will do to these creation/annihilation
+% states and the plane waves. has the effect of swapping the top and
+% bottom components of u with a flipped spatial momentum, which is
+% the same as multiplying by gamma_0.
+% this gives you the rule for how psi transforms, from which you can
+% figure out everything else
+% compare your table with p 71 of P&S 
+
+\begin{table}\index{vector}\index{scalar}\index{pseudovector}
+\index{pseudoscalar}\index{tensor}
+\begin{tabularx}{\linewidth}{LCCr} \hline\hline
+Type         & $J^{PC}$ & $\Gamma$ & Example particles \\\hline
+scalar       & $0^{++}$ & $\id$                 &  \\
+pseudoscalar & $0^{-+}$ & $\gamma_5$            &  \\ 
+vector       & $1^{--}$ & $\gamma^\mu$          &  \\ 
+pseudovector & $1^{++}$ & $\gamma^\mu\gamma_5$  &  \\ 
+tensor       & $1^{+-}$ &          &  \\ 
+\hline\hline
+\end{tabularx}
+\caption{The $J^{PC}$ for various meson currents, where $\Gamma$ indicates the
+object sandwiched between the Dirac fields in \equatref{eq:mesonInterp}.
+The words ``scalar", ``vector", and ``tensor" indicate how an operator
+transforms under Lorentz transformations. The ``pseudo" objects have the
+opposite sign changes under parity as their corresponding objects.}
+\label{tab:discreteSymm}
+\end{table}
 
 
 \section{Anomalous magnetic moment}\label{sec:magAnom}
@@ -671,7 +717,7 @@ LAL-Orsay~\cite{augustin_evidence_1973},
 which measured the cross section for $e^+e^-\to\mu^+\mu^-$.
 There a characteristic interference pattern was found for
 the $\phi(1020)$ resonance\footnote{A {\it phi meson} $\phi$
-is\index{meson!phi} a strange-antistrange pair.}, in concordance with the
+is\index{meson!f@$\phi$} a strange-antistrange pair.}, in concordance with the
 $\phi$ HVP contribution. CERN had a series of experiments
 starting in 
 1958~\cite{charpak_measurement_1961,bailey_precise_1971,bailey_anomalous_1977}, 
@@ -702,7 +748,7 @@ in more detail in \secref{sec:muonAnom}.
 \index{hypercharge}\index{isospin}
 
 We follow Chapter~9 of 
-Thomson~\cite{thomson_modern_2013}. 
+Ref.~\cite{thomson_modern_2013}. 
 In quantum mechanics you learn that spin is a quantum number of
 charged particles. For example the electron is a spin-1/2 particle. The
 $z$-component $S_3$ of the spin operator $S$ commutes with the Hamiltonian, and
