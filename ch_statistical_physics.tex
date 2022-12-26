@@ -43,7 +43,16 @@ first law of thermodynamics,
 \begin{equation}\label{eq:fslaw}
   \dd{U}=T\dd{S}-P\dd{V}+\sum_i\mu_i\dd{N}_i,
 \end{equation}
-we know that
+we know that\footnote{It can be quite confusing to track which variables
+are held fixed and allowed to vary doing these partial derivatives.
+This matters because sometimes different choices of control parameters
+are related to each other through a constraint.
+You can get a hint for example by looking at equations like
+\equatref{eq:fslaw}, which is a reminder we are thinking of
+$U$ as a function of the set \{$S$, $V$, $\vec{N}$\}. In this context,
+partial derivatives with respect to one of those variables must
+guarantee the others in that set are fixed.}
+
 \begin{equation}
   T=\pdv{U}{S}.
 \end{equation}
@@ -154,53 +163,23 @@ Legendre transform $U(S)$ out of the variable $S$, then the minimization
 will guarantee that the new independent variable is $T$. Calling
 this new function $F$, we obtain
 \begin{equation}\label{eq:helmholtz}
-  F(V,T,N)=U-ST.
+  F(V,T,N)=U-TS.
 \end{equation}
 This new function is guaranteed to be a thermodynamic potential, and
 we give it a special name: the {\it Helmholtz free energy}.
 From \equatref{eq:helmholtz} and the first law, we get
 \begin{equation}\label{eq:helmholtz1st}
-  \dd F = -S\dd T-P\dd V+\sum_i\mu_i\dd{N}_i.
+  \dd F = -P\dd V -S\dd T +\sum_i\mu_i\dd{N}_i.
 \end{equation}
 
 We can derive some useful thermodynamic relations from these. For
-instance\footnote{It can be quite confusing to track which variables
-are held fixed and allowed to vary doing these partial derivatives.
-You can get a hint for example by looking at equations like
-\equatref{eq:helmholtz1st}, which is a reminder we are thinking of
-$F$ as a function of the set \{$T$, $V$, $\vec{N}$\}. In this context,
-partial derivatives with respect to one of those variables must
-guarantee the others in the set are fixed.}
+instance
 \begin{equation}\label{eq:dfdt}
-  -T^2\pdv{(F/T)}{T}=U=\pdv{\beta F}{\beta}.
+  -T^2\pdv{(F/T)}{T}=U=\pdv{(\beta F)}{\beta},
 \end{equation}
+where $\beta=1/T$ in natural units.
 
 %\section{Cumulants}
-
-\section{Bulk properties of matter}
-
-One of the experimental goals of statistical physics is to predict some
-properties of thermodynamic systems. Historically one considered e.g.
-the air, which is a gas of particles. In these research notes, the focus
-is rather on the bulk thermodynamics of strongly interacting matter.
-A commonly used procedure is to calculate the pressure, giving
-you the EoS, and to derive other thermodynamic quantities from that.
-In this section we will discuss some of these quantities.
-
-\subsection{Pressure waves}
-%TODO: check formula
-The {\it speed of sound}\index{speed of sound} at fixed control parameter $X$
-is given by
-\begin{equation}
-  c_X^2=\atFixed{\pdv{P}{\epsilon}}{X}.
-\end{equation}
-The {\it compressibility}\index{compressibility} at fixed $X$ is
-\begin{equation}
-  \kappa_X=-\frac{1}{V}\atFixed{\pdv{V}{P}},
-\end{equation}
-which captures how much the volume changes under a change of pressure.
-Substances that take a lot of pressure to change the volume are not
-very compressible; hence the minus sign.
 
 \section{Ideal quantum gas}
 
@@ -219,7 +198,7 @@ very compressible; hence the minus sign.
 
 % keep discussion general to mu_i N_i
 \index{fugacity}
-\begin{equation}
+\begin{equation}\label{eq:fugacity}
   z=e^{-N\mu/T}
 \end{equation}
 
@@ -228,13 +207,29 @@ The {\it grand potential} is\index{grand potential}
   \Phi\left(V,T,\vec{\mu}\right)=U-TS-\sum_i\mu_i N_i=-T\log\grandZ
 \end{equation}
 from which one gets
-\begin{equation}
+\begin{equation}\label{eq:1stlawgrand}
   \dd\Phi=-P\dd V-S\dd T-\sum_i N_i\dd\mu_i.
 \end{equation}
-Reorganizing \equatref{eq:grand} yields the Gibbs-Duhem relation
+Since $\log\grandZ$ is extensive, it must be that
+\begin{equation}
+-T\log\grandZ=kV
+\end{equation}
+for some constant $k$. Hence\footnote{Sometimes it is convenient to work
+with $\muh\equiv\mu/T$ and $T$ instead of $\mu$ and $T$. This equation
+holds for both sets of control variables since both $\mu$ and $T$ are
+held fixed.} from \equatref{eq:1stlawgrand}
+\begin{equation}
+P=-\pdv{\Phi}{V}=-k,
+\end{equation}
+which means we can identify
+\begin{equation}\label{eq:pgrand}
+P=\frac{T}{V}\log\grandZ.
+\end{equation}
+Reorganizing \equatref{eq:grand} using \equatref{eq:pgrand}
+yields the {\it Gibbs-Duhem relation}
 \index{Gibbs-Duhem relation}
 \begin{equation}
-  s=\frac{\epsilon}{T}+\frac{1}{V}\log\grandZ-\sum_i\frac{\mu_i}{T}n_i,
+  s=\frac{\epsilon}{T}+\frac{P}{T}-\sum_i\frac{\mu_i}{T}n_i,
 \end{equation}
 where $s\equiv S/V$ is the entropy density, and $\epsilon$ and $n_i$
 are the energy and number densities.
@@ -333,6 +328,31 @@ The HRG model is a low temperature model, in the sense we imagine we are working
 in a phase where quarks are confined, so that the only degrees of freedom are
 hadronic bound states. To a good approximation, this means we need only include
 stable mesons, baryons, and their antiparticles.
+
+\section{Bulk properties of matter}
+
+One of the experimental goals of statistical physics is to predict some
+properties of thermodynamic systems. Historically one considered e.g.
+the air, which is a gas of particles. In these research notes, the focus
+is rather on the bulk thermodynamics of strongly interacting matter.
+A commonly used procedure is to calculate the pressure, giving
+you the EoS, and to derive other thermodynamic quantities from that.
+In this section we will discuss some of these quantities.
+
+\subsection{Pressure waves}
+%TODO: check formula
+The {\it speed of sound}\index{speed of sound} at fixed control parameter $X$
+is given by
+\begin{equation}
+  c_X^2=\atFixed{\pdv{P}{\epsilon}}{X}.
+\end{equation}
+The {\it compressibility}\index{compressibility} at fixed $X$ is
+\begin{equation}
+  \kappa_X=-\frac{1}{V}\atFixed{\pdv{V}{P}},
+\end{equation}
+which captures how much the volume changes under a change of pressure.
+Substances that take a lot of pressure to change the volume are not
+very compressible; hence the minus sign.
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}

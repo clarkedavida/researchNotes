@@ -531,8 +531,8 @@ a small step in the direction of the gradient by
 where $c$ is a constant that is small enough not to overshoot direction
 of steepest descent. This is an example of a {\it steepest descent method}.
 The Levenberg-Marquardt\index{Levenberg-Marquardt} 
-method~\cite{levenberg_method_1944,marquardt_algorithm_1963}, which is 
-our method of choice, varies smoothly between~\equatref{eq:NR} and 
+method~\cite{levenberg_method_1944,marquardt_algorithm_1963} 
+varies smoothly between~\equatref{eq:NR} and 
 \eqref{eq:SD}. Steepest descent is used far from the minimum, and 
 then it switches to the Newton-Raphson method when the minimum is approached.
 
@@ -549,9 +549,10 @@ means we update the links one at a time. This is done in a systematic order,
 because there is some computational advantage compared to updating in a
 random order~\cite{berg_markov_2004}. 
 An updating {\it sweep}\index{sweep} updates every link on the lattice once. 
-To maximize efficiency while maintaining ergodicity, our updating sweeps 
-have a combination of HB and OR updating. We call this a 
-{\it Monte Carlo Over-relaxation} (MCOR) sweep.
+To maximize efficiency while maintaining ergodicity, it is common for pure
+$\SU(2)$ algorithms to use
+a combination of HB and OR updating. 
+
 
 An MCMC simulation of LGT broadly consists of three essential steps:
 \begin{enumerate}
@@ -597,6 +598,13 @@ An MCMC simulation of LGT broadly consists of three essential steps:
         \end{verbatim}
 \end{enumerate}
 
+\begin{figure}
+\includegraphics[width=\linewidth]{figs/threadBlock.pdf}
+\caption{The thread/block hierarchy used in NVIDIA GPUs.
+Image taken from Ref.~\cite{NVIDIA}.}
+\label{fig:threadBlock}
+\end{figure}
+
 
 \subsection{Improving performance}
 
@@ -614,6 +622,44 @@ parallelize code is to use the Message Passing Interface (MPI). MPI allows
 for efficient exchange of information between processors and is easily included
 in Fortran, C, and C++ programs.
 
+To get a quantitative understanding of performance, one introduces
+the {\it clock cycle},\index{clock cycle} which is the smallest unit of
+time in a computer\footnote{Most CPUs keep time using a quartz crystal.
+The basic idea is that an electric field will cause the quartz to
+vibrate. The frequency of this vibration is the clock cycle.
+This frequency can be tuned according to the shape and size of the
+crystal, as well the placement of electrodes on it.}.
+In the olden days, only one computation would be carried out per cycle;
+nowadays it is more common to carry out many. The number of
+computations per clock cycle is known as the\index{clock speed} {\it clock speed}.
+
+A CPU\index{CPU} is divided into several\index{core} physical {\it cores}, each of which can
+carry operations separately. This is then one way to carry out parallelization:
+You use MPI to have each core execute different tasks simultaneously.
+A virtual entity comprising of these tasks being executed on one core
+is usually called a\index{thread} {\it thread}. Sometimes one core splits
+tasks between two threads. For pure $\SU(2)$ calculations, this
+is sufficient.
+
+
+We will see in \chref{ch:ferm} that simulations with dynamical fermions
+are much more complex, and correspondingly, they are much more
+computationally intensive. For such purposes, it is not really ideal even
+to use CPUs. It was realized in the 2000s~\cite{egri_lattice_2007}
+that\index{GPU} GPUs, which
+are often needed for the numerous calculations required to render graphics
+in video games, could be adapted for use in lattice QCD calculations.
+In a GPU, there are many (often thousands) of cores, which allows for
+extremely high parallelization. On a single GPU, no MPI is required;
+however GPUs have memory limitations, such that they may not always accommodate
+a single lattice, and in such cases MPI can be used to link
+multiple GPUs together\footnote{How you link GPUs together depends on the
+system you run on. Usually communication between GPUs is the slowest part
+of a calculation, so one may utilize other frameworks besides MPI, usually
+depending on the GPU manufacturer, to get a performance boost.}.
+Since there are so many cores, it is practical to introduce an organizational
+hierarchy. The most common is used by NVIDIA, where threads are collected
+into\index{block} {\it blocks}; this is shown in \figref{fig:threadBlock}.
 
 \subsection{Object oriented programming}
 
@@ -1036,49 +1082,7 @@ Code in the purple region to the left of the machine balance point
 tends to be limited by bandwidth.
 
 
-\subsection{Random number generators}\index{random number generator}
-
-True random numbers are not easily available. This could be accomplished in
-principle through e.g. radioactive decay, but the problem with this method in
-particular is that the signal is noisy, and since the results are truly
-stochastic, they cannot be reproduced, which is important for cross-checking
-and debugging.
-Instead one relies on algorithms that produce {\it pseudorandom} 
-numbers\index{pseudorandom numbers}, i.e. sequences that appear statistically
-random, but are in fact produced through some deterministic procedure.
-Since this distinction is quite well known, it is common to refer to
-pseudorandom number generators simply as random number generators (RNG).
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{figs/linear_congruence.pdf} 
-  \caption{Example generation of pseudorandom numbers using the linear
-           congruence algorithm. This layout reveals in the upper panel
-           a strong correlation given a poor choice of parameters
-           $a$, $b$, and $m$. Image created by C. Schmidt.}
-  \label{fig:RNG} 
-\end{figure} 
-
-
-Perhaps the earliest known RNG is the {\it linear congruence 
-generator}~\cite{lehmer_mathematical_1951,thomson_modified_1958},
-which\index{linear congruence} was developed in the 1950s.
-This is a pedagogically interesting generator since it is fast,
-easy to understand, and contains a hidden pitfall. 
-One starts with some {\it seed}\index{seed}
-$x_0$, then generates the sequence of pseudorandom numbers
-recursively through
-\begin{equation}
-x_n=(ax_{n-1}+b)\mod m,
-\end{equation}
-where $a$, $b$, and $m$ are input parameters that determine the
-sequence. If one is not careful about the choice of input
-parameters, there is a strong, hidden correlation that is revealed when plotting
-pseudorandom number $2n+1$ against $2n$, which
-is illustrated in \figref{fig:RNG}.
-
 
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
-
