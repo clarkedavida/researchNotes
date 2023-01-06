@@ -61,32 +61,39 @@
 \newcommand{\chidof}{\chi^2/\text{d.o.f.}}
 
 
-  % Physics
+  % General Physics
 \newcommand{\Lagr}{\mathcal{L}} 
+\newcommand{\Qin}{Q_{\text{in}}}
+\newcommand{\Qsuck}{Q_{\text{suck}}}
+\newcommand{\Qlost}{Q_{\text{lost}}}
+\newcommand{\Qdump}{Q_{\text{dump}}}
+\newcommand{\atFixed}[2]{\left(#1\right)_{#2}}
+  % QFT
 \newcommand{\MS}{\overline{\text{MS}}}
 \newcommand{\T}{\mathbf T}                % time-ordered product
-\renewcommand{\L}{\mathbf L}              % lattice
-\newcommand{\nconf}{N_{\text{conf}}}
-\newcommand{\nsimil}{N_{\text{sim}}}
-\newcommand{\fas}{f_{\text{as}}}
 \newcommand{\qconj}{\mathcal{C}}
 \newcommand{\parity}{\mathcal{P}}
 \newcommand{\Dright}{\overrightarrow{D\strut}}
 \newcommand{\Dleft}{\overleftarrow{D\strut}}
-\newcommand{\pbp}{\bar{\psi}\psi}         % chiral condensate
-\newcommand{\muh}{\hat{\mu}}              % mu/T
+\DeclareMathOperator{\Br}{Br}             % branching ratio
+\newcommand{\amuhvp}{a_\mu^{\rm HVP}}     % leading HVP contribution to a_mu
+\newcommand{\ME}{\mathcal{M}}             % matrix element
+  % LFT
+\renewcommand{\L}{\mathbf L}              % lattice
+\newcommand{\nconf}{N_{\text{conf}}}
+\newcommand{\nsimil}{N_{\text{sim}}}
 \newcommand{\plaq}{U^\square}
+  % Phase diagram 
+\newcommand{\fas}{f_{\text{as}}}
 \newcommand{\fsing}{f_{\text{sing}}}
 \newcommand{\freg}{f_{\text{reg}}}
+\newcommand{\pbp}{\bar{\psi}\psi}         % chiral condensate
+\newcommand{\muh}{\hat{\mu}}              % mu/T
 \newcommand{\TRW}{T_{\rm RW}}             % roberge-weiss
 \newcommand{\Tc}{T_{\rm c}}               % critical temp
 \newcommand{\Tpc}{T_{\rm pc}}             % pseudo-critical temp
 \newcommand{\ZQCD}{\mathcal{Z}_{\rm QCD}} % QCD partition func
 \newcommand{\grandZ}{\mathcal{Z}}
-\newcommand{\ME}{\mathcal{M}}             % matrix element
-\DeclareMathOperator{\Br}{Br}             % branching ratio
-\newcommand{\atFixed}[2]{\left(#1\right)_{#2}}
-\newcommand{\amuhvp}{a_\mu^{\rm HVP}}      % leading HVP contribution to a_mu
 
 
   % Group and algebra names
@@ -111,12 +118,13 @@
 \newcommand{\simulat}{\texttt{SIMULATeQCD}}
 
 
-  % Some other useful stuff
+  % Some other useful stuff (trying to follow APS conventions)
 \newcommand{\tinysp}{\hspace{0.1mm}}
-\newcommand{\secref}[1]{Section~\ref{#1}}
+\newcommand{\secref}[1]{Sec.~\ref{#1}}
 \newcommand{\chref}[1]{Chapter~\ref{#1}}
 \newcommand{\apref}[1]{Appendix~\ref{#1}}
 \newcommand{\propref}[1]{Proposition~\ref{#1}}
+\newcommand{\corref}[1]{Corollary~\ref{#1}}
 \newcommand{\thmref}[1]{Theorem~\ref{#1}}
 \newcommand{\lemref}[1]{Lemma~\ref{#1}}
 \newcommand{\equatref}[1]{eq.~\eqref{#1}}

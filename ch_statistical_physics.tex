@@ -2,44 +2,343 @@
 
 One regime of interest for lattice QCD calculations is the application
 of lattice formalism to hot, dense nuclear systems; this is the realm
-of thermodynamics\index{thermodynamic} and statistical physics. In this chapter I try to
+of thermodynamics\index{thermodynamics} and statistical physics. In this chapter I try to
 offer some reminders of statistical physics, especially those that
 are directly relevant to modern lattice investigations of the QCD
 phase diagram. Some references I drew from include
 Ref.~\cite{tahir-kheli_general_2012} and \cite{kardar_statistical_2007}.
 
-\section{The laws of thermodynamics}\index{thermodynamic!laws}
+\section{A brief history of early thermodynamics}
 
-In thermodynamics, one usually divides the universe into a system under
-consideration and its surroundings. Let $U$ be the energy of a system,
+As it turns out, much of thermodynamics was discovered in order to develop
+and increase the efficiency of engines. This presentation is based
+on Ref.~\cite{wiki:thermo}. The first engine progenitor that I'm
+aware of would be the vacuum pump, which was built and designed by Otto von 
+Guericke in 1650. Shortly thereafter, Boyle and Hooke developed an air pump.
+Playing around with this air pump helped reveal {\it Boyle's law}\index{Boyle's
+law}
+\begin{equation}
+  P\propto\frac{1}{V},
+\end{equation}
+a relationship between the pressure $P$ and volume $V$ of a gas.
+
+In 1697, Denis Papin developed a steam digester, a closed vessel which trapped steam 
+until a high pressure was generated, with a valve to release pressure to keep it
+from exploding.  He noticed the value would rhythmically move up and down and was 
+inspired to create a piston and cylinder engine; however, he did not pursue this design. 
+Later, Thomas Savery and Thomas Newcomen built the first engine based on Papin's concept.
+This\index{engine!Newcomen} {\it Newcomen engine} was quite inefficient; a
+major improvement was made by James Watt, who made the condenser a separate
+entity to avoid energy loss repeatedly cooling and re-heating the cylinder.
+He also implemented rotary motion, allowing the\index{engine!Watt} {\it Watt engine} to 
+be more broadly applicable. 
+
+The development of thermodynamics as a modern science arguably begins with
+with Sadi Carnot, who in 1824 published {\it Reflections on the Motive Power of
+Fire}, a text on heat, power, energy and engine efficiency. 
+His book outlined energetic relations between the\index{Carnot!engine}
+Carnot engine, the\index{Carnot!cycle} Carnot cycle, and motive power. 
+In 1850, Clausius published a paper titled ``On the Moving Force of Heat", which 
+first stated the basic principles of the second law of thermodynamics. 
+He introduced the concept of entropy\index{entropy} in 1865.
+
+
+
+\section{The laws of thermodynamics}
+
+In thermodynamics, one usually divides the universe into a system 
+(or collection of systems) under
+consideration and its (their) surroundings.
+The {\it zeroth law of thermodynamics} is just the statement that
+equilibrium is transitive.\index{thermodynamics!zeroth law}
+\begin{theorem}{Zeroth law of thermodynamics}{}
+  If two systems $A$ and $B$ are in equilibrium with a system $C$, then
+$A$ and $B$ are also in equilibrium.
+\end{theorem}
+Let $U$ be the energy of any system,
 $Q$ the heat added to it, and
-$W$ the work done on it. Then
+$W$ the work done on it. The {\it first law of thermodynamics}
+is the statement of energy conservation.\index{thermodynamics!first law}
 \begin{theorem}{First law of thermodynamics}{}
   $$\dd U=Q+W$$
 \end{theorem}
+%In other words, heat and work are the only ways to change a system's energy.
 
-A process is {\it adiabatic}\index{adiabatic} if $Q=0$ throughout that process
-and {\it reversible}\index{reversible} if $Q=T\ddS$, where $T$ is the
-temperature and $S$ is the entropy. It follows that reversible,
-adiabatic processes are isentropic. 
+These two laws are relatively straightforward to understand. But to understand
+the second law, one needs the concept of entropy. First we will proceed
+using discoveries by Carnot and Clausius, which I think is valuable
+because it helps one understand why $Q=T\dd S$. Then we will take a look at an
+information-oriented understanding of entropy. Both of these follow the
+presentations in Ref.~\cite{kardar_statistical_2007} closely.
 
+
+
+\begin{figure}
+\includegraphics[width=\linewidth]{figs/engineFrige.pdf}
+\caption{Schematic diagrams for an ideal engine (left) and refrigerator (right).}
+\label{fig:engineFrige}
+\end{figure}
+
+
+
+\subsection{Entropy from engines}
+
+A {\it heat engine}\index{engine!heat} is any idealized system that takes in
+heat $\Qin$ from a source, converts some of that into work $W$, and loses some heat to its
+surroundings $\Qlost$. A reasonable measure of its efficiency\footnote{It is not
+clear to me at this stage that this is the ``best" definition of efficiency or a
+unique one. In particular, one could raise this ratio of heat to an arbitrary
+(positive) power. In a sense, using 1 as the power is the simplest possible definition. 
+Additionally, when we derive
+the Carnot engine efficiency, we will see that it related to the ratio
+of two temperatures raised to some power. There also we have the freedom to
+pick a power, and again the simplest decision is 1. Picking the same power for
+the heat and the temperature ratios is important so that the entropy derived from
+engines matches the microcanonical (or information) entropy, which we will derive
+later.} is
+\begin{equation}\label{eq:engineEff}
+  \text{efficiency}=\frac{W}{\Qin}=\frac{\Qin-\Qlost}{\Qin}\leq1,
+\end{equation}
+where the inequality is due to the first law of
+thermodynamics\footnote{Incidentally, this rules out any (perpetual motion)
+machine that can produce more energy than you put in.}.
+A {\it refrigerator}\index{refrigerator} is any idealized system that does the
+opposite; i.e. it takes in some work $W$ to suck some heat $\Qsuck$ out of
+some source, and dumps that heat $\Qdump$ into its environment.
+Similarly, a reasonable measure of the refrigerator's efficiency is
+\begin{equation}\label{eq:refrigeratorEff}
+  \text{efficiency}=\frac{\Qsuck}{W}=\frac{\Qsuck}{\Qdump-\Qsuck},
+\end{equation}
+Schematics of an ideal engine and refrigerator are given in
+\figref{fig:engineFrige}.
+With this terminology, we give two equivalent statements of the second law,
+which as far as I can tell, are just things that were empirically observed
+when developing engines:\index{thermodynamics!second law}
+\begin{enumerate}
+  \item (Kelvin) There is no process whose sole result is the conversion of heat
+        into work. In other words the inequality in \equatref{eq:engineEff}
+        should be strict.
+  \item (Clausius) There is no process whose sole result is the transfer of
+        heat from a colder system to a warmer one. In other words, the
+        efficiency \eqref{eq:refrigeratorEff} is finite.
+\end{enumerate}
+It is not too difficult to show using ideal engines and refrigerators
+that these two formulations are equivalent~\cite{kardar_statistical_2007}.
+Later, we will formulate these in terms of a new quantity, entropy. The
+formulation in terms of entropy can be proven in the framework of statistical
+physics.
+
+In order to examine systems in detail, we need to be in equilibrium so that all
+thermodynamic coordinates are well defined.
+If nothing changes, a system remains in equilibrium; it stands to reason that
+if a process happens sufficiently slowly, it is more or less still in
+equilibrium. Such processes are called\index{quasistatic} {\it quasistatic}.
+A process is {\it adiabatic}\index{adiabatic} if $Q=0$ throughout that process.
+
+Next we introduce the idea of a\index{engine!Carnot} {\it Carnot engine},
+which should theoretically be the most efficient engine possible. 
+It turns out that the most important property of such an engine is that it 
+is\index{reversible} {\it reversible}, i.e. that you can reverse all its inputs
+and outputs with the result that it works like the forward engine running
+backwards in time. In particular a Carnot engine is reversible,
+runs\index{cycle} in a {\it cycle}, i.e. it returns to its original state
+at the end of its process, and its heat exchanges occur at 
+temperatures\footnote{A Carnot cycle generically consists of two adiabats
+and two isotherms. Specifying the heat exchanges at these temperatures allows us
+to pick two isotherms. One can theoretically find adiabats using, e.g. an ideal
+gas, but in principle Carnot engines with other materials are possible.}
+$T_H$ and $T_C$, i.e. it draws and dumps heat without changing the
+temperatures of its surroundings.
+Looking at \figref{fig:engineFrige}, we see that a Carnot
+engine run backward in time is just a Carnot refrigerator, and vice versa.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/carnotThm.pdf}
+\caption{An idealized machine used to prove Carnot's theorem.}
+\label{fig:carnot}
+\end{figure}
+
+To see why this reversibility matters, consider \figref{fig:carnot}. In this
+system, we use any engine to draw heat from a hot reservoir fixed at
+$T_H$ that loses heat to a cold reservoir $T_C$ with $T_H>T_C$. We reverse a Carnot engine,
+and use the output work from the left engine as input work to the reversed
+Carnot engine. This combined system works as a process whose sole result 
+transfers heat between the top and bottom reservoirs. By Clausius's statement 
+of the second law of thermodynamics, it must be that $\Qin\geq\Qdump$ and
+$\Qlost\geq\Qsuck$. It follows that
+\begin{equation}
+\text{efficiency}=\frac{W}{\Qin}\leq\frac{W}{\Qdump}=\text{Carnot engine
+efficiency}.
+\end{equation}
+
+\index{Carnot's theorem}
+\begin{theorem}{Carnot}{}
+No engine is more efficient than a Carnot engine.
+\end{theorem}
+
+\begin{corollary}{Carnot}{carnot}
+All Carnot engines have the same efficiency $\eta(T_H,T_C).$
+\end{corollary}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.6\linewidth]{figs/carnotSeries.pdf}
+\caption{A series of Carnot engines.}
+\label{fig:carnotSeries}
+\end{figure}
+
+Next, we are going to derive a relationship between heat flow and reservoir
+temperature for the Carnot engine. Once we have this relationship, we will
+creatively apply our knowledge of Carnot engines to say something about heat
+flow and temperature generally. This will ultimately lead us to conclude that
+entropy exists, and deliver a definition of it.
+
+To derive the aforementioned relationship, consider a series of Carnot engines
+as shown\footnote{The Carnot engines are identical and reversible, so it
+must be that the heat exchanges on either side of $T_2$ are the same.}
+in \figref{fig:carnotSeries} with $T_3>T_2>T_1$. The total effect of this
+Carnot series is to take in heat $Q_3$, lose heat $Q_1$, and do work
+$W_{31}=W_{32}+W_{21}.$ Using \corref{cor:carnot} 
+we find that the heat exchanges must be related by
+\begin{equation}\begin{aligned}
+  Q_2 &= Q_3 - W_{32} &&= Q_3\left(1-\eta(T_3,T_2)\right) \\
+  Q_1 &= Q_2 - W_{21} &&= Q_2\left(1-\eta(T_2,T_1)\right) 
+                  = Q_3\left(1-\eta(T_3,T_2)\right)\left(1-\eta(T_2,T_1)\right) \\
+  Q_1 &= Q_3 - W_{31} &&= Q_3\left(1-\eta(T_3,T_1)\right).
+\end{aligned}\end{equation}
+From the last two equations, it follows
+\begin{equation}
+\left(1-\eta(T_3,T_2)\right)\left(1-\eta(T_2,T_1)\right) =
+1-\eta(T_3,T_1).
+\end{equation}
+Whatever the functional form of $1-\eta$ is, the middle temperature must be
+cancelled through a multiplication. Hence $1-\eta$ must be a ratio of its input
+temperatures, raised to some power. The simplest choice\footnote{Again, this
+choice also will help our definition of entropy match that from the
+microcanonical ensemble.} that guarantees $0\leq\eta<1$ is
+\begin{equation}\label{eq:carnotEfficiency}
+  \frac{Q_1}{Q_2}=1-\eta(T_2,T_1)\equiv\frac{T_1}{T_2}.
+\end{equation}
+
+It is nice to have this expression for the Carnot engine efficiency.
+But again, from my perspective, it's more interesting to have this relation between
+heat and temperature at the input and output heat vents for the engine.
+Indeed, we can now potentially learn something about heat delivered
+to an arbitrary system at some temperature, and we will leverage this trick to
+prove a theorem due to Clausius.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/clausius.pdf}
+\caption{A convenient setup used to prove Clausius's theorem.}
+\label{fig:clausius}
+\end{figure}
+
+\index{Clausius's theorem}
+\begin{theorem}{Clausius}{}
+For any cyclic transformation,
+$$ \oint\frac{\delta Q}{T}\leq0. $$
+where $\delta Q$ is a small amount of heat supplied at temperature $T$ to
+a system during part of the cycle.
+\begin{proof}
+Consider the setup of \figref{fig:clausius}. The directions of heat and
+work can be chosen as given WLOG. We begin with a system that
+has a small amount of heat $\delta Q$ delivered to it at temperature $T$; by
+energy conservation, some work $\delta W$ will leave the system.
+To leverage \equatref{eq:carnotEfficiency}, we direct $\delta Q$ to the output port
+of a Carnot engine, which generically takes in heat $\delta Q_R$ from a
+reservoir at temperature $T_R$ and does some work $\delta W_E$.
+From \equatref{eq:carnotEfficiency} we have
+\begin{equation*}
+\delta Q_R=T_R\frac{\delta Q}{T}.
+\end{equation*}
+After returning to their original states, the system and Carnot engine have the
+combined effect of taking in heat $Q_R=\oint\delta Q_R$ and doing work $W$.
+By energy conservation $Q_R=W$. By Kelvin's statement of the second law, it must
+be that positive work is done on the system and positive heat leaves
+the system; given our arrow conventions, we conclude $W=Q_R\leq0$. Hence
+\begin{equation*}
+T_R\oint\frac{\delta Q}{T}\leq0.
+\end{equation*}
+That $T_R$ is non-negative proves the theorem.
+\end{proof}
+\end{theorem}
+
+We are finally in a position to define\index{entropy} entropy.
+In particular, if we further specify that the cycle is reversible,
+we will find that $\delta Q\to-\delta Q$ when we switch the direction of the
+cycle. It follows that for a reversible cycle
+\begin{equation}
+ \oint\frac{\delta Q}{T}=0. 
+\end{equation}
+This tells us that the process is path-independent, which means we can define a
+new function $S$ with
+\begin{equation}
+ S(B)-S(A)=\int_A^B\frac{\delta Q}{T}. 
+\end{equation}
+Hence we learn for reversible\footnote{I've seen examples of people defining
+reversible\index{reversible} systems to be those that have $Q=T\dd S$.}, 
+quasistatic\index{Lattice calculations are always done under the assumption
+of equilibrium, which means it's quasistatic by definition.} changes
+\begin{equation}
+Q=T\dd S.
+\end{equation}
+It follows that reversible, adiabatic processes are\index{isentropic} isentropic.
+We also get this statement of the first law:\index{thermodynamics!first law}
+\begin{equation}
+ \dd U = T\dd S+P\dd V.
+\end{equation} 
+
+Finally, consider a possibly irreversible path from $A$ to $B$ that is closed
+with a reversible one from $B$ to $A$. From Clausius's theorem, we get
+\begin{equation}
+\int_A^B\frac{\delta Q}{T}+\int_B^A\delta Q_{\text{rev}}\leq0
+\end{equation}
+or
+\begin{equation}
+\int_A^B\frac{\delta Q}{T}\leq S(B)-S(A).
+\end{equation}
+It follows that $\delta S\geq\delta Q/T$ for any process. In particular consider
+two systems that are originally isolated from each other and separately in
+equilibrium, then allow them to exchange heat. Since there is no work, we must
+have $\delta Q_{\text{total}}=0$ by the first law, and hence $\delta
+S_{\text{total}}\geq0$. This is the more familiar statement of
+the {\it second law of thermodynamics}.\index{thermodynamics!second law}
+\begin{theorem}{Second law of thermodynamics}{}
+If two or more adiabatically isolated systems are brought into thermal contact,
+their combined entropy must always increase.
+\end{theorem}
+
+In the context of statistical physics, this statement will follow from
+probabilistic considerations. There we will see that systems in equilibrium have
+maximum entropy. What about statements of minimum entropy? This is covered by
+the {\it third law of thermodynamics}, which is an observation.\index{thermodynamics!third law}
+\begin{theorem}{Third law of thermodynamics}{}
+$$
+  \lim_{T\to0}S(T)=0
+$$
+\end{theorem}
+
+
+\subsection{Entropy from information}
 
 \section{Equations of state}\label{sec:EoS}
 
 
 Probably the equation of state that you are most familiar with is the 
-ideal gas law,
+ideal gas law,\index{ideal gas law}
 \begin{equation}
   PV=NkT.
 \end{equation}
 The volume $V$ and the number of particles $N$ both scale linearly with the
 size of the system; we call such variables {\it extensive}\index{extensive}. 
-Meanwhile the pressure $P$ and the temperature $T$ are {\it intensive}
-\index{intensive}, i.e. they do not scale with the system.
+Meanwhile the pressure $P$ and the temperature $T$ are {\it intensive}\index{intensive}, 
+i.e. they do not scale with the system.
 
 There is an equation of state for each intensive variable required for the
 description of thermodynamic states. For example from the
-first law of thermodynamics,
+first law of thermodynamics,\index{thermodynamics!first law}
 \begin{equation}\label{eq:fslaw}
   \dd{U}=T\dd{S}-P\dd{V}+\sum_i\mu_i\dd{N}_i,
 \end{equation}
