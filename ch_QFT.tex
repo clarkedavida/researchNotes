@@ -526,11 +526,12 @@ particle-antiparticle pair, we conclude
 \begin{equation}
   \Delta E\approx 2mc^2 \gtrsim\hbar c/2L.
 \end{equation}
-Appearing in this equation is the Compton wavelength\footnote{I guess if
+We then introduce the Compton wavelength\footnote{I guess if
 one uses $\hbar$ instead of $h$ this is rather the {\it reduced} Compton
 wavelength. But I somehow always work using $\hbar$ instead of $h$, so I opted
 to abuse this convention a little.}\index{wavelength!Compton}
-$\lambda_c=\hbar/mc$. This delivers an interpretation for the Compton wavelength:
+$\lambda_c=\hbar/mc$. This argument delivers an interpretation for 
+$\lambda_c$:
 \begin{equation}
   L \gtrsim \lambda_c/4
 \end{equation}
@@ -1250,6 +1251,26 @@ of SSB: If quarks were massless, the pions would arise as
 the Goldstone bosons of chiral SSB; hence we refer to pions as
 ``would-be" Goldstone bosons.
 
+\section{Thirring model}\label{sec:Thirring}\index{Thirring model}
+
+The {\it Thirring model}~\cite{thirring_soluble_1958} is a QFT in 1+1 dimensions.
+Its Lagrangian density is given by
+\begin{equation}
+  \Lagr=\bar{\psi}(i\partial\!\!\!/-m)\psi -\frac{g}{2}
+         \left(\bar{\psi}\gamma_\mu\psi\right) \left(\bar{\psi}\gamma^\mu
+\psi\right).
+\end{equation}
+This describes a Dirac field with a self-interaction.
+What's special about the massless Thirring model is that it is 
+exactly solvable~\cite{johnson_solution_1961,hagen_new_1967,klaiber_1968}, 
+which means it is a useful test bed for various QFT methods.
+The massive Thirring model is partially solvable: my understanding is that the
+correlations are not yet known.
+
+In the context of lattice calculations, the Thirring model is used often as a
+test bed for Lefshetz thimbles, which are a possible sign problem workaround.
+Sometimes in these studies, one may consider a model with more or fewer spatial
+dimensions.
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}

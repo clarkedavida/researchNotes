@@ -54,6 +54,30 @@ for line in bib:
     continue
   elif line.strip().startswith('reportNumber'):
     continue
+  elif line.strip().startswith('interhash'):
+    continue
+  elif line.strip().startswith('intrahash'):
+    continue
+  elif line.strip().startswith('keywords'):
+    continue
+  elif line.strip().startswith('timestamp'):
+    continue
+  elif line.strip().startswith('added-at'):
+    continue
+  elif line.strip().startswith('annote'):
+    continue
+  elif line.strip().startswith('lccn'):
+    continue
+  elif line.strip().startswith('citeulike-article-id'):
+    continue
+  elif line.strip().startswith('howpublished'):
+    continue
+  elif line.strip().startswith('priority'):
+    continue
+  elif line.strip().startswith('description'):
+    continue
+  elif line.strip().startswith('series'):
+    continue
   out.write(line)
 
 
