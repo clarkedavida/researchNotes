@@ -19,6 +19,9 @@ done
 
 pdflatex 0_researchnotes.tex
 makeindex 0_researchnotes
+python scripts/fixIndex.py
+mv temp.idx 0_researchnotes.idx
+mv temp.ind 0_researchnotes.ind
 pdflatex 0_researchnotes.tex
 pdflatex 0_researchnotes.tex
 ./distclean

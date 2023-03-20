@@ -79,11 +79,22 @@ one finds
    =\frac{1}{3}\sum_f\pdv{\mu_f}.
 \end{equation}
 
-Now we will connect this to the partition function $Z$. We have
+Once we've picked a discretization, we know the action. From the perspective of
+practical calculations coming from lattices, it is hence desirable to express
+these formulas in terms of the partition function $Z$. From~\equatref{eq:pgrand}
+we have
 \begin{equation}
   \frac{P}{T^4}=\frac{1}{VT^3}\log Z,
 \end{equation}
 where as usual $V=(aN_s)^3$ and $T=1/aN_\tau$.
+Hence we can instead
+express generalized susceptibilities as
+\begin{equation}
+\chi_{ijk}^{(u)(d)(s)}(T)
+  =\frac{1}{VT^3}\frac{\partial^{\,i+j+k}}{\partial\muh_u^i\partial\muh_d^j
+                                       \partial\muh_s^k}\log Z\,\Big|_{\muh=0}.
+\end{equation}
+
 When there are $N_f$ flavors and when we use the HISQ action we have,
 according to \equatref{eq:HISQdist},
 \begin{equation}

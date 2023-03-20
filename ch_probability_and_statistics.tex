@@ -167,7 +167,7 @@ The {\it covariance}\index{covariance}
 can be used to give a measure of how correlated $X$ and $Y$ are, or
 one can use the {\it correlation}\index{correlation}
 \begin{equation}\label{dfn:cor}
-  \rho(X,Y)=\frac{\Cov[X,Y]}{\sqrt{\sigma^2_X\sigma^2_Y}}.
+  \rho(X,Y)=\frac{\Cov[X,Y]}{\sigma_X\sigma_Y}.
 \end{equation}
 So equivalently we say $X$ and $Y$ are correlated if $\rho(X,Y)=0$.
 It's worth emphasizing that if $X$ and $Y$ are independent,
@@ -996,7 +996,16 @@ automatically into account. This completes the tool set needed to
 estimate average values of functions of data, correcting for bias and
 correlation.
 
-\section{The $\chi^2$ distribution and fitting data}
+\section{Fitting data}
+
+In this section we consider the general problem of fitting curves through data.
+In the case where we have some expectation of the general form of the fit
+function, which may come for instance from theory, we will want to find the fit
+parameters that yield a curve closest to the data points. In the case where we
+have no idea, we will resort to splines.
+
+\subsection{With an a priori fit function}
+
 Consider a sample of $N$ Gaussian, independent data points $(X_i,Y_i)$,
 where the $Y_i$ have standard deviations $\sigma_i$. For now we will
 assume the $X_i$ have no error. We will consider a situation where
@@ -1078,11 +1087,65 @@ The CDF in the form \eqref{eq:chi2num} is well-suited for numerical
 calculation because it is straightforward to compute the incomplete
 gamma function.
 
-%In practice the uncertainties $\sigma_i$ are not exactly known, and the
-%data are not exactly Gaussian, so the above strategy is at best only
-%approximately valid. In cases where the data are sampled well, this
-%correction is small, so that it's enough to simply round your
-%error bars conservatively.
+In practice the uncertainties $\sigma_i$ are not exactly known, and the
+data are not exactly Gaussian, so the above strategy is at best only
+approximately valid. In cases where the data are sampled well, this
+correction is small, so that it's enough to simply round your
+error bars conservatively.
+
+% If you don't know the number of parameters? Bayes!
+
+\subsection{Without any a priori fit function}
+
+
+This is the situation with almost no knowledge whatsoever. We go in only with
+the assumption that $y$ is a {\it smooth}\index{function!smooth} 
+function of the data $x$; that is, it is continuous and
+it has some number of derivatives everywhere in the fit range.
+One way to proceed is to leverage the following theorem:
+\begin{theorem}{Weierstrass approximation theorem}{WAT}
+Consider a closed interval $[a,b]$ and let $y:[a,b]\to\R$
+be continuous. Then $\Forall\epsilon>0$ $\Exists$ a polynomial 
+$p\suchthat x\in[a,b]\Rightarrow |y(x)-p(x)|<\epsilon$.
+\end{theorem}
+The Weierstrass approximation theorem\index{Weierstrass approximation theorem}
+tells us that if we ``zoom in" enough on any confinuous $y$, it is approximately
+like a polynomial. This motivates the idea of a {\it spline}\index{spline}: we
+will approximate $f$ by stitching a bunch of polynomials together.
+
+Order the $X_i$ so that $X_0<...<X_N$, and divide $[X_0,X_N]$ into $k+1$
+subintervals. The boundaries separating the subintervals are called {\it
+knots}\index{knot}; hence there are $k$ knots. The spline $s$ that will
+approximate our function $y$ is
+\begin{equation}
+s(x) = \sum_{j=1}^{k+1} p_j(x),
+\end{equation}
+where the $p_j$ are polynomials of degree $d$ defined on the disjoint 
+subintervals.
+
+How many degrees of freedom does this fit have? Well, each $p_j$ will have $d+1$
+coefficients (we can consider the $a_j$ an overall normalization), and there are
+$k+1$ of them. On the other hand asking that $y$ be continuous means that the
+polynomials have to agree at the knots, which adds one constraint per knot. 
+Furthermore asking $s$ to be differentiable everywhere means the derivatives of 
+the polynomials also must agree on the knots, which adds one constraint per
+derivative per knot. Altogether we get
+\begin{equation}\label{eq:splinedof}
+\text{\# d.o.f.} = (k+1)(d+1)-k-k(d-1) = k + d + 1.
+\end{equation}
+
+A spline with $d=2$ is a {\it quadratic spline}\index{spline!quadratic}, 
+and hence it supports one derivative\footnote{Asking the second derivative to
+match demands that all the $p_j$ have the same coefficient for $x^2$.}.
+Quadratic splines may struggle when $y$ has an inflection point, since two
+derivatives of the spline yields a constant on either side of the inflection
+point; at the same time, the second derivative should be zero there. 
+Hence splines with $d=3$, the {\it cubic splines}\index{spline!cubic}, are
+usually more reliable. According to \equatref{eq:splinedof}, the number of
+degrees of freedom will increase with increasing $d$; hence picking a cubic
+spline is sort of a compromise between having an approximation that follows $y$
+reasonably well while avoiding overfitting.
+
 
 \section{The Kolmogorov test}\index{Kolmogorov test}
 Let's say we perform an experiment and extract a CDF $\bar{F}$ from 

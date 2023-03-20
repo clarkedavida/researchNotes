@@ -1,4 +1,4 @@
-\chapter{Physics: Quantum Field Theories}
+\chapter{Physics: QFT crash course} 
 
 The Standard Model (SM) of particle physics classifies all known
 \index{particle!elementary}\index{Standard Model}
@@ -27,10 +27,17 @@ Figure~\ref{fig:SM} gives a schematic overview of the SM.
 The theoretical framework underlying the SM is an example of a Quantum 
 Field Theory (QFT). QFTs are consistent with both quantum mechanics and
 relativity. Lattice gauge theories are a kind of QFT; therefore it is
-important for the reader to know a little bit about them. There are a lot
+important for the reader to know a little bit about them. A solid understanding
+of QFT I think can only be achieved by taking courses along with a significant
+amount of self study. In my case, that self study has required multiple years,
+but you're a different person, so mileage may vary.
+
+There are a lot
 of different resources one can use to learn about QFT; for example when I was a
 grad student I used Peskin and Schroeder~\cite{peskin_introduction_1995}
-and Srednicki~\cite{srednicki_quantum_2007}.
+and Srednicki~\cite{srednicki_quantum_2007}. Far and away the most pedagogical
+text book I've encountered is by Schwartz~\cite{schwartz_quantum_2014}, and it's
+the one I recommend to newcomer in the field.
 Nowadays there are also some very high quality lectures on YouTube,
 for instance a series by Tong~\cite{tongQFT}, which I found had some other nice
 introductory remarks. 
@@ -350,7 +357,9 @@ at least one $s$ quark. Hence $\Omega$ baryons are a type of hyperon.}.
   \centering
   \includegraphics[width=0.48\linewidth]{figs/Meson_octet.png}
   \includegraphics[width=0.48\linewidth]{figs/Baryon_decuplet.png}
-  \caption{{\it Left}: Spin-0 pseudo-scalar meson octet. {\it Right}:
+  \caption{{\it Left}: Spin-0 pseudoscalar meson octet. (See
+           \tabref{tab:discreteSymm} for a definition of
+           pseudoscalar.) {\it Right}:
            Spin-3/2 baryon decuplet. The $s$ represents strangeness,
            with all particles in the same horizontal row having the
            same strangeness. Electric charge is represented by $q$,
@@ -439,7 +448,7 @@ noticed\footnote{Higgs and Englert received the 2013 Nobel for this.}
 that by strategically choosing 
 the gauge, one can simultaneously
 eliminate the Goldstone modes, add a mass term to gauge bosons, and a scalar
-boson, the Higgs boson.\index{boson!Higgs}
+boson, the Higgs boson.\index{Higgs!boson}
 We will discuss spontaneous symmetry breaking and Goldstone's theorem
 \index{spontaneous symmetry breaking} in \secref{sec:ssb}. The Higgs
 mechanism is discussed in detail in \apref{ap:spec_higgs}.
@@ -547,11 +556,9 @@ particle. One can compare this with the particle's de Broglie wavelength
 \index{wavelength!de Broglie}$\lambda_v=\hbar/mv$, where it behaves in a well-defined way as a wave.
 
 
-\section{The principle of stationary action}
-
-
-This section follows a fairly well known and delightful lecture by Feynman
-\cite{caltech}.
+%\section{The principle of stationary action}
+%This section follows a fairly well known and delightful lecture by Feynman
+%\cite{caltech}.
 
 \index{limit!classical}\index{non-relativistic limit}
 \section{The non-relativistic and classical limits}
@@ -607,7 +614,7 @@ momentum simultaneously.
 
 %\section{The path integral}
 
-\section{The Dirac equation}\index{Dirac equation}
+%\section{The Dirac equation}\index{Dirac equation}
 
 % dirac equation
 % in order to be lorentz invariant we need gamma_0
@@ -620,7 +627,7 @@ momentum simultaneously.
 
 \section{Discrete symmetries}\label{sec:discreteSymm}
 
-A general local meson operator (current) has the form
+A general local meson operator/current/bilinear has the form
 \begin{equation}\label{eq:mesonInterp}
   \bar{\psi}^f(x)\Gamma\psi^g(x)
 \end{equation}
@@ -638,11 +645,11 @@ for fermion flavors $f$ and $g$.
 \index{pseudoscalar}\index{tensor}
 \begin{tabularx}{\linewidth}{LCCr} \hline\hline
 Type         & $J^{PC}$ & $\Gamma$ & Example particles \\\hline
-scalar       & $0^{++}$ & $\id$                 &  \\
-pseudoscalar & $0^{-+}$ & $\gamma_5$            &  \\ 
-vector       & $1^{--}$ & $\gamma^\mu$          &  \\ 
-pseudovector & $1^{++}$ & $\gamma^\mu\gamma_5$  &  \\ 
-tensor       & $1^{+-}$ &          &  \\ 
+scalar       & $0^{++}$ & $\id$                 &  $H$\\
+pseudoscalar & $0^{-+}$ & $\gamma_5$            &  $\pi^0$, $\pi^{\pm}$\\ 
+vector       & $1^{--}$ & $\gamma^\mu$          &  $\rho^0$, $\rho^{\pm}$\\ 
+pseudovector & $1^{++}$ & $\gamma^\mu\gamma_5$  &  $a_1$\\ 
+tensor       & $1^{+-}$ & $\sigma^{\mu\nu}$     &  $b_1$\\ 
 \hline\hline
 \end{tabularx}
 \caption{The $J^{PC}$ for various meson currents, where $\Gamma$ indicates the
@@ -652,7 +659,16 @@ transforms under Lorentz transformations. The ``pseudo" objects have the
 opposite sign changes under parity as their corresponding objects.}
 \label{tab:discreteSymm}
 \end{table}
+\index{meson!rho@$\rho$}\index{meson!pi@$\pi$}\index{Higgs!boson}
 
+For instance the $\rho$ meson is a vector meson\footnote{The $\rho$ meson is any 
+spin-1 combination of $u$ and $d$
+quarks/antiquarks, hence their designation as ``vector" mesons in
+\tabref{tab:discreteSymm}. Each quark has spin-1/2, so the $\rho$ meson is the
+aligned state, while the pion is the anti-aligned state. The mass of a
+$\rho$ meson is much greater than the pion (more than five times greater), which
+reflects the fact that under strong interactions, aligned-spin states are higher
+energy states.}.
 
 \section{Anomalous magnetic moment}\label{sec:magAnom}
 The {\it magnetic moment}\footnote{This is the dipole contribution to the

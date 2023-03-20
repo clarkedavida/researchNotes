@@ -598,69 +598,6 @@ An MCMC simulation of LGT broadly consists of three essential steps:
         \end{verbatim}
 \end{enumerate}
 
-\begin{figure}
-\includegraphics[width=\linewidth]{figs/threadBlock.pdf}
-\caption{The thread/block hierarchy used in NVIDIA GPUs.
-Image taken from Ref.~\cite{NVIDIA}.}
-\label{fig:threadBlock}
-\end{figure}
-
-
-\subsection{Improving performance}
-
-For pure $\SU(2)$ simulations like what I did in grad school, 
-it may take months (or years!) for a single-processor MCMC simulation to
-generate enough data to get reasonable error bars. In order to get
-results in time to finish a PhD thesis, it is necessary to consider ways to
-optimize the code.
-
-A common strategy is to divide the lattice into smaller sublattices, updating
-simultaneously on each sublattice, passing relevant information between the
-sublattices whenever necessary. {\it Parallelizing} in this way offers a speed
-up factor somewhat less than the number of sublattices used. A standard way to
-parallelize code is to use the Message Passing Interface (MPI). MPI allows
-for efficient exchange of information between processors and is easily included
-in Fortran, C, and C++ programs.
-
-To get a quantitative understanding of performance, one introduces
-the {\it clock cycle},\index{clock cycle} which is the smallest unit of
-time in a computer\footnote{Most CPUs keep time using a quartz crystal.
-The basic idea is that an electric field will cause the quartz to
-vibrate. The frequency of this vibration is the clock cycle.
-This frequency can be tuned according to the shape and size of the
-crystal, as well the placement of electrodes on it.}.
-In the olden days, only one computation would be carried out per cycle;
-nowadays it is more common to carry out many. The number of
-computations per clock cycle is known as the\index{clock speed} {\it clock speed}.
-
-A CPU\index{CPU} is divided into several\index{core} physical {\it cores}, each of which can
-carry operations separately. This is then one way to carry out parallelization:
-You use MPI to have each core execute different tasks simultaneously.
-A virtual entity comprising of these tasks being executed on one core
-is usually called a\index{thread} {\it thread}. Sometimes one core splits
-tasks between two threads. For pure $\SU(2)$ calculations, this
-is sufficient.
-
-
-We will see in \chref{ch:ferm} that simulations with dynamical fermions
-are much more complex, and correspondingly, they are much more
-computationally intensive. For such purposes, it is not really ideal even
-to use CPUs. It was realized in the 2000s~\cite{egri_lattice_2007}
-that\index{GPU} GPUs, which
-are often needed for the numerous calculations required to render graphics
-in video games, could be adapted for use in lattice QCD calculations.
-In a GPU, there are many (often thousands) of cores, which allows for
-extremely high parallelization. On a single GPU, no MPI is required;
-however GPUs have memory limitations, such that they may not always accommodate
-a single lattice, and in such cases MPI can be used to link
-multiple GPUs together\footnote{How you link GPUs together depends on the
-system you run on. Usually communication between GPUs is the slowest part
-of a calculation, so one may utilize other frameworks besides MPI, usually
-depending on the GPU manufacturer, to get a performance boost.}.
-Since there are so many cores, it is practical to introduce an organizational
-hierarchy. The most common is used by NVIDIA, where threads are collected
-into\index{block} {\it blocks}; this is shown in \figref{fig:threadBlock}.
-
 \subsection{Object oriented programming}
 
 
@@ -929,7 +866,7 @@ if you change \texttt{g}, \texttt{h} will change as well. Be careful!\\
 \lstinputlisting[language={},firstline=1,lastline=4]{exampleCode/SU2Output.txt}
 
 
-\subsection{Dealing with binary files}
+\subsection{Addressing storage challenges}
 
 \index{binary}\index{binary!file}
 The configurations that we generate store lots of information, and to make a
@@ -1024,18 +961,111 @@ applied to each bit. For example
   \texttt{001 \& 111} = \texttt{001}. 
 \end{equation*}
 
+The above schemes give ways to represent data with numbers, but it is also
+useful to understand how the data are stored physically in the system.
+The {\it memory cell} is the most fundamental element of memory. In the old
+days, a memory cell consisted of ferromagnetic material, shaped in a torus, with
+a wire running through its hole. A current going through the wire induces a
+magnetic field in the plane of the torus, aligning the spins either CW or CCW.
+When the current stops, the torus keeps its magnetization due to 
+{\it hysteresis}\index{hysteresis}. One bit is stored in this cell, which is 0
+or 1 depending on the magnetization direction.
 
-\subsection{Evaluating performance}
+Nowadays it is more common to use semiconductor memory. The cell in
+semiconductor memory is a small circuit consisting largely of transistors.
+Certain transistor setups allow charge to be trapped inside of them,
+which one can interpret (depending on your convention) as a 0-bit. The state
+without trapped charge would the be interpreted as a 1-bit.
+For memory that's only needed in the short term, the bit can be implemented 
+instead as a full or discharged capacitor.
 
-Lattice projects are extremely computationally demanding; for instance
+Now we have some intuition how data is generally stored on a computer.
+The physical location of the memory units that will be utilized by your
+program are represented in the lowest-level software, i.e. the software
+directly managing the computer hardware, as a {\it physical address}\index{address!physical}.
+At the same time, your computer has its own representation for the physical
+memory, which is the {\it virtual address}\index{address!virtual}.
+Back in the day, physical and virtual addresses more or less directly corresponded.
+Nowadays the mapping between physical and virtual addresses is stored inside a
+data structure called a {\it page table}\index{page table}.
+This is roughly what is under the hood of the memory
+addresses\index{address!memory} discussed above.
+
+
+\begin{figure}
+\includegraphics[width=\linewidth]{figs/threadBlock.pdf}
+\caption{The thread/block hierarchy used in NVIDIA GPUs.
+Image taken from Ref.~\cite{NVIDIA}.}
+\label{fig:threadBlock}
+\end{figure}
+
+
+\subsection{Improving performance}
+
+For pure $\SU(2)$ simulations like what I did in grad school, 
+it may take months (or years!) for a single-processor MCMC simulation to
+generate enough data to get reasonable error bars. In order to get
+results in time to finish a PhD thesis, it is necessary to consider ways to
+optimize the code.
+
+A common strategy is to divide the lattice into smaller sublattices, updating
+simultaneously on each sublattice, passing relevant information between the
+sublattices whenever necessary. {\it Parallelizing} in this way offers a speed
+up factor somewhat less than the number of sublattices used. A standard way to
+parallelize code is to use the Message Passing Interface (MPI). MPI allows
+for efficient exchange of information between processors and is easily included
+in Fortran, C, and C++ programs.
+
+To get a quantitative understanding of performance, one introduces
+the {\it clock cycle},\index{clock cycle} which is the smallest unit of
+time in a computer\footnote{Most CPUs keep time using a quartz crystal.
+The basic idea is that an electric field will cause the quartz to
+vibrate. The frequency of this vibration is the clock cycle.
+This frequency can be tuned according to the shape and size of the
+crystal, as well the placement of electrodes on it.}.
+In the olden days, only one computation would be carried out per cycle;
+nowadays it is more common to carry out many. The number of
+computations per clock cycle is known as the\index{clock speed} {\it clock speed}.
+
+A CPU\index{CPU} is divided into several\index{core} physical {\it cores}, each of which can
+carry operations separately. This is then one way to carry out parallelization:
+You use MPI to have each core execute different tasks simultaneously.
+A virtual entity comprising of these tasks being executed on one core
+is usually called a\index{thread} {\it thread}. Sometimes one core splits
+tasks between two threads. For pure $\SU(2)$ calculations, this
+is sufficient.
+
+We will see in \chref{ch:ferm} that simulations with dynamical fermions
+are much more complex, and correspondingly, they are much more
+computationally intensive. For such purposes, it is not really ideal even
+to use CPUs. It was realized in the 2000s~\cite{egri_lattice_2007}
+that\index{GPU} GPUs, which
+are often needed for the numerous calculations required to render graphics
+in video games, could be adapted for use in lattice QCD calculations.
+In a GPU, there are many (often thousands) of cores, which allows for
+extremely high parallelization. On a single GPU, no MPI is required;
+however GPUs have memory limitations, such that they may not always accommodate
+a single lattice, and in such cases MPI can be used to link
+multiple GPUs together\footnote{How you link GPUs together depends on the
+system you run on. Usually communication between GPUs is the slowest part
+of a calculation, so one may utilize other frameworks besides MPI, usually
+depending on the GPU manufacturer, to get a performance boost.}.
+Since there are so many cores, it is practical to introduce an organizational
+hierarchy. The most common is used by NVIDIA, where threads are collected
+into\index{block} {\it blocks}; this is shown in \figref{fig:threadBlock}.
+
+Lattice projects studying physically realistic setups
+ are extremely computationally demanding; for instance
 a recent HotQCD study utilized ensembles that required
 $\order{2000}$ GPU-years of compute time and take up 2.4 PB of storage 
-space~\cite{Bollweg:2021vqf}. Meeting this computational demands is
-not cheap, so it is crucially important that your code is highly
+space~\cite{Bollweg:2021vqf}. Meeting these computational demands is
+not cheap, and it is no longer sufficient to simply foist your
+calculation onto GPUs. For these applications, it becomes crucially 
+important that your code is highly
 optimized to get the most bang for your buck.
-In this section we'll review some key concepts and terminology
+We'll now review some key concepts and terminology
 relevant to assessing the performance of code
-in high-performance computing (HPC). 
+in high-performance computing\index{high-performance computing} (HPC). 
 
 In this context, it is useful to define a few terms. A floating
 point operation\index{FLOP} is a calculation of floating point arithmetic. In a
@@ -1081,7 +1111,47 @@ memory efficiency or algorithm improvement to try to speed up the code.
 Code in the purple region to the left of the machine balance point
 tends to be limited by bandwidth.
 
-
+If you find your code is bandwidth-bound, there are a number of strategies that
+can be used to improve performance. One way is to reshape your algorithm so that
+it requires less communication. This can be quite challenging. An easier way is
+to look in detail where your memory is being stored. Modern computing
+architectures have multiple levels of memory, organized in the following by
+increasing distance from the processor:
+\begin{enumerate}
+  \item {\it Registers}\index{register} are located inside of the processor
+itself. They hold very little data but are extremely fast.
+  \item {\it Caches}\index{cache} are also located inside the processor.
+Actively used data from the main memory, which we'll discuss next, is duplicated
+in the cache for faster access. A processor can contain a cache hierarchy, for
+instance many GPUs have L1, L2, and L3 caches, which in that order become
+gradually larger but slower.
+  \item {\it Main memory}\index{memory!main} is no longer inside the processor,
+but has a comparatively large storage size. It is connected to the processor
+via a {\it bus}\index{bus}. On circuit boards, you can sometimes see the 
+connections as thin lines of a metal, such as copper, called {\it
+traces}\index{trace}. The bus also requires logical units made of transistors
+that manage the this transfer between devices.
+Usually there are multiple buses connecting the main
+memory with the processor, for instance one bus may send a number that indicates
+the desired location of the data. This number is the {\it memory address}.
+Another bus will then transfer the data themselves.
+\end{enumerate}
+As already hinted in some of the above discussion, as one increases physical
+distance from the processor, the latency tends to increase, or conversely the
+bandwidth decreases. This increase in latency has many causes, the easiest of
+which to understand are:
+\begin{enumerate}
+  \item The further a signal needs to travel, the longer it takes.
+  \item Memory addresses correspond to physical locations on the storage device.
+Reading and writing data is implemented through some physical operation at that
+physical location, and hence you may lose time if you need to change locations,
+depending on how this is implemented. Registers and caches let you carry out
+repeated operations on a section of your full memory, limiting latency of this kind.
+  \item Coordinating data transfer requires instructions to be sent around. The
+further away the memory is, the more complicated it is to access that memory,
+and hence the more instructions are required. And of course it takes time to
+process instructions.
+\end{enumerate}
 
 
 \bibliographystyle{unsrtnat}
