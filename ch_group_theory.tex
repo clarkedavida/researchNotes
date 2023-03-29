@@ -615,7 +615,21 @@ The $\SU(2)$ algebra is defined by
   [J_i,J_j]=i\epsilon_{ij}J_k.
 \end{equation}
 In units $\hbar=1$, this is the algebra of the familiar angular momentum
-operator from QM. 
+operator from QM.
+It can be represented as
+\begin{equation}
+\SU(2)=\left\{
+\left(\begin{array}{cc}
+          a+ib   & -c+id  \\ 
+          c+id   &  a-ib  \\
+            \end{array}\right)\suchthat a,b,c,d\in\R \right\}.
+\end{equation} 
+One property of $\SU(N)$ matrices, $N\in\N$, is that they have determinant 1.
+This leads to the constraint
+\begin{equation}
+a^2+b^2+c^2+d^2=1,
+\end{equation} 
+which is the equation for the unit hypersphere in four dimensions, $S^3$. 
 
 \begin{proposition}{}{}
   Let $A,B\in\SU(2)$ with parameterization
@@ -646,7 +660,12 @@ operator from QM.
   \end{proof}
 \end{proposition}
 Something worth noting about the parameterization of the above proposition
-is that it shows a bijection between $\SU(2)$ and the three-sphere $S^3$.
+is that we again see the bijection\footnote{Unfortunately this nice visualization
+already breaks down for $\SU(3)$. I have read that it is ``the total space of 
+an $S^3$ fibration over $S^5$. I don't really know what that means, but $S^3$
+and $S^5$ are hyperspheres, so I sometimes think of an element in $\SU(3)$ being
+characterized by two points, one on each hypersphere, with the hyperspheres
+being somehow entangled.} between $\SU(2)$ and the three-sphere $S^3$.
 In this parameterization, $a_\mu$ is a component of a 4D Euclidean vector where
 $a_0\equiv a_4$. The vector, which specifies the $\SU(2)$ matrix entirely,
 satisfies $a_\mu a_\mu=1$, which means it's a point on the surface of a 4D
@@ -660,9 +679,48 @@ matrix multiplications on the computer.
   \frac{A+B}{\sqrt{\det(A+B)}}\in\SU(2).
   $$
   \begin{proof}
-    This follows from $\det(cA)=c^n\det(A)$ for any $n\times n$ matrix $A$.
+    Follows from $\det(cA)=c^n\det(A)$ for any $n\times n$ matrix $A$.
   \end{proof}
 \end{proposition}
+
+\subsection{Useful facts for Lie groups}
+
+Here we collect some useful facts about common Lie groups that are encountered
+in physics. Any time we give a dimension, it is over $\R$. 
+That $G$ is a double cover of $H$ roughly means there are always two 
+elements of $G$ corresponding to one element in
+$H$. A summary of information is given in \tabref{tab:lie}.
+
+To see the $\U(2)$ isomorphism, let $g\in\U(2)$, then show that
+\begin{equation}
+\sqrt{\det g\det g^*}=1.
+\end{equation} 
+The corresponding
+$h\in U(1)\times SU(2)/\Z_2$ is given by
+\begin{equation}
+h=\left(\pm\sqrt{\det g},\pm\frac{g}{\sqrt{\det g}}\right),
+\end{equation} 
+where the sign reflects the $\Z_2$ part.
+
+\begin{table}
+\centering
+\caption{Collection of properties of some Lie groups. }
+\begin{tabularx}{\linewidth}{lCr}
+\hline\hline
+Group & Dimension & Notes\\
+\hline
+$\U(1)$  & 1        & $\cong S^1$ and $\SO(2)$\\
+$\U(2)$  & 4        & $\cong \U(1)\times \SU(2)/\Z_2$\\
+$\U(N)$  & $N^2$    & \\ 
+$\SU(2)$ & 3        & $\cong S^3$, double cover of $\SO(3)$\\
+$\SU(N)$ & $N^2-1$  & \\
+$\ON(N)$ & $N(N-1)/2$ & \\
+$\SO(N)$ & $N(N-1)/2$ & \\
+\hline\hline
+\end{tabularx}
+\label{tab:lie}
+\end{table}
+
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}

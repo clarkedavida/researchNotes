@@ -670,254 +670,6 @@ $\rho$ meson is much greater than the pion (more than five times greater), which
 reflects the fact that under strong interactions, aligned-spin states are higher
 energy states.}.
 
-\section{Anomalous magnetic moment}\label{sec:magAnom}
-The {\it magnetic moment}\footnote{This is the dipole contribution to the
-magnetic moment. Higher order moments, such as the quadrupole, are forbidden.
-In particular this multipole expansion, which can be expressed in
-terms of spherical harmonics $Y_l^m$, has its $l$ limited to $l=1$
-since the only particles we consider are spin-1/2.}\index{magnetic moment} 
-of a particle $X$, $\vec{M}_X$,
-with $X\in\{e,\mu,\tau\}$
-determines how it responds to an external magnetic field $\vec{B}$. In particular it
-gives a contribution to the energy $-\vec{M}_X\cdot\vec{B}$.
-The magnetic moment itself comes from the particle's intrinsic spin $\vec{S}_X$,
-\begin{equation}
-  \vec{M}_X=g_X\frac{q_X}{2m_X}\vec{S}_X,
-\end{equation}
-where $g_X$ is a constant called the {\it g-factor}\index{g-factor}
-or {\it gyromagnetic ratio}\index{gyromagnetic ratio} and
-$m_X$ and $q_X$ are the particle's mass and charge, respectively.
-Using relativistic quantum mechanics, one can argue $g_X=2$. Any
-deviation from 2 is thus called the {\it anomalous magnetic moment},
-\index{magnetic moment!anomalous}
-\begin{equation}
-  a_X=\frac{g_X-2}{2}.
-\end{equation}
-
-
-\subsection{Vacuum polarization}\label{sec:VP}\index{vacuum polarization}
-
-For this section we closely follow Ref.~\cite{maiani_hadron_2016}, 
-which I found to be quite
-a nice introduction to vacuum polarization.
-
-The simplest case of {\it vacuum polarization} (VP) is a one-loop effect in
-$e^+e^-$ scattering in QED. If the virtual photon has enough energy,
-an $e^+e^-$ pair can be emitted and reabsorbed, and this
-pair will effectively screen\footnote{The name can be remembered in analogy to
-the application of an external magnetic field on a dielectric material.
-In this case the polarized molecules in the material will also screen
-the external field inside the material.} the electromagnetic field, reducing the force
-carried by the photon.
-
-\begin{figure}
-\centering
-\includegraphics[width=0.8\linewidth]{figs/HVP.pdf}
-\caption{HVP contribution to $a_\mu$. It arises from the two
-contributions shown in this figure. {\it Top}: Quark-line
-connected contribution, which is a virtual quark
-bubble inserted in photon propagator. {\it Bottom}:
-Quark-line disconnected contribution, which consists of
-virtual quark bubbles connected by gluons. The bubbles
-include all possible QED interactions.
-Image taken from Ref.~\cite{FermilabLattice:2022izv}.}
-\label{fig:HVPmuon}
-\end{figure}
-
-
-Any possible charged particle-antiparticle pair must be considered,
-for instance $\mu^+\mu^-$ and $\tau^+\tau^-$. Their effects are small compared
-to $e^+e^-$ due to their comparatively large masses, and are hence
-only noticeable for large\index{virtuality} {\it virtuality}, or $q^2$,
-of the exchanged photon. 
-Contributions to VP coming from strongly interacting particles
-is referred to as\index{vacuum polarization!hadronic} 
-{\it hadronic vacuum polarization} (HVP).
-Their effect can be computed perturbatively at large $q^2$,
-but at small $q^2$ this of course fails.
-The HVP contribution to $a_\mu$ is shown in \figref{fig:HVPmuon}.
-
-The first experimental indication of HVP was found at 
-LAL-Orsay~\cite{augustin_evidence_1973},
-which measured the cross section for $e^+e^-\to\mu^+\mu^-$.
-There a characteristic interference pattern was found for
-the $\phi(1020)$ resonance\footnote{A {\it phi meson} $\phi$
-is\index{meson!f@$\phi$} a strange-antistrange pair.}, in concordance with the
-$\phi$ HVP contribution. CERN had a series of experiments
-starting in 
-1958~\cite{charpak_measurement_1961,bailey_precise_1971,bailey_anomalous_1977}, 
-culminating in a measurement of $a_\mu$, which agreed at the time with the 
-SM~\cite{calmet_anomalous_1977}.
-
-
-Since then, higher precision was achieved at Brookhaven
-and J-PARC, and a state-of-the-art determination from 
-Fermilab~\cite{abi_measurement_2021}
-places experimental searches at 4.2$\sigma$ tension
-against data-driven theoretical methods,
-which we will discuss shortly~\cite{aoyama_anomalous_2020}.
-
-
-At the same time that this 4.2$\sigma$ tension was revealed,
-the BMW collaboration offered a lattice calculation with precision competitive
-with data-driven approaches~\cite{borsanyi_leading_2021}.
-Their result tantalizingly lies between the data-driven result and experiment,
-being about 2.1$\sigma$ above the theory and 1.6$\sigma$ below experiment.
-Understanding this 3-fold tension requires careful investigation of
-systematics. We will discuss the lattice perspective
-in more detail in \secref{sec:muonAnom}. 
-
-
-
-\section{Isospin and hypercharge}\label{sec:isohyper}
-\index{hypercharge}\index{isospin}
-
-We follow Chapter~9 of 
-Ref.~\cite{thomson_modern_2013}. 
-In quantum mechanics you learn that spin is a quantum number of
-charged particles. For example the electron is a spin-1/2 particle. The
-$z$-component $S_3$ of the spin operator $S$ commutes with the Hamiltonian, and
-you learn that the eigenvectors of $S_3$ are the +1/2 and -1/2 states. You also
-learn that the components of $S$ are related to the Pauli matrices by
-\begin{equation}
-  S_i=\frac{\hbar}{2}\sigma_i.
-\end{equation}
-
-Early on in nuclear physics, scientists noticed that the proton and neutron had
-about the same mass, and that the nuclear force between two nucleons (i.e.
-protons or neutrons) was approximately charge independent. Therefore Heisenberg
-suggested that protons and neutrons were two states of a single particle (the
-nucleon) just as there are spin-up and spin-down states of a spin-1/2
-particle.
-The quantum number corresponding to this property is called {\it isospin}.
-Using this idea, the proton and neutron form an isospin doublet with total
-isospin $I=1/2$ and $z$-component $I_3=\pm1/2$. Thus the Pauli matrices also
-give a suitable representation of the isospin operator, and we write
-\begin{equation}
-  I^2=\sum\limits_{i=1}^3 I_i^2, \qquad I_i=\frac{1}{2}\sigma_i.
-\end{equation}
-I know this is sloppy, but I want to leave it to the reader to determine from
-context whether $I$ represents the operator or the eigenvalue. 
-
-The concept of isospin can be extended in the same way to quarks. 
-In the simplest case we have $N_f=2$ and consider the lightest quarks
-$u$ and $d$. The $\SU(2)$ isospin symmetry is only approximate because 
-the $u$ and $d$ quarks have slightly different masses. The isospin 
-doublet then has a $u$ component and a $d$ component. Generally with
-$N_f$ flavors of fermion with degenerate masses, the symmetry group is 
-$\SU(N_f)$ and we
-form $N_f$-component multiplets in flavor space, one component per flavor.
-
-Let's introduce the $s$ quark, assuming it has the same mass as the
-$u$ and $d$ quarks, and do the $N_f=3$ case.
-Using the Pauli matrices and the fact that $\SU(3)$ has 8 generators, you can
-figure out what the Gell-Mann matrices are. We will say that $u$, $d$, and $s$
-are eigenvectors of isospin and write
-\begin{equation}
-  u=\colvec{3}{1}{0}{0}, \qquad
-  d=\colvec{3}{0}{1}{0}, \qquad
-  s=\colvec{3}{0}{0}{1}.
-\end{equation}
-Then $u$ and $d$ span a 2D subspace of flavor space, so from the earlier
-discussion we should know that the generators of $\SU(2)$ are contained in the
-generators of $\SU(3)$. Hence
-\begin{equation}
-  \lambda_1=\left(\begin{array}{ccc}
-            0 & 1 &  \\
-            1 & 0 &  \\
-              &   & 0
-            \end{array}\right), \qquad
-  \lambda_2=\left(\begin{array}{ccc}
-            0 & -i &  \\
-            i & 0  &  \\
-              &    & 0
-            \end{array}\right), \qquad
-  \lambda_3=\left(\begin{array}{ccc}
-            1 & 0  &  \\
-            0 & -1 &  \\
-              &    & 0
-            \end{array}\right).
-\end{equation}
-But there's nothing special about $u$ and $d$; $u$ and $s$ will similarly form
-a subspace, and so will $d$ and $s$. In both cases, we will use the Pauli
-matrices as generators. We can similarly write
-\begin{equation}
-  \lambda_4=\left(\begin{array}{ccc}
-            0 &   & 1\\
-              & 0 &  \\
-            1 &   & 0
-            \end{array}\right), \qquad
-  \lambda_5=\left(\begin{array}{ccc}
-            0 &    & -i \\
-              & 0  &    \\
-            i &    & 0
-            \end{array}\right), \qquad
-  \lambda_X=\left(\begin{array}{ccc}
-            1 &    & 0 \\
-              & 0  &   \\
-            0 &    & -1
-            \end{array}\right),
-\end{equation}
-\begin{equation}
-  \lambda_6=\left(\begin{array}{ccc}
-            0 &   &  \\
-              & 0 & 1\\
-              & 1 & 0
-            \end{array}\right), \qquad
-  \lambda_7=\left(\begin{array}{ccc}
-            0 &    &   \\
-              & 0  & -i\\
-              & i  & 0
-            \end{array}\right), \qquad
-  \lambda_Y=\left(\begin{array}{ccc}
-           0  &    &  \\
-              & 1  & 0\\
-              & 0  & -1 
-            \end{array}\right).
-\end{equation}
-Finally note the fact that there are only 8 linearly independent generators, so
-two of these matrices should be linearly dependent. Since the
-$u\leftrightarrow d$ isospin symmetry is the closest to being exact, we choose
-the last generator to be a linear combination of $\lambda_X$ and $\lambda_Y$
-that treats the $u$ and $d$ quarks symmetrically. Thus
-\begin{equation}
-  \lambda_8=\frac{1}{\sqrt{3}}\lambda_X+\frac{1}{\sqrt{3}}\lambda_Y
-           =\frac{1}{\sqrt{3}}\left(\begin{array}{ccc}
-            1 &   &   \\
-              & 1 &   \\
-              &   & -2
-            \end{array}\right).
-\end{equation}
-The new isospin and total isospin operators are
-\begin{equation}
-  I^2=\frac{1}{4}\sum\limits_{i=1}^8 I_i^2, \qquad I_i=\frac{1}{2}\lambda_i.
-\end{equation}
-
-In the case of $\SU(2)$, the operators $I_i$ do not commute, and therefore are
-not simultaneously diagonalizable. For $\SU(3)$ in the Gell-Mann basis,
-$I_3$ and $I_8$ are both diagonal, so they correspond to compatible
-observables. The observable $I_3$ is itself sometimes referred to
-as isospin or weak isospin. The observable we associate with $I_8$ is rescaled as
-\begin{equation}
-  Y=\frac{1}{\sqrt{3}}\lambda_8,
-\end{equation}
-and $Y$ is called the {\it hypercharge}.\index{hypercharge} 
-We can quickly obtain the isopins and hypercharges of
-our lightest quarks: 
-\begin{equation}\begin{aligned}
-\hat{I_3}\,u =\frac{1}{2}u ~~~ &\text{and}~~~\hat{Y}u=\frac{1}{3}u,\\
-\hat{I_3}\,d =-\frac{1}{2}d ~~~ &\text{and}~~~\hat{Y}d=\frac{1}{3}d,\\
-\hat{I_3}\,s = 0           ~~~ &\text{and}~~~\hat{Y}s=-\frac{2}{3}s.
-\end{aligned}\end{equation}
-One can summarize this pattern of conserved charges in the following formula:
-\begin{theorem}{Gell-Mann-Nishijima Formula}{}
-\index{Gell-Mann-Nishijima formula}
-  The electric charge $Q$ of a particle is related to its isospin and
-  hypercharge by
-  \begin{equation*}
-    Q=I_3+\frac{1}{2}Y
-  \end{equation*}
-\end{theorem}
 
 
 \section{Spontaneous symmetry breaking}\label{sec:ssb}
@@ -1071,30 +823,170 @@ Goldstone boson.
 \end{proof}
 \end{theorem}
 
+Note that from \tabref{tab:lie}, the difference between the number of generators
+of $\ON(N)$ and $\ON(N-1)$ is $N-1$, which is consistent with $N-1$ pions.
 
 
+\section{Isospin and hypercharge}\label{sec:isohyper}
+\index{hypercharge}\index{isospin}
 
-\section{The GMOR formula}
-
-The Gell-Mann-Oakes-Oakes-Renner (GMOR) formula~\cite{gell-mann_behavior_1968}
-relates the pion mass to the masses of the up and down quarks. I think
-this formula is derivable in chiral perturbation theory. The formula
-takes the form
+We follow Chapter~9 of 
+Ref.~\cite{thomson_modern_2013}. 
+In quantum mechanics you learn that spin is a quantum number of
+charged particles. For example the electron is a spin-1/2 particle. The
+$z$-component $S_3$ of the spin operator $S$ commutes with the Hamiltonian, and
+you learn that the eigenvectors of $S_3$ are the +1/2 and -1/2 states. You also
+learn that the components of $S$ are related to the Pauli matrices by
 \begin{equation}
-  M_\pi^2= B(m_u+m_d)+\order{m^2}.
+  S_i=\frac{\hbar}{2}\sigma_i.
 \end{equation}
-This formula directly shows that the pion mass is not simply the sum of
-the valence quark masses. Moreover since you know the physical values
-of $M_\pi$, $m_u$, and $m_d$, this equation can be used to crudely estimate
-$M_\pi$ for unphysical light quark masses.
 
+Early on in nuclear physics, scientists noticed that the proton and neutron had
+about the same mass, and that the nuclear force between two nucleons (i.e.
+protons or neutrons) was approximately charge independent. Therefore Heisenberg
+suggested that protons and neutrons were two states of a single particle (the
+nucleon) just as there are spin-up and spin-down states of a spin-1/2
+particle.
+The quantum number corresponding to this property is called {\it isospin}.
+Using this idea, the proton and neutron form an isospin doublet with total
+isospin $I=1/2$ and $z$-component $I_3=\pm1/2$. Thus the Pauli matrices also
+give a suitable representation of the isospin operator, and we write
+\begin{equation}
+  I^2=\sum\limits_{i=1}^3 I_i^2, \qquad I_i=\frac{1}{2}\sigma_i.
+\end{equation}
+I know this is sloppy, but I want to leave it to the reader to determine from
+context whether $I$ represents the operator or the eigenvalue. 
 
+The concept of isospin can be extended in the same way to quarks. 
+In the simplest case we have $N_f=2$ and consider the lightest quarks
+$u$ and $d$. The $\SU(2)$ isospin symmetry is only approximate because 
+the $u$ and $d$ quarks have slightly different masses. The isospin 
+doublet then has a $u$ component and a $d$ component. Generally with
+$N_f$ flavors of fermion with degenerate masses, the symmetry group is 
+$\SU(N_f)$ and we
+form $N_f$-component multiplets in flavor space, one component per flavor.
+
+Let's introduce the $s$ quark, assuming it has the same mass as the
+$u$ and $d$ quarks, and do the $N_f=3$ case.
+Using the Pauli matrices and the fact that $\SU(3)$ has 8 generators, you can
+figure out what the Gell-Mann matrices are. We will say that $u$, $d$, and $s$
+are eigenvectors of isospin and write
+\begin{equation}
+  u=\colvec{3}{1}{0}{0}, \qquad
+  d=\colvec{3}{0}{1}{0}, \qquad
+  s=\colvec{3}{0}{0}{1}.
+\end{equation}
+Then $u$ and $d$ span a 2D subspace of flavor space, so from the earlier
+discussion we should know that the generators of $\SU(2)$ are contained in the
+generators of $\SU(3)$. Hence
+\begin{equation}
+  \lambda_1=\left(\begin{array}{ccc}
+            0 & 1 &  \\
+            1 & 0 &  \\
+              &   & 0
+            \end{array}\right), \qquad
+  \lambda_2=\left(\begin{array}{ccc}
+            0 & -i &  \\
+            i & 0  &  \\
+              &    & 0
+            \end{array}\right), \qquad
+  \lambda_3=\left(\begin{array}{ccc}
+            1 & 0  &  \\
+            0 & -1 &  \\
+              &    & 0
+            \end{array}\right).
+\end{equation}
+But there's nothing special about $u$ and $d$; $u$ and $s$ will similarly form
+a subspace, and so will $d$ and $s$. In both cases, we will use the Pauli
+matrices as generators. We can similarly write
+\begin{equation}
+  \lambda_4=\left(\begin{array}{ccc}
+            0 &   & 1\\
+              & 0 &  \\
+            1 &   & 0
+            \end{array}\right), \qquad
+  \lambda_5=\left(\begin{array}{ccc}
+            0 &    & -i \\
+              & 0  &    \\
+            i &    & 0
+            \end{array}\right), \qquad
+  \lambda_X=\left(\begin{array}{ccc}
+            1 &    & 0 \\
+              & 0  &   \\
+            0 &    & -1
+            \end{array}\right),
+\end{equation}
+\begin{equation}
+  \lambda_6=\left(\begin{array}{ccc}
+            0 &   &  \\
+              & 0 & 1\\
+              & 1 & 0
+            \end{array}\right), \qquad
+  \lambda_7=\left(\begin{array}{ccc}
+            0 &    &   \\
+              & 0  & -i\\
+              & i  & 0
+            \end{array}\right), \qquad
+  \lambda_Y=\left(\begin{array}{ccc}
+           0  &    &  \\
+              & 1  & 0\\
+              & 0  & -1 
+            \end{array}\right).
+\end{equation}
+Finally note the fact that there are only 8 linearly independent generators, so
+two of these matrices should be linearly dependent. Since the
+$u\leftrightarrow d$ isospin symmetry is the closest to being exact, we choose
+the last generator to be a linear combination of $\lambda_X$ and $\lambda_Y$
+that treats the $u$ and $d$ quarks symmetrically. Thus
+\begin{equation}
+  \lambda_8=\frac{1}{\sqrt{3}}\lambda_X+\frac{1}{\sqrt{3}}\lambda_Y
+           =\frac{1}{\sqrt{3}}\left(\begin{array}{ccc}
+            1 &   &   \\
+              & 1 &   \\
+              &   & -2
+            \end{array}\right).
+\end{equation}
+The new isospin and total isospin operators are
+\begin{equation}
+  I^2=\frac{1}{4}\sum\limits_{i=1}^8 I_i^2, \qquad I_i=\frac{1}{2}\lambda_i.
+\end{equation}
+
+In the case of $\SU(2)$, the operators $I_i$ do not commute, and therefore are
+not simultaneously diagonalizable. For $\SU(3)$ in the Gell-Mann basis,
+$I_3$ and $I_8$ are both diagonal, so they correspond to compatible
+observables. The observable $I_3$ is itself sometimes referred to
+as isospin or weak isospin. The observable we associate with $I_8$ is rescaled as
+\begin{equation}
+  Y=\frac{1}{\sqrt{3}}\lambda_8,
+\end{equation}
+and $Y$ is called the {\it hypercharge}.\index{hypercharge} 
+We can quickly obtain the isopins and hypercharges of
+our lightest quarks: 
+\begin{equation}\begin{aligned}
+\hat{I_3}\,u =\frac{1}{2}u ~~~ &\text{and}~~~\hat{Y}u=\frac{1}{3}u,\\
+\hat{I_3}\,d =-\frac{1}{2}d ~~~ &\text{and}~~~\hat{Y}d=\frac{1}{3}d,\\
+\hat{I_3}\,s = 0           ~~~ &\text{and}~~~\hat{Y}s=-\frac{2}{3}s.
+\end{aligned}\end{equation}
+One can summarize this pattern of conserved charges in the following formula:
+\begin{theorem}{Gell-Mann-Nishijima Formula}{}
+\index{Gell-Mann-Nishijima formula}
+  The electric charge $Q$ of a particle is related to its isospin and
+  hypercharge by
+  \begin{equation*}
+    Q=I_3+\frac{1}{2}Y
+  \end{equation*}
+\end{theorem}
 
 
 \section{Chiral symmetry}\label{sec:cscont}
 \index{chiral symmetry}
 
-
+There are some interesting, approximate global symmetries of the QCD Lagrangian
+that crop up in the limit of zero quark mass. They are related to isospin
+discussed in \secref{sec:isohyper}. Introducing small quark masses breaks this
+symmetry; hence from the perspective of an effective theory of bound states we
+can find something like Goldstone bosons in accordance with the discussion in
+\secref{sec:ssb}. 
 In this section we work with a Euclidean metric. We follow
 Chapter 7 of Gattringer and
 Lang~\cite{gattringer_quantum_2010}.
@@ -1115,10 +1007,11 @@ mapping
   \psi\to e^{i\alpha\gamma_5}\psi~~~~\text{and}~~~~
   \bar{\psi}\to\bar\psi e^{i\alpha\gamma_5},
 \end{equation}
-where $\alpha\in\R$. This is probably called a chiral rotation
-because $\gamma_5$ is used to define the operators~\eqref{eq:projdef},
-which project out the left-handed and right-handed components of the
-fermion field according to \equatref{eq:projact}. Using identity 2 of
+where $\alpha\in\R$. This is called a chiral rotation
+because $\gamma_5$, which is used to define the operators~\eqref{eq:projdef},
+projects out the left-handed and right-handed components of the
+fermion field according to \equatref{eq:projact}. 
+Using identity 2 of
 \propref{prp:gammatech}, we find that $\Lagr_F$ transforms under this
 rotation as
 \begin{equation}
@@ -1144,10 +1037,8 @@ which mixes the chiral components, thereby breaking chiral symmetry.
 This is why one refers to the limit $m\to0$ as the {\it chiral limit}.
 
 
-
-
-We now generalize these ideas to $N_f$ flavors of fermion. In Gattringer
-and Lang eq.~(7.11), they write the fermion action as
+We now generalize these ideas to $N_f$ flavors of fermion.
+In general we can write a fermion action as
 \begin{equation}\label{eq:nfact}
   S_F=\int\dd[4]{x}\Lagr_F=\int\dd[4]{x}
          \bar{\psi}\left(\slashed{D}+M\right)\psi,
@@ -1156,9 +1047,12 @@ where $M$ is the {\it mass matrix}\index{mass matrix}
 \begin{equation}
   M~``="~\diag(m_1,m_2,...,m_{N_f})
 \end{equation}
-acting in flavor space. $M$ cannot be a $N_f\times N_f$ matrix, because
-we have defined $\gamma^\mu$ as a $4\times4$ matrix. The only way adding
-these matrices makes sense is if $M$ is a $4N_f\times4N_f$ matrix, i.e. if
+acting in flavor space. Here the $\psi$ can be thought of as a vector with $N_f$
+components $\psi_f$ like
+\begin{equation}
+  \psi=\colvec{4}{\psi_1}{\psi_2}{\vdots}{\psi_{N_f}}.
+\end{equation}
+Each $\psi_f$ is a 4-component Dirac spinor, and so $M$ has the form 
 \begin{equation}
   M=\left(\begin{array}{cccc}
       m_1\id_4 &          &        & \\
@@ -1167,55 +1061,73 @@ these matrices makes sense is if $M$ is a $4N_f\times4N_f$ matrix, i.e. if
                &          &        & m_{N_f}\id_4
     \end{array}\right).
 \end{equation}
-Then $\psi$ must be a $4N_f$ vector (in the mathematical sense, not
-in the Lorentz transformation sense) looking something like
+Similarly when we write $\gamma_\mu$ in \equatref{eq:nfact} what we really mean is
 \begin{equation}
-  \psi=\colvec{4}{\psi_1}{\psi_2}{\vdots}{\psi_{N_f}},
-\end{equation}
-where each $\psi_i$ is a 4-component Dirac spinor, and presumably when
-we write $\gamma^\mu$ in \equatref{eq:nfact} what we really mean is
-\begin{equation}
-  \gamma^\mu=\gamma^\mu\id_{N_f}
+  \gamma_\mu
             =\left(\begin{array}{cccc}
-               \gamma^\mu &            &        & \\
-                          & \gamma^\mu &        & \\
+               \gamma_\mu &            &        & \\
+                          & \gamma_\mu &        & \\
                           &            & \ddots & \\
-                          &            &        & \gamma^\mu
+                          &            &        & \gamma_\mu
                \end{array}\right).
 \end{equation}
-Please forgive the notational perversion in the above equation.
-
+Where the $\gamma^\mu$ in the matrix are defined as usual while the $\gamma_\mu$
+on the LHS is just a shorthand. I'm sorry about this confusing notation. 
 
 In the chiral limit, the action \equatref{eq:nfact} is again invariant under
 \index{rotation!axial vector}
-chiral rotations, also in this context called {\it axial vector rotations},
-taking the form
+{\it axial} rotations taking the form
 \begin{gather}
   \label{eq:SUNfc}
-  \psi\to e^{i\alpha\gamma_5 T^a}\psi,\qquad
-    \bar{\psi}\to\bar{\psi}e^{i\alpha\gamma_5 T^a}, \\
+  \psi\to e^{i\gamma_5\alpha^a T^a}\psi,\qquad
+    \bar{\psi}\to\bar{\psi}e^{i\gamma_5\alpha^a T^a}, \\
   \label{eq:U1A}
   \psi\to e^{i\alpha\gamma_5 \id}\psi,\qquad
     \bar{\psi}\to\bar{\psi}e^{i\alpha\gamma_5 \id},
 \end{gather}
 where the $T^a$ are the $N_f^2-1$ generators of $\SU(N_f)$,
-$\id\equiv\id_{4N_f}$, and again $\alpha\in\R$.
-In this limit the action is also invariant under the
-\index{rotation!vector}
-{\it vector rotations}
+$\id\equiv\id_{4N_f}$, and again $\alpha^a,\alpha\in\R$.
+In this limit the action is also invariant under 
+the \index{rotation!vector}{\it vector rotations}
 \begin{gather}
   \label{eq:SUNf}
-  \psi\to e^{i\alpha T^a}\psi,\qquad
-    \bar{\psi}\to\bar{\psi}e^{-i\alpha T^a}, \\
+  \psi\to e^{i\alpha^a T^a}\psi,\qquad
+    \bar{\psi}\to\bar{\psi}e^{-i\alpha^a T^a}, \\
   \label{eq:U1V}
   \psi\to e^{i\alpha \id}\psi,\qquad
     \bar{\psi}\to\bar{\psi}e^{-i\alpha \id}.
 \end{gather}
-This invariance under the above two equations extends to the case of degenerate
+The corresponding Noether currents for these symmetries are, up to a sign,
+respectively
+\begin{equation}\begin{aligned}
+J^{5a}_\mu&=\psibar T^a\gamma_\mu\gamma^5\psi,\\
+J^5_\mu&=\psibar\gamma_\mu\gamma^5\psi,\\
+J^a_\mu&=\psibar T^a\gamma_\mu\psi,\\
+J_\mu&=\psibar\gamma_\mu\psi.\\
+\end{aligned}\end{equation}
+
+Using eqs.~\eqref{eq:SUNfc} and \eqref{eq:SUNf}, we can define a general
+chiral rotation\index{rotation!chiral} by
+\begin{equation}\label{eq:chiralRotation}
+  \psi\to e^{i(\alpha^a + \gamma_5\beta^a)T^a}\psi.
+\end{equation}
+If we take $\beta^a=0$ in \equatref{eq:chiralRotation}, we get the diagonal
+isospin subgroup.
+If we express the action~\eqref{eq:nfact} in terms of left-handed and
+right-handed components of $\psi$, we will find that, in the chiral limit, the 
+rotation~\eqref{eq:chiralRotation} can be decomposed into two $\SU(2)$
+rotations, one rotating the left-handed fields of different flavors
+among themselves and similarly for right-handed fields. This reflects
+\begin{equation}
+\SU(2)_V\times\SU(2)_A = \SU(2)_L\times\SU(2)_R.
+\end{equation}
+
+The invariance under eqs.~\eqref{eq:SUNf} and \eqref{eq:U1V} extends to the case of degenerate
 masses, when $m_1=m_2=...=m_{N_f}\equiv m$, and is the familiar isospin
 symmetry generalized to $N_f$ flavors. The symmetry~\eqref{eq:U1V} holds for
 \index{baryon number}
-arbitrary masses, and the conserved quantity is the 
+arbitrary masses, and the corresponding Noether current suggests
+the conserved quantity in QCD is the 
 {\it baryon number}\footnote{You can see why it's called baryon number: 
 A baryon is made of 3
 quarks, and hence has $B=1$. Anti-quarks have $B=-1$, and
@@ -1250,9 +1162,9 @@ There remains
   \underbrace{\U(1)_V\times\U(1)_V\times...\times\U(1)_V}_\text{$N_f$ times}.
 \end{equation}
 
-
-The typical QCD scale is $\sim1~\text{GeV}$ (think protons, which have a
-mass of about 940~MeV) so the $u$, $d$, and $s$ quarks have masses that
+The typical QCD scale\footnote{Think of protons, which have a mass of about
+940~MeV.} is $\sim1~\text{GeV}$ 
+so the $u$, $d$, and $s$ quarks have masses that
 are relatively small (about 5~MeV, 5~MeV, and 100~MeV, respectively).
 Since these masses are so close to zero on this scale, we can say that
 when $N_f=2$, and partly for $N_f=3$, \equatref{eq:SMglobalbUA} is
@@ -1266,6 +1178,258 @@ conclude that something else is happening. This is another example
 of SSB: If quarks were massless, the pions would arise as
 the Goldstone bosons of chiral SSB; hence we refer to pions as
 ``would-be" Goldstone bosons.
+
+\subsection{Chiral perturbation theory}
+
+Let us try to understand the situation with only two light quarks $u$ and $d$.
+As discussed above, introducing massive, degenerate fermions introduces a
+symmetry-breaking pattern
+\begin{equation}
+\SU(2)_L\times\SU(2)_R\to\SU(2)_V,
+\end{equation}
+which is the isospin symmetry. Inspired by Goldstone's theorem, we would like to
+find an effective model in which this symmetry-breaking pattern lets us clearly see
+the pions as Goldstone bosons. We will use the linear sigma model as guide.
+This presentation follows Ref.~\cite{schwartz_quantum_2014}.
+
+Let $g_L\in\SU(2)_L$ and $g_R\in\SU(2)_R$. We introduce scalar fields
+$\sigma_{ij}(x)$ that transform under $\SU(2)_L\times\SU(2)_R$ as
+\begin{equation}\label{eq:chiralPertRot}
+\Sigma\to g_L\Sigma g_R^\dagger,\qquad
+\Sigma^\dagger\to g_R\Sigma^\dagger g_L^\dagger.
+\end{equation}
+An effective Lagrangian for this field is given by the linear sigma model
+\begin{equation}
+\Lagr=\left|\partial_\mu \Sigma\right|^2+m^2|\Sigma|^2-\frac{\lambda}{4}|\Sigma|^4,
+\end{equation}
+where $|\Sigma|^2=\Sigma_{ij}\Sigma^\dagger_{ji}$. This Lagrangian is invariant
+under the rotations~\eqref{eq:chiralPertRot}. The potential part is minimized
+when
+\begin{equation}
+\ev{\Sigma_{ij}}=\frac{v}{\sqrt{2}}\id_2,
+\end{equation}
+where the scale for the VEV is $v=\sqrt{m/2\lambda}$ like before.
+This choice corresponds to $\SU(2)_L\times\SU(2)_R$ breaking down
+to $\SU(2)_V$. 
+
+Next we define shifted fields $\pi^a$ and $\sigma$ relative to this point.
+This time we write it as
+\begin{equation}
+\Sigma(x)=\frac{v+\sigma(x)}{\sqrt{2}} \exp \left(2 i \frac{\pi^a(x) \tau^a}{f_\pi}\right)
+\end{equation}
+with the {\it pion decay constant}\index{decay constant!pion} $f_\pi$ given by
+\begin{equation}
+f_\pi=\frac{2m}{\lambda}=v,
+\end{equation}
+which leads to a nice normalization for the pion kinetic terms.
+In the limit $m\to\infty$ and $\lambda\to\infty$ holding $f_\pi$ fixed we get
+\begin{equation}\label{eq:Udef}
+\frac{\sqrt{2}}{v} \Sigma(x) \rightarrow U(x) \equiv \exp 
+\left[2 i \frac{\pi^a \tau^a}{f_\pi}\right]=\exp \left[\frac{i}{f_\pi}
+\left(\begin{array}{cc}
+\pi^0 & \sqrt{2} \pi^{-} \\
+\sqrt{2} \pi^{+} & -\pi^0
+\end{array}\right)
+\right],
+\end{equation}
+where $\pi^0=\pi^3$ and $\pi^\pm=(\pi^1\pm i\pi^2)\sqrt{2}$. This matrix form is
+thus determined by $\SU(2)$. Note that $U^\dagger U=\id$. Furthermore it
+transforms under $\SU(2)_L\times\SU(2)_R$ as
+\begin{equation}
+U\to g_LU g_R^\dagger.
+\end{equation}
+
+Let us now write down the most general Lagrangian involving $U$ invariant under 
+$\SU(2)_L\times\SU(2)_R$. It is 
+\begin{equation}\begin{aligned}\label{eq:chiralLagr}
+\Lagr_\chi=\frac{F_\pi^2}{4} \operatorname{tr}\left[\left(D_\mu U\right)\left(D_\mu U\right)^{\dagger}\right] & +L_1 \operatorname{tr}\left[\left(D_\mu U\right)\left(D_\mu U\right)^{\dagger}\right]^2 \\
+&+L_2 \tr \left[\left(D_\mu U\right)\left(D_\nu U\right)^{\dagger}\right] \operatorname{tr}\left[\left(D_\nu U\right)^{\dagger}\left(D_\mu U\right)\right]  \\
+& +L_3 \tr\left[\left(D_\mu U\right)\left(D_\mu
+U\right)^{\dagger}\left(D_\nu U\right)\left(D_\nu U\right)^{\dagger}\right]\\
+&+\cdots
+\end{aligned}\end{equation}
+This is the {\it chiral Lagrangian}\index{chiral Lagrangian}. This form is
+determined by the fact we need pairs of $g_L$ and $g_R$ to cancel. Every term
+requires derivatives since terms like $U^\dagger U$ are constant and hence have
+no influence on the equations of motion.
+In general these covariant derivatives include EW gauge fields, but no gluons.
+
+Plugging \equatref{eq:Udef} into \equatref{eq:chiralLagr} and expanding the
+exponential we find
+\begin{equation}\begin{aligned}
+& \frac{F_\pi^2}{4} \tr\left[\left(D_\mu U\right)\left(D_\mu U\right)^{\dagger}\right]
+=\frac{1}{2}\left(\partial_\mu \pi^0\right)\left(\partial_\mu \pi^0\right)+\left(D_\mu \pi^{+}\right)\left(D_\mu \pi^{-}\right)^{\dagger} \\
+& \quad+\frac{1}{F_\pi^2}\left[-\frac{1}{3} \pi^0 \pi^0 D_\mu \pi^{+} D_\mu
+\pi^{-}+\cdots\right]+\cdots
+\end{aligned}\end{equation}
+We thus find an expansion in powers of $f_\pi^{-2}$. This implies terms $L_i$ in
+\equatref{eq:chiralLagr} are suppressed relative to the leading term.
+Note that there is no pion mass term, which is consistent with them being
+Goldstone bosons.
+
+\subsection{The GMOR formula}
+
+In this section we derive a relation between pion masses and $u$ and $d$ masses.
+Chiral perturbation theory gives us a lot of useful information about pion
+interactions and their interactions with the EW sector, which motivates it as a
+possible starting point. The trouble is we have no pion mass term, and the
+theory doesn't know about $u$ and $d$ quarks.
+
+To extend $\Lagr_\chi$ to include $u$ and $d$ masses, we consider a term
+\begin{equation}
+\Lagr_{ud}=\psibar M \psi, \quad M=\left(\begin{array}{cc}
+m_u & 0 \\
+0 & m_d
+\end{array}\right)
+\end{equation}
+with $\psi$ containing $u$ and $d$ quarks only. To avoid trashing our
+$\SU(2)_L\times\SU(2)_R$ symmetry, we treat the constants $m_u$ and $m_d$ as
+fields and demand that the matrix $M$ transform as
+\begin{equation}
+M\to g_LMg_R^\dagger.
+\end{equation}
+Constants treated as fields in this way are sometimes called {\it
+spurions}\index{spurion}. 
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{figs/GMOR.pdf}
+\caption{Effective pion mass extracted from pion correlation functions
+for a $32^3\times16$ lattice calculation at $a\approx0.15$ fm.
+Results given for different bare light quark masses. Connecting lines guide the
+eye. Image taken from Ref.~\cite{gattringer_quantum_2010}.}
+\label{fig:GMOR}
+\end{figure}
+
+Now we can't include the term $\Lagr_{ud}$ directly because this is a theory
+where pions are the effective degrees of freedom, not the quarks. However we can
+include terms with $M$ to see what happens. The leading term we can add to
+$\Lagr_\chi$ looks like
+\begin{equation}
+\begin{aligned}
+\Lagr_M & =\frac{V^3}{2} \operatorname{tr}\left(M U+M^{\dagger} U^{\dagger}\right) \\
+& =V^3\left(m_u+m_d\right)-\frac{V^3}{2
+F_\pi^2}\left(m_u+m_d\right)\left(\pi_0^2+\pi_1^2+\pi_2^2\right)+\order{\pi^3} .
+\end{aligned}
+\end{equation}
+The prefactor $V^3/2$ was picked so that the VEV from $\Lagr_M$ matches the VEV
+from $\Lagr_{ud}$; here $V^3=\ev{\bar{u}u}=\ev{\bar{d}d}$. Looking at coupling
+for the $\pi^2$ terms, we read off the pion mass as
+\begin{equation}
+  M_\pi^2\approx \frac{V^3}{f_\pi^2}(m_u+m_d).
+\end{equation}
+This is the Gell-Mann-Oakes-Renner (GMOR)
+formula~\cite{gell-mann_behavior_1968}.
+It directly shows that the pion mass is not simply the sum of
+the valence quark masses. Moreover since you know the physical values
+of $M_\pi$, $m_u$, and $m_d$, this equation can be used to crudely estimate
+$M_\pi$ for unphysical light quark masses.
+
+In \figref{fig:GMOR} we show the results of a lattice calculation of the pion
+mass taken from Ref.~\cite{gattringer_quantum_2010}. Note that increasing the
+bare mass from 0.02 to 0.05 leads to a change in $m_\text{eff}$ of
+$0.4/0.26\approx1.54$. From the GMOR formula, we would expect the pion mass to
+change by a factor $\sqrt{0.05/0.02}\approx1.58$. Hence we see that the GMOR
+formula holds to good accuracy also in lattice QCD.
+
+\section{Anomalous magnetic moment}\label{sec:magAnom}
+The {\it magnetic moment}\footnote{This is the dipole contribution to the
+magnetic moment. Higher order moments, such as the quadrupole, are forbidden.
+In particular this multipole expansion, which can be expressed in
+terms of spherical harmonics $Y_l^m$, has its $l$ limited to $l=1$
+since the only particles we consider are spin-1/2.}\index{magnetic moment} 
+of a particle $X$, $\vec{M}_X$,
+with $X\in\{e,\mu,\tau\}$
+determines how it responds to an external magnetic field $\vec{B}$. In particular it
+gives a contribution to the energy $-\vec{M}_X\cdot\vec{B}$.
+The magnetic moment itself comes from the particle's intrinsic spin $\vec{S}_X$,
+\begin{equation}
+  \vec{M}_X=g_X\frac{q_X}{2m_X}\vec{S}_X,
+\end{equation}
+where $g_X$ is a constant called the {\it g-factor}\index{g-factor}
+or {\it gyromagnetic ratio}\index{gyromagnetic ratio} and
+$m_X$ and $q_X$ are the particle's mass and charge, respectively.
+Using relativistic quantum mechanics, one can argue $g_X=2$. Any
+deviation from 2 is thus called the {\it anomalous magnetic moment},
+\index{magnetic moment!anomalous}
+\begin{equation}
+  a_X=\frac{g_X-2}{2}.
+\end{equation}
+
+
+\subsection{Vacuum polarization}\label{sec:VP}\index{vacuum polarization}
+
+For this section we closely follow Ref.~\cite{maiani_hadron_2016}, 
+which I found to be quite
+a nice introduction to vacuum polarization.
+
+The simplest case of {\it vacuum polarization} (VP) is a one-loop effect in
+$e^+e^-$ scattering in QED. If the virtual photon has enough energy,
+an $e^+e^-$ pair can be emitted and reabsorbed, and this
+pair will effectively screen\footnote{The name can be remembered in analogy to
+the application of an external magnetic field on a dielectric material.
+In this case the polarized molecules in the material will also screen
+the external field inside the material.} the electromagnetic field, reducing the force
+carried by the photon.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\linewidth]{figs/HVP.pdf}
+\caption{HVP contribution to $a_\mu$. It arises from the two
+contributions shown in this figure. {\it Top}: Quark-line
+connected contribution, which is a virtual quark
+bubble inserted in photon propagator. {\it Bottom}:
+Quark-line disconnected contribution, which consists of
+virtual quark bubbles connected by gluons. The bubbles
+include all possible QED interactions.
+Image taken from Ref.~\cite{FermilabLattice:2022izv}.}
+\label{fig:HVPmuon}
+\end{figure}
+
+
+Any possible charged particle-antiparticle pair must be considered,
+for instance $\mu^+\mu^-$ and $\tau^+\tau^-$. Their effects are small compared
+to $e^+e^-$ due to their comparatively large masses, and are hence
+only noticeable for large\index{virtuality} {\it virtuality}, or $q^2$,
+of the exchanged photon. 
+Contributions to VP coming from strongly interacting particles
+is referred to as\index{vacuum polarization!hadronic} 
+{\it hadronic vacuum polarization} (HVP).
+Their effect can be computed perturbatively at large $q^2$,
+but at small $q^2$ this of course fails.
+The HVP contribution to $a_\mu$ is shown in \figref{fig:HVPmuon}.
+
+The first experimental indication of HVP was found at 
+LAL-Orsay~\cite{augustin_evidence_1973},
+which measured the cross section for $e^+e^-\to\mu^+\mu^-$.
+There a characteristic interference pattern was found for
+the $\phi(1020)$ resonance\footnote{A {\it phi meson} $\phi$
+is\index{meson!f@$\phi$} a strange-antistrange pair.}, in concordance with the
+$\phi$ HVP contribution. CERN had a series of experiments
+starting in 
+1958~\cite{charpak_measurement_1961,bailey_precise_1971,bailey_anomalous_1977}, 
+culminating in a measurement of $a_\mu$, which agreed at the time with the 
+SM~\cite{calmet_anomalous_1977}.
+
+
+Since then, higher precision was achieved at Brookhaven
+and J-PARC, and a state-of-the-art determination from 
+Fermilab~\cite{abi_measurement_2021}
+places experimental searches at 4.2$\sigma$ tension
+against data-driven theoretical methods,
+which we will discuss shortly~\cite{aoyama_anomalous_2020}.
+
+
+At the same time that this 4.2$\sigma$ tension was revealed,
+the BMW collaboration offered a lattice calculation with precision competitive
+with data-driven approaches~\cite{borsanyi_leading_2021}.
+Their result tantalizingly lies between the data-driven result and experiment,
+being about 2.1$\sigma$ above the theory and 1.6$\sigma$ below experiment.
+Understanding this 3-fold tension requires careful investigation of
+systematics. We will discuss the lattice perspective
+in more detail in \secref{sec:muonAnom}. 
+
+
 
 \section{Thirring model}\label{sec:Thirring}\index{Thirring model}
 

@@ -1,4 +1,23 @@
-\chapter{Physics: Renormalization Group}
+\chapter{Physics: Phase transitions} 
+
+In \chref{ch:statphys} we saw that in a statistical mechanical system,
+observables of interest can be derived from the free energy or grand potential,
+i.e. from $\log\mathcal{Z}$. During this discussion there was more or less an
+assumption that $\log\mathcal{Z}$ was mathematically well behaved, or at least
+I never brought it up. In general $\log\mathcal{Z}$ may not be smooth
+everywhere. A point in the space of control parameters where $\log\mathcal{Z}$
+is not well behaved is a {\it critical point}\index{critical point}. Depending
+on the system under study, this may even be extended to a {\it critical line} or
+{\it critical surface}; generically we refer to these as {\it phase
+boundaries}\index{phase boundary}. These shapes separate the space of control parameters
+into different regions where $\log\mathcal{Z}$ is analytic. Each of these
+regions corresponds to a {\it phase}\index{phase} or {\it state}\index{state} of
+the system. Physically, the system exhibits qualitative differences between
+different phases. When the system crosses this critical boundary and moves from
+one phase to another, it is said to undergo a {\it phase transition}\index{phase
+transition}.
+Much of our current understanding of phase transitions was developed by studying
+liquid-gas systems and ferromagnets. 
 
 Critical temperatures in fluids were discovered by T. 
 Andrews\footnote{He seems to be the one who coined the
@@ -33,30 +52,137 @@ critical phenomena is Ref.~\cite{hohenberg_theory_1977}.}.
 
 This chapter will generally try to follow 
 lectures by F. Karsch, as well as the book by Binney et
-al.~\cite{binney_theory_1992}, but I will also use details from a nice
-book I found Bauerschmidt et al.~\cite{Bauerschmidt_2019}.
-In that book, they give a nice overview of the idea
-behind RG transformations, saying
-\begin{quote}
-Two paramount features of critical phenomena are scale invariance and 
-universality. The renormalization group method exploits the scale 
-invariance to explain universality. This is done via a multi-scale analysis, 
-in which a system studied at a particular scale is represented by an 
-effective Hamiltonian. Scales are analyzed sequentially, leading to a map 
-that takes the Hamiltonian at one scale to a Hamiltonian at the next scale. 
-Advancing the scale gives rise to a dynamical system defined by this map. 
-Scale invariance occurs at a fixed point of the map, and different fixed
-points correspond to different universality classes. The analysis of the 
-dynamical system at and near the fixed point provides a means to compute 
-universal quantities such as critical exponents. 
-\end{quote} 
-The goal of this chapter is to try to understand this quote in more detail,
-and to learn how to carry out and interpret RG calculations that often
-appear in the context of lattice field theory.
+al.~\cite{binney_theory_1992}. 
 
-\section{Spin systems}
+\section{Types of transitions}
 
-\section{The scaling hypothesis}
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figs/simplified_water.png}
+\caption{Simplified phase diagram for water indicating its solid, liquid, and
+gas phases. Phase boundaries are indicated by the black lines. It is difficult
+to see on the scale of this plot, but the solid-liquid boundary near 1 atm has a
+slight lean to the left, which is an uncommon feature for most substances having
+a solid-liquid transition. Beyond the
+critical point, liquid and gas phases cannot be distinguished. 
+Image taken from Wikipedia \cite{Wiki_water}.}
+\label{fig:phase_water}
+\end{figure}
+
+The definition of phase transition given in the introduction is mathematically
+unambiguous, but it may not help give much physics intuition. To this end, it is
+useful to think about some archetypical substances that exhibit many of the
+properties common to systems undergoing phase transitions.
+
+In \figref{fig:phase_water} we see a simplified {\it phase diagram}\index{phase
+diagram} for water. A phase diagram shows the various phases where
+the free energy is analytic, separated by phase boundaries as discussed before.
+Phase transitions can be classified according to how the free energy and its
+derivatives behave when crossing a phase boundary. In the case of water, these
+are {\it first-order}\footnote{This naming scheme dates back to Paul Ehrenfest's
+classification of phase transitions. Under his scheme, a transition is said to
+be of order $n$ if the $n\nth$ derivative of the free energy is discontinuous
+across the phase boundary.} phase transitions\index{phase transition!first-order}.
+In general when changing a control parameter, one has to dump energy into the
+system; for instance increasing temperature generically requires the addition of
+heat. When the system hits a first-order phase boundary, energy dumped into the
+system will, for a brief period, not change the control parameter, and instead
+is needed to change the phase of the substance. In the case of water, when
+hitting for instance the solid-liquid first-order line, additional heat is used
+to break the bonds between molecules, changing the substance from a solid into a
+liquid. The energy required to do this is the {\it latent heat}\index{latent
+heat}. The existence of a latent heat defines first-order phase transitions.
+
+Along phase boundaries, different phases may coexist. For instance along the
+solid-liquid phase boundary one will in general find a mixture of solids and
+liquid, which is sometimes called a {\it slurry}\index{slurry}. We also use
+the common verbiage when crossing the boundaries: the substance {\it
+melts}\index{melt} when going from solid to liquid, {\it
+evaporates}\index{evaporate} when going
+from liquid to gas, and {\it sublimates}\index{sublimate} when going from solid
+to gas. Salient in \figref{fig:phase_water} is also a critical point, beyond
+which liquid and gas cannot be distinguished. One sometimes refers to this
+region as a {\it supercritical fluid}\index{supercritical fluid}. A path from
+liquid to gas region going around the critical point, not crossing any phase
+boundary, allows for a analytic change from liquid to gas. Such a change of
+phase is referred to as a {\it crossover}\index{crossover}. Since this change is
+completely analytic, we will distinguish crossovers from phase transitions in
+these notes. 
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figs/ising_phase_diagram.png}
+\caption{Phase diagram for the 2-$d$ Ising model. The solid black
+circle indicates the critical temperature; the solid line connected to it is a
+first-order line. Magnetization is indicated by $M$.
+Image taken from Ref.~\cite{ising_picture}.}
+\label{fig:phase_ising}
+\end{figure}
+
+Water gives the quintessential example of a first-order phase transition. Now we
+will consider {\it second-order} or {\it continuous} phase
+transitions\index{phase transition!second-order}\index{phase
+transition!continuous}. The Ising model of a ferromagnet in two or more
+dimensions is the quintessential example for second-order transitions.
+The 2-$d$ {\it Ising model}\index{Ising model} 
+imagines a magnet as being comprised of interacting spins
+with nearest-neighbor interactions. Its Hamiltonian is
+\begin{equation}
+H=-J\sum_{\ev{i j}} \sigma_i \sigma_j-h \sum_j
+\sigma_j,
+\end{equation}
+where the brackets indicate a sum over nearest-neighbors,
+$\sigma_i\in\{+1,-1\}$ indicates the value of spin $i$, $h$ gives the
+coupling of the spins to an external magnetic field, and $J$ gives the
+nearest-neighbor interaction strength.
+
+The Ising model phase diagram in two dimensions is given 
+in \figref{fig:phase_ising}.
+At fixed temperature, when varying the external magnetic field, one can
+discontinuously flip the magnetization $M$. Moving from left to right in $T$
+at $h=0$, this first-order line terminates in a second-order critical point. When
+approaching the critical point by varying the temperature, one can
+show\footnote{This was first done by Onsager~\cite{onsager_crystal_1944}. A
+nice, closed-form solution like this is not available for three dimensions or
+more. Critical exponents are typically extracted from Monte Carlo simulations.}
+that the magnetization changes as
+\begin{equation}\label{eq:exampleCP}
+  M\sim|T-T_c|^\beta
+\end{equation}
+with $\beta=1/8$. This sort of behavior is a hallmark of second-order
+transitions. The quantity $\beta$ is an example of a {\it critical
+exponent}\index{critical exponent}. 
+Many other physical quantities will also exhibit asymptotic behavior when
+approaching a second-order point analogous to \equatref{eq:exampleCP}.
+These will have their own critical exponents. These
+critical exponents can be related to each other, which we discuss
+in \secref{sec:scalingHypothesis}.
+
+What is positively remarkable is that completely different
+physical systems sometimes have exactly the same critical exponents.
+This phenomenon is known as {\it universality}\index{universal}, and when two
+systems have the same exponents, they are said to belong to the same {\it
+universality class}\index{universality class}. In the context of lattice QCD,
+it has for example been demonstrated that the chiral transition for $N_f=2+1$
+quark masses in the chiral limit $m_u=m_d\equiv m_l\to0$ belongs to the 3-$d$, 
+$\ON(4)$ universality class~\cite{ding_chiral_2019}, 
+the same class as a generalized magnet with spins
+free to rotate on 4-$d$ hyperspheres.
+
+For the Ising model, at extremely high temperatures, 
+the $TS$ term in the free energy dominates over
+the internal energy, and the spins of the ferromagnet become, in the absence of
+an external magnetic field, randomly aligned\footnote{In the high-temperature
+phase, one can point the spins in a particular direction by applying an external
+field.}, and hence the net magnetization is zero. If one decreases the
+temperature below $T_c$, the internal energy coming from spin alignment becomes
+more important, and domains of aligned spins start to emerge. Eventually the
+system will settle pointing in one direction. There is nothing special about the
+direction the system picks; this is an example of spontaneous symmetry
+breaking\index{spontaneous symmetry breaking}, which plays a major role in QFT,
+as discussed in \secref{sec:ssb}. 
+
+\section{The scaling hypothesis}\label{sec:scalingHypothesis}
 All critical exponents\index{critical exponent} can be written as functions 
 of the number of dimensions $d$ as well as $\nu$ and $\eta$. Given the reduced 
 temperature\index{temperature!reduced}
@@ -139,7 +265,7 @@ f(\vec{k}')=b^d\left(f(\vec{k})-g(\vec{k})\right).
 
 Next, let's think about how to relate the couplings $\vec{k}'$ and $\vec{k}$
 near the fixed point $\vec{k}_0$. 
-We can Taylor expand $\vec{R}$ in the vicinity of $\vec{k}_0$ to find
+We can Taylor expand the renormalization action $\vec{R}$ in the vicinity of $\vec{k}_0$ to find
 \begin{equation}
   \vec{k}_0+\delta\vec{k}'=\vec{R}\left(\vec{k}_0+\delta\vec{k}\right)
                           \approx\vec{R}(\vec{k}_0)
@@ -159,7 +285,7 @@ couplings $\vec{x}'$ are given according to the eigenvalues of $M$ as
   x_i'=\lambda_i x_i~~~~\text{no summation}.
 \end{equation}
 Hence we can recast \equatref{eq:widom1} as
-\begin{equation}\label{eq:widom1}
+\begin{equation}\label{eq:widom2}
 f(\lambda_1x_1,\lambda_2x_2,...)=b^d\left(f(x_1,x_2,...)-g(x_1,x_2,...)\right).
 \end{equation}
 

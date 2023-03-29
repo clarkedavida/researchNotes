@@ -536,13 +536,14 @@ varies smoothly between~\equatref{eq:NR} and
 \eqref{eq:SD}. Steepest descent is used far from the minimum, and 
 then it switches to the Newton-Raphson method when the minimum is approached.
 
-\section{Implementation details}\label{sec:implement}
+\section{General code structure}
 
 Now that we have introduced the general idea of MCMC, along with some specific
 updating schemes, and complications for statistical analysis, we are ready 
-to discuss the computer implementation. 
+to discuss the computer implementation. In this section we will discuss the
+general code structure. In the following sections, we will address various
+implementation details important for improving code performance and readability. 
 
-\subsection{General code structure}
 
 As mentioned earlier, we design the simulation using {\it local updates}, which
 means we update the links one at a time. This is done in a systematic order,
@@ -598,7 +599,7 @@ An MCMC simulation of LGT broadly consists of three essential steps:
         \end{verbatim}
 \end{enumerate}
 
-\subsection{Object oriented programming}
+\section{Object oriented programming}
 
 
 The focus of these research notes is on LFT, which employs programming heavily.
@@ -675,7 +676,7 @@ it can be difficult to see precisely what operations the computer
 performs. In my experience, this trade-off is hugely worthwhile, and I think
 most modern software developers would agree.
 
-\subsubsection{OOP in C++} 
+\subsection{OOP in C++} 
 Probably the best way to learn is through an example. To see the basics
 of OOP in action, we will implement a \texttt{CAT} class, and 
 introduce some new OOP jargon and concepts along the way.
@@ -760,7 +761,7 @@ in C++ out there, but a good start might be Ref.~\cite{tp:cpp}.\\
 \lstinputlisting[firstline=40, lastline=49]{exampleCode/scope.cpp}
 \lstinputlisting[language={}]{exampleCode/scopeOutput.txt}
 
-\subsubsection{OOP in Python}
+\subsection{OOP in Python}
 
 We continue by discussing OOP in Python. Python is a rather friendly language
 and it is popular for scientific programming, so you can find lots of useful
@@ -866,7 +867,7 @@ if you change \texttt{g}, \texttt{h} will change as well. Be careful!\\
 \lstinputlisting[language={},firstline=1,lastline=4]{exampleCode/SU2Output.txt}
 
 
-\subsection{Addressing storage challenges}
+\section{Addressing storage challenges}
 
 \index{binary}\index{binary!file}
 The configurations that we generate store lots of information, and to make a
@@ -1000,13 +1001,21 @@ Image taken from Ref.~\cite{NVIDIA}.}
 \end{figure}
 
 
-\subsection{Improving performance}
+\section{Improving performance}
 
 For pure $\SU(2)$ simulations like what I did in grad school, 
 it may take months (or years!) for a single-processor MCMC simulation to
 generate enough data to get reasonable error bars. In order to get
 results in time to finish a PhD thesis, it is necessary to consider ways to
 optimize the code.
+
+When getting into details about coding specifically, this section tends to focus
+on C++ and Python. Besides being two languages with which I'm comparatively
+familiar, they are also popular choices for scientific computing. When GPU
+parallelization is mentioned, we discuss NVIDIA, although alternatives like AMD
+and Intel exist nowadays.
+
+\subsection{Parallelization}
 
 A common strategy is to divide the lattice into smaller sublattices, updating
 simultaneously on each sublattice, passing relevant information between the
@@ -1053,6 +1062,8 @@ depending on the GPU manufacturer, to get a performance boost.}.
 Since there are so many cores, it is practical to introduce an organizational
 hierarchy. The most common is used by NVIDIA, where threads are collected
 into\index{block} {\it blocks}; this is shown in \figref{fig:threadBlock}.
+
+\subsection{Evaluating performance}
 
 Lattice projects studying physically realistic setups
  are extremely computationally demanding; for instance
@@ -1111,6 +1122,8 @@ memory efficiency or algorithm improvement to try to speed up the code.
 Code in the purple region to the left of the machine balance point
 tends to be limited by bandwidth.
 
+\subsection{Optimizing memory usage}\label{sec:memory}
+
 If you find your code is bandwidth-bound, there are a number of strategies that
 can be used to improve performance. One way is to reshape your algorithm so that
 it requires less communication. This can be quite challenging. An easier way is
@@ -1153,6 +1166,44 @@ and hence the more instructions are required. And of course it takes time to
 process instructions.
 \end{enumerate}
 
+\subsection{Referencing and dereferencing in C++}
+
+By default, if I pass an array to a function in C++, the function will get a
+copy of the array, rather than the original. This is safe default behavior to
+have; for example in a situation like
+\begin{equation}
+\text{output}=f(\text{input}),
+\end{equation}
+this precludes the possibility of modifying the original input array inside the
+function by accident. On the other hand, this is inefficient: From the
+discussion \secref{sec:memory}, you can imagine that copying an array then
+accessing that copy may take some extra time. It obviously also takes up extra
+memory, which is bad for extremely large arrays, like the ones that store gauge
+fields.
+
+The solution in C++ is to pass instead a {\it reference}\index{reference} to an 
+array\footnote{Superficially pointers and references act similarly, but they are
+different. A pointer contains a memory address, hence it takes up however much
+memory is required to store that address. A reference is simply an alias, so it
+takes up no memory.} as the argument. This can be accomplished with the
+ampersand like
+\begin{equation*}
+\texttt{func(\&arr)}.
+\end{equation*}
+We say in the above case the function was ``passed by reference". In the
+instance where we don't use reference, we ``pass by value" as
+\begin{equation*}
+\texttt{func(arr)},
+\end{equation*}
+which copies the array, as discussed above.
+
+If we have a reference or pointer to some object in our code, we might be interested in
+getting the value. This is accomplished through {\it
+dereferencing}\index{dereference} by
+\begin{equation*}
+\texttt{value = *arr},
+\end{equation*}
+which would return the value of the first element of the array \texttt{arr}.
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
