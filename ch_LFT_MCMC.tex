@@ -634,10 +634,10 @@ operations the computer is going to carry out. I will call Fortran
 a {\it non-OOP} language.
 
 An OOP language is more general than this, and hence it is a bit more powerful.
-\index{compile-time}\index{runtime}
+\index{compile time}\index{run time}
 For the following discussion, it is useful to introduce two terms,
-{\it compile-time}, which is the time during which the code you wrote
-is turned into an executable, and {\it runtime}, which is the time during
+{\it compile time}, which is the time during which the code you wrote
+is turned into an executable, and {\it run time}, which is the time during
 which the executable runs.
 Again very roughly, an OOP language has instead three things:
 \begin{enumerate}\index{object}\index{function!OOP}\index{method}\index{class}
@@ -646,7 +646,8 @@ Again very roughly, an OOP language has instead three things:
   \item {\it functions} or {\it methods}, which map objects to other
         objects; and
   \item {\it classes}, which are an abstraction of objects and/or functions,
-        that do not take any space in memory or have an address.
+        that do not take any space in memory or have an address. One common
+        way to think of classes is as ``blueprints" for objects.
 \end{enumerate}
 
 Ultimately an important goal of OOP is to try to make your code more closely
@@ -675,6 +676,7 @@ without having to modify anything that utilizes it. The drawback is that
 it can be difficult to see precisely what operations the computer
 performs. In my experience, this trade-off is hugely worthwhile, and I think
 most modern software developers would agree.
+
 
 \subsection{OOP in C++} 
 Probably the best way to learn is through an example. To see the basics
@@ -708,7 +710,14 @@ collection of attributes and methods acting on them.\\
 
 To understand the constructor and destructor, let us turn to our main
 code where we will use this class. In the first line, we declare a
-\texttt{CAT}-type object, which we call \texttt{cat}. We say that we have
+\texttt{CAT}-type\footnote{A {\it type}\index{type} is a category of data
+defined by some properties or characteristics. The type often defines the sorts
+of operations that one can do with that datum. For instance, integers, floats,
+strings, and objects are all types. Types are related to classes but not exactly
+the same. A class in particular tells you how something should be implemented,
+whereas a type doesn't necessarily. For instance you might have a \texttt{CAT}
+type. Two possible \texttt{CAT}-type implementations could be, e.g.
+\texttt{MEANCAT} or \texttt{WUNKUSCAT} classes.} object, which we call \texttt{cat}. We say that we have
 {\it instantiated} \texttt{cat}, and \texttt{cat} is an {\it instance}
 \index{instantiation}
 of \texttt{CAT}. \texttt{CAT} is a class; therefore, as mentioned
@@ -1166,7 +1175,51 @@ and hence the more instructions are required. And of course it takes time to
 process instructions.
 \end{enumerate}
 
-\subsection{Referencing and dereferencing in C++}
+\subsection{C++ best practices}
+
+When making new classes, one often has to think how memory should be allocated
+and deallocated, in particular when defining constructors. The {\it rule of
+three}\index{rule of three} states that whenever a type needs one of the
+following, it needs all three:
+\begin{itemize}
+  \item copy constructor,
+  \item copy assignment,
+  \item destructor.
+\end{itemize}
+A common example where this is especially important is when your destructor 
+explicitly deallocates some memory. If no user-defined copy constructor exists,
+C++ implements a {\it shallow copy}\index{copy!shallow}. A shallow copy of an
+object shares some of the same data as the original object, such as a 
+pointer\footnote{By contrast, a {\it deep copy}\index{copy!deep} will create
+an entirely new object with its own data.}.
+Hence changing the attribute of a shallow copy will also change the attribute of
+the original. This means that when the destructor is called on a shallow copy,
+it will deallocate the original copy's data, and hence when it comes time for
+the original copy to deallocate, there is nothing left!
+This leads to {\it undefined behavior}\index{undefined behavior}, which is sort
+of a catch-all term for a result of compiling and running that cannot be
+predicted\footnote{When doing parallel computing, a commonly encountered type of
+undefined behavior is a {\it race condition}\index{race condition}. 
+This happens whenever two
+processes try to write into the same chunk of memory at the same time. In my
+experience, undefined behavior due to a race condition may not even produce the
+same results after two runs of the same compilation.}. Compilers will not always
+catch undefined behavior; hence it's safest to just use the rule of three from
+the beginning.
+
+An extension to the rule of three is the {\it rule of five}\index{rule of five},
+which states that whenever a type needs one of the
+following, it needs all five: 
+\begin{itemize}
+  \item copy constructor,
+  \item copy assignment,
+  \item destructor,
+  \item move constructor,
+  \item move assignment. 
+\end{itemize}
+
+
+\subsection{C++ referencing and dereferencing}
 
 By default, if I pass an array to a function in C++, the function will get a
 copy of the array, rather than the original. This is safe default behavior to
@@ -1204,6 +1257,29 @@ dereferencing}\index{dereference} by
 \texttt{value = *arr},
 \end{equation*}
 which would return the value of the first element of the array \texttt{arr}.
+
+\subsection{C++ compile-time directives}
+
+In the introduction of this section, I tried to distinguish between compile time
+and run time. This is helpful for example to distinguish between information
+that is known while compiling and known while running. In the context of lattice
+QCD, it is beneficial to make the lattice size a run-time quantity. If it were a
+compile-time quantity, then you would have to recompile your code each time you
+changed lattice sizes.
+
+Broadly speaking, when writing a code, one specifies a sequence of commands that
+should be carried out. The role of the compiler is to translate those commands
+to machine code, preferably in a safe away with good performance. C++ also gives
+you the power to give commands to the compiler itself, i.e. you can control to
+some degree how the compiler translates the code. For example a compile-time
+decision might be whether to compile in single or double precision. One can
+specify which decision to make using a {\it compile-time
+directive}\index{compile time!directive}.
+In C++ these are usually indicated with the \texttt{#} symbol.
+
+A series of such directives can be used to simplify coding tasks or create
+coding shortcuts. In this context sometimes one refers to such series as {\it
+macros}\index{macro}.
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
