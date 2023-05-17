@@ -9,7 +9,7 @@ are given by functional integrals
 Even though the integral~\eqref{eq:exobs} is well-defined on a lattice
 because there are 
 finitely many sites, it is not feasible to evaluate it numerically; even
-relatively small lattices have $4\times10^4$ links. The goal of an MCMC
+relatively small lattices have $4\times10^4$ links. The goal of our
 simulation is to estimate $\ev{X}$ by randomly generating configurations,
 distributed with probability $e^{-S}$,
 and on each configuration, making a measurement $X_i$. The average 
@@ -18,22 +18,9 @@ and on each configuration, making a measurement $X_i$. The average
 \end{equation}
 serves as the estimator.
 
-In \secref{sec:MCMCintro} we introduce MCMC simulations as they 
-are applied to the project. \secref{sec:statana} summarizes
-some of the tools needed to statistically analyze the generated data. 
-The final \secref{sec:implement} provides 
-details of how our simulation is implemented on the computer.
-Further details can be found in, for instance, 
-Ref.~\cite{berg_markov_2004,gattringer_quantum_2010}. 
-
-
-\section{Markov chain Monte Carlo}\label{sec:MCMCintro}
-
-To generate our configurations, we start from some arbitrary configuration
-$C_0$ and construct a stochastic sequence of configurations. 
-Configuration $C_i$ is generated based on\index{update}
-configuration $C_{i-1}$, which we call an {\it update} or {\it Monte Carlo
-step}\footnote{The idea of Monte Carlo algorithms dates back to the 1940s.
+The strategy of carrying out a statistical computation using random sampling
+goes under the name of {\it Monte Carlo}\index{Monte Carlo} 
+algorithms\footnote{The idea of Monte Carlo algorithms dates back to the 1940s.
 Stanislav Ulam wanted to know the probability of winning a game of Solitaire.
 The calculation turned out to be too complicated to do by hand, so he wanted to
 estimate this by playing repeated games, then calculating
@@ -42,7 +29,21 @@ $$
 $$
 Of course this is tremendously tedious; it is much more appropriate for a
 computer. Other scientists working with him at Los Alamos such as John von
-Neumann and Nicholas Metropolis are early pioneers of this method.}. 
+Neumann and Nicholas Metropolis are early pioneers of this method.}.
+The strategy of drawing these random configurations is to use a
+Markov chain, and hence the backbone of a lattice calculation is
+often referred to as {\it Markov chain Monte Carlo} (MCMC).
+Further details on MCMC methods can be found in, for instance, 
+Ref.~\cite{berg_markov_2004,gattringer_quantum_2010}. 
+
+
+\section{Markov chain Monte Carlo}\label{sec:MCMCintro}
+
+To generate our configurations, we start from some arbitrary configuration
+$C_0$ and construct a stochastic sequence of configurations. 
+Configuration $C_i$ is generated based on\index{update}
+configuration $C_{i-1}$, which we call an {\it update} or {\it Markov
+step}
 The result is a {\it Markov chain}
 \begin{equation}
   C_0\to C_1\to C_2\to...
@@ -73,26 +74,33 @@ If $W$ satisfies
   \item {\it ergodicity},\index{ergodic} i.e.
         \begin{equation}\label{eq:ergodicity}
           \pr{C}>0\;\;\text{and}\;\;\pr{C'}>0\;\;\Rightarrow\;\;
-          \exists\;n\in\N\;\;\text{s.t.}\;\;\big(W^n\big)^{CC'}>0;
+          \exists\;n\in\N\;\;\text{s.t.}\;\;\big(W^n\big)^{CC'}>0,
         \end{equation}
+        which means that every possible configuration is accessible from
+        any other configuration in a finite number\footnote{In practice,
+        it's important that $n$ is not too large, otherwise some configurations
+        will be sampled poorly. In a sense, this is the problem with
+        topological freezing\index{topological!freezing}
+        in \secref{sec:toplat}.} of Markov steps;
   \item {\it normalization},\index{normalization} i.e.
         \begin{equation}
-          \sum\limits_{C'}W^{CC'}=1;
+          \sum\limits_{C'}W^{CC'}=1,
         \end{equation}
+        which means that starting from configuration $C$ you have
+        to move somewhere;
   \item and balance, 
 \end{enumerate}
 then the Markov process is guaranteed to bring the ensemble toward 
 equilibrium. Using normalization, one finds from \equatref{eq:balance}
-\begin{equation}\index{balance}
+\begin{equation}\label{eq:eigenProb}
     \sum\limits_CW^{CC'}\pr{C}=\pr{C'},
 \end{equation}
 which shows that the equilibrium distribution is a fixed point of
-the Markov chain. The first property, ergodicity, guarantees that it
-is possible to transition from $C$ to $C'$ in a finite number of steps.
-In realistic simulations, it is important that the $n$ appearing in
-\equatref{eq:ergodicity}\index{ergodic} is not too large. For example 
-the Markov chain may have difficulty connecting different topological sectors
-in configuration space.
+the Markov chain\footnote{Above, we called $W^{CC'}$ a transition matrix.
+Equation~\eqref{eq:eigenProb} shows that we can think of the equilibrium
+distribution as an eigenvector of $W$ with eigenvalue 1. Each component
+of this vector thus yields the probability of a particular configuration.}. 
+
 
 \subsection{Update: Metropolis and heat bath}
 \index{heat bath}\index{Metropolis algorithm}
@@ -749,6 +757,16 @@ the inside of \texttt{if} and \texttt{while} statements and the
 insides of classes. Look to \texttt{scope.cpp} to see constructors and
 destructors in action. Note the order of creation and destruction.
 
+This practice of objects automatically allocating memory through their
+constructors and destroying themselves when they leave scope
+sometimes goes under the name\index{resource acquisition}
+{\it resource acquisition is initialization} (RAII).
+This strategy helps avoid\index{memory leak} {\it memory leaks},
+which is when the computer fails to release some unneeded 
+memory\footnote{Failure to release memory can negatively impact performance;
+for instance if you never release memory, then long and memory-intensive
+programs will quickly use up all of a system's available memory.}.
+
 Turning back to the main, we see that we can access attributes of
 \texttt{cat} such as \texttt{\_name} directly, and we can also call
 methods of \texttt{cat} like \texttt{speak()}. This is possible because
@@ -1218,6 +1236,13 @@ following, it needs all five:
   \item move assignment. 
 \end{itemize}
 
+A strategy to help improve code reuse and flexibility is\index{policy!based
+design} {\it policy-based design}.
+In this context, a {\it policy}\index{policy} is a template that encapsulates a 
+behavior or set of behaviors that can be used to customize the behavior of a class. 
+The policy itself is not part of the class, but rather is used to customize it. 
+For example, a policy may determine how memory is allocated for an object
+or how arithmetic with that object works.
 
 \subsection{C++ referencing and dereferencing}
 
