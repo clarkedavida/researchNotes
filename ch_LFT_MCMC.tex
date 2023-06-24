@@ -702,9 +702,12 @@ read and reduced duplication.\\
 
 The \texttt{CAT} class begins with the \texttt{public} keyword, which
 is a statement about accessibility. Anything that falls under the
-\texttt{public} heading can be used outside of the class\footnote{Another
-possibility is \texttt{private}. Anything under the \texttt{private} heading
-can only be seen by the class itself.}. Everything in the class falls
+\texttt{public} heading can be used outside of the class\footnote{The other
+two possibilities are \texttt{private} and \texttt{protected}. 
+Anything under the \texttt{private} heading
+can only be seen by the class itself, while \texttt{protected} members can be accessed 
+by the class itself, as well as any derived classes that inherit from the class.}. 
+Everything in the class falls
 under this heading in this example. The first group of three lines
 are variables stored inside the \texttt{CAT} class; such variables
 \index{attribute}\index{constructor}\index{destructor}\index{method}
@@ -1019,6 +1022,13 @@ data structure called a {\it page table}\index{page table}.
 This is roughly what is under the hood of the memory
 addresses\index{address!memory} discussed above.
 
+Next we discuss some strategies for accessing computer memory.
+A {\it stack operation}\index{stack} is a type of computer operation involving a 
+collection of data items called a {\it stack}. In a stack operation, data can be 
+pushed (added) onto the stack and popped (removed) off the stack. It can be thought 
+of as a type of Last-In-First-Out (LIFO)\index{LIFO} data structure.
+Other possibilities include queues, trees, graphs, and hash tables.
+
 
 \begin{figure}
 \includegraphics[width=\linewidth]{figs/threadBlock.pdf}
@@ -1046,11 +1056,26 @@ and Intel exist nowadays.
 
 A common strategy is to divide the lattice into smaller sublattices, updating
 simultaneously on each sublattice, passing relevant information between the
-sublattices whenever necessary. {\it Parallelizing} in this way offers a speed
+sublattices whenever necessary. {\it Parallelizing}\index{parallelization} 
+in this way offers a speed
 up factor somewhat less than the number of sublattices used. A standard way to
-parallelize code is to use the Message Passing Interface (MPI). MPI allows
-for efficient exchange of information between processors and is easily included
-in Fortran, C, and C++ programs.
+parallelize code is to use the Message Passing Interface (MPI). MPI\index{MPI} 
+is a library that allows for efficient exchange of information between processors 
+and can be included in Fortran, C, and C++ programs.
+
+One way to approach parallelism is called Single Instruction Multiple
+Data\index{SIMD} (SIMD). In this approach, the same instruction is given to
+multiple data elements. For instance the first way you learn implement scalar
+multiplication for a vector is through a simple loop:
+\begin{verbatim}
+do from i=0 to i=ndim
+  v[i] *= 2
+end do
+\end{verbatim}
+Instead of saying ``perform this multiplication, now perform the next one", SIMD
+says to perform all the multiplications simultaneously, at least in the ideal
+case. Sometimes this approach is referred to as {\it
+vectorization}\index{vectorization}.
 
 To get a quantitative understanding of performance, one introduces
 the {\it clock cycle},\index{clock cycle} which is the smallest unit of
@@ -1300,7 +1325,7 @@ some degree how the compiler translates the code. For example a compile-time
 decision might be whether to compile in single or double precision. One can
 specify which decision to make using a {\it compile-time
 directive}\index{compile time!directive}.
-In C++ these are usually indicated with the \texttt{#} symbol.
+In C++ these are usually indicated with the \texttt{\#} symbol.
 
 A series of such directives can be used to simplify coding tasks or create
 coding shortcuts. In this context sometimes one refers to such series as {\it

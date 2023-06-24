@@ -49,7 +49,7 @@
 % replacements when porting code over.
 \newcommand{\ct}{c_{\theta}}
 \newcommand{\st}{s_{\theta}}
-
+\let\phi\varphi
 
 % If you click on citations or equation references, you will be take
 % to the corresponding page. 
@@ -215,6 +215,7 @@ $u_0$           & Tadpole factor\\
 \section*{Abbreviations}
 \begin{tabular}{ll}
 BC      &       Boundary condition \\
+CW      &       Clockwise \\
 CCW     &       Counterclockwise\\
 CDF     &       Cumulative distribution function \\
 CLT     &       Central limit theorem\\
@@ -282,15 +283,12 @@ $m_p$    & $1.67262\times 10^{-27}$ & [kg]
 I would like to start off by thanking some people with whom discussions
 have influenced the material in these notes in one way or another.
 These people are
-B. Berg,
 D. Bollweg,
-S. Dentinger,
-C. DeTar,
+P. Boyle,
 H. Dick,
 L. Dini,
 G. Gagliardi,
 J. Goswami,
-O. Kaczmarek,
 F. Karsch,
 S. Lahert,
 A. Lahiri,
@@ -313,11 +311,10 @@ Next, I would like to give thanks to G. Endr\"odi whose lattice seminar
 has helped me learn many aspects of lattice QCD in an accessible way while
 providing a forum for judgement-free and open discussion.
 
-I would like to thank Bielefeld University for giving me a chance to learn some
-state-of-the-art lattice physics and make connections in the community.
-
-Most of all I would like to thank B. Berg, who took my desire to be a
-physicist seriously and has continually been a patient advocate for me.
+Finally I want to especially thank B. Berg, who took my desire to be a
+physicist seriously and has continually been a patient advocate for me,
+and C. DeTar, who besides being extremely knowledgable and enthusiastic about
+science, is perhaps the most empathetic physicist I've ever worked with.
 
 
 \chapter{Preface}
@@ -359,6 +356,7 @@ to develop some sections of these appendices into full chapters.
 \include{ch_QFT}
 \include{ch_LGT_prelim}
 \include{ch_LFT_fermions}
+\include{ch_LFT_improved}
 \include{ch_LFT_MCMC}
 \include{ch_LFT_realPhysics}
 

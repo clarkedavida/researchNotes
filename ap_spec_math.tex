@@ -70,6 +70,37 @@ together yields the desired result.
 \end{proof}
 \end{proposition}
 
+Often in statistical physics it is useful to be able to switch between different
+sets of control parameters. For instance one may be interested in a system where
+one can control the temperature $T$, along with some set of $N$
+potentials\footnote{For instance chemical potentials.},
+which we represent here as a vector $\vec\alpha$. On the other hand, it may only
+be possible in an experiment to fix some other $N$ control parameters that in
+general change with $T$ and $\alpha$; call them $\vec{x}(T,\vec\alpha)$. We
+would like to conveniently switch between $\vec\alpha$ and $\vec{x}$. 
+
+\begin{proposition}{}{}
+\begin{equation*}
+\left( \pdv{f}{T} \right)_{\vec{x}} =  \left(\pdv{f}{T}\right)_{\vec\alpha}
++\sum_\alpha 
+\left(\pdv{\alpha}{T}\right)_{\vec{x}}
+\left(\pdv{f}{\alpha}\right)_{T,~\vec{\beta},~\beta_i\neq\alpha} 
+\end{equation*}
+\begin{proof}
+Since $f(T,\vec{x})$, we can write
+\begin{equation*}
+\dd f=\dd T \left( \pdv{f}{T} \right)_{\vec{\alpha}} 
++ \sum_\alpha\dd\alpha\left(\pdv{f}{\alpha}\right)_{T,~\vec{\beta},~\beta_i\neq\alpha},
+\end{equation*}
+where in the sum we indicate that we hold all control parameters $\beta_i$ of
+$\vec{\beta}$ except for $\alpha$ fixed. Similarly, 
+\begin{equation*}
+\dd\alpha=\dd T \left( \pdv{\alpha}{T} \right)_{\vec{x}} 
++ \sum_x\dd x\left(\pdv{\alpha}{x}\right)_{T,~\vec{y},~y_i\neq x}.
+\end{equation*}
+Plugging $\dd \alpha$ into $\dd f$ completes the proof. 
+\end{proof}
+\end{proposition}
 
 \section{Hyperspherical coordinates}
 
@@ -349,11 +380,13 @@ We will formulate these ideas in terms of inner products.
   projection}\index{orthogonal!projection}.
   \index{transformation!hermitian}\index{transformation!unitary}
   \index{transformation!orthogonal}
+  \index{transformation!positive definite}
   \index{transformation!positive semidefinite}
   A linear transformation $U$ is {\it unitary} if $U^\dagger U=\id$.
   It is {\it hermitian} if $U^\dagger=U$, and it is {\it orthogonal}
   if $U^TU=\id$. A matrix is
-  {\it positive semidefinite} if its eigenvalues are nonnegative.
+  {\it positive definite} if its eigenvalues are all positive, and
+  {\it positive semidefinite} if the eigenvalues are all nonnegative. 
 
 \begin{theorem}{}{hermit}
   Hermitian matrices are diagonalizable.
@@ -389,6 +422,10 @@ with entries $m_{ij}\in\C$ is given by
 \begin{equation}
   \det M\equiv\epsilon_{i_1...i_N}m_{1\,i_1}...m_{N\,i_N}.
 \end{equation}
+
+
+\section{Fourier transforms}
+
 
 \index{Green's function}
 \section{Green's functions}

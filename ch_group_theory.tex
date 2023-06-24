@@ -1,6 +1,7 @@
-\chapter{Math: Group Theory}\label{ch:group}
-This chapter focuses on some the basic ideas of group theory and some 
-applications of group theory to physics. Groups appear often in physics:
+\chapter{Math: Abstract Algebra}\label{ch:group}
+This chapter focuses on some of the abstractions in math, especially
+as they apply to group theory. 
+Groups appear often in physics:
 Boosts and rotations in special relativity 
 generate the Lorentz group, sets of gauge transformations equipped with 
 function composition form gauge groups, etc. Some of this presentation
@@ -8,9 +9,142 @@ follows sections of Dummit and Foote~\cite{dummit_abstract_2004} and
 Georgi~\cite{georgi_lie_1999}.
 
 
-\section{Preliminaries}\label{sec:gpprelim}
-In order for us to understand any of the above paragraph, we must lay down a
-few definitions and mathematical preliminaries.
+\section{Preliminaries}
+
+We want to discuss math in a fairly abstract way, in part because one of our
+goals will be to look at generic mathematical structures. At the end of the book
+we will look at groups, structures that have only three characteristics. We will
+see that many math structures you've already encountered are examples of
+groups
+Hence we will need some notation that is agnostic to any particular math
+structure.
+
+
+To start, a {\it set}\index{set} is a collection of objects of
+any kind, anything\footnote{This is technically wrong. It turns out that one has
+to be very careful how a set is defined. Bertrand Russell was the first do
+discover this; if you are interested in what can go wrong, look up
+Russell's\index{Russell's paradox}
+paradox. For our purposes, this subtlety won't matter.}
+you can think of. We usually denote a set
+with curly brackets
+\begin{equation}
+A=\{1,2,3,4\}.
+\end{equation}
+The things that the set contains are called {\it elements}\index{element}
+or\index{member} {\it members}, and we indicate that, e.g. 1 is an element of
+$A$ by writing
+\begin{equation}
+1\in A,
+\end{equation}
+which we read as ``1 is an element/member of the set $A$" or ``1 is in $A$".
+If we want to refer to an arbitrary element $a$ of $A$, we write
+\begin{equation}
+a\in A,
+\end{equation}
+and if we want to say that $b$ is not a member of $A$, we write
+\begin{equation}
+b\notin A,
+\end{equation}
+The number of elements in a finite set is called its\index{cardinality}
+{\it cardinality}. The cardinality of the set $A$ above is 4, and we write
+\begin{equation}
+  |A|=4.
+\end{equation}
+A {\it finite} set has a finite cardinality; otherwise it's an infinite set.
+
+
+It is also useful to introduce an organizational hierarchy for sets. For
+instance the set
+\begin{equation}
+  B=\{1,2,3,4,5,6\}
+\end{equation}
+is larger than $A$, but it contains $A$ entirely. We write
+\begin{equation}
+A\subset B.
+\end{equation}
+Talking about set logic is a good opportunity to introduce some more notation.
+It is common to use $\Forall$ as shorthand for ``for all" or ``for any".
+Since $A\subset B$, we know that $\Forall a\in A$ we must have $a\in B$.
+To express that last idea, we write
+\begin{equation}\label{eq:subsetIn}
+a\in A\Rightarrow a\in B.
+\end{equation}
+The\index{set!empty} {\it empty set} $\emptyset$ is the set with nothing in it
+at all. If a set has at least one element, it is\index{nonempty} {\it nonempty}.
+From \equatref{eq:subsetIn} it follows that for any set $C$
+\begin{equation}
+\emptyset\subset C~~~~\text{and}~~~~C\subset C.
+\end{equation}
+
+
+A\index{function}
+{\it function} or\index{map} {\it mapping} $f$ between $X$ and $Y$
+associates $\Forall x\in X$ a unique element $f(x)\in Y$. We
+write
+\begin{equation}
+f:X\to Y.
+\end{equation}
+Usually $X$ is called the\index{domain} {\it domain}
+and $Y$ is called the\index{codomain} {\it codomain}.
+The\index{image} {\it image} or\index{range} {\it range}
+is $f(X)$, i.e. the set of all values $f$
+maps to given the domain. Note $f(X)\subset Y$.
+
+Next we classify a few different kinds of functions.
+A function is\index{injection} {\it injective}
+or\index{one-to-one} {\it one-to-one} if each element in $X$
+maps to a different element in $Y$. We can express this symbolically as
+\begin{equation}
+ \Forall x_1,x_2\in X,~f(x_1)=f(x_2)\Rightarrow x_1=x_2.
+\end{equation}
+A\index{surjection} {\it surjective} or\index{onto} {\it onto} function
+maps to every possible element of the codomain $Y$. Symbolically,
+\begin{equation}
+ \Forall y\in Y,~\Exists x\in X \suchthat y=f(x), 
+\end{equation}
+where we have introduced the symbol $\Exists$ as shorthand for ``there is at
+least one" or ``there exists". Finally a function is\index{function!bijective}
+{\it bijective} if it is both an injection and a surjection. In this case each
+element of $X$ corresponds to exactly one element of $Y$, and vice-versa.
+Pictorial representations of these kinds of functions are shown in
+\figref{fig:mapping}.
+
+
+\begin{figure}
+\centering
+\includegraphics[width=0.45\linewidth]{figs/Injection.png}~~~
+\includegraphics[width=0.45\linewidth]{figs/Surjection.png}\\
+\includegraphics[width=0.45\linewidth]{figs/Bijection.png}~~~
+\includegraphics[width=0.45\linewidth]{figs/Not-Injection-Surjection.png}
+\caption{Example mappings that are injective (top left), surjective (top right),
+bijective (bottom left), and none of these (bottom right). Images taken from
+Wikipedia~\cite{wiki:bijection}.}
+\label{fig:mapping}
+\end{figure}
+
+
+To close out the section, we discuss a couple ways of putting sets together.
+The most straightforward way is just to ``add" the sets, i.e. form a new set
+whose elements include all the elements from the parent sets. For instance if
+you have two sets $A$ and $B$, then the\index{union} {\it union} is
+\begin{equation}
+A\cup B = \{x\suchthat x\in A~\text{or}~x\in B\}.
+\end{equation}
+You can also create a set that contains only the elements that both $A$ and $B$ have
+in common. This set is the\index{intersection} {\it intersection}
+\begin{equation}
+A\cap B = \{x\suchthat x\in A~\text{and}~x\in B\}.
+\end{equation}
+We exist in nature in a space of more than one dimension; therefore it is useful to be
+able to combine sets into coordinates. We define the\index{Cartesian product}
+{\it Cartesian product} of $A$ and $B$ as the set of tuples
+\begin{equation}
+A\times B=\{(a,b)\suchthat a\in A~\text{and}~b\in B\}.
+\end{equation}
+
+
+\section{Groups}\label{sec:gpprelim}
 A {\it binary operation} \index{binary operation} $\bullet$ on a set 
 $G$ is a function $\bullet : G\times G\to G$. A {\it group} \index{group}, 
 then, is a set $G$ equipped with a binary operation $\bullet$ that satisfies 
@@ -37,7 +171,7 @@ $\bullet$ and in this case we will write $H\leq G$.
 (It should be clear from context whether this symbol indicates group 
 organization or magnitude.) Finally a group is {\it cyclic} \index{cyclic}
 if it is generated by a single element; that is, if $\Exists g\in G$ such that 
-$G=\{g^{n}:  n\in\Z\}$.
+$G=\{g^{n}\suchthat n\in\Z\}$.
 
 It's actually not too common for mathematicians or physicists to write the
 $\bullet$ explicitly when showing the composition of two elements. So for
@@ -58,6 +192,24 @@ $g\bullet h$ from here on out.
   \end{proof}
 \end{proposition}
 
+An {\it equivalence relation} \index{equivalence relation} $\sim$ on a
+set $G$ is a binary operation that has the following properties
+$\Forall x,y,z\in G$:
+\begin{enumerate}
+  \item it is {\it reflexive}\index{reflexive}, i.e. $x\sim x$;
+  \item it is {\it symmetric}\index{symmetric}, i.e.
+        $x\sim y\Leftrightarrow y\sim x$; and
+  \item it is {\it transitive}\index{transitive}, i.e. $x\sim y$ and
+        $y\sim z$ $\Rightarrow$ $x\sim z$.
+\end{enumerate}
+Let $g\in G$. The set
+\begin{equation}
+\bar{g}\equiv\{x\in G\suchthat x\sim g\}
+\end{equation}
+is called an\index{equivalence class} 
+{\it equivalence class}.
+
+
 \begin{example*}{}{}
 \begin{enumerate}
   \item $\Z,\ \Q,\ \R$, and $\C$ are all groups
@@ -76,7 +228,7 @@ $g\bullet h$ from here on out.
         (We read this as ``$a$ is congruent to $b$ modulo $ n$" or ``$a$ is
         congruent to $b$ mod $n$.") Define an equivalence class by 
         \begin{equation}
-          \bar{a}\coloneqq\{a+mn\ : m\in \Z\}.
+          \bar{a}\coloneqq\{a+mn \suchthat m\in \Z\}.
         \end{equation}
         The set of all such equivalence classes is called {\it the integers 
         modulo n}\index{modular arithmetic} and is denoted by 
@@ -88,9 +240,9 @@ $g\bullet h$ from here on out.
         \begin{equation}
           \label{eq:chgtmaad1}
           \begin{aligned}
-            \bar{1}+\bar{2}&=\{(1+2)+4(m_{1}+m_{2})\ : m_{1},m_{2}
+            \bar{1}+\bar{2}&=\{(1+2)+4(m_{1}+m_{2}) \suchthat m_{1},m_{2}
                              \in \Z\}\\
-                         &=\{3+4m\ : m\in \Z\}\\
+                         &=\{3+4m \suchthat m\in \Z\}\\
                          &=\bar{3}
           \end{aligned}
         \end{equation}
@@ -98,11 +250,11 @@ $g\bullet h$ from here on out.
         \begin{equation}
           \label{eq:chgtmaad2}
           \begin{aligned}
-            \bar{3}+\bar{3}&=\{(3+3)+4(m_{3}+m_{4})\ : m_{3},m_{4}
+            \bar{3}+\bar{3}&=\{(3+3)+4(m_{3}+m_{4})\suchthat m_{3},m_{4}
                              \in \Z\}\\
-                         &=\{2+4(1+m_{3}+m_{4})\ : m_{3},m_{4}
+                         &=\{2+4(1+m_{3}+m_{4})\suchthat m_{3},m_{4}
                              \in \Z\}\\
-                         &=\{2+4m\ : m\in \Z\}\\
+                         &=\{2+4m\suchthat m\in \Z\}\\
                          &=\bar{2}
           \end{aligned}
         \end{equation}
@@ -136,9 +288,9 @@ $\Forall g,h\in G$ is called a {\it homomorphism}.\index{homomorphism}
 If in addition to the above property we know that $\phi$ is a bijection, 
 $\phi$ is said to be an {\it isomorphism} \index{isomorphism} of $G$ and 
 $H$, we say that $G$ and $H$ are {\it isomorphic}, and we write $G\cong H$. 
-Finally an {\it endomorphism} \index{endomorphism} is a homomorphism 
-mapping a group to itself, and an {\it automorphism} \index{automorphism}
-is a bijective endomorphism (isomorphism from a group to itself).
+%Finally an {\it endomorphism} \index{endomorphism} is a homomorphism 
+%mapping a group to itself, and an {\it automorphism} \index{automorphism}
+%is a bijective endomorphism (isomorphism from a group to itself).
 
 The above definition shows us that when $G\cong H$, $H$ is really just $G$ in
 disguise. Since $\phi$ is a bijection we have a way of associating each element
@@ -159,50 +311,65 @@ that the binary operations of the groups act the same way.
 %          called the {\it distributive property}.
 %  \end{enumerate}
 %A {\it subfield} is a subset $A$ of $F$ whose elements still form a field.
-%
-%\begin{example}
-%\leavevmode
-%\begin{enumerate}
-%  \item For any group $G$, $G\cong G$.
-%  \item The rotational symmetries of a regular $n$-gon are isomorphic to
-%        $\Z_n$.
-%  \item $\Q$, $\R$, and $\C$ are all fields.
-%  \item $\Z$ is not a field. 
-%\end{enumerate}
-%\end{example}
 
-\section{Quotient groups}\label{sec:q}
-Let's add some structure to groups. In this section we will discuss a way of
-creating a new group by partitioning an old one.
+\begin{example*}{}{}
+\begin{enumerate}
+  \item For any group $G$, $G\cong G$.
+  \item The rotational symmetries of a regular $n$-gon are isomorphic to
+        $\Z_n$.
+\end{enumerate}
+\end{example*}
 
-  An {\it equivalence relation} \index{equivalence relation} $\sim$ on a 
-  set $G$ is a binary operation that has the following properties 
-  $\Forall x,y,z\in G$:
-  \begin{enumerate}
-    \item it is {\it reflexive}\index{reflexive}, i.e. $x\sim x$;
-    \item it is {\it symmetric}\index{symmetric}, i.e. 
-          $x\sim y\Leftrightarrow y\sim x$; and
-    \item it is {\it transitive}\index{transitive}, i.e. $x\sim y$ and 
-          $y\sim z$ $\Rightarrow$ $x\sim z$.
-  \end{enumerate}
-  Let $g\in G$. The set $\bar{g}=\{x\in G:x\sim g\}$ is called an {\it
-  equivalence class}\index{equivalence class}.
+We note that if $G$ and $H$ are not isomorphic, it can be that $\phi$ maps
+multiple elements of $G$ to the same element in $H$. The {\it
+kernel}\index{kernel} of $\phi$, $\ker\phi$, is the set of elements in $G$ that map
+to $\id_H$. 
 
-So we see that equivalence relations are just generalizations of the =
-sign. We actually use equivalence relations more than you probably realize.
-For example when $x,y\in\R$ and $y=x+\epsilon$, where $\epsilon$ is
-small, we often just write $y=x$. Strictly speaking, these two quantities
-are not equal, but it's not hard to show that ``equal to first order in
-$\epsilon$" defines an equivalence relation.
+\section{Quotient groups}\label{sec:q}\index{quotient group}
 
-Let $H\le G$. The {\it left coset} \index{coset} of $H$ with respect to 
+In this section we follow Ref.~\cite{dummit_abstract_2004}, which gives a nice
+presentation of quotient groups. There, they point out that understanding
+quotient groups more or less amounts to understanding group homomorphisms.
+
+To begin we consider two groups $G$ and $H$ with a homomorphism $\phi:G\to H$.
+The {\it fibers}\index{fiber} of $\phi$ are the sets of elements in $G$ mapping
+to a single element in $H$, which is depicted graphically in
+\figref{fig:quotientGroup}. If $a$ represents one of the dots in $H$,
+the solid line above $a$ is the fiber of $\phi$ over $a$, which we can represent
+at $\phi^{-1}(a)$.
+
+Since $\phi$ is a homomorphism, it follows that however multiplication works 
+among the dots in $H$, multiplication among the fibers must function the same
+way. This suggests the creation of a new group, the {\it quotient group},
+formed from the fibers. By construction, the quotient group with this
+multiplication is clearly isomorphic to the image of $G$ under $\phi$.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.60\linewidth]{figs/quotientGroup.pdf}
+  \caption{Graphical depiction of constructing a quotient group from a group
+$G$. The fibers, which are the solid, vertical lines, are mapped by the homomorphism 
+$\phi$ into $H$. The set of fibers forms the quotient group. Image taken
+from Ref.~\cite{dummit_abstract_2004}.}
+  \label{fig:quotientGroup}
+\end{figure}
+
+Let $H\le G$ and $a\in G$. The {\it left coset} \index{coset} of $H$ with respect to 
 $G$ is the set
-  $$ aH=\{ah:\ h\in H\}. $$
-The {\it right coset} is defined similarly, but with $h$ and $a$
-interchanged.
-We are now going to see that cosets define equivalence classes. To begin with
-let $H\le G$; $x,y\in H$; and define a binary relation $\sim$ by
 \begin{equation}
+   aH=\{ah\suchthat h\in H\}. 
+\end{equation}
+The {\it right coset} $Ha$ is defined similarly, but with $h$ and $a$
+interchanged. You can think of e.g. a left coset of $H$ as a left translate of
+$H$ by $a$, and similarly for the right coset. Any element of a coset is
+called a {\it representative} of the coset.
+
+
+We are now going to see that cosets define equivalence classes. To begin with
+let $H\le G$; $x,y\in H$; and define a binary relation\footnote{You can
+heuristically think of this equation as the statement that if I go ``forward" by
+$x$, then ``backward" by $y$, I remain in $H$.} $\sim$ by
+\begin{equation}\label{eq:cosetEquivalence}
   x\sim y \Leftrightarrow xy^{-1}\in H.
 \end{equation}
 \begin{proposition}{}{}
@@ -217,20 +384,20 @@ let $H\le G$; $x,y\in H$; and define a binary relation $\sim$ by
             Hence $y\sim x$.
       \item $x\sim y$ and $y\sim z$ $\Rightarrow$ $xy^{-1}\in H$ and
             $yz^{-1}\in H$. Then since $H$ is closed under multiplication,
-            $xy^{-1}yz^{-1}=xz^{-1}\in H$ $\Rightarrow$ $xz^{-1}\in H$ 
-            $\Rightarrow$ $x\sim z$.
+            $xy^{-1}yz^{-1}=xz^{-1}\in H$ $\Rightarrow$ $x\sim z$.
     \end{enumerate}
   \end{proof}
 \end{proposition}
-According to this definition, the equivalence classes of $G$ are the sets
-$A\subset G$ satisfying $\Forall x,y\in A$ $xy^{-1}\in H$. To see why this is
+According to definition~\eqref{eq:cosetEquivalence}, given $H$,
+the equivalence classes of $G$ under $\sim$ are the sets
+$A\subset G$ satisfying $xy^{-1}\in H$ $\Forall x,y\in A$. To see why this is
 important, fix $a\in A$. Then $\Forall x\in A$,
 \begin{equation}
   \begin{aligned}
     x\sim a &\Rightarrow xa^{-1}\in H \\
-            &\Rightarrow xa^{-1}=h,\ h\in H\\
-            &\Rightarrow x=ha,\ h\in H\\
-            &\Rightarrow A=Ha.
+            &\Rightarrow xa^{-1}=h~\text{for some}~h\in H\\
+            &\Rightarrow x=ha\\
+            &\Rightarrow A\subset Ha.
   \end{aligned}
 \end{equation}
 In other words, the equivalence classes are the right cosets of $H$! If we
@@ -280,11 +447,11 @@ notation.
 \index{modular arithmetic}
   Take $G=(\Z,+)$ and $N=4\Z$. Clearly $4\Z$ is a
   normal subgroup of $\Z$ since it's commutative. To form the 
-  quotient group $\Z/4\Z$, we find all cosets of $4\Z$.
+  quotient group $\Z_4=\Z/4\Z$, we find all cosets of $4\Z$.
   These are
   \begin{itemize}
     \item $4\Z$,
-    \item $4\Z+1$=$\{4m+1:m\in\Z\}$,
+    \item $4\Z+1$=$\{4m+1\suchthat m\in\Z\}$,
     \item $4\Z+2$, and
     \item $4\Z+3$.
   \end{itemize}
@@ -441,7 +608,7 @@ of the representations $D_i$.
 
 \section{Young tableaux}
 
-Recall from Section~\ref{sec:gpprelim} the permutation group on
+Recall from \secref{sec:gpprelim} the permutation group on
 $n$ objects, $S_n$. Any element in $S_n$ can be written
 as a product of cycles, which are just cyclic permutations of subsets.
 Conventional notation writes a cycle as a list of numbers between
@@ -473,7 +640,7 @@ This is called the {\it defining representation}.
 A set is called a {\it conjugacy class}\index{conjugacy class} if 
 $gSg^{-1}=S$. If you have a group element $g_1$, the 
 {\it conjugation} of $g_1$ is $gg_1g^{-1}$.
-From the definition of normal subgroup in Section~\ref{sec:q} we
+From the definition of normal subgroup in \secref{sec:q} we
 see that normal subgroups are conjugacy classes. The conjugacy classes
 of of permutations are just the cycle structure; for instance all
 interchanges are in the same conjugacy class. One way of seeing this
