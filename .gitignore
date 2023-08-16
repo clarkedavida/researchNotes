@@ -5,6 +5,9 @@ Exported\ Items.bib
 *.tfm
 *.600pk
 *.mf
+_minted-0_researchnotes/
+*.pyg
+mycode_languages.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

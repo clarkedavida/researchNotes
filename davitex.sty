@@ -8,11 +8,11 @@
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Packages needed to use these commands: 
-%\usepackage{amsmath,amssymb}
-%\usepackage{graphicx,multirow,tabularx}
 
-  % General mathematics
+
+%
+% General mathematics
+%
 \newcommand{\set}[1]{\left\{#1\right\}}
 \newcommand{\degree}{^{\circ}}
 %\newcommand{\st}{{}^{\rm st}}  % 1st
@@ -21,7 +21,8 @@
 \newcommand{\nth}{{}^{\rm th}} % nth
 \renewcommand{\Re}{\mathop{\mathrm{Re}}}
 \renewcommand{\Im}{\mathop{\mathrm{Im}}}
-\newcommand{\ltsim}{\lesssim} % seriously who the fuck named these two
+\newcommand{\ltsim}{\lesssim} % seriously who the fuck named these
+\newcommand{\ltrsim}{\lesssim}
 \newcommand{\gtsim}{\gtrsim}
 \newcommand{\suchthat}{~\text{s.t.}~}
 \newcommand{\R}{\mathbb{R}}
@@ -47,9 +48,15 @@
   }
   {\mathinner{\mathcal{D}\IfNoValueTF{#1}{}{^{#1}}#2} \IfNoValueTF{#3}{}{(#3)}}
 }
+\DeclareMathOperator{\Exists}{\exists}
+\DeclareMathOperator{\Forall}{\forall}
+\DeclareMathOperator{\s}{s}
+\DeclareMathOperator{\co}{c}
 
 
-  % Probability
+%
+% Probability
+%
 \newcommand{\pr}[1]{\operatorname{P}\left(#1\right)}
 \newcommand{\prt}[1]{\operatorname{T}\left(#1\right)}
 \newcommand{\tauint}{\tau_\text{int}}
@@ -62,14 +69,20 @@
 \newcommand{\chidof}{\chi^2/\text{d.o.f.}}
 
 
-  % General Physics
+%
+% General Physics
+%
 \newcommand{\Lagr}{\mathcal{L}} 
 \newcommand{\Qin}{Q_{\text{in}}}
 \newcommand{\Qsuck}{Q_{\text{suck}}}
 \newcommand{\Qlost}{Q_{\text{lost}}}
 \newcommand{\Qdump}{Q_{\text{dump}}}
 \newcommand{\atFixed}[2]{\left(#1\right)_{#2}}
-  % QFT
+
+
+%
+% QFT
+%
 \newcommand{\MS}{\overline{\text{MS}}}
 \newcommand{\T}{\mathbf T}                % time-ordered product
 \newcommand{\qconj}{\mathcal{C}}
@@ -80,13 +93,21 @@
 \newcommand{\amuhvp}{a_\mu^{\rm HVP}}     % leading HVP contribution to a_mu
 \newcommand{\ME}{\mathcal{M}}             % matrix element
 \newcommand{\psibar}{\bar{\psi}}
-  % LFT
-\renewcommand{\L}{\mathbf L}              % lattice
+\newcommand{\fas}{f_{\text{as}}}
+
+
+%
+% LFT
+%
+\newcommand{\LAT}{\mathbf L}              % lattice
 \newcommand{\nconf}{N_{\text{conf}}}
 \newcommand{\nsimil}{N_{\text{sim}}}
 \newcommand{\plaq}{U^\square}
-  % Phase diagram 
-\newcommand{\fas}{f_{\text{as}}}
+
+
+%
+% Phase diagram 
+%
 \newcommand{\fsing}{f_{\text{sing}}}
 \newcommand{\freg}{f_{\text{reg}}}
 \newcommand{\pbp}{\bar{\psi}\psi}         % chiral condensate
@@ -98,7 +119,9 @@
 \newcommand{\grandZ}{\mathcal{Z}}
 
 
-  % Group and algebra names
+%
+% Group and algebra names
+%
 \DeclareMathOperator{\ON}{\text{O}}
 \DeclareMathOperator{\SU}{SU}
 \DeclareMathOperator{\SO}{SO}
@@ -107,21 +130,15 @@
 \DeclareMathOperator{\su}{\mathfrak{su}}
 
 
-  % Nice looking exists and forall
-\DeclareMathOperator{\Exists}{\exists}
-\DeclareMathOperator{\Forall}{\forall}
-
-
-  % Sine and cosine shorthand
-\DeclareMathOperator{\s}{s}
-\DeclareMathOperator{\co}{c}
-
-
-  % Corporate branding
+%
+% Corporate branding
+%
 \newcommand{\simulat}{\texttt{SIMULATeQCD}}
 
 
-  % Some other useful stuff (trying to follow APS conventions)
+%
+% Some other useful stuff (trying to follow APS conventions)
+%
 \newcommand{\tinysp}{\hspace{0.1mm}}
 \newcommand{\secref}[1]{Sec.~\ref{#1}}
 \newcommand{\chref}[1]{Chapter~\ref{#1}}
@@ -135,8 +152,10 @@
 \newcommand{\tabref}[1]{Table~\ref{#1}}
 
 
+%
 % This section defines colvec, which lets me make column
 % vectors more easily. \colvec{N}{a1}{a2}...{aN}
+%
 \newcount\colveccount
 \newcommand*\colvec[1]{
         \global\colveccount#1
@@ -154,13 +173,110 @@
         \fi
 }
 
+
+%
 % Cell alignment in tables.
+%
 \newcommand{\cjcell}[1]{\multicolumn{1}{c}{#1}}
 \newcommand{\rjcell}[1]{\multicolumn{1}{r}{#1}}
 \newcommand{\ljcell}[1]{\multicolumn{1}{l}{#1}}
 
+
+%
 % Creates a centered column in such a way that the table fills the
 % width of the page. The other commands are other alignments
+%
 \newcolumntype{C}{>{\centering\arraybackslash}X}
 \newcolumntype{L}{>{\raggedright\arraybackslash}X}
 \newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+
+%
+% What follows is a bunch of stuff to make a new command, mycode,
+% that makes code input look nice.
+%
+\definecolor{bgcolor}{RGB}{247,247,247}
+\definecolor{frcolor}{RGB}{227,227,227}
+\usepackage{caption}
+\captionsetup[listing]{
+    justification=raggedright,
+    singlelinecheck=off,
+}
+\setlength{\belowcaptionskip}{20pt}
+\usepackage[section]{minted}
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[
+  fileext = lol,
+  listname = {List of Listings},
+  name = Listing
+]{code}
+\usepackage[many]{tcolorbox}
+\tcbuselibrary{minted}
+\newtcbinputlisting{\mycode}[2]{%
+  listing engine=minted,%
+  minted language={#1},%
+  listing file={#2},%
+  minted options={%
+    xleftmargin=3.2em,%
+    autogobble=true,%
+    numbers=left,%
+    numbersep=1em,%
+    baselinestretch=1.2,%
+    fontsize=\fontsize{8.5}{8},%
+    breaklines=true,%
+    },%
+  listing only,%
+  enhanced jigsaw,%
+  colframe=black,%
+  sharp corners,%
+  boxrule=1pt,%
+  colback=bgcolor,%
+  left=-1.5em,%
+  left skip=0em,%
+  width=\textwidth,%
+  overlay={\begin{tcbclipinterior}\fill[frcolor] (frame.south west)
+        rectangle ([xshift=5.1mm]frame.north west);\end{tcbclipinterior}},
+}
+
+
+%
+% This makes the \ff environment, which makes code quotations look nice.
+%
+\makeatletter
+\newcommand\ff@print[1]{%
+  \textnormal{%
+    \ifdefined\ff@sf\sffamily\else\ttfamily\fi%
+    \ifdefined\ff@bold\fontseries{b}\selectfont\fi%
+    #1%
+  }%
+}
+\makeatother
+\makeatletter\newcommand\ff@rule
+  {\vrule height 6pt depth 1pt width 0pt}
+\makeatother
+\makeatletter
+\ifdefined\ff@noframes\else
+  \RequirePackage{tcolorbox}
+  \newtcbox\ff@box{nobeforeafter,colframe=gray!80!white,
+    colback=bgcolor,boxrule=0.1pt,arc=1pt,
+    boxsep=1.2pt,left=0.5pt,right=0.5pt,top=0.2pt,bottom=0.2pt,
+    tcbox raise base}
+\fi
+\makeatother
+\makeatletter
+\NewDocumentCommand\ff@x{v}{\ff{#1}}
+\makeatother
+\makeatletter
+\newcommand\ff[1]{%
+  \ifdefined\ff@noframes%
+    \ff@rule\ff@print{#1}%
+  \else%
+    \relax\ifmmode%
+      \ff@rule\ff@print{#1}%
+    \else%
+      \ff@box{\ff@rule\ff@print{#1}}%
+    \fi%
+  \fi%
+}
+\makeatother
+

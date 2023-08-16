@@ -1,20 +1,15 @@
 #!/bin/bash
 
-pdflatex -interaction=batchmode -draftmode 0_researchnotes.tex
-
-# If the bibliography file didn't change, we don't need to
-# compile these again. An attempt to speed up compilation.
-diff bibliography.bib .bibreference.bib &>/dev/null
-if [ $? -eq 1 ]; then
-  for auxfile in ch_*.aux; do
-      bibtex `basename $auxfile .aux`
-  done
-  for auxfile in ap_*.aux; do
-      bibtex `basename $auxfile .aux`
-  done
-  pdflatex -interaction=batchmode -draftmode 0_researchnotes.tex
-fi
-
+#
+# bibtex stuff
+#
+pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex
+for auxfile in ch_*.aux; do
+    bibtex `basename $auxfile .aux`
+done
+for auxfile in ap_*.aux; do
+    bibtex `basename $auxfile .aux`
+done
 
 #
 # feynman diagrams
@@ -24,12 +19,18 @@ for diagram in "${diagrams[@]}"; do
   if [ ! -f ${diagram}.mf ]; then mf ${diagram}; fi
 done
 
-
+#
+# index
+#
+pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex
 makeindex -s indexHeader.ist 0_researchnotes
 python scripts/fixIndex.py
 mv temp.idx 0_researchnotes.idx
 mv temp.ind 0_researchnotes.ind
-pdflatex -interaction=batchmode -draftmode 0_researchnotes.tex
-pdflatex -interaction=batchmode 0_researchnotes.tex
+
+#
+# the rest
+#
+pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex
+pdflatex -interaction=batchmode -shell-escape 0_researchnotes.tex
 ./distclean
-cp bibliography.bib .bibreference.bib

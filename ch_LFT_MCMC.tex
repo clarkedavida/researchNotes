@@ -698,7 +698,9 @@ actually it is there to make it easier to print to screen, which is
 an example of abstraction. We see that it made the code easier to
 read and reduced duplication.\\
 
-\lstinputlisting[firstline=1,lastline=41]{exampleCode/cat.cpp}
+\begin{code*}
+\mycode{c++}{exampleCode/cat.cpp}
+\end{code*}
 
 The \texttt{CAT} class begins with the \texttt{public} keyword, which
 is a statement about accessibility. Anything that falls under the
@@ -717,7 +719,9 @@ shortly. Finally the last group of four \texttt{void} functions are
 called {\it methods}. It is basically correct to think of a class as a
 collection of attributes and methods acting on them.\\
 
-\lstinputlisting[firstline=42, lastline=54]{exampleCode/cat.cpp}
+\begin{code*}
+\mycode{c++}{exampleCode/cat.cpp}
+\end{code*}
 
 To understand the constructor and destructor, let us turn to our main
 code where we will use this class. In the first line, we declare a
@@ -746,7 +750,9 @@ it is useful to have a constructor set the attributes to some default values.
 That is what the constructor does in this case, and it also tells the
 user that it instantiated a \texttt{CAT} object.\\
 
-\lstinputlisting[language={}]{exampleCode/catOutput.txt}
+\begin{code*}
+\mycode{text}{exampleCode/catOutput.txt}
+\end{code*}
 
 The destructor is the function called every time an object is destroyed.
 The two most common times an object is destroyed are when the object
@@ -788,8 +794,12 @@ For example you can manipulate exactly where and how objects
 are stored in memory. There are lots of good references for OOP
 in C++ out there, but a good start might be Ref.~\cite{tp:cpp}.\\
 
-\lstinputlisting[firstline=40, lastline=49]{exampleCode/scope.cpp}
-\lstinputlisting[language={}]{exampleCode/scopeOutput.txt}
+\begin{code*}
+\mycode{c++}{exampleCode/scope.cpp}
+\end{code*}
+\begin{code*}
+\mycode{text}{exampleCode/scopeOutput.txt}
+\end{code*}
 
 \subsection{OOP in Python}
 
@@ -811,7 +821,9 @@ repetition, since the child has access to all methods and attributes defined in
 the parent. Operator overloading enhances readability, for example by
 helping your code more closely mirror mathematical notation.\\
 
-\lstinputlisting[language=Python,firstline=1,lastline=31]{exampleCode/cat.py}
+\begin{code*}
+\mycode{python}{exampleCode/cat.py}
+\end{code*}
 
 Let us begin by implementing the \texttt{CAT} class from before in Python,
 which is shown in \texttt{cat.py}. One nice feature of Python classes
@@ -841,8 +853,12 @@ the first argument, and that this reference is always required to
 interact with class methods and attributes, even within the class itself.
 Some example output code using the \texttt{CAT} class is shown below.\\
 
-\lstinputlisting[language=Python,firstline=44,lastline=55]{exampleCode/cat.py}
-\lstinputlisting[language={}]{exampleCode/pythonCatOutput.txt}
+\begin{code*}
+\mycode{python}{exampleCode/cat.py}
+\end{code*}
+\begin{code*}
+\mycode{text}{exampleCode/pythonCatOutput.txt}
+\end{code*}
 
 To demonstrate inheritance, we consider a new kind of \texttt{CAT}, a
 \texttt{MEANCAT}. \texttt{MEANCAT}s prefer to hiss rather than meow, and
@@ -858,15 +874,23 @@ in \texttt{MEANCAT} overrides that of its parent, \texttt{CAT}. One last
 feature to point out is the use of the \texttt{del} keyword, which lets you
 call an object's destructor.\\
 
-\lstinputlisting[language=Python,firstline=32,lastline=41]{exampleCode/cat.py}
-\lstinputlisting[language=Python,firstline=56,lastline=66]{exampleCode/cat.py}
-\lstinputlisting[language={}]{exampleCode/meanCatOutput.txt}
+\begin{code*}
+\mycode{python}{exampleCode/cat.py}
+\end{code*}
+\begin{code*}
+\mycode{python}{exampleCode/cat.py}
+\end{code*}
+\begin{code*}
+\mycode{text}{exampleCode/meanCatOutput.txt}
+\end{code*}
 
 Finally we will have a look at operator overloading. For this example we
 will create a (rudimentary and wildly incomplete) class for a simple math 
 object of interest to high energy physics: the $\SU(2)$ matrix.\\
 
-\lstinputlisting[language=Python,firstline=1,lastline=42]{exampleCode/SU2.py}
+\begin{code*}
+\mycode{text}{exampleCode/SU2.py}
+\end{code*}
 
 Here the attributes are the elements of the matrix. 
 I have opted to use double underscores \texttt{\_\_} in front of
@@ -877,8 +901,12 @@ elements should always be \texttt{complex}, and I want to make sure the
 user cannot accidentally change the type. The \texttt{complex} type is
 enforced here through the \texttt{setElement} method.
 
-\lstinputlisting[language=Python,firstline=53,lastline=55]{exampleCode/SU2.py}
-\lstinputlisting[language={},firstline=5,lastline=8]{exampleCode/SU2Output.txt}
+\begin{code*}
+\mycode{python}{exampleCode/SU2.py}
+\end{code*}
+\begin{code*}
+\mycode{text}{exampleCode/SU2Output.txt}
+\end{code*}
 
 To use operator overloading, each binary operator has a special function name.
 In the \texttt{SU2} class example, we overloaded the + operator. Its special
@@ -893,8 +921,12 @@ the = sign here is not a copy constructor; instead both \texttt{g} and
 \texttt{h} are references to the same \texttt{SU2} object. This means that
 if you change \texttt{g}, \texttt{h} will change as well. Be careful!\\ 
 
-\lstinputlisting[language=Python,firstline=46,lastline=52]{exampleCode/SU2.py}
-\lstinputlisting[language={},firstline=1,lastline=4]{exampleCode/SU2Output.txt}
+\begin{code*}
+\mycode{python}{exampleCode/SU2.py}
+\end{code*}
+\begin{code*}
+\mycode{text}{exampleCode/SU2Output.txt}
+\end{code*}
 
 
 \section{Addressing storage challenges}

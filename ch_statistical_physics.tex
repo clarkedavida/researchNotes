@@ -539,7 +539,7 @@ Since $\log\grandZ$ is extensive, it must be that
 \begin{equation}
 -T\log\grandZ=kV
 \end{equation}
-for some constant $k$. Hence\footnote{Sometimes it is convenient to work
+for some unitless $k$. Hence\footnote{Sometimes it is convenient to work
 with $\muh\equiv\mu/T$ and $T$ instead of $\mu$ and $T$. This equation
 holds for both sets of control variables since both $\mu$ and $T$ are
 held fixed.} from \equatref{eq:1stlawgrand}
@@ -550,6 +550,7 @@ which means we can identify
 \begin{equation}\label{eq:pgrand}
 P=\frac{T}{V}\log\grandZ.
 \end{equation}
+
 Reorganizing \equatref{eq:grand} using \equatref{eq:pgrand}
 yields the {\it Gibbs-Duhem relation}
 \index{Gibbs-Duhem relation}
@@ -558,6 +559,12 @@ yields the {\it Gibbs-Duhem relation}
 \end{equation}
 where $s\equiv S/V$ is the entropy density, and $\epsilon$ and $n_i$
 are the energy and number densities.
+Taking a derivative of \equatref{eq:pgrand} w.r.t. $\mu_i$ and
+using \equatref{eq:1stlawgrand} yields
+another often useful relation,
+\begin{equation}
+  \frac{N_i}{V}=\pdv{P}{\mu_i}.
+\end{equation}
 
 \section{Relativistic quantum gases}
 
