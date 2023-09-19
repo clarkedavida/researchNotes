@@ -325,6 +325,78 @@ about using OR to gauge fix, see Ref.~\cite{mandula_efficient_1990}.
 For information about how to implement this on multiple GPUs, see
 e.g. Ref.~\cite{schrock_coulomb_2013}.
 
+\subsection{Choosing a random number generator}
+
+As far as we know\footnote{See for instance \apref{ap:bell}.}, 
+the only truly random or stochastic things in nature are
+quantum mechanical measurements. This poses a problem for our strategy, since
+we need a random number for the Metropolis step \equatref{eq:metupdate}.
+In practice, one wants to generate a number $X$ uniformly at random
+in the interval $X\in[0,1)$ and compute the number on the RHS
+of \equatref{eq:metupdate}. If $X$ turns out to be greater, you reject $C'$.
+
+In order to generate $X$, we use a {\it random number
+generator}\index{generator!random number} or RNG. 
+Since we can't have a true random number\footnote{For
+this reason, these algorithms are sometimes more aptly called
+{\it pseudorandom number generators}\index{generator!pseudorandom number}
+or PRNGs.}, we instead settle for an algorithm that produces a sequence of numbers
+\begin{equation}
+  X_{\rm seed},~X_1,~X_2,~...,~X_n,~...,
+\end{equation}
+by using some rule to generate $X_{n+1}$ given $X_n$. The starting number is
+called the {\it seed}\index{seed}. The goal is to choose your rule so that,
+given the seed, it is difficult or effectively impossible to figure out what
+$X_n$ will be. Again, this is not a truly random process, but unfortunately it
+is not yet practical to harness direct quantum-mechanical measurements to that
+end. 
+
+One of the earliest popular RNGs was the {\it linear congruence
+generator}\index{generator!linear congruence}~\cite{lehmer_mathematical_1951,thomson_modified_1958}. 
+Here the rule is pretty simple
+to understand: You choose three tuning parameters $a$, $b$, $m\in\N$
+and then generate according to
+\begin{equation}\label{eq:linearCongruence}
+X_{n+1}=(aX_n+b)\mod m.
+\end{equation}
+One can then convert a number $X_n$ generated in this way to a number $X$
+in the unit interval as required for the Metropolis step by normalizing it by $m$.
+
+
+\begin{figure}
+\includegraphics[width=\linewidth]{figs/linear_congruence.pdf}
+\caption{A strong correlation hidden in the linear congruence generator for
+poorly chosen $a$, $b$, and $m$. Things seem to improve for a better choice of
+these parameters, but as Marsaglia proved, this generator ought to be avoided
+regardless. Image made by C. Schmidt.}
+\label{fig:LCG}
+\end{figure}
+
+The linear congruence generator is extremely easy to implement and is quite
+fast. Unfortunately it suffers from one fatal flaw: It sucks. To see that it
+sucks, one can plot $X_{2m}$ against $X_n$. An example of such a plot for
+poorly chosen $a$, $b$, and $m$ is given in \figref{fig:LCG}. One sees the
+pairs organize themselves into planes. Changing $a$, $b$, and $m$ seems
+to improve the generator, but this flaw of the linear congruence generator
+is fundamental. Indeed it was shown by Marsaglia~\cite{marsaglia_random_1968} that
+outcomes of the linear will always arrange themselves in planes of hypercubes.
+Hence one should never this generator for scientific purposes.
+
+Looking for these hidden correlations is a bit challenging requiring some care
+and experience. There are a variety of tests, but if you want to be thorough,
+it is likely best to use already existing batteries, such as the {\it Diehard}
+battery written by Marsaglia himself. More modern batteries, 
+such as the {\it Dieharder}, can be found online~\cite{dieharder}.
+Besides lacking hidden correlations, you would like numbers produced by your
+RNG to match the target distribution. This can be quantitatively estimated
+using, for instance, the Kolmogorov test of \secref{sec:kolm}.
+Some modern RNGs that are known to be suitable for scientific purposes,
+in particular passing some of the tests above, include
+the\index{generator!Tausworthe} 
+{\it hybrid Tausworthe}~\cite{tausworthe_random_1965,lecuyer_maximally_1996}
+and\index{generator!Mersenne twister} 
+the {\it Mersenne twister}~\cite{matsumoto_mersenne_1998}.
+
 \section{Statistical analysis}\label{sec:statana}
 
 Since $C_i$ is generated based on $C_{i-1}$, measurements on subsequent

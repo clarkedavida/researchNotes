@@ -585,7 +585,7 @@ $\sigma/\sqrt{N}$ of the estimator roughly 68\% of the time.
 \tabref{tab:normal} gives the area under a Gaussian curve 
 for different numbers of standard deviations away from the mean. 
 
-\begin{table}[b]
+\begin{table}
 \centering
 \caption{Table of areas under the curve for the normal distribution.
 The last column gives the probability that a random variable 
@@ -615,7 +615,11 @@ the variance? Naively one might write
 \begin{equation}\label{eq:bad}
   \bar{\sigma}^2_{\text{biased}}=\frac{1}{N}\sum_{i=1}^N(X_i-\bar{X})^2;
 \end{equation} 
-While we expect this estimator to converge to the
+While we expect this estimator to converge\footnote{An estimator that
+converges to the correct result as $N\to\infty$ is
+{\it consistent}\index{consistent}. Note that unbiased and consistent
+do not mean the same thing; in particular $\bar{\sigma}^2_{\text{biased}}$
+is consistent but biased.} to the
 exact result in the limit $N\to\infty$, it disagrees with
 $\sigma^2$ for small $N$. Most glaringly when $N=1$, the
 estimator is zero, regardless of the exact result.
@@ -1147,7 +1151,7 @@ spline is sort of a compromise between having an approximation that follows $y$
 reasonably well while avoiding overfitting.
 
 
-\section{The Kolmogorov test}\index{Kolmogorov test}
+\section{The Kolmogorov test}\label{sec:kolm}\index{Kolmogorov test}
 Let's say we perform an experiment and extract a CDF $\bar{F}$ from 
 the data. How can we tell whether the data are consistent with some
 true CDF $F$? Or if we extract another CDF $\bar{G}$, how can

@@ -504,7 +504,18 @@ instance
 \end{equation}
 where $\beta=1/T$ in natural units.
 
-%\section{Cumulants}
+
+\subsection{Enthalpy}\index{enthalpy}
+
+The {\it enthalpy} is given by the Legendre transformation
+\begin{equation}\label{eq:enthalpy}
+ H(S,P,N)=U+PV.
+\end{equation}
+From \equatref{eq:enthalpy} and the first law we obtain
+\begin{equation}\label{eq:enthalpy}
+ \dd H = T\dd S +V\dd P +\sum_i\mu_i\dd N_i.
+\end{equation}
+
 
 \section{Ideal quantum gas}
 
@@ -539,7 +550,7 @@ Since $\log\grandZ$ is extensive, it must be that
 \begin{equation}
 -T\log\grandZ=kV
 \end{equation}
-for some unitless $k$. Hence\footnote{Sometimes it is convenient to work
+for some intensive $k$. Hence\footnote{Sometimes it is convenient to work
 with $\muh\equiv\mu/T$ and $T$ instead of $\mu$ and $T$. This equation
 holds for both sets of control variables since both $\mu$ and $T$ are
 held fixed.} from \equatref{eq:1stlawgrand}
@@ -654,12 +665,24 @@ interpreted as being done at fixed $\muh$.
 
 Knowing the pressure \equatref{eq:pressrelQM}, we are now ready to write down
 some expressions for the {\it hadron resonance gas} (HRG) model,
-following Ref.~\cite{karsch_probing_2011}.
+following Ref.~\cite{karsch_probing_2011}. This model is interesting for lattice
+results to compare against below $\Tpc$. 
 
-The HRG model is a low temperature model, in the sense we imagine we are working
+The HRG model is a low-temperature model, in the sense we imagine we are working
 in a phase where quarks are confined, so that the only degrees of freedom are
 hadronic bound states. To a good approximation, this means we need only include
 stable mesons, baryons, and their antiparticles.
+
+\subsection{Ideal Fermi gas}\label{sec:fermi}\index{gas!ideal Fermi}
+
+At high temperatures $T\gg\Tpc$, all the hadrons are melted, and the system is
+asymptotically free. Therefore a reasonable model is of a gas of non-interacting
+quarks and anti-quarks. This can also be obtained from \equatref{eq:pressrelQM}
+by setting $\eta=+1$. For a single species of quark, one adds together
+contributions in the integrand for both particles and antiparticles.
+After performing an integration by parts, you get a simple expression for the
+pressure~\cite{hegde_lattice_2008}. 
+This can be used to compare against lattice results at high $T$.
 
 \section{Bulk properties of matter}
 
@@ -671,20 +694,57 @@ A commonly used procedure is to calculate the pressure, giving
 you the EoS, and to derive other thermodynamic quantities from that.
 In this section we will discuss some of these quantities.
 
-\subsection{Pressure waves}
-%TODO: check formula
+\subsection{Pressure and expansion}
 The {\it speed of sound}\index{speed of sound} at fixed control parameter $X$
 is given by
 \begin{equation}
   c_X^2=\atFixed{\pdv{P}{\epsilon}}{X}.
 \end{equation}
+This is not the only expression one might encounter for a sound speed.
+Qualitatively, the speed of sound should capture something like
+\begin{equation}
+  c_X^2=\frac{{\rm elasticity}}{{\rm inertia}}.
+\end{equation}
+If a material is quick to return to its original shape after deformation, a sound
+wave in the material, which is caused by these kinds of movements, will have a
+higher speed. Conversely if it's harder to move the constituents of the
+material, i.e. if it has a higher inertia, sound speed will decrease.
+
+
 The {\it compressibility}\index{compressibility} at fixed $X$ is
 \begin{equation}
-  \kappa_X=-\frac{1}{V}\atFixed{\pdv{V}{P}},
+  \kappa_X=-\frac{1}{V}\atFixed{\pdv{V}{P}}{X},
 \end{equation}
 which captures how much the volume changes under a change of pressure.
 Substances that take a lot of pressure to change the volume are not
 very compressible; hence the minus sign.
+
+The {\it thermal expansion coefficient}\index{thermal expansion coefficient}
+at fixed $X$ is
+\begin{equation}
+  \alpha_X=\frac{1}{V}\atFixed{\pdv{V}{T}}{X}.
+\end{equation}
+
+\subsection{Heat storage}
+
+The {\it specific heat} at constant volume\index{specific heat} is
+\begin{equation}
+  C_V=\atFixed{\pdv{U}{T}}{V}
+\end{equation}
+while the specific heat at constant pressure is
+\begin{equation}
+  C_P=\atFixed{\pdv{H}{T}}{P}
+\end{equation}
+
+\subsection{Relationships}
+
+\begin{equation}
+ \frac{\kappa_T}{\kappa_S}=\frac{C_P}{C_V}
+\end{equation}
+\begin{equation}
+ \kappa_S=\kappa_T-\frac{\alpha_V^2 T}{n C_P}
+\end{equation}
+
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
