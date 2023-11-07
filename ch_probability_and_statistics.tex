@@ -12,7 +12,7 @@ Parts of this presentation follow selected parts
 of Chapters~1 and~2 of Berg~\cite{berg_markov_2004}.
 
 
-\section{Preliminaries}
+\section{Preliminaries}\label{sec:probprelim}
 
 
 We will consider a {\it random variable}\index{random variable}\footnote{
@@ -24,7 +24,7 @@ The set of all possible outcomes
   \Omega=\{x_1,x_2,...,x_n\},
 \end{equation}
 assuming there are $n\in\N$ possible outcomes, is called the {\it sample
-space}\index{sample space}. If $|\Omega|$ is finite as in the above case, we
+space}\index{sample space}. If $\given\Omega\given$ is finite as in the above case, we
 say that $X$ is {\it discrete}\index{discrete}. An {\it event}\index{event} $E$
 is any subset of outcomes $E\subset\Omega$, and we assign it a {\it
 probability}\index{probability} $\pr{E}$. Axiomatically speaking, the
@@ -37,13 +37,29 @@ of the possibilities is 1.
 \end{enumerate}
 
 Pragmatically you can assign a probability by repeating some experiment $n$
-times. If the event $E$ occurs $n_E$ times, then
-\begin{equation}
+times. If the event $E$ occurs $n_E$ times, then\footnote{Note that this limit 
+is nontrivial since $n_E$ will in general change as $n$ increases.}
+\begin{equation}\label{eq:freqdef}
   \pr{E}\equiv\lim_{n\to\infty}\frac{n_E}{n}.
 \end{equation}
-Alternative, you can make some theoretical assignment of probabilities to
+This method of assignment also gives a way to interpret
+what a probability means; in particular $\pr{E}=0.3$ would mean that
+if I repeat some experiment 10 times, I can expect to observe event
+$E$ 3 times on average. This interpretation is called
+the {\it frequentist}\index{frequentist approach} interpretation. We will
+discuss another interpretation in the context of the 
+{\it Bayesian}\index{Bayes!approach} approach in
+\secref{sec:bayes}.
+ 
+Alternatively, you can make some theoretical assignment of probabilities to
 events. For instance when one tosses a coin, if one has no reason to believe the
-coin is biased, it must be that
+coin is biased\footnote{One way of looking at this theoretical assignment
+is that we have no reason to suppose heads is ``more likely" than tails,
+i.e. there is no reason to prefer heads to tails. 
+We call this the {\it principle of insufficient reason}\index{principle!insufficient reason}.
+This approach to probability
+assignment can be generalized to an arbitrary $n$-state system, which leads
+to the uniform distribution.}, it must be that
 \begin{equation}
 \pr{\text{heads}}=\pr{\text{tails}}=\frac{1}{2}.
 \end{equation}
@@ -648,7 +664,7 @@ the estimator is {\it unbiased}.
   \begin{equation*}
     \begin{aligned}
     \ev{X_i\bar{X}}&=\frac{1}{N}\left(\ev{X_i^2}+
-                     \sum_{j\,|\,j\neq i}\ev{X_iX_j}\right)\\
+                     \sum_{j\suchthat j\neq i}\ev{X_iX_j}\right)\\
                    &=\frac{1}{N}\left(\ev{X^2}+(N-1)\ev{X}^2\right)\\
                    &=\frac{1}{N}\left(\ev{X^2}-\ev{X}^2\right)+\ev{X}^2\\
                    &=\frac{\sigma^2}{N}+\hat{x}^2,
@@ -658,7 +674,7 @@ the estimator is {\it unbiased}.
   for the last term we have
   $$
     \ev{\bar{X}^2}=\ev{\frac{1}{N^2}\sum_{i,j}X_iX_j}
-        =\frac{1}{N^2}\left(N\ev{X^2}+\sum_{i,j\,|\,i\neq j}\hat{x}^2\right)
+        =\frac{1}{N^2}\left(N\ev{X^2}+\sum_{i,j\suchthat i\neq j}\hat{x}^2\right)
         =\frac{\sigma^2}{N}+\hat{x}^2,
   $$
   where we again used independence in the second equality. Plugging
@@ -1268,7 +1284,7 @@ and Smirnov~\cite{smirnoff_sur_1939}.
     In the case $F$ is not monotonic, the inverse is not guaranteed.
     We define
     $$
-      F^+(y)\equiv\min\{x\,|\,F(x)\geq y\}.
+      F^+(y)\equiv\min\{x\suchthat F(x)\geq y\}.
     $$
     The important thing is that $F^+(y)\leq z\Leftrightarrow y\leq F(z)$.
     To see this note that
@@ -1320,9 +1336,25 @@ CDF is continuous. In practice one can proceed as follows:
         say 0.05, then this assumption becomes suspect. 
 \end{enumerate}
 
-\section{Statistical analysis of Markov chains}
-Suppose we have computed using MCMC a time series of $N$ measurements
-\{$X_1$, ..., $X_N$\}. In principle each element of this sample is drawn
+\section{Statistical analysis of time series}
+
+Once we get into lattice calculations, we are going to analyze
+Markov chains, which we'll discuss in \chref{ch:MCMC}. There
+we'll consider a {\it time series}\index{time series} of $N$
+measurements
+\begin{equation}
+\{X_1, ..., X_N\}. 
+\end{equation}
+The idea of a time series is that each measurement
+$X_i$ is in principle somehow correlated with $X_{i-1}$.
+For instance one can consider a time series of temperature
+measurements in a city. In our case, we'll generate a time
+series of space-time configurations, where each configuration
+is generated based on the preceding one.
+
+\subsection{Autocorrelation}
+
+In principle each element of this sample is drawn
 from a PDF with mean $\ev{X_i}=\ev{X}=\hat{x}$ and variance 
 $\sigma^2=\ev{(X_i-\hat{x})^2}$, i.e. they all have the same mean
 and variance. Unbiased estimators for the mean and variance are
@@ -1337,14 +1369,14 @@ The variance of the random variable $\bar{X}$ is
                     =\frac{1}{N^2}\left(\sum_{i\neq j}\ev{X_iX_j}
                      +N\ev{X^2}\right)-\hat{x}^2.
 \end{equation}
-In the case that the measurements are uncorrelated, the expected values
+In the case that the measurements are effectively uncorrelated, the expected values
 factorize, and we obtain
 \begin{equation}
   \sigma^2_{\bar{X}}=\sigma^2/N
 \end{equation}
 in agreement with the CLT. But in practice measurement
-$i+1$ is often correlated with measurement $i+t$ because they are from
-the same time series. To measure this we draw inspiration from 
+$i+1$ is often correlated with measurement $i+t$. 
+To measure this we draw inspiration from 
 definition \eqref{dfn:cor}. 
 The {\it autocovariance}\index{autocovariance} between measurements 
 $X_i$ and $X_{i+t}$ is
@@ -1427,6 +1459,198 @@ which parallels \equatref{eq:IACest} more closely. To construct a final
 estimator for $\tauint$, one looks for a window in $n$ for which
 \equatref{eq:IACest} becomes roughly independent of $n$. This serves
 as the final $\bar{\tau}_\text{int}$.
+
+\subsection{Correlation between two series}
+
+
+Consider now two series with measurements indicated by $X_i$ and $Y_i$;
+we assume the series are of the same length. Again drawing
+inspiration from definition \eqref{dfn:cor}, we define the
+{\it Pearson correlation coefficient}\footnote{This is the same number that gets 
+delivered in Excel when you fit a line.}
+as\index{correlation!Pearson}
+\begin{equation}
+r\equiv
+\frac{\sum_{i=1}^n\left(X_i-\bar{X}\right)\left(Y_i-\bar{Y}\right)}{\sqrt{\sum_{j=1}^n\left(X_j-\bar{X}\right)^2}
+\sqrt{\sum_{k=1}^n\left(Y_k-\bar{Y}\right)^2}}.
+\end{equation}
+If the series are not correlated, you would expect a deflection of $X_i$
+above its mean would be roughly as likely as a deflection of $Y_i$
+below its mean, and hence $r\approx0$. The denominator normalizes this
+quantity so that it falls in the range $r\in[-1,1]$.
+
+\section{The Bayesian approach}\label{sec:bayes}
+
+The probability assignment rule \equatref{eq:freqdef} effectively summarizes 
+the frequentist\index{frequentist approach} interpretation of probability. Here we
+will describe another interpretation, the {\it Bayesian}\index{Bayesian
+approach} interpretation. An excellent introduction to this approach
+to probability theory can be found in, e.g. Ref.~\cite{sivia_data_2006}.
+
+To motivate this approach, I want to share an example of an interesting false
+signal from experimental particle physics. In this context, we are often tasked
+with the challenge of discerning a signal within some background distribution.
+One can use a variety of statistics\footnote{For instance the Kolmogorov
+statistic of \secref{sec:kolm}.} to compute the probability that the observed
+distribution is consistent with the background. To help protect against
+reporting a false signal, particle physicists have decided to place the
+discovery threshold at 5$\sigma$, which according to \tabref{tab:normal}
+yields a probability of about $5.7\times10^{-7}$. In 2004, physicists
+reported the discovery of a pentaquark\footnote{This is a
+5-quark\index{pentaquark} bound state.} with a probability of about
+$4\times10^{-8}$ of being a genuine signal, well beyond the
+5$\sigma$ threshold~\cite{aktas_evidence_2004}. This pentaquark could
+not be found by subsequent groups; Ref.~\cite{rossi_tetra-quarks_2021}
+includes a nice summary of the matter.
+
+So what went wrong? Were we just really unlucky? In fact this signal was due to
+a mistake in the analysis. Does this mean the people who calculated the
+probability didn't know what they were doing? On the contrary, the probability
+was calculated under the assumption that the analysis was correct; in other
+words, it was calculated in the context of the information they had available at
+the time.
+
+This is the essence of the Bayesian approach: it generalizes the notion of a 
+probability to a degree of belief. If you like, you can view it as an attempt to
+be more honest about assumptions are made or what knowledge goes into a
+calculation. This knowledge is summarized by probability distributions called
+{\it priors}\index{prior}.
+
+\subsection{Rules for consistent reasoning}\label{sec:consistentReasoning}
+
+In 1946, Cox thought about how to quantitatively assign likelihoods to
+statements about the word in a consistent manner~\cite{cox_probability_1946}. 
+The idea is that one wants to
+take statements like ``The sun will rise tomorrow" or ``Jerry attacked Tom" and
+assign real numbers to them such that the real number is higher for the
+statement in whose truth one has greater confidence.
+In general one considers statements $A$ and $B$ and assigns them
+real numbers $\pr{A}$ and $\pr{B}$, which defines our 
+{\it probabilities}\index{probability}. 
+Cox showed that consistency is ensured
+if the real numbers satisfy
+\begin{equation}\begin{aligned}
+\pr{A\given I}+\pr{\neg A\given I}&=1,\\
+\pr{A\wedge B\given I}&=\pr{A\given B\wedge I}\pr{B\given I},\\
+\pr{\text{true}}&=1,\\
+\pr{\text{false}}&=0.
+\end{aligned}\end{equation}
+The vertical bar $|$ in this context means ``given", i.e. everything to the
+right of this bar is taken to be true. In each case we include this symbol $I$
+to indicate some possible background information that is known ahead of time.
+The first of these two equations is sometimes called the {\it sum
+rule}\index{rule!sum} while the second is sometimes called the {\it product
+rule}\index{rule!product}. It can be used to relate conditional probabilities
+in the following manner.
+
+\index{Bayes's Theorem} 
+\begin{theorem}{Bayes's Theorem}{} 
+$$
+\pr{A\given B\land I}=\frac{\pr{B\given A\land I}\pr{A\given I}}{\pr{B\given I}}
+$$
+  \begin{proof}
+  From the product rule we have both
+\begin{equation*}\begin{aligned}
+\pr{A\wedge B\given I}&=\pr{A\given B\wedge I}\pr{B\given I},\\
+\pr{B\wedge A\given I}&=\pr{B\given A\wedge I}\pr{A\given I}.
+\end{aligned}\end{equation*}
+  Since the statements $A\land B$ and $B\land A$ are exactly the same, we can
+eliminate the LHS and solve for $\pr{A\given B\land I}$.
+  \end{proof}
+\end{theorem}
+
+This relation between the conditional probabilities is useful especially in the
+context of data analysis, for if we replace $A$ by ``model" and $B$ by ``data",
+we get 
+\begin{equation}
+\pr{\text{model}\given \text{data}\land I}
+=\frac{\pr{\text{data}\given \text{model}\land I}\pr{\text{model}\given I}}{\pr{\text{data}\given
+I}}.
+\end{equation}
+In particular, in the context of analyzing data, the LHS is what is difficult to
+ascertain. One may have a bunch of competing ways of looking at things and
+desires the way of looking at things that is, given the information $I$ at hand,
+the most probable. The LHS is called the {\it posterior}\index{posterior}
+probability. It is related to the {\it likelihood}\index{likelihood} that one
+would find these data given the hypothesis, $\pr{\text{data}\given
+\text{model}\land I}$ as well as the {\it prior}\index{prior}
+probability $\pr{\text{model}\given I}$, which represents our state of
+knowledge about the model before analyzing the data. The denominator term,
+$\pr{\text{data}\given I}$ is called\footnote{It is also sometimes called
+the {\it prior predictive}\index{prior!predictive} or the 
+{\it marginal likelihood}\index{likelihood!marginal}.} 
+the {\it evidence}\index{evidence}. 
+
+We note one more useful property of conditional probabilities, that
+\begin{equation}
+\pr{A\land I}=\int_{-\infty}^\infty \dd{B} f(A\given B\land I),
+\end{equation}
+where $f$ is a PDF to be interpreted like in \secref{sec:probprelim}.
+This is the statement that if $A$ is conditional on $B$, I can arrive at a
+statement involving $A$ alone by exhaustively integrating over all possible
+outcomes for $B$. This process is known\footnote{When we do this in a physics
+context instead of a statistical context, we usually say we are ``integrating
+out" $B$.} as {\it marginalization}\index{marginalization}.
+
+Marginalization is useful in the same way integrating out is useful: If we know
+e.g. that a model contains some explicit dependence on some parameter $\lambda$
+but we don't know what it is, the exhaustive integration lets us make statements
+independent of it. In the context of statistical analysis, such quantities are
+often called {\it nuisance parameters}\index{nuisance parameter}.
+
+\subsection{Interpreting probabilities}
+
+Perhaps the nicest characteristic of the frequentist approach is that it
+provides a clear interpretation of a probability like 0.98; in particular we
+imagine some ensemble of 100 experiments or universes and claim that, on
+average, our event of interest would occur 98 times. In the Bayesian case, by
+contrast, a probability as we have presented it in
+\secref{sec:consistentReasoning} has no such a priori interpretation. Instead it
+is a degree of confidence that we demand should have certain properties, for
+instance that if $\pr{A}>\pr{B}$ then we think that $A$ is more ``likely to
+occur" than $B$. For this reason, some authors view it as an extension of
+ordinary logic. Which is preferable for probability assignment?
+
+To begin with, I want to list a couple drawbacks of the frequentist approach.
+The first is that this ensemble interpretation is not always reasonable. Cox
+gives an example from number theory~\cite{cox_probability_1946} that should hold
+for one of the integers 4, 5, 6, 7, or 8. A mathematician surmises that
+4 is the ``most likely". What would it mean to imagine an ensemble in this case,
+that is, what kind of statistical spread can you imagine for something that,
+when determined, gives a unique, unambiguous result?
+The second kind of drawback concerns the example of the pentaquark given at the
+beginning, namely that it ignores the role of limited information. Every
+probability in a Bayesian context is explicitly written as conditional on
+whatever information is available at the time. This is a subtle point, but its
+corollary is important: The frequentist computation of the discovery probability 
+yields a false statement. The Bayesian computation, which would arrive at the same 
+number, would yield a true statement, since it is conditional on the limited
+understanding of that experimental analysis. To put it another way, the
+frequentist approach strives to yield an objective number independent of all
+context, while the Bayesian approach softens this goal to a demand that
+observers with the same knowledge obtain the same number.
+
+I found myself still somewhat uncomfortable with the loss of the ensemble
+interpretation of probabilities, because it let me say unambiguously ``this is
+what 0.98 means". This discomfort can be largely resolved by approaching this
+superficially alien way of looking at probabilities in a similar manner as when
+one first becomes comfortable with special relativity or quantum mechanics,
+specifically by noting that the Bayesian interpretation reduces to the
+frequentist one in familiar cases. For example when $I$ represents the
+information that one rolls an ideal, fair die, one can again imagine the
+ensemble of die throws, and one obtains the same number as the frequentist does.
+Therefore the observer hasn't lost any interpreting power; on the contrary, the 
+observer gains the ability to assign numbers representing degrees of certainty to
+situations where the ensemble interpretation is useless.
+
+
+\subsection{Assigning probabilities}
+
+
+Now that we've thought about what the probabilities mean in the Bayesian
+framework, we need a way to assign them; in the frequentist framework, it was
+sufficient to use ratios of set sizes, but now this assignment isn't automatic.
+ 
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}

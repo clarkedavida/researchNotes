@@ -3,11 +3,17 @@
 % by: David A. Clarke                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\documentclass[12pt]{book}
+
+
+\usepackage{silence}
+\WarningFilter{latex}{Float too large for page}
+
 
 % Normal preamble stuff.
-\documentclass[12pt]{book}
 \usepackage[title]{appendix}
-\usepackage{mathtools,tensor,physics,slashed,textcomp,mhchem}
+\usepackage{mathtools,tensor,physics,slashed,textcomp}
+\usepackage[version=4]{mhchem} % version is to suppress an annoying warning
 \usepackage{microtype} % should help with hyphenation
 \usepackage{xcolor,feynmf,subcaption} % stuff for feynman diagrams
 
@@ -15,6 +21,7 @@
 % davitex and required packages
 \usepackage{amsmath,amssymb,graphicx,multirow,tabularx}
 \usepackage{davitex}
+
 
 % I don't want to use this in general; I was just too lazy to make the
 % replacements when porting code over.
@@ -25,6 +32,7 @@
 % If you click on citations or equation references, you will be take
 % to the corresponding page. 
 \usepackage{hyperref}
+\pdfminorversion=7
 \hypersetup{
   colorlinks=true,
   linkcolor=black,
@@ -126,11 +134,22 @@
 \begin{frontstuff} % ----------------------------------------------- FRONT STUFF
 
 
-\section*{Math Symbols}
+\section*{Logic Symbols}
 \begin{tabular}{ll}
 $\exists$       & There exists \\
 $\forall$       & For all \\
+$\wedge$        & Logical and; wedge product \\
+$\lor$          & Logical or \\ 
+$\neg$          & Logical negation \\
 $\in$           & Is a member of the set \\
+$\subseteq$     & Is a subset of \\ 
+$\subset$     & Is a proper subset of \\ 
+\end{tabular}
+\clearpage
+
+
+\section*{Math Symbols}
+\begin{tabular}{ll}
 $\leq$          & Less than or equal to; is a subgroup of\\
 $\approx$       & Approximate equality \\
 $\cong$         & Isomorphic\\
@@ -152,11 +171,14 @@ $\mathbb{R}$    & Real numbers \\
 $\s_x$          & $\sin(x)$ \\
 $\SU(N)$        & Special unitary group of degree $N$ \\
 $\U(N)$         & Unitary group of degree $N$ \\
-O$(N)$         & Orthogonal group of dimension $N$ \\
+O$(N)$          & Orthogonal group of dimension $N$ \\
 $S_V$           & Symmetric group on the set $V$ \\
 $\tauint$       & Integrated autocorrelation time \\
+$\wedge$        & Logical and; wedge product \\
 $\mathbb{Z}$    & Integers \\
 $\mathbb{Z}_n$  & Integers modulo $n$ \\
+$G$             & A group; Newton's gravitational constant\\
+$g$             & A group element; $\SU(N_c)$ bare coupling\\
 \end{tabular}
 \clearpage
 
@@ -261,6 +283,7 @@ L. Dini,
 A. X. El-Khadra,
 G. Gagliardi,
 J. Goswami,
+O. Kaczmarek,
 F. Karsch,
 S. Lahert,
 A. Lahiri,
@@ -274,6 +297,7 @@ M. Sarkar,
 A. Sciarra,
 C. Schmidt,
 P. Scior,
+M. Semaan,
 S. Sharma,
 S. Singh,
 and

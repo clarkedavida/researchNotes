@@ -1,17 +1,5 @@
 \chapter{LGT: Lattice without Fermions}\label{ch:preliminaries}
 
-LGT is introduced in \secref{sec:LGT}
-by reviewing local gauge symmetries in QFT, regularizing a pure
-gauge theory on the lattice, discussing the true continuum limit,
-\index{limit!continuum}
-and introducing finite temperature. In \secref{sec:refscales}, 
-reference scales are defined, and systematic error within the context
-of scale setting is explored. Topological observables are introduced
-in \secref{sec:topinvar}, and effects of topology barriers
-are considered.
-
-\section{Lattice gauge theory}\label{sec:LGT}
-
 Physically, QFT is defined on a 4D Minkowskian space-time. In LGT 
 the 4D space-time is instead equipped with a Euclidean metric, which is 
 related to the original metric via a \index{rotation!Wick}{\it Wick rotation}
@@ -28,7 +16,7 @@ have units of inverse length.
 We first work in the continuum, then 
 discretize the theory by defining the lattice.
 
-\subsection{Local gauge symmetries}
+\section{Local gauge symmetries}
 
 Local gauge symmetries play a central role in the SM. 
 Starting from a Lagrangian that depends on the derivatives of
@@ -160,7 +148,7 @@ For the purpose of a lattice study,
 it is helpful to look at a non-Abelian theory, which
 has a well-defined continuum limit.
 
-\subsection{Lattice regularization}\label{sec:latreg}
+\section{Lattice regularization}\label{sec:latreg}
 We now define QFT on a lattice. Let $N_{1},N_{2},N_{3},N_{4}
 \in \N$. The {\it lattice} ${\LAT}$ is defined by
 \begin{equation}
@@ -382,7 +370,7 @@ Because of this identification, $\beta$ is also (besides $g$) sometimes
 referred to as the \index{coupling constant}{\it coupling constant}.
 
 
-\subsection{The Haar measure}\label{sec:haar}\index{Haar measure}
+\section{The Haar measure}\label{sec:haar}\index{Haar measure}
 
 We now restrict
 our attention to lattices that have extension $N_1=N_2=N_3\equiv N_s$
@@ -468,7 +456,7 @@ us to integrate out the common link in such situations:
   \int \dd U\tr VU\tr U^\dagger W=\frac{1}{3}\tr VW
 \end{equation}
 
-\subsection{Heavy quark free energy}\label{sec:hqfe}
+\section{Heavy quark free energy}\label{sec:hqfe}
 
 
 When one thinks about the potential\footnote{At finite temperature
@@ -613,7 +601,7 @@ quarks forming two mesons. This phenomenon is known as
 {\it string breaking}\index{string!breaking}.
 
 
-\subsection{Renormalization group and the continuum limit}
+\section{Renormalization group and the continuum limit}
 \index{renormalization!group}\index{limit!continuum}
 
 
@@ -760,7 +748,7 @@ size (which limits the largest wavelength) affect our results?
 These questions are discussed in detail in 
 \secref{sec:refscales}.
 
-\subsection{Finite temperature}\label{sec:finitetemp}
+\section{Finite temperature}\label{sec:finitetemp}
 
 The functional integral for a 3D, 
 pure $\SU(2)$ LGT system in contact with a thermal reservoir at 
@@ -835,9 +823,8 @@ and a first-order transition for $\SU(N_c)$ when $N_c>2$
 ~\cite{svetitsky_critical_1982}. 
 The order parameter\footnote{We will argue this in \secref{sec:ploop}.} 
 for this transition is the \index{Polyakov loop}
-Polyakov loop~\eqref{eq:ploop}
-\index{Polyakov loop} {\it Polyakov loop}, 
-\begin{equation}\label{eq:ploop}
+{\it Polyakov loop}\index{Polyakov loop},
+\begin{equation}
   P(\vec{x})\sim\tr\prod_\tau U_4(\vec{x},\tau),
 \end{equation}
 which is a straight Wilson loop of length $N_\tau$ that is 
@@ -1045,33 +1032,7 @@ The $N_s=\infty$ result $\beta_c(N_\tau)$ can then
 be extracted from a fit of the three parameters $\beta_c(N_\tau)$,
 $a_1(N_\tau)$, and $a_2(N_\tau)$.
 
-
-\section{Topological invariants}\label{sec:topinvar}
-
-
-\subsection{Topological winding number}
-\index{topological!winding number}
-
-This section follows Chapter 93 of Srednicki~\cite{srednicki_quantum_2007}; 
-more details can be found there.
-We start by considering classical, pure $\SU(2)$ gauge theory
-\begin{equation}\label{eq:topaction}
-  \Lagr=-\frac{1}{2g^2}F_{\mu\nu}F_{\mu\nu}
-\end{equation}
-at fixed $x_4$, focusing for the moment on $U$ that are time-independent.
-Let $U\equiv U(\vec{x})\in\SU(2)$, and set the BC $U(\infty)=U_0$
-for some constant matrix $U_0$. 
-The {\it topological winding number} 
-or {\it Pontryagin index} \index{Pontryagin index}of the map $U$ is
-\begin{equation}\label{eq:wn}
-  n\equiv\frac{1}{24\pi^2}\int\dd[3]{x}\epsilon_{ijk}
-    \tr U\,\partial_iU^\dagger U\,\partial_jU^\dagger
-        U\,\partial_kU^\dagger.
-\end{equation}
-The winding number is invariant under coordinate changes since the Jacobian of
-the measure cancels the Jacobian of the partial derivatives.
-Given the BC, it is also invariant under smooth deformations of $U$. 
-To show this, we first establish a useful Lemma.
+% CUM
 
 \begin{lemma}{}{variationrule}
   $$\var\left(U\partial_kU^\dagger\right)

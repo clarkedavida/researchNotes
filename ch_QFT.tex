@@ -630,7 +630,7 @@ momentum simultaneously.
 A general local meson operator/current/bilinear\footnote{Sometimes in lattice
 QCD you see bilinears of the form $\bar{\psi}^f(x)\Gamma\psi^g(x\pm a\muh)$,
 which is called a {\it point-split}\index{point-split} operator.} has the form
-\begin{equation}\label{eq:mesonInterp}
+\begin{equation}\label{eq:mesonInterpLat}
   \bar{\psi}^f(x)\Gamma\psi^g(x)
 \end{equation}
 for fermion flavors $f$ and $g$.
@@ -1007,7 +1007,7 @@ common feature whenever a $\gamma_5$ is in the exponent. Recall that
 $\bar{\psi}=\psi^\dagger\gamma_4$. The $\gamma_5$ will anticommute with
 $\gamma_4$.} of the fermion fields is a transformation
 mapping
-\begin{equation}\label{eq:chiralRotation}
+\begin{equation}
   \psi\to e^{i\alpha\gamma_5}\psi~~~~\text{and}~~~~
   \bar{\psi}\to\bar\psi e^{i\alpha\gamma_5},
 \end{equation}
@@ -1455,6 +1455,32 @@ In the context of lattice calculations, the Thirring model is used often as a
 test bed for Lefshetz thimbles, which are a possible sign problem workaround.
 Sometimes in these studies, one may consider a model with more or fewer spatial
 dimensions.
+
+
+\section{Topological invariants}\label{sec:topinvar}\index{topological!winding number}
+
+This section follows Chapter 93 of Srednicki~\cite{srednicki_quantum_2007};
+more details can be found there.
+We start by considering classical, pure $\SU(2)$ gauge theory
+\begin{equation}\label{eq:topaction}
+  \Lagr=-\frac{1}{2g^2}F_{\mu\nu}F_{\mu\nu}
+\end{equation}
+at fixed $x_4$, focusing for the moment on $U$ that are time-independent.
+Let $U\equiv U(\vec{x})\in\SU(2)$, and set the BC $U(\infty)=U_0$
+for some constant matrix $U_0$.
+The {\it topological winding number}
+or {\it Pontryagin index} \index{Pontryagin index}of the map $U$ is
+\begin{equation}\label{eq:wn}
+  n\equiv\frac{1}{24\pi^2}\int\dd[3]{x}\epsilon_{ijk}
+    \tr U\,\partial_iU^\dagger U\,\partial_jU^\dagger
+        U\,\partial_kU^\dagger.
+\end{equation}
+The winding number is invariant under coordinate changes since the Jacobian of
+the measure cancels the Jacobian of the partial derivatives.
+Given the BC, it is also invariant under smooth deformations of $U$.
+To show this, we first establish a useful Lemma.
+
+
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}

@@ -1,36 +1,43 @@
 #!/bin/bash
 
-#
-# bibtex stuff
-#
-pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex
+
+SUPPRESS="feynmf"
+BIBTEXSUPPRESS="BibTeX|top-level|unsrtnat|Database"
+
+
+echo "Initializing compilation..."
+pdflatex -interaction=batchmode -shell-escape -draftmode -halt-on-error 0_researchnotes.tex > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "Compilation failed! Rerun with makelatex to learn more."
+    exit
+fi
+
+
+echo "Running bibtex..."
 for auxfile in ch_*.aux; do
-    bibtex `basename $auxfile .aux`
+    bibtex `basename $auxfile .aux` 2>&1 | grep -Ev ${BIBTEXSUPPRESS}
 done
 for auxfile in ap_*.aux; do
-    bibtex `basename $auxfile .aux`
+    bibtex `basename $auxfile .aux` 2>&1 | grep -Ev ${BIBTEXSUPPRESS}
 done
 
-#
-# feynman diagrams
-#
+
+echo "Making Feynman diagrams..."
 diagrams=(fr123 fr4to17 fr18to21 fr22to25 fr26 prob1 prob2)
 for diagram in "${diagrams[@]}"; do
-  if [ ! -f ${diagram}.mf ]; then mf ${diagram}; fi
+  if [ ! -f ${diagram}.mf ]; then mf --quiet ${diagram}; fi
 done
 
-#
-# index
-#
-pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex
+
+echo "Making Index..."
+pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex > /dev/null 2>&1
 makeindex -s indexHeader.ist 0_researchnotes
 python scripts/fixIndex.py
 mv temp.idx 0_researchnotes.idx
 mv temp.ind 0_researchnotes.ind
+pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex > /dev/null 2>&1
 
-#
-# the rest
-#
-pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex
-pdflatex -interaction=batchmode -shell-escape 0_researchnotes.tex
+
+echo "Finish..."
+pdflatex -interaction=batchmode -shell-escape 0_researchnotes.tex 2>&1 | grep -Ev ${SUPPRESS}
 ./distclean

@@ -3,7 +3,11 @@
 #
 # bibtex stuff
 #
-pdflatex -shell-escape 0_researchnotes.tex
+pdflatex -shell-escape -draftmode -halt-on-error 0_researchnotes.tex
+if [ $? -ne 0 ]; then
+    echo "Compilation failed! Rerun with makelatex to learn more."
+    exit
+fi
 for auxfile in ch_*.aux; do
     bibtex `basename $auxfile .aux`
 done
@@ -22,15 +26,13 @@ done
 #
 # index
 #
-pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex
+pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex > /dev/null 2>&1
 makeindex -s indexHeader.ist 0_researchnotes
 python scripts/fixIndex.py
 mv temp.idx 0_researchnotes.idx
 mv temp.ind 0_researchnotes.ind
+pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex > /dev/null 2>&1
 
-#
-# the rest
-#
-pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex
+
 pdflatex -interaction=batchmode -shell-escape 0_researchnotes.tex
 ./distclean
