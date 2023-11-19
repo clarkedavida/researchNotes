@@ -1,4 +1,4 @@
-\chapter{Physics: Phase transitions} 
+\chapter{Physics: Phase transitions}
 
 In \chref{ch:statphys} we saw that in a statistical mechanical system,
 observables of interest can be derived from the free energy or grand potential,
@@ -182,6 +182,44 @@ direction the system picks; this is an example of spontaneous symmetry
 breaking\index{spontaneous symmetry breaking}, which plays a major role in QFT,
 as discussed in \secref{sec:ssb}. 
 
+\section{The Lee-Yang theorem}\label{sec:leeyang}\index{Lee-Yang Theorem}
+
+One of the lessons of \chref{ch:statphys} is that the partition function of a
+system determines all its observables. For example in the grand canonical
+formulation, we saw that the grand potential is related to the partition
+function by
+\begin{equation}\label{eq:grandPotZ}
+  \Phi\left(V,T,\vec{\mu}\right)=-T\log\grandZ.
+\end{equation}
+Remaining observables, such as energy densities, entropy, heat capacity, and so
+on, can then in principle be determined by carefully taking partial derivatives
+and utilizing relations like the first law of thermodynamics or the Gibbs-Duhem
+relation.
+
+
+\begin{figure} 
+\centering
+\includegraphics[width=\linewidth]{figs/lee_yang.pdf}
+\caption{
+Figure from Ref.~\cite{yang_statistical_1952}. In their setup, they consider a
+three-phase system. $y$ is the fugacity, so $\log y\sim \mu/T$. The pressure is
+$p$; $t_1$ and $t_2$ are zeros of the partition function, and $\rho$ is a
+$\mu$-derivative of the pressure.
+}
+\label{fig:leeYangTheorem}
+\end{figure}
+
+
+The partition function is also useful to find
+phase transitions. Perhaps the most important work in this regard is by Lee and
+Yang~\cite{yang_statistical_1952}, who demonstrated that, in the limit
+$V\to\infty$, $\grandZ(h)$, which we write as a function of the magnetization or
+symmetry-breaking parameter $h$, will have zeros at phase transitions. According
+to \equatref{eq:grandPotZ} then, we correspondingly expect singularities in the
+free energy. 
+
+
+
 \section{The scaling hypothesis}\label{sec:scalingHypothesis}
 All critical exponents\index{critical exponent} can be written as functions 
 of the number of dimensions $d$ as well as $\nu$ and $\eta$. Given the reduced 
@@ -354,6 +392,52 @@ strategically depending on the observable we're looking at:
 \end{aligned}\end{equation}
 One can eliminate the unknown variables $y_h$, $y_t$, and $d$ to obtain
 the first two hyperscaling relations.
+
+\subsection{Finite size scaling}\index{finite size scaling}
+
+In \secref{sec:leeyang} we saw that phase transitions happen in the $V\to0$
+limit. However when looking at real-word, condensed-matter systems, we deal
+exclusively with finite volumes. Similarly all lattice calculations are on
+configurations stored in computer memory, and are hence themselves finite as
+well. On the other hand, we would like our understanding of statistical physics
+to say something about the real, finite-volume world, and conversely, we would
+like to learn about phase transitions of large systems from finite-volume
+lattice calculations. How do we reconcile these seemingly conflicting goals?
+This is the domain of {\it finite-size scaling}; in particular we are going to analyze
+how our observables change as a function of the lattice extension, which we will
+call $L$. For simplicity we consider lattices with geometry $L^d$.
+
+We start by considering systems with $h=0$. 
+We note that, near a second-order critical point, the correlation
+length $\xi$ is, according to \tabref{tab:scaling}, expected to scale like
+$|t|^{-\nu}$. On the other hand, in a finite box, the correlation length is bounded
+from above by $L$. This suggests
+\begin{equation}
+    |\Tc(L)-\Tc(\infty)|\sim L^{-1/\nu}.
+\end{equation}
+This hard cutoff can also be utilized to guess how some other observables
+change as $L$ approaches the thermodynamic limit. For instance, the same
+table tells us $\chi\sim|t|^{-\gamma}$. Taking this as inspiration, we
+make the ansatz
+\begin{equation}
+    \chi(L)=|t|^{-\gamma}g\left(\frac{L}{\xi}\right).
+\end{equation}
+To keep our scaling laws consistent, we demand that $g$ has the limiting behavior
+\begin{equation}
+    \lim_{x\to\infty}g(x)=\text{const.},~~~~~~\lim_{x\to0}g(x)\sim x^{\gamma/\nu}.
+\end{equation}
+The former limit ensures that we recover the correct thermodynamic limit scaling law
+for $\chi$, while the latter limit enforces a temperature-independent susceptibility
+as the correlation length diverges. This latter limit also shows us that
+\begin{equation}
+    \chi_{\text{max}}\sim L^{\gamma/\nu}.
+\end{equation}
+This is extremely helpful, in that it directly permits us to extract a ratio of
+critical exponents, even at finite volume where there is no true transition.
+Similar arguments for the specific heat yield
+\begin{equation}
+    C_{V,\,\text{max}}\sim L^{\alpha/\nu}.
+\end{equation}
 
 
 \section{Classification of observables}
