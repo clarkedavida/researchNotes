@@ -407,8 +407,8 @@ This is the domain of {\it finite-size scaling}; in particular we are going to a
 how our observables change as a function of the lattice extension, which we will
 call $L$. For simplicity we consider lattices with geometry $L^d$.
 
-We start by considering systems with $h=0$. 
-We note that, near a second-order critical point, the correlation
+We consider systems with $h=0$. 
+Note that, near a second-order critical point, the correlation
 length $\xi$ is, according to \tabref{tab:scaling}, expected to scale like
 $|t|^{-\nu}$. On the other hand, in a finite box, the correlation length is bounded
 from above by $L$. This suggests
@@ -420,25 +420,39 @@ change as $L$ approaches the thermodynamic limit. For instance, the same
 table tells us $\chi\sim|t|^{-\gamma}$. Taking this as inspiration, we
 make the ansatz
 \begin{equation}
-    \chi(L)=|t|^{-\gamma}g\left(\frac{L}{\xi}\right).
+    \chi(L)=|t|^{-\gamma}g\left(\frac{L}{\xi}\right)
 \end{equation}
-To keep our scaling laws consistent, we demand that $g$ has the limiting behavior
+for some function $g$. To keep our scaling laws consistent, we demand that 
+$g$ has the limiting behavior
 \begin{equation}
     \lim_{x\to\infty}g(x)=\text{const.},~~~~~~\lim_{x\to0}g(x)\sim x^{\gamma/\nu}.
 \end{equation}
 The former limit ensures that we recover the correct thermodynamic limit scaling law
-for $\chi$, while the latter limit enforces a temperature-independent susceptibility
+for $\chi$ while the latter limit enforces a temperature-independent susceptibility
 as the correlation length diverges. This latter limit also shows us that
-\begin{equation}
+\begin{equation}\label{eq:fss_susc}
     \chi_{\text{max}}\sim L^{\gamma/\nu}.
 \end{equation}
 This is extremely helpful, in that it directly permits us to extract a ratio of
 critical exponents, even at finite volume where there is no true transition.
 Similar arguments for the specific heat yield
-\begin{equation}
+\begin{equation}\label{eq:fss_CV}
     C_{V,\,\text{max}}\sim L^{\alpha/\nu}.
 \end{equation}
 
+Equations \eqref{eq:fss_susc} and \eqref{eq:fss_CV} have a practical use of
+allowing extraction of critical exponents from real-world simulations.
+They can be also be used to argue that a phase transition is of second order
+belonging to some particular universality class. For first-order transitions,
+one expects~\cite{fisher_scaling_1982}\index{phase transition!first-order}\index{phase
+transition!second-order}\index{crossover}
+\begin{equation}\label{eq:fss_susc}
+    \chi_{\text{max}}\sim L^d.
+\end{equation}
+For a crossover, one expects to see no scaling of susceptibility peak height
+at all. Indeed, this strategy was used to demonstrate that the QCD phase change
+at physical quark mass is a crossover~\cite{aoki_order_2006}.
+ 
 
 \section{Classification of observables}
 
