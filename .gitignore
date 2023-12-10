@@ -8,6 +8,15 @@ Exported\ Items.bib
 _minted-0_researchnotes/
 *.pyg
 mycode_languages.txt
+typsetDerivatives.png
+
+# Some tests relying on binaries, which are not ready to be brought over yet.
+testing/corr_fitting/*
+testing/extrapolation/*
+testing/smoothingSpline/*
+
+# pdf outputs from test functions
+*.pdf
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -150,11 +159,3 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-
-# Some tests relying on binaries, which are not ready to be brought over yet.
-testing/corr_fitting/*
-testing/extrapolation/*
-testing/smoothingSpline/*
-
-# pdf outputs from test functions
-*.pdf

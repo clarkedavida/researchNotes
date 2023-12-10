@@ -679,7 +679,7 @@ An MCMC simulation of LGT broadly consists of three essential steps:
         \end{verbatim}
 \end{enumerate}
 
-\section{Object oriented programming}
+\section{Object-oriented programming}\label{sec:oop}
 
 
 The focus of these research notes is on LFT, which employs programming heavily.
@@ -1278,6 +1278,31 @@ memory efficiency or algorithm improvement to try to speed up the code.
 Code in the purple region to the left of the machine balance point
 tends to be limited by bandwidth.
 
+When it comes to evaluating the performance as one increases the number
+of GPUs, a straightforward approach is to simply plot throughput against
+the number of devices. In this context, one may be interested in
+{\it strong scaling}\index{scaling!strong}, which measures the effectiveness 
+of a parallel computing system when the problem size\footnote{In the context
+of LQCD, the problem size is usually proportional to the lattice size
+$N_\sigma^3\times N_\tau$.} remains constant, 
+but the number of processing elements (cores, nodes, etc.) is increased.
+In the ideal case\footnote{We never achieve the ideal case because of,
+for instance, communication overhead.}, throughput
+increases linearly with the number of processing elements.
+One can also investigate {\it weak scaling}\index{scaling!weak},
+which evaluates the performance when both the problem size and the number 
+of processing elements are increased proportionally. 
+Hence for a weak scaling test, the work assigned to each processing element 
+remains fixed as new resources are added. Like with strong scaling,
+perfect weak scaling would suggest throughput increases linearly with
+the number of processing elements. In practice, it is much easier to
+get closer to ideal weak scaling. There can be many reasons
+for this, but a major one is that if the number of processors becomes
+comparable to the number of computations, the code will spend a significant fraction
+of the time communicating, which is hugely inefficient. Hence weak scaling is
+usually a more relevant performance metric. 
+
+
 \subsection{Optimizing memory usage}\label{sec:memory}
 
 If you find your code is bandwidth-bound, there are a number of strategies that
@@ -1310,7 +1335,6 @@ distance from the processor, the latency tends to increase, or conversely the
 bandwidth decreases. This increase in latency has many causes, the easiest of
 which to understand are:
 \begin{enumerate}
-  \item The further a signal needs to travel, the longer it takes.
   \item Memory addresses correspond to physical locations on the storage device.
 Reading and writing data is implemented through some physical operation at that
 physical location, and hence you may lose time if you need to change locations,
@@ -1322,7 +1346,24 @@ and hence the more instructions are required. And of course it takes time to
 process instructions.
 \end{enumerate}
 
-\subsection{C++ best practices}
+\section{C++ best practices}
+
+As discussed in the last section, achieving optimal performance is challenging
+and subtle. When writing a lattice code, it is therefore crucial to choose
+a language that
+\begin{enumerate}
+  \item gives the programmer control over technical details like how hardware
+interactions are handled and how memory is stored; and
+  \item allows the programmer to write code that is highly readable and
+easy to use, so that the code can continue to be used and maintained
+for a long time.
+\end{enumerate}
+These two requirements rule out almost every language except C++, which has
+become the de facto standard for high-performance LQCD code\footnote{For
+instance the two most widely-used code bases, Grid and QUDA, are both
+written in C++. \simulat, which I work on, is also written in C++.}.
+In the interest of point 2 above, it is worthwhile to discuss some
+best practices in C++ programming.
 
 When making new classes, one often has to think how memory should be allocated
 and deallocated, in particular when defining constructors. The {\it rule of
@@ -1373,6 +1414,16 @@ The policy itself is not part of the class, but rather is used to customize it.
 For example, a policy may determine how memory is allocated for an object
 or how arithmetic with that object works.
 
+The use of template parameters helps increase the flexibility of already
+compiled code. In this context it is often to keep the
+{\it substitution failure is not an error} (SFINAE)\index{SFINAE} principle
+in mind.
+SFINAE is a principle in C++ template metaprogramming that allows a template 
+specialization to be discarded or selected based on whether a substitution 
+failure occurs during template instantiation. This principle enables compile-time 
+conditional behavior by selectively removing template specializations from 
+consideration when certain conditions are not met.
+
 \subsection{C++ referencing and dereferencing}
 
 By default, if I pass an array to a function in C++, the function will get a
@@ -1414,7 +1465,7 @@ which would return the value of the first element of the array \texttt{arr}.
 
 \subsection{C++ compile-time directives}
 
-In the introduction of this section, I tried to distinguish between compile time
+In the introduction of \secref{sec:oop}, I tried to distinguish between compile time
 and run time. This is helpful for example to distinguish between information
 that is known while compiling and known while running. In the context of lattice
 QCD, it is beneficial to make the lattice size a run-time quantity. If it were a

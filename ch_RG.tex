@@ -212,11 +212,23 @@ $\mu$-derivative of the pressure.
 
 The partition function is also useful to find
 phase transitions. Perhaps the most important work in this regard is by Lee and
-Yang~\cite{yang_statistical_1952}, who demonstrated that, in the limit
+Yang~\cite{yang_statistical_1952}, who demonstrated that, in the 
+{\it thermodynamic limit}\index{limit!thermodynamic} limit, i.e.
 $V\to\infty$, $\grandZ(h)$, which we write as a function of the magnetization or
 symmetry-breaking parameter $h$, will have zeros at phase transitions. According
 to \equatref{eq:grandPotZ} then, we correspondingly expect singularities in the
 free energy. 
+
+
+\begin{figure} 
+    \centering
+    \includegraphics[width=\linewidth]{figs/LYE.pdf}
+    \caption{
+        Generic singularity structure of the Ising model partition function in the
+        complex $h$ plane, for $T<T_c$ in the thermodynamic limit.
+    }
+    \label{fig:LYE}
+\end{figure}
 
 
 
@@ -430,7 +442,7 @@ $g$ has the limiting behavior
 The former limit ensures that we recover the correct thermodynamic limit scaling law
 for $\chi$ while the latter limit enforces a temperature-independent susceptibility
 as the correlation length diverges. This latter limit also shows us that
-\begin{equation}\label{eq:fss_susc}
+\begin{equation}\label{eq:fss_susc_2nd}
     \chi_{\text{max}}\sim L^{\gamma/\nu}.
 \end{equation}
 This is extremely helpful, in that it directly permits us to extract a ratio of
@@ -446,7 +458,7 @@ They can be also be used to argue that a phase transition is of second order
 belonging to some particular universality class. For first-order transitions,
 one expects~\cite{fisher_scaling_1982}\index{phase transition!first-order}\index{phase
 transition!second-order}\index{crossover}
-\begin{equation}\label{eq:fss_susc}
+\begin{equation}\label{eq:fss_susc_1st}
     \chi_{\text{max}}\sim L^d.
 \end{equation}
 For a crossover, one expects to see no scaling of susceptibility peak height
