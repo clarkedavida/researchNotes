@@ -7,9 +7,13 @@ generate the Lorentz group, sets of gauge transformations equipped with
 function composition form gauge groups, etc. Some of this presentation
 follows sections of Dummit and Foote~\cite{dummit_abstract_2004} and 
 Georgi~\cite{georgi_lie_1999}.
+In those presentations, the connection between groups and linear
+transformations is emphasized; therefore we also include
+some reminders of linear algebra.
 
 
 \section{Preliminaries}
+
 
 We want to discuss math in a fairly abstract way, in part because one of our
 goals will be to look at generic mathematical structures. At the end of the book
@@ -145,6 +149,8 @@ A\times B=\{(a,b)\suchthat a\in A~\text{and}~b\in B\}.
 
 
 \section{Groups}\label{sec:gpprelim}
+
+
 A {\it binary operation} \index{binary operation} $\bullet$ on a set 
 $G$ is a function $\bullet : G\times G\to G$. A {\it group} \index{group}, 
 then, is a set $G$ equipped with a binary operation $\bullet$ that satisfies 
@@ -288,9 +294,9 @@ $\Forall g,h\in G$ is called a {\it homomorphism}.\index{homomorphism}
 If in addition to the above property we know that $\phi$ is a bijection, 
 $\phi$ is said to be an {\it isomorphism} \index{isomorphism} of $G$ and 
 $H$, we say that $G$ and $H$ are {\it isomorphic}, and we write $G\cong H$. 
-%Finally an {\it endomorphism} \index{endomorphism} is a homomorphism 
-%mapping a group to itself, and an {\it automorphism} \index{automorphism}
-%is a bijective endomorphism (isomorphism from a group to itself).
+Finally an {\it endomorphism}\index{endomorphism} is a homomorphism 
+mapping a group to itself, and an {\it automorphism}\index{automorphism}
+is a bijective endomorphism (isomorphism from a group to itself).
 
 The above definition shows us that when $G\cong H$, $H$ is really just $G$ in
 disguise. Since $\phi$ is a bijection we have a way of associating each element
@@ -298,32 +304,43 @@ of $H$ with exactly one element of $G$ and vice-versa (one could consider
 $\phi$ the relabeling), and the fact that $\phi$ is a homomorphism shows us
 that the binary operations of the groups act the same way.
 
-%A {\it field} is a set $F$ equipped with two binary
-%  operations  $+$ and $\cdot$  satisfying the following properties:
-%  \begin{enumerate}
-%    \item $F$ equipped with $+$ is an abelian group. (Denote the 
-%          identity element with respect to this operation 0. 0 is often 
-%          referred to as the {\it additive identity}.)
-%    \item $F-\{0\}$ equipped with $\cdot$ is an abelian group. (Denote the
-%          identity element with respect to this operation 1. As you may have
-%          guessed, 1 is called the {\it multiplicative identity}.)
-%    \item $a\cdot (b+c)=(a\cdot b)+(a\cdot c)\ \ \Forall a,b,c\in F$. This is
-%          called the {\it distributive property}.
-%  \end{enumerate}
-%A {\it subfield} is a subset $A$ of $F$ whose elements still form a field.
+We note that if $G$ and $H$ are not isomorphic, it can be that $\phi$ maps
+multiple elements of $G$ to the same element in $H$. The {\it
+kernel}\index{kernel} of $\phi$, $\ker\phi$, is the set of elements in $G$ that map
+to $\id_H$. 
+
+A {\it field}\footnote{There are many instances where a term used in
+a mathematical context is slightly different than its meaning in
+a physics context. In a physics context, ``field" means something like
+``a math object whose domain is every space-time point".
+Due to these differing conventions, one usually has to determine based
+on context which kind of field is meant.}\index{field} 
+is a set $F$ equipped with two binary
+  operations  $+$ and $\cdot$  satisfying the following properties:
+  \begin{enumerate}
+    \item $F$ equipped with $+$ is an abelian group. (Denote the 
+          identity element with respect to this operation 0. 0 is often 
+          referred to as the\index{identity!additive} {\it additive identity}.)
+    \item $F-\{0\}$ equipped with $\cdot$ is an abelian group. (Denote the
+          identity element with respect to this operation 1. As you may have
+          guessed, 1 is called the\index{identity!multiplicative} 
+          {\it multiplicative identity}.)
+    \item $a\cdot (b+c)=(a\cdot b)+(a\cdot c)\ \ \Forall a,b,c\in F$. This is
+          called the\index{distributive property} {\it distributive property}.
+  \end{enumerate}
+A {\it subfield}\index{subfield} 
+is a subset $A$ of $F$ whose elements still form a field.
+Later we will see that fields are the fundamental sets out of
+which vectors are created.
 
 \begin{example*}{}{}
 \begin{enumerate}
   \item For any group $G$, $G\cong G$.
   \item The rotational symmetries of a regular $n$-gon are isomorphic to
         $\Z_n$.
+  \item $\Q$ is a subfield of $\R$, which is in turn a subfield of $\C$.
 \end{enumerate}
 \end{example*}
-
-We note that if $G$ and $H$ are not isomorphic, it can be that $\phi$ maps
-multiple elements of $G$ to the same element in $H$. The {\it
-kernel}\index{kernel} of $\phi$, $\ker\phi$, is the set of elements in $G$ that map
-to $\id_H$. 
 
 \section{Quotient groups}\label{sec:q}\index{quotient group}
 
@@ -423,6 +440,7 @@ closed under this operation.
     This is pretty clearly a group because $G$ is. The identity is $\id N$,
     and each $xN$ has inverse $x^{-1}N$
   \end{proof}
+
 \end{proposition}
 \begin{proposition}{}{}
   $G/N$ forms a partition of $G$.
@@ -466,7 +484,443 @@ notation.
 \end{example*}
 
 
-\section{Group representations}
+
+
+
+\section{Vectors and vector spaces}\label{sec:vectors}
+
+  This section begins a brief foray into linear algebra.
+  Besides the fact that linear algebra has many applications to
+  physics on its own, it is useful for understanding group
+  representations, which we will discuss in \secref{sec:represent}.
+
+  Let $F$ be a field. A {\it vector space}\index{vector!space} over $F$ is a set
+  $V$ together with a binary operation $+$ under which $F$ is abelian and a
+  mapping $F\times V\to V$, denoted $av\ \Forall a\in F$ and $v\in V$,
+  satisfying
+  \begin{enumerate}
+    \item $(a+b)v=av+bv$,
+    \item $(ab)v=a(bv)$,
+    \item $a(v+w)=av+aw$, and
+    \item $1v=v$
+  \end{enumerate}
+  $\Forall a,b\in F$ and $v,w\in V$. The elements $v$ and $w$ are\index{vector}
+  called {\it vectors}\footnote{Note that within the contexts of high
+  energy physics and relativity, the word ``vector" has a slightly more
+  specific meaning: A ``vector" in those contexts is a vector in the
+  mathematical sense along with a demand on how it behaves under
+  Lorentz transformations.} A {\it subspace}\index{subspace}
+  is a subset $W$ of
+  $V$ that still forms a vector space over $F$. I will become immediately
+  less formal and refer to the underlying field only if it's absolutely
+  necessary.
+  Let $V$ and $V'$ be vector spaces over a field $F$. A
+  {\it linear transformation}\index{transformation!linear}
+  of $V$ to $V'$ is a mapping $T : V\to V'$ such that
+  \begin{enumerate}
+    \item $T(v+w)=T(v)+T(w)$ and
+    \item $T(av)=aT(v)$
+  \end{enumerate}
+  $\Forall a\in F$ and $v,w\in V$. We will often drop the parentheses
+  and simply write $T(v)=Tv$. A linear transformation mapping a
+  vector space to itself is called a {\it linear operator}.
+  \index{operator!linear}\index{null space}\index{kernel}
+  The {\it null space} or {\it kernel} of $T$ is
+  \begin{equation}
+    \mathcal{N}(T)\equiv\{v\in V:Tv=0\};
+  \end{equation}
+  i.e. it is the set of vectors annihilated by $T$. Finally $T$ is said
+  to be {\it idempotent}\index{idempotent} if $T^2=T\neq\neq00$.
+To connect some of the above definitions to what we learned in
+\chref{ch:group}, we see that a linear operator is an endomorphism.
+Furthermore we see that if a linear operator has an inverse, then it
+is an automorphism.
+
+  \index{function!distance}\index{metric}
+  Let $M$ be some set. A {\it distance function} or {\it metric}
+  is a function
+  $d:M\times M\to \R$
+  such that $\Forall x,y,z\in M$
+  \begin{enumerate}
+    \item $d(x,y)=0\Leftrightarrow x=y$,
+    \item $d(x,y)=d(y,x)$,
+    \index{triangle inequality}
+    \item $d(x,z)\leq d(x,y)+d(y,z)$ (this is called the {\it triangle
+          inequality}).
+  \end{enumerate}
+  \index{metric space}
+  A {\it metric space}, then, is a set $M$ equipped with a metric $d$.
+One can generalize the idea of a metric and relax some of these
+conditions. I think for most purposes in physics this definition is sufficient.
+
+\begin{example*}{}{}
+ $\R^n$ forms a metric space when equipped with
+  \begin{equation}
+    d(x,y)=|x-y|=\sqrt{\sum\limits_{i=1}^n(x_i-y_i)^2}.
+  \end{equation}
+  \index{metric!Euclidean}
+  This known as the {\it Euclidean metric}.
+\end{example*}
+
+
+Next we turn to the concepts of orthogonality and dimensionality, which
+essentially tell us when two vectors are independent and how many independent
+generators it takes to make a vector space.
+We will formulate these ideas in terms of inner products.
+  \index{product!inner}\index{product!scalar}
+  Let $V$ be a vector space over $\C$. An {\it inner
+  product} or {\it scalar product} is a mapping
+  $(\ ,\ ):V\times V\to \C$
+  satisfying $\Forall x,y,z\in V$ and $\alpha \in F$
+  \begin{enumerate}
+    \item $(x,y)=(y,x)^{*}$,
+    \item $(x,y+z)=(x,y)+(x,z)$
+    \item $(x,\alpha y)=\alpha(x,y)$
+  \end{enumerate}
+  Note that the above properties also imply $(x+y,z)=(x,z)+(y,z)$ and
+  \index{vector!magnitude}\index{vector!norm}
+  $(\alpha x,y)=\alpha^{*}(x,y)$. The {\it magnitude} or {\it norm}
+  of a vector $x$ is $|x|\equiv(x,x)^{1/2}$. If $(x,y)=0$ then $x$
+  \index{orthogonal}\index{orthonormal}
+  and $y$ are said to be {\it orthogonal} and we write $x\perp y$.
+  If in addition $|x|=|y|=1$, then they are {\it orthonormal}.
+
+\begin{proposition}{}{orthog}
+  Let $V$ be a vector space with inner product and let $W$ a subspace
+  of $V$ with basis $\{w_1,...,w_N\}$. Consider the mapping $P:V\to W$
+  defined by
+  $$
+    Pv=\sum_{i=1}^N\frac{(v,w_i)}{|w_i|^2}w_i.
+  $$
+  (This map is the {\it orthogonal
+  projection}\index{orthogonal!projection}.)
+  Then $v-Pv\perp W.$
+  \begin{proof}
+    We have
+    \begin{equation*}
+      \begin{aligned}
+        (v-Pv,w_j)&=(v,w_j)-(Pv,w_j)\\
+          &=(v,w_j)-\sum_{i=1}^N\frac{(v,w_i)}{|w_i|^2}(w_i,w_j)\\
+          &=(v,w_j)-\frac{(v,w_j)}{|w_j|^2}|w_j|^2\\
+          &=(v,w_j)-(v,w_j)\\
+          &=0.
+      \end{aligned}
+    \end{equation*}
+    Since $v-Pv$ is orthogonal to every basis vector of $W$, it is
+    orthogonal to every vector in $W$.
+  \end{proof}
+\end{proposition}
+
+The above proposition gives an algorithm to construct
+a vector which is orthogonal to all elements in some subspace.
+The algebra was a bit tedious but the intuition is clear:
+if I project $v$ onto every basis vector of $W$ and add all
+those contributions together, I get the part of $v$ that lies
+within $W$. So I just subtract that away.
+
+\section{Matrices}
+
+Matrices play a fundamental role in physics as well.
+We will see they are very useful for understanding different kinds of
+symmetries, but they have many other applications.
+
+Given a vector space $A^n$, we associate
+$n\times n$ matrices\footnote{Such a matrix is usually called a {\it square
+matrix}. Matrices don't have to be square matrices, i.e. they can have a
+different number of rows than columns. In physics square
+matrices matter the most, so that's all we'll worry about for these notes.},
+which have the form
+\begin{equation}\label{eq:basicMatrix}
+  M=\left(\begin{array}{cccc}
+          a_{11}   & a_{12} &       & a_{1n}\\
+          a_{21}   & a_{22} &       & a_{2n}\\
+                   &        & \ddots&       \\
+          a_{n1}   & a_{n2} &       & a_{nn}
+            \end{array}\right). 
+\end{equation}
+We call each entry $a_{ij}\in A$, $1\leq i,j\leq n$, an {\it element}. The position
+of each element is indicated by two subscripts, the left
+indicating the row number and the right indicating the column number.
+
+
+Matrices as defined above\footnote{That is, square matrices. By the way,
+in this context of mapping vector spaces into themselves, we sometimes
+call matrices {\it operators}\index{operator}.} map $A^n$ into itself, i.e.
+\begin{equation}\label{eq:operatorDef}
+  M:A^n\to A^n.
+\end{equation}
+In general, this mapping is achieved through matrix multiplication. If one
+multiplies a vector $v$ with a matrix $M$, one gets for the $i\nth$ component
+of the product $Mv$
+\begin{equation}\label{eq:matTimesVec}
+  (Mv)_i=\sum_{j=1}^n a_{ij}v_j,
+\end{equation}
+where $M$ is our matrix and $v$ is a vector.
+
+Matrices can be added together element-wise.
+Analogously as with many kinds of number systems, it is useful to introduce
+in $n$ dimensions an additive identity\index{identity!additive} or zero matrix as
+\begin{equation}
+  \zd_n=\left(\begin{array}{cccc}
+          0   & 0 &       & 0\\
+          0   & 0 &       & 0\\
+              &   & \ddots& \\
+          0   &   &       & 0
+            \end{array}\right), 
+\end{equation}
+i.e. it's the $n\times n$ matrix with 0 in every element. With our definition
+of matrix addition, we find that for any $n\times n$ matrix $M$
+\begin{equation}
+\zd_n+M=M+\zd_n=M.
+\end{equation}
+
+Besides addition, it is useful to be able to carry out multiplication.
+The simplest kind is scalar multiplication\index{multiplication!scalar},
+which is defined similarly as with vectors.
+One can also multiply a matrix $M$ and a matrix $L$. If $L$ has elements
+$b_{ij}$, then the product $ML$ is defined element-wise by
+\begin{equation}
+  (ML)_{ij}=\sum_{k=1}^n a_{ik}b_{kj}.
+\end{equation}
+Notably, matrix multiplication is not in general commutative.
+Again to continue our analogy with other number systems,
+we introduce a multiplicative identity for matrices.
+In $n$ dimensions, the {\it identity matrix} is
+\begin{equation}
+  \id_n=\left(\begin{array}{cccc}
+          1   & 0 &       & 0\\
+          0   & 1 &       & 0\\
+          0   &   & \ddots& \\
+          0   &   &       & 1
+            \end{array}\right), 
+\end{equation}
+i.e. it is the matrix with 1 along the diagonal and 0 everywhere else. Using
+matrix multiplication you can show that for any $n\times n$ matrix $M$
+\begin{equation}
+  M\id_n =\id_n M = M.
+\end{equation}
+Sometimes a matrix is {\it invertible}\index{matrix!invertible}, 
+i.e. $\Exists M^{-1}$ so that
+\begin{equation}
+  M^{-1} M=\id_n. 
+\end{equation}
+If a matrix is not invertible, it is said to be 
+{\it singular}\index{matrix!singular}.
+
+
+To round out this discussion of thinking about matrices as math objects in their
+own right, it is sometimes useful to define functions of matrices.
+For starters, we can always
+raise a matrix to an arbitrary power $k\in\N$. Hence we have well defined
+functions of the form
+\begin{equation}
+f(M)=M^k\equiv\underbrace{M\,M\,...\,M}_{k\text{ times}},
+\end{equation}
+and as with ordinary numbers, we define $M^0\equiv \id_n$.
+Using scalar multiplication and matrix addition, we are therefore also
+able to sensibly define polynomials of matrices
+\begin{equation}
+f(M)=\alpha_0\id_n + \alpha_1 M + \alpha_2 M^2...+\alpha_n M^n.
+\end{equation}
+The fact that we can construct polynomials out of matrices empowers us
+to define even more general functions through their Taylor series.
+For example, the exponential $\exp:\R\to\R$ is given through its Taylor expansion
+as
+\begin{equation}
+\exp(x)=\sum_{i=0}^\infty \frac{x^k}{k!}.
+\end{equation}
+This allows us to define the exponential of a matrix as
+\begin{equation}\label{eq:expMat}
+\exp(M)=\sum_{i=0}^\infty \frac{M^k}{k!}.
+\end{equation}
+All the typical elementary functions $\sin$, $\sinh$, and so on can be
+analogously defined on matrices.
+One can also do calculus on matrices:
+
+\begin{proposition}{}{}
+  Let $A$ and $B$ be $n\times n$ matrices with differentiable elements. Then
+  $$
+    \partial_\mu(AB)=(\partial_\mu A)B+A(\partial_\mu B).
+  $$
+  \begin{proof}
+    We use the summation convention and abuse notation slightly: in the
+    proposition statement $\partial_\mu$ has an identity matrix implicitly
+    attached to it, but in this proof this symbol will also be used to
+    denote the partial derivative operator. This is confusing, but
+    it is also very common. Now since the matrix elements obey the product
+    rule, we have
+    \begin{equation*}
+      \begin{aligned}
+        \big(\partial_\mu(AB)\big)_{mk}
+          &=\delta_{mn}\partial_\mu(A_{nl}B_{lk})\\
+          &=\delta_{mn}\big(\partial_\mu(A_{nl})B_{lk}
+                            +A_{nl}(\partial_\mu B_{lk})\big)\\
+          &=\big((\partial_\mu A)B+A(\partial_\mu B)\big)_{mk}.
+      \end{aligned}
+    \end{equation*}
+  \end{proof}
+\end{proposition}
+
+
+I am obligated to introduce some notation one frequently encounters
+in physics with regard to matrices. The {\it trace}\index{trace} of an
+$n\times n$ matrix is the sum of its diagonal elements,
+\begin{equation}
+  \tr M=\sum_i^nM_{ii}.
+\end{equation}
+When you {\it transpose}\index{transpose} a matrix, $M^t$, you interchange all of its
+off-diagonal elements; i.e. the $i,j$-element gets replaced with the
+$j,i$-element, and vice-versa.
+The {\it complex conjugate}\index{complex conjugate}
+of a matrix $M^*$ simply conjugates all its elements.
+Finally we will sometimes need the conjugate-transpose or
+{\it adjoint}\index{adjoint} of a matrix, which is indicated with a
+little dagger\footnote{Hence we sometimes say ``$M$-dagger".},
+$M^\dagger$. It is
+\begin{equation}
+M^\dagger\equiv (M^*)^t.
+\end{equation}
+The {\it determinant}\index{determinant}
+of $M$ is 
+\begin{equation}
+  \det M\equiv\epsilon_{i_1...i_n}M_{1\,i_1}...M_{n\,i_n},
+\end{equation}
+where $\epsilon_{i_1...i_n}$ is the Levi-Civita symbol.
+An important and often-used fact relating determinants
+and inverses is the following:
+\begin{proposition}{}{}
+A matrix is invertible if and only if its determinant is nonzero.
+\end{proposition}
+
+Matrices will appear in many contexts for us, one of which
+is quantum physics. Quantum physics was historically built up partially in
+analogy to classical physics. As we were developing a consistent theory for these
+small systems, we noticed that the kinds of relations we needed our observables
+to obey could not be satisfied by familiar scalar fields like $\R$ and $\C$.
+It was realized that we needed non-commutative symbols to understand,
+for example, the famous Stern-Gerlach experiment. We already noted that matrix
+multiplication is not commutative, so from that perspective matrices make good
+candidates. More deeply, groups can be mapped into the set of
+vector space automorphisms,
+i.e. group elements can be 
+represented\footnote{See \secref{sec:represent}.}\index{representation} by matrices,
+and so we can always think of non-commutative symbols in terms of matrices,
+whenever that helps us.
+
+In the context of quantum physics, observables like position are represented by
+matrices. But what we measure for an observable cannot depend on how we
+represent\footnote{I mean ``represent" here in the colloquial sense.} it,
+so we would like information about a matrix that is e.g. independent of
+basis choice. The most important example of such information is as follows:
+Let $V$ be a vector space $V$ over a field $F$ and let $v\in V$,
+and suppose the matrix $M$ satisfies
+\begin{equation}\label{eq:eigen}
+Mv = \lambda v
+\end{equation}
+for some $\lambda\in F$. Then $v$ is an {\it eigenvector}\index{eigenvector} 
+of $M$ with {\it eigenvalue}\index{eigenvalue} $\lambda$.
+
+\begin{proposition}{}{eigenvalue}
+  A matrix's eigenvalues don't depend on the basis. 
+\end{proposition}
+
+\propref{prp:eigenvalue} shows that eigenvalues are a great candidate
+for measurable quantities, and indeed this is what we use in practice.
+Finding eigenvectors and eigenvalues is pretty straightforward.
+All eigenvalues of $M$ satisfy the
+{\it characteristic polynomial}\index{characteristic polynomial}
+\begin{equation}\label{eq:characteristicPolynomial}
+\det\left(\lambda\id_n-M\right)=0,
+\end{equation}
+and in practice that's how one usually computes them.
+Once you have found all the $\lambda$, you can plug them
+into \equatref{eq:eigen} to find their corresponding
+eigenvectors. If \equatref{eq:characteristicPolynomial}
+has a root of order $m>1$, that eigenvalue is repeated.
+Additionally, multiple vectors may have the same eigenvalue.
+
+A matrix $U$ is said to be {\it unitary}\index{unitary} if
+\begin{equation}\label{eq:unitary}
+U^\dagger U=UU^\dagger=\id_n,
+\end{equation}
+i.e. unitary matrices are those whose inverses are the same as
+their adjoints. Besides the fact that, by definition, these
+matrices are easily invertible, they have the nice property 
+for any vector $v$ that
+\begin{equation}
+|Uv|=\sqrt{(Uv,Uv)}=\sqrt{(Uv)^\dagger Uv}=\sqrt{v^2}=|v|,
+\end{equation}
+i.e. they preserve vector lengths. From
+\equatref{eq:unitary} we see also they have determinant 1.
+  A matrix $H$ is {\it hermitian}\index{hermitian}\footnote{Named
+after a French mathematician, Charles Hermite. He's known
+for a lot of stuff; for instance he was the first to
+show that $e$ is transcendental.} if
+\begin{equation}
+H^\dagger=H. 
+\end{equation}
+Hermitian matrices by definition have real eigenvalues.
+This is useful in the context of quantum physics, since physical observables
+correspond to matrices, and eigenvalues of those matrices are measurable
+quantities, which ought to be real.
+Another nice property of hermitian matrices is the following:
+
+\begin{theorem}{}{hermit}
+  Hermitian matrices are diagonalizable.
+\end{theorem}
+
+A matrix $O$ is {\it orthogonal}\index{orthogonal} if $O^tO=\id$. This is
+the real counterpart of a unitary matrix. A matrix is
+{\it positive definite}\index{positive definite} 
+if its eigenvalues are all positive, and
+{\it positive semidefinite}\index{positive semidefinite} 
+if the eigenvalues are all nonnegative.
+
+
+\subsection{General complex matrices}
+
+Many of the matrices we deal with in physics are unitary, hermitian,
+or orthogonal, and hence they have relatively nice properties.
+Later in the context of lattice QCD, we will deal with more general
+complex matrices that are not guaranteed to have these properties.
+Therefore we collect here some useful results for complex matrices.
+
+\begin{theorem}{The exp-trace-log (ETL) formula}{exptrlog}
+  Let $M$ be an invertible, complex matrix. Then
+  $$\det M = \exp \tr \log M$$
+\end{theorem}
+
+\index{ETL formula}
+\thmref{thm:exptrlog} is useful to derive expressions relating
+lattice interpolators and physical observables,
+which we do in \secref{sec:QCDtherm}.
+
+\index{Cayley-Hamilton theorem}
+\begin{theorem}{The Cayley-Hamilton theorem}{cayleyHamilton}
+Every square, complex matrix\footnote{Actually this theorem is
+a bit more general as it applies to commutative rings.
+But our matrices will always be over $\C$, so there isn't
+much point to introduce rings and make the distinction.} 
+satisfies its own characteristic equation.
+\end{theorem}
+
+The Cayley-Hamilton theorem finds use as a method for
+efficient computation of matrix inverses. For
+example one can show for a $3\times 3$ matrix
+\begin{equation}
+M^3-(\tr M) M^2+\frac{1}{2}\left((\tr M)^2-\tr M^2\right) M
+-\det M  \id_3=O.
+\end{equation}
+One can then multiply through by $M^{-1}$, and hence trade
+the general problem of matrix inversion with a handful for matrix
+multiplications, which may be faster.
+Later we will encounter Lie groups whose representations
+are traceless, which simplifies inverting such
+matrices substantially.
+
+\section{Group representations}\label{sec:represent}
+
+
 
 It turns out that many groups are isomorphic to sets of linear transformations
 on vector spaces, and similarly that many sets of matrices equipped with matrix
@@ -485,8 +939,7 @@ is denoted by $GL_{n}(F)$.
 The reader may be concerned that the nomenclature
 of the previous definition is poorly chosen. However if $V$ is a vector field
 over the field $F$, the groups $GL(V)$ and $GL_{n}(F)$ are actually just two
-ways of viewing the same thing. We shall demonstrate this fact with the
-following theorem. 
+ways of viewing the same thing. 
 
 \begin{theorem}{}{}
   Let $V$ be an $n$-dimensional vector space over $F$. Then 
@@ -801,8 +1254,8 @@ which is the equation for the unit hypersphere in four dimensions, $S^3$.
 \begin{proposition}{}{}
   Let $A,B\in\SU(2)$ with parameterization
   $$
-    A=a_0\id+i\vec{a}\cdot\vec{\sigma}, \qquad
-    B=b_0\id+i\vec{b}\cdot\vec{\sigma},
+    A=a_0\id_2+i\vec{a}\cdot\vec{\sigma}, \qquad
+    B=b_0\id_2+i\vec{b}\cdot\vec{\sigma},
   $$
   where the $\sigma_i$ are the usual Pauli matrices. Then
   \begin{equation*}

@@ -392,6 +392,109 @@ This is what we call an {\it equation of state}\index{equation of state}
 of state is enough to reconstruct the fundamental equation, and therefore 
 enough to determine the physics of the system.
 
+\subsection{Rules for differentials}
+
+Especially in statistical physics one encounters many involved combinations
+of partial derivatives, so it is worthwhile to remind yourself what the
+rules are. Here we list some useful results, that one can also
+find in e.g. Ref.~\cite{huang_introduction_2001}.
+
+When first learning about partial derivatives, one considers functions
+of independent variables, for example when $x$, $y$, and $z$ represent
+spatial directions. And so when you think of some
+regular\footnote{That is,analytic or differentiable.} \index{function!regular}
+function $f(x,y,z)$
+and calculate its partial derivative,
+\begin{equation}
+\pdv{f}{x},
+\end{equation}
+it means that all other variables, in this case $y$ and $z$, are treated as
+constants.
+
+
+A subtle issue occurs when we consider $f$ to be a constraint on $x$, $y$,
+and $z$; i.e. when $f(x,y,z)=0$. In this case, we have two independent
+quantities. If we like, we can think of this constraint as a two-dimensional
+manifold, and when taking partial derivatives, we think of moving some direction
+along that manifold. In such a case, it is important to specify which quantity
+is being held fixed. For example if we are interested in $\partial_x y$, we
+could hold $z$ fixed, but we more generally hold some function
+$w(x,y,z)$ fixed. In this case we obtain
+\begin{equation}\label{eq:chainw}
+\left(\pdv{x}{y}\right)_w
+\left(\pdv{y}{z}\right)_w
+=\left(\pdv{x}{z}\right)_w
+\end{equation}
+and
+\begin{equation}\label{eq:inv}
+\left(\pdv{x}{y}\right)_w
+=\left(\pdv{y}{x}\right)_w^{-1}.
+\end{equation}
+Note that \equatref{eq:chainw} and \eqref{eq:inv} have always the same
+fixed quantity $w$. This is to be distinguished from the following
+situation.
+
+\begin{proposition}{The constrained chain rule}{prp:chainconstrain}
+$$
+\left(\pdv{x}{y}\right)_z
+\left(\pdv{y}{z}\right)_x
+\left(\pdv{z}{x}\right)_y
+=-1
+$$
+\begin{proof}
+From the constraint, we have
+\begin{equation*}
+0=\dd f=
+ \left(\pdv{f}{x}\right)_{y,z}\dd x
++\left(\pdv{f}{y}\right)_{x,z}\dd y
++\left(\pdv{f}{z}\right)_{x,y}\dd z.
+\end{equation*}
+If we hold e.g. $z$ fixed, we find $\dd z=0$, and therefore
+\begin{equation*}
+\left(\pdv{x}{y}\right)_z=-\left(\pdv{f}{y}\right)_{x,z}\left(\pdv{f}{x}\right)_{y,z}^{-1}.
+\end{equation*}
+Similar equations hold for the other two derivatives, and multiplying them
+together yields the desired result.
+\end{proof}
+\end{proposition}
+                         
+
+Often in statistical physics it is useful to be able to switch between different
+sets of control parameters. For instance one may be interested in a system where
+one can control the temperature $T$, along with some set of $N$
+potentials\footnote{For instance chemical potentials.},
+which we represent here as a vector $\vec\alpha$. On the other hand, it may only
+be possible in an experiment to fix some other $N$ control parameters that in
+general change with $T$ and $\alpha$; call them $\vec{x}(T,\vec\alpha)$. We
+would like to conveniently switch between $\vec\alpha$ and $\vec{x}$.
+
+\begin{proposition}{}{}
+\begin{equation*}
+\left( \pdv{f}{T} \right)_{\vec{x}} =  \left(\pdv{f}{T}\right)_{\vec\alpha}
++\sum_\alpha 
+\left(\pdv{\alpha}{T}\right)_{\vec{x}}
+\left(\pdv{f}{\alpha}\right)_{T,~\vec{\beta},~\beta_i\neq\alpha} 
+\end{equation*}
+\begin{proof}
+Since $f(T,\vec{x})$, we can write
+\begin{equation*}
+\dd f=\dd T \left( \pdv{f}{T} \right)_{\vec{\alpha}} 
++ \sum_\alpha\dd\alpha\left(\pdv{f}{\alpha}\right)_{T,~\vec{\beta},~\beta_i\neq\alpha},
+\end{equation*}
+where in the sum we indicate that we hold all control parameters $\beta_i$ of
+$\vec{\beta}$ except for $\alpha$ fixed. Similarly,
+\begin{equation*}
+\dd\alpha=\dd T \left( \pdv{\alpha}{T} \right)_{\vec{x}} 
++ \sum_x\dd x\left(\pdv{\alpha}{x}\right)_{T,~\vec{y},~y_i\neq x}.
+\end{equation*}
+Plugging $\dd \alpha$ into $\dd f$ completes the proof.
+\end{proof}
+\end{proposition}
+
+ 
+
+
+
 \section{Legendre transforms}\index{Legendre transformation}
 
 Equation~\eqref{eq:fslaw} tells us that we can think of the internal energy
@@ -720,30 +823,38 @@ Substances that take a lot of pressure to change the volume are not
 very compressible; hence the minus sign.
 
 The {\it thermal expansion coefficient}\index{thermal expansion coefficient}
-at fixed $X$ is
+is
 \begin{equation}
-  \alpha_X=\frac{1}{V}\atFixed{\pdv{V}{T}}{X}.
+  \alpha_X=\frac{1}{V}\atFixed{\pdv{V}{T}}{P}.
 \end{equation}
 
 \subsection{Heat storage}
 
 The {\it specific heat} at constant volume\index{specific heat} is
-\begin{equation}
-  C_V=\atFixed{\pdv{U}{T}}{V}
+\begin{equation}\label{eq:CV}
+  C_V=\atFixed{\pdv{U}{T}}{V},
 \end{equation}
 while the specific heat at constant pressure is
 \begin{equation}
-  C_P=\atFixed{\pdv{H}{T}}{P}
+  C_P=\atFixed{\pdv{H}{T}}{P}.
 \end{equation}
+The idea of a specific heat in general is to characterize how much heat
+it takes to change the temperature. Actually this is hidden in each of
+these formulae; for instance if we look at \equatref{eq:CV}, we notice
+that according to the first law, if we fix $V$, that
+$\dd U=T\dd S$, which is the heat. The same is true of the specific heat
+at constant pressure. Here, the Legendre transform, which adds $PV$,
+switches the dependence from $V$ to $P$, and hence this constrained
+partial derivative captures the change in heat once again.
 
-\subsection{Relationships}
-
-\begin{equation}
- \frac{\kappa_T}{\kappa_S}=\frac{C_P}{C_V}
-\end{equation}
-\begin{equation}
- \kappa_S=\kappa_T-\frac{\alpha_V^2 T}{n C_P}
-\end{equation}
+%\subsection{Relationships}
+%
+%\begin{equation}
+% \frac{\kappa_T}{\kappa_S}=\frac{C_P}{C_V}
+%\end{equation}
+%\begin{equation}
+% \kappa_S=\kappa_T-\frac{\alpha_V^2 T}{n C_P}
+%\end{equation}
 
 
 \bibliographystyle{unsrtnat}

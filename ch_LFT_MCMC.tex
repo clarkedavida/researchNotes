@@ -556,7 +556,7 @@ and
 
 To estimate finite size corrections and carry out continuum limit
 extrapolations, we need a way to fit data to curves.
-Consider a sample of $\nsimil$ Gaussian, independent data points $(X_i,Y_i)$,
+Consider a sample of $\nsim$ Gaussian, independent data points $(X_i,Y_i)$,
 where the $Y_i$ have standard deviations $\sigma_i$ and the $X_i$ have
 no errors. For instance, if one is interested in a continuum limit
 extrapolation, the $X_i$ are $\beta$ values while the $Y_i$ are
@@ -571,18 +571,18 @@ is to estimate the $a_j$.
 Assuming that $y(x;a)$ is the exact law for the data, the probability
 distribution for the measurements $Y_i$ is 
 \begin{equation}
-  f(y_1,...,y_{\nsimil})=\prod_{i=1}^{\nsimil}\frac{1}{\sqrt{2\pi}\sigma_i}
+  f(y_1,...,y_{\nsim})=\prod_{i=1}^{\nsim}\frac{1}{\sqrt{2\pi}\sigma_i}
       \exp\left[\frac{-(y_i-y(x_i;a))^2}{2\sigma_i^2}\right].
 \end{equation}
 The probability that the data fall within a region near what was observed is
 \begin{equation}
-  \text{P}=\prod_{i=1}^{\nsimil}\frac{1}{\sqrt{2\pi}\sigma_i}
+  \text{P}=\prod_{i=1}^{\nsim}\frac{1}{\sqrt{2\pi}\sigma_i}
       \exp\left[\frac{-(y_i-y(x_i;a))^2}{2\sigma_i^2}\right]dy_i.
 \end{equation}
 Our strategy for determining the correct fit will be to find the vector $a$
 that maximizes the above probability. This happens when
 \begin{equation}
-  \chi^2(a)\equiv\sum_{i=1}^{\nsimil}\frac{(y_i-y(x_i;a))^2}{2\sigma_i^2}
+  \chi^2(a)\equiv\sum_{i=1}^{\nsim}\frac{(y_i-y(x_i;a))^2}{2\sigma_i^2}
 \end{equation}
 is minimized. This strategy is an example of a {\it maximum likelihood method}.
 

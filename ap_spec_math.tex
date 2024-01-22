@@ -5,102 +5,6 @@ not long enough to be chapters themselves. Perhaps if any of these sections
 were expanded, they could become chapters later, or be incorporated into
 other chapters later.
 
-\section{Rules for differentials}
-
-Especially in statistical physics one encounters many involved combinations
-of partial derivatives, so it is worthwhile to remind yourself what the
-rules are. Here we list some useful results, that one can also
-find in e.g. Ref.~\cite{huang_introduction_2001}.
-
-When first learning about partial derivatives, one considers functions
-of independent variables, for example when $x$, $y$, and $z$ represent
-spatial directions. And so when you think of some 
-regular\footnote{Regular seems to be a synonym
-of analytic or differentiable.} \index{function!regular}
-function $f(x,y,z)$
-and calculate its partial derivative,
-\begin{equation}
-\pdv{f}{x},
-\end{equation} 
-it means that all other variables, in this case $y$ and $z$, are treated as
-constants.
-
-A subtle issue occurs when we consider $f$ to be a constraint on $x$, $y$,
-and $z$; i.e. when $f(x,y,z)=0$. In this case, we have two independent
-quantities. If we like, we can think of this constraint as a two-dimensional
-manifold, and when taking partial derivatives, we think of moving some direction
-along that manifold. In such a case, it is important to specify which quantity
-is being held fixed. For example if we are interested in $\partial_x y$, we
-could hold $z$ fixed, but we more generally hold some function
-$w(x,y,z)$ fixed. In this case we obtain
-\begin{equation}\label{eq:chainw}
-\left(\pdv{x}{y}\right)_w
-\left(\pdv{y}{z}\right)_w
-=\left(\pdv{x}{z}\right)_w
-\end{equation}
-and
-\begin{equation}\label{eq:inv}
-\left(\pdv{x}{y}\right)_w
-=\left(\pdv{y}{x}\right)_w^{-1}.
-\end{equation}
-Note that \equatref{eq:chainw} and \eqref{eq:inv} have always the same
-fixed quantity $w$. This is to be distinguished from the following
-situation. 
-\begin{proposition}{The constrained chain rule}{prp:chainconstrain}
-$$
-\left(\pdv{x}{y}\right)_z
-\left(\pdv{y}{z}\right)_x
-\left(\pdv{z}{x}\right)_y
-=-1
-$$
-\begin{proof}
-From the constraint, we have
-\begin{equation*}
-0=\dd f=
- \left(\pdv{f}{x}\right)_{y,z}\dd x
-+\left(\pdv{f}{y}\right)_{x,z}\dd y
-+\left(\pdv{f}{z}\right)_{x,y}\dd z.
-\end{equation*}
-If we hold e.g. $z$ fixed, we find $\dd z=0$, and therefore
-\begin{equation*}
-\left(\pdv{x}{y}\right)_z=-\left(\pdv{f}{y}\right)_{x,z}\left(\pdv{f}{x}\right)_{y,z}^{-1}.
-\end{equation*}
-Similar equations hold for the other two derivatives, and multiplying them
-together yields the desired result.
-\end{proof}
-\end{proposition}
-
-Often in statistical physics it is useful to be able to switch between different
-sets of control parameters. For instance one may be interested in a system where
-one can control the temperature $T$, along with some set of $N$
-potentials\footnote{For instance chemical potentials.},
-which we represent here as a vector $\vec\alpha$. On the other hand, it may only
-be possible in an experiment to fix some other $N$ control parameters that in
-general change with $T$ and $\alpha$; call them $\vec{x}(T,\vec\alpha)$. We
-would like to conveniently switch between $\vec\alpha$ and $\vec{x}$. 
-
-\begin{proposition}{}{}
-\begin{equation*}
-\left( \pdv{f}{T} \right)_{\vec{x}} =  \left(\pdv{f}{T}\right)_{\vec\alpha}
-+\sum_\alpha 
-\left(\pdv{\alpha}{T}\right)_{\vec{x}}
-\left(\pdv{f}{\alpha}\right)_{T,~\vec{\beta},~\beta_i\neq\alpha} 
-\end{equation*}
-\begin{proof}
-Since $f(T,\vec{x})$, we can write
-\begin{equation*}
-\dd f=\dd T \left( \pdv{f}{T} \right)_{\vec{\alpha}} 
-+ \sum_\alpha\dd\alpha\left(\pdv{f}{\alpha}\right)_{T,~\vec{\beta},~\beta_i\neq\alpha},
-\end{equation*}
-where in the sum we indicate that we hold all control parameters $\beta_i$ of
-$\vec{\beta}$ except for $\alpha$ fixed. Similarly, 
-\begin{equation*}
-\dd\alpha=\dd T \left( \pdv{\alpha}{T} \right)_{\vec{x}} 
-+ \sum_x\dd x\left(\pdv{\alpha}{x}\right)_{T,~\vec{y},~y_i\neq x}.
-\end{equation*}
-Plugging $\dd \alpha$ into $\dd f$ completes the proof. 
-\end{proof}
-\end{proposition}
 
 \section{Hyperspherical coordinates}
 
@@ -260,171 +164,9 @@ where $e_i$ are unit vectors in direction $i$ and the $\partial$ on
 the LHS is meant to represent a vector, while $\partial$s on the RHS
 represents just the partial derivative operator.
 
-\section{Linear algebra reminders}
-
-  Let $F$ be a field. A {\it vector space}\index{vector!space} over $F$ is a set
-  $V$ together with a binary operation $+$ under which $F$ is abelian and a
-  mapping $F\times V\to V$, denoted $av\ \Forall a\in F$ and $v\in V$,
-  satisfying
-  \begin{enumerate}
-    \item $(a+b)v=av+bv$,
-    \item $(ab)v=a(bv)$,
-    \item $a(v+w)=av+aw$, and
-    \item $1v=v$
-  \end{enumerate}
-  $\Forall a,b\in F$ and $v,w\in V$. The elements $v$ and $w$ are\index{vector}
-  called {\it vectors}\footnote{Note that within the contexts of high
-  energy physics and relativity, the word ``vector" has a slightly more
-  specific meaning: A ``vector" in those contexts is a vector in the
-  mathematical sense along with a demand on how it behaves under
-  Lorentz transformations.} A {\it subspace}\index{subspace} 
-  is a subset $W$ of
-  $V$ that still forms a vector space over $F$. I will become immediately
-  less formal and refer to the underlying field only if it's absolutely
-  necessary.
-  Let $V$ and $V'$ be vector spaces over a field $F$. A
-  {\it linear transformation}\index{transformation!linear} 
-  of $V$ to $V'$ is a mapping $T : V\to V'$ such that
-  \begin{enumerate}
-    \item $T(v+w)=T(v)+T(w)$ and
-    \item $T(av)=aT(v)$
-  \end{enumerate}
-  $\Forall a\in F$ and $v,w\in V$. We will often drop the parentheses
-  and simply write $T(v)=Tv$. A linear transformation mapping a
-  vector space to itself is called a {\it linear operator}.
-  \index{operator!linear}\index{null space}\index{kernel}
-  The {\it null space} or {\it kernel} of $T$ is
-  \begin{equation}
-    \mathcal{N}(T)\equiv\{v\in V:Tv=0\};
-  \end{equation}
-  i.e. it is the set of vectors annihilated by $T$. Finally $T$ is said
-  to be {\it idempotent}\index{idempotent} if $T^2=T$.
-To connect some of the above definitions to what we learned in
-\chref{ch:group}, we see that a linear operator is an endomorphism.
-Furthermore we see that if a linear operator has an inverse, then it
-is an automorphism.
-
-  \index{function!distance}\index{metric}
-  Let $M$ be any set. A {\it distance function} or {\it metric}
-  is a function
-  $$d:M\times M\to \R$$
-  such that $\Forall x,y,z\in M$
-  \begin{enumerate}
-    \item $d(x,y)=0\Leftrightarrow x=y$,
-    \item $d(x,y)=d(y,x)$,
-    \index{triangle inequality}
-    \item $d(x,z)\leq d(x,y)+d(y,z)$ (this is called the {\it triangle
-          inequality}).
-  \end{enumerate}
-  \index{metric space}
-  A {\it metric space}, then, is a set $M$ equipped with a metric $d$.
-One can generalize the idea of a metric and relax some of these
-conditions. For now this definition is sufficient for our purposes.
-
-\begin{example*}{}{}
- $\R^n$ forms a metric space when equipped with
-  \begin{equation}
-    d(x,y)=|x-y|=\sqrt{\sum\limits_{i=1}^n(x_i-y_i)^2}.
-  \end{equation}
-  \index{metric!Euclidean}
-  This known as the {\it Euclidean metric}.
-\end{example*}
-
-Next we turn to the concepts of orthogonality and dimensionality, which
-essentially tell us when two vectors are independent and how many independent
-generators it takes to make a vector space.
-We will formulate these ideas in terms of inner products.
-  \index{product!inner}\index{product!scalar}
-  Let $V$ be a vector space over $\C$. An {\it inner
-  product} or {\it scalar product} is a mapping
-  $(\ ,\ ):V\times V\to \C$
-  satisfying $\Forall x,y,z\in V$ and $\alpha \in F$
-  \begin{enumerate}
-    \item $(x,y)=(y,x)^{*}$,
-    \item $(x,y+z)=(x,y)+(x,z)$
-    \item $(x,\alpha y)=\alpha(x,y)$
-  \end{enumerate}
-  Note that the above properties also imply $(x+y,z)=(x,z)+(y,z)$ and
-  \index{vector!magnitude}\index{vector!norm}
-  $(\alpha x,y)=\alpha^{*}(x,y)$. The {\it magnitude} or {\it norm}
-  of a vector $x$ is $|x|\equiv(x,x)^{1/2}$. If $(x,y)=0$ then $x$
-  \index{orthogonal}\index{orthonormal}
-  and $y$ are said to be {\it orthogonal} and we write $x\perp y$.
-  If in addition $|x|=|y|=1$, then they are {\it orthonormal}.
-
-\begin{proposition}{}{orthog}
-  Let $V$ be a vector space with inner product and let $W$ a subspace
-  of $V$ with basis $\{w_1,...,w_N\}$. Consider the mapping $P:V\to W$
-  defined by
-  $$
-    Pv=\sum_{i=1}^N\frac{(v,w_i)}{|w_i|^2}w_i.
-  $$
-  Then $v-Pv\perp W.$
-  \begin{proof}
-    We have
-    \begin{equation*}
-      \begin{aligned}
-        (v-Pv,w_j)&=(v,w_j)-(Pv,w_j)\\
-          &=(v,w_j)-\sum_{i=1}^N\frac{(v,w_i)}{|w_i|^2}(w_i,w_j)\\
-          &=(v,w_j)-\frac{(v,w_j)}{|w_j|^2}|w_j|^2\\
-          &=(v,w_j)-(v,w_j)\\
-          &=0.
-      \end{aligned}
-    \end{equation*}
-    Since $v-Pv$ is orthogonal to every basis vector of $W$, it is
-    orthogonal to every vector in $W$.
-  \end{proof}
-\end{proposition}
-
-  The map of \propref{prp:orthog} is called the {\it orthogonal
-  projection}\index{orthogonal!projection}.
-  \index{transformation!hermitian}\index{transformation!unitary}
-  \index{transformation!orthogonal}
-  \index{transformation!positive definite}
-  \index{transformation!positive semidefinite}
-  A linear transformation $U$ is {\it unitary} if $U^\dagger U=\id$.
-  It is {\it hermitian} if $U^\dagger=U$, and it is {\it orthogonal}
-  if $U^TU=\id$. A matrix is
-  {\it positive definite} if its eigenvalues are all positive, and
-  {\it positive semidefinite} if the eigenvalues are all nonnegative. 
-
-\begin{theorem}{}{hermit}
-  Hermitian matrices are diagonalizable.
-\end{theorem}
-
-\begin{proposition}{}{}
-  Let $A$ and $B$ be $n\times n$ matrices with differentiable elements. Then
-  $$
-    \partial_\mu(AB)=(\partial_\mu A)B+A(\partial_\mu B).
-  $$
-  \begin{proof}
-    We use the summation convention and abuse notation slightly: in the
-    proposition statement $\partial_\mu$ has an identity matrix implicitly
-    attached to it, but in this proof this symbol will also be used to
-    denote the partial derivative operator. This is confusing, but
-    it is also very common. Now since the matrix elements obey the product
-    rule, we have
-    \begin{equation*}
-      \begin{aligned}
-        \big(\partial_\mu(AB)\big)_{mk}
-          &=\delta_{mn}\partial_\mu(A_{nl}B_{lk})\\
-          &=\delta_{mn}\big(\partial_\mu(A_{nl})B_{lk}
-                            +A_{nl}(\partial_\mu B_{lk})\big)\\
-          &=\big((\partial_\mu A)B+A(\partial_\mu B)\big)_{mk}.
-      \end{aligned}
-    \end{equation*}
-  \end{proof}
-\end{proposition}
-
-\index{determinant}
-The {\it determinant} of an $N\times N$ matrix $M$
-with entries $m_{ij}\in\C$ is given by
-\begin{equation}
-  \det M\equiv\epsilon_{i_1...i_N}m_{1\,i_1}...m_{N\,i_N}.
-\end{equation}
 
 
-\section{Fourier transforms}
+%\section{Fourier transforms}
 
 
 \index{Green's function}
@@ -451,13 +193,14 @@ is Newton's law, which expressed in these symbols looks like
   D_t\,x(t)=m\frac{\dd^2}{\dd t^2}x(t) = f(t).
 \end{equation}
 
-\begin{figure}\label{fig:impulse}
+\begin{figure}
 \centering
 \includegraphics[width=0.44\textwidth]{figs/impulse.png}\\
 \includegraphics[width=0.90\textwidth]{figs/manyimpulses.png}
 \caption{Top: The response of the variable $x$ to a delta function kick at 
 $t'$. Bottom: A general force $f$ thought of as the sum of many impulses.
 Figure taken from Quintin and Daniel's math methods notes.}
+\label{fig:impulse}
 \end{figure}
 
 A possibility for $f$ is to use a Dirac delta function
@@ -551,7 +294,7 @@ This is the {\it diffusion equation} in 3+1 dimensions. For the remainder
 of this section, to keep the notation light, we will solve the diffusion
 equation in 1+1 dimensions.
 
-\subsection{Perturbation theory}
+%\subsection{Perturbation theory}
 
 \section{Dirac algebra}
 In this section we summarize Section~3.2 of 
