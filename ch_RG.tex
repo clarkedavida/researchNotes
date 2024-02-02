@@ -182,7 +182,7 @@ direction the system picks; this is an example of spontaneous symmetry
 breaking\index{spontaneous symmetry breaking}, which plays a major role in QFT,
 as discussed in \secref{sec:ssb}. 
 
-\section{The Lee-Yang theorem}\label{sec:leeyang}\index{Lee-Yang Theorem}
+\section{The Lee-Yang theorem}\label{sec:leeyang}\index{Lee-Yang!Theorem}
 
 One of the lessons of \chref{ch:statphys} is that the partition function of a
 system determines all its observables. For example in the grand canonical
@@ -218,6 +218,11 @@ $V\to\infty$, $\grandZ(h)$, which we write as a function of the magnetization or
 symmetry-breaking parameter $h$, will have zeros at phase transitions. According
 to \equatref{eq:grandPotZ} then, we correspondingly expect singularities in the
 free energy. 
+In their original paper, they allow the fugacity, which they denote
+as $y$, to be complex, then imagine the situation in the complex plane.
+The regions of analyticity for $y$ along with the expected behavior
+of the pressure and its $\mu$-derivatives is shown schematically
+in \figref{fig:leeYangTheorem}, which is taken from Lee and Yang. 
 
 
 \begin{figure} 
@@ -230,6 +235,24 @@ free energy.
     \label{fig:LYE}
 \end{figure}
 
+
+The above logic is what happens exactly at the critical point $T=\Tc$ and $h=0$.
+When we are away from the critical point, the situation in the complex plane
+changes somewhat. Still in the thermodynamic limit, let us imagine $T<\Tc$ 
+and let $h$ be complex. The expectation is that $\log Z(h)$ should
+have two branch cuts in the complex-$h$ plane, called 
+{\it Lee-Yang edges}\index{Lee-Yang!edge}, that terminate at
+branch points called {\it Lee-Yang edge singularities}.
+This is shown schematically in \figref{fig:LYE}. The expectation is
+that, as $T\to\Tc$, these branch points will approach and eventually
+pinch the real axis, where they manifest as a phase transition
+in accordance with the Lee-Yang theorem.
+
+As shown in \figref{fig:LYE}, the Lee-Yang edges should limit the convergence
+radius of $\log Z$. In principle there are other singularities possible.
+The {\it extended analyticity conjecture}\index{extended analyticity conjecture}
+posits that the Lee-Yang edges should be the closest singularities
+to the origin in the complex $h$-plane~\cite{fonseca_ising_2003}. 
 
 
 \section{The scaling hypothesis}\label{sec:scalingHypothesis}

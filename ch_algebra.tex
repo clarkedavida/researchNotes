@@ -746,8 +746,11 @@ One can also do calculus on matrices:
     We use the summation convention and abuse notation slightly: in the
     proposition statement $\partial_\mu$ has an identity matrix implicitly
     attached to it, but in this proof this symbol will also be used to
-    denote the partial derivative operator. This is confusing, but
-    it is also very common. Now since the matrix elements obey the product
+    denote the partial derivative operator applied to a single 
+    element\footnote{I found notation like this to be extremely confusing
+    when I was getting started. Sadly it very common notation, and as
+    you can see, I have succumbed to this weakness myself.}. 
+    Now since the matrix elements obey the product
     rule, we have
     \begin{equation*}
       \begin{aligned}
@@ -788,7 +791,7 @@ of $M$ is
 where $\epsilon_{i_1...i_n}$ is the Levi-Civita symbol.
 An important and often-used fact relating determinants
 and inverses is the following:
-\begin{proposition}{}{}
+\begin{proposition}{}{detSingular}
 A matrix is invertible if and only if its determinant is nonzero.
 \end{proposition}
 
@@ -838,6 +841,11 @@ into \equatref{eq:eigen} to find their corresponding
 eigenvectors. If \equatref{eq:characteristicPolynomial}
 has a root of order $m>1$, that eigenvalue is repeated.
 Additionally, multiple vectors may have the same eigenvalue.
+In case the eigenvalues are real, a matrix is
+{\it positive definite}\index{positive definite} 
+if its eigenvalues are all positive, and
+{\it positive semidefinite}\index{positive semidefinite} 
+if the eigenvalues are all nonnegative.
 
 A matrix $U$ is said to be {\it unitary}\index{unitary} if
 \begin{equation}\label{eq:unitary}
@@ -869,13 +877,24 @@ Another nice property of hermitian matrices is the following:
   Hermitian matrices are diagonalizable.
 \end{theorem}
 
-A matrix $O$ is {\it orthogonal}\index{orthogonal} if $O^tO=\id$. This is
-the real counterpart of a unitary matrix. A matrix is
-{\it positive definite}\index{positive definite} 
-if its eigenvalues are all positive, and
-{\it positive semidefinite}\index{positive semidefinite} 
-if the eigenvalues are all nonnegative.
-
+A matrix $S$ is {\it symmetric}\index{symmetric} if
+\begin{equation}
+S^t=S,
+\end{equation}
+i.e. if the elements are symmetric about the diagonal.
+Meanwhile a matrix $O$ is {\it orthogonal}\index{orthogonal} if 
+\begin{equation}
+O^tO=\id_n.
+\end{equation}
+This is
+the real counterpart of a unitary matrix. 
+\begin{proposition}{}{orthogonalMatrixLength}
+Orthogonal matrices preserve length; i.e. if $O$ is
+a real, orthogonal matrix and $v\in\R^n$, then 
+$$
+|Ov|=|v|.
+$$
+\end{proposition}
 
 \subsection{General complex matrices}
 
@@ -884,16 +903,6 @@ or orthogonal, and hence they have relatively nice properties.
 Later in the context of lattice QCD, we will deal with more general
 complex matrices that are not guaranteed to have these properties.
 Therefore we collect here some useful results for complex matrices.
-
-\begin{theorem}{The exp-trace-log (ETL) formula}{exptrlog}
-  Let $M$ be an invertible, complex matrix. Then
-  $$\det M = \exp \tr \log M$$
-\end{theorem}
-
-\index{ETL formula}
-\thmref{thm:exptrlog} is useful to derive expressions relating
-lattice interpolators and physical observables,
-which we do in \secref{sec:QCDtherm}.
 
 \index{Cayley-Hamilton theorem}
 \begin{theorem}{The Cayley-Hamilton theorem}{cayleyHamilton}
@@ -907,7 +916,7 @@ satisfies its own characteristic equation.
 The Cayley-Hamilton theorem finds use as a method for
 efficient computation of matrix inverses. For
 example one can show for a $3\times 3$ matrix
-\begin{equation}
+\begin{equation}\label{eq:inv3x3CH}
 M^3-(\tr M) M^2+\frac{1}{2}\left((\tr M)^2-\tr M^2\right) M
 -\det M  \id_3=O.
 \end{equation}
@@ -918,6 +927,125 @@ Later we will encounter Lie groups whose representations
 are traceless, which simplifies inverting such
 matrices substantially.
 
+\index{spectral theorem}
+\begin{theorem}{Spectral theorem}{spectral}
+Let $S$ be an $n\times n$ symmetric, complex matrix with
+eigenvalues $\lambda_i$ and eigenvectors $u_i$. Then
+We can decompose $S$ as
+$$
+S=U^t\Lambda U,
+$$
+where $\Lambda\equiv\diag\left(\lambda_1,...,\lambda_n\right)$ and
+$U=\left(u_1,...,u_n\right)$.
+\end{theorem}
+
+The spectral theorem can be employed to find a useful
+factorization for an arbitrary matrix, which goes by
+the name of 
+{\it singular value decomposition}\index{singular value decomposition} (SVD).
+\begin{theorem}{Singular value decomposition}{SVD}
+Any square\footnote{There is a statement also for non-square matrices.
+But again, that's that not what we're interested in.}
+matrix $M$ can be factorized as
+$$
+M=USV^t,
+$$
+where $S=\diag\left(s_1,...,s_n\right)$, $s_i\geq 0$,
+and $U$ and $V$ are orthogonal matrices.
+\end{theorem} 
+SVD shows us that we can think of the action of any matrix on a real vector 
+in three steps. More precisely, since $U$ and 
+$V^t$ are orthogonal, they can be thought of
+as rotations, and since $S$ is diagonal, it stretches each cardinal axis 
+by $s_i$. These $s_i$ are called {\it singular values}\index{singular!value},
+hence the name.
+
+\begin{proposition}{}{semidefinite}
+If $M$ is positive semidefinite, then its eigenvalues equal its singular values.
+\end{proposition}
+
+\propref{prp:semidefinite} is especially useful in the context of statistics,
+since covariance matrices, discussed in \chref{ch:probability}, are
+positive semidefinite. Hence SVD gives us a way to ``doctor" the eigenvalues
+of a matrix, if we need to\footnote{For example in the context of statistics,
+we need to invert covariance matrices, which turns out to be challenging if
+the singular values span many orders of magnitude. 
+We discuss in more detail in \secref{sec:numerics}.}. 
+
+%Let A be a symmetric, positive definite matrix with singular value decomposition A=UΣVT (i.e. U, V are orthogonal matrices and Σ a diagonal matrix). Now look at how the singular values of A are related to the eigenvalues of ATA. Then think about how the eigenvalues of A are related to the eigenvalues of ATA and use that if A is symmetric, positive definite then its eigenvalues are real and positive.
+
+We wrap up with a theorem that's useful to derive expressions relating
+lattice interpolators and physical observables,
+which we do in \secref{sec:QCDtherm}.
+\begin{theorem}{The exp-trace-log (ETL) formula}{exptrlog}
+  Let $M$ be an invertible, complex matrix. Then
+  $$\det M = \exp \tr \log M$$
+\end{theorem}
+\index{ETL formula}
+
+
+\subsection{Numerical considerations}\label{sec:numerics}
+
+
+Many tasks in computational physics can be reduced to solving
+$n$ simultaneous equations in $n$ variables. Collecting
+the coefficients of the variables in a matrix $M$, this
+can be expressed as
+\begin{equation}\label{eq:solveGeneral}
+Mx=b,
+\end{equation}
+where $b$ collects your RHS values and $x$ is the vector
+of unknowns. Then \equatref{eq:solveGeneral} suggests a way
+to find these unknowns:
+\begin{equation}
+x=M^{-1}b.
+\end{equation}
+Hence a situation where one has to determine some unknown
+quantities subject to some constraints can always be cast
+as the problem of inverting a matrix $M$, and it follows that
+matrix inversion is crucial to scientific computing.
+
+In an introductory linear algebra course,
+one learns some standard techniques for inverting matrices,
+usually Gauss-Jordan elimination. 
+It's useful to use alternative algorithms whenever we can find them,
+which may be faster or more numerically stable.
+For instance, the Cayley-Hamilton theorem as applied
+in \equatref{eq:inv3x3CH} is relatively fast.
+
+Another consideration when inverting a matrix is numerical
+stability. In particular, any algorithm that inverts a matrix is
+limited by the machine's precision. So for instance if your
+matrix has a near-zero determinant, then by
+\propref{prp:detSingular}, you might intuit that while
+formally invertible, computing this inverse is problematic,
+since it's ``almost not invertible".
+
+\thmref{thm:SVD} allows us some insight to such predicaments.
+In particular we define the {\it condition number}\index{condition number}
+$\kappa$ of a matrix $M$ to be the ratio of the largest
+(in magnitude) singular value to the smallest, i.e.
+\begin{equation}
+\kappa(M)=\frac{\max\{s\}}{\min\{s\}}.
+\end{equation}
+$M$ is said to be {\it ill-conditioned}\index{ill-conditioned}
+if $\kappa(M)$ is too large, i.e. if $1/\kappa(M)$ approaches
+machine precision\footnote{Roughly less than $10^{-6}$ for
+single precision and $10^{-12}$ for double.}.
+
+One strategy to increase the stability of an inversion is to use
+SVD to single out the problematic singular values of a matrix.
+Then one can replace the smallest singular values with some small
+number times the largest singular value, which then raises
+the condition number by hand. This of course changes the matrix,
+but in some circumstances, the change may be 
+acceptable\footnote{For example in Ref.~\cite{dowdall_neutral_2019}
+it is argued that such a modification, in their context applied
+to a covariance matrix, serves to increase uncertainty estimates, which
+they therefore argue is a conservative move.}.
+A deeper discussion of SVD can be found in Ref.~\cite{press_numerical_2007}.
+
+
 \section{Group representations}\label{sec:represent}
 
 
@@ -927,8 +1055,7 @@ on vector spaces, and similarly that many sets of matrices equipped with matrix
 multiplication form groups. In many cases these isomorphisms make dealing with
 groups less abstract and more manageable; after all, everyone is comfortable
 with matrices. In this section we will make these ideas precise, but we will
-need to use linear algebra. For a very brief review of the relevant bits, see
-the appendix.
+need to use linear algebra. 
 
 The set of all automorphisms of a vector space $V$ is called
 the {\it automorphism group}\index{group!automorphism} of $V$ or the 

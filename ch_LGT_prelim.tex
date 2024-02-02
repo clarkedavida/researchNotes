@@ -167,7 +167,10 @@ take the lattice to have periodic boundary conditions (BCs), i.e.
 \end{equation}
 where $\hat{\mu}$ is the unit vector in the direction indicated by $\mu$. 
 Since the lattice is discrete, one must replace partial derivatives 
-by finite differences, 
+by finite differences\footnote{The finite difference \equatref{eq:dertodiff},
+known as the {\it central difference}\index{central difference},
+exhibits errors in even powers of $a$, which you can show by Taylor
+expanding $f(x+a\hat{\mu})$ and $f(x-a\hat{\mu})$ about $x$.}, 
 \begin{equation}\label{eq:dertodiff}
   \partial_\mu f(x)\to\Delta_{\mu}f(x)\equiv\frac{f(x+a\hat{\mu})
                                                    -f(x-a\hat{\mu})}{2a},
@@ -212,7 +215,7 @@ Now we define the building blocks necessary to construct paths on the
 lattice. The directed {\it link}\index{link} connects $x$ with the 
 neighboring point $x+a\hat{\mu}$, and its corresponding {\it link variable} 
 $U_\mu(x)\in \SU(N_c)$ is defined by
-\begin{equation}
+\begin{equation}\label{eq:linkVariable}
   U_\mu(x)=e^{-aA_{\mu}(x)},
 \end{equation}
 where $A_{\mu}(x)\in\su(N_c)$. A link variable is
@@ -297,27 +300,27 @@ $$
   \begin{proof}
     Starting with the definition of the plaquette variable, we have
     \begin{equation*}\begin{aligned}
-      U^\Box_{\mu\nu}(x)&=U(x,x+a\hat\nu)U(x+a\hat\nu,x+a\hat\nu+a\hat\mu)\\
-               &~~~~\times U(x+a\hat\mu+a\hat\nu,x+a\hat\mu)U(x+a\hat\mu,x)\\
-            &=\exp\left[aA_\nu(x)\right]
+      U^\Box_{\mu\nu}(x)&=U(x,x+a\hat\nu)\,U(x+a\hat\nu,x+a\hat\nu+a\hat\mu)\\
+               &~~~~\times U(x+a\hat\mu+a\hat\nu,x+a\hat\mu)\,U(x+a\hat\mu,x)\\
+            &=\exp\left[aA_\nu(x)\right]\,
               \exp\left[aA_\mu(x+a\hat\nu)\right]\\
-               &~~~~\times\exp\left[-aA_\nu(x+a\hat\mu)\right]
+               &~~~~\times\exp\left[-aA_\nu(x+a\hat\mu)\right]\,
                 \exp\left[-aA_\mu(x)\right]\\
-            &=\exp\left[aA_\nu(x)\right]
-               \exp\left[a\left( A_\mu(x)+a\Delta_\nu A_\mu(x) \right)
+            &=\exp\left[aA_\nu(x)\right]\,
+               \exp\left[a\left( A_\mu(x)+a\partial_\nu A_\mu(x) \right)
                                  +\order{a^3}\right]\\
                &~~~~\times
-               \exp\left[-a\left(A_\nu(x)+a\Delta_\mu A_\nu(x) \right)
-                                 +\order{a^3}\right]
+               \exp\left[-a\left(A_\nu(x)+a\partial_\mu A_\nu(x) \right)
+                                 +\order{a^3}\right]\,
                \exp\left[-aA_\mu(x)\right]\\
-            &=\exp\left[aA_\nu+aA_\mu+a^2\Delta_\nu A_\mu
+            &=\exp\left[aA_\nu+aA_\mu+a^2\partial_\nu A_\mu
                  +\frac{1}{2}\left[aA_\nu,aA_\mu\right]
                  +\order{a^3}\right]\\
-            &~~~~\times\exp\left[-aA_\nu-a^2\Delta_\mu A_\nu-aA_\mu
+            &~~~~\times\exp\left[-aA_\nu-a^2\partial_\mu A_\nu-aA_\mu
                  +\frac{1}{2}\left[-aA_\nu,-aA_\mu\right]
                  +\order{a^3}\right]\\
-            &=\exp\left[a^2\Delta_\nu A_\mu+a^2\left[A_\mu,A_\nu\right]
-                 -a^2\Delta_\mu A_\nu+\order{a^3}\right]\\
+            &=\exp\left[a^2\partial_\nu A_\mu+a^2\left[A_\mu,A_\nu\right]
+                 -a^2\partial_\mu A_\nu+\order{a^3}\right]\\
             &=\exp\left[-a^2F_{\mu\nu}+\order{a^3}\right].
     \end{aligned}\end{equation*}
     In the fourth step we applied the Campbell-Baker-Hausdorff formula and
@@ -329,7 +332,7 @@ $$
 \end{proposition}
 After some algebra, the connection between the Wilson action and the action
 corresponding to \equatref{eq:lagrkin} becomes clear.
-\begin{proposition}{}{} 
+\begin{proposition}{}{wilsonCont} 
   $$S_W=-\frac{\beta}{4N_c}\sum_x a^4\tr F_{\mu\nu}(x)F_{\mu\nu}(x)
                   +\order{a^5}.$$
   \begin{proof} Using the definition~\eqref{eq:wilsonaction} and
@@ -357,7 +360,8 @@ corresponding to \equatref{eq:lagrkin} becomes clear.
     Following a plaquette in reverse just interchanges $\mu$ and $\nu$,
     which flips the sign of the leading term in the exponential
     of \propref{prp:plaquette} because $F_{\mu\nu}$
-    is antisymmetric.
+    is antisymmetric. Meanwhile the $\order{a^3}$ term must vanish
+    since the exponent of $U_{\mu\nu}^\Box(x)$ is traceless. 
   \end{proof}
 \end{proposition}
 
@@ -369,6 +373,19 @@ $S_G=\int \dd^4x\,\Lagr_G$ when one identifies
 Because of this identification, $\beta$ is also (besides $g$) sometimes 
 referred to as the \index{coupling constant}{\it coupling constant}.
 
+In \propref{prp:wilsonCont} we write the correction is $\order{a^5}$,
+but actually only even powers of $a$ are permitted in the expansion.
+This is not special to the Wilson action, but true of lattice actions
+more generally. Indeed due to \equatref{eq:linkVariable}, you can
+convince yourself that every $a$ comes attached to a Lorentz vector.
+In most cases this is just $A_\mu$ in some direction, but in
+\propref{prp:plaquette} we also see Lorentz indices emerge when
+expanding, e.g., $A_\mu(x+a\hat{\nu})$. In such expansions, each
+new Lorentz index also adds exactly one power of $a$. Hence there
+is an exact correspondence between powers of $a$ and number of Lorentz 
+indices. Therefore odd powers of $a$ are attached to odd numbers
+of Lorentz indices. Such objects are parity-odd, and since the
+action is parity-even, cannot appear in the expansion.
 
 \section{The Haar measure}\label{sec:haar}\index{Haar measure}
 

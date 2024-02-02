@@ -1,4 +1,4 @@
-\chapter{Math: Probability and Statistics}
+\chapter{Math: Probability and Statistics}\label{ch:probability}
 
 Crucial to the study of quantum physics, statistical physics, experiment, and
 eventually lattice field theory is an understanding of probability and the
@@ -1650,7 +1650,29 @@ situations where the ensemble interpretation is useless.
 Now that we've thought about what the probabilities mean in the Bayesian
 framework, we need a way to assign them; in the frequentist framework, it was
 sufficient to use ratios of set sizes, but now this assignment isn't automatic.
- 
+
+
+\subsection{Fitting data}
+
+In the context of fitting data $(x_i,y_i)$, the fit function $y(x_i;\vec{a})$,
+where $\vec{a}$ is the vector of fit parameters, can be
+thought of as a model. Here, Bayes's theorem reads
+\begin{equation}
+\pr{\vec{a}\given\vec{y}\wedge I}\propto\pr{\vec{y}\given\vec{a}\wedge
+I}\pr{\vec{a}\given I},
+\end{equation}
+where again $\pr{\vec{a}\given I}$ is the prior probability for the
+model $\vec{a}$. Sometimes we have some a priori knowledge of model parameters;
+for instance we may know they have to be positive. In the cases where we don't,
+we can simplify
+\begin{equation}
+\pr{\vec{a}\given I}=\text{const.}
+\end{equation}
+and it follows in such cases that
+\begin{equation}
+\pr{\vec{a}\given\vec{y}\wedge I}\propto\pr{\vec{y}\given\vec{a}\wedge
+I}.
+\end{equation}
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
