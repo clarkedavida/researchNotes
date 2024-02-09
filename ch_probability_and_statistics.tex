@@ -781,7 +781,7 @@ decreases faster than the statistical error bar, which you will recall
 goes like $1/\sqrt{N}$. Hence when $N$ becomes large enough, the bias
 can be ignored.
 
-\section{Error propagation and covariance}\label{sec:prop}
+\section{Error propagation}\label{sec:prop}
 We will now reproduce the commonly used error propagation formula. We know
 that if we have a smooth function of $N$ variables 
 $f:\R^N\to\R$ we can Taylor expand
@@ -839,6 +839,8 @@ In practice we can apply \equatref{eq:errprop} when we
         approximately linear in a region close to the mean.
 \end{enumerate}
 
+\section{Covariance}\index{covariance}
+
 Oftentimes in physics you'll find yourself in a situation where you want
 to calculate several functions of the same random variables $X_j$. If
 the $X_j$ are close enough to their means, or if the $Y_i$ are linear
@@ -855,6 +857,59 @@ turns out to be the case. In particular
   \end{aligned}
 \end{equation}
 which shows the $Y_i$ are correlated even if the $X_j$ are not.
+
+Let us now explore the situation where the underlying $X_j$
+themselves are correlated. Obviously the error propagation formula 
+\eqref{eq:linprop} gives us further contributions to the error in any 
+function of the $X_j$, but it would be preferable that the data
+were uncorrelated to begin with. It is interesting to ask: Although
+the $X_j$ themselves are correlated, are there some combinations
+of the $X_j$ that are not?
+
+The covariance between any two measurements $X_j$ and $X_j$ can be
+collected together as a matrix, the 
+{\it covariance matrix}\index{covariance matrix}
+\begin{equation}
+\Cov_{jk}=\Cov\left(X_j,X_k\right).
+\end{equation}
+This matrix must be real since we only measure real numbers.
+Furthermore, it is by definition symmetric, and its diagonal
+elements in this basis are all positive since every measurement
+is perfectly correlated with itself. One can similarly define
+a {\it correlation matrix}\index{correlation matrix}
+\begin{equation}
+\rho_{jk}=\rho\left(X_j,X_k\right)
+\end{equation}
+whose diagonal entries must be 1. Viewed in this way, we are
+representing correlations in a basis where each basis vector
+corresponds to a measurement. The statement that two separate
+measurements are correlated is the statement that off-diagonal
+elements are nonzero.
+Thus, to answer our question, it suffices to find a basis where
+$\Cov_{jk}$ is diagonal, i.e. we seek its eigenvectors and eigenvalues.
+Then the eigenvectors will correspond to exactly those combinations
+of the underlying $X_j$ that are uncorrelated.
+
+It is interesting to think about two random variables, taking this
+geometric interpretation where we associate each variable with
+a direction. Then the uncorrelated axes will be some rotation
+of the original. The {\it confidence ellipse}\index{confidence ellipse}
+has semi-major and semi-minor directions parallel to the
+eigenvectors of the correlation matrix, with lengths equal
+to the eigenvalues $\lambda_1$, $\lambda_2$. 
+Defining the confidence ellipse in this way,
+assuming the Gaussian random variables, the probability
+that the true mean pair $\hat{x}_1$, $\hat{x}_2$ lies
+in the confidence ellipse $E$ is
+\begin{equation}\begin{aligned}
+\pr{\hat{x}_1,\hat{x}_2\in E} & =\frac{1}{\sqrt{2 \pi \lambda_1}} \frac{1}{\sqrt{2 \pi \lambda_2}}
+\int_{\text {ellipse }} \dd{x_1}\dd{x_2} \exp \left(-\frac{x_1^2}{2 \lambda_1}\right) \exp \left(-\frac{x_2^2}{2 \lambda_2}\right) \\
+& = \int_0^1 r \dd{r} \exp \left(-\frac{r^2}{2}\right)\\
+&=1-\exp \left(-\frac{1}{2}\right)\\
+&=0.393,
+\end{aligned}\end{equation}
+which is notably quite different from 1-$d$ normal distribution;
+see e.g. \tabref{tab:normal}.
 
 \section{Jackknife resampling}\index{jackknife}
 Let us consider a sample of independent measurements 
