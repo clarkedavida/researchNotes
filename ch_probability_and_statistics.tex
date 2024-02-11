@@ -894,22 +894,28 @@ It is interesting to think about two random variables, taking this
 geometric interpretation where we associate each variable with
 a direction. Then the uncorrelated axes will be some rotation
 of the original. The {\it confidence ellipse}\index{confidence ellipse}
-has semi-major and semi-minor directions parallel to the
+has semi-major and semi-minor directions $a_j$ parallel to the
 eigenvectors of the correlation matrix, with lengths equal
 to the eigenvalues $\lambda_1$, $\lambda_2$. 
 Defining the confidence ellipse in this way,
-assuming the Gaussian random variables, the probability
-that the true mean pair $\hat{x}_1$, $\hat{x}_2$ lies
+assuming Gaussian random variables $a_j$, the probability
+that the mean pair $\hat{a}_1$, $\hat{a}_2$ lies
 in the confidence ellipse $E$ is
-\begin{equation}\begin{aligned}
-\pr{\hat{x}_1,\hat{x}_2\in E} & =\frac{1}{\sqrt{2 \pi \lambda_1}} \frac{1}{\sqrt{2 \pi \lambda_2}}
-\int_{\text {ellipse }} \dd{x_1}\dd{x_2} \exp \left(-\frac{x_1^2}{2 \lambda_1}\right) \exp \left(-\frac{x_2^2}{2 \lambda_2}\right) \\
+\begin{equation}\begin{aligned}\label{eq:confidenceInt}
+\pr{\hat{a}_1,\hat{a}_2\in E} & =\frac{1}{\sqrt{2 \pi \lambda_1}} \frac{1}{\sqrt{2 \pi \lambda_2}}
+\int_0^1 \dd{a_1}\int_0^1\dd{a_2} \exp \left(-\frac{a_1^2}{2 \lambda_1}\right) \exp \left(-\frac{a_2^2}{2 \lambda_2}\right) \\
 & = \int_0^1 r \dd{r} \exp \left(-\frac{r^2}{2}\right)\\
 &=1-\exp \left(-\frac{1}{2}\right)\\
-&=0.393,
+&\approx0.39,
 \end{aligned}\end{equation}
 which is notably quite different from 1-$d$ normal distribution;
-see e.g. \tabref{tab:normal}.
+see e.g. \tabref{tab:normal}. If rather than 0.39 one seeks
+an arbitrary confidence limit $C$, one can rescale the 
+upper limit of integration to some constant $s$, 
+then solve for the $s$ that yields
+the desired RHS.
+
+
 
 \section{Jackknife resampling}\index{jackknife}
 Let us consider a sample of independent measurements 
