@@ -1,0 +1,62 @@
+\chapter{Special Topic: Machine Learning}
+
+Machine learning\index{machine learning} (ML) 
+is a type of artificial intelligence, and as far
+as I can tell, what distinguishes it is the use of statistical
+methods to try to infer ``hidden" information. Often this hidden
+information can be thought of as a set of features common to the
+to-be-studied data that are not known by the user at runtime. 
+The goal of the ML algorithm, then, is to try to identify these
+features.
+
+For example, a common task for ML algorithms is to identify pictures,
+say to determine whether a photo contains a traffic light. The algorithm
+must identify some features in these photos; maybe it ``looks out" for
+photos containing a red, yellow, and green circle, but remember,
+you, the user, to do not tell the algorithm what to look for ahead of time.
+Mathematically, these features can be thought of as generalized 
+models\footnote{In the Bayesian statistical sense.} which can be
+represented mathematically, and the goal of the algorithm is to
+find the ``best" model parameters.
+
+Broadly, ML algorithms can be divided into {\it supervised
+learning}\index{supervised learning}, {\it unsupervised
+learning}\index{unsupervised learning}, and {\it reinforcement
+learning}\index{reinforcement learning}.
+
+For supervised learning: The model is {\it trained}\index{training} 
+on a labeled dataset. 
+Heuristically, we think of training as ``teaching" a model based on the
+data. In more detail, this is carried out through several steps:
+\begin{itemize}
+\item Before training, data is properly cleaned and prepared. This could 
+involve rectifying missing values, handling outliers, etc. You label
+these data, i.e. they are classified ahead of time\footnote{These photos
+contain traffic lights; those photos do not.}. We split our original
+data into a {\it training set}, which will be used in step 2, and
+a {\it validation set}, which will be used in step 4.
+\item Next, the data are given as input to the model, which then calculates
+a prediction based on these data. It compares that result against the label
+and adjusts its parameters accordingly. This is the {\it
+learning}\index{learning} part of the algorithm. This comparison is usually
+handled by minimizing a {\it loss function}\index{loss function}, which
+is the difference between the prediction and actual label.
+\item We repeat step 2, each time feeding different subsets of the data, 
+slowly adjusting the model. Each such iteration is sometimes called
+an {\it epoch}\index{epoch}. This is done many times until the model's 
+predictions are satisfactory or we hit some maximum number of epochs. 
+\item Now that we have trained our model using the training set, we will
+try the model on the validation set. We can measure how good our model
+is by, for example, the fraction of the validation set the model calls
+correctly. This process is {\it validation}\index{validation}.
+\item After the model has been trained and validated, it can be tested on a separate testing dataset to further evaluate its performance.
+\end{itemize}
+
+% uhhh actually hard to tell difference between testing and validation... 
+
+%2. Unsupervised Learning: In this case, there's no teacher and the model must figure out patterns from the input data on its own. The analogy for this is like learning to play a new game without the rules and learning the rules as you play the game.
+%
+%3. Reinforcement Learning: Here, the machine learns by interacting with its environment. The model will learn to perform an action from states within the environment that maximize the reward through a trial and error approach.
+%
+\bibliographystyle{unsrtnat}
+\bibliography{bibliography}

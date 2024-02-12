@@ -93,7 +93,9 @@ to break the bonds between molecules, changing the substance from a solid into a
 liquid. The energy required to do this is the {\it latent heat}\index{latent
 heat}. The existence of a latent heat defines first-order phase transitions.
 
-Along phase boundaries, different phases may coexist. For instance along the
+Along phase boundaries, different phases may coexist\footnote{This
+coexistence, which in a sense occurs because there is a latent heat,
+can also be used to characterize first-order transitions.}. For instance along the
 solid-liquid phase boundary one will in general find a mixture of solids and
 liquid, which is sometimes called a {\it slurry}\index{slurry}. We also use
 the common verbiage when crossing the boundaries: the substance {\it
@@ -182,6 +184,20 @@ direction the system picks; this is an example of spontaneous symmetry
 breaking\index{spontaneous symmetry breaking}, which plays a major role in QFT,
 as discussed in \secref{sec:ssb}. 
 
+
+Often, first-order lines terminate in second-order endpoints. Indeed, this
+can be seen in both \figref{fig:phase_water} and \figref{fig:phase_ising}.
+At this critical endpoint, the coexistence line fuses into one phase.
+Another possibility not shown in these figures is a tricritical point, 
+where three phases fuse. Generally for liquid-gas transitions like
+water, the expectation is that the endpoint belongs to the Ising
+model universality
+class~\cite{hubbard_wilson_1972,bruce_scaling_1992,wilding_critical-point_1995,yarmolinsky_revisiting_2017}.
+Still, this statement is not without controversy, with some studies suggesting
+it has a universality class of its own, albeit with very similar
+critical exponents~\cite{valls_liquid-gas_1978}.
+
+
 \section{The Lee-Yang theorem}\label{sec:leeyang}\index{Lee-Yang!Theorem}
 
 One of the lessons of \chref{ch:statphys} is that the partition function of a
@@ -216,8 +232,12 @@ Yang~\cite{yang_statistical_1952}, who demonstrated that, in the
 {\it thermodynamic limit}\index{limit!thermodynamic} limit, i.e.
 $V\to\infty$, $\grandZ(h)$, which we write as a function of the magnetization or
 symmetry-breaking parameter $h$, will have zeros at phase transitions. According
-to \equatref{eq:grandPotZ} then, we correspondingly expect singularities in the
-free energy. 
+to \equatref{eq:grandPotZ} then, we correspondingly expect 
+singularities in the free energy\footnote{When it comes to the Ising model,
+it is somewhat intuitive that the thermodynamic limit is a necessary
+condition for phase transitions. At finite volume, the partition function
+is a finite sum of spins scaled by $T$, and hence must be an analytic
+function of $T$. This guarantee is lost when one considers infinite sums.}. 
 In their original paper, they allow the fugacity, which they denote
 as $y$, to be complex, then imagine the situation in the complex plane.
 The regions of analyticity for $y$ along with the expected behavior

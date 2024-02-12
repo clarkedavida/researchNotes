@@ -236,7 +236,10 @@ of the fireball according to the speed of sound. % Henrik's thesis is nice
 Also in the context of heavy ion collisions, it can be used to look out
 for a long-lived fireball, which may coincide with a {\it softest point}
 \index{softest point} where the pressure-to-energy-density ratio,
-and hence $c_s^2$, attains a minimum~\cite{hung_hydrodynamics_1995}.
+and hence $c_s^2$, attains a minimum\footnote{Another way of looking at
+this is that near the crossover as we increase temperature, this
+energy serves to change hadronic degrees of freedom to screened
+quarks and gluons, rather than changing the pressure.}~\cite{hung_hydrodynamics_1995}.
 In the context of neutron stars, $c_s^2$ is interesting since the relationship
 between the star masses and radii is influenced by how $c_s^2$ changes with
 $n_B$~\cite{ozel_masses_2016}.
@@ -266,11 +269,14 @@ and in the quasiparticle method~\cite{mykhaylova_impact_2021}.
 \vspace{-1cm}
 \includegraphics[width=0.6\linewidth]{figs/3d_phase_diag_Gauss.003.pdf}
 \vspace{-1cm}
-\caption{Schematic phase diagram of QCD. Indicated are the pseudocritical transition temperature 
-$\Tpc$ of QCD at physical quark mass and the critical transition temperature $\Tc$ in the 
-chiral limit. Dashed lines indicate crossovers, thick, solid lines are lines of second-order phase 
-transitions, and a first-order surface is indicated in grey. A possible critical endpoint 
-is indicated in teal. Figure by C. Schmidt.}
+\caption{Schematic phase diagram of QCD. Indicated are the pseudocritical 
+transition temperature $\Tpc$ of QCD at physical quark mass and the critical 
+transition temperature $\Tc$ in the chiral limit. Dashed lines indicate 
+crossovers; thick, solid, colored lines are lines of second-order phase 
+transitions; the thick, solid, black line is a line of first-order
+transitions; and a first-order surface is indicated in grey. 
+A possible critical endpoint is indicated in teal. Figure by C. Schmidt.
+This figure is described in some detail in Ref.~\cite{karsch_critical_2019}.}
 \label{fig:pdiag}
 \end{figure}
 
@@ -281,6 +287,36 @@ first-order transitions, which is expected to terminate at a second-order critic
 endpoint belonging to the 3-$d$, $\Z_2$ universality class, as shown in the rear 
 plane of Fig.~\ref{fig:pdiag}.
 
+Let us discuss the qualitative form of the phase diagram in a bit more 
+detail~\cite{halasz_phase_1998}.
+At $T=0$ and physical quark masses\footnote{We are moving along the dotted,
+horizontal line in the rear plane.}, it can be argued that baryon-number 
+density $n_B$ should jump at
+$\mu\approx m_p$ to the {\it nuclear matter density}\index{nuclear matter
+density} $n_0\approx 0.16$ fm$^{-3}$. This jump is discontinuous, and
+so the expectation is that transition is first-order, with $n_B$
+playing the role of an order parameter.
+At sufficiently large $\mu$, color interactions are expected to be screened,
+and hence non-perturbative effects like global symmetry breaking should
+be suppressed. So for massless quarks, one expects for large $\mu$
+a chirally-restored phase, and this should also be of 
+first-order\footnote{Now moving along the horizontal axis in
+the foreground.}. 
+When $\mu$ is sufficiently small and when $m_l=0$,
+there is a second-order chiral phase transition belonging to the
+$\SU(2)_L\times\SU(2)_R\cong\ON(4)$ universality class.
+
+Returning to the first-order transition at $T=0$ and $m_l=0$,
+moving off the $T=0$ axis, continuity demands
+the first-order transition to continue as a line. Once $T\neq0$, there
+is no longer a well-defined order parameter, and this requirement is lost;
+the expectation is this terminates in a tricritical point, which is
+itself connect to a second-order line. The ``wings" of this tricritical
+point branch off to second-order lines at positive and negative quark
+mass\footnote{There is a $m_l\to-m_l$ symmetry, which is not indicated
+in the figure since only $m_l\geq0$ is shown.}.
+
+Let us now think about how to probe this diagram on the lattice.
 When viewed from the plane of complex $\muh$, the Taylor expansion 
 approach is limited by the location of the nearest zero of the QCD partition 
 function $\ZQCD$, i.e. the nearest singularity of the free energy in the 
