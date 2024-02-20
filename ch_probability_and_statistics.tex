@@ -1304,11 +1304,7 @@ fact about $\Delta$ is that it is {\it distribution free}.
 The proof is relatively straightforward and given in
 \thmref{thm:koldf}. \thmref{thm:kolprb} gives
 the probability that the difference between the empirical and true
-CDFs is at least as extreme as what we calculate. This proof is
-tedious and not particularly enlightening, so it has been omitted.
-If you want to see a proof you can read Berg~\cite{berg_markov_2004},
-who attributes it to Birnbaum and Tingey~\cite{birnbaum_one-sided_1951}
-and Smirnov~\cite{smirnoff_sur_1939}.
+CDFs is at least as extreme as what we calculate.
 \begin{theorem}{}{koldf}
   All continuous $F$ have the same $\Delta$. 
   \begin{proof}
@@ -1360,16 +1356,10 @@ and Smirnov~\cite{smirnoff_sur_1939}.
     in the first paragraph.
   \end{proof}
 \end{theorem}
-\begin{theorem}{}{kolprb}
+\begin{theorem}{Kolmogorov}{kolprb}
   Let $D>0$. Then
   $$
-    \pr{\Delta>D}=\sum_{k=0}^K{N\choose k}D\left(D+\frac{k}{N}\right)^{k-1}
-                   \left(1-D-\frac{k}{N}\right)^{N-k},
-  $$
-  where $K$ is determined by the condition that $1-D-k/N$ cannot be
-  negative. If $N$ is large enough, this probability can be approximated as
-  $$
-    \pr{\Delta>D}\approx e^{-2ND^2}.
+    \pr{\Delta>D}=1-2\sum_{k=1}^\infty(-1)^{k-1}e^{-Nk^2D^2}.
   $$
 \end{theorem}
 
