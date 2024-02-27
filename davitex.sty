@@ -191,6 +191,7 @@
 ]{code}
 \usepackage[many]{tcolorbox}
 \tcbuselibrary{minted}
+
 \newtcbinputlisting{\mycode}[2]{%
   listing engine=minted,%
   minted language={#1},%
@@ -203,6 +204,34 @@
     baselinestretch=1.2,%
     fontsize=\fontsize{8.5}{8},%
     breaklines=true,%
+    },%
+  listing only,%
+  enhanced jigsaw,%
+  colframe=black,%
+  sharp corners,%
+  boxrule=1pt,%
+  colback=bgcolor,%
+  left=-1.5em,%
+  left skip=0em,%
+  width=\textwidth,%
+  overlay={\begin{tcbclipinterior}\fill[frcolor] (frame.south west)
+        rectangle ([xshift=5.1mm]frame.north west);\end{tcbclipinterior}},
+}
+
+\newtcbinputlisting{\mycodeSnippet}[4]{%
+  listing engine=minted,%
+  minted language={#1},%
+  listing file={#2},%
+  minted options={%
+    xleftmargin=3.2em,%
+    autogobble=true,%
+    numbers=left,%
+    numbersep=1em,%
+    baselinestretch=1.2,%
+    fontsize=\fontsize{8.5}{8},%
+    breaklines=true,%
+    firstline={#3},%
+    lastline={#4},%
     },%
   listing only,%
   enhanced jigsaw,%
