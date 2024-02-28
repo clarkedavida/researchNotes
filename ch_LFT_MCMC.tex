@@ -353,8 +353,93 @@ about using OR to gauge fix, see Ref.~\cite{mandula_efficient_1990}.
 For information about how to implement this on multiple GPUs, see
 e.g. Ref.~\cite{schrock_coulomb_2013}.
 
-\subsection{Update: Molecular dynamics}
+\subsection{Update: Molecular dynamics}\index{molecular dynamics}
 
+For this updating strategy, we leverage an isomorphism between
+lattice field theory and a classical statistical mechanical 
+ensemble. We will use this
+correspondence to find a clever way of suggesting a gauge
+configuration, and then ultimately accept or reject it via
+a standard Metropolis step.
+
+To start let's imagine a theory with a scalar field $\phi$ on 
+the lattice. Then expectation values are computed like
+\begin{equation}
+\ev{X}=Z^{-1}\int\DD\phi e^{-S[\phi]}X[\phi],~~~~Z\equiv\int\DD\phi
+e^{-S[\phi]}.
+\end{equation}
+Now let
+\begin{equation}
+H\equiv\frac{1}{2}\sum_{x\in\LAT}P(x)^2+S[\phi],
+\end{equation}
+where $P$ is a scalar field we will define in a moment. Since $P$ is some other
+field, it follows that
+\begin{equation}
+\ev{X}=Z^{-1}\int\DD\phi\DD P e^{-H[\phi,P]}X[\phi],
+~~~~Z\equiv\int\DD\phi\DD P e^{-H[\phi,P]}.
+\end{equation}
+Now let these fields evolve in Markov time $\tau$ and define
+\begin{equation}
+\dv{\phi(x)}{\tau}\equiv P(x).
+\end{equation}
+Then we have defined a classical system where $P$ is the momentum
+conjugate to $\phi$. If we evolve $\phi$ and $P$ in $\tau$ according
+to Hamilton's equations of motion, the energy is guaranteed to
+be a constant. This procedure would yield 100\% acceptance if we
+were able to integrate the equations of motion exactly. In practice
+there is round off error, and the Metropolis step serves to protect
+the probability distribution.
+
+The above example is for a scalar field, which is a simplification of 
+Ref.~\cite{callaway_microcanonical_1982},
+which does it for $\U(1)$. This was shortly thereafter extended
+to fermions~\cite{polonyi_microcanonical_1983}. 
+This approach is completely deterministic, and hence does not
+capture quantum fluctuations. To capture such quantum behavior,
+one can intuitively imagine disturbing Hamilton's equations
+with a random noise term. This is is an example of a
+stochastic differential equation\footnote{A stochastic differential
+equation is a differential equation where you include one
+or more random forces. A simple example is the Langevin equation
+$$
+m \dv{v}{t}=-\lambda v+\eta(t)
+$$
+describing the Brownian motion of a particle of mass $m$
+and velocity $v$ in a fluid. Here $\lambda$ is the drag, and
+$\eta$ is a Gaussian-distributed noise term representing
+random collisions of the particle with other particles in the fluid.
+At a fixed value of the noise, such equations can be solved.
+It becomes challenging when one wants to average over $\eta$.
+}
+like the Langevin equation, which can be used to model the inherent
+randomness of the underlying quantum field 
+theory~\cite{parisi_perturbation_1981}.
+Inspired by this, we might consider to give the conjugate momentum
+random kicks, following the microcanonical path in between.
+This strategy is often called a 
+{\it hybrid}~\cite{duane_hybrid_1985} strategy.
+If not for numerical rounding error, this strategy would be expected
+to generate the correct 
+distribution~\cite{duane_theory_1986}.
+To correct for numerical error, one can again apply the Metropolis
+step as before, which is referred to as 
+{\it hybrid Monte Carlo}\index{Monte Carlo!hybrid} (HMC).
+
+Applying a series of molecular dynamics steps is usually called
+a {\it trajectory}\index{trajectory}, after which comes the
+Metropolis step. To fulfill detailed balance, we need to ensure
+that our integration scheme
+\begin{enumerate}
+  \item preserves the integration measure $\DD\phi\DD P$; and
+  \item is reversible.
+\end{enumerate}
+A commonly used scheme that is reversible is known as the
+{\it leapfrog} algorithm. Under this scheme, $\phi$ integrates
+in $N$ steps of Monte Carlo length $\epsilon$, while $P$
+starts with a step of length $\epsilon/2$, followed by $N-1$
+steps of length $\epsilon$, and a final step of length $\epsilon/2$.
+You can find an elementary proof of reversibility under this
+scheme in Ref.~\cite{gattringer_quantum_2010}.
 
 
 \subsection{Choosing a random number generator}

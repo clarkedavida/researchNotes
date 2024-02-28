@@ -152,7 +152,7 @@ very ill-behaved in this regard, since its $n\nth$ moment diverges
 $\Forall n\in\N$.
 Generally in the lab, one draws random variables from distributions
 about which one has no a priori knowledge. Therefore in principle one
-doesn't know the true moments these distributions. The
+does not know the true moments these distributions. The
 definition \eqref{dfn:mom} suggests a way to estimate them. 
 Suppose you draw a sample $X_1,...,X_N$:
   An {\it estimator}\index{estimator} of the $n\nth$ moment is
@@ -407,7 +407,7 @@ standard deviations $\sigma_1$ and $\sigma_2$.
              -\frac{(x-\hat{x}_1)^2}{2\sigma_1^2}
              -\frac{(y-x-\hat{x}_2)^2}{2\sigma_2^2}\right].
     \end{equation*}
-    Pull everything out of the integral that doesn't depend on $x$,
+    Pull everything out of the integral that does not depend on $x$,
     then complete the square with what's left over.
     One obtains for $g(y)$
     $$
@@ -418,7 +418,7 @@ standard deviations $\sigma_1$ and $\sigma_2$.
            \exp\left[-\frac{\sigma_1^2+\sigma_2^2}
                      {2\sigma_1^2\sigma_2^2}(x+C)^2\right],
     $$
-    where $C$ is just a bunch of stuff that doesn't depend on $x$.
+    where $C$ is just a bunch of stuff that does not depend on $x$.
     Therefore you can make the substitution $u=x+C$ with $\dd u=\dd x$ and
     carry out the new integral using \propref{prp:gauss}.
     The result is
@@ -574,7 +574,7 @@ the true mean. Here is the precise statement.
             &=\exp\left[-\frac{\sigma^2t^2}{2N}\right],
       \end{aligned}
     \end{equation*}
-    where $C$ is a number that doesn't depend on $s$. It remains to show 
+    where $C$ is a number that does not depend on $s$. It remains to show 
     $\phi_S=\phi_{\text{gau}}$. By \propref{prp:addchars} we have
     $$
       \phi_S(t)=\phi_{\frac{1}{N}\sum X_i-\hat{x}}(t)
@@ -652,7 +652,7 @@ the estimator is {\it unbiased}.
   $$
   \begin{proof}
   To construct an unbiased estimator of the variance,
-  we'll determine the bias of the estimator, then remove it. Note
+  we will determine the bias of the estimator, then remove it. Note
   \begin{equation*}
     \ev{\bar{\sigma}^2_{\text{biased}}}=\frac{1}{N}\sum\limits_{i=1}^N
       \left(\ev{X_i^2}-2\ev{X_i\bar{X}}+\ev{\bar{X}^2}\right).
@@ -826,7 +826,7 @@ can associate the $a_{ij}$ with partial derivatives. Then
 \end{equation}
 This is the {\it error propagation formula} as it's usually stated. 
 Berg~\cite{berg_markov_2004} emphasizes that this relation is 
-mnemonic because it doesn't make 
+mnemonic because it does not make 
 sense to take derivatives with respect to random variables. 
 In practice we can apply \equatref{eq:errprop} when we
 \begin{enumerate}
@@ -921,7 +921,7 @@ the desired RHS.
 Let us consider a sample of independent measurements 
 $X_1,...,X_N$ from some distribution with mean $\hat{x}$ and 
 variance $\sigma^2$ and a function $f$ that has a Taylor series 
-expansion near $\hat{x}$, but isn't necessarily linear.
+expansion near $\hat{x}$, but is not necessarily linear.
 From \secref{sec:bias} we know that $\bar{f}=f(\bar{X})$ is
 a consistent estimator of $\hat{f}=f(\hat{x})$. 
 
@@ -1390,8 +1390,8 @@ CDF is continuous. In practice one can proceed as follows:
 \section{Statistical analysis of time series}
 
 Once we get into lattice calculations, we are going to analyze
-Markov chains, which we'll discuss in \chref{ch:MCMC}. There
-we'll consider a {\it time series}\index{time series} of $N$
+Markov chains, which we will discuss in \chref{ch:MCMC}. There
+we will consider a {\it time series}\index{time series} of $N$
 measurements
 \begin{equation}
 \{X_1, ..., X_N\}. 
@@ -1399,7 +1399,7 @@ measurements
 The idea of a time series is that each measurement
 $X_i$ is in principle somehow correlated with $X_{i-1}$.
 For instance one can consider a time series of temperature
-measurements in a city. In our case, we'll generate a time
+measurements in a city. In our case, we will generate a time
 series of space-time configurations, where each configuration
 is generated based on the preceding one.
 
@@ -1443,7 +1443,7 @@ $c(0)=\sigma^2$, which motivates the definition of the {\it autocorrelation}
   \gamma(t)\equiv\frac{c(t)}{\sigma^2}.
 \end{equation}
 The autocorrelation decays in $t$ as a sum of exponentials. I don't
-know why this is true, and I couldn't find a reference, but this is what
+know why this is true, and I could not find a reference, but this is what
 everybody says. Assuming this is the case we can write
 \begin{equation}
   \gamma(t)=A_\text{exp}\,e^{-t/\tau_\text{exp}}
@@ -1556,7 +1556,7 @@ includes a nice summary of the matter.
 
 So what went wrong? Were we just really unlucky? In fact this signal was due to
 a mistake in the analysis. Does this mean the people who calculated the
-probability didn't know what they were doing? On the contrary, the probability
+probability did not know what they were doing? On the contrary, the probability
 was calculated under the assumption that the analysis was correct; in other
 words, it was calculated in the context of the information they had available at
 the time.
@@ -1690,7 +1690,7 @@ specifically by noting that the Bayesian interpretation reduces to the
 frequentist one in familiar cases. For example when $I$ represents the
 information that one rolls an ideal, fair die, one can again imagine the
 ensemble of die throws, and one obtains the same number as the frequentist does.
-Therefore the observer hasn't lost any interpreting power; on the contrary, the 
+Therefore the observer has not lost any interpreting power; on the contrary, the 
 observer gains the ability to assign numbers representing degrees of certainty to
 situations where the ensemble interpretation is useless.
 
@@ -1700,7 +1700,7 @@ situations where the ensemble interpretation is useless.
 
 Now that we've thought about what the probabilities mean in the Bayesian
 framework, we need a way to assign them; in the frequentist framework, it was
-sufficient to use ratios of set sizes, but now this assignment isn't automatic.
+sufficient to use ratios of set sizes, but now this assignment is not automatic.
 
 
 \subsection{Fitting data}
