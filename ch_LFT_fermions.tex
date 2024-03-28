@@ -85,14 +85,16 @@ transforms as
 Since \equatref{eq:naivefermactgauge} is the gauge-invariant action,
 this will be what we investigate for fermion doubling.
 
-\section{Grassmann numbers}\index{algebra!Grassman}
+\section{Grassmann
+numbers}\label{sec:grassmann}\index{algebra!Grassmann}\index{Grassmann!algebra}
 Fermions are objects that by definition anticommute with each other. 
 With this in mind, we introduce Grassmann numbers.
 We consider a set of numbers $\eta_i$, $1\leq i\leq N$ obeying
 \begin{equation}
   \eta_i\eta_j=-\eta_j\eta_i
 \end{equation}
-for all $i$ and $j$. These are called {\it Grassmann numbers}.
+for all $i$ and $j$. These are called {\it Grassmann
+numbers}\index{Grassmann!number}.
 It follows that
 \begin{equation}\label{eq:gnilpotent}
   \eta_i^2=0.
@@ -106,7 +108,8 @@ immediately. In general we would write
 \end{equation}
 with $a,\,a_i,\,a_{ij},...,\,a_{1...N}\in\mathbb{C}$.
 We refer to \equatref{eq:grasspoly} as a {\it Grassmann polynomial}.
-Grassmann polynomials are closed under addition and multiplication,
+Grassmann\index{Grassmann!polynomial} 
+polynomials are closed under addition and multiplication,
 and are thus said to form a {\it Grassmann algebra}. The $\eta_i$
 are the {\it generators} of the Grassmann algebra.
 
@@ -242,6 +245,37 @@ $$
   line, and the last line follows from \equatref{eq:grassintrules}.
 \end{proof}
 \end{theorem}
+
+Let us take a moment to see how the Matthews-Salam formula is employed
+in lattice field theory. In our case, our Grassman variables are
+fermion fields. The integration measure is a product over all
+space-time sites, so that the index $i$ labels the site.
+The matrix that occurs for us is the 
+{\it Dirac operator}\index{Dirac!operator}
+or {\it Dirac matrix}\index{Dirac!matrix} $D(x,y)$, appearing
+in the action like
+\begin{equation}\label{eq:diracPositionBasis}
+\bar{\psi}(x)\left(\slashed{D}+m\right)\psi(y)
+\equiv\bar{\psi}(x)D(x,y)\psi(y).
+\end{equation}
+Remember that $\slashed{D}$ contains a covariant derivative, which
+is responsible for parallel transport between $x$ and its neighbors,
+which is why we write $D(x,y)$. When we write $D(x,y)$, we are
+now thinking about $\slashed{D}+m$ as a matrix in the basis
+of spacetime points. The form of $D(x,y)$ will depend on how we
+discretize\footnote{For example the Wilson action, which we will discuss
+in \secref{sec:LFTdoubling}, has Kronecker $\delta$-functions that
+enforce each site only interacts with its immediate neighbors.
+In that sense the Wilson Dirac operator is ``tridiagonal".
+The HISQ action on the other hand, which we will discuss in 
+\secref{sec:HISQ}, includes interactions between sites and
+their next-to-nearest neighbors. This is analogous to having a 
+band diagonal matrix.}. Hence Matthews-Salam will let us trade
+away the fermion fields for the determinant of the Dirac operator.
+Due to the incredible size of $D(x,y)$, computing its determinant
+is prohibitively computationally expensive. We will discuss the most
+commonly used trick to avoid this in \secref{sec:pseudofermions}.
+
 If we replace $M$ with the Dirac operator, we see that the fermionic
 partition function is just the determinant of the Dirac operator.
 By the way, the ordering of the differentials in the measure should
@@ -398,12 +432,12 @@ fermion action~\eqref{eq:naivefermactgauge} is bilinear in $\psi$
 and $\bar{\psi}$, so it can be written as
 \begin{equation}
   S_F=a^4\sum_{x,y}\sum_{\alpha,\beta,c_1,c_2}\bar{\psi}(x)_{\alpha c_1}
-      \,D(x|y)_{\alpha \beta c_1 c_2}\,\psi(y)_{\beta c_2},
+      \,D(x,y)_{\alpha \beta c_1 c_2}\,\psi(y)_{\beta c_2},
 \end{equation}
 where $\alpha$ and $\beta$ are Dirac indices, $c_1$ and $c_2$ are
 color indices, and the Dirac operator on the lattice is
 \begin{equation}
-  D(x|y)_{\alpha\beta c_1c_2}\equiv\sum_{\mu=1}^4(\gamma_\mu)_{\alpha\beta}
+  D(x,y)_{\alpha\beta c_1c_2}\equiv\sum_{\mu=1}^4(\gamma_\mu)_{\alpha\beta}
    \frac{U_\mu(x)_{c_1c_2}\delta_{x+a\hat{\mu},y}
          -U_{-\mu}(x)_{c_1c_2}\delta_{x-a\hat{\mu},y}}{2a}
    +m\delta_{\alpha\beta}\delta_{c_1c_2}\delta_{xy}.
@@ -417,7 +451,7 @@ Since we have free fermions, we may as well suppress color indices,
 and we will also use vector/matrix notation in Dirac space, so that
 Dirac indices are also suppressed. We find
 \begin{equation}\begin{aligned}
-  \tilde{D}(p|q)&=\frac{1}{V}\sum_{x,y}e^{-ipx}D(x|y)e^{-iqy}\\
+  \tilde{D}(p,q)&=\frac{1}{V}\sum_{x,y}e^{-ipx}D(x,y)e^{-iqy}\\
      &=\frac{1}{V}\sum_{x,y}e^{-ipx}\left(
       \sum_\mu\gamma_\mu\frac{\delta_{x+a\hat{\mu},y}
                              -\delta_{x-a\hat{\mu},y}}{2a}+m\delta_{x,y}\id
@@ -476,7 +510,7 @@ This second term is called the {\it Wilson!term}. This formulation
 of fermions is called {\it Wilson fermions}. The complete Dirac
 operator using this formulation becomes 
 \begin{equation}
-  D(x|y)^f_{\alpha\beta c_1c_2}
+  D(x,y)^f_{\alpha\beta c_1c_2}
   =\left(m^f+\frac{4}{a}\right)\delta_{\alpha\beta}
                                \delta_{c_1c_2}
                                \delta_{xy}
@@ -488,7 +522,8 @@ where
   \gamma_{-\mu}\equiv-\gamma_{\mu}.
 \end{equation}
 
-\section{Staggered fermions}\index{fermion!staggered}\index{staggered!fermions}
+\section{Staggered
+fermions}\index{fermion!staggered}\index{staggered!fermions}\label{sec:HISQ}
 
 In this section we work in a free theory to simplify the notation.
 In the interacting theory, each spinor will have a link attached to it
@@ -842,6 +877,33 @@ that creates a meson $X$ at $y$ and annihilates it at $x$ is
 % which according to LGT:prelim gives sum over \vec{x}.
 % is the discussion from degrand-detar more general?
 % section 6.2.3 wall sources
+
+\section{Pseudofermions}\label{sec:pseudofermions}
+
+As discussed in \secref{sec:grassmann}, the Matthews-Salam formula
+lets us integrate out the fermion fields, and we are left with
+the determinant of a very large matrix, the Dirac matrix, in
+our integration measure. Computing this determinant directly
+is not computationally feasible. Let's follow a nice presentation
+from Ref.~\cite{degrand_lattice_2006} to learn how to approach
+simulating dynamical fermions in spite of this difficulty.
+
+The partition function for a single fermion species is
+\begin{equation}\begin{aligned}
+  Z&=\int\DD U\DD\bar\psi\DD\psi e^{-S_G-\bar\psi D\psi}
+   &=\int\DD U \det D\,e^{-S_G}.
+\end{aligned}\end{equation}
+As we can see in \eqref{eq:diracPositionBasis}, we think of $D$ as a matrix in
+the basis of space-time sites, i.e. there is an element for each pair of
+space-time points. Even though it is a sparse matrix, its dimensionality is
+still impossibly huge, and hence computing determinants in a straightforward
+manner is computationally not feasible\footnote{As discussed with
+staggered fermions, we will want to take
+square roots and fourth roots of the Dirac operator. These rooted matrices
+have even more nonzero entries, exacerbating the problem significantly.
+It should be that the further one gets from the diagonal, the smaller
+the entries become, and in the continuum limit, $D$ 
+should become local\index{local}.}. 
 
 
 \bibliographystyle{unsrtnat}
