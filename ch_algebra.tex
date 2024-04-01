@@ -1355,14 +1355,23 @@ to second order in $\epsilon$ and then do some rearranging.
   $$
 \end{theorem}
 
-\subsection{SU(2)}
+\subsection{SU(N)}
 
-The $\SU(2)$ algebra is defined by
+The Lie groups $\SU(2)$ and $\SU(3)$ are of considerable importance in the
+Standard Model, as they used to describe weak and strong interactions.
+General $\SU(N)$ is interesting for example
+in the context of topological charge and for some grand unified theories.
+Here we lay out some general properties of $\SU(N)$ matrices,
+in the {\it defining representation}\index{representation!defining},
+which is how they are commonly encountered.
+
+In the defining representation, the generators $T^a$ are $N\times N$
+traceless, complex, hermitian matrices, chosen so that
 \begin{equation}
-  [J_i,J_j]=i\epsilon_{ij}J_k.
+\tr T^a T^b=\frac{1}{2}\delta^{ab}.
 \end{equation}
-In units $\hbar=1$, this is the algebra of the familiar angular momentum
-operator from QM.
+Of course, the generators will always obey \equatref{eq:liealg}.
+
 It can be represented as
 \begin{equation}
 \SU(2)=\left\{
@@ -1371,8 +1380,7 @@ It can be represented as
           c+id   &  a-ib  \\
             \end{array}\right)\suchthat a,b,c,d\in\R \right\}.
 \end{equation} 
-One property of $\SU(N)$ matrices, $N\in\N$, is that they have determinant 1.
-This leads to the constraint
+That the matrix must have determinant 1 leads to the constraint
 \begin{equation}
 a^2+b^2+c^2+d^2=1,
 \end{equation} 
@@ -1406,8 +1414,8 @@ which is the equation for the unit hypersphere in four dimensions, $S^3$.
     \end{equation*}
   \end{proof}
 \end{proposition}
-Something worth noting about the parameterization of the above proposition
-is that we again see the bijection\footnote{Unfortunately this nice visualization
+The parameterization of the above proposition exposes again
+the bijection\footnote{Unfortunately this nice visualization
 already breaks down for $\SU(3)$. I have read that it is ``the total space of 
 an $S^3$ fibration over $S^5$. I don't really know what that means, but $S^3$
 and $S^5$ are hyperspheres, so I sometimes think of an element in $\SU(3)$ being

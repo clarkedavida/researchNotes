@@ -445,7 +445,39 @@ You can find an elementary proof that the leapfrog preserves area
 and is reversible in Ref.~\cite{gattringer_quantum_2010}.
 There one also finds a proof that the Metropolis fulfills detailed balance.
 
+Let us synthesize what we have discussed to introduce an updating scheme that
+represents a system of two indentical fermions with gauge interaction
+at zero chemical potential.
+This scheme for staggered fermions was first made explicit
+in Ref.~\cite{gottlieb_hybrid-molecular-dynamics_1987}.
+As discussed in \secref{sec:pseudofermions}, the most efficient way
+to treat the determinant of the Dirac matrix is using pseudofermions.
+Hence our path integral is\index{pseudofermion}
+\begin{equation}\begin{aligned}
+Z&=\int\DD{U}\left(\det D\right)^2e^{-S_G}\\
+&=
+\int\DD{\Phi_R}\DD{\Phi_I}\DD{U} 
+e^{-S_G-\Phi^\dagger\left(D^\dagger D\right)^{-1}\Phi},
+\end{aligned}\end{equation}
+where we have introduced a three-color, complex scalar field
+$\Phi=\Phi_R+i\Phi_I$, the pseudofermion field.
+In \secref{sec:pseudofermions} we stressed that the treatment of two identical
+fermions was important since it lets us put a $D^\dagger D$ in the
+exponential, which makes it a well defined probability distribution.
+We also saw that we can draw our pseudofermions according to the
+above distribution if we define $\Phi=D^\dagger R$ and draw $R$ from
+$\exp\left(-R^\dagger R\right)$. The strategy then goes:
+\begin{enumerate}
+\item Generate Gaussian $R$.
+\item Solve $\Phi=D^\dagger R$ to get $\Phi$.
+\item Given your starting configuration $U$ generate conjugate
+momenta.
+\item Keeping $\Phi$ fixed, use the molecular dynamics strategy
+to integrate along a short trajectory, yielding a proposal for $U$.
+\item Do a Metropolis accept/reject at the end of the trajectory for $U$.
+\end{enumerate}
 
+Let us discuss steps 2-4 in a little more detail. 
 
 \subsection{Choosing a random number generator}
 

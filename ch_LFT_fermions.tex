@@ -220,7 +220,7 @@ the $\det M$ would have been on the LHS.
 The stuff between the parentheses in the naive action~\eqref{eq:naivefermact}
 can be viewed as an operator. Keeping this in mind, we're going to show
 that the fermionic partition function can be viewed as a determinant.
-The setup is as follows: We have a Grassmann algebra with 2N generators
+The setup is as follows: We have a Grassmann algebra with $2N$ generators
 $\bar{\eta}_i$ and $\eta_i$ that all anticommute with each other and
 an $N\times N$ linear transformation $M$.
 \begin{theorem}{Matthews-Salam formula}{}
@@ -813,7 +813,7 @@ in the continuum limit. In spite of this danger, people who employ staggered
 actions often tend to use rooting anyway. One way to make this step more
 justified is to reduce taste-breaking effects. Improved 
 actions\footnote{We will discuss improved actions in more detail in 
-\secref{ch:improved}.} such
+\chref{ch:improve}.} such
 as the HISQ action, to be discussed in the next section, have greatly
 reduced taste-breaking and, reassuringly, results from HISQ actions
 seem to agree with experiment.
@@ -903,8 +903,74 @@ square roots and fourth roots of the Dirac operator. These rooted matrices
 have even more nonzero entries, exacerbating the problem significantly.
 It should be that the further one gets from the diagonal, the smaller
 the entries become, and in the continuum limit, $D$ 
-should become local\index{local}.}. 
+should become local\index{local}. It should be noted that
+the time complexity of
+computing the determinant of an $N\times N$ matrix
+is usually $\order{N^3}$. This is of course algorithm-dependent,
+but the lowest I am aware of is still
+slower than $\order{N^2}$, which for us would correspond to
+the lattice volume squared.}. 
 
+Instead of evaluating the determinant, we approximate it
+by introducing 
+{\it pseudofermions}~\cite{fucito_proposal_1981,weingarten_physics_1981}.
+A pseudofermion $\Phi\equiv\Phi_R+i\Phi_I$ is a color-triplet, complex, 
+scalar field. We leverage the formal identity
+\begin{equation}\label{eq:pseudofermionIdentity}
+\det M \sim \int\DD{\Phi_R}\DD{\Phi_I}\exp\left(-\Phi^\dagger M^{-1}\Phi\right),
+\end{equation}
+where the squiggle indicates there may be some irrelevant factors 
+missing\footnote{Remember that the only important thing when it comes to
+predicting observables is that expectation values remain unchanged.
+Constant factors always drop out in the ratio. In Gattringer and Lang I
+see some factors $\pi^N$, which I don't always see in the literature.}.
+Now, it is always crucial that our exponentials can be interpreted
+as probabilities; therefore an important question to ask is whether
+that exponential is real and bounded.
 
+One way to explore the argument of the above exponential is to decompose
+the scalar fields $\Phi$ in terms of eigenvectors of $M$. Assuming $M$
+is an $N\times N$ matrix with only nonzero eigenvalues $\lambda_i$, 
+we can write
+\begin{equation}
+\Phi^\dagger M^{-1}\Phi=\sum_{i=1}^N
+\left(\Phi^\dagger\psi\right)_i\frac{1}{\lambda_i}\left(\psi^\dagger\Phi\right)_i.
+\end{equation}
+The projections of $\Phi$ onto the eigenstates of $M$ are complex
+conjugates, so if the eigenvalues were positive, we would be guaranteed that
+$\Phi^\dagger M^{-1}\Phi$ is positive. The trick then is to look
+out for an operator $M$ with positive eigenvalues.
+
+In \secref{sec:signProblem} we will see that most Dirac operators $D$ used in
+lattice field theory are $\gamma_5$-hermitian\index{hermitian},
+which means they obey
+\begin{equation}
+D^\dagger=\gamma_5 D \gamma_5.
+\end{equation}
+In that Section, we will show this guarantees
+\begin{equation}
+\det D = \det D^\dagger,
+\end{equation}
+and hence if we choose $M=D^\dagger D$, we will have
+by \equatref{eq:pseudofermionIdentity}
+\begin{equation}\label{eq:twoPseudofermionFlavors}
+\left(\det D\right)^2 
+=\det D^\dagger D 
+\sim \int\DD{\Phi_R}\DD{\Phi_I}
+\exp\left(-\Phi^\dagger \left(D^\dagger D\right)^{-1}\Phi\right),
+\end{equation}
+i.e. we will be able to rewrite the fermion determinants corresponding
+to a system with two identical flavors of quark in a way that guarantees
+we can use a Markov chain.
+
+An important practical point to consider is how to generate $\Phi$ according to
+the distribution \equatref{eq:twoPseudofermionFlavors}. Let $R$ be a random
+vector such that
+\begin{equation}
+\Phi=D^\dagger R.
+\end{equation}
+Then if we draw $R$ from a Gaussian, i.e. if we draw
+according to $\exp\left(-R^\dagger R\right)$, we are guaranteed that
+$\Phi$ will be distributed as desired.
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
