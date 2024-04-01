@@ -1361,18 +1361,61 @@ The Lie groups $\SU(2)$ and $\SU(3)$ are of considerable importance in the
 Standard Model, as they used to describe weak and strong interactions.
 General $\SU(N)$ is interesting for example
 in the context of topological charge and for some grand unified theories.
+This is the\index{group!special unitary} 
+{\it special unitary group of degree $N$}. Its matrix
+representations are unitary with determinant 1.
+
 Here we lay out some general properties of $\SU(N)$ matrices,
 in the {\it defining representation}\index{representation!defining},
 which is how they are commonly encountered.
-
 In the defining representation, the generators $T^a$ are $N\times N$
-traceless, complex, hermitian matrices, chosen so that
-\begin{equation}
+traceless\footnote{The generators being traceless guarantees
+that the group elements have determinant 1. You can see this using 
+the ETL formula.}, complex, hermitian matrices, chosen so that
+\begin{equation}\label{eq:SUNnorm}
 \tr T^a T^b=\frac{1}{2}\delta^{ab}.
 \end{equation}
 Of course, the generators will always obey \equatref{eq:liealg}.
+For $\SU(2)$, the generators are the Pauli matrices. For
+$\SU(3)$ they are the Gell-Mann matrices\footnote{The definition
+of the Gell-Mann matrices along with some physics intuition that
+might lead someone to construct them in the first place
+is given in \secref{sec:isohyper}.}.
 
-It can be represented as
+Next we discuss taking derivatives of $\SU(N)$ matrices.
+Let $f$ be defined on $\SU(N)$. Then the 
+derivative\footnote{We note that this definition is not unique.
+More generally a directional derivative can be defined by
+$$
+\nabla^af(U)\equiv\pdv{}{t}f\left(\gamma(t)\right)\Bigg|_{t=0},
+$$
+where $\gamma$ is any curve with $\gamma(0)=U$ and
+$\dd\gamma/\dd t=T^a$. No matter what you pick for $\gamma$,
+the derivative will give the same result. The choice taken here
+is convenient for calculational purposes.
+See e.g. Ref.~\cite{hall_lie_2003} for more details.
+}
+of $f$ in the $T^a$ direction is
+\begin{equation}\label{eq:lieDeriv}
+\nabla^af(U)\equiv\pdv{}{t}f\left(e^{itT^a}U\right)\Bigg|_{t=0}.
+\end{equation}
+What we've done here is parameterize a curve in moving through $\SU(N)$ that is
+extends in the $T^a$ direction using $t$. Evaluating at $t=0$
+effectively gives the instantaneous rate\footnote{In the parlance
+of differential geometry, $\nabla^a f$ lives in the tangent space
+of $\SU(N)$, and this tangent space is spanned by the Lie algebra generators.} 
+of change at $U$. This derivative obeys the product and chain rules.
+
+\begin{example*}{}{}
+Let $A$, $B\in\SU(N)$. Then
+\begin{equation*}\begin{aligned}
+\nabla^a AUB&=iAT^aUB\\
+\nabla^a AUUB&=iAT^aUUB + iAUT^aUB.
+\end{aligned}\end{equation*}
+\end{example*}
+
+
+A convenient way to write $\SU(2)$ matrices is as
 \begin{equation}
 \SU(2)=\left\{
 \left(\begin{array}{cc}

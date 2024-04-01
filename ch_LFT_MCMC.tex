@@ -453,7 +453,7 @@ in Ref.~\cite{gottlieb_hybrid-molecular-dynamics_1987}.
 As discussed in \secref{sec:pseudofermions}, the most efficient way
 to treat the determinant of the Dirac matrix is using pseudofermions.
 Hence our path integral is\index{pseudofermion}
-\begin{equation}\begin{aligned}
+\begin{equation}\begin{aligned}\label{eq:twoFlavorRHMC}
 Z&=\int\DD{U}\left(\det D\right)^2e^{-S_G}\\
 &=
 \int\DD{\Phi_R}\DD{\Phi_I}\DD{U} 
@@ -477,7 +477,73 @@ to integrate along a short trajectory, yielding a proposal for $U$.
 \item Do a Metropolis accept/reject at the end of the trajectory for $U$.
 \end{enumerate}
 
-Let us discuss steps 2-4 in a little more detail. 
+Let us discuss steps 2-4 in a little more detail; in particular we would like to
+understand how the molecular dynamics works for $\SU(3)$. We express our gauge
+field as
+\begin{equation}
+U_\mu=e^{i\omega_\mu^aT^a}=e^{iA_\mu}.
+\end{equation}
+We will therefore think of our Hamiltonian as a function of the
+generalized coordinates $A_\mu$, or equivalently when convenient,
+$\omega_\mu^a$. The corresponding conjugate momenta are
+\begin{equation}
+P_\mu=P^a_\mu T^a.
+\end{equation}
+The steps taken in the leapfrog change the momentum. With our fictitous 
+Hamiltonian in mind, what we seek is a force, i.e. a gradient of
+the effective action. Looking at \equatref{eq:twoFlavorRHMC} our effective
+action is
+\begin{equation}
+S_{\rm eff}=-S_G-\Phi^\dagger\left(D^\dagger D\right)^{-1}\Phi,
+\end{equation}
+and the force is
+\begin{equation}
+f=T^a\nabla^aS_{\rm eff}.
+\end{equation}
+The leapfrog thus proceeds in steps $\epsilon f$.
+
+Based on the effective action, the force can be divided into the
+{\it gauge force} and {\it fermion force}. The fermion force thus 
+depends on the chosen discretization. For example with a straightforward Wilson
+gauge action, whose contribution at $U$ has the form
+\begin{equation}
+-\frac{\beta}{6}\tr\left(UA+A^\dagger U^\dagger\right),
+\end{equation}
+where $A$ is the staple sum. Using \equatref{eq:lieDeriv},
+the fact that the derivative lies in the Lie algebra,
+which lets you express it as a linear combination of the generators,
+and \eqref{eq:SUNnorm}, the gauge force comes out to be
+\begin{equation}
+f_G=-\frac{i\beta}{12}\left(UA-A^\dagger U^\dagger\right).
+\end{equation}
+Meanwhile, using the fact that
+\begin{equation}
+\partial_\omega M^{-1} =-M^{-1}\left(\partial_\omega M\right)M^{-1}
+\end{equation}
+the fermion force is generally writeable as
+\begin{equation}
+f_{\rm ferm}=
+-T^a\left(\left(D^\dagger D\right)^{-1}\Phi\right)^\dagger
+\left(\pdv{D}{\omega^a}D^\dagger+D\pdv{D^\dagger}{\omega^a}\right)
+\left(\left(D^\dagger D\right)^{-1}\Phi\right).
+\end{equation}
+This exposes that the inverse of $D^\dagger D$ must be computed
+at each step of the molecular dynamics, which is far and away
+the most expensive part.
+
+Both here and in Step 2 we need to compute inverses of extremely
+large matrices. One of the most efficient ways to approach this,
+and indeed the strategy taken by codes such as 
+QUDA, 
+Grid, and
+$\simulat$, is to use the conjugate gradient.
+The difficulty of computing the inverse increases
+substantially according to the smallest eigenvalue of $D$,
+as mentioned in \secref{sec:numerics}. As a result
+one may need to employ an SVD or a
+{\it force filter}\index{force!filter}, which artificially
+shifts low eigenmodes by an amount $\delta$.
+ 
 
 \subsection{Choosing a random number generator}
 
@@ -518,7 +584,8 @@ in the unit interval as required for the Metropolis step by normalizing it by $m
 
 
 \begin{figure}
-\includegraphics[width=\linewidth]{figs/linear_congruence.pdf}
+\centering
+\includegraphics[width=0.9\linewidth]{figs/linear_congruence.pdf}
 \caption{A strong correlation hidden in the linear congruence generator for
 poorly chosen $a$, $b$, and $m$. Things seem to improve for a better choice of
 these parameters, but as Marsaglia proved, this generator ought to be avoided
