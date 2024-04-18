@@ -352,7 +352,7 @@ To begin we consider two groups $G$ and $H$ with a homomorphism $\phi:G\to H$.
 The {\it fibers}\index{fiber} of $\phi$ are the sets of elements in $G$ mapping
 to a single element in $H$, which is depicted graphically in
 \figref{fig:quotientGroup}. If $a$ represents one of the dots in $H$,
-the solid line above $a$ is the fiber of $\phi$ over $a$, which we can represent
+the solid line above $a$ is the ``fiber of $\phi$ over $a$", which we can represent
 at $\phi^{-1}(a)$.
 
 Since $\phi$ is a homomorphism, it follows that however multiplication works 
@@ -372,7 +372,7 @@ from Ref.~\cite{dummit_abstract_2004}.}
 \end{figure}
 
 Let $H\le G$ and $a\in G$. The {\it left coset} \index{coset} of $H$ with respect to 
-$G$ is the set
+$a$ is the set
 \begin{equation}
    aH=\{ah\suchthat h\in H\}. 
 \end{equation}
@@ -421,6 +421,21 @@ In other words, the equivalence classes are the right cosets of $H$! If we
 instead defined the equivalence relation by $x\sim y$ $\Leftrightarrow$
 $x^{-1}y\in H$, we would have found the equivalence classes to be the left
 cosets of $H$.
+\begin{proposition}{}{cosetPartition}
+  The cosets of $H$ partition $G$.
+  \begin{proof}
+    Let $g\in G$. We have to check that (1) $g$ belongs to some coset of $H$,
+    and further that (2) $g$ does not belong to two different cosets.
+    \begin{enumerate}
+      \item Let $h\in H$. Then $g=h(h^{-1}g)$, i.e. it's in the right
+            coset of $H$. A similar computation shows it's in the left
+            coset of $H$ as well. 
+      \item Let $x,y\in G$. If $g\sim x$ and $g\sim y$, i.e. it belongs in
+            the $x$-coset and $y$-coset of $H$, then $x\sim y$ since
+            $\sim$ is transitive. 
+    \end{enumerate}
+  \end{proof}
+\end{proposition}
 
 We can now construct our new group. The group is a collection of cosets, but
 it only forms a group if the cosets are special. In particular,
@@ -434,25 +449,12 @@ $N$. We define an operation on $G/N$ by
 Hence we see why it was so crucial that the subgroup be normal: It allowed
 us to move the $y$ past $N$ in the second step, thus guaranteeing $G/N$ is
 closed under this operation.
+Moreover by \propref{prp:cosetPartition}, $G/N$ partitions $G$.
 \begin{proposition}{}{}
   $G/N$ forms a group under the above operation.
   \begin{proof}
     This is pretty clearly a group because $G$ is. The identity is $\id N$,
     and each $xN$ has inverse $x^{-1}N$
-  \end{proof}
-
-\end{proposition}
-\begin{proposition}{}{}
-  $G/N$ forms a partition of $G$.
-  \begin{proof}
-    Let $g\in G$. We have to check that (1) $g$ belongs to some coset of $N$,
-    and further that (2) $g$ does not belong to two different cosets.
-    \begin{enumerate}
-      \item Let $n\in N$ and define $g'=n^{-1}g$. Then
-            $ng'=nn^{-1}g=g$, so $g\sim g'$.
-      \item Let $x,y\in G$. If $g\sim x$ and $g\sim y$ then $x\sim y$ since
-            $\sim$ is transitive. 
-    \end{enumerate}
   \end{proof}
 \end{proposition}
 To summarize: If we find a normal subgroup $N$ of $G$, we can make a new group
@@ -483,7 +485,17 @@ notation.
   cosets, note that $4\Z+4$=$4\Z$.
 \end{example*}
 
-
+To close out this Section, we prove Lagrange's theorem, which often useful
+for learning about group structure.
+\begin{theorem}{Lagrange}{lagrange}\index{Lagrange's theorem}
+Let $G$ be a finite group and let $H\leq G$. Then $|H|$ divides $|G|$.
+In particular, the number of cosets of $H$ in $G$ is $|G|/|H|$.
+\begin{proof}
+Note that $|H|=|gH|$ for any $g\in G$, i.e. all cosets have the same
+order. On the other hand, by \propref{prp:cosetPartition}, the cosets
+partition $G$. Hence $|G|=n|H|$, where $n$ is the number of cosets of $H$.
+\end{proof}
+\end{theorem}
 
 
 
@@ -1146,14 +1158,16 @@ $\forall w\in W$
 \begin{equation}
   D(g)w\in W.
 \end{equation}
-If $D$ has an invariant subspace it is said to be {\it reducible};
+If $D$ has a nontrivial, invariant subspace, i.e.
+a subspace that is not just the whole vector space or just
+the identity, it is said to be {\it reducible};
 \index{representation!reducible} otherwise it is {\it irreducible}. 
 We will shorten irreducible representation as irrep. If two representations $D$
 and $D'$ are related by \equatref{eq:simtr} they are {\it equivalent}.
 \index{representation!equivalent}
 If $D$ is equivalent to a representation whose matrix
 elements are in block diagonal form
-\begin{equation}
+\begin{equation}\label{eq:reducible}
   D(g)=\left(\begin{array}{ccc}
              D_1(g) & 0      &       \\
              0      & D_2(g) &       \\
@@ -1180,9 +1194,15 @@ of the representations $D_i$.
 %  Theorem~\ref{thm:hermit}, it is diagonalizable.
 %  \end{proof}
 \end{theorem}
-\begin{theorem}{}{}
+\begin{theorem}{}{factorizeFiniteGroups}
   Every representation of a finite group is completely reducible.
 \end{theorem}
+
+\thmref{thm:factorizeFiniteGroups} shows us the irreducible
+representations can be thought of as building blocks for any
+finite group representation. It is broken down into the restriction
+of the representation to each invariant subspace, which 
+can be displayed in matrix form like in \equatref{eq:reducible}.
 
 % Talk about simple, schur's lemma.
 
@@ -1256,7 +1276,8 @@ structure.
 \end{proposition}
 
 Lie Algebras are used in physics to construct Lie groups.
-Lie groups \index{group!Lie}are used to collect and analyze continuous symmetries of systems
+Lie groups\index{group!Lie}
+are used to collect and analyze continuous symmetries of systems
 and structures.
 Let us see a way to construct Lie groups in physics. We will call the 
 Lie group $G$, and the groups elements $g(\alpha)\in G$ will depend
@@ -1328,8 +1349,8 @@ for some constants $f^{abc}$. Hence
 \begin{equation}\label{eq:liealg}
   [T^a,T^b]=if^{abc}T^c.
 \end{equation}
-The $f^{abc}$ are called the {\it structure constants}
-\index{structure constants}. We have
+The $f^{abc}$ are called the {\it structure constants}\index{structure constants}. 
+We have
 \begin{equation}
   f^{abc}=-f^{bac}
 \end{equation}
@@ -1414,6 +1435,45 @@ Let $A$, $B\in\SU(N)$. Then
 \end{aligned}\end{equation*}
 \end{example*}
 
+Let $R^a$ be a $d$-dimensional irreducible representation of the
+$\su(N)$ generators. The {\it quadratic Casimir operator}
+is\index{quadratic Casimir}
+\begin{equation}
+C_2\equiv R^a R^a.
+\end{equation}
+
+\begin{proposition}{}{c2commute}
+$C_2$ commutes with all generators of $\su(N)$.
+\begin{proof}
+$$
+\left[R^a R^a, R^b\right]=R^a\left[R^a, R^b\right]+\left[R^a, R^b\right] R^a=i
+f^{a b c}\left(R^a R^c+R^c R^a\right)=0.
+$$
+The salient point is that in the last step we're contracting an antisymmetric
+object with a symmetric object.
+\end{proof}
+\end{proposition}
+Combining \propref{prp:c2commute} with Schur's lemma shows us that
+$C_2$ must be proportional to $\id_d$. This gives us a way
+to compute the Casimir in various representations. For
+instance in the defining representation
+\begin{equation}
+T^aT^a\equiv C_F\id_N,
+\end{equation}
+which defines the often-encountered symbol $C_F$.
+Taking the trace of this equation and using
+\equatref{eq:SUNnorm} yields
+\begin{equation}
+C_F=\frac{N^2-1}{2N}.
+\end{equation}
+
+Many relations among products of the generators can be derived, but
+I almost never use them. Unfortunately it doesn't seem that there
+are especially simple rules for produces of generators like there
+are with gamma matrices. For example in general
+\begin{equation}
+\tr T^aT^bT^c\neq0.
+\end{equation}
 
 A convenient way to write $\SU(2)$ matrices is as
 \begin{equation}

@@ -121,7 +121,8 @@ Image taken from Ref.~\cite{ising_picture}.}
 \label{fig:phase_ising}
 \end{figure}
 
-Water gives the quintessential example of a first-order phase transition. Now we
+The liquid-gas line for water 
+gives the quintessential example of a first-order phase transition. Now we
 will consider {\it second-order} or {\it continuous} phase
 transitions\index{phase transition!second-order}\index{phase
 transition!continuous}. The Ising model of a ferromagnet in two or more
@@ -142,7 +143,8 @@ The Ising model phase diagram in two dimensions is given
 in \figref{fig:phase_ising}.
 At fixed temperature, when varying the external magnetic field, one can
 discontinuously flip the magnetization $M$. Moving from left to right in $T$
-at $h=0$, this first-order line terminates in a second-order critical point. When
+at $h=0$, this first-order line terminates
+in a second-order critical point. When
 approaching the critical point by varying the temperature, one can
 show\footnote{This was first done by Onsager~\cite{onsager_crystal_1944}. A
 nice, closed-form solution like this is not available for three dimensions or
@@ -185,20 +187,32 @@ breaking\index{spontaneous symmetry breaking}, which plays a major role in QFT,
 as discussed in \secref{sec:ssb}. 
 
 
-Often, first-order lines terminate in second-order endpoints. Indeed, this
+First-order lines terminate in second-order 
+endpoints\footnote{It seems to be that
+all critical points are attached to first-order (coexistence) lines
+(or surfaces depending on how many control parameters you consider).
+This can be used to intuitively guess the universality class of
+the critical point. For example critical points touching only two phases
+regardless of the number of extra parameters you introduce would
+belong to $\Z_2$. The situation seems to be more subtle for three phases.
+If it's true that all critical points are attached to coexistence
+lines/surfaces, one can argue that the sometimes-used jargon
+``critical endpoint" is redundant.}.
+Indeed, this
 can be seen in both \figref{fig:phase_water} and \figref{fig:phase_ising}.
 At this critical endpoint, the coexistence line fuses into one phase.
 Another possibility not shown in these figures is a tricritical point, 
 where three phases fuse. Generally for liquid-gas transitions like
 water, the expectation is that the endpoint belongs to the Ising
 model universality
-class~\cite{hubbard_wilson_1972,bruce_scaling_1992,wilding_critical-point_1995,yarmolinsky_revisiting_2017}.
+class\footnote{We will make an intuitive argument about this
+in \secref{sec:leeyang}.}~\cite{hubbard_wilson_1972,bruce_scaling_1992,wilding_critical-point_1995,yarmolinsky_revisiting_2017}.
 Still, this statement is not without controversy, with some studies suggesting
 it has a universality class of its own, albeit with very similar
 critical exponents~\cite{valls_liquid-gas_1978}.
 
 
-\section{The Lee-Yang theorem}\label{sec:leeyang}\index{Lee-Yang!Theorem}
+\section{Singularity structure}\label{sec:leeyang}\index{Lee-Yang!Theorem}
 
 One of the lessons of \chref{ch:statphys} is that the partition function of a
 system determines all its observables. For example in the grand canonical
@@ -250,7 +264,7 @@ in \figref{fig:leeYangTheorem}, which is taken from Lee and Yang.
     \includegraphics[width=\linewidth]{figs/LYE.pdf}
     \caption{
         Generic singularity structure of the Ising model partition function in the
-        complex $h$ plane, for $T<T_c$ in the thermodynamic limit.
+        complex $h$ plane, for $T>T_c$ in the thermodynamic limit.
     }
     \label{fig:LYE}
 \end{figure}
@@ -258,21 +272,36 @@ in \figref{fig:leeYangTheorem}, which is taken from Lee and Yang.
 
 The above logic is what happens exactly at the critical point $T=\Tc$ and $h=0$.
 When we are away from the critical point, the situation in the complex plane
-changes somewhat. Still in the thermodynamic limit, let us imagine $T<\Tc$ 
+changes somewhat. Still in the thermodynamic limit, let us 
+imagine\footnote{In case you forget which way the inequality goes, just
+remember \figref{fig:phase_ising}. High temperatures must destroy
+magnetization, so of course there's no transition there.} $T>\Tc$ 
 and let $h$ be complex. The expectation is that $\log Z(h)$ should
 have two branch cuts in the complex-$h$ plane, called 
-{\it Lee-Yang edges}\index{Lee-Yang!edge}, that terminate at
-branch points called {\it Lee-Yang edge singularities}.
-This is shown schematically in \figref{fig:LYE}. The expectation is
-that, as $T\to\Tc$, these branch points will approach and eventually
+{\it Lee-Yang edges}\index{Lee-Yang!edge} (LYE), that terminate at
+branch points called {\it LYE singularities}~\cite{lee_statistical_1952}.
+This is shown schematically in \figref{fig:LYE}. According to Lee and Yang, 
+as $T\to\Tc$, these branch points will approach and eventually
 pinch the real axis, where they manifest as a phase transition
 in accordance with the Lee-Yang theorem.
-
+Moreover, LYE singularities can be regarded as critical points in their
+own right, in the sense that as one approaches the LYE singularities 
+in the complex $h$ plane, the order parameter will diverge
+according to the dimension and critical 
+exponents~\cite{fisher_yang-lee_1978}. In particular $M\sim h^\sigma$, where
+\begin{equation}
+\sigma=\frac{1}{\delta}=\frac{d-2+\eta}{d+2-\eta}.
+\end{equation}
+What is remarkable about these edges is that, generally speaking,
+there is no expectation on how complex singularities of a function
+should organize themselves; Lee and Yang show that for the Ising model,
+the lie exactly on the imaginary $h$ axis.
 As shown in \figref{fig:LYE}, the Lee-Yang edges should limit the convergence
-radius of $\log Z$. In principle there are other singularities possible.
-The {\it extended analyticity conjecture}\index{extended analyticity conjecture}
-posits that the Lee-Yang edges should be the closest singularities
-to the origin in the complex $h$-plane~\cite{fonseca_ising_2003}. 
+radius of $\log Z$. 
+%In principle there are other singularities possible.
+%The {\it extended analyticity conjecture}\index{extended analyticity conjecture}
+%posits that the Lee-Yang edges should be the closest singularities
+%to the origin in the complex $h$-plane~\cite{fonseca_ising_2003}. 
 
 
 \section{The scaling hypothesis}\label{sec:scalingHypothesis}

@@ -1077,6 +1077,33 @@ automatically into account. This completes the tool set needed to
 estimate average values of functions of data, correcting for bias and
 correlation.
 
+\section{Bootstrap resampling}\index{bootstrap}
+
+Another common approach to resampling is called {\it bootstrap resampling}.
+The setup is similar as with the jackknife: we again consider
+$N$ measurements $X_1,...,X_N$ from a distribution with mean
+$\hat{x}$ and variance $\sigma^2$. We again create new samples from
+this original set of measurements, but this time the strategy is different:
+One {\it bootstrap sample} is formed by drawing $N$ times from our set
+of measurements with replacement. One then repeats this process
+$\nboot$ times.
+
+Let's be more precise. I follow a note of P. Young~\cite{youngBootstrap}.
+We will label our bootstrap samples with $\alpha$ so that
+$1\leq\alpha\leq\nboot$. In bootstrap sample $\alpha$, the measurement
+$X_i$ will be drawn some number of times, call it $n_{\alpha,i}$.
+We have that
+\begin{equation}
+\sum_{i=1}^Nn_{\alpha,i}=N,
+\end{equation}
+since each bootstrap sample has size $N$. We construct the bootstrap mean in
+sample $\alpha$ by
+\begin{equation}
+X_{B,\alpha}\equiv\frac{1}{N}\sum_{i=1}^Nn_{\alpha,i}X_i,
+\end{equation}
+which is just the standard arithmetic mean inside the bootstrap sample.
+
+
 \section{Fitting data}
 
 In this section we consider the general problem of fitting curves through data.

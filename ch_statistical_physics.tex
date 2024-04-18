@@ -491,7 +491,6 @@ Plugging $\dd \alpha$ into $\dd f$ completes the proof.
 \end{proof}
 \end{proposition}
 
- 
 
 
 
@@ -797,7 +796,6 @@ A commonly used procedure is to calculate the pressure, giving
 you the EoS, and to derive other thermodynamic quantities from that.
 In this section we will discuss some of these quantities.
 
-\subsection{Pressure and expansion}
 The {\it speed of sound}\index{speed of sound} at fixed control parameter $X$
 is given by
 \begin{equation}
@@ -821,14 +819,13 @@ The {\it compressibility}\index{compressibility} at fixed $X$ is
 which captures how much the volume changes under a change of pressure.
 Substances that take a lot of pressure to change the volume are not
 very compressible; hence the minus sign.
-
 The {\it thermal expansion coefficient}\index{thermal expansion coefficient}
 is
 \begin{equation}
-  \alpha_X=\frac{1}{V}\atFixed{\pdv{V}{T}}{P}.
+  \alpha=\frac{1}{V}\atFixed{\pdv{V}{T}}{P},
 \end{equation}
-
-\subsection{Heat storage}
+and transparently characterizes how much the volume changes under temperature
+changes.
 
 The {\it specific heat} at constant volume\index{specific heat} is
 \begin{equation}\label{eq:CV}
@@ -847,14 +844,35 @@ at constant pressure. Here, the Legendre transform, which adds $PV$,
 switches the dependence from $V$ to $P$, and hence this constrained
 partial derivative captures the change in heat once again.
 
-%\subsection{Relationships}
-%
-%\begin{equation}
-% \frac{\kappa_T}{\kappa_S}=\frac{C_P}{C_V}
-%\end{equation}
-%\begin{equation}
-% \kappa_S=\kappa_T-\frac{\alpha_V^2 T}{n C_P}
-%\end{equation}
+\subsection{Maxwell relations}\index{Maxwell relation}
+
+Each of the above material parameters are essentially derivatives like
+\begin{equation}
+\atFixed{\pdv{X}{Y}}{Z,W,...}
+\end{equation}
+where variables $Z$, $W$, and so on are held fixed. In principle, the
+number of such derivatives is large, but in practice, the fact
+that partial derivatives of the same function at the same fixed
+control parameters commute. For example:
+\begin{equation}
+-\atFixed{\pdv{P}{S}}{V,N}
+=\atFixed{\frac{\partial^2 U}{\partial S\partial V}}{N}
+=\atFixed{\frac{\partial^2 U}{\partial V\partial S}}{N}
+=\atFixed{\pdv{T}{V}}{S,N}.
+\end{equation}
+The equality relating partial derivatives like the ones on the far left
+and far right that can be related in this way is said to
+be a {\it Maxwell relation}.
+
+Leveraging Maxwell relations reveals several useful relationships
+among material parameters. Since they at their heart stem from
+commutation of partial derivatives between two specific variables holding
+all other control variables fixed, these will hold regardless of
+the number of particle species. One can show:
+\begin{equation}\begin{aligned}
+ \frac{\kappa_T}{\kappa_S}&=\frac{C_P}{C_V}\\
+ \kappa_T-\kappa_S&=\frac{\alpha^2 T}{n C_P}
+\end{aligned}\end{equation}
 
 
 \bibliographystyle{unsrtnat}
