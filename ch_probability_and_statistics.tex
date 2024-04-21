@@ -18,7 +18,7 @@ of Chapters~1 and~2 of Berg~\cite{berg_markov_2004}.
 We will consider a {\it random variable}\index{random variable}\footnote{
 We will try to denote random variables by capital letters.} $X$ which
 has some possible {\it outcomes}\index{outcome} $x_i$. The random variable will take
-one of the values in $x_i$, but we don't know for sure which one.
+one of the values in $x_i$, but we do not know for sure which one.
 The set of all possible outcomes
 \begin{equation}
   \Omega=\{x_1,x_2,...,x_n\},
@@ -320,13 +320,13 @@ with mean $\hat{x}$ and variance $\sigma^2$.
        \leq\lim_{N\to\infty}\frac{\sigma^2_{\bar{X}}}{\epsilon^2}
        =\lim_{N\to\infty}\frac{\sigma^2}{N\epsilon^2}=0.
     $$
-    The probability can't be less than 0, so we're done.
+    The probability cannot be less than 0, so we're done.
   \end{proof}
 \end{theorem}
 The above proof relies on the PDF having a finite
 variance. As it turns out, the Weak LLN is true
 even when the variance is infinite! This can be proved
-using characteristic functions. But since we don't introduce characteristic
+using characteristic functions. But since we do not introduce characteristic
 functions until \secref{sec:CLT}, and since we assume in practice
 that our data are drawn from PDFs with finite variance anyway,
 we direct the reader elsewhere. For example, a proof can be
@@ -432,7 +432,7 @@ standard deviations $\sigma_1$ and $\sigma_2$.
 
 Since the normal distribution is so important, so must be its CDF.
 Unfortunately the integral of the normal PDF is {\it non-elementary};
-\index{non-elementary} that is, it can't be expressed in terms of 
+\index{non-elementary} that is, it cannot be expressed in terms of 
 polynomials or standard
 functions like $\sin$, $\cos$, or $\exp$. Therefore we give a name
 to this special function.
@@ -540,7 +540,7 @@ our main use for them is summarized in the next proposition.
   \end{proof}
 \end{proposition}
 Now suppose you're an experimenter taking independent measurements of 
-some observable. Furthermore suppose you don't know anything about the 
+some observable. Furthermore suppose you do not know anything about the 
 observable, except that it comes from some distribution with finite variance.
 The central limit theorem (CLT) says that armed with this information alone, 
 you know that the sample mean will be normally distributed about
@@ -1201,7 +1201,7 @@ approximately valid. In cases where the data are sampled well, this
 correction is small, so that it's enough to simply round your
 error bars conservatively.
 
-% If you don't know the number of parameters? Bayes!
+% If you do not know the number of parameters? Bayes!
 
 \subsection{Without any a priori fit function}
 
@@ -1469,7 +1469,7 @@ $c(0)=\sigma^2$, which motivates the definition of the {\it autocorrelation}
 \begin{equation}\label{dfn:acor}
   \gamma(t)\equiv\frac{c(t)}{\sigma^2}.
 \end{equation}
-The autocorrelation decays in $t$ as a sum of exponentials. I don't
+The autocorrelation decays in $t$ as a sum of exponentials. I do not
 know why this is true, and I could not find a reference, but this is what
 everybody says. Assuming this is the case we can write
 \begin{equation}
@@ -1511,7 +1511,7 @@ From \equatref{eq:IAC} we see that $\tauint$ is just the ratio between the
 estimated variance of the sample mean and what this variance would have been 
 if the data were uncorrelated. 
 
-In practice, we often don't know the true mean $\hat{x}$ of the time series.
+In practice, we often do not know the true mean $\hat{x}$ of the time series.
 Therefore along the lines of \equatref{eq:umv}, we construct an unbiased
 estimator of the autocovariance
 \begin{equation}
@@ -1672,7 +1672,7 @@ out" $B$.} as {\it marginalization}\index{marginalization}.
 
 Marginalization is useful in the same way integrating out is useful: If we know
 e.g. that a model contains some explicit dependence on some parameter $\lambda$
-but we don't know what it is, the exhaustive integration lets us make statements
+but we do not know what it is, the exhaustive integration lets us make statements
 independent of it. In the context of statistical analysis, such quantities are
 often called {\it nuisance parameters}\index{nuisance parameter}.
 
@@ -1741,7 +1741,7 @@ I}\pr{\vec{a}\given I},
 \end{equation}
 where again $\pr{\vec{a}\given I}$ is the prior probability for the
 model $\vec{a}$. Sometimes we have some a priori knowledge of model parameters;
-for instance we may know they have to be positive. In the cases where we don't,
+for instance we may know they have to be positive. In the cases where we do not,
 we can simplify
 \begin{equation}
 \pr{\vec{a}\given I}=\text{const.}
