@@ -81,7 +81,7 @@ one finds
 
 Once we've picked a discretization, we know the action. From the perspective of
 practical calculations coming from lattices, it is hence desirable to express
-these formulas in terms of the partition function $Z$. From~\equatref{eq:pgrand}
+these formulae in terms of the partition function $Z$. From~\equatref{eq:pgrand}
 we have
 \begin{equation}
   \frac{P}{T^4}=\frac{1}{VT^3}\log Z,
@@ -126,30 +126,19 @@ useful to remember that the QCD partition function should be blind to charge
 conjugation at $\mu_B=0$. This tells us that we should expect only even powers
 of $\mu_B$ when using that as the expansion parameter. 
 
-\subsection{Derivative formulas}
+\subsection{Derivative formulae}
 
-We will now derive some formulas which are useful for calculations in QCD
-thermodynamics. You can find even more useful formulas for a system of 
+We will now derive some formulae which are useful for calculations in QCD
+thermodynamics. You can find even more useful formulae for a system of 
 $N_f$ identical
 fermion flavors in the appendix of Ref.~\cite{allton_thermodynamics_2005}.
-For these calculations we will often use\index{ETL formula}
-\thmref{thm:exptrlog}, which I refer to here as the ETL formula.
-
-Let $M$ depend on $\alpha\in\C$ and let $y\in\R$. Then from the ETL formula
-\begin{equation}\begin{aligned}
-  \partial_\alpha(\det M)^y &= y(\det M)^{y-1}\partial_\alpha\det M\\
-      &= y(\det M)^{y-1}\exp\left[\tr\log M\right]\partial_\alpha\tr\log M\\
-      &= y(\det M)^y \tr M^{-1}\partial_\alpha M.
-\end{aligned}\end{equation}
-This formula is useful in evaluating derivatives of roots of the fermion
-matrix determinant. A final formula useful for matrix derivatives is
-\begin{equation}
-  \partial_\alpha M^{-1} = - M^{-1}\left(\partial_\alpha M\right) M^{-1}.
-\end{equation}
+For these calculations we will often use
+\thmref{thm:exptrlog} along with \propref{prp:MATwrtSCLinv}
+and \propref{prp:MATwrtSCLpowerRule}.
 
 Our goal is to eventually take derivatives of expectation values, so from
 \equatref{eq:HISQev} we will need $\muh$-derivatives of the partition 
-function. For the following few formulas 
+function. For the following few formulae 
 I will assume arbitrarily many non-degenerate
 fermion flavors\footnote{I find this helpful to get prefactors that appear
 in terms in, e.g., $\chi_2^u$ correct.}. Assuming $S_G$ has no 
@@ -404,8 +393,10 @@ observable of interest, we can then in principle analytically
 continue from the imaginary axis to the real one.
 
 {\it Reweighting}~\cite{ferrenberg_new_1989}\index{reweighting}
-is another possibility. Consider
-the expectation value of an observable $X$ calculated at $\mu'$. We have
+is another possibility. One can reweight in arbitrary parameters.
+We showcase the idea by doing reweighting in $\beta$ for
+pure $\SU(N)$ lattice gauge theory. Consider
+the expectation value of an observable $X$ calculated at $\beta'$. We have
 \begin{equation}\label{eq:RW}
 \begin{aligned}
   \ev{X}_{\beta'}&=Z_{\beta'}^{-1}\int\dd{\phi}e^{-\beta'E(\phi)}X(\phi)

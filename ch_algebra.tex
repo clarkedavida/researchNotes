@@ -345,7 +345,7 @@ which vectors are created.
 
 Let $G_1$, $G_2$, ... $G_n$ be groups. The
 {\it direct product}\index{direct!product}\index{product!direct} 
-$G_1\otimes G_2\otimes ...\otimes G_n$
+$G_1\times G_2\times ...\times G_n$
 is the set of tuples $(g_1,g_2,...,g_n)$ with $g_i\in G_i$
 and the group operation defined component-wise like
 \begin{equation}
@@ -361,7 +361,7 @@ groupness from them. Hence it is a Cartesian product
 that preserves group structure.
 
 \begin{proposition}{}{}
-$G_1\otimes G_2\otimes ...\otimes G_n$ is a group.
+$G_1\times G_2\times ...\times G_n$ is a group.
 If all $G_i$ are finite, its order is $\Pi_i |G_i|$.
 \end{proposition}
 
@@ -375,10 +375,7 @@ It's also useful to note that the direct product is
 isomorphic up to any permutation of its factors.
 This notion of a direct product can be extended also
 up to infinitely many groups. Still the group operation
-is defined component wise, and we write such groups as
-\begin{equation}
-\bigotimes_i G_i.
-\end{equation}
+is defined component wise. 
 
 The {\it direct sum}\index{direct!sum} is a subgroup
 of the direct product. It is the restriction to elements of
@@ -1277,41 +1274,71 @@ discuss in \secref{sec:represent}.
 
 \section{Matrix calculus}\label{sec:matrixCalculus} 
 
+Here we discuss in particular taking derivatives involving matrices.
+It is usually most convenient to think about these derivatives in terms of
+matrix elements, since then all properties of the derivative are transparently
+inherited from the underlying field. In this section we assume all matrices have
+differentiable elements.
+
+Let $A$ be a matrix and let $x$ be a scalar. Then one can
+introduce a matrix-by-scalar derivative,\index{derivative!matrix}
+\begin{equation}
+\partial_x A\equiv\mat{\pdv{A}{x}}{ij}\equiv\pdv{A_{ij}}{x},
+\end{equation}
+as well as a scalar-by-matrix derivative
+\begin{equation}
+\mat{\pdv{x}{A}}{ij}\equiv\pdv{x}{A_{ij}}.
+\end{equation}
+
+
 \begin{proposition}{}{MATwrtSCLproductRule}
-  Let $A$ and $B$ be $n\times n$ matrices with differentiable elements. Then
+  Let $A$ and $B$ be $n\times n$ matrices. Then
   $$
-    \partial_\mu(AB)=(\partial_\mu A)B+A(\partial_\mu B).
+    \partial_x(AB)=(\partial_x A)B+A(\partial_x B).
   $$
   \begin{proof}
-    We use the summation convention and abuse notation slightly: in the
-    proposition statement $\partial_\mu$ has an identity matrix implicitly
-    attached to it, but in this proof this symbol will also be used to
-    denote the partial derivative operator applied to a single 
-    element\footnote{I found notation like this to be extremely confusing
-    when I was getting started. Sadly it very common notation, and as
-    you can see, I have succumbed to this weakness myself.}. 
-    Now since the matrix elements obey the product
+    Since the matrix elements obey the product
     rule, we have
     \begin{equation*}
       \begin{aligned}
-        \big(\partial_\mu(AB)\big)_{mk}
-          &=\delta_{mn}\partial_\mu(A_{nl}B_{lk})\\
-          &=\delta_{mn}\big(\partial_\mu(A_{nl})B_{lk}
-                            +A_{nl}(\partial_\mu B_{lk})\big)\\
-          &=\big((\partial_\mu A)B+A(\partial_\mu B)\big)_{mk}.
+        \mat{\partial_x(AB)}{mk}
+          &=\delta_{mn}\partial_x(A_{nl}B_{lk})\\
+          &=\delta_{mn}\left(\partial_x(A_{nl})B_{lk}
+                            +A_{nl}(\partial_x B_{lk})\right)\\
+          &=\mat{(\partial_x A)B+A(\partial_x B)}{mk}.
       \end{aligned}
     \end{equation*}
   \end{proof}
 \end{proposition}
 
 \begin{proposition}{}{MATwrtSCLinv}
-Let $A$ be invertible and differentiable. Then
+Let $A$ be invertible. Then
 $$
-\partial_\mu A^{-1}=-A^{-1}\partial_\mu A A^{-1}
+\partial_x A^{-1}=-A^{-1}\left(\partial_x A \right)A^{-1}
 $$
 \begin{proof}
-The trick is to start with $\zd=\partial_\mu\id=\partial_\mu(A^{-1}A)$.
-Then use \propref{prp:MATwrtSCLproductRule}.
+The trick is to start with $\zd=\partial_x\id=\partial_x(A^{-1}A)$.
+Then use \propref{prp:MATwrtSCLproductRule}. 
+\end{proof}
+\end{proposition}
+\propref{prp:MATwrtSCLinv} is actually
+the same result as one gets with a derivative of the multiplicative
+inverse of some scalar function, except that it must respect
+ the general non-commutativity of matrix multiplication.
+
+\begin{proposition}{}{MATwrtSCLpowerRule}
+Let $A$ be an invertible matrix and $y\in\R$. Then
+$$
+\partial_x(\det A)^y=
+y(\det A)^y \tr A^{-1}\partial_x A
+$$ 
+\begin{proof}
+We use \thmref{thm:exptrlog} to find
+\begin{equation*}\begin{aligned}
+  \partial_x(\det A)^y &= y(\det A)^{y-1}\partial_x\det A\\
+      &= y(\det A)^{y-1}\exp\left[\tr\log A\right]\partial_x\tr\log A\\
+      &= y(\det A)^y \tr A^{-1}\partial_x A.
+\end{aligned}\end{equation*}
 \end{proof}
 \end{proposition}
 
@@ -1818,7 +1845,7 @@ To see the $\U(2)$ isomorphism, let $g\in\U(2)$, then show that
 \sqrt{\det g\det g^*}=1.
 \end{equation} 
 The corresponding
-$h\in U(1)\times SU(2)/\Z_2$ is given by
+$h\in \U(1)\times \SU(2)/\Z_2$ is given by
 \begin{equation}
 h=\left(\pm\sqrt{\det g},\pm\frac{g}{\sqrt{\det g}}\right),
 \end{equation} 
