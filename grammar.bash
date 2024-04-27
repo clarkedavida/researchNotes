@@ -17,6 +17,7 @@ do
     sed -i 's/don'\''t/do not/g' $file
     sed -i 's/dn'\''t/d not/g' $file
     sed -i 's/ormulas/ormulae/g' $file
+    sed -i 's/ell-defined/ell defined/g' $file
     sed -i 's/inimums/inima/g' $file
     sed -i 's/aximums/axima/g' $file
     sed -i 's/nsatzes/nsätze/g' $file

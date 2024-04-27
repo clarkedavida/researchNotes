@@ -353,7 +353,7 @@ about using OR to gauge fix, see Ref.~\cite{mandula_efficient_1990}.
 For information about how to implement this on multiple GPUs, see
 e.g. Ref.~\cite{schrock_coulomb_2013}.
 
-\subsection{Update: Molecular dynamics}\index{molecular dynamics}
+\subsection{Update: Molecular dynamics}\label{sec:MD}\index{molecular dynamics}
 
 For this updating strategy, we leverage an isomorphism between
 lattice field theory and a classical statistical mechanical 
@@ -516,18 +516,15 @@ and \eqref{eq:SUNnorm}, the gauge force comes out to be
 \begin{equation}
 f_G=-\frac{i\beta}{12}\left(UA-A^\dagger U^\dagger\right).
 \end{equation}
-Meanwhile, using the fact that
+Meanwhile, using \propref{prp:MATwrtSCLinv}, 
+the fermion force can be written 
 \begin{equation}
-\partial_\omega M^{-1} =-M^{-1}\left(\partial_\omega M\right)M^{-1}
-\end{equation}
-the fermion force is generally writeable as
-\begin{equation}
-f_{\rm ferm}=
+f_{\rm ferm}^a=
 -T^a\left(\left(D^\dagger D\right)^{-1}\Phi\right)^\dagger
 \left(\pdv{D}{\omega^a}D^\dagger+D\pdv{D^\dagger}{\omega^a}\right)
 \left(\left(D^\dagger D\right)^{-1}\Phi\right).
 \end{equation}
-This exposes that the inverse of $D^\dagger D$ must be computed
+This shows that the inverse of $D^\dagger D$ must be computed
 at each step of the molecular dynamics, which is far and away
 the most expensive part.
 
@@ -543,7 +540,67 @@ as mentioned in \secref{sec:numerics}. As a result
 one may need to employ an SVD or a
 {\it force filter}\index{force!filter}, which artificially
 shifts low eigenmodes by an amount $\delta$.
- 
+
+\subsection{The HISQ force}\label{sec:HISQforce}
+
+In this section we review aspects of computing the HISQ force specifically.
+The HISQ action, discussed in \secref{sec:stagg} and \secref{sec:HISQ},
+is widely used in state-of-the-art lattice calculations. Constructing its
+force is a bit complicated, as it is a synthesis of many constructs in
+those sections along with \secref{sec:MD}. 
+
+We begin by writing down the action itself in a way that's helpful
+for computer implementation. We write
+\begin{equation}
+S_f=\Phi^\dagger\left(D^\dagger D\right)^{-N_f/4}\Phi
+=\bra{\Phi}\left(D^{\dagger} D\right)^{-N_f/4}\ket{\Phi},
+\end{equation}
+where $N_f$ is the number of fermions and $\ket\Phi$ is the pseudofermion field.
+For this presentation of the HISQ force, we follow
+Ref.~\cite{Wong:2007uz}, and hence switch to bra-ket notation.
+Remember, we chose this pseudofermion rewrite to be able to compute the
+determinant of the Dirac matrix efficiently. We want a
+$D^\dagger D$ in the exponential since it has positive eigenvalues,
+and hence makes for a well defined probability distribution.
+The $D^\dagger D$ would correspond to two identical quarks of that flavor.
+The trick to get around this, as done in 
+Ref.~\cite{gottlieb_hybrid-molecular-dynamics_1987}, is to define the
+$\Phi$ fields on even sites only. This works because $D^\dagger D$ has no
+matrix elements\footnote{As this is a matrix in the space-time coordinate
+basis, we just check to see which Kronecker $\delta$ connect which sites.} 
+connecting even and odd sites. Finally we have the issue, discussed in
+\secref{sec:HISQ}, that staggered fermions lead to four degenerate tastes.
+The solution offered in that section is to take the fourth root. In practice,
+this fourth root is implemented as a rational 
+approximation~\cite{clark_rhmc_2004,clark_rational_2006},
+\begin{equation}
+\left(D^\dagger D\right)^{-N_f/4}\approx\alpha_0+\sum_l\frac{\alpha_l}{D^\dagger
+D+\beta_l}.
+\end{equation}
+Using the rational approximation to estimate the fourth root in this hybrid
+Monte Carlo scheme is called {\it rational hybrid Monte Carlo}\index{RHMC}
+(RHMC).
+
+
+Next we need to open up the $D$. We write\footnote{It is common practice in
+lattice publications to use $M$ rather than $D$ to indicate the Dirac matrix.
+In that case, $D$ is sometimes used to indicate the (covariant) derivative part.
+I took the notation of Gattringer and Lang~\cite{gattringer_quantum_2010}.}
+\begin{equation}\begin{aligned}
+D(y|x)&=2m\delta_{x,y}
++\sum_\alpha \eta_\alpha(x)\left(\UHISQ_\alpha(x)\delta_{x,y-\hat\alpha}
+-\left(\UHISQ_\alpha(x-\hat\alpha)\right)^\dagger\delta_{x,y+\hat\alpha}\right)\\
+&\equiv 2m\delta_{x,y}+\dd_{x,y},
+\end{aligned}\end{equation}
+where $\UHISQ$ is given by \equatref{eq:HISQsmear}:
+\begin{equation}
+\UHISQ=\mathcal{F}^{\rm Fat7}_{\rm corr}\mathcal{U}\mathcal{F}^{\rm Fat7}U,
+\end{equation} 
+i.e. we Fat7-smear the thin link, followed
+by a reunitarization and then a second-level smear that has some lattice-spacing
+corrections built in. The $\eta_\alpha$ are the
+staggered phases defined in \equatref{eq:staggeredPhase}.
+
 
 \subsection{Choosing a random number generator}
 

@@ -1272,7 +1272,7 @@ second factor in the direct sum. The fact that direct sums and products can be
 related in this way is useful for group representations, which we will
 discuss in \secref{sec:represent}.
 
-\section{Matrix calculus}\label{sec:matrixCalculus} 
+\subsection{Matrix calculus}\label{sec:matrixCalculus} 
 
 Here we discuss in particular taking derivatives involving matrices.
 It is usually most convenient to think about these derivatives in terms of
@@ -1342,7 +1342,58 @@ We use \thmref{thm:exptrlog} to find
 \end{proof}
 \end{proposition}
 
+Knowing how to do matrix-by-scalar and scalar-by-matrix derivatives
+lets us define even more general matrix derivatives. 
+We follow Ref.~\cite{kamleh_hybrid_2004}, which besides what we present
+here contains lots of useful matrix calculus operations.
+To continue, we would like
+to introduce a somewhat more general math object than a matrix.
 
+The elements $M_{ij}$ of a matrix $M$ are distinguished by their two indices.
+A more general object is a {\it tensor}\index{tensor} $T$, which you can think
+of as a ``matrix" indexed by $n\in\N$ indices. The number of indices $n$
+is called the {\it rank}\index{rank} of the tensor. One way of thinking of
+tensors is as functions that map tuples of vectors to the underyling field $F$.
+For example a complex matrix $M$ is a rank-2 tensor\footnote{If you know about
+dual spaces, or equivalently if you do some special or general relativity,
+one likes to distinguish covariant and contravariant indices
+in the rank. So for instance $M_{\mu\nu}$ is an element of a rank-(0,2)
+tensor while $M_\mu^\nu$ is rank (1,1).}
+since I can contract it with complex vectors $x$ and $y$ as
+\begin{equation}
+x_i M_{ij} y_j \in\C.
+\end{equation}
+
+Tensors allow us to look at tensor products in another way. In particular
+we write tensor products element-wise as\index{product!tensor}
+\begin{equation}
+\left(A\otimes B\right)_{ijkl}=A_{ij}B_{kl},
+\end{equation}
+i.e. the tensor product of the rank-2 tensors $A$ and $B$ is a rank-4 tensor.
+Using this definition of a tensor product then gives us a way to compute
+general matrix-by-matrix derivatives. In
+particular let $M$ be a matrix-valued function of the matrix $X$.
+Then
+\begin{equation}
+\left(\pdv{M}{X}\right)_{ijkl}=\pdv{M_{il}}{X_{jk}}.
+\end{equation}
+
+\begin{proposition}{}{}
+Let $M=\Pi_i^n X_i$. Then
+$$ \pdv{M}{X_j}=\bigotimes_{i\neq j}X_i $$
+and
+$$ \pdv{M}{M}=\bigotimes_{i=1}^{n-1}\id_2. $$
+Let $X$, $Y$, and $A$ be matrices with $X$ invertible. 
+Then analagously as with the matrix-by-scale
+derivative, we find
+$$
+\pdv{XY}{A}=\pdv{X}{A}Y+X\pdv{Y}{A}
+$$
+and
+$$
+\pdv{X^{-1}}{A}=-X^{-1}\pdv{X}{A}X^{-1}.
+$$
+\end{proposition}
 
 \section{Group representations}\label{sec:represent}
 
@@ -1829,9 +1880,9 @@ matrix multiplications on the computer.
   \end{proof}
 \end{proposition}
 
-\subsection{Some useful facts for Lie groups}
+\subsection{Some useful facts for groups}
 
-Here we collect some useful facts about common Lie groups that are encountered
+Here we collect some useful facts about common groups that are encountered
 in physics. Any time we give a dimension, it is over $\R$. 
 That $G$ is a double cover of $H$ roughly means there are always two 
 elements of $G$ corresponding to one element in
@@ -1853,7 +1904,9 @@ where the sign reflects the $\Z_2$ part.
 
 \begin{table}
 \centering
-\caption{Collection of properties of some Lie groups. }
+\caption{Collection of properties of some groups.
+Every group in the table, except $\ON(1)\cong\Z_2$
+is a Lie group. }
 \begin{tabularx}{\linewidth}{lCr}
 \hline\hline
 Group & Dimension & Notes\\
@@ -1863,7 +1916,7 @@ $\U(2)$  & 4          & $\cong \U(1)\times \SU(2)/\Z_2$\\
 $\U(N)$  & $N^2$      & \\ 
 $\SU(2)$ & 3          & $\cong S^3$, double cover of $\SO(3)$\\
 $\SU(N)$ & $N^2-1$    & \\
-$\ON(1)$ &            & $\cong\Z_2$, hence not Lie\\
+$\ON(1)$ &            & $\cong\Z_2$\\
 $\ON(N)$ & $N(N-1)/2$ & $N>1$\\
 $\SO(N)$ & $N(N-1)/2$ & \\
 \hline\hline
