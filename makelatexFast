@@ -32,7 +32,7 @@ done
 echo "Making Index..."
 pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex > /dev/null 2>&1
 makeindex -s indexHeader.ist 0_researchnotes
-python scripts/fixIndex.py
+python3 scripts/fixIndex.py
 mv temp.idx 0_researchnotes.idx
 mv temp.ind 0_researchnotes.ind
 pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex > /dev/null 2>&1
