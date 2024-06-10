@@ -4,10 +4,11 @@
 # bibtex stuff
 #
 pdflatex -shell-escape -draftmode -halt-on-error 0_researchnotes.tex
-#if [ $? -ne 0 ]; then
-#    echo "Compilation failed! Rerun with makelatex to learn more."
-#    exit
-#fi
+if [ $? -ne 0 ]; then
+    echo "Compilation failed! (You may have to comment this block out"
+    echo "if it's your first time compiling this document." 
+    exit
+fi
 for auxfile in ch_*.aux; do
     bibtex `basename $auxfile .aux`
 done
