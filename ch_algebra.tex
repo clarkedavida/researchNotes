@@ -1014,6 +1014,35 @@ We discuss in more detail in \secref{sec:numerics}.}.
 
 %Let A be a symmetric, positive definite matrix with singular value decomposition A=UΣVT (i.e. U, V are orthogonal matrices and Σ a diagonal matrix). Now look at how the singular values of A are related to the eigenvalues of ATA. Then think about how the eigenvalues of A are related to the eigenvalues of ATA and use that if A is symmetric, positive definite then its eigenvalues are real and positive.
 
+Another useful way to break up a complex matrix is through its
+{\it Schur decomposition}\index{Schur decomposition}.
+\begin{theorem}{Schur decomposition}{schur}
+  Let $M$ be a complex, square matrix.  Then we can write
+$$
+M=UTU^{-1}
+$$
+for some unitary matrix $U$ and upper triangular matrix $T$.
+\begin{proof}
+Since $M$ is a matrix over $\C$, its characteristic polynomial
+is guaranteed to have roots by the fundamental theorem of algebra,
+and hence it has at least one eigenvalue $\lambda$ corresponding
+to some eigenspace $V_\lambda$. Choosing a suitable basis, we
+can write our matrix like
+$$
+M= \left(\begin{array}{cc}
+            \lambda\id & A  \\
+            0 & B   \\
+            \end{array}\right).
+$$
+If $B$ is upper triangular, we are done. If not, we use the
+same argument to decompose $B$, continuing until we run out
+of eigenvalues.
+\end{proof}
+\end{theorem}
+This decomposition is useful since $T$ and $M$ are similar, which
+guarantees they have the same spectrum. For any upper triangular
+matrix, the eigenvalues lie on the diagonal.
+
 We wrap up with a theorem that's useful to derive expressions relating
 lattice interpolators and physical observables,
 which we do in \secref{sec:QCDtherm}.
