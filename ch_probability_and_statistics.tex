@@ -1252,8 +1252,74 @@ Hence splines with $d=3$, the {\it cubic splines}\index{spline!cubic}, are
 usually more reliable. According to \equatref{eq:splinedof}, the number of
 degrees of freedom will increase with increasing $d$; hence picking a cubic
 spline is sort of a compromise between having an approximation that follows $y$
-reasonably well while avoiding overfitting.
+reasonably well while avoiding overfitting\footnote{If you have enough fit
+parameters, you can nearly guarantee that a fit passes through each data.
+On the other hand, the data are expected to be random variables, so
+differences in them as you change the independent variable may not be
+genuine structure. This is what is meant by {\it
+overfitting}\index{overfitting}; characteristics of overfitting can
+include wiggles where there are no data}.
 
+To try to keep a spline from inventing more structure than is sensible given the
+data, one can add further constraints on the splines besides matching at the
+knots. For example, a {\it natural spline}\index{spline!natural} asks that
+the spline have zero curvature at the endpoints; that is
+\begin{equation}
+s''(X_0)=s''(X_N)=0.
+\end{equation}
+Earlier we mentioned that cubic splines are nice choices. We can actually make
+a nice, rigorous statement about natural, cubic splines. In particular
+let $f\in\continuous^2$ and $a<b$. Define the following measure of smoothness:
+\begin{equation}
+\mu(f)\equiv\int_a^b \dd{x}(f''(x))^2.
+\end{equation}
+We can sort of see what this definition is doing: Since $f''$ gives the
+curvature of $f$, we want to add up all curvature of $f$ in the interval
+$[a,b]$, regardless of whether it is concave or convex curvature.
+
+\begin{theorem}{}{}
+Of all functions that interpolate the data $(X_i,Y_i)$, the natural
+cubic spline is the smoothest.
+\begin{proof}
+We want to show that
+$$
+\mu(f) \geq \mu(s)
+$$
+where $s$ indicates our cubic, natural spline.
+Let
+$$
+ g(x)=s(x)-f(x).
+$$
+Clearly
+$g(x) \in \continuous^2$
+and $g\left(X_i\right)=0$
+Inserting this yields
+$$
+\begin{aligned}
+\mu(f) & =\int_a^b\dd{x}\left(s''(x)-g''(x)\right)^2 \\
+& =\mu(s)+\mu(g)-2 \int_a^b\dd{x} s''(x) g''(x).
+\end{aligned}
+$$
+Since $\mu(g)>0$, we have proved our result if the
+remaining integral vanishes. Note 
+$$
+\int_a^b \dd{x}s''(x) g''(x)=\left.g'(x) s''(x)\right|_a^b
+-\int_a^b \dd{x} g'(x) s'''(x).
+$$
+The surface term vanishes since the spline is natural.
+What remains can be split in an integral over each subdomain
+$$
+\begin{aligned}
+-\int_a^b \dd{x}g'(x) s'''(x) 
+& =-\sum_{i=1}^{N} \int_{X^i}^{X_{i+1}^i}\dd{x} g'(x) s'''(x) \\
+& =-\sum_{i=1}^{N} 6 a_i \int_{X_i}^{X_{i+1}}\dd{x} g'(x) \\
+& =-\sum_{i=1}^{N} 6 a_i g(x) t_{X_i}^{X_{i+1}}\\
+& =0,
+\end{aligned}
+$$
+as desired.
+\end{proof}
+\end{theorem}
 
 \section{The Kolmogorov test}\label{sec:kolm}\index{Kolmogorov test}
 Let's say we perform an experiment and extract a CDF $\bar{F}$ from 

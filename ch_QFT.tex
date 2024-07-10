@@ -1474,7 +1474,7 @@ where $1\leq a\leq N$.
 
 This section follows Chapter 93 of Srednicki~\cite{srednicki_quantum_2007};
 more details can be found there.
-We start by considering classical, pure $\SU(2)$ gauge theory
+We start by considering classical, Euclidean, pure $\SU(2)$ gauge theory
 \begin{equation}\label{eq:topaction}
   \Lagr=-\frac{1}{2g^2}F_{\mu\nu}F_{\mu\nu}
 \end{equation}
@@ -1492,6 +1492,530 @@ The winding number is invariant under coordinate changes since the Jacobian of
 the measure cancels the Jacobian of the partial derivatives.
 Given the BC, it is also invariant under smooth deformations of $U$.
 To show this, we first establish a useful Lemma.
+
+\begin{lemma}{}{variationrule}
+  $$\var\left(U\partial_kU^\dagger\right)
+   =-U\partial_k\left(U^\dagger\var U\right)U^\dagger.$$
+\begin{proof} Note that $\var U^\dagger=-U^\dagger\var U\,U^\dagger$. Hence
+  \begin{alignat*}{2}
+   \var\left(U\partial_kU^\dagger\right)
+    &=\var U\partial_kU^\dagger&&+U\partial_k\var U^\dagger\\
+    &=                           &&-U\partial_k\left(U^\dagger\var
+                                                     U\,U^\dagger\right)\\
+    &=                           &&-U\left(\partial_kU^\dagger\var UU^\dagger
+                                        +U^\dagger\partial_k\var U\,U^\dagger
+                                        +U^\dagger\var U\partial_k
+                                         U^\dagger                     \right).
+  \end{alignat*}
+  Cancelling the first and last terms and using the product rule gives the
+  result.
+\end{proof}
+\end{lemma}
+
+\begin{theorem}{}{wndeform}
+The topological winding number is invariant under smooth
+deformations of $U$.
+\begin{proof} We integrate \equatref{eq:wn} over a time-slice of space-time,
+which we call $\Omega$. Then
+  \begin{align*}
+   \var n &=-\frac{1}{24\pi^2}~\var\int_\Omega\dd[3]{x}\epsilon_{ijk}\tr
+                U\partial_iU^\dagger\,
+                U\partial_jU^\dagger\,
+                U\partial_kU^\dagger\\
+            &=-\frac{1}{8\pi^2}\int_\Omega \dd[3]{x}\epsilon_{ijk}\tr
+                \var\left(U\partial_iU^\dagger\right)
+                            U\partial_jU^\dagger\,
+                            U\partial_kU^\dagger\\
+            &=+\frac{1}{8\pi^2}\int_\Omega \dd[3]{x}\epsilon_{ijk}\tr
+                \partial_i\left(U^\dagger\var U\right)
+                 U^\dagger\partial_jU\,
+                 U^\dagger\partial_kU\\
+           &=+\frac{1}{8\pi^2}\int_{\partial\Omega} \dd{S_i}\epsilon_{ijk}\tr
+                U^\dagger\var U\,
+                U^\dagger\partial_j U\,
+                U^\dagger\partial_k U\\
+            &~~~~~-\frac{1}{8\pi^2}\int_\Omega \dd[3]{x}\epsilon_{ijk}\tr
+                U^\dagger\var U\partial_i\left[
+                U^\dagger\partial_j U\,
+                U^\dagger\partial_k U\right].
+  \end{align*}
+  In the second step we used the product rule and the fact that the trace 
+  and Levi-Civita symbols are cyclic.
+  In the third step we used \lemref{lem:variationrule} as well as
+  $U\partial_\mu U^\dagger=-\partial_\mu UU^\dagger$. In the last step
+  we integrated by parts. The first integral is over the time-slice boundary
+  evaluated at infinity. Since $\partial_jU=\partial_jU_0=0$ there, this term
+  vanishes. The integrand of the remaining integral is expanded as
+  \begin{equation*}\begin{aligned}
+    \epsilon_{ijk}\tr\Big[&
+     \partial_i U^\dagger\partial_j U U^\dagger\partial_k U
+     +\partial_j U^\dagger\partial_i U U^\dagger\partial_k U\\
+     &+U^\dagger\partial_{ij}UU^\dagger\partial_k U
+     +U^\dagger\partial_jUU^\dagger\partial_{ik}U\Big].
+  \end{aligned}\end{equation*}
+  Terms with double derivatives vanish, as they are symmetric with respect
+  to exchange of indices, while $\epsilon$ is antisymmetric. The remaining
+  terms are also shown to vanish using the antisymmetry of $\epsilon$
+  in addition to cyclically permuting terms under the trace.
+\end{proof}
+\end{theorem}
+
+The quantity~\eqref{eq:wn} is called a winding number because it counts
+the number of times the mapping $U$ ``winds around" or ``covers" 
+the integration region. Let us see how this works in the present case.
+The integration region is the 3D surface of space-time, which is
+homeomorphic to the 3-sphere $S^3$. A point $\hat{x}\in S^3$
+is specified by two polar angles $\chi$ and $\psi$ and an azimuthal
+angle $\phi$ as
+\begin{equation}
+  \hat{x}=\colvec{4}{\s_\chi\s_\psi\co_\phi}{\s_\chi\s_\psi\s_\phi}
+                    {\s_\chi\co_\psi}{\co_\chi}.
+\end{equation}
+Then the mapping $U:S^3\to\SU(2)$ given by
+\begin{equation}\label{eq:uexplicit}
+U(\hat{x})=\left(\begin{array}{cc}
+             \co_\chi+i\s_\chi\co_\psi     & i\s_\chi\s_\psi e^{-im\phi}\\
+             i\s_\chi\s_\psi e^{im\phi}& c_\chi-i\s_\chi\co_\psi 
+            \end{array}\right),
+\end{equation}
+has winding number $m$. Intuitively, one can see this in the following manner:
+Any $\SU(2)$ matrix can be written in terms of four real components as 
+\begin{equation}
+  U=a_4\id+i\vec{a}\cdot\vec{\sigma},
+\end{equation}
+where $a_\mu a_\mu=1$. The vector corresponding to the 
+map~\eqref{eq:uexplicit} is
+\begin{equation}
+  \hat{a}=\colvec{4}{\s_\chi\s_\psi\co_{m\phi}}{\s_\chi\s_\psi\s_{m\phi}}
+                    {\s_\chi\co_\psi}{\co_\chi}.
+\end{equation}
+We see that if we sweep through $\phi$, $\hat{x}$ sweeps over $S^3$ once
+while $\hat{a}$ sweeps over $S^3$ $m$ times. And indeed, one can see
+that \equatref{eq:wn} extracts the winding number by plugging in the 
+mapping~\eqref{eq:uexplicit}. This is done in the following Proposition.
+
+\begin{proposition}{}{wnproof}
+Consider the map $U:S^3\to\SU(2)$ given by
+$$
+U(\hat{x})=\left(\begin{array}{cc}
+             \co_\chi+i\s_\chi\co_\psi     & i\s_\chi\s_\psi e^{-im\phi}\\
+             i\s_\chi\s_\psi e^{im\phi}& c_\chi-i\s_\chi\co_\psi 
+            \end{array}\right).
+$$
+Then $U$ has winding number $m$.
+\begin{proof}
+  Plugging this map into \equatref{eq:wn} we find
+  \begin{equation*}
+  \begin{aligned}
+    n&=-\frac{1}{24\pi^2}\int_{S^3} \dd[3]{x}\epsilon_{ijk}\tr
+        U\partial_i U^\dagger\,U\partial_j U^\dagger\,U\partial_k U^\dagger\\
+   &=-\frac{1}{24\pi^2}\int_0^\pi\dd\chi\int_0^\pi\dd{\psi}\int_0^{2\pi}
+        \dd{\phi}\epsilon_{\alpha\beta\gamma}\tr
+        U\partial_\alpha U^\dagger\,U\partial_\beta U^\dagger\,
+        U\partial_\gamma U^\dagger,\\
+  \end{aligned}
+  \end{equation*}
+  where $\alpha,\,\beta,\,\gamma\in\{\chi,\,\psi,\,\phi\}$ and
+  $\epsilon_{\chi\psi\phi}\equiv+1$.
+  Since the trace is cyclic, all even permutations of $\chi,\,\psi,\,\phi$ give
+  the same contribution to the integral, and similarly for all odd
+  permutations. Hence
+  \begin{equation*}\begin{aligned}
+    n=-\frac{1}{8\pi^2}\int_0^\pi\dd{\chi}\int_0^\pi\dd\psi\int_0^{2\pi}
+        \dd{\phi}\epsilon_{\chi\psi\phi}&\tr\Big(
+        U\partial_\chi U^\dagger\,U\partial_\psi U^\dagger\,
+        U\partial_\phi U^\dagger\\
+        &~~~~~~-U\partial_\chi U^\dagger\,U\partial_\phi U^\dagger\,
+        U\partial_\psi U^\dagger\Big).
+  \end{aligned}\end{equation*}
+  Next we compute
+  \begin{equation*}
+  \begin{aligned}
+    U^\dagger&=\left(\begin{array}{cc}
+                  \co_\chi-i\s_\chi\co_\psi & -i\s_\chi\s_\psi e^{-im\phi}\\
+                 -i\s_\chi\s_\psi e^{im\phi}& c_\chi+i\s_\chi\co_\psi 
+                \end{array}\right)\\
+    \partial_\chi U^\dagger
+             &=\left(\begin{array}{cc}
+                  -\s_\chi-i\co_\chi\co_\psi  & -i\co_\chi\s_\psi e^{-im\phi}\\
+                 -i\co_\chi\s_\psi e^{im\phi} & -s_\chi+i\co_\chi\co_\psi 
+                \end{array}\right)\\
+    \partial_\psi U^\dagger
+             &=\left(\begin{array}{cc}
+                  +i\s_\chi\s_\psi & -i\s_\chi\co_\psi e^{-im\phi}\\
+                 -i\s_\chi\co_\psi e^{im\phi} & -i\s_\chi\s_\psi 
+                \end{array}\right)\\
+  \partial_\phi U^\dagger
+             &=\left(\begin{array}{cc}
+                  0 & -m\s_\chi\s_\psi e^{-im\phi}\\
+                 m\s_\chi\s_\psi e^{im\phi} & 0 
+                \end{array}\right)
+  \end{aligned}
+  \end{equation*}
+  and plug into the above equation. I did not see any further simplification,
+  so all that remains is to multiply the matrices, take the trace, and
+  carry out the integrations. That seemed tedious, and I'm certain I would
+  make a mistake, so I just plugged this into Mathematica to find 
+  $$n=m.$$
+\end{proof}\end{proposition}
+
+Finally we prove another fact about the winding number that will be useful
+in the following section.
+\begin{proposition}{}{}
+  Let $U_n:S^3\to S^3$ have winding number $n$ and
+  $U_k:S^3\to S^3$ have winding number $k$. Then the map
+  $U_n U_k$ has winding number $n+k$.
+  \begin{proof}
+    The total winding number for the map $U_n U_k$ can be written
+    \begin{equation*}\begin{aligned}
+      w=\frac{1}{24\pi^2}\int_0^\pi\dd{\chi}\int_0^\pi\dd{\psi}
+          \left(\int_0^\pi+\int_\pi^{2\pi}\right)\dd{\phi}
+          \epsilon_{\alpha\beta\gamma}\tr\,
+          &U_nU_k\partial_\alpha(U_nU_k)^\dagger\\
+          &\times\left(\text{$\beta$ term}\right)
+          \left(\text{$\gamma$ term}\right).
+    \end{aligned}\end{equation*}
+    From \thmref{thm:wndeform}, we know we can smoothly
+    deform $U_n$ to $\id$ for $x_3<0$ without changing $w$.
+    Then for $0\leq\phi\leq\pi$, we have
+    $\partial_i U_k=0$ and $U_n U_k=U_k$, and we can clearly identify
+    the first contribution to the above integral as $k$.
+    Similarly, we smoothly deform $U_k$ to $\id$ for
+    $x_3>0$ and find the second contribution to be $n$. Thus,
+    $$w=n+k.$$
+  \end{proof}
+\end{proposition}
+
+
+\subsection{Theta vacua}
+Now we have shown that \equatref{eq:wn} is invariant under smooth deformations
+of $U$, and we can believe that it really extracts the number of times
+$U$ as a mapping covers the integration region. Next we want to understand
+how the winding number relates to physics. 
+Consider two maps $U$ and $U'$ that are gauge transformations of
+zero and with different winding numbers. Since the winding number
+is a topological invariant, the only way to deform $U$ to $U'$ is
+to pass through configurations with $F_{\mu\nu}\neq0$; in other
+words, there is an energy barrier between $U$ and $U'$. 
+The corresponding quantum theory therefore has degenerate
+vacuum states characterized by their winding numbers.
+
+Between two quantum states $\ket{n}$ and $\ket{n'}$, there is a 
+transition amplitude $\bra{n'}H\ket{n}$ where $H$ is the Hamiltonian. 
+Let us discuss its matrix elements. Since 
+\begin{enumerate}
+  \item the product of two maps with winding numbers $n$ and $k$ 
+        has winding number $n+k$, which one can see from \equatref{eq:wn}
+        by smoothly deforming $U_n$ to $\id$ for $x_3<0$ and
+        smoothly deforming $U_k$ to be $\id$ for $x_3>0$;
+  \item the winding number is odd under parity, which follows from the
+        fact that negative winding numbers reverse orientation; and
+  \item the Yang-Mills Hamiltonian is parity invariant,
+\end{enumerate}
+it follows that the tunneling amplitude depends on $|n-n'|$ only.
+This can be seen in a few steps. From the first point, we see that
+a gauge transformation $U_k$ maps a field configuration with
+winding number $n$ to one with winding number $n+k$. In the
+corresponding quantum theory, this transformation is achieved 
+through a unitary operator
+\begin{equation}\label{eq:qwn}
+  \mathcal{U}_k\ket{n}=\ket{n+k}.
+\end{equation}
+The pure $\SU(2)$ Hamiltonian is built out of gauge-invariant
+field strengths, so we must have 
+\begin{equation}\label{eq:qid}
+  \mathcal{U}_kH\mathcal{U}_k^\dagger=H.
+\end{equation}
+Inserting factors of $\mathcal{U}_k^\dagger\mathcal{U}_k=\id$ into
+the matrix element $\bra{n}H\ket{n'}$ and using \equatref{eq:qwn}
+and \eqref{eq:qid} yields
+\begin{equation}
+  \bra{n}H\ket{n'}=\bra{n+k}H\ket{n'+k}.
+\end{equation}
+Hence the matrix element depends on $n-n'$ only. From the second and
+third points, we see that $P\ket{n}=\ket{-n}$ and $PHP^{-1}=H$;
+therefore we similarly find
+\begin{equation}
+  \bra{n}H\ket{n'}=\bra{-n}H\ket{-n'},
+\end{equation}
+showing that the matrix element depends on $|n-n'|$ only.
+One can use this fact to show that $H$ is diagonalized by 
+\index{theta vacua}{\it theta vacua}, which are states of the form
+\begin{equation}
+  \ket{\theta}\equiv\sum\limits_{n=-\infty}^\infty e^{-i n\theta}\ket{n}.
+\end{equation}
+\index{vacuum angle}
+The parameter $\theta$ is referred to as the {\it vacuum angle}. 
+
+
+\subsection{Topological charge and instantons}\index{topological!charge}
+
+We will now discuss the topology of gauge field
+configurations defined on all space-time. Let $r=(x_\mu x_\mu)^{1/2}$.
+We require that
+\begin{equation}
+  A_\mu(x)\to U(x)\partial_\mu U^\dagger(x)
+\end{equation}
+as $r\to\infty$ to keep the action finite. (Infinite actions are
+exponentially suppressed in the path integral.) The 3D integration
+region will be the surface of space-time at infinity.
+In addition to the BC $U(\infty)=U_0$, we specify $U$ at $x_4=-\infty$
+to have winding number $n_-$ and $U$ at $x_4=+\infty$ to have
+winding number $n_+$. The entire boundary is homeomorphic to
+$S^3$, and the winding number of $U$ is
+\begin{equation}
+  Q\equiv n_+-n_-, 
+\end{equation}
+where the relative minus sign is due to the surfaces at $x_4=\pm\infty$
+having opposite orientation. We indicate this winding number with a
+$Q$, and it is often called the {\it topological charge}.
+
+By viewing the integrand of \equatref{eq:wn} 
+as the surface integral over a 4D region, defining the 
+{\it Chern-Simons current}\index{Chern-Simons current}
+\begin{equation}
+  J_\mu^{CS}\equiv 2\epsilon_{\mu\nu\rho\sigma}\tr
+    \left(a_\nu F_{\rho\sigma} +\frac{2}{3}A_\nu A_\rho A_\sigma\right),
+\end{equation}
+and applying Gauss's theorem, one can identify the winding number as 
+an integral over the four-divergence of $J_\mu^{CS}$. We find
+\begin{equation}\label{eq:Q}
+  Q=\frac{1}{16\pi^2}\int\dd[4]{x}\tr\dual{F_{\mu\nu}}F_{\mu\nu}
+   \equiv \int\dd[4]{x}q,
+\end{equation}
+where
+\begin{equation} 
+\dual{F}_{\mu\nu}=\frac{1}{2}\epsilon_{\mu\nu\rho\sigma}F_{\rho\sigma}
+\end{equation}
+is the {\it dual} field strength tensor. The quantity
+$q$ is called the {\it topological charge density}. This form of the
+topological charge is helpful to look find vacuum solutions to the
+Euclidean field equations, and it also motivates one of the possible
+definitions for topological charge on the lattice. We prove it now.
+
+\begin{proposition}{}{wnfsproof}
+The topological charge can be written in terms of the field strength as
+$$
+  Q=\frac{1}{16\pi^2}\int\dd[4]{x}\tr\dual{F_{\mu\nu}}F_{\mu\nu}.
+$$
+  \begin{proof} Starting from the definition of the winding number we have
+    $$
+      Q=-\frac{1}{24\pi^2}\int\dd[3]{x}
+        \epsilon_{\nu\rho\sigma}\tr U\partial_\nu U^\dagger\,
+        U\partial_\rho U^\dagger\,U\partial_\sigma U^\dagger.
+    $$
+    Recasting this integral as a 4D surface integral and noting
+    that $\epsilon_{r\chi\psi\phi}=-1$, which by looking at the Jacobian
+    for this change of variables leads to an overall minus sign, we obtain
+   \begin{equation*}\begin{aligned}
+      Q&=\frac{1}{24\pi^2}\int\dd{S_\mu}
+        \epsilon_{\mu\nu\rho\sigma}\tr U\partial_\nu U^\dagger\,
+        U\partial_\rho U^\dagger\,U\partial_\sigma U^\dagger\\
+       &=\frac{1}{24\pi^2}\int\dd{S_\mu}
+        \epsilon_{\mu\nu\rho\sigma}\tr A_\nu A_\rho A_\sigma.
+    \end{aligned}\end{equation*}
+    From the BCs we know that $F_{\rho\sigma}=0$ on this surface, so
+    we are able to replace the integrand in the winding number
+    with $J^{CS}$. We get
+    $$
+      Q=\frac{1}{32\pi^2}\int\dd{S_\mu}J_\mu^{CS}
+       =\frac{1}{32\pi^2}\int\dd[4]{x}\partial_\mu J_\mu^{CS}
+    $$
+    by the divergence theorem.
+    It remains to compute $\partial_\mu J_\mu^{CS}$. We have
+    \begin{equation*}
+    \begin{aligned}
+      \partial_\mu J_\mu^{CS}
+       &=2\epsilon_{\mu\nu\rho\sigma}\tr\Big[\partial_\mu A_\nu F_{\rho\sigma}
+           +A_\nu\partial_\mu F_{\rho\sigma}\\
+       &~~~~~~~~~~~~~~~~~~+\frac{2}{3}\left(\partial_\mu A_\nu A_\rho A_\sigma
+              +A_\nu \partial_\mu A_\rho A_\sigma
+              +A_\nu A_\rho \partial_\mu A_\sigma\right)\Big]\\
+       &=2\epsilon_{\mu\nu\rho\sigma}\tr\Big[\partial_\mu A_\nu F_{\rho\sigma}
+           +A_\nu\partial_\mu F_{\rho\sigma}
+           +2\partial_\mu A_\nu A_\rho A_\sigma\Big]\\ 
+      &=\epsilon_{\mu\nu\rho\sigma}\tr\Big[\partial_\mu A_\nu F_{\rho\sigma}
+           -\partial_\nu A_\mu F_{\rho\sigma}
+           +2A_\nu\partial_\mu[A_\rho,A_\sigma]
+           +4\partial_\mu A_\nu A_\rho A_\sigma\Big]\\
+       &=\epsilon_{\mu\nu\rho\sigma}\tr\Big[\partial_\mu A_\nu F_{\rho\sigma}
+           -\partial_\nu A_\mu F_{\rho\sigma}\\
+           &~~~~~~~~~~~~~~~~~~+[A_\mu,A_\nu]
+                    \big(\partial_\rho A_\sigma-\partial_\sigma A_\rho
+                          +[A_\rho,A_\sigma]\big)\Big]\\
+       &=\epsilon_{\mu\nu\rho\sigma}\tr F_{\mu\nu}F_{\rho\sigma}\\
+       &=2\tr \dual{F_{\mu\nu}}F_{\mu\nu}.
+    \end{aligned}
+    \end{equation*}
+   To get to the second line, we used the fact that cyclic permutations
+    of products under the trace leave the trace unchanged; the fact that
+    $\epsilon$ is antisymmetric; and relabelled dummy indices. To get to
+    the third line, we expanded the field strength tensor; and used the fact
+    that terms with second-derivatives are symmetric and therefore vanish
+    when contracted with $\epsilon$. Finally to get to the fourth line,
+    one can use the same tricks as with the second line. In addition,
+    note that $\epsilon\tr AAAA=0$ because cyclic permutations of
+    four indices in $\epsilon$ flip the sign, while cyclic permutations
+    of the $AAAA$ indices under the trace leave it unchanged; therefore
+    we can add terms of this form inside the trace with impunity
+    and obtain the $[A,A][A,A]$ term.
+    Plugging this result back into our expression for the winding number
+    completes the proof.
+  \end{proof}
+\end{proposition}
+
+With \equatref{eq:Q} we can find vacuum solutions to the Euclidean
+field equations
+\begin{equation}
+  D_\mu F_{\mu\nu}=0.
+\end{equation}
+The trick is to construct a lower bound on the action. Then if we can
+find a solution saturating the bound, it must solve the field equations,
+since it minimizes the action. This is called a \index{Bogomolny bound}
+{\it Bogomolny bound}.
+Using \equatref{eq:topaction}, we find
+\begin{equation}\label{eq:bogo}
+  S\geq 8\pi^2|Q|/g^2,
+\end{equation}
+which becomes saturated when
+\begin{equation}\label{eq:efeq}
+  \dual{F_{\mu\nu}}=(\text{sign}\;n)F_{\mu\nu}.
+\end{equation}
+\begin{proposition}{}{}
+For configurations with topological charge $Q$,
+the action is bounded below by
+$$
+  S\geq\frac{8\pi^2|Q|}{g^2}.
+$$
+  \begin{proof}
+    Note that $\dual{F_{\mu\nu}}\dual{F_{\mu\nu}}=F_{\mu\nu}F_{\mu\nu}$, so
+    $$
+      \frac{1}{2}\tr\left(\dual{F_{\mu\nu}\pm F_{\mu\nu}}\right)^2
+       =\tr F_{\mu\nu}F_{\mu\nu}\pm\tr\dual{F_{\mu\nu}}F_{\mu\nu}.
+    $$
+    The LHS of the above equation is $2g^2S$ while the RHS
+    is, according to \propref{prp:wnfsproof}, $16\pi^2|Q|$.
+    This completes the proof.
+  \end{proof}
+\end{proposition}
+
+We arrive at an explicit solution to the above equation using
+the map \eqref{eq:uexplicit} with $Q=1$ $(m=1)$.
+\begin{proposition}{}{}
+The equation
+$$
+\dual{F_{\mu\nu}}=F_{\mu\nu}
+$$
+is solved by
+$$
+  A_\mu(x)=\frac{r^2}{r^2+R^2}\,U(\hat{x})\partial_\mu U^\dagger(\hat{x}),
+$$
+where $\hat{x}=x/r.$
+  \begin{proof} We start with the ansatz
+    $$A_\mu(x)=f(r)U(\hat{x})\partial_\mu U^\dagger(\hat{x}),$$
+    with $f(\infty)=1$ and $f(0)=0$. Plugging this ansatz into the
+    field tensor, we get
+    \begin{equation*}
+    \begin{aligned}
+      F_{\mu\nu}
+        &=\partial_\mu f\,U\partial_\nu U^\dagger
+          +f\partial_\mu U\partial_\nu U^\dagger
+          +f^2U\partial_\mu U^\dagger U\partial_\nu U^\dagger
+          -(\mu\leftrightarrow\nu)\\
+        &=\partial_\mu f\,U\partial_\nu U^\dagger
+          +f(1-f)\partial_\mu U\partial_\nu^\dagger
+          -(\mu\leftrightarrow\nu).
+    \end{aligned}
+    \end{equation*}
+   Terms symmetric in $\mu$ and $\nu$ vanished, and we utilized
+    $\partial_\mu U^\dagger=-U^\dagger\partial_\mu UU^\dagger.$
+    To proceed, we need to know the components of $\partial$.
+    They are
+    \begin{equation*}
+     \partial=e_r\frac{\partial}{\partial r}
+     +e_\chi\frac{1}{r}\frac{\partial}{\partial \chi}
+     +e_\psi\frac{1}{rs_{\chi}}\frac{\partial}{\partial \psi}
+     +e_\phi\frac{1}{rs_{\chi}s_{\psi}}\frac{\partial}{\partial \phi},
+    \end{equation*}
+    where $e_i$ is the unit vector in direction $i$. Since $f$ is
+    a function of $r$ only and $U$ is a function of the angles
+    only, this implies
+    $$
+      F_{r\chi}=\frac{1}{r}f'U\partial_\chi U^\dagger
+    $$
+    and
+   $$
+      F_{\psi\phi}=\frac{1}{r^2s^2_\chi s_\psi}
+        f(1-f)\left(\partial_\psi U\partial_\phi U^\dagger
+                    -\partial_\phi U\partial_\psi U^\dagger\right).
+    $$
+    From the definition of the dual tensor, we have
+    $\dual{F_{r\chi}}=-F_{\psi\phi}$, since $\epsilon_{r\chi\psi\phi}=-1$.
+    To satisfy the instanton equation $\dual{F_{\mu\nu}}=F_{\mu\nu}$
+    we must therefore have $F_{r\chi}=-F_{\psi\phi}$. Because
+    the variables are separated in $F$, we conclude
+    $$
+      kf'=kf(1-f)
+    $$
+   and
+    $$
+      U\partial_\chi U^\dagger=-\frac{1}{cs_\chi^2s_\psi}
+               \left(\partial_\psi U\partial_\phi U^\dagger
+                    -\partial_\phi U\partial_\psi U^\dagger\right) 
+    $$
+    for some constant $k$. Plugging the explicit mapping into the
+    latter equation yields $k=2$. The former, ordinary differential
+    equation is then easily solved. The result is
+    $$
+      f(r)=\frac{r^2}{r^2+R^2},
+    $$
+    where $R$ is a constant of integration.
+\end{proof}
+\end{proposition}
+
+
+This solution is called the {\it instanton}~\cite{belavin_pseudoparticle_1975}
+\index{instanton}and the integration constant $R$ is called the 
+{\it instanton size}. 
+The instanton mediates between vacuum configurations at times
+$+\infty$ and $-\infty$ with winding numbers $n_+$ and $n_-$.
+When $Q=-1$ we have an {\it anti-instanton}.
+When $|Q|>1$, the mediating solution is constructed of multiple 
+instantons or anti-instantons. When separations are large compared
+to their sizes, we call this a {\it dilute gas} of instantons
+or anti-instantons. From \equatref{eq:bogo}
+we see that each instanton or anti-instanton contributes
+$8\pi^2/g^2$ to the Bogomolny bound.
+
+\index{topological!susceptibility}
+The {\it topological susceptibility} is defined as
+\begin{equation}
+  \chi_Q\equiv\int\dd[4]{x}\ev{q(x)q(0)},
+\end{equation}
+where $q$ is the topological charge density of \equatref{eq:Q}.
+The topological susceptibility gives evidence that the topological
+structure of the underlying gauge fields has phenomenological significance.
+In particular, by performing a calculation in the large $N_c$ limit, 
+Witten and Veneziano~\cite{witten_current_1979,veneziano_u1_1979} showed
+that at $N_c=\infty$ the $\eta'$ mass is related to 
+the topological susceptibility through
+\begin{equation}\index{Witten-Veneziano formula}
+  m_{\eta'}^2+m_\eta^2-2m_K=\frac{4N_f\chi_Q}{f_\pi^2},
+\end{equation}
+where $m_\eta$ is the $\eta$ mass, $m_K$ is the mass of the kaon, 
+$N_f$ is the number of fermion flavors, and $f_\pi$ is the
+pion decay constant. This mechanism can be used to explain the 
+$\eta-\eta'$ mass difference. 
+Plugging experimental values into the above
+formula for $N_f=3$, one finds
+\begin{equation}\label{eq:chivalue}
+  \chi_Q\approx(180~\text{MeV})^4.
+\end{equation}
+While a conventional derivation of the Witten-Veneziano formula depends
+on large $N_c$, lattice calculations for pure $\SU(2)$ and
+pure $\SU(3)$ land relatively close to \equatref{eq:chivalue}.
+
+
 
 
 
