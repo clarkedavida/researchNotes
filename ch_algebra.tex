@@ -275,7 +275,9 @@ is called an\index{equivalence class}
         be any non-empty set of objects and let $S_{V}$ be the set of all
         permutations of $V$. Then $S_{V}$ forms a group under function
         composition called the {\it symmetric group}\index{group!symmetric} 
-        on the set $V$.
+        or {\it permutation group}\index{group!permutation} on the set $V$.
+        The symmetric group on the $n$ integers $\{1,2,...,n\}$ will be
+        denoted here as $S_n$. Its order is $n!$.
 \end{enumerate}
 \end{example*}
 
@@ -1574,25 +1576,36 @@ to be kept by the first result in \propref{prp:tensorProps}.
 
 % Talk about simple, schur's lemma.
 
-\section{Young tableaux}
+\subsection{The symmetric group}
 
-Recall from \secref{sec:gpprelim} the permutation group on
-$n$ objects, $S_n$. Any element in $S_n$ can be written
-as a product of cycles, which are just cyclic permutations of subsets.
+Recall from \secref{sec:gpprelim} the 
+permutation group\index{group!permutation}\index{group!symmetric} on
+$n$ integers\footnote{This discussion is superficially limited
+to permutations of integers, but it extends to arbitrary permutations
+of distinct objects; just label each object with one of the integers.} 
+$S_n$. We can write any element in $S_n$ as a {\it cycle}\index{cycle}, 
+a string of integers which cyclically permutes these
+integers keeping all others fixed.
+Every permutation $g\in S_n$ is expressible as a product
+of cycles\footnote{One way to see this is to arrange the integers in a line 
+of ``slots" and think about what happens at the $k\nth$ slot. Every
+permutation must send the integer in the $k\nth$ slot somewhere and must send
+some integer into the $k\nth$ slot, i.e. it is part of a ``chain". Since
+this is true for all slots, there can be no place a chain is broken.}.
 Conventional notation writes a cycle as a list of numbers between
-parenthesis, indicating the set of elements are are permuted.
+parentheses, indicating the set of elements that are permuted.
 \begin{example*}{}{}
   Consider permutations of $V=\{x_1,...,x_n\}$. Then
   \begin{enumerate}
     \item (1) takes $x_1\to x_1$;
     \item (238) takes $x_2\to x_3\to x_8\to x_2$;
-    \item a cycle of length $k$ is a {\it k-cycle};
-    \item $\id$=(1)(2)...(n); and
-    \item $(12)(3)...(n)\in S_n$ interchanges $x_1$ and $x_2$
-          while leaving all other elements fixed.
+    \item a cycle of length $k$ is a {\it k-cycle}; and
+    \item $\id$=(1)(2)...($n$).
   \end{enumerate}
 \end{example*}
-A simple $n$D representation of $S_n$ permutes the orthonormal
+
+
+A simple $n$-$d$ representation of $S_n$ permutes the orthonormal
 basis vectors of $\R^n$. If a permutation $\pi$ takes $x_i$
 to $x_j$ then
 \begin{equation}
@@ -1602,28 +1615,43 @@ which implies
 \begin{equation}
   D(\pi)_{li}=\bra{l}D\ket{i}=\delta_{lj}.
 \end{equation}
-This is called the {\it defining representation}.
-\index{representation!defining}
+This is the {\it defining representation}\index{representation!defining}
+of $S_n$.
 
-A set is called a {\it conjugacy class}\index{conjugacy class} if 
-$gSg^{-1}=S$. If you have a group element $g_1$, the 
-{\it conjugation} of $g_1$ is $gg_1g^{-1}$.
+A set $C$ is called a {\it conjugacy class}\index{conjugacy class} if 
+$gCg^{-1}=C$. If you have a group element $h$, the 
+{\it conjugation}\index{conjugation} of $h$ is $ghg^{-1}$.
 From the definition of normal subgroup in \secref{sec:q} we
-see that normal subgroups are conjugacy classes. The conjugacy classes
-of of permutations are just the cycle structure; for instance all
-interchanges are in the same conjugacy class. One way of seeing this
+see that normal subgroups are conjugacy classes.
+
+\begin{proposition}{}{}
+All permutations with the same cycle structure fall into a conjugacy class.
+\begin{proof}
+One way of seeing this
 is by looking at the defining representation. If you conjugate using
 an interchange, all this does is switch the basis vectors
 $\ket{i}$ and $\ket{j}$, which clearly has no impact on the cycle
-structure. Then, since any permutation can be built from interchanges,
+structure of $D(g)$. Since any permutation can be built from interchanges,
 it follows that an arbitrary conjugation preserves the cycle
 structure. 
+\end{proof}
+\end{proposition}
+
+The number of permutations in a conjugacy class of $S_n$ consisting
+of $k_2$ 2-cycles, $k_3$ 3-cycles, and so on, is
+\begin{equation}
+\frac{n!}{\prod_{j{\rm -cycles}}j^{k_j}k_j!}.
+\end{equation}
+The denominator indicates that within a cycle, all elements can be cyclically
+permuted without changing the permutation, and also we can write the $j$-cycles
+in any order. 
+
 
 \section{Lie algebras and Lie groups}
 
   A {\it Lie algebra}\index{algebra!Lie} is a vector space $L$ over a field $F$
   together with an operation $[\ ,\ ]:L\times L\to L$ called the 
-  {\it Lie bracket}\index{Lie!bracket}that satisfies 
+  {\it Lie bracket}\index{Lie!bracket} that satisfies 
   $\Forall \alpha,\beta\in F$ 
   and $x,y,z\in L$
   \begin{enumerate}
@@ -1744,7 +1772,7 @@ to second order in $\epsilon$ and then do some rearranging.
   $$
 \end{theorem}
 
-\subsection{SU(N)}
+\subsection{The special unitary group}
 
 The Lie groups $\SU(2)$ and $\SU(3)$ are of considerable importance in the
 Standard Model, as they used to describe weak and strong interactions.
