@@ -519,13 +519,21 @@ as the correlation length diverges. This latter limit also shows us that
 \end{equation}
 This is extremely helpful, in that it directly permits us to extract a ratio of
 critical exponents, even at finite volume where there is no true transition.
-Similar arguments for the specific heat yield
+Similar arguments yield for the specific heat
 \begin{equation}\label{eq:fss_CV}
-    C_{V,\,\text{max}}\sim L^{\alpha/\nu}.
+    C_{V,\,\text{max}}\sim L^{\alpha/\nu}
+\end{equation}
+and for the magnetization
+\begin{equation}\label{eq:fss_M}
+    m\big|_{T=\Tc(L)}\sim L^{-\beta/\nu}.
 \end{equation}
 
-Equations \eqref{eq:fss_susc} and \eqref{eq:fss_CV} have a practical use of
-allowing extraction of critical exponents from real-world simulations.
+
+Equations \eqref{eq:fss_susc_2nd}, \eqref{eq:fss_CV}, and \eqref{eq:fss_M} 
+have a practical use of
+allowing extraction of critical exponents from real-world simulations,
+which must always be carried out at finite $L$.
+Once you have two exponents, the rest can be extracted from hyperscaling relations.
 They can be also be used to argue that a phase transition is of second order
 belonging to some particular universality class. For first-order transitions,
 one expects~\cite{fisher_scaling_1982}\index{phase transition!first-order}\index{phase
@@ -535,7 +543,8 @@ transition!second-order}\index{crossover}
 \end{equation}
 For a crossover, one expects to see no scaling of susceptibility peak height
 at all. Indeed, this strategy was used to demonstrate that the QCD phase change
-at physical quark mass is a crossover~\cite{aoki_order_2006}.
+at physical quark mass and zero baryon chemical potential 
+is a crossover~\cite{aoki_order_2006}.
  
 
 \section{Classification of observables}
