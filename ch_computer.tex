@@ -838,5 +838,209 @@ A series of such directives can be used to simplify coding tasks or create
 coding shortcuts. In this context sometimes one refers to such series as {\it
 macros}\index{macro}.
 
+\section{Machine learning}\label{sec:ML}\index{machine learning}
+
+At some point during my first postdoc, {\it machine learning} (ML) really exploded.
+Core to machine learning seems to be strategies of pattern recognition, and
+therefore it has applications all over the place. Eventually I found myself in a
+project that utilizes ML, and therefore I needed to learn about it. In this
+section I collect what I've learned, but I have to warn the reader that
+I have no formal training on this subject, and hence am very far from an expert.
+One of my goals is to familiarize myself with ML jargon. In this section I
+try to string together jargon that was relevant to me from
+Google~\cite{google_ML}.
+
+Very broadly we can imagine {\it artificial intelligence}\index{artificial
+intelligence} (AI) as trying to get computers to mimic human intelligence. 
+A naive\footnote{Indeed I tried writing a ``chatbot" using QBASIC in this
+manner when I was a little boy. This is why it's crucial to be specific
+when telling a child to make friends.} way of doing this could be to implement tons 
+of conditionals. Machine learning by contrast aims to carry out some
+task without any explicit code to carry out said task. Generically,
+this can be done by quantifying data in your problem, then performing many
+transformations on said data, usually using ideas from advanced mathematics
+or statistics.
+
+Let's be a little more precise about that above paragraph.
+We have a bunch of data that we want to analyze, which in a physics context
+usually means a bunch of measurements of some observable,
+represented as collections of real numbers. In the ML context, each of
+these observables is called a {\it feature}\index{feature}. For instance
+consider a lattice of spins. Each spin at each site could be considered
+a feature. Now let's say we have the task of determining
+whether the system is in the ferromagnetic or paramagnetic phase.
+If all the spins are aligned, we {\it label}\index{label} that lattice
+as being in the ferromagnetic phase, and the combination of features
+with that label is called an {\it example}\index{example}.
+What we would like ML to do
+is effectively find a mapping from features (spin values) to labels (phases). 
+Such a mapping is a {\it model}\index{model} in the parlance ML, and
+the ultimate hope is that if we present the ML model with an unlabelled
+example, the {\it prediction}\index{prediction} 
+that the ML model returns is an accurate label.
+
+\begin{figure}
+\includegraphics[width=\linewidth]{figs/NeuralNetwork.png}
+\includegraphics[width=\linewidth]{figs/Neurons.png}
+\caption{A schematic deep NN with two hidden layers.
+{\it Top}: Features in the input layer
+are fed to neurons in the hidden layers, which eventually yield
+a prediction in the output layer. {\it Bottom}: A schematic
+highlighting what is fed into each neuron. Images taken 
+from~\cite{google_ML}.}
+\label{fig:neuralNet}
+\end{figure}
+
+\subsection{Neural networks}
+
+There are many, many strategies to construct an ML model.
+A popular strategy is to construct a {\it neural network}\index{neural network}
+(NN), which is shown schematically in \figref{fig:neuralNet}. 
+A NN is organized into {\it layers}\index{layer}, which except\footnote{Or if you like
+I suppose you could imagine the input layer performs the identity
+transformation on the features.} for the input layer,
+perform some transformation on information from the preceding layer. 
+The {\it input layer}\index{layer!input} contains the features, and
+the {\it output layer}\index{layer!output} yields the final predictions.
+
+In between the input and output layers are 
+{\it hidden layers}\index{layer!hidden} containing {\it neurons}\index{neuron}.
+If there is more than one hidden layer, we call the NN a {\it deep}
+NN\index{neural network!deep}\footnote{And sometimes if there is only one
+layer but many neurons per layer, it is called {\it wide}\index{neural
+network!wide}.}.
+As a first step toward building a NN, one might imagine transforming
+feature data using weighted sums. So for example 
+the blue neuron in \figref{fig:neuralNet} (bottom), which I will
+call $h_{12}$, indicating hidden layer 1 neuron 2, might take values
+$x_1$ and $x_2$ from feature 1 and feature 2, respectively, and compute
+\begin{equation}
+h_{12} = w_{11}x_1+w_{12}x_2.
+\end{equation}
+Then the orange neuron would compute
+\begin{equation}
+h_{21} = w_{21}h_{11}+w_{22}h_{12}+w_{23}h_{13},
+\end{equation}
+with the output layer yielding
+\begin{equation}
+{\rm output} = w_{31}h_{21}+w_{32}h_{22}.
+\end{equation}
+In this NN, the output can be written linearly in terms of the input $x_i$;
+in other words, the NN models the labels as a linear function of the features.
+The NN is characterized completely by the weights $w_{ij}$ and the connections
+shown in the diagram. Note that each node in each layer depends on
+every\footnote{This makes sense since it's the most
+general strategy we could take. If a node in a preceding layer turns out
+not to matter, a reasonable NN should compute the corresponding weight to be
+zero. In principle you don't have to construct the NN in this way, and
+so sometimes we say such NNs have {\it dense} or {\it fully connected}
+layers\index{layer!dense}\index{layer!fully connected}.} input in the preceding layer.
+
+The above NN clearly models labels as linear functions of features; on the other
+hand, there is a wealth of phenomena that are more aptly understood as nonlinear
+functions of input parameters, some of them highly so. In order to model
+nonlinearity, a simple extension could be to feed the linear ansatz at each
+neuron into some nonlinear function, called an {\it activation
+function}\index{activation function}.  
+
+At this stage I want to take a moment to discuss NN nomenclature and maybe
+understand what inspired NNs to begin with. 
+Based on its name, it clearly takes a cue from how
+brains in animals work. Communication in brains is mediated by electrical
+signals that travel from neuron to neuron. These electrical signals are
+carried chemically by ions\footnote{There is some evidence
+of electrical signals that travel through low-resistance pathways or
+are influenced by extracellular electric fields~\cite{faber_two_2018}.},
+and across the neuron's cell wall, there is an electric potential due to ions 
+inside and outside the neuron. Moreover built into the cell wall are channels
+that allow ions to flow in or out of the neuron. In the default or resting
+state, these channels are closed, but when that potential difference reaches
+some voltage threshold, a channel can open, allowing ions to flow easily
+and reduce the potential difference. In a biological context, this
+nexus of neurons is called a neural network\footnote{Therefore sometimes NNs
+in the ML context are referred artificial neural networks.}, and hence
+we can see that the network of what we call ``neurons" in an ML context
+is an attempt to mimic brains in nature. The way channels open and close
+ inspires not only the ``activation function" terminology but also many of 
+the activation functions chosen in ML, which we will see often resemble 
+step functions.
+
+Okay let us return to constructing a nonlinear model using activation functions.
+We modify hidden layers so that they instead do something like
+\begin{equation}
+h_{12} = A\left(w_{11}x_1+w_{12}x_2\right)
+\end{equation}
+for some activation function $A$. Popular choices include
+$A(x)=\tanh(x)$, the {\it sigmoid}\index{sigmoid} function,
+\begin{equation}
+A(x)=\frac{1}{1+e^{-x}},
+\end{equation}
+the {\it rectified linear unit}\index{ReLU} (ReLU),
+\begin{equation}
+A(x)= \begin{cases}0 & x<0 \\ x & x \geq 0\end{cases},
+\end{equation}
+and the {\it leaky} ReLU\index{ReLU!leaky}, 
+\begin{equation}
+A(x)= \begin{cases}\alpha x & x<0 \\ x & x \geq 0\end{cases},
+\end{equation}
+for some small constant $\alpha$. Which activation function is best suited
+for the task depends on the task at hand. Activation functions that output
+in $[0,1]$ can be interpreted as probabilities, which may make sense
+depending on your needs. The sigmoid function and $\tanh$ involve
+exponentials, and hence may be slower to compute than ReLU. 
+
+We now have constructed a relatively elementary, nonlinear NN to 
+model labels as a function of features. How good of a model will this be?
+It is in some sense mathematically guaranteed to be extremely good.
+There are many {\it universal approximation theorems}\index{universal
+approximation theorem} which guarantee that NNs converge to real-world
+relationships. More precisely if we imagine our labels as a function $f$ of the
+features and give some closeness criterion $\epsilon>0$, there exists some
+number of neurons such that a NN approximates $f$ within $\epsilon$.
+For example NNs with as few as one hidden layer and arbitrary bounded,
+nonconstant activation function approximate well, provided there
+are enough neurons~\cite{hornik_approximation_1991}.
+
+All that remains for our simplistic example is the problem of determining
+the weights $w_{ij}$. Once the weights are determined, we can give arbitrary
+feature data $x_i$ and the NN will compute a corresponding label prediction. 
+It is not hard to see that this is essentially a least-squares problem:
+we will effectively ``fit" the NN using several examples.
+In this context, one constructs some {\it loss} function\index{loss function},
+which is analogous to $\chi^2$ in the least-squares approach.
+We show the machine repeated examples, and it iteratively computes weights
+that minimize the loss function. This process is called {\it
+training}\index{training}. Just like with a standard fit, guesses for weights
+are computed using well known algorithms such as the gradient descent.
+This can be another consideration when picking an activation function, as
+these algorithms may struggle to pick out weights for activation functions 
+that vary little over large ranges.
+
+It is common practice to take your original data, i.e. your original set of
+examples, and organize them into subsets. There is a {\it training
+set}\index{set!training}, a {\it validation set}\index{set!validation},
+and a {\it testing set}\index{set!testing}. These sets are utilized in three
+typical stages of building the ML model:
+\begin{enumerate}
+\item Training: You use the training set to compute the initial weights.
+When the fitting procedure has visited every example once, we call
+that an {\it epoch}\index{epoch}. In this stage, one may also subdivide
+the training set into {\it batches}\index{batch}. Finally algorithms
+like the gradient descent have an adjustable step size, in this
+context called a {\it learning rate}\index{learning rate}. Settings such 
+as the number of epochs, the number of batches, or the learning rate 
+are chosen by the user and will ultimately affect the
+weights that are computed. These settings are sometimes referred to
+as {\it hyperparameters}\index{hyperparameter}.
+\item Validation:\index{validation} You loose the model on the 
+validation set. There will
+be some metric you use to determine whether the weights computed in
+the training set are reasonable. At this stage, you still have the opportunity
+to make adjustments to the ML model.
+\item Testing:\index{testing} Finally you use the testing set to
+ensure good performance of the tuned model.
+\end{enumerate}
+
+
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}

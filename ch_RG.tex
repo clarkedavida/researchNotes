@@ -54,7 +54,7 @@ This chapter will generally try to follow
 lectures by F. Karsch, as well as the book by Binney et
 al.~\cite{binney_theory_1992}. 
 
-\section{Types of transitions}
+\section{Types of transitions}\label{sec:typesOfTransitions}
 
 \begin{figure}
 \centering
@@ -201,16 +201,121 @@ lines/surfaces, one can argue that the sometimes-used jargon
 Indeed, this
 can be seen in both \figref{fig:phase_water} and \figref{fig:phase_ising}.
 At this critical endpoint, the coexistence line fuses into one phase.
-Another possibility not shown in these figures is a tricritical point, 
-where three phases fuse. Generally for liquid-gas transitions like
+Another possibility is a {\it tricritical point}\index{tricritical point}
+where three phases fuse. This can be seen in water's phase diagram, but
+does not exist in the 2-$d$ Ising model diagram.
+Generally for liquid-gas transitions like
 water, the expectation is that the endpoint belongs to the Ising
 model universality
-class\footnote{We will make an intuitive argument about this
-in \secref{sec:leeyang}.}~\cite{hubbard_wilson_1972,bruce_scaling_1992,wilding_critical-point_1995,yarmolinsky_revisiting_2017}.
-Still, this statement is not without controversy, with some studies suggesting
+class~\cite{hubbard_wilson_1972,bruce_scaling_1992,wilding_critical-point_1995,yarmolinsky_revisiting_2017}.
+Still, this statement is not without some controversy, with some studies suggesting
 it has a universality class of its own, albeit with very similar
 critical exponents~\cite{valls_liquid-gas_1978}.
 
+\section{Models of magnets}
+
+In \secref{sec:typesOfTransitions} we introduced the Ising\footnote{This
+model is named after Ernst Ising, who was given the problem by his
+PhD advisor Wilhelm Lenz, who conceived it. Ising was Jewish and
+fled from Germany to Luxembourg during the pogroms. Luxembourg was
+occupied by the Nazis, and during that time he was a shepherd and did
+railroad work. After the allied liberation, he emigrated to the US,
+where he became a physics professor in Peoria, IL.} model 
+Hamiltonian\footnote{One can generalize this model replacing
+$J\to J_{ij}$ and $h\to h_j$. However the most well studied and easiest
+to implement models take these interactions to be uniform throughout
+the lattice, as presented in \equatref{eq:ising}. Such generalizations
+are of course also possible for the subsequent models we present.}
+\begin{equation}\label{eq:ising}
+H=-J\sum_{\ev{i j}} \sigma_i \sigma_j-h \sum_j
+\sigma_j,
+\end{equation}
+where the brackets indicate a sum over nearest-neighbors,
+$\sigma_i\in\{+1,-1\}$ is the spin $i$, $h$ is 
+external magnetic field, and $J$ is the
+nearest-neighbor interaction strength. 
+This model tries to capture the
+idea that spins in a magnet prefer to align, as $H$ lowers when
+$\sigma_i$ and $\sigma_j$ have the same sign. Similarly when there
+is an external field, the model prefers spins to align with it.
+
+We said this was the 2-$d$
+Ising model, but since we are labelling the sites by indices, the form
+will be the same for any $d\in\N$. The 1-$d$ model was shown to
+exhibit no phase transition by Ising himself~\cite{ising_beitrag_1924}.
+The 2-$d$ model was solved analytically by 
+Onsager~\cite{onsager_crystal_1944}, who found a critical temperature of
+\begin{equation}
+\Tc=\frac{2 J}{k_B \ln (1+\sqrt{2})}\approx(2.269185) \frac{J}{k_B}.
+\end{equation}
+Generally particle physicists work in units where $k_B=1$. Moreover
+to better expose quantities like $\Tc$, we often set $J=1$. Under this
+convention, one then gets $\Tc$ in the form most commonly quoted
+in the literature,
+\begin{equation}
+\Tc\approx2.269185.
+\end{equation}
+
+There is no analytic solution to the Ising model in $n$-$d$, when $n>2$.
+Typically we rely on the results of Markov chain Monte Carlo
+simulations\footnote{We discuss such simulations in detail applied to lattice
+field theory in \chref{ch:MCMC}.}. For the 3-$d$ Ising model,
+one finds~\cite{alves_ising-model_1990}
+\begin{equation}
+\Tc=4.51325(82).
+\end{equation}
+
+Generic spin models are essentially just generalizations of \equatref{eq:ising}.
+The next standard generalization is called a $q$-state
+{\it Potts model}\index{Potts model}, originally studied by 
+Potts~\cite{Potts:1951rk}. The Hamiltonian\footnote{One can also add 
+an external magnetic field term. I'm not sure how often such
+models get studied.} is
+\begin{equation}\label{eq:potts}
+H=-J\sum_{\ev{i j}} \delta\left(\sigma_i, \sigma_j\right)
+\end{equation}
+where now $\sigma_i\in\{0,1,...,q-1\}$. In this
+model, the system favors exact spin alignment, with all other configurations
+equally disfavored. Now both $q$ and $d$ are adjustable parameters of the
+theory. We see that the 2-state Potts model and the Ising model with
+zero magnetic field are essentially equivalent. In fact, sometimes a
+{\it normalization}\index{normalization} or offset is added to $H$
+so that one finds $\ev{E}=0$ in the completely disordered
+(random spin orientation) phase, in agreement
+with what happens for the Ising model.
+Estimates of the critical temperature for some choices
+of $d$ and $q$ are collected in \tabref{tab:pottsTc}. 
+
+\begin{table}
+\centering
+\caption{Some critical temperatures for the Potts model.}
+\begin{tabularx}{\linewidth}{LR}
+\hline\hline
+$d=3$, $q=3$ & $d=2$, $q=10$ \\
+\hline
+3.632908(64)~\cite{alves_potts_1991} & 0.70123178~\cite{alves_potts_1991}\\
+3.632632(66)~\cite{janke_three-dimensional_1997} & \\
+3.63263(19)~\cite{berg_markov_2004} & \\
+\hline\hline
+\end{tabularx}
+\label{tab:pottsTc}
+\end{table}
+
+
+Reflecting a bit on electrodynamics, perhaps a more physically accurate theory
+would allow a continuous penalty for spin unalignment. This leads to
+the $q$-state {\it clock model}\index{clock model} or 
+{\it vector Potts model}\index{Potts model!vector} with Hamiltonian 
+\begin{equation}\label{eq:clock}
+H=-J\sum_{\ev{i j}} \cos\left(\theta_i-\theta_j\right)
+\end{equation}
+with
+\begin{equation}
+\theta_i\equiv\frac{2\pi\sigma_i}{q}
+\end{equation}
+and $\sigma_i\in\{0,1,...,q-1\}$ as before.
+In the limit $q\to\infty$, one obtains the so-called
+{\it XY model}\index{XY model} or $\ON(2)$ model.
 
 \section{Singularity structure}\label{sec:leeyang}\index{Lee-Yang!Theorem}
 
@@ -275,7 +380,7 @@ When we are away from the critical point, the situation in the complex plane
 changes somewhat. Still in the thermodynamic limit, let us 
 imagine\footnote{In case you forget which way the inequality goes, just
 remember \figref{fig:phase_ising}. High temperatures must destroy
-magnetization, so of course there's no transition there.} $T>\Tc$ 
+magnetization, so of course there's no symmetry breaking there.} $T>\Tc$ 
 and let $h$ be complex. The expectation is that $\log Z(h)$ should
 have two branch cuts in the complex-$h$ plane, called 
 {\it Lee-Yang edges}\index{Lee-Yang!edge} (LYE), that terminate at
@@ -296,13 +401,23 @@ What is remarkable about these edges is that, generally speaking,
 there is no expectation on how complex singularities of a function
 should organize themselves; Lee and Yang show that for the Ising model,
 the lie exactly on the imaginary $h$ axis.
-As shown in \figref{fig:LYE}, the Lee-Yang edges should limit the convergence
+As shown in \figref{fig:LYE}, the LYEs should limit the convergence
 radius of $\log Z$. 
 %In principle there are other singularities possible.
 %The {\it extended analyticity conjecture}\index{extended analyticity conjecture}
 %posits that the Lee-Yang edges should be the closest singularities
 %to the origin in the complex $h$-plane~\cite{fonseca_ising_2003}. 
 
+For a finite system there will be no zeros of the partition function
+on the real axis, but there will generically be zeroes in the complex
+plane. As the system size grows, these zeros coalesce and form
+branch cuts of $\log Z$ in the thermodynamic limit.
+There is an intuition that if these cuts pinch the real axis we have a
+second-order transition, while if they cross it there is a first-order.
+One way to think about this latter case is that for first-order transitions, we
+get these discontinuous jumps in the order parameter. That matches what you
+would expect to happen for a generic complex function as you cross a branch cut:
+you jump discontinuously from one Riemann sheet to the next.
 
 \section{The scaling hypothesis}\label{sec:scalingHypothesis}
 All critical exponents\index{critical exponent} can be written as functions 
