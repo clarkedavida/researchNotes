@@ -259,11 +259,9 @@ in the literature,
 There is no analytic solution to the Ising model in $n$-$d$, when $n>2$.
 Typically we rely on the results of Markov chain Monte Carlo
 simulations\footnote{We discuss such simulations in detail applied to lattice
-field theory in \chref{ch:MCMC}.}. For the 3-$d$ Ising model,
-one finds~\cite{alves_ising-model_1990}
-\begin{equation}
-\Tc=4.51325(82).
-\end{equation}
+field theory in \chref{ch:MCMC}.}. Some $\Tc$ for the 3-$d$
+Ising model are collected in the first column of
+\tabref{tab:pottsTc}. 
 
 Generic spin models are essentially just generalizations of \equatref{eq:ising}.
 The next standard generalization is called a $q$-state
@@ -288,14 +286,18 @@ of $d$ and $q$ are collected in \tabref{tab:pottsTc}.
 
 \begin{table}
 \centering
-\caption{Some critical temperatures for the Potts model.}
-\begin{tabularx}{\linewidth}{LR}
+\caption{Some critical temperatures for various Potts models. The first
+column is of course the 3-$d$ Ising model.}
+\begin{tabularx}{\linewidth}{LLR}
 \hline\hline
-$d=3$, $q=3$ & $d=2$, $q=10$ \\
+$d=3$, $q=2$ & $d=3$, $q=3$ & $d=2$, $q=10$ \\
 \hline
-3.632908(64)~\cite{alves_potts_1991} & 0.70123178~\cite{alves_potts_1991}\\
-3.632632(66)~\cite{janke_three-dimensional_1997} & \\
-3.63263(19)~\cite{berg_markov_2004} & \\
+4.51154(13)~\cite{pawley_monte_1984}
+  & 3.632908(64)~\cite{alves_potts_1991} & 0.70123178~\cite{alves_potts_1991}\\
+4.51162(11)~\cite{barber_finite-size_1985} 
+  & 3.632632(66)~\cite{janke_three-dimensional_1997} & \\
+4.511463(45)~\cite{landau_computer_1994} 
+  & 3.63263(19)~\cite{berg_markov_2004} & \\
 \hline\hline
 \end{tabularx}
 \label{tab:pottsTc}
@@ -316,6 +318,31 @@ with
 and $\sigma_i\in\{0,1,...,q-1\}$ as before.
 In the limit $q\to\infty$, one obtains the so-called
 {\it XY model}\index{XY model} or $\ON(2)$ model.
+It is interesting to note that for $d\leq2$, the
+$\ON(2)$ has no phase transition. This is a special case of a more general
+result known as the {\it Mermin-Wagner theorem}\index{Mermin-Wagner theorem},
+which states that there can be no stable ordered phase at finite
+temperature in $d\leq2$ for any system with a continuous 
+symmetry~\cite{mermin_absence_1966}.
+Interestingly enough, while there is no phase transition in the usual sense,
+there is still some kind of phase change.
+In particular spins can arrange themselves in vortices and antivortices.
+Kosterlitz, Thouless, and independently Berezinskii were able to show that there
+is a low-temperature phase where vortices and antivortices must arrange 
+themselves in pairs along with a high-temperature phase where vortices can
+exist in 
+isolation~\cite{Berezinsky:1972rfj,kosterlitz_ordering_1973,kosterlitz_critical_1974}.
+
+
+The $\ON(2)$ model imagines each spin as lying on a unit circle. These spins can be
+even further generalized. In particular when we allow each spin to lie on a unit
+sphere, we obtain the {\it Heisenberg model}\index{Heisenberg model}
+or $\ON(3)$ model. With MCMC one can find in three dimensions
+$\Tc=1.44321(21)$~\cite{peczak_high-accuracy_1991}
+and 1.44300(21)~\cite{holm_critical_1993}.
+General $N$-spin systems go by the name of $\ON(N)$ models.
+
+
 
 \section{Singularity structure}\label{sec:leeyang}\index{Lee-Yang!Theorem}
 

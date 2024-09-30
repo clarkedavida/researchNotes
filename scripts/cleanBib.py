@@ -78,6 +78,8 @@ for line in bib:
     continue
   elif line.strip().startswith('series'):
     continue
+  elif line.strip().startswith('copyright'):
+    continue
   out.write(line)
 
 
