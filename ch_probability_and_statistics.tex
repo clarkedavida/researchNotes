@@ -1663,7 +1663,7 @@ calculation. This knowledge is summarized by probability distributions called
 \subsection{Rules for consistent reasoning}\label{sec:consistentReasoning}
 
 In 1946, Cox thought about how to quantitatively assign likelihoods to
-statements about the word in a consistent manner~\cite{cox_probability_1946}. 
+statements about the world in a consistent manner~\cite{cox_probability_1946}. 
 The idea is that one wants to
 take statements like ``The sun will rise tomorrow" or ``Jerry attacked Tom" and
 assign real numbers to them such that the real number is higher for the
@@ -1794,29 +1794,109 @@ situations where the ensemble interpretation is useless.
 Now that we've thought about what the probabilities mean in the Bayesian
 framework, we need a way to assign them; in the frequentist framework, it was
 sufficient to use ratios of set sizes, but now this assignment is not automatic.
+In general we would like a method of assignment that introduces no extra
+information beyond what is known, whether it be a bias, correlation, or
+whatever. The known information $I$ can be introduced as a constraint
+on the PDF pr that we seek,
+\begin{equation}
+f({\rm pr},I)={\rm something},
+\end{equation}
+and we refer to $I$ as {\it testable information}\index{information!testable}.
+In this section we will argue\footnote{We tried to repeat a heuristic argument,
+but note that this assignment is justified in other ways as well.
+It reflects common sense~\cite{jaynes_foundations_1963} and
+can be derived in the context of information 
+theory~\cite{shannon_mathematical_1948} or even by demanding
+that inference be logically 
+self-consistent~\cite{shore_axiomatic_1980}. It can also be argued
+that it is the least-correlated assignment~\cite{Skilling1988}.} 
+that the {\it principle of maximum 
+entropy}\index{principle!maximum entropy}, which asks that we select
+pr by maximizing
+\begin{equation}\label{eq:maxent}
+S=-\int \dd{x} \pr{x} \log \frac{\pr{x}}{m(x)}
+\end{equation}
+with {\it measure}\index{measure} $m$, fulfills our criteria.
 
 
-\subsection{Fitting data}
+We present the so-called ``monkey argument", which at least has some connection
+to the frequentist assignment of probabilities. We will use it to derive a
+discrete form of \equatref{eq:maxent}. Suppose we have some event with $M$
+outcomes $X_i$. We imagine a probability distribution pr on the $X_i$ in the
+following way: We have $N$ ``units" of probability, $N\gg M$, which can be
+distributed in $M$ boxes, each box representing an outcome. Thinking of the
+units of probability as balls, each possible way of distributing the balls among
+the boxes represents a different probability distribution. We want to impose no
+preference for one probability distribution over another, so we treat every
+possible distribution as equally likely. In the literature, this is playfully
+ensured by having monkeys cast the balls in the boxes, hence the name.
+There are $M^N$ ways to allocate balls to boxes, and many such allocations
+may yield the same pr. Our preferred assignment is the pr that occurs the most 
+frequently.
 
-In the context of fitting data $(x_i,y_i)$, the fit function $y(x_i;\vec{a})$,
-where $\vec{a}$ is the vector of fit parameters, can be
-thought of as a model. Here, Bayes's theorem reads
-\begin{equation}
-\pr{\vec{a}\given\vec{y}\wedge I}\propto\pr{\vec{y}\given\vec{a}\wedge
-I}\pr{\vec{a}\given I},
-\end{equation}
-where again $\pr{\vec{a}\given I}$ is the prior probability for the
-model $\vec{a}$. Sometimes we have some a priori knowledge of model parameters;
-for instance we may know they have to be positive. In the cases where we do not,
-we can simplify
-\begin{equation}
-\pr{\vec{a}\given I}=\text{const.}
-\end{equation}
-and it follows in such cases that
-\begin{equation}
-\pr{\vec{a}\given\vec{y}\wedge I}\propto\pr{\vec{y}\given\vec{a}\wedge
-I}.
-\end{equation}
+
+
+% \subsection{Fitting data}
+% 
+% In the context of fitting data $(x_i,y_i)$, the fit function $y(x_i;\vec{a})$,
+% where $\vec{a}$ is the vector of fit parameters, can be
+% thought of as a model. Here, Bayes's theorem reads
+% \begin{equation}
+% \pr{\vec{a}\given\vec{y}\wedge I}\propto\pr{\vec{y}\given\vec{a}\wedge
+% I}\pr{\vec{a}\given I},
+% \end{equation}
+% where again $\pr{\vec{a}\given I}$ is the prior probability for the
+% model $\vec{a}$. Sometimes we have some a priori knowledge of model parameters;
+% for instance we may know they have to be positive. In the cases where we do not,
+% we can simplify
+% \begin{equation}
+% \pr{\vec{a}\given I}=\text{const.}
+% \end{equation}
+% and it follows in such cases that
+% \begin{equation}
+% \pr{\vec{a}\given\vec{y}\wedge I}\propto\pr{\vec{y}\given\vec{a}\wedge
+% I}.
+% \end{equation}
+
+
+
+\subsection{Model averaging}
+
+A central goal of data analysis from the perspective of a scientist is to use
+existing, measured data to either interpolate between them or extrapolate them.
+In either case, we are trying to make some kind of prediction, i.e. make
+statements about some as-yet-unexplored part of the world. In order to do
+either, we need some kind of {\it model}\index{model}. Heuristically, a model is
+a way of looking at the data; it is a story you tell that captures some patterns
+or connections among the data. Semi-rigorously, a model is some kind of
+generalized function that takes the data as input and yields a prediction as output.
+In practice, your model may include more than just a functional form; for
+example it may include criteria about when to exclude data.
+
+For example in \chref{ch:preliminaries} we will introduce lattice gauge theory,
+which places space and time on a grid of countably many spacetime points. This
+grid is a mere calculational crutch, and we expect that as the spacing between
+points on the grid $a$ decreases, our results will become closer to the real world,
+with the real world ``continuum limit" achieved as $a\to 0$. The dependence $f$ of
+an observable on $a$ is some function expressed as a series in $a$, which for
+pragmatic purposes must be truncated at some order. Therefore we have, at least in
+principle, countably infinitely many possible descriptions of $f$, each defined
+by that truncation order. Canonically, lattice calculations have tried to keep
+the order low, with the intuition that since $a\ll1$, higher orders become
+negligible. But depending on the range of $a$ where one performs the
+extrapolation, this need not be the case, and hence one might achieve different
+continuum-limit results for different choices of order. Furthermore, viewing $f$
+as some expansion about $a=0$, one may choose to exclude data when $a$ is too
+large, and depending on what data are excluded, the final result will change
+again.
+
+In Bayesian parlance, each different continuum-limit result has a different
+context that we are trying to keep track of. What we would like is to transform
+this knowledge into something quantitative, i.e. we would like to report a final
+continuum-limit result whose uncertainty reflects in part this model ambiguity.
+This is sometimes called {\it model uncertainty}\index{model!uncertainty}.
+Bayes's theorem gives us a way to estimate model uncertainty
+
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
