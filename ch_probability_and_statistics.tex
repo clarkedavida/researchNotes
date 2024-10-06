@@ -1673,7 +1673,7 @@ real numbers $\pr{A}$ and $\pr{B}$, which defines our
 {\it probabilities}\index{probability}. 
 Cox showed that consistency is ensured
 if the real numbers satisfy
-\begin{equation}\begin{aligned}
+\begin{equation}\begin{aligned}\label{eq:probabilityAxioms}
 \pr{A\given I}+\pr{\neg A\given I}&=1,\\
 \pr{A\wedge B\given I}&=\pr{A\given B\wedge I}\pr{B\given I},\\
 \pr{\text{true}}&=1,\\
@@ -1813,7 +1813,7 @@ that it is the least-correlated assignment~\cite{Skilling1988}.}
 that the {\it principle of maximum 
 entropy}\index{principle!maximum entropy}, which asks that we select
 pr by maximizing
-\begin{equation}\label{eq:maxent}
+\begin{equation}\label{eq:ShannonEntropy}
 S=-\int \dd{x} \pr{x} \log \frac{\pr{x}}{m(x)}
 \end{equation}
 with {\it measure}\index{measure} $m$, fulfills our criteria.
@@ -1821,19 +1821,57 @@ with {\it measure}\index{measure} $m$, fulfills our criteria.
 
 We present the so-called ``monkey argument", which at least has some connection
 to the frequentist assignment of probabilities. We will use it to derive a
-discrete form of \equatref{eq:maxent}. Suppose we have some event with $M$
+discrete form of \equatref{eq:ShannonEntropy}. Suppose we have some event with $M$
 outcomes $X_i$. We imagine a probability distribution pr on the $X_i$ in the
 following way: We have $N$ ``units" of probability, $N\gg M$, which can be
-distributed in $M$ boxes, each box representing an outcome. Thinking of the
-units of probability as balls, each possible way of distributing the balls among
-the boxes represents a different probability distribution. We want to impose no
-preference for one probability distribution over another, so we treat every
-possible distribution as equally likely. In the literature, this is playfully
+allocated in $M$ boxes, each box representing an outcome. Thinking of the
+units of probability as balls, each possible way of allocating the balls among
+the boxes represents some probability distribution. Drawing inspiration from the
+frequentist approach, this allocation yields the probability distribution
+\begin{equation}\label{eq:entropyProbability}
+\pr{X_i}=\frac{n_i}{N},
+\end{equation}
+where $n_i$ is the number of balls in box $X_i$. We impose no
+preference for one allocation over another\footnote{Having a preference about
+how to allocate probability units/balls is equivalent to saying you have some
+idea of what kind of allocation a desirable probability distribution ought to
+have.}, so we treat every
+possible allocation as equally likely. In the literature, this is playfully
 ensured by having monkeys cast the balls in the boxes, hence the name.
 There are $M^N$ ways to allocate balls to boxes, and many such allocations
 may yield the same pr. Our preferred assignment is the pr that occurs the most 
 frequently.
 
+To figure out how frequently pr occurs, it remains to count the number of
+allocations that yield $\vec{n}$, i.e. allocations
+that yield $n_i$ balls in box $X_i$. This is
+\begin{equation}
+\frac{N!}{\prod_{i=1}^Mn_i!}.
+\end{equation}
+Hence the frequency of pr is
+\begin{equation}
+F\left({\rm pr}\right)=\frac{N!}{M^N\prod_{i=1}^Mn_i!}.
+\end{equation}
+Taking the logarithm of both sides, using {\it Stirling's
+approximation}\index{Stirling's approximation},
+\begin{equation}
+\log N!\approx N\log N-N,
+\end{equation}
+which is valid whenever $N$ is large, and using
+\equatref{eq:entropyProbability}, we get
+\begin{equation}
+\log F \approx  -N\log M -N\sum_{i=1}^M \pr{X_i}\log\pr{X_i}.
+\end{equation}
+Since the logarithm is monotonic with $F$, and since $M$ and $N$ are constants,
+maximizing $F$ is equivalent to maximizing the {\it information
+entropy}\index{entropy!information} or {\it Shannon
+entropy}\index{entropy!Shannon} or {\it Kullback number}\index{Kullback number}
+\begin{equation}
+S\equiv  -\sum_{i=1}^M \pr{X_i}\log\pr{X_i}.
+\end{equation}
+Generalizing this to continuous variables gives us
+\equatref{eq:ShannonEntropy}. We introduce a measure $m$ in this case, which
+ensures that the entropy is invariant under a change of variables.
 
 
 % \subsection{Fitting data}
@@ -1895,7 +1933,30 @@ context that we are trying to keep track of. What we would like is to transform
 this knowledge into something quantitative, i.e. we would like to report a final
 continuum-limit result whose uncertainty reflects in part this model ambiguity.
 This is sometimes called {\it model uncertainty}\index{model!uncertainty}.
-Bayes's theorem gives us a way to estimate model uncertainty
+
+Here we follow Ref.~\cite{jay_bayesian_2021}, who propose a method for computing
+model uncertainty with lattice field theory in mind. We are trying to describe a
+data set $D$ using some base model $M_0$ and want to determine some common
+parameters $\vec{a}_c$. To estimate the $\vec{a}_c$, we usually consider some
+extensions $M$ of the base model $M_0$ that has some further parameters
+$\vec{a}_M$. We demand that each $M$ reduces to $M_0$ if we marginalize over
+these additional parameters.
+
+A common, explicit example might be constructing QCD pressure coefficients in
+the continuum\footnote{These are discussed in \secref{sec:QCDtherm}.}. In the
+continuum, these are functions $\chi(T)$ of temperature, and hence their
+extrapolation often requires a fit in both $T$ and $N_\tau$. In this example,
+$M_0$ might be some parameterization of $\chi(T)$ with parameters $\vec{a}_c$.
+At finite spacing, one might consider lattice spacing effects up to various
+possible orders, each offering a model $M$ of $\chi(T,a)$. These fits have in
+addition to the $\vec{a}_c$ some additional parameters for the lattice-spacing
+dependence $\vec{a}_M$.
+
+We begin by writing down an expectation value for an arbitrary function $f$
+of the parameters. This would be
+\begin{equation}
+\ev{f(\vec{a}_c)}=\int\dd{\vec{a}_c}\pr{\vec{a}_c\given D}f(\vec{a}_c)
+\end{equation}
 
 
 \bibliographystyle{unsrtnat}

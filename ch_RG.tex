@@ -246,7 +246,7 @@ exhibit no phase transition by Ising himself~\cite{ising_beitrag_1924}.
 The 2-$d$ model was solved analytically by 
 Onsager~\cite{onsager_crystal_1944}, who found a critical temperature of
 \begin{equation}
-\Tc=\frac{2 J}{k_B \ln (1+\sqrt{2})}\approx(2.269185) \frac{J}{k_B}.
+\Tc=\frac{2 J}{k_B \log (1+\sqrt{2})}\approx(2.269185) \frac{J}{k_B}.
 \end{equation}
 Generally particle physicists work in units where $k_B=1$. Moreover
 to better expose quantities like $\Tc$, we often set $J=1$. Under this
@@ -265,7 +265,8 @@ Ising model are collected in the first column of
 
 Generic spin models are essentially just generalizations of \equatref{eq:ising}.
 The next standard generalization is called a $q$-state
-{\it Potts model}\index{Potts model}, originally studied by 
+{\it Potts model}\index{Potts model} or
+$S_q$ {\it model}, originally studied by 
 Potts~\cite{Potts:1951rk}. The Hamiltonian\footnote{One can also add 
 an external magnetic field term. I'm not sure how often such
 models get studied.} is
@@ -281,23 +282,31 @@ zero magnetic field are essentially equivalent. In fact, sometimes a
 so that one finds $\ev{E}=0$ in the completely disordered
 (random spin orientation) phase, in agreement
 with what happens for the Ising model.
-Estimates of the critical temperature for some choices
-of $d$ and $q$ are collected in \tabref{tab:pottsTc}. 
+Estimates of the critical temperature for some 3-$d$ Potts
+models are collected in \tabref{tab:pottsTc}.
+In 2-$d$, the model is exactly 
+solvable~\cite{baxter_exactly_1982}. It is a first-order
+transition when $q>4$ and second-order when $q\leq4$.
+The critical temperature in units $J=k_B=1$ is given by
+\begin{equation}
+\Tc=\frac{1}{\log\left(1+\sqrt{q}\right)},
+\end{equation}
+which we see is closely related to the Ising $T_c$ when $q=2$, as expected.
 
 \begin{table}
 \centering
-\caption{Some critical temperatures for various Potts models. The first
+\caption{Some critical temperatures for various 3-$d$ Potts models. The first
 column is of course the 3-$d$ Ising model.}
-\begin{tabularx}{\linewidth}{LLR}
+\begin{tabularx}{\linewidth}{LR}
 \hline\hline
-$d=3$, $q=2$ & $d=3$, $q=3$ & $d=2$, $q=10$ \\
+$d=3$, $q=2$ & $d=3$, $q=3$  \\
 \hline
 4.51154(13)~\cite{pawley_monte_1984}
-  & 3.632908(64)~\cite{alves_potts_1991} & 0.70123178~\cite{alves_potts_1991}\\
+  & 3.632908(64)~\cite{alves_potts_1991} \\
 4.51162(11)~\cite{barber_finite-size_1985} 
-  & 3.632632(66)~\cite{janke_three-dimensional_1997} & \\
+  & 3.632632(66)~\cite{janke_three-dimensional_1997} \\
 4.511463(45)~\cite{landau_computer_1994} 
-  & 3.63263(19)~\cite{berg_markov_2004} & \\
+  & 3.63263(19)~\cite{berg_markov_2004} \\
 \hline\hline
 \end{tabularx}
 \label{tab:pottsTc}
@@ -306,8 +315,9 @@ $d=3$, $q=2$ & $d=3$, $q=3$ & $d=2$, $q=10$ \\
 
 Reflecting a bit on electrodynamics, perhaps a more physically accurate theory
 would allow a continuous penalty for spin unalignment. This leads to
-the $q$-state {\it clock model}\index{clock model} or 
-{\it vector Potts model}\index{Potts model!vector} with Hamiltonian 
+the $q$-state {\it clock model}\index{clock model}, 
+{\it vector Potts model}\index{Potts model!vector},
+or $\Z_q$ {\it model}, with Hamiltonian 
 \begin{equation}\label{eq:clock}
 H=-J\sum_{\ev{i j}} \cos\left(\theta_i-\theta_j\right)
 \end{equation}
