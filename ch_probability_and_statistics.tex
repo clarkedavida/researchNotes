@@ -1934,30 +1934,18 @@ this knowledge into something quantitative, i.e. we would like to report a final
 continuum-limit result whose uncertainty reflects in part this model ambiguity.
 This is sometimes called {\it model uncertainty}\index{model!uncertainty}.
 
-Here we follow Ref.~\cite{jay_bayesian_2021}, who propose a method for computing
-model uncertainty with lattice field theory in mind. We are trying to describe a
-data set $D$ using some base model $M_0$ and want to determine some common
-parameters $\vec{a}_c$. To estimate the $\vec{a}_c$, we usually consider some
-extensions $M$ of the base model $M_0$ that has some further parameters
-$\vec{a}_M$. We demand that each $M$ reduces to $M_0$ if we marginalize over
-these additional parameters.
-
-A common, explicit example might be constructing QCD pressure coefficients in
-the continuum\footnote{These are discussed in \secref{sec:QCDtherm}.}. In the
-continuum, these are functions $\chi(T)$ of temperature, and hence their
-extrapolation often requires a fit in both $T$ and $N_\tau$. In this example,
-$M_0$ might be some parameterization of $\chi(T)$ with parameters $\vec{a}_c$.
-At finite spacing, one might consider lattice spacing effects up to various
-possible orders, each offering a model $M$ of $\chi(T,a)$. These fits have in
-addition to the $\vec{a}_c$ some additional parameters for the lattice-spacing
-dependence $\vec{a}_M$.
-
-We begin by writing down an expectation value for an arbitrary function $f$
-of the parameters. This would be
+We summarize some of the discussion of Ref.~\cite{neil_improved_2024},
+which tackles computing
+model uncertainty with lattice field theory in mind. 
+We assume the data set $D$ is described by some ``true" model $M_T$
+We will try to describe our data with many models $M_\mu$.
+The goal is to be able to obtain expectation values of functions $f$
+of some model parameters $\vec{a}$. We will compute them as
 \begin{equation}
-\ev{f(\vec{a}_c)}=\int\dd{\vec{a}_c}\pr{\vec{a}_c\given D}f(\vec{a}_c)
-\end{equation}
-
-
+\ev{f\left(\vec{a}\right)}=
+\sum_\mu f\left(\vec{a}_\mu^*\right) \pr{M_\mu\given D},
+\end{equation} 
+where the sum runs over all attempted models, indexed by $\mu$, and  
+$\vec{a}_\mu^*$ denotes the best-fit parameters for the model $M_\mu$.
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}

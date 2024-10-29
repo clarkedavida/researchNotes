@@ -63,7 +63,10 @@ adds charge -1/3, and subtracts 1 from the strangeness.}
   \mu_s &= \frac{1}{3}\mu_B - \frac{1}{3}\mu_Q - \mu_S.
 \end{aligned}\end{equation}
 These relations are needed whenever one is interested in {\it conserved
-charge fluctuations},\index{conserved charge fluctuation} i.e. susceptibilities like
+charge fluctuations}\footnote{These are also sometimes referred to
+as {\it generalized susceptibilities}\index{susceptibility!generalized}
+or {\it cumulants}\index{cumulant}.},\index{conserved charge fluctuation} 
+i.e. susceptibilities like
 \begin{equation}
 \chi_{ijk}^{(B)(Q)(S)}(T)
   \equiv\frac{\partial^{\,i+j+k}\,P/T^4}{\partial\muh_B^i\partial\muh_Q^j
@@ -197,11 +200,21 @@ one should always work with non-degenerate flavors, then allow the flavors to be
 degenerate at the end. This way one correctly distinguishes between e.g.
 $\chi_{11}^{ll}$ and $\chi_2^l$.} conserved charge fluctuations in terms of 
 generalized susceptibilities, such as
-\begin{equation}\begin{aligned}
+\begin{equation}\begin{aligned}\label{eq:2ndorderdiagonal}
   \chi_2^B&=\frac{1}{9}\left(2\chi_2^l+\chi_2^s+2\chi_{11}^{ll}+4\chi_{11}^{ls}\right)\\
   \chi_2^Q&=\frac{1}{9}\left(5\chi_2^l+\chi_2^s-4\chi_{11}^{ll}-2\chi_{11}^{ls}\right)\\
   \chi_2^S&=\chi_2^s.
 \end{aligned}\end{equation}
+Sometimes we call cumulants with derivatives of only one variety
+{\it diagonal} cumulants\index{cumulant!diagonal}; hence
+\equatref{eq:2ndorderdiagonal} lists all second-order, diagonal cumulants.
+Expressions for the second-order, off-diagonal cumulants are
+\begin{equation}\begin{aligned}
+\chi^{QS}_{11}&=\frac{1}{3}\left(\chi^{s}_{2}-\chi^{ls}_{11}\right)\\
+\chi^{BS}_{11}&=\frac{1}{3}\left(-\chi^{s}_{2}-2\chi^{ls}_{11}\right)\\
+\chi^{BQ}_{11}&=\frac{1}{9}\left(\chi^{l}_{2}-\chi^{s}_{2}+\chi^{ll}_{11}-\chi^{ls}_{11}\right).\\
+\end{aligned}\end{equation}
+
 
 
 \subsection{QCD material parameters}
