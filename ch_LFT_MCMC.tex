@@ -562,13 +562,35 @@ Remember, we chose this pseudofermion rewrite to be able to compute the
 determinant of the Dirac matrix efficiently. We want a
 $D^\dagger D$ in the exponential since it has positive eigenvalues,
 and hence makes for a well defined probability distribution.
-The $D^\dagger D$ would correspond to two identical quarks of that flavor.
+
+The $D^\dagger D$ would correspond to two identical quarks of that flavor, since
+by the Matthews-Salam formula
+\begin{equation}
+\det D^\dagger D = \det D^\dagger \det D
+=\int \dd{\bar{\psi}_f}\dd{\psi_f}\dd{\bar{\psi}_g}\dd{\psi_g}
+\exp\left(\bar{\psi}_fD^\dagger \psi+\bar{\psi}_gD \psi_g\right).
+\end{equation}
 The trick to get around this, as done in 
 Ref.~\cite{gottlieb_hybrid-molecular-dynamics_1987}, is to define the
 $\Phi$ fields on even sites only. This works because $D^\dagger D$ has no
-matrix elements\footnote{As this is a matrix in the space-time coordinate
-basis, we just check to see which Kronecker $\delta$ connect which sites.} 
-connecting even and odd sites. Finally we have the issue, discussed in
+matrix elements connecting even and odd sites. More precisely, if
+$D_0$ is the massless part of the Dirac operator, then
+\begin{equation}\begin{aligned}
+\left(D^\dagger D\right)_{xy}
+&=\left(2m\delta_{xz}+D^\dagger_{0,xz}\right)
+  \left(2m\delta_{zy}+D_{0,zy}\right)\\
+&=4m^2\delta_{xy}+2m\left(D^\dagger_{0,xy}+D_{0,xy}\right)+D^\dagger_{0,xz}D_{0,zy}.
+\end{aligned}\end{equation}
+The second term in the last line vanishes since $D$ is antihermitian.
+The first term is diagonal in the site basis. Similarly $D$ itself always sends
+odd to even or vice versa, so $D_0^\dagger D_0$ must preserve parity.
+Hence if we write $D^\dagger D$ in a basis organized so even indices come first 
+followed by odd, we have a block-diagonal matrix with two copies of
+$4m^2+D_0^\dagger D_0$. Restricting to one parity halves the number of degrees
+of freedom, returning us once again to our interpretation of having a single
+fermion species.
+
+Finally we have the issue, discussed in
 \secref{sec:HISQ}, that staggered fermions lead to four degenerate tastes.
 The solution offered in that section is to take the fourth root. In practice,
 this fourth root is implemented as a rational 
