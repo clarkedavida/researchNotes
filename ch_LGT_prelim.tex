@@ -795,7 +795,7 @@ temperature}\index{temperature} is seen to be
 \end{equation}
 
 
-\section{Scale setting}\label{sec:refscales}\index{scale!setting}
+\section{Scale setting I}\label{sec:refscales}\index{scale!setting}
 
 
 Lattice computations deliver dimensionless quantities $L=\ell/a$, where 
@@ -816,8 +816,12 @@ is called {\it scale setting}, and commonly one says
 
 
 Calculation of the constants $R_{ij}$ is prone to nontrivial statistical and
-systematic errors because they come from MCMC simulations performed on 
-finite lattices with nonzero spacing. Therefore it is desirable to set
+systematic uncertainties. On the statistical side, observables, including
+reference scales, come from randomly sampled field 
+configurations\footnote{See \chref{ch:MCMC}.}, and increasing statistics
+requires an increased computational effort. On the systematic side, there are
+uncertainties coming from performing calculations at finite box size and how one
+extrapolates to the continuum limit. Therefore it is desirable to set
 the scale with a quantity that is computable with low numerical effort,
 has small systematic uncertainties, and good statistical precision.
 
@@ -834,6 +838,29 @@ in the continuum once, where here $\ell_{\rm nice}$ is this nice scale with
 high precision and low effort. Then for each ensemble, one can
 easily compute $L_{\rm nice}$, giving you a good estimate for $a$ in physical units.
 
+
+The choice of $\ell_{\rm exp}$ can also be a source of uncertainty. For example
+experimental statistical and systematic uncertainties propagate into 
+$\ell_{\rm exp}$. More subtly, there is a systematic uncertainty that arises
+whenever there is a mismatch between the lattice Lagrangian and SM Lagrangian.
+For example, we have been considering up to now pure $\SU(N_c)$ theories, which
+are theories of $N_c$ colors of gluon only. Since we live in a world with all
+kinds of other particles, there is no way to directly access pure $\SU(N_c)$ in
+experiment. There are three approaches to somewhat circumvent this difficulty:
+\begin{enumerate}
+\item One can always report results as ratios of observables, never actually
+connecting to some physical unit like MeV.
+\item One can find indirect ways of relating quantities from physical and
+unphysical theories. These are often model-dependent, and hence it is hard to
+get a controlled, precise handle on the unphysical observable's value.
+\item One can use scales that are less sensitive to the missing particles. For
+example, most modern lattice calculations use at most the four lightest quarks,
+arguing that the top and bottom quarks are too heavy to have a significant
+effect, i.e. an effect detectable within the study's statistical precision.
+\end{enumerate}
+In the following subsections, we discuss some scales that have been used in pure
+gauge simulations. We postpone the discussion of scales directly accessible in
+experiment to \secref{sec:refscalesII}.
 
 
 \subsection{String tension}\index{string!tension}

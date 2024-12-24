@@ -1027,7 +1027,7 @@ When the fitting procedure has visited every example once, we call
 that an {\it epoch}\index{epoch}. In this stage, one may also subdivide
 the training set into {\it batches}\index{batch}. Finally algorithms
 like the gradient descent have an adjustable step size, in this
-context called a {\it learning rate}\index{learning rate}. Settings such 
+context called a {\it learning rate}\index{learning!rate}. Settings such 
 as the number of epochs, the number of batches, or the learning rate 
 are chosen by the user and will ultimately affect the
 weights that are computed. These settings are sometimes referred to
@@ -1041,6 +1041,53 @@ to make adjustments to the ML model.
 ensure good performance of the tuned model.
 \end{enumerate}
 
+
+\begin{figure}
+\includegraphics[width=\linewidth]{figs/CNN_filter.png}
+\caption{An example convolution of a filter/kernel
+of size $3\times 3$ with background pixels.
+Image taken from Wikipedia~\cite{wikiCNN}.}
+\label{fig:CNN}
+\end{figure}
+
+A {\it convolutional neural network}\index{neural network!convolutional} (CNN) 
+adds an additional layer to the architecture, the 
+{\it convolutional layer}\index{layer!convolutional}. CNNs are employed usually 
+in tasks of image recognition; hence we imagine a training process that scans
+over some set of pixels, with the goal of trying to extract some features from
+them.
+
+The convolutional layer is what carries out this task. It introduces a 
+{\it filter}\index{filter} or {\it kernel}\index{kernel}. For a 2-$d$ image, the
+kernel is a 2-$d$ grid, typically of size $3\times 3$, within which one
+specifies some values in the grid like 0 or 1. One then performs an inner
+product of the kernel with the pixels, as shown in \figref{fig:CNN}. This maps
+the original set of pixels to a smaller, coarse-grained set of 
+pixels\footnote{This is similar in spirit to a renormalization-group transform.},
+thereby lowering the information sent to the next part of the layer.
+Depending on the task at hand, the kernel size, the contents of the kernel,
+and the {\it stride}\index{stride}, a hyperparameter specifying 
+the number of pixels the kernel moves before
+performing the next inner product, must be adjusted.
+
+\subsection{Unsupervised learning}
+
+Up to now we have discussed ML models where some training must be done.
+These are examples of {\it supervised learning}\index{learning!supervised},
+where someone has to give some information to the ML model, in particular the
+labels on the training data. By contrast in {\it unsupervised
+learning}\index{learning!unsupervised}, we do no training, and instead sic some
+ML model on a set of data, allowing the model itself to discover any patterns.
+
+There are many strategies to achieve this. One strategy is to map each data
+point to $\R^n$. The ML model can then try to measure distances between each
+point in $\R^n$ to discover clusters. These are examples of {\it clustering
+algorithms}\index{clustering algorithm}.
+Alternatively after such a mapping, one could use 
+{\it principal component analysis}\index{principal component analysis} (PCA).
+For PCA, one tries to find a set of independent directions in $\R^n$ spanning
+the data. If we imagine the data as arranged in an ellipsoid, PCA tries to
+find its principal axes.
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
