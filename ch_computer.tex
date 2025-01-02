@@ -1072,15 +1072,19 @@ performing the next inner product, must be adjusted.
 
 \subsection{Unsupervised learning}
 
-Up to now we have discussed ML models where some training must be done.
-These are examples of {\it supervised learning}\index{learning!supervised},
+Up to now we have discussed ML examples of 
+{\it supervised learning}\index{learning!supervised},
 where someone has to give some information to the ML model, in particular the
-labels on the training data. By contrast in {\it unsupervised
-learning}\index{learning!unsupervised}, we do no training, and instead sic some
+labels on the training data. By contrast in {\it unsupervised}\index{learning!unsupervised}, 
+or {\it self-supervised}\index{learning!self-supervised} learning we provide no
+labels, and instead sic some
 ML model on a set of data, allowing the model itself to discover any patterns.
 
 There are many strategies to achieve this. One strategy is to map each data
-point to $\R^n$. The ML model can then try to measure distances between each
+point to $\R^n$. This target space is sometimes called a 
+{\it latent space}\index{space!latent}
+or {\it embedding space}\index{space!embedding}.
+The ML model can then try to measure distances between each
 point in $\R^n$ to discover clusters. These are examples of {\it clustering
 algorithms}\index{clustering algorithm}.
 Alternatively after such a mapping, one could use 
@@ -1088,6 +1092,66 @@ Alternatively after such a mapping, one could use
 For PCA, one tries to find a set of independent directions in $\R^n$ spanning
 the data. If we imagine the data as arranged in an ellipsoid, PCA tries to
 find its principal axes.
+
+
+Another useful algorithm for learning features is called an
+{\it autoencoder}\index{autoencoder}. It contains a hidden layer
+$c$ called an {\it encoder}\index{encoder} that represents the input $x$
+by $c(x)$. There is also a {\it decoder}\index{decoder} $d$ which ought to satisfy
+\begin{equation}\label{eq:autoencoder}
+x=d(c(x)).
+\end{equation}
+In principle there are many useless transformations
+$c$ that will not teach us anything new about the data. What we would like is to
+constrain $c$ in such a way that \equatref{eq:autoencoder} is approximate,
+with the hope that $c$ will expose the data's most salient features.
+
+One way of doing this is to enforce that $c(x)$ has a smaller\footnote{A CNN
+also creates a new data set of lower dimension than the input through
+convolution with the kernel. Rather than specifying the dimensional reduction
+should be a convolution, the autoencoder is asked to find the transformation
+itself.} dimension than $x$. Such autoencoders are said to be
+{\it undercomplete}\index{undercomplete}. With a mind toward 
+\equatref{eq:autoencoder}, the learning process consists of minimizing
+a loss function $L(x,d(c(x)))$ that penalizes $d(c(x))$ for being
+too different from $x$. If the decoder is linear and $L$ is
+the mean-squared error, the undercomplete autoencoder will learn to
+span the same space as PCA~\cite{Goodfellow_2016}. 
+
+\begin{figure}
+\includegraphics[width=\linewidth]{figs/VAE.png}
+\caption{A schematic variational autoencoder.
+Image taken from Wikipedia~\cite{wikiVAE}.}
+\label{fig:VAE}
+\end{figure}
+
+Depending on choices like the mapping $c$, the desired dimensionality of $c(x)$,
+and so on, an autoencoder may in some sense learn too well. What this means in
+practice is that the original data are too closely mimicked, and hence no
+interesting features of the data can be extracted. Generally speaking there
+are many strategies to avoid such overfitting. In the case of autoencoders,
+one can employ a {\it variational autoencoder}\index{autoencoder!variational}.
+In this algorithm, the output of the code is used to create a probability
+distribution; for example you could compute the mean and variance of $c(x)$ and
+create a Gaussian distribution $f$ from that. Then instead of passing $c(x)$
+directly to $d$, the machine draws a sample from $f$ which is then passed to
+$c$. A schematic of this process is shown in \figref{fig:VAE}.
+
+Another example of an unsupervised\footnote{Contrastive learning can also
+be used in supervised contexts. In the parlance of the following discussion,
+in the supervised case, one would label the example $e$ and incorporate
+that label in the loss function.} algorithm is called {\it contrastive
+learning}\index{contrastive learning}. Here one starts with an example $e$,
+then applies small transformations to $e$ creating new examples, say $e'$ and
+$e''$. This process of creating these new examples is called {\it data
+augmentation}\index{data augmentation}\footnote{Data augmentation can be
+employed also in other ML models.}. 
+In the context of image classification,
+common transformation include cropping the image, changing its color, flipping
+it, rotating it, and so on. 
+After embedding $e'$ and $e''$ in the latent space, one designs loss functions
+that punish points in the space that came from different original examples $e$.
+
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
