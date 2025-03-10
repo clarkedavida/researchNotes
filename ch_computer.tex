@@ -891,7 +891,7 @@ from~\cite{google_ML}.}
 \label{fig:neuralNet}
 \end{figure}
 
-\subsection{Neural networks}
+\subsection{Neural networks}\label{sec:NN}
 
 There are many, many strategies to construct an ML model.
 A popular strategy is to construct a {\it neural network}\index{neural network}
@@ -914,7 +914,7 @@ feature data using weighted sums. So for example
 the blue neuron in \figref{fig:neuralNet} (bottom), which I will
 call $h_{12}$, indicating hidden layer 1 neuron 2, might take values
 $x_1$ and $x_2$ from feature 1 and feature 2, respectively, and compute
-\begin{equation}
+\begin{equation}\label{eq:layer1}
 h_{12} = w_{11}x_1+w_{12}x_2.
 \end{equation}
 Then the orange neuron would compute
@@ -925,6 +925,13 @@ with the output layer yielding
 \begin{equation}
 {\rm output} = w_{31}h_{21}+w_{32}h_{22}.
 \end{equation}
+Equation~\eqref{eq:layer1} focuses on on just one neuron. This can be succinctly
+generalized to encapsulate all neurons in hidden layer 1; in particular
+\begin{equation}
+h_1=W x,
+\end{equation} 
+where $W=w_{ij}$ is the {\it weight matrix}\index{weight matrix}.
+
 In this NN, the output can be written linearly in terms of the input $x_i$;
 in other words, the NN models the labels as a linear function of the features.
 The NN is characterized completely by the weights $w_{ij}$ and the connections
@@ -985,9 +992,15 @@ A(x)= \begin{cases}\alpha x & x<0 \\ x & x \geq 0\end{cases},
 \end{equation}
 for some small constant $\alpha$. Which activation function is best suited
 for the task depends on the task at hand. Activation functions that output
-in $[0,1]$ can be interpreted as probabilities, which may make sense
+in $[0,1]$ can be interpreted as probabilities, which may\footnote{For example
+if the task of your NN is to classify images of dogs, it must be that
+$\pr{\rm{dog}}+\pr{\rm{not dog}}=1$.} make sense
 depending on your needs. The sigmoid function and $\tanh$ involve
 exponentials, and hence may be slower to compute than ReLU. 
+Finally, activation functions can be shifted adding a {\it bias}\index{bias}
+in their arugment, which can be represented as a constant shift added
+to weight produces like $Wx+b$. Adding a bias can be useful to e.g. change
+activation thresholds, which may be necessary to make a model more accurate.
 
 We now have constructed a relatively elementary, nonlinear NN to 
 model labels as a function of features. How good of a model will this be?
@@ -1129,7 +1142,8 @@ Depending on choices like the mapping $c$, the desired dimensionality of $c(x)$,
 and so on, an autoencoder may in some sense learn too well. What this means in
 practice is that the original data are too closely mimicked, and hence no
 interesting features of the data can be extracted. Generally speaking there
-are many strategies to avoid such overfitting. In the case of autoencoders,
+are many strategies to avoid such overfitting\index{overfitting}. 
+In the case of autoencoders,
 one can employ a {\it variational autoencoder}\index{autoencoder!variational}.
 In this algorithm, the output of the code is used to create a probability
 distribution; for example you could compute the mean and variance of $c(x)$ and
@@ -1152,6 +1166,66 @@ it, rotating it, and so on.
 After embedding $e'$ and $e''$ in the latent space, one designs loss functions
 that punish points in the space that came from different original examples $e$.
 
+\subsection{Judging ML model performance}
+
+In \secref{sec:NN} we sketched a three-step process for tuning a NN.
+Here we wish to discuss aspects of this process in detail, for example
+elucidating the role of the testing phase compared to the validation phase.
+
+The point of training is that the model describes data better and better as
+training progresses. As a consequence, one should expect that the loss function
+decreases and roughly converges with increasing epochs. This can be a metric of
+performance for ML models.
+
+Again, a common goal of constructing NNs is to model labels as a function of
+features. How well the NN models the data depends on what one feeds to it during
+training, and again thinking about the connection to least-squares problems,
+one can imagine fitting the weights and biases to the training data. Just like
+with ordinary fitting, one can {\it overfit}\index{overfitting} the data: This
+often amounts to taking fluctuations in training data too seriously, baking structure
+into the model that is either irrelevant or not really there, stemming instead
+from e.g. statistical noise. Just as in ordinary least-squares problems,
+a model is more susceptible to overfitting when there are too many fit
+parameters. Overfit models will label the training data
+extremely well, but having ``learned" irrelevant features and/or noise in the
+training data, will generally not perform well when presented with completely
+new data. In ML parlance, one might say that the overfit model does not
+{\it generalize}\index{generalization} well. Another drawback to overfitting
+manifests for models whose output layers are to be interpreted as probabilities.
+Overfitted NNs may find a high likelihood that a datum belongs to a particular
+label while also getting the label wrong. In this context, overfitting
+translates to a problem of {\it overconfidence}\index{overconfidence}.
+
+As suggested by the above paragraph, one way to check if a model has been
+overfitted is to see how well it generalizes. One way to do this is to set aside
+another set of data to see if the trained, validated model performs well in a
+new situation. This a motivation for the testing stage. A model that performed
+well during validation but poorly during testing may suffer from overfitting.
+Another check is to compare the dependence of the loss function against the
+number of epochs between the training and validation sets. In this context, a
+sign of overfitting can be that the validation loss curve diverges with increasing 
+epochs compared to the training loss curve.
+
+Just as with least-squares approaches, overfitting can be combatted by
+penalizing model complexity. For example in the context of ordinary
+least-squares fits, model quality is sometimes judged using various information
+criteria, which often add to the $\chi^2$ a penalty that increases with
+increasing number of fit parameters. Thus to prevent overfitting, instead of
+minimizing a bare loss function, one may seek to minimize
+\begin{equation}
+{\rm loss}+\lambda~{\rm regularization},
+\end{equation}
+with the latter {\it regularization}\index{regularization} term quantifying the
+overfitting and $\lambda$ an adjustable parameter to give more or less weight to
+this term compared to the loss.
+
+A simple and popular choice of regularization is the $L_2$ 
+regularization\index{regularization!L2}. Here the regularization is computed as
+the sum of squares of the weights, which punishes weights that are away from
+zero. For each weight, this forces the machine to make a decision how important
+that weight is: Weights that decrease the loss function only very little will
+ultimately be punished by the regularization. In that sense, the model is forced
+to focus on the most important weights only.
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}

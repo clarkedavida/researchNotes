@@ -417,16 +417,26 @@ enters linearly in the action.
 We showcase the idea by doing reweighting in $\beta=1/T$ for
 an arbitrary statistical physics theory of some field $\phi$. Consider
 the expectation value of an observable $X$ calculated at $\beta'$. We have
-\begin{equation}\label{eq:RW}
+\begin{equation}
 \begin{aligned}
   \ev{X}_{\beta'}&=Z_{\beta'}^{-1}\int\dd{\phi}e^{-\beta'E(\phi)}X(\phi)
                   e^{(\beta-\beta)E(\phi)}\\
                  &=Z_{\beta'}^{-1}\int\dd{\phi}e^{(\beta-\beta')E(\phi)}
                   X(\phi)e^{-\beta E(\phi)}\\
-                 &=Z_{\beta'}^{-1}Z_{\beta}\ev{e^{(\beta-\beta')E}X}_\beta\\
-                 &=\ev{\frac{Z_\beta}{Z_{\beta'}}e^{(\beta-\beta')E}X}_\beta.
+                 &=Z_{\beta'}^{-1}Z_{\beta}\ev{e^{(\beta-\beta')E}X}_\beta.
 \end{aligned}
 \end{equation}
+To determine the factor $Z_{\beta'}^{-1}Z_{\beta}$, just plug in $X=1$.
+One finds
+\begin{equation}
+Z_{\beta'}^{-1}Z_{\beta}=\ev{e^{(\beta-\beta')E}}_{\beta}^{-1},
+\end{equation}
+and so
+\begin{equation}\label{eq:RW}
+\ev{X}_{\beta'}=\frac{\ev{e^{(\beta-\beta')E}X}_\beta}{\ev{e^{(\beta-\beta')E}}_{\beta}}.
+\end{equation}
+
+
 We can calculate the expectation value in the last line
 using data from a time series generated at $\beta$, and this gives us an
 estimate for $\ev{X}_{\beta'}$. Reweighting is only useful when
