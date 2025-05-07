@@ -1220,12 +1220,20 @@ overfitting and $\lambda$ an adjustable parameter to give more or less weight to
 this term compared to the loss.
 
 A simple and popular choice of regularization is the $L_2$ 
-regularization\index{regularization!L2}. Here the regularization is computed as
+{\it regularization}\index{regularization!L2}. Here the regularization is computed as
 the sum of squares of the weights, which punishes weights that are away from
 zero. For each weight, this forces the machine to make a decision how important
 that weight is: Weights that decrease the loss function only very little will
 ultimately be punished by the regularization. In that sense, the model is forced
 to focus on the most important weights only.
+Another popular choice is\index{regularization!dropout} {\it dropout
+regularization}~\cite{srivastava_dropout_2014}. In this scheme, every neuron of
+either the input or hidden layer is removed, along with its connections, with
+probability $p$. This {\it thinned network}\index{neural network!thinned}
+represents a draw from a sample of all possible neural networks. Weights must be
+normalized with the dropout probability $p$ in order to ensure the weights keep
+the same scale relative to each other.
+
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}

@@ -790,10 +790,21 @@ temperature direction rather than a time direction.
 The continuum limit of the finite temperature system corresponds
 to $a\to0$ with $aN_s$ and $aN_\tau$ fixed. The {\it physical
 temperature}\index{temperature} is seen to be
-\begin{equation}
+\begin{equation}\label{eq:latticeTemp}
   T=\frac{1}{aN_\tau}.
 \end{equation}
 
+From this equation, we see that at fixed lattice spacing, $T$ and $N_\tau$ are
+inversely related. In particular, at fixed $a$, the limit $N_\tau=\infty$
+delivers zero-temperature configurations. In practice, if we are interested in
+zero-temperature physics, the best we can do is generate configurations with
+negligibly small $T$. To judge whether $T$ is negligible, a good choice is
+asking $T$ to be much smaller than the lightest bound state\footnote{You know
+everything must be bound states because you're in the confined phase.}, 
+which in $\SU(N_c)$ would be the lightest glueball. That $N_\tau$ needs to be
+large enough to deliver a relatively small $T$ tends to make $T=0$ calculations
+rather expensive, especially if you are additionally wanting to suppress size
+effects, which requires also $N_s$ to be large.
 
 \section{Scale setting I}\label{sec:refscales}\index{scale!setting}
 
@@ -874,6 +885,7 @@ to get a precise connection to physical units using this quantity.
 
 
 \subsection{Deconfinement temperature}\index{temperature!deconfinement}
+\index{phase transition!deconfining}
 
 
 Another choice of scale for pure gauge systems is the 
@@ -1197,6 +1209,7 @@ the Polyakov loop has fallen out of favor for this purpose at physical
 quark masses and lower~\cite{clarke_polyakov_2020}.
 
 \subsection{The Polyakov loop and deconfinement}\index{deconfinement}
+\index{phase transition!deconfinement}
 We begin with a brief review of some relevant properties of the
 Polyakov loop. For a theory with underlying $\SU(N_c)$ gauge group, we define
 the Polyakov loop by\index{Polyakov loop}
@@ -1238,12 +1251,13 @@ uncorrelated; therefore one finds
     \approx\ev{P_{\vec{x}}}\ev{P^\dagger_{\vec{y}}}
     =\ev{P}\ev{P^\dagger}
     =\ev{P}\ev{P}^\dagger
-    =\left|\ev{P}\right|^2,
+    =\left|\ev{P}\right|^2
+    \approx\ev{|P|^2},
 \end{equation}
 and from \equatref{eq:Fav} we can (at least schematically) write
 something like
 \begin{equation}
-  \left|\ev{P}\right|^2\sim\exp\left[-\frac{F_{q\bar{q}}(\infty,T)}{T}\right]. 
+  \ev{|P|^2}\sim\exp\left[-\frac{F_{q\bar{q}}(\infty,T)}{T}\right]. 
 \end{equation}
 Since $F_{q\bar{q}}$ is growing linearly with separation at low temperatures
 due to confinement, the RHS of the above equation is zero.\footnote{You may
@@ -1270,10 +1284,10 @@ unchanged, one can write
 since the sum over the center elements is zero.
 
 At higher temperatures the first equality of \equatref{eq:centerzero}
-no longer holds. At the deconfinement temperature $T_c$, this center symmetry
+no longer holds. At the deconfinement temperature $\Td$, this center symmetry
 is spontaneously broken, and $\ev{|P|}$ acquires a nonzero value, signalling
 a finite static quark-antiquark free energy and hence deconfinement.
-At finite $N_\sigma$, $\ev{|P|}$ has an inflection point at $T_c$, and
+At finite $N_\sigma$, $\ev{|P|}$ has an inflection point at $\Td$, and
 the slope at this point diverges in the infinite volume limit. The Polyakov
 loop susceptibility, defined as
 \begin{equation}\index{Polyakov loop!susceptibility}
@@ -1388,20 +1402,20 @@ Therefore,
   \lim_{r\to0}~F_{q\bar{q}}-F_1=T\log 9\qquad\Forall T.
 \end{equation}
 
-The Polyakov loop requires a multiplicative renormalization. When each link
-is renormalized with factor $Z(\beta)$, it follows from
-\equatref{eq:ploop} that the Polyakov loop renormalizes as
+The Polyakov loop requires a multiplicative renormalization. Polyakov was the
+first to show that the Polyakov loop renormalizes as~\cite{polyakov_gauge_1980}
 \begin{equation}\label{eq:renploop}
-  P^{\text{ren}}=Z(\beta)^{N_\tau}P.
+  P\ren=Z(\beta)^{N_\tau}P,
 \end{equation}
-From \equatref{eq:Fav} it is then clear that $F_{q\bar{q}}$ requires an
+where $Z(\beta)$ is the renormalization of the gauge field, i.e. of
+each link. From \equatref{eq:Fav} it is then clear that $F_{q\bar{q}}$ requires an
 additive renormalization. We can write
 \begin{equation}\label{eq:renFav}
-  a\,F_{q\bar{q}}^{\text{ren}}=a\,F_{q\bar{q}}+c(\beta),
+  a\,F_{q\bar{q}}\ren=a\,F_{q\bar{q}}+c(\beta),
 \end{equation}
 and then by \equatref{eq:Tlog9} we can similarly write
 \begin{equation}
-  a\,F_1^{\text{ren}}=a\,F_1+c(\beta)
+  a\,F_1\ren=a\,F_1+c(\beta)
 \end{equation}
 with the same $c(\beta)$ for both. From \equatref{eq:Fav},
 \eqref{eq:renploop}, and \eqref{eq:renFav} we can write
@@ -1409,8 +1423,14 @@ with the same $c(\beta)$ for both. From \equatref{eq:Fav},
   c(\beta)=-2\log Z(\beta).
 \end{equation}
 
+We note in passing that, in general, composite operators made of Polyakov loops
+require a separate 
+renormalization~\cite{polyakov_gauge_1980,korchemsky_renormalization_1987}.
+This includes, among other things, the Polyakov loop susceptibility.
+
 In practice, renormalized Polyakov loops can be calculated using
-the $q\bar{q}$-scheme~\cite{kaczmarek_heavy_2002}. The additive
+the $q\bar{q}$ {\it scheme}~\cite{kaczmarek_heavy_2002}.\index{renormalization
+scheme!$q\bar{q}$} The additive
 renormalization is determined by matching the singlet free energy
 to the zero temperature potential at short distances, i.e.
 \begin{equation}
@@ -1422,25 +1442,88 @@ distance suffers the most from lattice artifacts.) The renormalized
 Polyakov loop is determined as follows:
 By \equatref{eq:Fav} and \eqref{eq:ploop_decouple}
 \begin{equation}
-  \lim_{r\to\infty}F_{q\bar{q}}^{\text{ren}}(r,T)
+  \lim_{r\to\infty}F_{q\bar{q}}\ren(r,T)
              =-T\log\left|\ev{P}\right|^2+c(\beta)T.
 \end{equation}
 Moreover as the distance between the pair increases, this free energy
 should approach that of two quarks that do not interact with each other, i.e.
 \begin{equation}
-  \lim_{r\to\infty}F_{q\bar{q}}^{\text{ren}}(r,T)=2F_q^{\text{ren}}(T),
+  \lim_{r\to\infty}F_{q\bar{q}}\ren(r,T)=2F_q\ren(T),
 \end{equation}
 where $F_q$ is the free energy of a heavy, static quark in the thermal
 medium. The renormalized Polyakov loop is then recovered from its
 relationship to this free energy, namely
 \begin{equation}
-  P^{\text{ren}}=\exp\left[-\frac{F_q^{\text{ren}}(T)}{T}\right],
+  P\ren=\exp\left[-\frac{F_q\ren(T)}{T}\right],
 \end{equation}
 and from the above three equations we finally find
 \begin{equation}
-  P^{\text{ren}}=\exp\left[-\frac{1}{2}\left(\log\left|\ev{P}\right|^2
+  P\ren=\exp\left[-\frac{1}{2}\left(\log\left|\ev{P}\right|^2
                                              -c(\beta)\right)\right].
 \end{equation}
+
+Historically, the $q\bar{q}$ scheme was the first lattice renormalization
+strategy for the Polyakov loop. A major drawback of the $q\bar{q}$ scheme
+is that it requires some $T=0$ calculations, which are generally speaking
+extremely expensive, as was explained in \secref{sec:finitetemp}.
+Several years later, a cheaper alternative was introduced, the so-called {\it
+direct renormalization procedure}\index{direct renormalization}
+\cite{gupta_renormalized_2008}.\footnote{ In this paper, they also 
+point out a condition under which a Polyakov loop can be
+renormalized in multiple representations.
+Let $P_R$ indicate a Polyakov loop computed in some
+representation $R$. If both the bare and renormalized Polyakov loops 
+in two representations $R$ and $R'$ satisfy
+$$
+P_R^{1/C_2(R)}=P_{R'}^{1/C_2(R')},
+$$
+where $C_2(R)$ is the quadratic Casimir computed in representation $R$,
+they are said to satisfy {\it Casimir scaling}\index{Casimir!scaling}.
+If Casimir scaling holds, it follows that $Z_R(\beta)=Z_{R'}(\beta)$.
+Hence under Casimir scaling, one can take over a result from the fundamental
+representation to another one.}
+
+The idea of the direct renormalization procedure is
+to iteratively construct the renormalized Polyakov loop at all temperatures
+starting from some known renormalized Polyakov loop at a reference temperature.
+\begin{enumerate}
+  \item As input, we need $P\ren(T_0)$ at some reference temperature
+  $T_0$ along with the corresponding bare $P$ for at least two $N_\tau$, 
+  say $N_{\tau,1}$ and $N_{\tau,2}$. $P\ren$ could be fixed by, for example, 
+  the $q\bar{q}$ scheme. From \equatref{eq:renploop} it follows that
+  \begin{equation*}\begin{aligned}
+  P\ren(T_i)&=Z(\beta_{i,1})^{N_{\tau,1}}P(\beta_{i,1},N_{\tau,1})\\
+            &=Z(\beta_{i,2})^{N_{\tau,2}}P(\beta_{i,2},N_{\tau,2}),
+  \end{aligned}\end{equation*}
+  for any $i$, where $i$ indicates the iteration step. Hence our first use
+  of this equation will be for $i=0$.
+  \item Next, we need a measurement of $P$ at $N_{\tau,1}$, this time using the
+  coupling $\beta_{i,2}$. In other words,
+  $$
+  \beta_{i+1,1}=\beta_{i,2}.
+  $$
+  This delivers a new temperature
+  $$
+  T_{i+1}=\frac{1}{a(\beta_{i,2})N_{\tau,1}}=\frac{N_{\tau,2}}{N_{\tau,1}}T_i.
+  $$
+  Again from \equatref{eq:renploop} it follows that
+  $$
+  P\ren(T_{i+1})=Z(\beta_{i,2})^{N_{\tau,1}}P(\beta_{i,2},N_{\tau,1}).
+  $$
+  We already have $Z(\beta_{i+1,1})=Z(\beta_{i,2})$ from step 1, so combined with 
+  our measurement of $P$, we can compute $P\ren(T_{i+1})$. Knowing $T_{i+1}$, we get
+  $\beta_{i+1,2}$ using \equatref{eq:latticeTemp}. 
+  \item Finally, we need a measurement of $P$ at $N_{\tau,2}$ and $\beta_{i+1,2}$.
+  Another application of \equatref{eq:renploop} along with our already
+  computed $P\ren(T_{i+1})$ enables us to deduce $Z(\beta_{i+1,2})$.
+  \item We now have the same equations as step 1 for $i+1$, which defines
+  the iterative process. 
+\end{enumerate}
+
+We note that while this procedure is cheap and straightforward, step 3 exposes
+a drawback, namely that $\beta_{i+1,2}$ has to be obtained by inverting
+the function $a(\beta)$, and hence this scheme is in principle sensitive to the
+parameterization of $a(\beta)$. 
 
 \subsection{Finite size scaling}\label{sec:ploopfss}
 In this section we discuss some finite volume effects related to the

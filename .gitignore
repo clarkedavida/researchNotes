@@ -1,6 +1,7 @@
 # LaTeX stuff not needed for repository
 *.bbl
 Exported\ Items.bib
+_minted*
 *.tf
 *.tfm
 *.600pk
