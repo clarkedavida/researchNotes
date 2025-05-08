@@ -1403,12 +1403,14 @@ Therefore,
 \end{equation}
 
 The Polyakov loop requires a multiplicative renormalization. Polyakov was the
-first to show that the Polyakov loop renormalizes as~\cite{polyakov_gauge_1980}
+first to notice that the Polyakov loop renormalizes as~\cite{polyakov_gauge_1980}
 \begin{equation}\label{eq:renploop}
   P\ren=Z(\beta)^{N_\tau}P,
 \end{equation}
 where $Z(\beta)$ is the renormalization of the gauge field, i.e. of
-each link. From \equatref{eq:Fav} it is then clear that $F_{q\bar{q}}$ requires an
+each link. The same year, it was proven renormalizable to all orders in
+perturbation theory~\cite{arefeva_quantum_1980,gervais_slope_1980}. 
+From \equatref{eq:Fav} we see that $F_{q\bar{q}}$ requires an
 additive renormalization. We can write
 \begin{equation}\label{eq:renFav}
   a\,F_{q\bar{q}}\ren=a\,F_{q\bar{q}}+c(\beta),
@@ -1425,8 +1427,8 @@ with the same $c(\beta)$ for both. From \equatref{eq:Fav},
 
 We note in passing that, in general, composite operators made of Polyakov loops
 require a separate 
-renormalization~\cite{polyakov_gauge_1980,korchemsky_renormalization_1987}.
-This includes, among other things, the Polyakov loop susceptibility.
+renormalization~\cite{polyakov_gauge_1980,arefeva_quantum_1980,gervais_slope_1980,korchemsky_renormalization_1987}.
+This includes, for instance, the Polyakov loop susceptibility.
 
 In practice, renormalized Polyakov loops can be calculated using
 the $q\bar{q}$ {\it scheme}~\cite{kaczmarek_heavy_2002}.\index{renormalization
@@ -1524,6 +1526,24 @@ We note that while this procedure is cheap and straightforward, step 3 exposes
 a drawback, namely that $\beta_{i+1,2}$ has to be obtained by inverting
 the function $a(\beta)$, and hence this scheme is in principle sensitive to the
 parameterization of $a(\beta)$. 
+
+The final, standard approach to renormalizing the Polyakov loop is
+the use of the gradient flow. L\"uscher and Weisz showed perturbatively 
+that the gradient flow maps configurations to smooth, renormalized 
+fields~\cite{luscher_perturbative_2011}. The flow time that you
+choose defines a renormalization scheme. It was mentioned above that the
+standard multiplicative renormalization does not automatically renormalize
+composite operators. Interestingly, lattice calculations seem to suggest
+that this approach takes care of the Polyakov loop susceptibility
+as well~\cite{datta_using_2016,bazavov_polyakov_2016}. What is also nice
+about this approach is that to leading order in pure SU(3) gauge theory, 
+the dependence of $P\ren$ on the flow time $t$ is known:
+\begin{equation}
+\log P\ren(T,t)=\frac{g^2(T)C_Fm_E}{8\pi T}+\order{g^4,g^4\sqrt{t}T},
+\end{equation}
+where $m_E=gT$ and $C_F$ is the quadratic Casimir in the fundamental
+representation, given by \equatref{eq:casfund}.
+
 
 \subsection{Finite size scaling}\label{sec:ploopfss}
 In this section we discuss some finite volume effects related to the
