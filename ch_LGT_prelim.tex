@@ -1537,7 +1537,7 @@ composite operators. Interestingly, lattice calculations seem to suggest
 that this approach takes care of the Polyakov loop susceptibility
 as well~\cite{datta_using_2016,bazavov_polyakov_2016}. What is also nice
 about this approach is that to leading order in pure SU(3) gauge theory, 
-the dependence of $P\ren$ on the flow time $t$ is known:
+the dependence of $P\ren$ on the flow time $t$ is known~\cite{datta_using_2016}
 \begin{equation}
 \log P\ren(T,t)=\frac{g^2(T)C_Fm_E}{8\pi T}+\order{g^4,g^4\sqrt{t}T},
 \end{equation}
@@ -1568,7 +1568,7 @@ so we cannot anticipate that $\ev{\Im P}$ will vanish anymore.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]
+  \includegraphics[width=0.7\textwidth]
           {figs/ploopScatter_betaDependl568ms80.pdf}
   \caption{Scatter plot of $P$ values for $56^3\times8$ HISQ configurations
            with $N_f=2+1$ at $m_s/m_l=80$. Temperatures are listed in MeV. 
@@ -1601,7 +1601,7 @@ $\ev{y^2}$ scales linearly with $1/V$.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{figs/ImP2_voldepend.pdf}
+  \includegraphics[width=0.7\textwidth]{figs/ImP2_voldepend.pdf}
   \caption{Volume dependence of the bare $\ev{(\Im P)^2}$ on $N_\tau=8$
            lattices with $\beta=6.445$, $m_s/m_l=80$, and $N_\sigma=32$, 40,
            and 56. The linear fit has
@@ -1636,5 +1636,31 @@ absolute values are not linear.
            infinite volume extrapolations.}
   \label{fig:FSSScalingOfSuscs}
 \end{figure}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.45\textwidth]{figs/mercedesStar.pdf}
+  \includegraphics[width=0.45\textwidth]{figs/ploopPotential.pdf}
+  \caption{{\it Left}: Heat map of Polyakov loop in complex plane, forming the
+  Mercedes star pattern. The triangle indicates the phase boundaries.
+  {\it Right}: Visualization of effective potential.}
+  \label{fig:mercedesStar}
+\end{figure}
+
+
+\subsection{Effective potential}
+
+In \figref{fig:ploopScatter} we see where the Polyakov loop likes to settle for
+various temperatures. Both above and below the QCD crossover temperature, which
+is about 155 MeV, it is found to cluster on the real axis.
+This is a property of doing the simulation at finite quark mass. In pure SU(3),
+the Polyakov loop settles differently in the complex plane; in particular it
+clusters in three locations in the confined phase, forming a pattern sometimes
+referred to as the {\it Mercedes star}\index{Mercedes star}.
+An example of this behavior is shown in \figref{fig:mercedesStar} (left).
+
+
+
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
