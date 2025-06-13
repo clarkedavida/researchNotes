@@ -238,6 +238,9 @@ This model tries to capture the
 idea that spins in a magnet prefer to align, as $H$ lowers when
 $\sigma_i$ and $\sigma_j$ have the same sign. Similarly when there
 is an external field, the model prefers spins to align with it.
+We note that, generally speaking, the critical behavior of a magnet model
+depends on the geometry of its supporting space. In this section, we assume the
+spins lie on square, cubic, or hypercubic lattices.
 
 We said this was the 2-$d$
 Ising model, but since we are labelling the sites by indices, the form
@@ -265,11 +268,12 @@ Ising model are collected in the first column of
 
 Generic spin models are essentially just generalizations of \equatref{eq:ising}.
 The next standard generalization is called a $q$-state
-{\it Potts model}\index{Potts model} or
-$S_q$ {\it model}, originally studied by 
+{\it Potts model}\index{Potts model}\footnote{The 4-state Potts model
+is sometimes referred to as the {\it Ashkin-Teller model}\index{Ashkin-Teller
+model}, as they had studied an equivalent model already
+in 1943~\cite{ashkin_statistics_1943}.} or $S_q$ {\it model}, originally studied by 
 Potts~\cite{Potts:1951rk}. The Hamiltonian\footnote{One can also add 
-an external magnetic field term. I'm not sure how often such
-models get studied.} is
+an external magnetic field term.} is
 \begin{equation}\label{eq:potts}
 H=-J\sum_{\ev{i j}} \delta\left(\sigma_i, \sigma_j\right)
 \end{equation}
@@ -343,7 +347,24 @@ is a low-temperature phase where vortices and antivortices must arrange
 themselves in pairs along with a high-temperature phase where vortices can
 exist in 
 isolation~\cite{Berezinsky:1972rfj,kosterlitz_ordering_1973,kosterlitz_critical_1974}.
+For example in the $\ON(2)$ model, a {\it vortex}\index{vortex} can be found
+if one follows the spins around an elementaray plaquette, summing their relative
+angles along the way, and get $2\pi$. An {\it antivortex} state sums to $-2\pi$.
+Vortex and antivortex states are shown
+schematically in \figref{fig:classicalExcitations} (b).
 
+\begin{figure} 
+\centering
+\includegraphics[width=0.6\linewidth]{figs/vortex.pdf}
+\caption{
+Schematic drawings of (a) a spin-wave excitation,
+(b) vortex and anti-vortex excitations, and (c)
+a soliton excitation in a one-dimensional lattice
+with symmetry-breaking field.
+Figure from Ref.~\cite{landau_guide_2021}.
+}
+\label{fig:classicalExcitations}
+\end{figure}
 
 The $\ON(2)$ model imagines each spin as lying on a unit circle. These spins can be
 even further generalized. In particular when we allow each spin to lie on a unit
@@ -363,6 +384,32 @@ where $\sigma_i\in\{-1,0,1\}$. For this model, the coupling $D$ is called
 the {\it crystal-field coupling}, which is attached to a term quadratic in the
 fields. This model is sometimes interesting because it features a second-order
 line that becomes first-order for low $T$.
+
+Up to now we have considered magnet models featuring only a nearest-neighbor
+interaction, however it may be useful for such systems to consider
+next-to-nearest-neighbor interactions. Such interactions can be useful to study,
+e.g., geometric {\it frustration}\index{frustration}, a general phenomenon in
+which competing inter-atomic forces lead to intricate structures such as
+highly degenerate ground states. In the 2-$d$ {\it frustrated Ising model}\index{Ising
+model!frustrated}, one has the Hamiltonian
+\begin{equation}
+H=J_1\sum_{\ev{i j}} \sigma_i \sigma_j + J_2\sum_{\ev{\ev{i j}}} \sigma_i \sigma_j
+\sigma_j,
+\end{equation}
+where $\ev{\ev{ij}}$ indicates second, diagonal neighbors on the square lattice
+and $J_1$ and $J_2$ are chosen to have opposite signs. In this context, one
+usually defines a parameter $g\equiv J_2/|J_1|$ to capture the relative strength
+of the couplings. For $g<1/2$ at $T=0$, the system exhibits a standard
+ferromagnetic ground state. For $g>1/2$, the system energetically punishes
+alignment with the second, diagonal neighbors, and the spins organize themselves
+into aligned and anti-aligned stripes, an example of a highly degenerate ground
+state emerging in a frustrated system. This structure is called the
+{\it stripe anti-ferromagnetic phase}\index{stripe anti-ferromagnetic}.
+The phase structure for $g>1/2$ is somewhat controversial: It is
+unclear whether it is second-order $\forall g>1/2$ or whether there exists a
+first-order region. Moreover the universality classes to which these systems
+belong is still under active study.
+
 
 \section{Singularity structure}\label{sec:leeyang}\index{Lee-Yang!Theorem}
 

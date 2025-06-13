@@ -17,7 +17,146 @@ the muon anomalous magnetic moment, they can comprise a substantial fraction of
 the overall uncertainty. When it is relevant, this uncertainty
 is referred to as\index{strong isospin breaking} {\it strong isospin breaking}.
 
+\section{Scale setting II}\label{sec:refscalesII}\index{scale!setting}
+
+In \secref{sec:refscales} we introduced the concept of scale setting,
+which is more or less how one takes the dimensionless numbers delivered by
+an LQCD simulation and expresses them in physical units. We then
+discussed a handful of reference scales that can be used in pure
+$\SU(N_c)$ calculations. In this section, we will discuss some reference scales
+that are used for calculations with $N_f>0$ and the rationale behind various
+choices. Scale setting is extremely important for state-of-the-art lattice
+calculations, as the uncertainty from the scale propagates into the final
+results, and many modern calculations target sub-per-mille uncertainties.
+
+For pure $\SU(N_c)$ calculations, the only input is the bare coupling constant
+$\beta$. Quite often, pure $\SU(N_c)$ calculations leave their results in
+lattice units because there is no experimentally accessible way to set the
+scale; after all we exist in a world with quarks. When lattice practitioners
+wish to express their pure $\SU(N_c)$ results in physical units, this has
+historically been accomplished by estimating a quantity like the string tension
+using some kind of effective model.\footnote{A thorough discussion about this in
+the context of pure gauge theories can be found toward the beginning of
+Ref.~\cite{smit_introduction_2002}.} We emphasize that such calculations only
+require one quantity with physical units as input.
+
+Lattice calculations with $N_f>0$ have the
+advantage of being more physically realistic, especially simulations that
+include the three lightest quarks in nature, and hence experimentally accessible
+quantities can be more straightforwardly used as a reference scale. At the same
+time, as discussed in \chref{ch:ferm}, bare quark masses enter the action.
+If we want simulations that match the real world as closely as possible, one has
+to tune the bare quark masses as well. One way to accomplish this is to pick
+bare quark masses such that the simulation faithfully reproduces some
+judiciously chosen hadron masses. Therefore $N_f>0$ calculations require
+multiple experimental inputs, usually a couple hadron masses to tune the bare
+quarks and a final input to set the scale. 
+
+\subsection{The gradient scale}
+
+\secref{sec:gradcool} introduced the gradient scale. There one integrates the
+flow equation \eqref{eq:Wflow} until
+\begin{equation}
+  y=t^2 \ev{E(t)},
+\end{equation}
+where $E$ is the energy density and 
+$y$ is some target value. The gradient scale $s$, which has units of length,
+is then given by
+\begin{equation}
+  s\equiv\sqrt{t}.
+\end{equation}
+In L\"uscher's original paper, $y=0.3$ was chosen, which defines a flow time
+commonly referred to as $t_0$~\cite{luscher_properties_2010}. As discussed
+in \secref{sec:gradcool}, flowing smooths the gauge fields over a hypersphere of
+mean-square radius $\sqrt{8t}$. To suppress significant finite-size and cutoff effects,
+the target value should should be chosen such that $a\ll \sqrt{8t}\ll aN_{\rm
+min}$, where $N_{\rm min}$ represents the shortest extension. The choice $y=0.3$
+delivers a mean-square radius that has satisfied this constraint for many
+commonly used ensembles.
+
+Empirically it was discovered by the BMW collaboration that the slope of
+$t^2\ev{E(t)}$ is less contaminated by lattice artifacts than $t^2\ev{E(t)}$
+itself~\cite{BMW:2012hcm}. This motivated in their paper another
+gradient-flow-based scale, defined by integrating 
+\begin{equation}
+  y=t \dv{}{t}t^2 \ev{E(t)}.
+\end{equation}
+The choice $y=0.3$ for this equation yields a flow time referred to as $w_0^2$.
+Hence $w_0$ is a quantity with units of length.
+
+There are multiple ways one can discretize the action used in the flow equation
+\eqref{eq:Wflow}. When one uses the standard Wilson gauge action, this is referred
+to as the {\it Wilson flow}\index{Wilson flow}. This action can be 
+Symanzik-improved like any other action or interpolator can; an example of this is 
+the {\it Zeuthen flow}\index{Zeuthen flow}~\cite{Ramos:2015baa}.
+
+\subsection{Pseudoscalar decay constants}
+
+Pseudoscalar decay constants enter in formulae that describe the decay rates 
+of pseudoscalar mesons $P$ decaying to a lepton $\ell$ and a neutrino $\nu_\ell$. 
+To leading order, this is given by
+\begin{equation}\label{eq:decayconstant}
+\Gamma(P\to\ell\nu_\ell)=\frac{G_F^2}{8\pi}f_P^2m_\ell^2m_P
+\left(1-\frac{m_\ell^2}{m_P^2}\right)|V_{q_1q_2}|^2.
+\end{equation}
+Here, $G_F$ is the Fermi coupling constant\footnote{This constant is the
+interaction strength of Fermi's effective model of four-fermion weak
+interactions~\cite{fermi_tentativo_1934}. Its square is proportional to
+to the muon decay rate: At tree level $\mu^-$ annihilates with $\nu_\mu$
+to an off-shell $W^-$ boson, which in turn commonly decays to
+$e^-$ and $\nu_e$. Experimentally it's roughly $1\times10^{-5}$ GeV$^{-2}$.},
+$f_P$ is the {\it pseudoscalar decay constant}\index{decay constant},
+$m_\ell$ is the mass of $\ell$, $m_P$ is the mass of $P$,
+and $V_{q_1q_2}$ is the CKM matrix element\footnote{Described in
+more detail in \apref{ap:spec_neutrino}.} for the quark constituents
+$q_1$ and $q_2$ of $P$. If one knows the masses, the product
+$f_P|V_{q_1q_2}|$ can be extracted through \equatref{eq:decayconstant} by
+measuring the decay rate on the LHS.
+Since $f_P$ is also related to the matrix element of the
+axial current between the one-$P$-meson state and the vacuum,
+\begin{equation}
+\bra{0}\bar{q}_1\gamma_\mu\gamma_5\ket{P(p)}=ip_\mu f_P,
+\end{equation}
+it can be interpreted as the ``wave function overlap" of the quark and
+antiquark. 
+
+Pion decay constants $f_\pi$ have historically been used for scale setting, as
+they are known relatively precisely. Beyond leading order, they include
+EW effects that need to be taken into account. For LQCD calculations
+that target sub-per-mille precision, this is not ideal.
+Kaon decay constants $f_K$ refer to the decays of charged kaons.
+The reason is that the weak sector SM Lagrangian contains no so-called
+{\it flavor-changing neutral currents}\index{FCNC} (FCNC); that is,
+no tree-level, electric-charge-neutral process lets you change the
+flavor of a lepton.
+
+\subsection{Hadron masses}
+
+Masses of hadrons can also be used to set the scale. The masses
+$m_\pi$, $m_K$, and $m_{D_s}$\footnote{$D$ mesons\index{meson!$D$}
+are mesons with one $c$ quark and a $u$, $d$, or $s$ quark.
+$D_s$ specifically refers to $\bar{c}s$ or $\bar{s}c$.}
+are known experimentally to quite good precision. Often these masses are used to
+tune light, strange, and charm quark masses in LQCD simulations.
+In such studies, another experimentally accessible quantity is used
+to set the scale.
+
+Vector mesons have signal-to-noise issues. That they have $J=1$ reflects the
+fact that these are always resonances, and hence it can be difficult to
+distinguish them. Therefore these are not typically used for scale setting.
+
+Baryons can also be used to set the scale. Some baryon masses are known with
+high precision and are ground-state particles, such as the proton and neutron
+mass. On the lattice, interpolators corresponding to light quarks are often
+expensive and noisy to measure, so these are not typically used to scale
+setting. The next-lightest baryon\index{baryon!$\Omega$} 
+is the $\Omega^-$ whose quark content is $sss$ and is known to higher precision
+than the other $\Omega$-baryons. This can be a preferable choice to the decay
+constants as one does not need to account for EW effects. 
+
+
 \section{QCD thermodynamics}\label{sec:QCDtherm} 
+
 
 This section focuses on the phenomenology I worked on as a postdoc in
 Bielefeld, i.e. the phase diagram of QCD. There are many useful reviews
@@ -520,8 +659,6 @@ in Ref.~\cite{blum_calculation_2018} found that the smoothed step function
 was somehow less sensitive to discretization effects.
 Window observables can be used for high-precision comparisons between both
 data-driven calculations and lattice calculations.
-
-\section{Scale setting II}\label{sec:refscalesII}\index{scale!setting}
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}

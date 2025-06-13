@@ -1166,6 +1166,39 @@ it, rotating it, and so on.
 After embedding $e'$ and $e''$ in the latent space, one designs loss functions
 that punish points in the space that came from different original examples $e$.
 
+\subsection{Some details about training}
+
+In \secref{sec:NN}, we explained that training can be cast as a least-squares
+problem. The loss function is the to-be-minimized function, and its minimum
+in weight space can be found e.g. using gradient descent.
+
+As a reminder, gradient descent works by computing partial derivatives of 
+a function with respect to its parameters. In the context of least-squares, that
+means the algorithm proceeds along the gradient of the $\chi^2$ with respect
+to the fit parameters; in the context of machine learning, we proceed along the
+gradient of the loss function with respect to its weights. A modern strategy for
+computing partial derivatives is {\it automatic differentiation}\index{automatic
+differentiation}.
+
+The idea behind automatic differentiation is relatively simple. Consider a composite
+function $f(g(h(x,y)))$. Suppose you already understand how to take a derivative
+of the functions $f$, $g$, and $h$. You can imagine $f$, $g$, and $h$ represent
+some single elementary operation, say $f$ represents $\sin$, $g$ represents
+$\cos$, and $h$ represents multiplication. If you code up how to take a generic
+derivative for each of those three operations, you can take the derivative of
+$f\circ g\circ h$, and in fact, you can take a derivative of an arbitrary
+composition of $f$, $g$, and $h$. Automatic differentiation tries to leverage
+that every computer operation carries out a sequence of arithmetic operations
+and elementary functions. One obtains ``exact" results without having to go
+through a slow, symbolic manipulation.
+
+When carrying out gradient descent for the loss function, one uses {\it
+backpropagation}\index{backpropagation}. Backpropagation uses automatic
+differentiation to compute these partial derivatives layer by layer starting
+from the first layer. It employs tricks to improve efficiency, for example
+finding ways to avoid redundant calculations in intermediate steps of the chain
+rule.
+
 \subsection{Judging ML model performance}
 
 In \secref{sec:NN} we sketched a three-step process for tuning a NN.
@@ -1186,7 +1219,8 @@ often amounts to taking fluctuations in training data too seriously, baking stru
 into the model that is either irrelevant or not really there, stemming instead
 from e.g. statistical noise. Just as in ordinary least-squares problems,
 a model is more susceptible to overfitting when there are too many fit
-parameters. Overfit models will label the training data
+parameters relative to the amount of training data. 
+Overfit models will label the training data
 extremely well, but having ``learned" irrelevant features and/or noise in the
 training data, will generally not perform well when presented with completely
 new data. In ML parlance, one might say that the overfit model does not
@@ -1226,13 +1260,18 @@ zero. For each weight, this forces the machine to make a decision how important
 that weight is: Weights that decrease the loss function only very little will
 ultimately be punished by the regularization. In that sense, the model is forced
 to focus on the most important weights only.
+
 Another popular choice is\index{regularization!dropout} {\it dropout
 regularization}~\cite{srivastava_dropout_2014}. In this scheme, every neuron of
 either the input or hidden layer is removed, along with its connections, with
-probability $p$. This {\it thinned network}\index{neural network!thinned}
+probability $p$. This procedure helps combat {\it
+co-adaptation}\index{co-adaptation}, which is ML jargon that refers to neurons
+in hidden layers having large correlations. The 
+resulting {\it thinned network}\index{neural network!thinned}
 represents a draw from a sample of all possible neural networks. Weights must be
 normalized with the dropout probability $p$ in order to ensure the weights keep
-the same scale relative to each other.
+the same scale relative to each other. Dropout can lead to lower test classification 
+error compared to $L_2$ regularization~\cite{srivastava_dropout_2014}.
 
 
 \bibliographystyle{unsrtnat}
