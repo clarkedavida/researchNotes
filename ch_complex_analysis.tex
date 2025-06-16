@@ -524,10 +524,14 @@ singularities manifest in the approximant.
 Since Pad\'e approximants are continuous except at their poles, it must be that
 all singularities are somehow represented by poles in the approximant. An
 essential singularity, which is an isolated singularity, is represented by a
-pole in the approximant. The more interesting case is the branch cut; the only
-way the Pad\'e can feel the cut is by a line of poles. The number of points
-along the cut is limited by the order $n$ of the $[m,n]$ approximant, and the
-rough intuition is that cut is ``recovered" as $n\to\infty$.
+pole in the approximant. The more interesting case is the branch cut. The only
+way the Pad\'e can feel the cut is by a line of poles; in practice it
+manifests as a line of alternating zeros and poles. Very intuitively, since
+the function value jumps discontinuously from one edge of a Riemann sheet down
+to the other edge, maybe one can believe that the best way a rational function
+can approximate that is by alternating zeros and poles along the cut. 
+The number of points along the cut is limited by the order $n$ of the $[m,n]$ 
+approximant, and the rough intuition is that cut is ``recovered" as $n\to\infty$.
 
 
 

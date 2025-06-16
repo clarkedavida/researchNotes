@@ -370,6 +370,74 @@ tests. (See e.g. \thmref{thm:gaudif}.)
   \end{proof}
 \end{proposition}
 
+
+\section{The Poisson distribution}\label{sec:Poisson}\index{PDF!Poisson}
+
+Let $k\in\N$ and $\lambda>0$. A discrete random variable $X$ has 
+a {\it Poisson distribution} if
+\begin{equation}\label{eq:poisson}
+\pr{X=k}=\frac{\lambda^k e^{-\lambda}}{k!}.
+\end{equation}
+Generally $k$ is interpreted as a number of occurrences and $\lambda$ is
+interpreted as a rate, i.e. as a number of occurrences per unit ``time".
+This PDF has many useful applications. In physics, it is often used to model 
+the number of particle decays given a decay rate $\lambda$, or it can
+model the probability of particles popping in and out of existence. More hilariously, 
+Von Bortkiewicz noted in his {\it Das Gesetz der Kleinen Zahlen} that a Poisson
+distribution modeled well the frequency with which horses would just straight 
+up kick Prussian soldiers to death~\cite{funnyPrussianMan}.
+
+Let us try to understand how one arrives at such a distribution.
+Forget about the rate for the time being, and consider a sequence of 
+$N$ independent trials, where a ``success" occurs with probability $p$.
+Then the probability of $k$ successes is given by the {\it binomial
+distribution}\index{PDF!binomial}
+\begin{equation}\label{eq:binomial}
+\pr{X=k}=\binom{N}{k}p^k(1-p)^{N-k}.
+\end{equation}
+This is relatively straightforward to interpret: You have $k$ successes,
+which has probability $p^k$ since the trials are independent, and $N-k$
+failures, which each must have probability $1-p$. Finally, there are
+$\binom{N}{k}$ ways to order the $k$ successes. We can arrive at the Poisson
+distribution by making the binomial distribution continuous.
+More precisely, set $\lambda=pN$ and eliminate $p$ in \equatref{eq:binomial}.
+One arrives at
+\begin{equation}
+\pr{X=k}=\frac{\lambda^k}{k!}\frac{N}{N}\frac{N-1}{N}\dots
+\frac{N-k+1}{N}\left(1-\frac{\lambda}{N}\right)^N
+\left(1-\frac{\lambda}{N}\right)^{-k}.
+\end{equation}
+Now take the limit $N\to\infty$ with $p\to0$ such that $\lambda$ remains
+constant. All factors in the above expression tend to 1, with the
+exception of the first and penultimate factors: In fact, the penultimate
+factor tends to $e^{-\lambda}$, and hence you recover Poisson.
+
+In the context of the phase diagram of strongly interacting matter, it is
+sometimes of interest to model net-baryon number\index{baryon number}, $N_B$.
+This is defined as the difference between the number of baryons and number 
+of antibaryons. If one models the rates of production of each kind of particle
+as a Poisson, it becomes useful to consider the distribution of the difference
+of Poissons. Following \propref{prp:addvars}, the PDF of the difference should
+be given by the convolution of two Poissons. For a discrete random variable $X$
+capturing the difference between two Poissons with rates $\lambda_1$ and
+$\lambda_2$, this comes out to be
+\begin{equation}
+\pr{X=k}=e^{-(\lambda_1+\lambda_2)}
+\sum_{N=\max{0,-k}}^\infty \frac{\lambda_1^{k+N}\lambda_2^N}{N!(k+N)!}.
+\end{equation} 
+It can be shown this implies that
+\begin{equation}
+\frac{\pr{X=k}}{\pr{X=-k}}=
+\left(\frac{\lambda_1}{\lambda_2}\right)^k,
+\end{equation} 
+which means
+\begin{equation}
+\pr{X=k}=e^{-(\lambda_1+\lambda_2)}
+\left(\frac{\lambda_1}{\lambda_2}\right)^{k/2}I_{|k|}\left(\sqrt{\lambda_1\lambda_2}\right),
+\end{equation} 
+where $I_k(z)$ is the modified Bessel function of the first kind.
+This is known as the {\it Skellam distribution}\index{PDF!Skellam}.
+
 \section{The normal distribution}
 \index{PDF!normal}
 Now we're going to focus on results about the normal distribution specifically.
