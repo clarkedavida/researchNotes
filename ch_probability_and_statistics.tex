@@ -2004,16 +2004,55 @@ This is sometimes called {\it model uncertainty}\index{model!uncertainty}.
 
 We summarize some of the discussion of Ref.~\cite{neil_improved_2024},
 which tackles computing
-model uncertainty with lattice field theory in mind. 
-We assume the data set $D$ is described by some ``true" model $M_T$
-We will try to describe our data with many models $M_\mu$.
+model uncertainty with lattice field theory in mind. Note however that this
+formalism generalizes to any situation where one has several possible models. 
+We assume the data set $D$ is described by some ``true" model $M_T$.
+We will try to describe our data with many models $M$.
 The goal is to be able to obtain expectation values of functions $f$
-of some model parameters $\vec{a}$. We will compute them as
-\begin{equation}
-\ev{f\left(\vec{a}\right)}=
-\sum_\mu f\left(\vec{a}_\mu^*\right) \pr{M_\mu\given D},
+of some model parameters $a$, i.e. we are thinking of $a$ as a vector.
+This expectation value can be expressed as a weighted sum 
+\begin{equation}\label{eq:BMAmean}
+\ev{f(a)}=
+\sum_M \ev{f(a^*)}_M \pr{M\given D},
 \end{equation} 
-where the sum runs over all attempted models, indexed by $\mu$, and  
-$\vec{a}_\mu^*$ denotes the best-fit parameters for the model $M_\mu$.
+where the sum runs over all attempted models, 
+$\ev{f(a^*)}_M$ denotes the expectation value of $f$ computed in $M$ with best-fit
+parameters $a^*$, and $\pr{M\given D}$ signifies the likelihood that model $M$ 
+is correct given the data $D$. Computing expectation values in this manner
+is known as {\it Bayesian model averaging}\index{Bayesian model average} (BMA).
+
+
+\begin{theorem}{}{BMAvar}
+If one computes expectation values according to \equatref{eq:BMAmean},
+the corresponding BMA variance is
+$$
+\sigma_{f(a)}=
+\sum_M\sigma^2_{f,M}
++\sum_M\ev{f(a^*)}_M^2\pr{M\given D}
+-\ev{f(a)},
+$$
+where $\sigma^2_{f,M}$ indicates the statistical variance of $f$
+within model $M$.
+\begin{proof}
+We have, according to \equatref{eq:BMAmean},
+\begin{equation}\begin{aligned}
+\sigma^2_{f(a)}\pr{M|D} &= \ev{f(a)^2}-\ev{f(a)}^2\\
+&= \sum_M\ev{f(a^*)^2}_M\pr{M\given D}
+-\ev{f(a)}^2\\
+&~~~~~~+\sum_M\left(\ev{f(a^*)}_M^2-\ev{f(a^*)}_M^2
+\right)\pr{M|D}.
+\end{aligned}\end{equation}
+That 
+$\sigma^2_{f(a)}=\sum_M\ev{f(a^*)^2}_M-\ev{f(a^*)}_M^2$
+completes the proof.
+\end{proof}
+\end{theorem}
+
+The first term of $\sigma^2_{f(a)}$ summarizes the purely statistical
+contribution, as by definition each $\sigma^2_{f,M}$ is a statistical variance.
+The second and third terms together estimate the systematic uncertainty, i.e.
+the uncertainty due to analysis choices, i.e. the choice of model $M$.
+They can be thought of as the ``model spread".
+
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
