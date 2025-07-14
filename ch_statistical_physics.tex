@@ -93,7 +93,7 @@ is the statement of energy conservation.\index{thermodynamics!first law}
 These two laws are relatively straightforward to understand. But to understand
 the second law, one needs the concept of entropy. First we will proceed
 using discoveries by Carnot and Clausius, which I think is valuable
-because it helps one understand why $Q=T\dd S$. Then we will take a look at an
+because it helps one understand why $Q=T\dd{S}$. Then we will take a look at an
 information-oriented understanding of entropy. Both of these follow the
 presentations in Ref.~\cite{kardar_statistical_2007} closely.
 
@@ -304,16 +304,16 @@ new function $S$ with
  S(B)-S(A)=\int_A^B\frac{\delta Q}{T}. 
 \end{equation}
 Hence we learn for reversible\footnote{I've seen examples of people defining
-reversible\index{reversible} systems to be those that have $Q=T\dd S$.}, 
+reversible\index{reversible} systems to be those that have $Q=T\dd{S}$.}, 
 quasistatic\footnote{Lattice calculations are always done under the assumption
 of equilibrium, which means it's quasistatic by definition.} changes
 \begin{equation}
-Q=T\dd S.
+Q=T\dd{S}.
 \end{equation}
 It follows that reversible, adiabatic processes are\index{isentropic} isentropic.
 We also get this statement of the first law:\index{thermodynamics!first law}
 \begin{equation}
- \dd U = T\dd S+P\dd V.
+ \dd U = T\dd{S}+P\dd{V}.
 \end{equation} 
 
 Finally, consider a possibly irreversible path from $A$ to $B$ that is closed
@@ -434,7 +434,7 @@ Note that \equatref{eq:chainw} and \eqref{eq:inv} have always the same
 fixed quantity $w$. This is to be distinguished from the following
 situation.
 
-\begin{proposition}{The constrained chain rule}{prp:chainconstrain}
+\begin{proposition}{The constrained chain rule}{chainconstrain}
 $$
 \left(\pdv{x}{y}\right)_z
 \left(\pdv{y}{z}\right)_x
@@ -478,13 +478,13 @@ would like to conveniently switch between $\vec\alpha$ and $\vec{x}$.
 \begin{proof}
 Since $f(T,\vec{x})$, we can write
 \begin{equation*}
-\dd f=\dd T \left( \pdv{f}{T} \right)_{\vec{\alpha}} 
+\dd f=\dd{T} \left( \pdv{f}{T} \right)_{\vec{\alpha}} 
 + \sum_\alpha\dd\alpha\left(\pdv{f}{\alpha}\right)_{T,~\vec{\beta},~\beta_i\neq\alpha},
 \end{equation*}
 where in the sum we indicate that we hold all control parameters $\beta_i$ of
 $\vec{\beta}$ except for $\alpha$ fixed. Similarly,
 \begin{equation*}
-\dd\alpha=\dd T \left( \pdv{\alpha}{T} \right)_{\vec{x}} 
+\dd\alpha=\dd{T} \left( \pdv{\alpha}{T} \right)_{\vec{x}} 
 + \sum_x\dd x\left(\pdv{\alpha}{x}\right)_{T,~\vec{y},~y_i\neq x}.
 \end{equation*}
 Plugging $\dd \alpha$ into $\dd f$ completes the proof.
@@ -596,7 +596,7 @@ This new function is guaranteed to be a thermodynamic potential, and
 we give it a special name: the {\it Helmholtz free energy}.
 From \equatref{eq:helmholtz} and the first law, we get
 \begin{equation}\label{eq:helmholtz1st}
-  \dd F = -P\dd V -S\dd T +\sum_i\mu_i\dd{N}_i.
+  \dd F = -P\dd{V} -S\dd{T} +\sum_i\mu_i\dd{N}_i.
 \end{equation}
 
 We can derive some useful thermodynamic relations from these. For
@@ -615,7 +615,7 @@ The {\it enthalpy} is given by the Legendre transformation
 \end{equation}
 From \equatref{eq:enthalpy} and the first law we obtain
 \begin{equation}
- \dd H = T\dd S +V\dd P +\sum_i\mu_i\dd N_i.
+ \dd H = T\dd{S} +V\dd{P} +\sum_i\mu_i\dd N_i.
 \end{equation}
 
 
@@ -646,7 +646,7 @@ The {\it grand potential} is\index{grand potential}
 \end{equation}
 from which one gets
 \begin{equation}\label{eq:1stlawgrand}
-  \dd\Phi=-P\dd V-S\dd T-\sum_i N_i\dd\mu_i.
+  \dd\Phi=-P\dd{V}-S\dd{T}-\sum_i N_i\dd\mu_i.
 \end{equation}
 Since $\log\grandZ$ is extensive, it must be that
 \begin{equation}
@@ -795,6 +795,8 @@ is rather on the bulk thermodynamics of strongly interacting matter.
 A commonly used procedure is to calculate the pressure, giving
 you the EoS, and to derive other thermodynamic quantities from that.
 In this section we will discuss some of these quantities.
+Altogether, they are often referred to as {\it material
+parameters}\index{material parameter}.
 
 The {\it speed of sound}\index{speed of sound} at fixed control parameter $X$
 is given by
@@ -839,10 +841,16 @@ The idea of a specific heat in general is to characterize how much heat
 it takes to change the temperature. Actually this is hidden in each of
 these formulae; for instance if we look at \equatref{eq:CV}, we notice
 that according to the first law, if we fix $V$, that
-$\dd U=T\dd S$, which is the heat. The same is true of the specific heat
+$\dd U=T\dd{S}$, which is the heat. The same is true of the specific heat
 at constant pressure. Here, the Legendre transform, which adds $PV$,
 switches the dependence from $V$ to $P$, and hence this constrained
 partial derivative captures the change in heat once again.
+
+We note that the above expressions for material parameters were
+written for a thermodynamic system of only two variables. These expressions
+can be generalized to systems with, e.g., multiple particle species.
+A common choice in that case is to hold fixed the particle numbers.
+
 
 \subsection{Maxwell relations}\index{Maxwell relation}
 
@@ -853,7 +861,8 @@ Each of the above material parameters are essentially derivatives like
 where variables $Z$, $W$, and so on are held fixed. In principle, the
 number of such derivatives is large, but in practice, the fact
 that partial derivatives of the same function at the same fixed
-control parameters commute. For example:
+control parameters commute implies there is a lot of redundancy. 
+For example:
 \begin{equation}
 -\atFixed{\pdv{P}{S}}{V,N}
 =\atFixed{\frac{\partial^2 U}{\partial S\partial V}}{N}
@@ -861,18 +870,101 @@ control parameters commute. For example:
 =\atFixed{\pdv{T}{V}}{S,N}.
 \end{equation}
 The equality relating partial derivatives like the ones on the far left
-and far right that can be related in this way is said to
-be a {\it Maxwell relation}.
+and far right is an example of a {\it Maxwell relation}.
 
 Leveraging Maxwell relations reveals several useful relationships
 among material parameters. Since they at their heart stem from
 commutation of partial derivatives between two specific variables holding
 all other control variables fixed, these will hold regardless of
 the number of particle species. One can show:
-\begin{equation}\begin{aligned}
- \frac{\kappa_T}{\kappa_S}&=\frac{C_P}{C_V}\\
- \kappa_T-\kappa_S&=\frac{\alpha^2 T}{n C_P}
+\begin{equation}\label{eq:matparamconstraints}
+ \frac{\kappa_T}{\kappa_S}=\frac{C_P}{C_V},~~~~~~ C_P-C_V=\frac{\alpha^2
+T}{\kappa_T}, ~~~~~
+ \kappa_T-\kappa_S=\frac{\alpha^2 T}{n C_P}.
+\end{equation}
+
+To illustrate how to obtain such relations, we consider 
+a thermodynamic system equipped with arbitrarily many particle species. 
+Along the way, we will derive other relations that allow one to probe
+experimentally inaccessible quantities with experimentally accessible ones.
+We follow the presentation of Ref.~\cite{huang_introduction_2001}.
+The first law of thermodynamics for such a system is given by
+\equatref{eq:fslaw}. We consider $U(V,T,\vec{N})$; hence the exact differential 
+$\dd U$ can be expressed as
+\begin{equation}
+\dd{U} = \atFixed{\pdv{U}{V}}{T,\vec{N}}\dd{V}
++ \atFixed{\pdv{U}{T}}{V,\vec{N}}\dd{T}
++ \sum_i \atFixed{\pdv{U}{N_i}}{T,V,N_j\neq N_i}\dd N_i.
+\end{equation}
+Inserting this into the first law and using the expression
+\equatref{eq:CV} for $C_V$, we get
+\begin{equation}\label{eq:maxDeriv1}
+T\dd{S}=
+\left[ \atFixed{\pdv{U}{V}}{T,\vec{N}} +P\right]\dd{V}
++ C_V \dd{T}
++ \sum_i \left[\atFixed{\pdv{U}{N_i}}{T,V,N_j\neq N_i}-\mu_i\right]\dd N_i.
+\end{equation}
+Similarly, we can express the exact differential $\dd{S}$ as
+\begin{equation}\label{eq:maxDeriv2}
+\dd{S} = \atFixed{\pdv{S}{V}}{T,\vec{N}}\dd{V}
++ \atFixed{\pdv{S}{T}}{V,\vec{N}}\dd{T}
++ \sum_i \atFixed{\pdv{S}{N_i}}{T,V,N_j\neq N_i}\dd N_i.
+\end{equation}
+Comparing \equatref{eq:maxDeriv1} and \equatref{eq:maxDeriv2},
+we can identify
+\begin{equation}\begin{aligned}\label{eq:maxDeriv3}
+\atFixed{\pdv{S}{T}}{V,\vec{N}}&=\frac{C_V}{T}\\
+\atFixed{\pdv{S}{V}}{T,\vec{N}}&=
+\frac{1}{T}\left[\atFixed{\pdv{U}{V}}{T,\vec{N}} +P\right].
 \end{aligned}\end{equation}
+Applying the Maxwell relation
+\begin{equation}
+\frac{\partial^2 S}{\partial V\partial T}
+=\frac{\partial^2 S}{\partial T\partial V}
+\end{equation}
+at fixed $\vec{N}$ to \equatref{eq:maxDeriv3} yields
+\begin{equation}
+\frac{1}{T}\atFixed{\pdv{C_V}{V}}{\vec{N}}=
+\frac{\partial}{\partial T}
+\frac{1}{T}\left[\atFixed{\pdv{U}{V}}{T,\vec{N}} +P\right].
+\end{equation}
+Using \equatref{eq:CV} for $C_V$ in the above equation and 
+cancelling identical terms yields the {\it energy equation}\index{energy
+equation}\footnote{The energy equation is useful in that it allows one to
+extract the derivative of the internal energy through the more easily measurable
+quantities $P$, $T$, and $N_i$. It also implies that, for an ideal gas,
+$\partial_V U=0$ at fixed $T$ and $\vec{N}$.},
+\begin{equation}\label{eq:energyEquation}
+\atFixed{\pdv{U}{V}}{T,\vec{N}}
+=T\atFixed{\pdv{P}{T}}{V,\vec{N}}-P.
+\end{equation}
+At the same time, \propref{prp:chainconstrain} implies
+\begin{equation}
+\atFixed{\pdv{P}{T}}{V,\vec{N}}
+=-\atFixed{\pdv{V}{T}}{P,\vec{N}}\atFixed{\pdv{V}{P}}{T,\vec{N}}^{-1}
+=\frac{\alpha}{\kappa_T}.
+\end{equation} 
+Combining this result with the energy equation and
+\equatref{eq:maxDeriv1} gives 
+\begin{equation}\label{eq:TdS1}
+T\dd{S} = C_V \dd{T} + \frac{\alpha T}{\kappa_T}\dd{V}
++ \sum_i \left[\atFixed{\pdv{U}{N_i}}{T,V,N_j\neq N_i}-\mu_i\right]\dd N_i.
+\end{equation}
+
+We carried out this analysis thinking of $V$, $T$, and $\vec{N}$ as the fixed
+quantities from the outset. If we repeat everything fixing instead $P$, $T$, and
+$\vec{N}$, we find a different energy equation and correspondingly instead
+\begin{equation}\label{eq:TdS2}
+T\dd{S} = C_P \dd{T} + \alpha T V\dd{P}
++ \sum_i \left[\atFixed{\pdv{H}{N_i}}{T,P,N_j\neq N_i}-\mu_i\right]\dd N_i.
+\end{equation}
+
+Holding $S$ and $\vec{N}$ fixed in both
+\equatref{eq:TdS1} and \equatref{eq:TdS2} and taking the ratio
+yields the first relation in \equatref{eq:matparamconstraints}.
+The second relation is derived by equating \equatref{eq:TdS1} and 
+\equatref{eq:TdS2} while holding $P$ and $\vec{N}$ fixed.
+The third relation follows then from the first two. 
 
 
 \bibliographystyle{unsrtnat}
