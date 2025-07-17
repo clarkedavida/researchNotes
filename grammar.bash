@@ -12,6 +12,7 @@
 for file in *.tex
 do
     sed -i 's/e'\''ll/e will/g' $file
+    sed -i 's/ou'\''re/ou are/g' $file
     sed -i 's/sn'\''t/s not/g' $file
     sed -i 's/can'\''t/cannot/g' $file
     sed -i 's/don'\''t/do not/g' $file

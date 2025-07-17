@@ -1,11 +1,11 @@
 # LaTeX stuff not needed for repository
 *.bbl
 Exported\ Items.bib
-_minted*
 *.tf
 *.tfm
 *.600pk
 *.mf
+_minted*
 _minted-0_researchnotes/
 *.pyg
 mycode_languages.txt

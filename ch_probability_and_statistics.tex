@@ -147,7 +147,7 @@ In particular, let $n\in\N$.
 The mean and variance are the special cases $\hat{x}=\ev{X}$ and 
 $\sigma^2=\ev{(X-\hat{x})^2}$. Sometimes we call the mean the {\it expected
 value} and sometimes we denote the variance $\variance$. Note that not all 
-probability distributions have well-defined moments. The Cauchy distribution is
+probability distributions have well defined moments. The Cauchy distribution is
 very ill-behaved in this regard, since its $n\nth$ moment diverges
 $\Forall n\in\N$.
 Generally in the lab, one draws random variables from distributions
@@ -607,7 +607,7 @@ our main use for them is summarized in the next proposition.
     where we used independence for the third equality.
   \end{proof}
 \end{proposition}
-Now suppose you're an experimenter taking independent measurements of 
+Now suppose you are an experimenter taking independent measurements of 
 some observable. Furthermore suppose you do not know anything about the 
 observable, except that it comes from some distribution with finite variance.
 The central limit theorem (CLT) says that armed with this information alone, 
@@ -900,7 +900,7 @@ In practice we can apply \equatref{eq:errprop} when we
 \begin{enumerate}
   \item know how some function $f$ depends on some variables $x_i$
         (then taking derivatives with respect to these new variables
-         is well-defined);
+         is well defined);
   \item take measurements of the variables;
   \item the measurements are independent; and
   \item either the function is exactly linear in the $x_i$ or $f$ is
@@ -2026,8 +2026,8 @@ is known as {\it Bayesian model averaging}\index{Bayesian model average} (BMA).
 If one computes expectation values according to \equatref{eq:BMAmean},
 the corresponding BMA variance is
 $$
-\sigma_{f(a)}=
-\sum_M\sigma^2_{f,M}
+\sigma^2_{f(a)}=
+\sum_M\sigma^2_{f,M}\pr{M\given D}
 +\sum_M\ev{f(a^*)}_M^2\pr{M\given D}
 -\ev{f(a)},
 $$
@@ -2036,14 +2036,14 @@ within model $M$.
 \begin{proof}
 We have, according to \equatref{eq:BMAmean},
 \begin{equation}\begin{aligned}
-\sigma^2_{f(a)}\pr{M|D} &= \ev{f(a)^2}-\ev{f(a)}^2\\
+\sigma^2_{f(a)} &= \ev{f(a)^2}-\ev{f(a)}^2\\
 &= \sum_M\ev{f(a^*)^2}_M\pr{M\given D}
 -\ev{f(a)}^2\\
 &~~~~~~+\sum_M\left(\ev{f(a^*)}_M^2-\ev{f(a^*)}_M^2
 \right)\pr{M|D}.
 \end{aligned}\end{equation}
 That 
-$\sigma^2_{f(a)}=\sum_M\ev{f(a^*)^2}_M-\ev{f(a^*)}_M^2$
+$\sigma^2_{f,M}=\sum_M\ev{f(a^*)^2}_M-\ev{f(a^*)}_M^2$
 completes the proof.
 \end{proof}
 \end{theorem}
@@ -2051,7 +2051,7 @@ completes the proof.
 The first term of $\sigma^2_{f(a)}$ summarizes the purely statistical
 contribution, as by definition each $\sigma^2_{f,M}$ is a statistical variance.
 The second and third terms together estimate the systematic uncertainty, i.e.
-the uncertainty due to analysis choices, i.e. the choice of model $M$.
+the uncertainty due to analysis choices. 
 They can be thought of as the ``model spread".
 
 \bibliographystyle{unsrtnat}

@@ -347,21 +347,72 @@ $$
 \end{theorem}
 
 
-\subsection{Entropy from information}
+%\subsection{Entropy from information} (can connect to probability chapter)
+
+\section{Extensive and intensive variables}\label{sec:intensiveextensive}
+\index{intensive}\index{extensive}
+
+Consider for a moment an ideal gas of $N$ particles trapped in a box of volume
+$V$ and temperature $T$. Now imagine that you create an exact copy of that system, 
+concatenating it with the original system. This creates a new system. 
+It is instructive to ask what must happen to some of the thermodynamic variables
+during this process.
+
+The new system must have volume $2V$ and $2N$ particles. On the other hand, we
+know that if we take the two original systems and put them into thermal contact,
+since the two systems had the same temperature, they are already in equilibrium,
+and thus the concatenated system will also have temperature $T$. We could
+generalize this process to concatenating, say, half a copy, or by concatenating
+$\pi$ copies. The volume of the combined system will be $1.5V$ or $(1+\pi)V$,
+and $N$ would scale similarly. Since $V$ and $N$ behave this way, we identify
+them as our first two examples of {\it extensive} variables.
+The temperature $T$, which is independent of this sort of scaling, is identified
+as our first example of an {\it intensive} variable.
+
+Moving forward, let us say that $V$ and $N$ are extensive by definition and that
+$T$ is intensive by definition. Now consider a set of $M$ extensive variables 
+${X_i}$ and a set of $R$ intensive variables ${Y_j}$. Then we further designate 
+a function $F$ of these variables as extensive if and only if $\Forall\lambda\in\R$
+\begin{equation}\label{eq:extensive}
+F(\lambda X_1, ... \lambda X_M,Y_1,...,Y_R)=\lambda F(X_1,...,X_M,Y_1,...,Y_R).
+\end{equation}
+A function of the above form is said to be {\it homogeneous of degree
+one}\index{homogeneous} w.r.t. its arguments, so extensive quantities are
+homogeneous of degree one w.r.t. other extensive quantities. If $F$ instead obeys
+\begin{equation}\label{eq:intensive}
+F(\lambda X_1, ... \lambda X_M,Y_1,...,Y_R)= F(X_1,...,X_M,Y_1,...,Y_R),
+\end{equation}
+then it is intensive. These rules together are usually succinctly summarized in
+sentences like ``extensive quantities scale linearly with the system size and
+intensive quantities are independent of system size".
+
+Since $V$ is by definition extensive, one can construct an intensive quantity
+from an extensive one by turning the extensive quantity into a density. For
+example the {\it particle number density}\index{number density}
+\begin{equation}
+n\equiv \frac{N}{V}
+\end{equation}
+is clearly intensive. Whether a variable is intensive or extensive can also be
+surmised from known relationships between it and other thermodynamic variables.
+For example the equipartition theorem tells us that a classical system of $N$
+particles, each with $f$ degrees of freedom, maintained at temperature $T$, has
+internal energy
+\begin{equation}
+U=\frac{Nf}{2}k_B T,
+\end{equation}  
+from which it follows that $U$ is extensive.
+
 
 \section{Equations of state}\label{sec:EoS}
 
 
 Probably the equation of state that you are most familiar with is the 
-ideal gas law,\index{ideal gas law}
+ideal gas law\index{ideal gas law},
 \begin{equation}
   PV=NkT.
 \end{equation}
-The volume $V$ and the number of particles $N$ both scale linearly with the
-size of the system; we call such variables {\it extensive}\index{extensive}. 
-Meanwhile the pressure $P$ and the temperature $T$ are {\it intensive}\index{intensive}, 
-i.e. they do not scale with the system.
-
+Based on the discussion in \secref{sec:intensiveextensive}, we see that $P$ is
+an intensive quantity.
 There is an equation of state for each intensive variable required for the
 description of thermodynamic states. For example from the
 first law of thermodynamics,\index{thermodynamics!first law}
@@ -392,17 +443,17 @@ This is what we call an {\it equation of state}\index{equation of state}
 of state is enough to reconstruct the fundamental equation, and therefore 
 enough to determine the physics of the system.
 
-\subsection{Rules for differentials}
+\section{Rules for differentials}\label{sec:thermdiff}
 
 Especially in statistical physics one encounters many involved combinations
 of partial derivatives, so it is worthwhile to remind yourself what the
-rules are. Here we list some useful results, that one can also
+rules are. Here we list some useful results, which one can also
 find in e.g. Ref.~\cite{huang_introduction_2001}.
 
 When first learning about partial derivatives, one considers functions
 of independent variables, for example when $x$, $y$, and $z$ represent
 spatial directions. And so when you think of some
-regular\footnote{That is,analytic or differentiable.} \index{function!regular}
+regular\footnote{That is, analytic or differentiable.} \index{function!regular}
 function $f(x,y,z)$
 and calculate its partial derivative,
 \begin{equation}
@@ -491,6 +542,33 @@ Plugging $\dd \alpha$ into $\dd f$ completes the proof.
 \end{proof}
 \end{proposition}
 
+Next we derive a useful fact concerning derivatives of intensive variables
+w.r.t. $V$. Let $G=Vg$ be extensive with $g$ intensive.
+Consider the extensive function $F$ of $G$ and $V$. 
+From \equatref{eq:extensive} we know that $\Forall\lambda\in\R$
+\begin{equation}
+F(\lambda G,\lambda V)=\lambda F(G,V).
+\end{equation}
+If we now choose $\lambda = 1/V$ and let $f=F/V$, we find
+\begin{equation}\label{eq:fintensive}
+f(g,1) V=F(G,V).
+\end{equation}
+Since $F$ was extensive, we know $f$ must be intensive. This 
+rescaling makes clear that $f$ has no remaining explicit volume dependence.
+It follows that
+\begin{equation}\label{eq:dfdVintensive}
+\atFixed{\pdv{f}{V}}{g}=0.
+\end{equation}
+Note that if we had instead held $G$ fixed, $g$ would be allowed to compensate
+changes in $V$, and we are no longer guaranteed zero when taking the partial
+derivative. On the other hand, the argument leading to
+\equatref{eq:dfdVintensive} does not depend on the number of 
+intensive quantities held fixed, and hence generalizes: 
+\begin{proposition}{}{}
+$$
+\atFixed{\pdv{f}{V}}{{\rm all~intensive~variables}}=0
+$$
+\end{proposition}
 
 
 
@@ -511,7 +589,7 @@ Hence we want
 \end{enumerate}
 These are the purposes of a Legendre transformation. The second point 
 may seem too obvious to state, but it's worth emphasizing here because 
-what makes thermodynamic potentials such as $U$ special is that you're 
+what makes thermodynamic potentials such as $U$ special is that you are 
 supposed to be able to determine state variables like $T$ from them. 
 Since no information is lost, Legendre transforms guarantee that 
 thermodynamic potentials get transformed to other thermodynamic potentials.
@@ -600,7 +678,14 @@ From \equatref{eq:helmholtz} and the first law, we get
 \end{equation}
 
 We can derive some useful thermodynamic relations from these. For
-instance
+instance\footnote{In \secref{sec:thermdiff} we outlined the importance of
+specifying which quantities are held fixed. Sometimes it is clear from context
+what is held fixed. For example \equatref{eq:helmholtz1st} makes clear
+that $F(V,T,\vec{N})$. In that context, the partial derivative in
+\equatref{eq:dfdt} w.r.t. $T$ must be carried out at fixed $V$ and $\vec{N}$.
+Of course it is good practice to write what is fixed explicitly, but some
+authors including me will drop that notation if they deem it clear, not
+relevant, or if they are being lazy.}
 \begin{equation}\label{eq:dfdt}
   -T^2\pdv{(F/T)}{T}=U=\pdv{(\beta F)}{\beta},
 \end{equation}
