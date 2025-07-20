@@ -137,7 +137,7 @@ $\xi=1$, the Lorenz to $\xi=0$, and the unitary to $\xi\to\infty$.) In this
 gauge, the gauge-fixing piece is
 \begin{equation}
   \Lagr_{gf}=-\frac{1}{2}C^a C^a -\frac{1}{2}\big(C^0\big)^2
-            =-C^+ C^- -\frac{1}{2}\Big(\big(C^3\big)^2\big(C^0\big)^2\Big),
+            =-C^+ C^- -\frac{1}{2}\big(C^3\big)^2\big(C^0\big)^2,
 \end{equation}
 where the gauge-fixing function is
 \begin{equation}
@@ -980,11 +980,11 @@ completeness relation
   \label{eq:ME2}
   \begin{aligned}
     \left< |\ME|^2 \right>&=3\frac{g^2 m_Q^2}{4M_W^2}\sum\limits_{s,s'}
-      \Tr u_s(\vec{p})\bar{u}_s(\vec{p})
+      \tr u_s(\vec{p})\bar{u}_s(\vec{p})
           v_{s'}(\vec{p}')\bar{v}_{s'}(\vec{p}') \\
-    &=\frac{3g^2 m_Q^2}{4M_W^2}\Tr(\slashed{p}+m_Q)(\slashed{p}'-m_Q) \\
-    &=\frac{3g^2 m_Q^2}{4M_W^2}\Tr(\slashed{p}\slashed{p}'-m_Q^2) \\
-    &=\frac{3g^2 m_Q^2}{M_W^2}\Tr(pp'-m_Q^2) \\
+    &=\frac{3g^2 m_Q^2}{4M_W^2}\tr(\slashed{p}+m_Q)(\slashed{p}'-m_Q) \\
+    &=\frac{3g^2 m_Q^2}{4M_W^2}\tr(\slashed{p}\slashed{p}'-m_Q^2) \\
+    &=\frac{3g^2 m_Q^2}{M_W^2}\tr(pp'-m_Q^2) \\
     &=\frac{3g^2 m_Q^2}{M_W^2}\Bigg(-\frac{s}{2}-m_Q^2-m_Q^2\Bigg) \\
     &=\frac{3g^2 m_Q^2}{M_W^2}\Bigg(-\frac{m_H^2}{2}-2m_Q^2\Bigg) \\
     &=\frac{3g^2 m_Q^2 m_H^2}{M_W^2}\Bigg(1-\frac{4m_Q^2}{m_H^2}\Bigg).
@@ -1037,14 +1037,14 @@ crossed diagram whose amplitude should equal the amplitude of the first by
 symmetry, which cancels the factor of 2 due to \F{24}. Hence the matrix
 element for this process is given by
 
-\begin{gather}
-  i\ME=\frac{igm_Q}{M_W}\int\frac{d^4l}{(2\pi)^4}\Tr\left[
+\begin{equation}\begin{aligned}
+  i\ME&=\frac{igm_Q}{M_W}\int\frac{d^4l}{(2\pi)^4}\tr\left[
         \frac{i(\slashed{l}-\slashed{k}+m_Q)}{(l-k)^2-m_Q^2}ig_S\gamma^\mu
         \frac{i(\slashed{l}+m_Q)}{l^2-m_Q^2}ig_S\gamma^\nu
         \frac{i(\slashed{l}+\slashed{p}+m_Q)}{(l+p)^2-m_Q^2}\right] \\
-        \times\Tr\big[G^aG^b\big]\epsilon^{\lambda '}_\mu(k)
+        &~~~~~~~~~~~~~~~~~~~~\times\tr\big[G^aG^b\big]\epsilon^{\lambda '}_\mu(k)
                            \epsilon^{\lambda }_\nu(p).
-\end{gather}
+\end{aligned}\end{equation}
 The numerator can be simplified using Form (see Appendix A) to
 \begin{equation}
   \label{eq:3num}
@@ -1084,7 +1084,7 @@ $N^{\mu\nu}$ with these terms dropped. Then
                     +g^{\mu\nu}\big(m_Q^2-pk\big)\Big) \\
                &=4m_Q\Bigg(\Big(m_Q^2
                     +\Big(xy-\tfrac{1}{2}\Big)m_H^2-q^2\Big)g^{\mu\nu}
-                    +4q^\mu q^\nu\Bigg).
+                    +4q^\mu q^\nu\Bigg),
   \end{aligned}
 \end{equation}
 \begin{equation}
@@ -1097,7 +1097,7 @@ $N^{\mu\nu}$ with these terms dropped. Then
   \end{aligned}
 \end{equation}
 Since $l$ and $q$ differ additively by terms independent of $l$ or $q$,
-$d^4l=d^4q$. Furthermore $\Tr G^aG^b=\delta^{ab}/2$, so
+$d^4l=d^4q$. Furthermore $\tr G^aG^b=\delta^{ab}/2$, so
 \begin{equation}
   \label{eq:53}
   i\ME=-\frac{gg_S^2m_Q}{M_W}\delta^{ab}\epsilon^{\lambda'*}_\mu(k)
