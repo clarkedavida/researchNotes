@@ -1436,9 +1436,67 @@ Understanding this 3-fold tension requires careful investigation of
 systematics. We will discuss the lattice perspective
 in more detail in \secref{sec:muonAnom}. 
 
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{figs/HIC.pdf}
+  \caption{Cartoon of an HIC.
+Figure taken from Ref.~\cite{valois_thermal_2025}.}
+  \label{fig:HIC}
+\end{figure}
 
 
-\section{Thirring model}\label{sec:Thirring}\index{Thirring model}
+\section{Heavy-ion collisions}\index{collision!heavy-ion}
+
+At the moment, heavy-ion collisions (HICs) are the primary direct method to
+experimentally probe strongly interacting matter, especially when one is
+interested in high temperatures and densities. They are the stage on which 
+some of the ``real physics" we discuss later will be investigated; therefore we
+discuss briefly the physics of an HIC and familiarize ourselves with some jargon
+used in the HIC community.
+% TODO : when you have internet, maybe get into some history about
+% HICs, what the big current and upcoming experiments are
+We follow a very nicely written and illustrated thesis~\cite{valois_thermal_2025}.
+
+In an HIC, two heavy ions, e.g. gold ions, are collided at relativistic speeds.
+The region where the ions overlap is extremely hot and dense for a very brief
+time, and we infer characteristics of the overlap region from the ultimate
+products of the collision. 
+In \figref{fig:HIC} we show a cartoon of a HIC. In the left-most frame, we see a
+collision from the center-of-mass frame of the identical heavy ions;
+alternatively you can think of it as the rest frame of the experimenters.
+Protons and neutrons are distinguished by having different colors, and the blue
+arrow shows the initial motion of the heavy ions.
+The two heavy ions look like pancakes--this is because the heavy
+ions move at relativistic speeds w.r.t. the center-of-mass frame, and hence
+this frame sees their shapes get severely Lorentz contracted. The incoming heavy
+ions are depicted as being slightly off center. This is an example
+of an {\it off-central}\index{collision!off-central} collision: it has
+non-zero impact parameter. {\it Central collisions}\index{collision!central} are
+head-on collisions and correspondingly have zero impact parameter.
+
+In the next frame, we see the initial stage of the collision. The heavy ions
+have moved through each other. Nucleons from the region where the heavy ions
+overlapped interact strongly with each other. The nucleons from this overlap
+region, i.e. the nucleons from one heavy ion that interact with nucleons from
+the other, are called the {\it participants}\index{participant}.
+Remaining nucleons are the {\it spectators}\index{spectator}.
+A small red region indicates what
+is sometimes called the {\it fireball}\index{fireball}; in \figref{fig:HIC} only
+participants are touching the fireball. For a very brief time,
+the fireball is expected to be in the QGP phase. As time goes on, the fireball
+expands and cools.
+
+
+
+\section{Exactly solvable models}
+
+There is a handful of QFTs that can exactly solved. These QFTs are useful
+as proving grounds for various tools; for example they have been employed to
+test Lefschetz thimbles, and multi-point Pad\'e approximants.
+They also often exhibit some features of more physically realistic theories;
+for example they may be asymptotically free like QCD is.
+
+\subsection{Thirring model}\label{sec:Thirring}\index{Thirring model}
 
 The {\it Thirring model}~\cite{thirring_soluble_1958} is a QFT in 1+1 dimensions.
 Its Lagrangian density is given by
@@ -1449,7 +1507,7 @@ Its Lagrangian density is given by
 \end{equation}
 where here $\gamma^\mu$ are 2-$d$ gamma matrices.
 This describes a Dirac field with a self-interaction.
-What's special about the massless Thirring model is that it is 
+What is special about the massless Thirring model is that it is 
 exactly solvable~\cite{johnson_solution_1961,hagen_new_1967,klaiber_1968}, 
 which means it is a useful test bed for various QFT methods.
 The massive Thirring model is partially solvable: my understanding is that the
@@ -1460,7 +1518,7 @@ test bed for Lefshetz thimbles, which are a possible sign problem workaround.
 Sometimes in these studies, one may consider a model with more or fewer spatial
 dimensions.
 
-\section{Gross-Neveu model}\label{sec:GNmodel}\index{Gross-Neveu model}
+\subsection{Gross-Neveu model}\label{sec:GNmodel}\index{Gross-Neveu model}
 
 The {\it Gross-Neveu model} \cite{gross_dynamical_1974} is another
 1+1 dimensional, toy QFT model. It contains $N$ Dirac fermions with a

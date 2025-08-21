@@ -22,4 +22,8 @@ do
     sed -i 's/inimums/inima/g' $file
     sed -i 's/aximums/axima/g' $file
     sed -i 's/nsatzes/nsätze/g' $file
+    sed -i 's/What'\''s/What is/g' $file
+    sed -i 's/what'\''s/what is/g' $file
+    sed -i 's/That'\''s/That is/g' $file
+    sed -i 's/that'\''s/that is/g' $file
 done
