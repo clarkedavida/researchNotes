@@ -1115,6 +1115,27 @@ The $N_s=\infty$ result $\beta_c(N_\tau)$ can then
 be extracted from a fit of the three parameters $\beta_c(N_\tau)$,
 $a_1(N_\tau)$, and $a_2(N_\tau)$.
 
+\section{Lattice renormalization}\label{sec:renorm}
+
+As mentioned in \secref{sec:latreg}, the lattice spacing acts as a regulator for
+the theory: momenta are restricted to the first Brillouin zone. Some physically
+interesting quantities may diverge or vanish in the continuum limit.
+For example we will see in \secref{sec:ploop} that the Polyakov loop vanishes at
+all temperatures in the continuum limit. Just as one typically does in QFT, we
+can redefine our theory to explicitly cancel out troublesome factors of $1/a$ to
+render our physically interesting quantity finite; that is, we can carry out a
+lattice renormalization.
+
+A common and practical strategy to do this in the context of lattice
+calculations is to define a new quantity constructed from a difference of two
+other quantities that diverge in the same way. As discussed in
+\secref{sec:ploop}, this is one way to define a renormalized Polyakov loop.
+Another strategy is to employ the gradient flow. Indeed, L\"uscher and Weisz
+showed that for non-abelian theories defined on $\R^4$, the gradient flow maps
+gauge fields to renormalized gauge fields on $\R^4\times[0,\infty)$
+\cite{luscher_perturbative_2011}.
+One can think of each flow time as defining a different renormalization scheme.
+
 
 \section{Topological charge on the lattice}\label{sec:toplat}
 
@@ -1190,6 +1211,7 @@ As mentioned earlier, the gradient flow averages the gauge field over
 a neighborhood, and therefore also has a smoothing effect. 
 Ideally, these methods work because they make local modifications,
 which therefore leave the global topological charge relatively intact.
+
 A delicate issue with these smoothing algorithms is that they can destroy 
 physical instantons; in fact after protracted cooling, a lattice will
 eventually be brought to $Q_L=0$. This happens because

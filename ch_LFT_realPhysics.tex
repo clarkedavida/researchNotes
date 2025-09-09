@@ -29,12 +29,12 @@ choices. Scale setting is extremely important for state-of-the-art lattice
 calculations, as the uncertainty from the scale propagates into the final
 results, and many modern calculations target sub-per-mille uncertainties.
 
-For pure $\SU(N_c)$ calculations, the only input is the bare coupling constant
+For pure $\SU(N_c)$ calculations, the only input is 
 $\beta$. Quite often, pure $\SU(N_c)$ calculations leave their results in
 lattice units because there is no experimentally accessible way to set the
-scale; after all we exist in a world with quarks. When lattice practitioners
-wish to express their pure $\SU(N_c)$ results in physical units, this has
-historically been accomplished by estimating a quantity like the string tension
+scale; after all we exist in a world with quarks. If one wishes
+to express pure $\SU(N_c)$ results in physical units, one can e.g. estimate
+the string tension
 using some kind of effective model.\footnote{A thorough discussion about this in
 the context of pure gauge theories can be found toward the beginning of
 Ref.~\cite{smit_introduction_2002}.} We emphasize that such calculations only
@@ -124,6 +124,7 @@ Pion decay constants $f_\pi$ have historically been used for scale setting, as
 they are known relatively precisely. Beyond leading order, they include
 EW effects that need to be taken into account. For LQCD calculations
 that target sub-per-mille precision, this is not ideal.
+
 Kaon decay constants $f_K$ refer to the decays of charged kaons.
 The reason is that the weak sector SM Lagrangian contains no so-called
 {\it flavor-changing neutral currents}\index{FCNC} (FCNC); that is,
@@ -148,7 +149,7 @@ distinguish them. Therefore these are not typically used for scale setting.
 Baryons can also be used to set the scale. Some baryon masses are known with
 high precision and are ground-state particles, such as the proton and neutron
 mass. On the lattice, interpolators corresponding to light quarks are often
-expensive and noisy to measure, so these are not typically used to scale
+expensive and noisy to measure, so these are not typically used for scale
 setting. The next-lightest baryon\index{baryon!$\Omega$} 
 is the $\Omega^-$ whose quark content is $sss$ and is known to higher precision
 than the other $\Omega$-baryons. This can be a preferable choice to the decay

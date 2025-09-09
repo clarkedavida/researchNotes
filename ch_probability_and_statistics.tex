@@ -522,20 +522,18 @@ Usually these estimates are different, and one might wonder whether this
 disparity is real or just plain unlucky. More precisely:
 \index{Gaussian difference test}
 \begin{theorem}{Gaussian difference test}{}\label{thm:gaudif}
-  Suppose $\bar{X}$ and $\bar{Y}$ are correct estimates of 
-  some expectation
-  value, i.e. they are normally distributed with the same mean, and call
-  their respective standard deviations $\sigma_X$ and
-  $\sigma_Y$. Then the probability that $\bar{X}$ 
+  Suppose $\bar{X}$ and $\bar{Y}$ are are normally distributed with 
+  the same mean and standard deviations $\sigma_{\bar{X}}$ and
+  $\sigma_{\bar{Y}}$. Then the probability that $\bar{X}$ 
   and $\bar{Y}$ differ by at least $D$ is
   \begin{equation*}
     \pr{|\,\bar{X}-\bar{Y}|>D}=1-\erf\left(\frac{D}
-       {\sqrt{2(\sigma_X^2+\sigma_Y^2)}}\right).
+       {\sqrt{2(\sigma_{\bar{X}}^2+\sigma_{\bar{Y}}^2)}}\right).
   \end{equation*}
   \begin{proof}
     From \propref{prp:addgauss}, the random variable
     $\bar{X}-\bar{Y}$ is normally distributed with mean 0 
-    and variance $\sigma_D^2=\sigma_X^2+\sigma_Y^2$. Therefore by
+    and variance $\sigma_D^2=\sigma_{\bar{X}}^2+\sigma_{\bar{Y}}^2$. Therefore by
     \equatref{eq:gaussCDF}, the probability that $\bar{X}$ and 
     $\bar{Y}$ are at most $D$ apart is
     \begin{equation*}
@@ -557,6 +555,62 @@ is called the \index{q-value}{\it q-value}. In practice one sets some
 threshold on $q$ below which one investigates further whether the 
 underlying distributions of the estimates are different. Often one 
 takes the threshold as 0.05.
+
+In practice, the true variances $\sigma_{\bar{X}}^2$ and $\sigma_{\bar{Y}}^2$
+are not known, so one cannot use the above theorem directly.
+When the sample size is large enough, one can approximate
+these variances with some estimators $\bar{\sigma}_{\bar{X}}^2$ and
+$\bar{\sigma}_{\bar{Y}}^2$ and just apply the Gaussian difference test.
+If one is worried about the effect of finite sample size, 
+one can instead perform a {\it Student
+difference test}\footnote{Student is actually a pseudonym. This test was
+originally discovered by William Sealy Gosset, who was a statistician who worked
+for Guiness. He may have used the pseudonym due to some kind of company policy.} 
+or {\it t-test}\index{t-test} to investigate whether the 
+discrepancy is due to chance. Suppose the estimate $\bar{X}$ comes from 
+$M$ data while $\bar{Y}$ comes from $N$ data.
+Assume $\sigma_{\bar{X}}=\sigma_{\bar{Y}}$, which
+happens when the sampling methods used are identical.
+Let
+\begin{equation}
+  t=\frac{D}{\bar{\sigma}_D},
+\end{equation}
+where $D=\bar{X}-\bar{Y}$, and
+\begin{equation}
+  \bar{\sigma}^2_D=\left(\frac{1}{M}+\frac{1}{N}\right)
+                   \frac{M(M-1)\,\bar{\sigma}_{\bar{X}}^2
+                    +N(N-1)\,\bar{\sigma}_{\bar{Y}}^2}
+                   {M+N-2}.
+\end{equation}
+Then the probability that these two estimates differ by at least $D$ is
+\begin{equation}
+ q=2
+ \begin{cases}
+ \,I\left(z,\frac{\nu}{2},\frac{1}{2}\right) & \text{for }t\leq 0, \\
+ \,1-\frac{1}{2}\,I\left(z,\frac{\nu}{2},\frac{1}{2}\right) & \text{otherwise},
+ \end{cases}
+\end{equation}
+where $I$ is the incomplete beta function, $\nu=M_{\text{conf}}+\nconf-2$,
+and
+\begin{equation}
+  z=\frac{\nu}{\nu+t^2}.
+\end{equation}
+
+%At this point it is worth commenting when it is appropriate to use
+%the sample average~\eqref{eq:arithmeticaverage} and the estimator
+%\eqref{eq:MCMCconsistentEst}. The sample average is the preferred 
+%method to estimate an observable that can be directly calculated from 
+%the configurations, i.e. when $X_i=X(C_i)$. 
+%Such random variables are called {\it primary quantities},
+%\index{primary quantity} and they include many simple observables such
+%as the action, the absolute value of the Polyakov loop, and so on. 
+%However some quantities can only be calculated 
+%as functions of the sample average; these are called {\it secondary quantities}.
+%\index{secondary quantity} An obvious example is the variance, which is defined
+%only in terms of averages. But a less obvious example are particle masses,
+%which cannot be directly calculated on any single configuration. In this
+%case we are forced to use \equatref{eq:MCMCconsistentEst}.
+
 
 \section{The central limit theorem}\label{sec:CLT}
 
@@ -1643,7 +1697,13 @@ is called the {\it integrated autocorrelation time}.
 
 From \equatref{eq:IAC} we see that $\tauint$ is just the ratio between the
 estimated variance of the sample mean and what this variance would have been 
-if the data were uncorrelated. 
+if the data were uncorrelated. Therefore if we were to estimate the variance
+using the standard unbiased formula, i.e. using \equatref{eq:umv}, we would
+underestimate it by a factor $\tauint$. Another way of looking at $\tauint$ is
+to note that $N$ gives the number of measurements in the time series, so
+\equatref{eq:IAC} shows there are $N/\tauint$ effectively independent
+measurements. This perspective suggests a simple strategy to reduce
+autocorrelation: simply separate your measurements by $\tauint$.
 
 In practice, we often do not know the true mean $\hat{x}$ of the time series.
 Therefore along the lines of \equatref{eq:umv}, we construct an unbiased

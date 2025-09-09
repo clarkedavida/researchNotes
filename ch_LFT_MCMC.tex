@@ -158,10 +158,70 @@ have reasonable acceptance probabilities to begin with. This
 strategy is often called {\it importance sampling}\index{importance sampling}.
 
 
-\section{Update: Heat bath}\index{heat bath}
+\section{General code structure}
 
-The {\it heat bath} (HB) algorithm takes this idea to the extreme. Here,
-we construct our trial probability distribution to draw from the
+Now that we have introduced MCMC, we can sketch the
+general code structure of an LFT simulation. 
+
+Typically, simulations use {\it local updates}, which
+means we update the links one at a time. This is usually done in a systematic order,
+because there is some computational advantage compared to updating in a
+random order~\cite{berg_markov_2004}. 
+An updating {\it sweep}\index{sweep} updates every link on the lattice once. 
+
+An MCMC simulation of LFT then broadly consists of these essential steps:
+\begin{enumerate}
+  \item {\it Initialization}: The first thing to do is get everything ready for
+        the simulation. This includes initializing the random number generator,
+        and setting up an initial configuration.
+  \item {\it Equilibration} or {\it thermalization}:
+        \index{equilibration}\index{thermalization}
+        To avoid over-sampling rare configurations,
+        one must perform many sweeps to bring the system to its equilibrium 
+        distribution. The structure of this section looks like 
+        \begin{verbatim}
+        do from n=1 to n=nequi 
+          call MCMC update
+        end do
+        \end{verbatim}
+  \item {\it Configuration generation}: One we are in the equilibrium
+        distribution, we want to generate configurations on which we can
+        perform measurements. To help reduce correlations between
+        measurements, multiple updating sweeps are performed in between.
+        This section is structured as
+        \begin{verbatim}
+        do from n=1 to n=nconf
+          do from n=1 to n=ndiscarded
+            call MCMC update
+          end do
+          save configuration 
+        end do
+        \end{verbatim}
+  \item {\it Measurements}: Now that we have a good sample of configuration
+        space, we are ready to perform measurements there. Some measurements
+        can be take {\it in situ}, i.e. they are incredibly cheap and can be
+        calculated the moment the configuration is saved. Measurements of this
+        type include simple link products like the Polyakov loop. More expensive
+        observables may require inverting a Dirac matrix thousands of times, 
+        gauge fixing, or smoothing. For such observables it is better to
+        have separate code that runs on the saved configurations. This
+        code is structured as
+        \begin{verbatim}
+        do from n=1 to n=nconf
+          take measurement 
+        end do
+        \end{verbatim}
+\end{enumerate}
+
+The details of the above steps, especially the MCMC update, depend on what
+physics are being simulated. In the following, we discuss some strategies for
+generating new gauge fields from old ones.
+
+
+\subsection{Update: Heat bath}\index{heat bath}
+
+The {\it heat bath} (HB) algorithm is designed to tackle pure $\SU(N_c)$
+systems. Here, we construct our trial probability distribution to draw from the
 Boltzmann distribution to begin with. Thus no formal accept/reject
 step is required\footnote{The Kennedy-Pendleton algorithm has a sort
 of accept/reject step on one of the random variables to ensure that
@@ -184,7 +244,7 @@ in Ref.~\cite{gattringer_quantum_2010}; the original papers are
 Refs.~\cite{fabricius_heat_1984,kennedy_improved_1985}.
 
 When $N_c>2$, this strategy is extended by leveraging the fact
-that $\SU(2)\leq\SU(3)$; in general, an $\SU(N_c)$ matrix
+that $\SU(2)\leq\SU(N_c)$; in general, an $\SU(N_c)$ matrix
 can be broken down into $N_c(N_c-1)/2$ 
 $\SU(2)$ submatrices~\cite{cabibbo_new_1982}. One generates each
 $\SU(2)$ submatrix using the above HB, then reconstructs
@@ -194,7 +254,7 @@ the $\SU(N_c)$ matrix from those.
 %(as opposed to random) order fulfill balance, but do not
 %fulfill detailed balance.
 
-\section{Update: Over-relaxation}\index{over-relaxation}
+\subsection{Update: Over-relaxation}\index{over-relaxation}
 
 An additional useful update for $\SU(N_c)$ is the 
 {\it over-relaxation}\index{over-relaxation} (OR) update. 
@@ -202,14 +262,15 @@ Adler introduced OR algorithms \cite{adler_over-relaxation_1981} and
 they were further developed by Creutz \cite{creutz_overrelaxation_1987} 
 and others. The idea of the OR algorithm is to speed up relaxation 
 by generating a group element ``far away" from $U$ without
-destroying equilibrium, which is here achieved by keeping the action constant.
+destroying equilibrium, which for $\SU(2)$ is achieved by keeping that action
+constant. 
 This update is not random in any way, but rather serves to move you around
 in configuration space without impacting the acceptance rate too much.
 
-More precisely let $U\in\SU(N_c)$ and suppose we have some method of
+More precisely let $U\in\SU(2)$ and suppose we have some method of
 choosing another link variable $U_0$ that maximizes
 the action for this staple.  We assume that this method of selection has no
-dependence on $U$.  Pick some element $V\in\SU(N_c)$ such that $U=VU_0$; viewed
+dependence on $U$.  Pick some element $V\in\SU(2)$ such that $U=VU_0$; viewed
 in this way, $U$ is ``on one side of $U_0$," and the element 
 ``on the other side" is $U'=V^{-1}U_0$.  Note that
 \begin{equation}
@@ -220,8 +281,7 @@ which implies
   U' = U_0 U^{-1} U_0.
 \end{equation}
 This manner of constructing a new link variable $U'$, which generates
-a group element ``far away" from $U$ without changing the action, 
-is what we mean by over-relaxation.
+a group element ``far away" from $U$, is what we mean by over-relaxation.
 
 In principle an OR update should be more efficient than a Monte
 Carlo update. This is because we chose the new link variable to be two
@@ -255,20 +315,24 @@ For $\SU(2)$, the update is given by
     which is what it was originally.
   \end{proof}
 \end{proposition}
+
 This simple 
 behavior is special to $\U(1)$ and $\SU(2)$ LGT. 
-For $N_c>2$, we again choose to do our efficient updates on
-$\SU(2)$ submatrices of the original $\SU(N_c)$ matrix. 
+For $N_c>2$, one can carry out OR updates on the $\SU(2)$ subspaces of the
+$\SU(N_c)$ matrix. This in general does not keep the action constant, but it
+does change the action only very little. Hence it is a good choice to supplement
+HB updates for $\SU(N_c)$ gauge fields in general. 
 
-\section{Update: Over-relaxation gauge fixing}\label{sec:ORgaugefix}
-
+\subsection{Update: Over-relaxation gauge fixing}\label{sec:ORgaugefix}
 \index{gauge!fixing}
+
 In general expectation values of gauge-dependent quantities are zero.
-Nevertheless there are some rare occasions where it is useful to calculate
+Nevertheless there are rare occasions where it is useful to calculate
 a quantity in a particular gauge, which can then be related to some
 other physical quantity. In this section we cover an OR
 algorithm that fixes gauge configurations to the {\it Coulomb} or 
 {\it Landau} gauges.\index{gauge!Coulomb}\index{gauge!Landau}
+
 In the continuum such gauges are given by the condition
 \begin{equation}
   \partial_\mu A_\mu=0,
@@ -353,8 +417,10 @@ about using OR to gauge fix, see Ref.~\cite{mandula_efficient_1990}.
 For information about how to implement this on multiple GPUs, see
 e.g. Ref.~\cite{schrock_coulomb_2013}.
 
-\section{Update: Molecular dynamics}\label{sec:MD}\index{molecular dynamics}
+\subsection{Update: Molecular dynamics}\label{sec:MD}\index{molecular dynamics}
 
+We now discuss one of the most popular updating strategies on the market,
+especially when carrying out simulations with dynamical fermions.
 For this updating strategy, we leverage an isomorphism between
 lattice field theory and a classical statistical mechanical 
 ensemble. We will use this
@@ -543,11 +609,14 @@ shifts low eigenmodes by an amount $\delta$.
 
 \section{The HISQ force}\label{sec:HISQforce}
 
-In this section we review aspects of computing the HISQ force specifically.
 The HISQ action, discussed in \secref{sec:stagg} and \secref{sec:HISQ},
-is widely used in state-of-the-art lattice calculations. Constructing its
+is widely used in state-of-the-art lattice calculations. 
+Here we discuss the computer implementation of HISQ fermions. 
+Constructing its
 force is a bit complicated, as it is a synthesis of many constructs in
-those sections along with \secref{sec:MD}. 
+those sections along with \secref{sec:MD}. In my view,
+implementing HISQ fermions is complicated enough to warrant its own section,
+maybe even its own chapter.
 
 We begin by writing down the action itself in a way that is helpful
 for computer implementation. We write
@@ -623,6 +692,17 @@ by a reunitarization and then a second-level smear that has some lattice-spacing
 corrections built in. The $\eta_\alpha$ are the
 staggered phases defined in \equatref{eq:staggeredPhase}.
 
+
+
+\section{Improving performance}
+
+The inversion of the Dirac matrix is generally the bottleneck of LFT
+simulations. We generally get better throughput as hardware improves, 
+but waiting for hardware improvements is not sufficient for completing realistic
+simulations in an acceptable amount of time. In \secref{sec:performance} we
+already discussed some general methods to get the most out of your hardware.
+Here, we will discuss some strategies that are specific to LFT.
+
 \subsection{The Hasenbusch trick}\index{preconditioning!Hasenbusch}
 
 At this point is has been mentioned multiple times that a major bottleneck
@@ -648,363 +728,43 @@ D\left(m_h\right),
 \end{equation}
 where $m_l$ indicates some light quark mass and $m_h$ some heavier one.
 The heavier masses are then treated with their own pseudofermion integrals.
-
-\section{Choosing a random number generator}
-
-As far as we know\footnote{See for instance \apref{ap:bell}.}, 
-the only truly random or stochastic things in nature are
-quantum mechanical measurements. This poses a problem for our strategy, since
-we need a random number for the Metropolis step \equatref{eq:metupdate}.
-In practice, one wants to generate a number $X$ uniformly at random
-in the interval $X\in[0,1)$ and compute the number on the RHS
-of \equatref{eq:metupdate}. If $X$ turns out to be greater, you reject $C'$.
-
-In order to generate $X$, we use a {\it random number
-generator}\index{generator!random number} or RNG. 
-Since we cannot have a true random number\footnote{For
-this reason, these algorithms are sometimes more aptly called
-{\it pseudorandom number generators}\index{generator!pseudorandom number}
-or PRNGs.}, we instead settle for an algorithm that produces a sequence of numbers
-\begin{equation}
-  X_{\rm seed},~X_1,~X_2,~...,~X_n,~...,
-\end{equation}
-by using some rule to generate $X_{n+1}$ given $X_n$. The starting number is
-called the {\it seed}\index{seed}. The goal is to choose your rule so that,
-given the seed, it is difficult or effectively impossible to figure out what
-$X_n$ will be. Again, this is not a truly random process, but unfortunately it
-is not yet practical to harness direct quantum-mechanical measurements to that
-end. 
-
-One of the earliest popular RNGs was the {\it linear congruence
-generator}\index{generator!linear congruence}~\cite{lehmer_mathematical_1951,thomson_modified_1958}. 
-Here the rule is pretty simple
-to understand: You choose three tuning parameters $a$, $b$, $m\in\N$
-and then generate according to
-\begin{equation}\label{eq:linearCongruence}
-X_{n+1}=(aX_n+b)\mod m.
-\end{equation}
-One can then convert a number $X_n$ generated in this way to a number $X$
-in the unit interval as required for the Metropolis step by normalizing it by $m$.
-
-
-\begin{figure}
-\centering
-\includegraphics[width=0.6\linewidth]{figs/linear_congruence.pdf}
-\caption{A strong correlation hidden in the linear congruence generator for
-poorly chosen $a$, $b$, and $m$. Things seem to improve for a better choice of
-these parameters, but as Marsaglia proved, this generator should be avoided. 
-Image by C. Schmidt.}
-\label{fig:LCG}
-\end{figure}
-
-The linear congruence generator is extremely easy to implement and is quite
-fast. Unfortunately it suffers from one fatal flaw: It sucks. To see that it
-sucks, one can plot $X_{2m}$ against $X_n$. An example of such a plot for
-poorly chosen $a$, $b$, and $m$ is given in \figref{fig:LCG}. One sees the
-pairs organize themselves into planes. Changing $a$, $b$, and $m$ seems
-to improve the generator, but this flaw of the linear congruence generator
-is fundamental. Indeed it was shown by Marsaglia~\cite{marsaglia_random_1968} that
-outcomes of the linear will always arrange themselves in planes of hypercubes.
-Hence one should never this generator for scientific purposes.
-
-Looking for these hidden correlations is a bit challenging requiring some care
-and experience. There are a variety of tests, but if you want to be thorough,
-it is likely best to use already existing batteries, such as the {\it Diehard}
-battery written by Marsaglia himself. More modern batteries, 
-such as the {\it Dieharder}, can be found online~\cite{dieharder}.
-Besides lacking hidden correlations, you would like numbers produced by your
-RNG to match the target distribution. This can be quantitatively estimated
-using, for instance, the Kolmogorov test of \secref{sec:kolm}.
-Some modern RNGs that are known to be suitable for scientific purposes,
-in particular passing some of the tests above, include
-the\index{generator!Tausworthe} 
-{\it hybrid Tausworthe}~\cite{tausworthe_random_1965,lecuyer_maximally_1996}
-and\index{generator!Mersenne twister} 
-the {\it Mersenne twister}~\cite{matsumoto_mersenne_1998}.
-
-\section{Statistical analysis}\label{sec:statana}
-
-Since $C_i$ is generated based on $C_{i-1}$, measurements on subsequent
-configurations are correlated. In our simulations, these
-correlations are reduced in two ways:
-\begin{enumerate}
-  \item Subsequent configurations are separated by multiple updating sweeps;
-        and then
-  \item configurations are grouped into $\nconf$ blocks or bins.
-\end{enumerate}
-The final measurements $X_i$ used in data analysis are obtained by averaging
-within each block.
-To check whether the final data are effectively independent, one can use
-the integrated autocorrelation time. 
-For statistically independent measurements, we expect the variance 
-$\sigma^2_{\bar{X}}$ of $\bar{X}$ to be
-\begin{equation}
-  \sigma^2_{\bar{X}}=\frac{\sigma^2}{\nconf}
-\end{equation}
-due to the CLT. In practice, however, one finds 
-\begin{equation}
-  \sigma^2_{\bar{X}}=\frac{\sigma^2}{\nconf}\tauint.
-\end{equation}\index{autocorrelation time!integrated}
-The factor $\tauint$ is the integrated autocorrelation time. It is the 
-ratio between the estimated variance of the sample
-mean and what this variance would have been if the data were independent.
-For effectively independent data, $\tauint=1$.
-
-So, the final measurements are drawn from some
-distribution with mean $\ev{X}$ and variance $\sigma^2$
-and are effectively independent. The
-estimator $\bar{X}$ of the mean is the average~\eqref{eq:arithmeticaverage}, 
-while the unbiased estimator $\bar{\sigma}^2$ of the variance is
-\begin{equation}\label{eq:estimatorvariance}
-  \bar{\sigma}^2=\frac{1}{\nconf-1}\sum_{i=1}^{\nconf}
-      \left(X_i-\bar{X}\right)^2.
-\end{equation}
-An estimator is biased if its mean for finite $\nconf$ 
-does not agree with the exact result;
-the bias is the difference. Generally, problems with bias emerge whenever
-one wishes to estimate some non-linear function $f$ of the mean $\ev{X}$.
-Naively one might guess
-\begin{equation}
-  \bar{f}_\text{bad}=\frac{1}{\nconf}\sum_{i=1}^{\nconf}f(X_i)
-\end{equation}
-as an estimator; however $\bar{f}_\text{bad}$ is not guaranteed
-to converge to the exact result\footnote{See for instance the discussion
-in \secref{sec:bias}.}. 
-An estimator for $f(\ev{X})$ that converges to its true value is
-\begin{equation}\label{eq:MCMCconsistentEst}
-  \bar{f}=f(\bar{X});
-\end{equation}
-in particular, the bias of this estimator is $\order{1/\nconf}$.
-Therefore in the large $\nconf$ limit, the bias vanishes faster than the 
-statistical error bar.
-
-At this point it is worth commenting when it is appropriate to use
-the sample average~\eqref{eq:arithmeticaverage} and the estimator
-\eqref{eq:MCMCconsistentEst}. The sample average is the preferred 
-method to estimate an observable that can be directly calculated from 
-the configurations, i.e. when $X_i=X(C_i)$. 
-Such random variables are called {\it primary quantities},
-\index{primary quantity} and they include many simple observables such
-as the action, the absolute value of the Polyakov loop, and so on. 
-However some quantities can only be calculated 
-as functions of the sample average; these are called {\it secondary quantities}.
-\index{secondary quantity} An obvious example is the variance, which is defined
-only in terms of averages. But a less obvious example are particle masses,
-which cannot be directly calculated on any single configuration. In this
-case we are forced to use \equatref{eq:MCMCconsistentEst}.
-
-We have introduced a way to estimate the mean and variance of some
-operator, as well as a way to estimate the mean of some function of
-that operator. Now we need a way to estimate the error bar of that
-function. We cannot use
-\begin{equation}
-  \bar{\sigma}^2_{\bar{f}}=\frac{\bar{\sigma}^2_{\bar{f}}}{\nconf}
-    =\frac{1}{\nconf\,(\nconf-1)}\sum_{i=1}^{\nconf}
-     \left(f(X_i)-\bar{f}\right)^2
-\end{equation}
-because $f(X_i)$ is not a valid sample point.
-One could analytically produce an error bar for $\bar{f}$ 
-using error propagation. However when the function is complicated, 
-error propagation becomes extremely unwieldy.
-
-Jackknifing\index{jackknife} allows one to extract a mean and error bar,
-and it is straightforward to implement; 
-therefore it makes sense to use the jackknife method generally.
-The idea of jackknifing is to throw away the first measurement, 
-leaving $\nconf-1$ resampled values. Then we resample again, this
-time throwing out the second point, and so on. The resulting
-jackknife bins are
-\begin{equation}
-  X_{J,i}=\frac{1}{\nconf-1}\sum_{j\neq i}X_j.
-\end{equation}
-The jackknife estimator for $f(\ev{x})$ is then
-\begin{equation}
-  \bar{f}_J=\frac{1}{\nconf}\sum_{i=1}^{\nconf}f(X_{J,i}),
-\end{equation}
-while the estimator for the variance of $\bar{f}_J$ is
-\begin{equation}
-  \bar{\sigma}^2_{f_J}=\frac{\nconf-1}{\nconf}\sum_{i=1}^{\nconf}
-    \left(f(X_{J,i})-\bar{f}_J\right)^2.
-\end{equation}
-
-In many instances, we will need to compare two estimates 
-of the same quantity against each other and decide whether the difference 
-between them is significant. This can happen, for example, if we want to
-compare another group's results with our own. Let their result
-be $\bar{X}$ with uncertainty $\sigma_{\bar{X}}$ and ours be
-$\bar{Y}$ with uncertainty $\sigma_{\bar{Y}}$. Then the probability
-that these two estimates differ by at least $D$ is
-\begin{equation}\index{Gaussian difference test}
-  q=\pr{|\bar{X}-\bar{Y}|>D}
-    =1-\erf\left(\frac{D}{\sqrt{2
-     \left(\sigma_{\bar{X}}^2+\sigma_{\bar{Y}}^2\right)}}\right)
-\end{equation}
-assuming $\bar{X}$ and $\bar{Y}$ are normally distributed with
-the same mean. This is called a Gaussian difference test. 
-The quantity $q$ is called the q-value.
-In practice we take $q\leq0.05$ to be an indication of a possible 
-discrepancy between $\bar{X}$ and $\bar{Y}$, keeping in mind that 
-$q\leq0.05$ by chance one out of twenty times.
-
-In practice, the true variances $\sigma_{\bar{X}}$ and $\sigma_{\bar{Y}}$
-are not known. If one wishes to use the estimators $\bar{\sigma}_{\bar{X}}$
-and $\bar{\sigma}_{\bar{Y}}$ instead, one can perform a {\it Student
-difference test} or {\it t-test}\index{t-test} to investigate whether the 
-discrepancy $D$ is due to chance. Suppose the estimate $\bar{X}$ comes from 
-$M_{\text{conf}}$ data, while $\bar{Y}$ comes from $\nconf$ data.
-Assume $\sigma_{\bar{X}}=\sigma_{\bar{Y}}$, which
-happens when the sampling methods used are identical.
-We introduce the random variable
-\begin{equation}
-  t=\frac{D}{\bar{\sigma}_D},
-\end{equation}
-where $D=\bar{X}-\bar{Y}$, and
-\begin{equation}
-  \bar{\sigma}^2_D=\left(\frac{1}{M_{\text{conf}}}+\frac{1}{\nconf}\right)
-                   \frac{(M_{\text{conf}}-1)\,\bar{\sigma}_{\bar{X}}^2
-                    +(\nconf-1)\,\bar{\sigma}_{\bar{Y}}^2}
-                   {M_{\text{conf}}+\nconf-2}.
-\end{equation}
-Then the probability that these two estimates differ by at least $D$ is
-\begin{equation}
- q=2
- \begin{cases}
- \,I\left(z,\frac{\nu}{2},\frac{1}{2}\right) & \text{for }t\leq 0, \\
- \,1-\frac{1}{2}\,I\left(z,\frac{\nu}{2},\frac{1}{2}\right) & \text{otherwise},
- \end{cases}
-\end{equation}
-where $I$ is the incomplete beta function, $\nu=M_{\text{conf}}+\nconf-2$,
-and
-\begin{equation}
-  z=\frac{\nu}{\nu+t^2}.
-\end{equation}
-
-To estimate finite size corrections and carry out continuum limit
-extrapolations, we need a way to fit data to curves.
-Consider a sample of $\nsim$ Gaussian, independent data points $(X_i,Y_i)$,
-where the $Y_i$ have standard deviations $\sigma_i$ and the $X_i$ have
-no errors. For instance, if one is interested in a continuum limit
-extrapolation, the $X_i$ are $\beta$ values while the $Y_i$ are
-ratios of scales evaluated at that $\beta$.
-We model these data with a fit that depends on some set
-of $M$ parameters
-\begin{equation}
-  y=y(x;a),
-\end{equation}
-where $a=(a_1,...,a_M)$ is the vector of these parameters. Our goal
-is to estimate the $a_j$.
-Assuming that $y(x;a)$ is the exact law for the data, the probability
-distribution for the measurements $Y_i$ is 
-\begin{equation}
-  f(y_1,...,y_{\nsim})=\prod_{i=1}^{\nsim}\frac{1}{\sqrt{2\pi}\sigma_i}
-      \exp\left[\frac{-(y_i-y(x_i;a))^2}{2\sigma_i^2}\right].
-\end{equation}
-The probability that the data fall within a region near what was observed is
-\begin{equation}
-  \text{P}=\prod_{i=1}^{\nsim}\frac{1}{\sqrt{2\pi}\sigma_i}
-      \exp\left[\frac{-(y_i-y(x_i;a))^2}{2\sigma_i^2}\right]dy_i.
-\end{equation}
-Our strategy for determining the correct fit will be to find the vector $a$
-that maximizes the above probability. This happens when
-\begin{equation}
-  \chi^2(a)\equiv\sum_{i=1}^{\nsim}\frac{(y_i-y(x_i;a))^2}{2\sigma_i^2}
-\end{equation}
-is minimized. This strategy is an example of a {\it maximum likelihood method}.
-
-We now describe an iterative method to search for the minimum of $\chi^2$.
-Let $a_n$ be the vector of parameters for the $n\nth$ iteration.
-As long as $a$ is in a small enough neighborhood of $a_n$, we can safely
-approximate
-\begin{equation}\label{eq:NRapprox}
-  \chi^2(a)\approx\chi^2(a_n)+(a-a_n)\cdot b
-           +\frac{1}{2}(a-a_n)\,A\,(a-a_n),
-\end{equation}
-where the coefficients of the vector $b$ and the $M\times M$ matrix $A$ 
-are given by the first and second derivatives of $\chi^2$ evaluated at $a_n$.
-In the {\it Newton-Raphson method}\index{Newton-Raphson}, the next 
-iteration $a_{n+1}$ is
-determined from the condition $\nabla\chi^2(a)|_{a=a_{n+1}}=0$,
-which yields
-\begin{equation}\label{eq:NR}
-  a_{n+1}=a_n-A^{-1}b.
-\end{equation}
-If the approximation~\eqref{eq:NRapprox} is not good, one can instead move
-a small step in the direction of the gradient by
-\begin{equation}\label{eq:SD}
-  a_{n+1}=a_n-c\,b,
-\end{equation}
-where $c$ is a constant that is small enough not to overshoot direction
-of steepest descent. This is an example of a {\it steepest descent method}.
-The Levenberg-Marquardt\index{Levenberg-Marquardt} 
-method~\cite{levenberg_method_1944,marquardt_algorithm_1963} 
-varies smoothly between~\equatref{eq:NR} and 
-\eqref{eq:SD}. Steepest descent is used far from the minimum, and 
-then it switches to the Newton-Raphson method when the minimum is approached.
-
-\section{General code structure}
-
-Now that we have introduced the general idea of MCMC, along with some specific
-updating schemes, and complications for statistical analysis, we are ready 
-to discuss the computer implementation. In this section we will discuss the
-general code structure. In the following sections, we will address various
-implementation details important for improving code performance and readability. 
-
-
-As mentioned earlier, we design the simulation using {\it local updates}, which
-means we update the links one at a time. This is done in a systematic order,
-because there is some computational advantage compared to updating in a
-random order~\cite{berg_markov_2004}. 
-An updating {\it sweep}\index{sweep} updates every link on the lattice once. 
-To maximize efficiency while maintaining ergodicity, it is common for pure
-$\SU(2)$ algorithms to use
-a combination of HB and OR updating. 
-
-
-An MCMC simulation of LGT broadly consists of three essential steps:
-\begin{enumerate}
-  \item {\it Initialization}: The first thing to do is get everything ready for
-        the simulation. This includes initializing the random number generator,
-        and setting up an initial configuration.
-  \item {\it Equilibration} or {\it thermalization}:
-        \index{equilibration}\index{thermalization}
-        To avoid over-sampling rare configurations,
-        one must perform many sweeps to bring the system to its equilibrium 
-        distribution. The structure of this section looks like 
-        \begin{verbatim}
-        do from n=1 to n=nequi 
-          call MCMC update
-        end do
-        \end{verbatim}
-  \item {\it Configuration generation}: One we are in the equilibrium
-        distribution, we want to generate configurations on which we can
-        perform measurements. To help reduce correlations between
-        measurements, multiple updating sweeps are performed in between.
-        This section is structured as
-        \begin{verbatim}
-        do from n=1 to n=nconf
-          do from n=1 to n=ndiscarded
-            call MCMC update
-          end do
-          save configuration 
-        end do
-        \end{verbatim}
-  \item {\it Measurements}: Now that we have a good sample of configuration
-        space, we are ready to perform measurements there. Some measurements
-        can be take {\it in situ}, i.e. they are incredibly cheap and can be
-        calculated the moment the configuration is saved. Measurements of this
-        type include simple link products like the Polyakov loop. More expensive
-        observables may require inverting a Dirac matrix thousands of times, 
-        gauge fixing, or smoothing. For such observables it is better to
-        have separate code that runs on the saved configurations. This
-        code is structured as
-        \begin{verbatim}
-        do from n=1 to n=nconf
-          take measurement 
-        end do
-        \end{verbatim}
-\end{enumerate}
-
-
+One can intuitively see how the ratio could plausibly have a lower condition
+number than $D^\dagger D(m_l)$: 
+if there were a basis that diagonalized both the light and heavy Dirac
+operators, the largest eigenvalue of $D^\dagger D(m_l)$ would be attenuated by
+the largest eigenvalue of $D^\dagger D(m_h)$, and the same would happen for the
+smallest eigenvalues.
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
+
+
+%We now describe an iterative method to search for the minimum of $\chi^2$.
+%Let $a_n$ be the vector of parameters for the $n\nth$ iteration.
+%As long as $a$ is in a small enough neighborhood of $a_n$, we can safely
+%approximate
+%\begin{equation}\label{eq:NRapprox}
+%  \chi^2(a)\approx\chi^2(a_n)+(a-a_n)\cdot b
+%           +\frac{1}{2}(a-a_n)\,A\,(a-a_n),
+%\end{equation}
+%where the coefficients of the vector $b$ and the $M\times M$ matrix $A$ 
+%are given by the first and second derivatives of $\chi^2$ evaluated at $a_n$.
+%In the {\it Newton-Raphson method}\index{Newton-Raphson}, the next 
+%iteration $a_{n+1}$ is
+%determined from the condition $\nabla\chi^2(a)|_{a=a_{n+1}}=0$,
+%which yields
+%\begin{equation}\label{eq:NR}
+%  a_{n+1}=a_n-A^{-1}b.
+%\end{equation}
+%If the approximation~\eqref{eq:NRapprox} is not good, one can instead move
+%a small step in the direction of the gradient by
+%\begin{equation}\label{eq:SD}
+%  a_{n+1}=a_n-c\,b,
+%\end{equation}
+%where $c$ is a constant that is small enough not to overshoot direction
+%of steepest descent. This is an example of a {\it steepest descent method}.
+%The Levenberg-Marquardt\index{Levenberg-Marquardt} 
+%method~\cite{levenberg_method_1944,marquardt_algorithm_1963} 
+%varies smoothly between~\equatref{eq:NR} and 
+%\eqref{eq:SD}. Steepest descent is used far from the minimum, and 
+%then it switches to the Newton-Raphson method when the minimum is approached.
