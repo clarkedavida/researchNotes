@@ -11,7 +11,7 @@ we are interested in studying QCD, so $N_c=3$. This chapter uses Dirac
 algebra extensively, but the algebra is different when the metric
 is Euclidean. For details see \apref{ap:spec_math}.
 
-In the continuum theory, the free fermion propagator is
+In the continuum theory, the free fermion action is 
 \begin{equation}
   S_F=\int\dd[4]{x}\bar{\psi}(\slashed{\partial}+m)\psi.
 \end{equation}
@@ -33,7 +33,9 @@ with integration measure
                         \dd{\psi^f_{\alpha c}(x)},
 \end{equation}
 where $f$ runs over flavors, $\alpha$ runs over Dirac indices, and $c$
-runs over colors.
+runs over colors.\footnote{We will try in this book to follow the convention of
+Ref.~\cite{gattringer_quantum_2010} and indicate Dirac indices with Greek
+letters and color indices with Latin letters.}
 
 In addition, we want the fermionic action to be gauge invariant. The
 gauge transformation for fermion fields
@@ -60,7 +62,7 @@ Solving for $A'_\mu$ we find
 \begin{equation}
   A'_\mu=(\partial_\mu U)U^\dagger-UA_\mu U^\dagger,
 \end{equation}
-just as we did before.
+just as with the pure gauge case. 
 
 On the lattice, link variables transform as
 \begin{equation}
@@ -85,8 +87,32 @@ transforms as
 Since \equatref{eq:naivefermactgauge} is the gauge-invariant action,
 this will be what we investigate for fermion doubling.
 
-\section{Grassmann
-numbers}\label{sec:grassmann}\index{algebra!Grassmann}\index{Grassmann!algebra}
+In this chapter, it will be convenient to separate out fermionic and gluonic
+parts of the path integral. To this end, we factorize expectation values as
+\begin{equation}\label{eq:evfact}
+\ev{...}=\ev{\ev{...}_F}_G.
+\end{equation} 
+For an observable $X$, the fermionic expectation value is defined as
+\begin{equation}\label{eq:evferm}
+\ev{X}_F\equiv\frac{1}{Z_F(U)}\int\DD\psi\DD\bar\psi
+e^{-S_F\left(\bar\psi,\psi,U\right)} X\left(\bar\psi,\psi,U\right),~~~~~
+Z_F(U)=\int\DD\psi\DD\bar\psi e^{-S_F\left(\bar\psi,\psi,U\right)}.
+\end{equation}
+This expectation value thus integrates out the fermionic degrees of freedom,
+leaving only a dependence on the gauge field.
+With this definition, the gluonic expectation value must be
+\begin{equation}
+\ev{X}_G\equiv\frac{1}{Z}\int\DD U e^{-S_G} Z_F(U) X(U)
+\end{equation}
+so that
+\begin{equation}
+\ev{X}=\frac{1}{Z}\int\DD U\DD\psi\DD\bar\psi
+e^{-S_G(U)-S_F\left(\bar\psi,\psi,U\right)} X\left(\bar\psi,\psi,U\right)
+\end{equation}
+as expected.
+
+\section{Grassmann numbers}\label{sec:grassmann}\index{algebra!Grassmann}
+\index{Grassmann!algebra}
 Fermions are objects that by definition anticommute with each other. 
 With this in mind, we introduce Grassmann numbers.
 We consider a set of numbers $\eta_i$, $1\leq i\leq N$ obeying
@@ -822,13 +848,15 @@ seem to agree with experiment.
 
 %\section{Overlap fermions}
 
-\section{Constructing interpolators}
+\section{Hadron interpolators}\label{sec:interpolators}
 
 One of the goals of LQCD calculations is to learn something about hadrons. A
 lattice operator that is supposed to represent some particular observable is
 called an {\it interpolator}\index{interpolator}. Hence to learn something
-about hadrons, we need to construct their corresponding interpolators. The
-guiding principles to constructing them are:
+about hadrons, we need to construct their corresponding interpolators. We follow
+the presentation in Ref.~\cite{gattringer_quantum_2010}.
+
+The guiding principles to constructing interpolators are:
 \begin{enumerate}
   \item They are local, i.e. they should create/annihilate the particle of
         interest at a particular space-time point.
@@ -838,7 +866,6 @@ guiding principles to constructing them are:
         e.g. they need to have the correct isospin, parity, electric charge,
         etc.
 \end{enumerate} 
-
 As an example, let's take the\index{interpolator!pion} pions. They are known to
 have\footnote{These properties are determined experimentally. For
 example the pion parity was found in the 1950s~\cite{chinowsky_reaction_1955}.} 
@@ -854,7 +881,22 @@ minus sign in $\pi^0$ is to get $I_z=0$.}
                                       -\bar{d}(x)\gamma_5d(x)\right).
 \end{aligned}\end{equation}
 These interpolators correspond to the pion operators in our physical Hilbert
-space; they annihilate a pion at $x$. In general, meson interpolators have the
+space; they annihilate a pion at $x$. Furthermore they are form an
+isospin triplet.\index{triplet state} There is also a $u$, $d$ combination
+with $I=0$, an isospin singlet state\index{singlet state}
+\begin{equation}
+\eta_{\rm non-phys.}(x)= \frac{1}{\sqrt{2}}\left( \bar{u}(x)\gamma_5u(x)
+                                      +\bar{d}(x)\gamma_5d(x)\right),
+\end{equation}
+which can be interpreted as a kind of $\eta$\index{meson!$\eta$} 
+meson.\footnote{The physical $\eta$ and $\eta'$ mesons are formed by 
+$$
+\eta= \frac{1}{\sqrt{6}}\left( \bar{u}u+\bar{d}d-2\bar{s}s\right)~~~~~
+\eta'= \frac{1}{\sqrt{3}}\left( \bar{u}u+\bar{d}d+\bar{s}s\right).
+$$
+}
+
+In general, meson interpolators have the
 form
 \begin{equation}\label{eq:mesonInterp}
  X=\bar{\psi}^f\Gamma\psi^g
@@ -864,21 +906,101 @@ for some quarks $f$ and $g$. It turns out that to create meson $X$ one needs
  \bar{X}=\bar{\psi}^g\Gamma\psi^f.
 \end{equation}
 
-
 With the interpolators in hand, we can construct general meson correlators.
 A correlation function\index{correlator} 
 that creates a meson $X$ at $y$ and annihilates it at $x$ is
 \begin{equation}
   G(x,y)\equiv\bra{0}X(x)\bar{X}(y)\ket{0}=\ev{X(x)\bar{X}(y)}.
 \end{equation} 
+We now recast this equation in a form more practical for lattice calculations.
+In particular we focus on expectation values $\ev{...}_F$. From
+\equatref{eq:deffermev} we see that these expectation values can be factorized
+according to quark flavor, which will be useful to us. As we will see,
+isotriplet and isosinglet operators will have slightly different forms.
 
-% the fields become D^-1
-% depending on how the contractions go, you can get connected and
-% disconnected pieces, GL 6.1.2
-% definite momentum requires momentum projection (fourier xform),
-% which according to LGT:prelim gives sum over \vec{x}.
-% is the discussion from degrand-detar more general?
-% section 6.2.3 wall sources
+To start, we consider simple isotriplet operators of the form
+$X=\bar{d}\Gamma u$. Expressing Lorentz and color indices explicitly we obtain 
+\begin{equation}\begin{aligned}\label{eq:contraction}
+\ev{X(x)\bar{X}(y)}_F&=\ev{\bar{d}(x)\Gamma u(x)\bar{u}(y)\Gamma d(y)}_F\\
+&=
+\Gamma_{\alpha\beta}\Gamma_{\bar{\alpha}\bar{\beta}}
+\ev{\bar{d}(x)_{\alpha c}u(x)_{\beta c}\bar{u}(y)_{\bar\alpha\bar
+c}d(y)_{\bar\beta \bar c}}_F\\
+&=
+-\Gamma_{\alpha\beta}\Gamma_{\bar{\alpha}\bar{\beta}}
+\ev{u(x)_{\beta c}\bar{u}(y)_{\bar\alpha\bar c}}_u
+\ev{d(y)_{\bar\beta \bar c}\bar{d}(x)_{\alpha c}}_d\\
+&=
+-\Gamma_{\alpha\beta}\Gamma_{\bar{\alpha}\bar{\beta}}
+D^{-1}_u(x,y)_{\beta\bar\alpha c\bar c}
+D^{-1}_d(y,x)_{\bar\beta\alpha \bar cc}\\
+&=-\tr\left[\Gamma D_u^{-1}(x,y)\Gamma D_d^{-1}(y,x)\right],
+\end{aligned}\end{equation}
+where we used Wick's theorem to arrive at fourth line.
+Through Wick's theorem, the original correlation function can be expressed in
+terms a trace of product of gamma matrices $D^{-1}$ operators that originally
+appeared in the fermionic part of the action. 
+
+\begin{figure}
+\includegraphics[width=\textwidth]{figs/connected_disconnected.pdf}
+\caption{Examples of connected (left) and disconnected (right) diagrams
+between spacetime points $x$ and $y$. The arrows indicate the direction of
+propagation. Any vertical pair of open and closed circles can be interpreted as
+a meson.}
+\label{fig:contraction}
+\end{figure}
+
+The above computation is an example of a fermion {\it contraction}\index{contraction}.
+Equation \eqref{eq:contraction} can be interpreted as follows: The propagator
+$D^{-1}_u$ propagates a $u$ quark from $y$ to $x$; simultaneously, the
+$D^{-1}_d$ propagates a $d$ quark from $x$ to $y$. The corresponding Feynman
+diagram is referred to as a {\it connected}\index{connected diagram} 
+diagram. This is shown
+schematically in \figref{fig:contraction} (left).\footnote{By doing a hopping
+parameter expansion, one can show that $D^{-1}$ can be expressed as a weighted
+sum over all possible, non-backtracking paths from $y$ to $x$. So the directed lines 
+shown in the \figref{fig:contraction} can be thought of as shorthand
+for such sums.}
+
+Using the same kinds of manipulations as in the contraction
+\eqref{eq:contraction}, one can show that correlators of 
+isosinglet operators of the form
+$X=\left(\bar{u}\Gamma u+\bar{d}\Gamma d\right)/\sqrt{2}$ become
+\begin{equation}\begin{aligned}\label{eq:disconnectedContribution}
+2\ev{X(x)\bar{X}(y)}_F&=
+-\tr\left[\Gamma D_u^{-1}(x,y)\Gamma D_u^{-1}(y,x)\right]\\
+&~~~~+\tr\left[\Gamma D_u^{-1}(x,x)\right]\tr\left[\Gamma D_u^{-1}(y,y)\right]\\
+&~~~~+\tr\left[\Gamma D_u^{-1}(x,x)\right]\tr\left[\Gamma D_d^{-1}(y,y)\right]
++(u\leftrightarrow d).
+\end{aligned}\end{equation}
+Here we see the appearance of {\it disconnected}\index{disconnected diagram}
+diagrams, like $\tr\Gamma D^{_1}(x,x)$, which can be visualized as in
+\figref{fig:contraction} (right). These diagrams propagate a quark from a point
+$x$ back to $x$. Correlators of the form
+$X=\left(\bar{u}\Gamma u-\bar{d}\Gamma d\right)/\sqrt{2}$, like the $I_z=0$
+component of the isotriplet, are exactly the same as
+\equatref{eq:disconnectedContribution}, except that there appears a relative
+minus sign between $u$ and $d$ terms. Computations that set $m_u=m_d$, i.e.
+{\it isospin symmetric}\index{isospin!symmetric calculation} calculations, have
+the benefit that the disconnected pieces cancel out. This turns out to be
+especially convenient, as disconnected diagrams are more expensive to
+compute than connected ones.
+
+We note that states of definite spatial momentum $\vec{p}$ can be obtained by
+Fourier transforming out the spatial sites, similar to \equatref{eq:fourierLat}.
+In this way, the time component $t$ is left free, and the resulting
+transform $\tilde{X}\left(\vec{p},t\right)$, being a sum over all sites on the
+time-slice $t$, is interpreted as living on the time-slice. 
+
+We close by giving a final formula to compute hadron correlators on the lattice,
+exemplifying the case of a connected meson interpolator. Combining
+Eqs.~\eqref{eq:evfact}, \eqref{eq:evferm}, \eqref{eq:contraction}, and
+the Matthews-Salam formula, we arrive at
+\begin{equation}
+\ev{X(x)\bar{X}(y)}=-\frac{1}{Z}
+\int\DD U e^{-S_G}\det D_u\det D_d \tr\left[\Gamma D_u^{-1}(x,y)\Gamma
+D_d^{-1}(y,x)\right].
+\end{equation}
 
 \section{Pseudofermions}\label{sec:pseudofermions}
 

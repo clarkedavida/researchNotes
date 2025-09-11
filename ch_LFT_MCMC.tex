@@ -703,7 +703,7 @@ simulations in an acceptable amount of time. In \secref{sec:performance} we
 already discussed some general methods to get the most out of your hardware.
 Here, we will discuss some strategies that are specific to LFT.
 
-\subsection{The Hasenbusch trick}\index{preconditioning!Hasenbusch}
+\subsection{Preconditioning: The Hasenbusch trick}\index{preconditioning!Hasenbusch}
 
 At this point is has been mentioned multiple times that a major bottleneck
 of the RHMC algorithm, which as of now is the fastest scheme for
@@ -734,6 +734,29 @@ if there were a basis that diagonalized both the light and heavy Dirac
 operators, the largest eigenvalue of $D^\dagger D(m_l)$ would be attenuated by
 the largest eigenvalue of $D^\dagger D(m_h)$, and the same would happen for the
 smallest eigenvalues.
+
+
+\subsection{Using noise vectors}
+
+As discussed in \secref{sec:interpolators}, local meson interpolator $X$ is a 
+bilinear of the form
+\begin{equation}
+O(x)=\bar\psi^f(x)\Gamma\psi^g(x),
+\end{equation}
+where $f$ and $g$ indicate quark flavors and $\Gamma$ is a monomial in gamma
+matrices. The way one constructs an interpolator is to pick quark content
+matching the valence quarks of the meson and to pick $\Gamma$ such that $O$ has
+the same quantum numbers as the meson of interest. Constructing your
+interpolator this way ensures that $X$ creates a particle with the desired
+properties when acting on the vacuum.
+
+
+
+
+% try to understand how propagator ended up not being sparse
+% so it's a big matrix, Nc*V*Nd
+% noise estimates
+
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
