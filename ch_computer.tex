@@ -911,6 +911,44 @@ A series of such directives can be used to simplify coding tasks or create
 coding shortcuts. In this context sometimes one refers to such series as {\it
 macros}\index{macro}.
 
+
+\section{Minimization algorithms}
+
+Here we describe iterative methods to search for minima.
+A common application of these methods is performing fits,
+like what was discussed in \secref{sec:fitchi2}. Therefore we take as our
+example the determination of fit parameters through the minimization of $\chi^2$.
+
+Let $a_n$ be the vector of parameters for the $n\nth$ iteration.
+As long as $a$ is in a small enough neighborhood of $a_n$, we can safely
+approximate
+\begin{equation}\label{eq:NRapprox}
+  \chi^2(a)\approx\chi^2(a_n)+(a-a_n)\cdot b
+           +\frac{1}{2}(a-a_n)\,A\,(a-a_n),
+\end{equation}
+where the coefficients of the vector $b$ and the $M\times M$ matrix $A$ 
+are given by the first and second derivatives of $\chi^2$ evaluated at $a_n$.
+In the {\it Newton-Raphson method}\index{Newton-Raphson}, the next 
+iteration $a_{n+1}$ is
+determined from the condition $\nabla\chi^2(a)|_{a=a_{n+1}}=0$,
+which yields
+\begin{equation}\label{eq:NR}
+  a_{n+1}=a_n-A^{-1}b.
+\end{equation}
+If the approximation~\eqref{eq:NRapprox} is not good, one can instead move
+a small step in the direction of the gradient by
+\begin{equation}\label{eq:SD}
+  a_{n+1}=a_n-c\,b,
+\end{equation}
+where $c$ is a constant that is small enough not to overshoot direction
+of steepest descent. This is an example of a {\it steepest descent method}.
+The Levenberg-Marquardt\index{Levenberg-Marquardt} 
+method~\cite{levenberg_method_1944,marquardt_algorithm_1963} 
+varies smoothly between~\equatref{eq:NR} and 
+\eqref{eq:SD}. Steepest descent is used far from the minimum, and 
+then it switches to the Newton-Raphson method when the minimum is approached.
+
+
 \section{Machine learning}\label{sec:ML}\index{machine learning}
 
 At some point during my first postdoc, {\it machine learning} (ML) really exploded.

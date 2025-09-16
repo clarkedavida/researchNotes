@@ -703,6 +703,199 @@ simulations in an acceptable amount of time. In \secref{sec:performance} we
 already discussed some general methods to get the most out of your hardware.
 Here, we will discuss some strategies that are specific to LFT.
 
+\subsection{Using noise vectors}\label{sec:noiseVector}
+
+Here we discuss a strategy to lessen the burden of computing the trace of some
+operator, $\tr X$. This can be applied to correlators, but it's also useful for
+operators like the number density, which we will show in \secref{sec:QCDtherm}
+can be computed like $\tr D^{-1}$. 
+If we were to compute this particular trace
+naively, we would need to compute propagators for $4N_cV$ point sources,
+which of course is too expensive.
+We will instead estimate the trace using a set of
+noisy vectors, sometimes called the {\it Hutchinson
+method}~\cite{hutchinson_stochastic_1990}.
+
+In particular, consider $N$ uncorrelated complex random numbers
+$\eta_i=\eta_R+i\eta_I$. Let $\eta$ be the vector formed from these numbers, and
+define $\eta_R$ and $\eta_I$ similarly. We demand they have unit variance, i.e.
+\begin{equation}\label{eq:noisenorm}
+\ev{\eta_i\eta_j^*}_\eta = \delta_{ij}.
+\end{equation}
+This normalization condition can be satisfied using, e.g., Gaussian random
+numbers, drawn according to
+\begin{equation}
+\pr{\eta}=\pi^{-N}\dd{\eta_R}\dd{\eta_I}\exp\left(-\eta^\dagger\eta\right),
+\end{equation}
+which can be seen by integrating $\eta_i\eta_j$ over the above measure.
+The expectation value \equatref{eq:noisenorm} can be approximated in the usual
+way, i.e. by drawing $\eta$ from the above distribution $K$ times,
+\begin{equation}
+\delta_{ij}\approx\frac{1}{K}\sum_k\eta_i^{k}\left(\eta_j^{k}\right)^*,
+\end{equation}
+which means traces can be estimated as
+\begin{equation}
+\tr X= X_{ij}\delta_{ij} \approx\frac{1}{K}\sum_k\left(\eta^k\right)^\dagger X\eta^{k}.
+\end{equation}
+This trick reduces the computational complexity from $\order{144V^2}$ to
+$\order{12KV}$. It is sometimes called a {\it noisy
+estimator}\index{estimator!noisy} of the trace. 
+
+We have explicitly indicated the dependence of the computational burden on
+metaparameters such as the number of noise vectors. The burden also increases
+with the accuracy of the solve. One thus faces the common dilemma of
+trading accuracy for computational effort. We therefore discuss next a trick to
+reduce solve times without sacrificing too much accuracy, the {\it truncated
+solver method}\index{truncated solver method} (TSM)~\cite{bali_effective_2010}.
+
+The idea is quite simple: We estimate $\tr X$ using two solve tolerances, a fine
+solve carried out to high accuracy, say to machine precision, and a sloppy solve
+where we terminate the inversion iterations early. Computing $\tr X$ using the
+latter solves only would be a biased estimate, as we did not permit the
+inversion to run fully to completion. To correct for the bias, we decompose
+\begin{equation}\label{eq:TSM}
+\tr X\approx \frac{1}{K_{\rm sloppy}}\sum_{k=1}^{K_{\rm sloppy}}
+\left(\eta^k\right)^\dagger X_{\rm sloppy}\eta^{k}
++\frac{1}{K_{\rm fine}}\sum_{k=K_{\rm sloppy}+1}^{K_{\rm sloppy}+K_{\rm fine}}
+\left(\eta^k\right)^\dagger 
+\left(X_{\rm fine}-X_{\rm sloppy}\right)\eta^{k},
+\end{equation}
+where the subscripts ``sloppy" and ``fine" indicate the accuracy to which
+$\left(\eta^k\right)^\dagger X\eta^{k}$ was determined. The second term of
+\equatref{eq:TSM} removes the bias from the sloppy solve. The idea then is to
+choose $K_{\rm sloppy}$ and $K_{\rm fine}$ such that $K_{\rm sloppy}\gg K_{\rm
+fine}$ while keeping the estimate for the bias correction reliable. 
+Sometimes, $K_{\rm fine}=1$ is sufficient.
+
+\subsection{Deflation}\label{sec:deflation}
+
+Consider a matrix $X$. {\it Deflation} refers to the process of constructing a
+new matrix $X_{\rm deflated}$ using some subspace of the column space of $X$.
+In the context of inverting $D$, one often uses deflation to
+isolate the subspace formed by its low eigenmodes, $L$; the remaining subspace
+is then $R={\rm range}~D-L$, and the Dirac matrix restricted to this
+subspace is the deflated matrix $D_{\rm deflated}$. Since $D_{\rm deflated}$ has
+the low eigenmodes excluded, its condition number is much better, and hence it
+is easier to invert. The spectrum of $D$ is such that its eigenvalues tend to
+increase rapidly, and hence ${\rm dim}~L$ tends to be comparatively quite small.
+Finding the eigenvectors of $D_L$ then becomes computationally tractable.
+
+\subsection{Point and wall sources}
+
+In \equatref{eq:mesonCorrFormula} we showed a formula for computing a connected
+meson correlator. The inversion of $D$ makes these correlators highly
+computationally demanding. Moreover, these correlators can often be quite noisy,
+especially for large Euclidean time separations. Here we discuss some commonly
+used strategies to ameliorate these difficulties somewhat. Again we follow
+Ref.~\cite{gattringer_quantum_2010}, so you can always look there fore more
+details. We will assume $m_u=m_d\equiv m_l$, i.e. we consider the isospin
+symmetric case, a case that is ubiquitous in modern lattice calculations and
+allows for useful simplifications.
+
+Let's start by discussing a general strategy for correlator calculation,
+using our connected meson correlator example. First of all, note that while $D$
+is generally at worst band diagonal, $D^{-1}$ is not, and it has\footnote{In
+4-$d$, in the Dirac representation.} $16N_c^2V^2$ components. Some modern
+lattice calculations that go to incredibly fine spacings require lattice sizes
+like $144^3\times288$. Ignoring gauge fields, this would require about 1 ZB of
+memory, which is obviously not possible to store, and even if it were, a direct
+numerical inversion of $D$ would clearly be intractable.\footnote{And even if
+this were doable, it would definitely be inefficient, as many entries of
+$D^{-1}$ will be highly correlated with each other, effectively meaning one
+wastes storage on redundant information.}
+One way to proceed is to find a strategy to work out $D^{-1}(x,y)$, looping over
+all possibilities for $x$ and $y$. This is an example of an {\it all-to-all}
+propagator\index{propagator!all-to-all}.\footnote{The term ``all-to-all" can also be used
+when propagating between all possible spatial sites of two time-slices. Such a set
+up is relevant for spectroscopy.}   
+
+For our first easy performance gain, we note that \equatref{eq:mesonCorrFormula}
+requires both the forward and backward propagator. One can avoid two inversions by 
+leveraging the $\gamma_5$-hermiticity of $D^{-1}$. So for instance if
+$\Gamma=\gamma_5$ one can rewrite 
+the fermionic expectation value as
+\begin{equation}
+\ev{X(x)\bar{X}(y)}_F=-\sum_{\alpha,\beta,a,b}\left|D^{-1}(x,y)_{\alpha\beta
+ab}\right|^2.
+\end{equation}
+Thus for such isospin-symmetric correlators, one needs carry out only one
+inversion of $D$.
+
+Inverting large matrices is a common problem encountered in computing contexts,
+so it makes sense to transfer what has been learned there to LQCD. What is often
+extremely efficient is to, effectively, try to determine $D^{-1}$ one column at
+a time. We can isolate a column by hitting a vector with $D^{-1}$, i.e. we can
+try to compute $G\equiv D^{-1}S$ for some {\it source vector}\index{source} $S$.
+Equivalently, we want to solve the system of equations
+\begin{equation}\label{eq:invertSchematic}
+DG=S.
+\end{equation}
+There are many algorithms on the market for solving
+\equatref{eq:invertSchematic}. The most popular by far in LQCD contexts are
+variants of the conjugate gradient\index{conjugate gradient} method.
+
+Next we discuss different possibilities for sources $S$. One has considerable
+freedom in the construction of $S$, so long as one avoids changing the quantum
+numbers and symmetries of the wavefunction. Perhaps most
+straightforward is the {\it point source},\index{source!point}
+\begin{equation}\label{eq:pointSource}
+S_{\alpha a}(x)=\delta_{\alpha \alpha'}\delta_{a a'}\delta(x-x').
+\end{equation}
+Applying the propagator to a point source connects all sites of the lattice to
+the site $x$; this is therefore sometimes referred to as a {\it one-to-all}
+propagator\index{propagator!one-to-all}. Another possibility is the {\it wall
+source}\index{source!wall}
+\begin{equation}\label{eq:wallSource}
+S_{\alpha a}(\vec{x},t)\propto 1\delta(t-t'),
+\end{equation}
+which can be viewed as an incoherent sum over all spatial sites on time-slice
+$t$. Depending on the interpolator one is interested in, it may be beneficial to
+scale this by e.g. a Gaussian. 
+
+As mentioned in \secref{sec:interpolators}, one can perform a Fourier transform
+to project out a state of definite momentum. This transform amounts to a
+weighted average over spatial sites at the sink. The variance of this average should
+decrease with increasing spatial volume, which is sometimes referred to as {\it
+volume averaging}\index{volume averaging}. Due to translational invariance,
+which is inherited from the periodic BCs, one can heuristically see that
+thoughtfully chosen wall sources can boost the correlator's signal. 
+
+Along the lines of signal boosting, one can implement {\it random
+sources}\index{source!random}. This is the same strategy that
+was presented in \secref{sec:noiseVector}: One generates an ensemble of noise
+vectors $\{\eta^k\}$ satisfying
+\begin{equation}
+\ev{\eta(x)\otimes\eta^\dagger(y)}_\eta=\delta(x-y)
+\end{equation}
+and then takes $S(x)=\eta(x)$. 
+Since propagators decrease exponentially with separation, i.e.
+\begin{equation}
+|D^{-1}(x,y)|\sim e^{-|x-y|/a},
+\end{equation}
+the source points $y$ closest to the sink point $x$ contribute the most to the
+variance, and it is often necessary to pair this method with some strategy to
+attenuate the noise from nearby source points.
+A detailed discussion on this strategy along with some solutions for improving the
+signal can be found in Ref.~\cite{Foley:2005ac}. 
+
+Another strategy to improve the signal when using noise vectors is {\it low-mode
+averaging}\index{low-mode averaging} (LMA). One starts by computing a small set
+of exact all-to-all low modes of $D$, say 2000 of them. The low modes are then 
+used to deflate the CG solve for each random source, which as discussed in
+\secref{sec:deflation}, greatly reduces the solve time. Since one already knows
+the low-mode part of the correlator exactly, one can replace the low-mode part
+of the resulting noisy estimate, reducing the variance for the low modes
+drastically. Schematically, one then computes correlators like
+\begin{equation}
+C_{\rm LMA}(t)\sim\ev{C_{\rm RW}(t)-C_{\rm RW,LL}(t)+C_{\rm A2A,LL}(t)},
+\end{equation} 
+where $C_{\rm RW}$ is the correlator coming from the deflated solve,
+$C_{\rm RW,LL}$ is the low-mode part of that, and $C_{\rm A2A,LL}$ is the exact
+all-to-all, low-mode solution. This strategy has been found to greatly improve
+the signal for large Euclidean times for certain
+operators~\cite{bazavov_hadronic_2025}.
+
+
 \subsection{Preconditioning: The Hasenbusch trick}\index{preconditioning!Hasenbusch}
 
 At this point is has been mentioned multiple times that a major bottleneck
@@ -736,58 +929,5 @@ the largest eigenvalue of $D^\dagger D(m_h)$, and the same would happen for the
 smallest eigenvalues.
 
 
-\subsection{Using noise vectors}
-
-As discussed in \secref{sec:interpolators}, local meson interpolator $X$ is a 
-bilinear of the form
-\begin{equation}
-O(x)=\bar\psi^f(x)\Gamma\psi^g(x),
-\end{equation}
-where $f$ and $g$ indicate quark flavors and $\Gamma$ is a monomial in gamma
-matrices. The way one constructs an interpolator is to pick quark content
-matching the valence quarks of the meson and to pick $\Gamma$ such that $O$ has
-the same quantum numbers as the meson of interest. Constructing your
-interpolator this way ensures that $X$ creates a particle with the desired
-properties when acting on the vacuum.
-
-
-
-
-% try to understand how propagator ended up not being sparse
-% so it's a big matrix, Nc*V*Nd
-% noise estimates
-
-
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
-
-
-%We now describe an iterative method to search for the minimum of $\chi^2$.
-%Let $a_n$ be the vector of parameters for the $n\nth$ iteration.
-%As long as $a$ is in a small enough neighborhood of $a_n$, we can safely
-%approximate
-%\begin{equation}\label{eq:NRapprox}
-%  \chi^2(a)\approx\chi^2(a_n)+(a-a_n)\cdot b
-%           +\frac{1}{2}(a-a_n)\,A\,(a-a_n),
-%\end{equation}
-%where the coefficients of the vector $b$ and the $M\times M$ matrix $A$ 
-%are given by the first and second derivatives of $\chi^2$ evaluated at $a_n$.
-%In the {\it Newton-Raphson method}\index{Newton-Raphson}, the next 
-%iteration $a_{n+1}$ is
-%determined from the condition $\nabla\chi^2(a)|_{a=a_{n+1}}=0$,
-%which yields
-%\begin{equation}\label{eq:NR}
-%  a_{n+1}=a_n-A^{-1}b.
-%\end{equation}
-%If the approximation~\eqref{eq:NRapprox} is not good, one can instead move
-%a small step in the direction of the gradient by
-%\begin{equation}\label{eq:SD}
-%  a_{n+1}=a_n-c\,b,
-%\end{equation}
-%where $c$ is a constant that is small enough not to overshoot direction
-%of steepest descent. This is an example of a {\it steepest descent method}.
-%The Levenberg-Marquardt\index{Levenberg-Marquardt} 
-%method~\cite{levenberg_method_1944,marquardt_algorithm_1963} 
-%varies smoothly between~\equatref{eq:NR} and 
-%\eqref{eq:SD}. Steepest descent is used far from the minimum, and 
-%then it switches to the Newton-Raphson method when the minimum is approached.
