@@ -1,4 +1,5 @@
 # LaTeX stuff not needed for repository
+make.log
 *.bbl
 Exported\ Items.bib
 *.tf

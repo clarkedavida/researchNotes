@@ -859,12 +859,14 @@ An estimator that never converges to its true value is called
 \index{estimator!consistent}
 So this bad estimator is not a consistent estimator. Note that a biased
 estimator is not necessarily inconsistent; for instance the biased estimator
-of the variance \equatref{eq:bad} is consistent. A consistent estimator
-of $\hat{f}$ is
+of the variance \equatref{eq:bad} is consistent. From a practical perspective,
+it is enough for the expectation value of the estimator to converge to its true
+value. Such estimators are {\it asymptotically unbiased}\index{asymptotically
+unbiased}. An asymptotically unbiased estimator of $\hat{f}$ is
 \begin{equation}\label{eq:consistentEstimator}
   \bar{f}=f(\bar{X}).
 \end{equation} 
-We can prove the consistency of $\bar{f}$ for a wide class of functions.
+We can prove that $\bar{f}$ is asymptotically unbiased for a wide class of functions.
 \begin{proposition}{}{bias}
   Suppose $f:\R\to\R$ has a convergent Taylor series 
   in a region about $\hat{x}$. If $\bar{X}$ maps to this region, 
@@ -895,7 +897,7 @@ We can prove the consistency of $\bar{f}$ for a wide class of functions.
   \end{proof}
 \end{proposition}
 According to the above proposition, the bias vanishes as $N\to\infty$, which
-shows that $\bar{f}$ is consistent. For large $N$, $\bar{X}$ is very likely
+shows that $\bar{f}$ is asymptotically unbiased. For large $N$, $\bar{X}$ is very likely
 to be close to $\hat{x}$ by the CLT, so \propref{prp:bias} will 
 essentially hold whenever $N$ is large and $f$ is a nice enough function.
 There is another important consequence to this proposition: the bias
@@ -1045,7 +1047,7 @@ $X_1,...,X_N$ from some distribution with mean $\hat{x}$ and
 variance $\sigma^2$ and a function $f$ that has a Taylor series 
 expansion near $\hat{x}$, but is not necessarily linear.
 From \secref{sec:bias} we know that $\bar{f}=f(\bar{X})$ is
-a consistent estimator of $\hat{f}=f(\hat{x})$. 
+an asymptotically unbiased estimator of $\hat{f}=f(\hat{x})$. 
 
 The discussion of \secref{sec:prop} gives us a way to propagate 
 uncertainty from the random variables to $f$, but it is effectively 
@@ -1203,7 +1205,7 @@ correlation.
 
 Another common approach to resampling is called {\it bootstrap resampling}.
 The setup is similar as with the jackknife: we again consider
-$N$ measurements $X_1,...,X_N$ from a distribution with mean
+$N$ independent measurements $X_1,...,X_N$ from a distribution with mean
 $\hat{x}$ and variance $\sigma^2$. We again create new samples from
 this original set of measurements, but this time the strategy is different:
 One {\it bootstrap sample} is formed by drawing $N$ times from our set
@@ -1211,20 +1213,30 @@ of measurements with replacement. One then repeats this process
 $\nboot$ times.
 
 Let's be more precise. I follow a note of P. Young~\cite{youngBootstrap}.
-We will label our bootstrap samples with $\alpha$ so that
-$1\leq\alpha\leq\nboot$. In bootstrap sample $\alpha$, the measurement
-$X_i$ will be drawn some number of times, call it $n_{\alpha,i}$.
+We will label our bootstrap samples with $i$ so that
+$1\leq i\leq\nboot$. In bootstrap sample $i$, the measurement
+$X_j$ will be drawn some number of times, call it $n_{ij}$.
 We have that
 \begin{equation}
-\sum_{i=1}^Nn_{\alpha,i}=N,
+\sum_{j=1}^Nn_{ij}=N,
 \end{equation}
 since each bootstrap sample has size $N$. We construct the bootstrap mean in
-sample $\alpha$ by
+sample $i$ by
 \begin{equation}
-X_{B,\alpha}\equiv\frac{1}{N}\sum_{i=1}^Nn_{\alpha,i}X_i,
+X_{B,i}\equiv\frac{1}{N}\sum_{j=1}^Nn_{ij}X_j,
 \end{equation}
 which is just the standard arithmetic mean inside the bootstrap sample.
-
+Just as with the jackknife, the {\it bootstrap estimator} of the mean
+of some function $f$ of the data is
+\begin{equation}\label{eq:bootstrap}
+  \bar{f}_B\equiv\frac{1}{\nboot}\sum_{i=1}^{\nboot} f_{B,i},
+\end{equation}
+where $f_{B,i}\equiv f(X_{B,i})$. 
+Again, \propref{prp:bias} tells us this is asymptotically unbiased.
+The bootstrap estimator for the variance of $\bar{f}_B$ is simply
+\begin{equation}\label{eq:bootvar}
+  \bar\sigma^2_{f_B}=\frac{1}{\nboot-1}\sum_{i=1}^{\nboot}(f_{B,i}-\bar{f}_B)^2.
+\end{equation}
 
 \section{Fitting data}
 
