@@ -705,7 +705,7 @@ Note that, near a second-order critical point, the correlation
 length $\xi$ is, according to \tabref{tab:scaling}, expected to scale like
 $|t|^{-\nu}$. On the other hand, in a finite box, the correlation length is bounded
 from above by $L$. This suggests
-\begin{equation}
+\begin{equation}\label{eq:fssnu}
     |\Tc(L)-\Tc(\infty)|\sim L^{-1/\nu}.
 \end{equation}
 This hard cutoff can also be utilized to guess how some other observables
@@ -754,7 +754,28 @@ For a crossover, one expects to see no scaling of susceptibility peak height
 at all. Indeed, this strategy was used to demonstrate that the QCD phase change
 at physical quark mass and zero baryon chemical potential 
 is a crossover~\cite{aoki_order_2006}.
- 
+
+
+\section{The Binder cumulant}\label{sec:binder}\index{Binder cumulant} 
+
+Equation \eqref{eq:fssnu} gives a way to estimate $\Tc\equiv\Tc(\infty)$.
+Another popular method uses the
+{\it Binder cumulant}~\cite{binder_finite_1981,binder_critical_1981}, which is defined as
+\begin{equation}
+B\equiv1-\frac{\ev{m^4}}{3\ev{m^2}^2}.
+\end{equation}
+This quantity is closely related to the kurtosis. Binder cumulants computed at
+different $L$ are expected to cross at $\Tc$. The accuracy of this approach
+improves with larger $L$. Two major advantages to using $B$ over
+\equatref{eq:fssnu} for the determination of $\Tc$ are that it requires no
+fitting and that contamination from regular contributions is greatly reduced.
+It is expected that
+\begin{equation}
+B=\begin{cases} 
+    0, & T\gg\Tc\\ 
+    2/3, & T\ll\Tc 
+\end{cases}.
+\end{equation}
 
 \section{Classification of observables}
 

@@ -150,6 +150,30 @@ value} and sometimes we denote the variance $\variance$. Note that not all
 probability distributions have well defined moments. The Cauchy distribution is
 very ill-behaved in this regard, since its $n\nth$ moment diverges
 $\Forall n\in\N$.
+
+\begin{example*}{}{}
+A {\it standardized moment}\index{moment!standardized} is some moment
+that has been rescaled. It is usually rescaled by some power of the variance in
+order that the quantity is unitless. The {\it skewness}\index{skewness} of
+the random variable $X$ is
+\begin{equation*}
+\gamma_1\equiv\left(\frac{\ev{X-\hat{x}}}{\sigma}\right)^3.
+\end{equation*}
+The variance measures the average distance of $X$ from the mean of its
+distribution, and hence can be interpreted as a measure of the distribution's
+spread. The skewness, having one more power this separation, can become
+negative, and we can interpret it as a measure of the asymmetry of the
+distribution. Another useful standardized moment is the {\it kurtosis}\index{kurtosis}
+\begin{equation*}
+\kappa\equiv\left(\frac{\ev{X-\hat{x}}}{\sigma}\right)^4.
+\end{equation*}
+Note that if the distribution from
+which $X$ is drawn features lots of large deviations from the mean, the
+numerator will win out over the denominator. This will happen when there are 
+healthy contributions from the tails of the distribution, and hence the kurtosis
+is a measure of the tailedness.
+\end{example*}
+
 Generally in the lab, one draws random variables from distributions
 about which one has no a priori knowledge. Therefore in principle one
 does not know the true moments these distributions. The
