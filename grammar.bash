@@ -26,4 +26,6 @@ do
     sed -i 's/what'\''s/what is/g' $file
     sed -i 's/That'\''s/That is/g' $file
     sed -i 's/that'\''s/that is/g' $file
+    sed -i 's/let'\''s/let us/g' $file
+    sed -i 's/Let'\''s/Let us/g' $file
 done

@@ -409,7 +409,7 @@ from which it follows that $U$ is extensive.
 Probably the equation of state that you are most familiar with is the 
 ideal gas law\index{ideal gas law},
 \begin{equation}
-  PV=NkT.
+  PV=Nk_BT.
 \end{equation}
 Based on the discussion in \secref{sec:intensiveextensive}, we see that $P$ is
 an intensive quantity.
@@ -442,6 +442,34 @@ This is what we call an {\it equation of state}\index{equation of state}
 {\it control parameters}\index{control parameter}. Knowing every equation 
 of state is enough to reconstruct the fundamental equation, and therefore 
 enough to determine the physics of the system.
+
+In the ideal gas EoS, one makes two assumptions, namely:
+\begin{enumerate}
+\item The particles themselves have zero volume; or alternatively,
+their volume can be neglected. 
+\item There is no interaction between the particles.
+\end{enumerate}
+Van der Waals was the first to attempt to correct for these 
+assumptions~\cite{van_der_waals_over_1873}. The Van der Waals EoS looks like
+\begin{equation}\label{eq:vanderwaals}
+P=\frac{NkT}{V-b}-\frac{A}{V^2}.
+\end{equation}
+We see two corrections. First, the parameter $b$, which is sometimes
+called the {\it excluded volume}\index{excluded volume}, represents the total
+volume occupied by the particles themselves. Hence $b\propto NV_0$, where $V_0$
+indicates the volume of one particle of the gas species. The second term
+represents a pairwise interaction between particles whose strength
+is parameterized by $A$. When $A>0$, this interaction is attractive.
+That the interaction term is scaled by $V^2$ can be interpreted as follows:
+The density of particles should increase the importance of this term, giving
+rise to one factor of $V$. Since the interaction is pairwise, it will be scaled
+by the fraction of the time particle $i$ interacts non-negligibly with particle
+$j$, which is also proportional to the particle density, leading to another
+factor of $V$. In the limit $A,b\to0$, or equivalently $V\to\infty$,
+one recovers the ideal gas EoS.
+The Van der Waals pressure cannot be neatly classified as an intensive quantity,
+except in the thermodynamic limit. 
+
 
 \section{Rules for differentials}\label{sec:thermdiff}
 
@@ -595,7 +623,7 @@ Since no information is lost, Legendre transforms guarantee that
 thermodynamic potentials get transformed to other thermodynamic potentials.
 \index{thermodynamic!potential}\index{potential!thermodynamic}
 
-Before we define a Legendre transformation, let's look at an example
+Before we define a Legendre transformation, let us look at an example
 due to Markus Deserno~\cite{deserno} where a naive transformation can go
 wrong and information can be lost. 
 \begin{example*}{}
@@ -737,16 +765,19 @@ Since $\log\grandZ$ is extensive, it must be that
 \begin{equation}
 -T\log\grandZ=kV
 \end{equation}
-for some intensive $k$. Hence\footnote{Sometimes it is convenient to work
+for some volume-independent constant $k$. That $k$ is volume-independent usually
+holds in the thermodynamic limit\footnote{Compare with, e.g. the Van der
+Waals pressure \eqref{eq:vanderwaals}.} Hence\footnote{Sometimes it is convenient to work
 with $\muh\equiv\mu/T$ and $T$ instead of $\mu$ and $T$. This equation
 holds for both sets of control variables since both $\mu$ and $T$ are
 held fixed.} from \equatref{eq:1stlawgrand}
 \begin{equation}
-P=-\pdv{\Phi}{V}=-k,
+P=\lim_{V\to\infty}-\pdv{\Phi}{V}=-k,
 \end{equation}
-which means we can identify
+which means we can identify\footnote{Often the thermodynamic limit is taken as
+implicit and not always directly written.}
 \begin{equation}\label{eq:pgrand}
-P=\frac{T}{V}\log\grandZ.
+P=\lim_{V\to\infty}\frac{T}{V}\log\grandZ.
 \end{equation}
 
 Reorganizing \equatref{eq:grand} using \equatref{eq:pgrand}
