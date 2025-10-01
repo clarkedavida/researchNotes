@@ -786,7 +786,7 @@ and the Haar measure runs over fields that are periodic in the
 $x_4$ direction. Because the functional integral for both systems is
 formally the same, we interpret a 4D system with $N_s\gg N_\tau$ as
 a 3D system at finite temperature, with $x_4$ running along a 
-temperature direction rather than a time direction. 
+temperature direction rather than a time direction.
 The continuum limit of the finite temperature system corresponds
 to $a\to0$ with $aN_s$ and $aN_\tau$ fixed. The {\it physical
 temperature}\index{temperature} is seen to be
@@ -794,6 +794,7 @@ temperature}\index{temperature} is seen to be
   T=\frac{1}{aN_\tau}.
 \end{equation}
 
+\index{zero-temperature calculation}
 From this equation, we see that at fixed lattice spacing, $T$ and $N_\tau$ are
 inversely related. In particular, at fixed $a$, the limit $N_\tau=\infty$
 delivers zero-temperature configurations. In practice, if we are interested in
@@ -805,6 +806,13 @@ which in $\SU(N_c)$ would be the lightest glueball. That $N_\tau$ needs to be
 large enough to deliver a relatively small $T$ tends to make $T=0$ calculations
 rather expensive, especially if you are additionally wanting to suppress size
 effects, which requires also $N_s$ to be large.
+
+Another perspective is that true $T=0$ calculations are achieved by simulating
+at progressively larger $N_\tau$, extrapolating $N_\tau\to\infty$ at fixed
+bare coupling. This perspective is similar in spirit to eliminating
+finite-volume corrections by taking the $N_s\to\infty$ limit. Similarly, one can
+characterize ``negligible" temperature effects by systematic shifts that are
+significantly smaller than the statistical uncertainty.
 
 \section{Scale setting I}\label{sec:refscales}\index{scale!setting}
 
