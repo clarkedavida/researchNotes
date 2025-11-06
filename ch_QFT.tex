@@ -119,11 +119,20 @@ impressively close to modern measurements.} by
 Jean Perrin~\cite{perrin_mouvement_1909}. At this point, basically everyone was
 convinced that atoms were real.
 
-The plum pudding model was
-disproved by Rutherford in his famous gold foil
+In the late 1800s, Ernest Rutherford introduced the nomenclature $\alpha$ and
+$\beta$ radiation, which refers to the emanation of $\ce{^4_2He}$ particles
+and $e^-$, respectively~\cite{rutherford_uranium_1899}.\footnote{For this
+reason, they are sometimes still referred to as $\alpha$ and $\beta$
+particles.\index{particle!$\alpha$}\index{particle!$\beta$}} In fact, together with
+Thomas Royds, he demonstrated that $\alpha$ radiation consists of 
+$\ce{^4_2He}$~\cite{rutherford_spectrum_1908} in 1908. The plum pudding model was
+disproved by Rutherford in 1911 through his famous gold foil
 experiment~\cite{rutherford_scattering_1911}, in which he discovered
 the atomic nucleus. Shortly thereafter, he discovered the
-proton~\cite{rutherford_collision_1919}.
+proton~\cite{rutherford_collision_1919} through the reaction
+\begin{equation}
+\ce{^4_2He}+\ce{^{14}_7N}\to p+\ce{^{17}_8O}.
+\end{equation}
 Bohr proposed his model~\cite{bohr_constitution_1913}
 of hydrogen, supposing it to be made of a proton and an electron, which agreed
 well with experiment\footnote{He got the 1922 Nobel for his
@@ -238,10 +247,8 @@ positive energy states of a different particle.
 
 
 One of the last kinds of fermions needed to complete our particle collection
-are the neutrinos. Before 1930, there was a problem with $\beta$-decay
-\index{decay!beta} 
-which is any decay emitting an $e^+$ or $e^-$ from
-an atomic nucleus: Energy was not conserved. In particular if one assumes
+are the neutrinos. Before 1930, there was a problem with $\beta$-decay: 
+Energy was not conserved. In particular if one assumes
 a general $\beta$-decay process functions like
 \begin{equation}
   A\to B+e^-,
@@ -310,7 +317,7 @@ interaction range\footnote{1949 Nobel.}.
 
 An early experimental search of cosmic ray\footnote{A {\it cosmic ray} is a high
 energy proton or atomic nucleus that originates somewhere from space. They were
-discovered in the early 1910s by Hess, which got him the 1936 Nobel.}
+discovered in the early 1910s by Hess, which got him the 1936 Nobel. }
 \index{cosmic ray} measurements using
 cloud\index{cloud chamber} chambers (see \figref{fig:cloud}) 
 found the muon~\cite{neddermeyer_note_1937}, which was originally 
@@ -328,6 +335,18 @@ recipient of this prize, most obviously because only three other scientists were
 on his team. Furthermore this prize credits him for his ``development of
 photographic method for studying nuclear processes", even though this method was
 pioneered by other physicists such as Blau and Wambacher.}.
+
+For a long
+time, cosmic ray experiments were the primary tool used to discover new
+particles. The first bona fide particle accelerator was not built until 1932
+by J. Cockroft and E. Walton, collaborators of Rutherford. This accelerator
+delivered a {\it collimated} beam,\index{collimated} i.e. a beam of particles
+moving in parallel, at an energy up to about 400 keV. This work earned them the
+1951 Nobel. The first potent particle accelerators did not come online until
+the early 1950s, for example the Cosmotron
+at Brookhaven National Lab, which attained a peak energy of about 3 GeV in 1953.
+These modern accelerators powered the discoveries of many new, mostly unstable
+particles, which tallied over 100 by the mid 1960s or so.
 
 
 \index{interaction!strong}
@@ -364,10 +383,10 @@ experiments at the Stanford Linear Accelerator (SLAC) showed that
 protons are made of smaller particles, and are therefore not
 elementary~\cite{bloom_high-energy_1969,breidenbach_observed_1969}.
 This alone did not convince the community that quarks were 
-real\footnote{For a while it was fashionable to refer to rather refer to
+real\footnote{For a while it was fashionable to refer to 
 nucleon constituents as {\it partons}\index{parton}, a term coined
 by Feynman.}, but
-subsequent discoveries would solidify the quark model,
+other discoveries would solidify the quark model,
 for example the 1964 discovery~\cite{barnes_observation_1964} 
 of the\index{baryon!$\Omega$} 
 $\Omega$ baryon\footnote{An $\Omega$ baryon is any baryon not
@@ -522,8 +541,6 @@ boson~\cite{aad_observation_2012,chatrchyan_observation_2012} shows that Higgs m
 corresponds to reality, rather than being just a mathematical trick to 
 consistently approach massive elementary particles.
 
-
-
 \section{Introductory remarks about QFT} 
 
 Here I just want to list some things that seem to be true about the universe,
@@ -637,6 +654,81 @@ the Heisenberg uncertainty relation,
 \end{equation}
 and when $\hbar=0$, you are once again allowed to know position and
 momentum simultaneously.
+
+
+\section{A very brief recap of some SR}
+
+The key concept in special relativity (SR) is that the laws of
+physics\footnote{I have never seen this statement really rigorously defined.
+What makes sense to me is that this means the equations of motion should be the
+same in all inertial frames. The goal of physics can be thought of as predicting
+what systems will do over time, so in that sense the invariance of equations of
+motion guarantees the ``laws" are the same.} 
+should be the same in all inertial reference frames. Looking at e.g. Maxwell's
+equations, one can argue from this the speed of light ought to be the same in
+all inertial frames, and a consequence is that the {\it line element}\index{line
+element}
+\begin{equation}
+\dd{s}^2\equiv\dd{x}_\mu\dd{x}^\mu
+\end{equation}
+should be invariant.
+
+For the remainder of this section, we consider all coordinate transformations to
+be between inertial frames. This can be accomplished through boosts, rotations, and
+translations, which are all linear operations. A general coordinate
+transformation of boosts and rotations can be written
+\begin{equation}\label{eq:boostRot}
+x^\mu\to x'^{\mu} = \Lambda_\nu^\mu x^\nu
+\end{equation}
+for some matrix $\Lambda$. The invariance of the line element restricts the form
+of $\Lambda$. If $\eta$ is the metric tensor, we find 
+\begin{equation}\label{eq:LorentzConstraint}
+\eta_{\mu\nu}=\Lambda\mu^\rho\Lambda_\nu^\sigma\eta_{\rho\sigma}.
+\end{equation}
+Equations \eqref{eq:boostRot} and \eqref{eq:LorentzConstraint} together put
+$\Lambda$ in the {\it Lorentz} group\index{group!Lorentz}, which is
+denoted $\ON(1,3)$.\footnote{This is true for the metric
+$\eta=\diag(1,-1,-1,-1)$. For the metric $\eta=\diag(-1,1,1,1)$ people use the
+notation $\ON(3,1)$.} Preserving the line element also implies
+\begin{equation}
+\det\Lambda=\pm1.
+\end{equation}
+We consider {\it proper}\index{proper} Lorentz
+transformations, i.e. those with $\det\Lambda=1$. If we consider the most
+general coordinate transform, we include boosts, like
+\begin{equation}\label{eq:boostRot}
+x^\mu\to x'^{\mu} = \Lambda_\nu^\mu x^\nu + a^\mu,
+\end{equation}
+which forms the {\it Poincar\'e group}\index{group!Poincar\'e} 
+$R^{1,3}\rtimes\ON(1,3)$.\footnote{$R^{1,3}$ is the spacetime translations
+group\index{group!spacetime translation}.} 
+Hence the Lorentz group is a subgroup of the Poincar\'e group.
+
+Let us now discuss boosts a bit. Let $\beta\equiv v/c$ and consider a boost in
+the $z$-direction. This must have the form
+\begin{equation}
+  \Lambda=\left(\begin{array}{cccc}
+      \Lambda^0_0 &          &        & \Lambda^0_3\\
+               & 1 & 0       & \\
+               & 0 & 1 & \\
+      \Lambda^3_0     &          &        & \Lambda^3_3
+    \end{array}\right).
+\end{equation}
+A commonly chosen parameterization that satisfies eqs. \eqref{eq:boostRot} 
+and \eqref{eq:LorentzConstraint} is
+\begin{equation}
+\Lambda^0_0=\Lambda^3_3=\cosh\xi~~~~~~~~
+\Lambda^0_3=\Lambda^3_0=-\sinh\xi,
+\end{equation} 
+where $\xi$ is a parameter called the {\it rapidity}\index{rapidity}.
+When we start the two frames from the same origin, we find $x^3=\beta
+x^0$, which implies\footnote{That $\cosh^2-\sinh^2=1$ can remind you
+of the square root needed in the definition of $\gamma$.}
+\begin{equation}
+\cosh\xi = \frac{1}{\sqrt{1-\beta^2}}\equiv\gamma ~~~~~~~~
+\sinh\xi = \beta\gamma.
+\end{equation}
+where $\gamma$ is the {\it Lorentz factor}\index{Lorentz factor}.
 
 % TODO: path integral classical limit
 
