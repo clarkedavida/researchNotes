@@ -356,10 +356,59 @@ Expressions for the second-order, off-diagonal cumulants are
 \end{aligned}\end{equation}
 
 
+\subsection{The trace anomaly}
+
+In the last sections, we expressed the pressure as a sum over cumulants,
+c.f. \equatref{eq:pxpac}, and provided some formulae to compute the second-order 
+(and higher) cumulants. What is missing is the leading term in this expansion,
+i.e. $\chi^{uds}_{000}$. In this section we discuss a popular strategy for
+obtaining this quantity on the lattice.
+
+Recall that the symmetric energy-momentum tensor $\Theta^{\mu\nu}$ has components describing
+energy density, energy-current density, momentum density, and moment-current
+density. We think about the $\Theta^{\mu\nu}$ describing strongly interacting matter.
+Working in the comoving frame, the elements $\Theta^{0,i}$ are zero.
+Assuming the matter is an ideal fluid, shear terms $\Theta^{ij}$, $i\neq j$, drop
+out, and further using the isotropy of the fluid, we are left with 
+\begin{equation}
+\Theta^{\mu\nu}=\diag\left(\epsilon,P,P,P\right),
+\end{equation}
+where $\epsilon\equiv U/V$ is the energy density and $P$ is the pressure. 
+The {\it trace anomaly}\index{trace anomaly} is simply the trace,
+\begin{equation}
+\Theta^{\mu\mu}=\epsilon-3P.
+\end{equation}
+Using appropriate powers of the temperature to make everything unitless, we find
+\begin{equation}\label{eq:thetaPressureDE}
+\frac{\Theta^{\mu\mu}}{T^4}=T\pdv{P/T^4}{T}.
+\end{equation}
+We have a couple expectations of $\Theta^{\mu\mu}$. To leading order in
+high-temperature perturbation theory~\cite{Kapusta:1979fh},
+\begin{equation}
+\frac{\Theta^{\mu\mu}}{T^4}=\frac{b_0}{3}\left(1+\frac{5N_f}{12}\right)g^4(T)+\order{g^5},
+\end{equation}
+which means $\Theta^{\mu\mu}$ should vanish at $T=\infty$. At temperatures below
+$\Tpc$, the HRG model predicts a sharp decline with decreasing temperature. 
+This can be seen from Eqs. \eqref{eq:pressrelQM} and \eqref{eq:edensityQM};
+in particular the $K_2$ cancels out, and $T\to0$ sends the argument of $K_1$ to
+infinity, suppressing it exponentially.
+
+Equation \eqref{eq:thetaPressureDE} is the fundamental relation to compute
+the leading term of the pressure on the lattice. In particular we see that we
+can integrate this equation starting from a reference temperature $T_0$ to obtain
+\begin{equation}
+\frac{P(T)}{T^4}-\frac{P(T_0)}{T_0^4}
+=\int_{T_0}^T \dd{T'}\frac{\Theta^{\mu\mu}(T')}{T'^5}.
+\end{equation}
+If $T_0$ is low enough, this can be estimated from HRG. I have also seen cases
+where the trace anomaly is estimated to be zero at $T_0$.
 
 
 \subsection{QCD material parameters}
 
+Besides the EoS, it is informative to look at various {\it material
+parameters}\index{material parameter}, i.e. quantities that characterize various
+properties of a studied material, for strongly interacting matter.
 
 The speed of sound at fixed control parameter $X$ is defined as
 \begin{equation}
