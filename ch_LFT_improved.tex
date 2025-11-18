@@ -452,35 +452,36 @@ Here we present the AsqTad\index{action!AsqTad}
 action~\cite{orginos_variants_1999,lepage_flavor-symmetry_1999}, a staggered
 fermion action with nearest- and third-nearest-neighbor interactions
 \begin{equation}
-  \Delta_\mu-\frac{a^2}{6}\Delta_\mu^3,
+  \Delta_\mu-\frac{a^2}{6}\Delta_\mu^3.
 \end{equation}
-i.e. it uses the Naik term.
 The third-nearest-neighbor uses an ordinary link, but the nearest-neighbor
 uses the fat link
-\begin{equation}
+\begin{equation}\label{eq:asqtad}
   V_\mu=~c_1U_\mu
-           +\sum_\nu\left[w_3S_{\mu\nu}^{(3)}
-           +\sum_\rho\left(w_5S_{\mu\nu\rho}^{(5)}
-           +\sum_\sigma w_7S^{(7)}_{\mu\nu\rho\sigma}\right)
-            +w_LS^{(L)}_{\mu\nu}\right],
+           +\sum_\nu\left[c_3U_{\mu\nu}^{(3)}
+           +\sum_\rho\left(c_5U_{\mu\nu\rho}^{(5)}
+           +\sum_\sigma c_7U^{(7)}_{\mu\nu\rho\sigma}\right)
+            +c_LU^{(L)}_{\mu\nu}\right],
 \end{equation}
 where the link constructs are given by
 \begin{equation}\begin{aligned}
-  S_{\mu\nu}^{(3)}(x)
+  U_{\mu\nu}^{(3)}(x)
        &=U_\nu(x)U_\mu(x+a\hat{\nu})U_\nu^\dagger(x+a\hat{\mu}),\\
-  S_{\mu\nu\rho}^{(5)}(x)
+  U_{\mu\nu\rho}^{(5)}(x)
        &=U_\nu(x)S_{\mu\rho}^{(3)}(x+a\hat{\nu})U_\nu^\dagger(x+a\hat{\mu}),\\
-  S_{\mu\nu\rho\sigma}^{(7)}(x)
+  U_{\mu\nu\rho\sigma}^{(7)}(x)
        &=U_\nu(x)S_{\mu\rho\sigma}^{(5)}(x+a\hat{\nu})
          U_\nu^\dagger(x+a\hat{\mu}),\\
-  S_{\mu\nu}^{(L)}(x)
+  U_{\mu\nu}^{(L)}(x)
        &=U_\nu(x)S_{\mu\nu}^{(3)}(x+a\hat{\nu})U_\nu^\dagger(x+a\hat{\mu}).
 \end{aligned}\end{equation}
+The last 5-link construct $U^{(L)}_{\mu\nu}$, a 5-link staple that is restricted
+to a plane, is called the {\it LePage}\index{LePage term} term.
 Examples of these constructs are shown in \figref{fig:AsqTadConstructs}.
 The tadpole-improved coefficients are
 \begin{equation}
-  c_1=8w_5=48w_7=\frac{1}{8}w_L=-\frac{1}{16}~~~~~~\text{and}~~~~~~
-     w_3=-\frac{5}{16}.
+  c_1=8c_5=48c_7=\frac{1}{8}c_L=-\frac{1}{16}~~~~~~\text{and}~~~~~~
+     c_3=-\frac{5}{16}.
 \end{equation}
 
 \section{Highly improved staggered fermions}\label{sec:HISQ}
@@ -519,10 +520,12 @@ The basic strategy of HISQ can be summarized as:
   \item Improve finite difference derivatives by 
         \vspace{-1mm}
         \begin{equation*}
-         \partial_\mu\to\partial_\mu-\frac{a^2}{6}(1+\epsilon)\partial_\mu^3,
+         \Delta_\mu\to\Delta_\mu-\frac{a^2}{6}(1+\epsilon)\Delta_\mu^3,
         \end{equation*}
-        where $\epsilon$ depends on charm physics. Without considering
-        charm physics, this is called a {\it Naik term}.\index{Naik term}
+        where $\epsilon$ depends on charm physics. If there are no quarks
+        heavier than a strange in the system, $\epsilon=0$, and this is called a 
+        {\it Naik term}.\index{Naik term} The parameter $\epsilon$ is called
+        the {\it Naik} $\epsilon$.
   \item Find a smear $U_\mu\to\mathcal{F}_\mu U_\mu$ that vanishes
         for links carrying momentum $\pi/a$. We start with one
         called {\it Fat7}.\index{link!Fat7}

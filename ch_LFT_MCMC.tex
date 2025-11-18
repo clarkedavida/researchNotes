@@ -616,7 +616,8 @@ Constructing its
 force is a bit complicated, as it is a synthesis of many constructs in
 those sections along with \secref{sec:MD}. In my view,
 implementing HISQ fermions is complicated enough to warrant its own section,
-maybe even its own chapter.
+maybe even its own chapter. I also attempt to introduce some jargon that you may
+encounter if you open up HISQ codes.
 
 We begin by writing down the action itself in a way that is helpful
 for computer implementation. We write
@@ -659,7 +660,7 @@ $4m^2+D_0^\dagger D_0$. Restricting to even or odd halves the number of degrees
 of freedom, returning us once again to our interpretation of having a single
 fermion species.
 
-Finally we have the issue, discussed in
+We have the issue, discussed in
 \secref{sec:HISQ}, that staggered fermions lead to four degenerate tastes.
 The solution offered in that section is to take the fourth root. In practice,
 this fourth root is implemented as a rational 
@@ -673,26 +674,141 @@ Monte Carlo scheme is called {\it rational hybrid Monte Carlo}\index{RHMC}
 (RHMC).
 
 
-Next we need to open up the $D$. We write\footnote{It is common practice in
+Next we need to open up the $D$. For the following formulae, we will suppress
+the Naik part to clean up the notation. The Naik term and its derivative can be
+included in the same way as all the other terms. We write\footnote{It is common practice in
 lattice publications to use $M$ rather than $D$ to indicate the Dirac matrix.
 In that case, $D$ is sometimes used to indicate the (covariant) derivative part.
 I took the notation of Gattringer and Lang~\cite{gattringer_quantum_2010}.}
-\begin{equation}\begin{aligned}
-D(y|x)&=2m\delta_{x,y}
+\begin{equation}\label{eq:DHISQsimple}
+D(y|x)=2m\delta_{x,y}
 +\sum_\alpha \eta_\alpha(x)\left(\UHISQ_\alpha(x)\delta_{x,y-\hat\alpha}
--\left(\UHISQ_\alpha(x-\hat\alpha)\right)^\dagger\delta_{x,y+\hat\alpha}\right)\\
-&\equiv 2m\delta_{x,y}+\dd_{x,y},
-\end{aligned}\end{equation}
+-\left(\UHISQ_\alpha(x-\hat\alpha)\right)^\dagger\delta_{x,y+\hat\alpha}\right),
+\end{equation}
 where $\UHISQ$ is given by \equatref{eq:HISQsmear}:
 \begin{equation}
-\UHISQ=\mathcal{F}^{\rm Fat7}_{\rm corr}\mathcal{U}\mathcal{F}^{\rm Fat7}U,
+\UHISQ=\mathcal{F}^{\rm AsqTad}\mathcal{U}\mathcal{F}^{\rm Fat7}U,
 \end{equation} 
 i.e. we Fat7-smear the thin link, followed
 by a reunitarization and then a second-level smear that has some lattice-spacing
-corrections built in. The $\eta_\alpha$ are the
-staggered phases defined in \equatref{eq:staggeredPhase}.
+corrections built in. This latter smear has the same structure as the AsqTad smear of 
+\equatref{eq:asqtad}, but different coefficients. If a Naik epsilon is required,
+as is the case for example when you want dynamical charm quarks, this is
+included in the AsqTad-like smear. The Fat7 smear also has the same form as the
+AsqTad smear, but with still different coefficients, and no Naik epsilon or
+LePage term.
+The $\eta_\alpha$ are the staggered phases defined in \equatref{eq:staggeredPhase}.
 
+To carry out molecular dynamics, we need the derivative of $S_f$ w.r.t. MC time,
+which translates via the chain rule to a derivative w.r.t. the gauge field
+$U$. From \equatref{eq:DHISQsimple}, successive applications of the chain rule
+show us we need
+\begin{equation}\label{eq:HISQchainrule}
+\pdv{S_f}{U}=\pdv{S_f}{X}\pdv{X}{W}\pdv{W}{V}\pdv{V}{U}.
+\end{equation}
+Here we have adopted the notation of~\cite{bazavov_scaling_2010},
+where
+\begin{equation}\begin{aligned}
+V&=\mathcal{F}^{\rm Fat7}U,\\
+W&=\mathcal{U} V\\
+X&=\mathcal{F}^{\rm AsqTad} W.
+\end{aligned}\end{equation}
 
+We begin working out the derivative of the action. This is
+\begin{equation}\begin{aligned}
+\pdv{S_f}{U_{x,\mu}} &=
+-\sum_l\alpha_l
+\bra{\Phi\left(D^\dagger D+\beta_l\right)^{-1}}
+\pdv{D^\dagger D}{U_{x,\mu}}
+\ket{\left(D^\dagger D+\beta_l\right)^{-1}\Phi}\\
+&=-\sum_l\alpha_l\left(
+\bra{L^l}\pdv{D_0^\dagger}{U_{x,\mu}}\ket{R^l} +
+\bra{R^l}\pdv{D_0^\dagger}{U_{x,\mu}}\ket{L^l}\right),
+\end{aligned}\end{equation}
+where
+\begin{equation}\begin{aligned}
+\ket{L^l}&\equiv\left(D^\dagger D+\beta_l\right)^{-1}\ket{\Phi}\\
+\ket{R^l}&\equiv D_0\ket{L^l}.
+\end{aligned}\end{equation}
+Since we originally took $\ket{\Phi}$ to be defined on even sites only,
+the pseudofermion fields $\ket{L^l}$ and $\ket{R^l}$ are defined on
+even and odd sites, respectively. Expanding the spacetime sum in $D$ and writing
+out color indices explicitly, we can rewrite this as
+\begin{equation}
+\pdv{S_f}{\left[U_{x,\mu}\right]_{ab}}=
+\sum_{y,\nu}(-1)^y\eta_{y,\nu}\left(
+\pdv{\left[U_{y,\nu}^{\rm HISQ}\right]_{mn}}{\left[U_{x,\mu}\right]_{ab}}
+\left[f_{y,\nu}\right]_{mn}+
+\pdv{\left[U_{y,\nu}^{\rm HISQ\,\dagger}\right]_{mn}}{\left[U_{x,\mu}\right]_{ab}}
+\left[f^\dagger_{y,\nu}\right]_{mn}
+\right),
+\end{equation}
+where $f_{y,\nu}$ is the {\it outer product}\index{outer product}
+\begin{equation}\label{eq:HISQouterproduct}
+\left[f_{y,\nu}\right]_{mn}=
+\begin{cases}
+\sum_l\alpha_l\left[R^l_{y+\nu}\right]_n\left[L^{l*}_y\right]_m & {\rm even}~y\\
+\sum_l\alpha_l\left[L^l_{y+\nu}\right]_n\left[R^{l*}_y\right]_m & {\rm odd}~y\\
+\end{cases}.
+\end{equation}
+
+We finish this section by giving a rough outline of how HISQ forces get
+implemented in practice. We will once again include the Naik term in the
+discussion. The smears can be thought of as a sum over their
+different constructs, hence derivatives of the smears are usually written as
+sums over the derivatives of those constructs. Note also that the HISQ smear
+requires a reunitarization. This reunitarization is often approximated as a
+function of the to-be-smeared link, and hence one also needs a derivative of
+that function w.r.t. the links. The HISQ action, as implemented by MILC,
+takes the coefficients
+\begin{equation}\begin{aligned}
+&c^{\rm Fat7}_1=\frac{1}{8},~~~
+c^{\rm Fat7}_3 =\frac{1}{16},~~~
+c^{\rm Fat7}_5 =\frac{1}{64},~~~
+c^{\rm Fat7}_7 =\frac{1}{384},~~~
+c_{\rm Naik}       =-\frac{1}{24}(1+\epsilon),\\
+&c^{\rm Asq}_1 =1+\frac{\epsilon}{8},~~~
+c^{\rm Asq}_3  =\frac{1}{16},~~~
+c^{\rm Asq}_5  =\frac{1}{64},~~~
+c^{\rm Asq}_7  =\frac{1}{384},~~~
+c^{\rm Asq}_L  =-\frac{1}{8}.
+\end{aligned}\end{equation}
+One then roughly follows these steps:
+\begin{enumerate}
+\item Compute the gauge fields $V$ and $W$.
+\item Prepare the pseudofermion fields $\ket{\Phi}$. As we saw in the last
+section, this is randomly generated, drawn from a Gaussian.
+\item Compute $\ket{L^l}$ and $\ket{R^l}$ from $\ket{\Phi}$. 
+This requires having implementations of
+the massive and massless Dirac operators, along with some method of inversion.
+The {\it shifts}\index{shift} $\beta_l$ enter here.
+\item Compute the outer products $f_{y,\nu}$ and $f_{y,3\nu}$. The latter will
+contribute only to the Naik derivatives. As indicated by
+\equatref{eq:HISQouterproduct}, the {\it residues}\index{residue} $\alpha_l$ enter here.
+\item Now we can construct the force. As discussed earlier, this can be
+expressed as a sum over derivatives of various constructs. We work through the
+chain rule \equatref{eq:HISQchainrule} from left to right:
+\begin{verbatim}
+force  = naikLinkDeriv(f3nu,W,cnaik)   # work out dX/dW
+force += lepageLinkDeriv(f3nu,clp)
+force += c1Asq*fnu 
+force += linkDeriv<3>(fnu,W,c3Asq)
+force += linkDeriv<5>(fnu,W,c5Asq)
+force += linkDeriv<7>(fnu,W,c7Asq)
+temp   = c1Fat7*projU3Deriv(V,force)   # work out dW/dV
+force += linkDeriv<3>(temp,W,c3Fat7)   # work out dV/dU
+force += linkDeriv<5>(temp,W,c5Fat7)
+force += linkDeriv<7>(temp,W,c7Fat7)
+force  = U*force                       # close the loop
+\end{verbatim}
+\end{enumerate}
+We note that when computing the derivative of the $\U(3)$ projection, the force
+calculated up to that point is generally contracted with $\partial W/\partial
+V$. This prevents having to deal with rank-4 tensors, which is nice in the
+context of the code base, as you can store everything in gaugefield objects.
+In the above pseudocode, this contracted derivative is saved in the 
+auxiliary field \texttt{temp}. We note also that \texttt{cnaik} and
+\texttt{c1Asq} depend on the Naik epsilon. 
 
 \section{Improving performance}
 
