@@ -692,10 +692,10 @@ where $\UHISQ$ is given by \equatref{eq:HISQsmear}:
 i.e. we Fat7-smear the thin link, followed
 by a reunitarization and then a second-level smear that has some lattice-spacing
 corrections built in. This latter smear has the same structure as the AsqTad smear of 
-\equatref{eq:asqtad}, but different coefficients. If a Naik epsilon is required,
+\equatref{eq:asqtad}, but different coefficients. If a Naik $\epsilon$ is required,
 as is the case for example when you want dynamical charm quarks, this is
 included in the AsqTad-like smear. The Fat7 smear also has the same form as the
-AsqTad smear, but with still different coefficients, and no Naik epsilon or
+AsqTad smear, but with still different coefficients, and no Naik $\epsilon$ or
 LePage term.
 The $\eta_\alpha$ are the staggered phases defined in \equatref{eq:staggeredPhase}.
 
@@ -709,9 +709,9 @@ show us we need
 Here we have adopted the notation of~\cite{bazavov_scaling_2010},
 where
 \begin{equation}\begin{aligned}
-V&=\mathcal{F}^{\rm Fat7}U,\\
-W&=\mathcal{U} V\\
-X&=\mathcal{F}^{\rm AsqTad} W.
+V&\equiv\mathcal{F}^{\rm Fat7}U,\\
+W&\equiv\mathcal{U} V\\
+X&\equiv\mathcal{F}^{\rm AsqTad} W.
 \end{aligned}\end{equation}
 
 We begin working out the derivative of the action. This is
@@ -807,8 +807,8 @@ calculated up to that point is generally contracted with $\partial W/\partial
 V$. This prevents having to deal with rank-4 tensors, which is nice in the
 context of the code base, as you can store everything in gaugefield objects.
 In the above pseudocode, this contracted derivative is saved in the 
-auxiliary field \texttt{temp}. We note also that \texttt{cnaik} and
-\texttt{c1Asq} depend on the Naik epsilon. 
+auxiliary field \texttt{temp}. We remind the reader that \texttt{cnaik} and
+\texttt{c1Asq} depend on the Naik $\epsilon$. 
 
 \section{Improving performance}
 
