@@ -541,7 +541,7 @@ boson~\cite{aad_observation_2012,chatrchyan_observation_2012} shows that Higgs m
 corresponds to reality, rather than being just a mathematical trick to 
 consistently approach massive elementary particles.
 
-\section{Introductory remarks about QFT} 
+\section{Introductory remarks about QFT}\label{sec:QFTintroRemarks}
 
 Here I just want to list some things that seem to be true about the universe,
 and therefore our underlying theory should reflect these things. For example:
@@ -729,6 +729,99 @@ of the square root needed in the definition of $\gamma$.}
 \sinh\xi = \beta\gamma.
 \end{equation}
 where $\gamma$ is the {\it Lorentz factor}\index{Lorentz factor}.
+
+The {\it dispersion relation}\index{dispersion relation} is
+\begin{equation}
+E^2=m^2+\vec{p}^2.
+\end{equation}
+The four-momentum of a relativistic particle is $p=\left(E,p^1,p^2,p^3\right)^t$.
+So if you already trust the dispersion relation, it follows that
+\begin{equation}\label{eq:p2eqm2}
+p_\mu p^\mu = m^2.
+\end{equation}
+
+\section{Ingredients of a QFT}
+
+In physics, we are always after the equations of motion, which let us predict
+what will happen to particles. The Lagrange formalism along with the principle
+of least action generally delivers equations of motion. As discussed
+heuristically in \secref{sec:QFTintroRemarks}, we want to model our particles as
+manifestations of underlying fields, so we need a field theory. Let $\phi$ be
+this field.\footnote{We work with just a one-component scalar field for clarity, but this
+obviously generalizes to scalar fields with more components.} Classically, 
+we would have written
+\begin{equation}\label{eq:classicalLagrangian}
+S=\int\dd{t}L\left(\phi,\dot\phi\right)
+\end{equation}
+where $L$ is the {\it Lagrangian}\index{Lagrangian}, the difference between
+kinetic and potential energies. Also discussed in
+\secref{sec:QFTintroRemarks} was the requirement that our model is compatible
+with SR. We see the classical description \equatref{eq:classicalLagrangian}
+treats time differently from spatial components, which is not a convenient
+perspective in the context of SR. Thus the starting point in all QFTs is instead
+formulated as
+\begin{equation}\label{eq:QFTLagrangian}
+S=\int\dd[4]{x} \Lagr\left(\phi,\partial_\mu\phi\right),
+\end{equation}
+where $\Lagr$ is the {\it Lagrangian density}. The Lagrangian density is still
+organized as kinetic minus potential terms, which become energy densities. 
+This distinction is minor enough that many authors will use the phrases
+``Lagrangian" and ``Lagrangian density" interchangably, myself included.
+
+Our starting point no longer distinguishes between space and time, as desired.
+In this formulation, the Euler-Lagrange equations become
+\begin{equation}\label{eq:EL}
+\pdv{\Lagr}{\phi}=\partial_\mu\pdv{\Lagr}{(\partial_\mu\phi)}.
+\end{equation}
+Thus to describe any system of fundamental particles, we need to
+\begin{enumerate}
+\item figure out what the fields should be, i.e. figure out what kinds of
+math objects will produce the particles of interest;
+\item use various combinations of those fields to write down the 
+corresponding $\Lagr$ in a relativistically covariant way; and
+\item solve the equations of motion, i.e. \equatref{eq:EL}.
+\end{enumerate}
+
+What is a minimal, relativistically covariant Lagrangian that describes a particle
+of mass $m$ corresponding to real $\phi$ without interactions? It is
+\begin{equation}
+\Lagr\sim\partial_\mu\phi\partial^\mu\phi+m^2\phi^2.
+\end{equation}
+The first term is clearly the kinetic energy term, or equivalently, it's the
+energy coming from how the field changes in space and time. The second term is a
+bit more subtle. This is the {\it mass term}\index{mass term}. Why should we
+have a term of this form?
+\begin{itemize}
+\item From a relativistic perspective, we want to include all energy contributions, so we
+need to have something with $m$ in it. 
+\item We also want the freedom to create and annihilate particles. An energy
+term quadratic in $\phi$ has a corresponding ``force" linear in $\phi$. This can
+be interpreted as a linear ``restoring force" that pushes particles into and out
+of existence. Whatever form this ``restoring force" has in reality, we know that
+close enough to equilibrium, we can approximate it linearly.
+\end{itemize}
+This latter point is especially crucial: When we quantize $\phi$, since we have
+what is effectively a simple-harmonic-oscillator Lagrangian, we can take over
+all the tricks using raising and lowering operators, which will be interpreted
+as creation and annihilation operators. Each particle carries $\hbar\omega_p$
+units of energy.
+
+In QM one has the identification
+\begin{equation}
+p^\mu=i\partial^\mu.
+\end{equation}
+Plugging this into $p_\mu p^\mu=m^2$ yields the {\it
+Klein-Gordon equation}\index{Klein-Gordon equation},
+\begin{equation}
+\left(\square +m^2\right)\phi=0.
+\end{equation}
+Klein-Gordon can be solved by plane waves. The most general,
+Lorentz-covariant solution is
+\begin{equation}
+\phi(x)=\int\frac{\dd[3]{p}}{(2\pi)^32E_p}
+\left(a_pe^{ipx}+a^\dagger_pe^{-ipx}\right).
+\end{equation}
+
 
 % TODO: path integral classical limit
 
