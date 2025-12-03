@@ -222,7 +222,7 @@ and Schr\"odinger shared the 1933 Nobel.}, who realized that
 one could have a relativistically sensible equation that is first-order
 in its operators by introducing some matrices and a spin component
 to the wavefunction~\cite{Dirac:1928hu,Dirac:1928ej}. The result is the 
-{\it Dirac equation}\index{Dirac equation}
+{\it Dirac equation}\index{Dirac!equation}
 \begin{equation}
 i\hbar\slashed{\partial}\psi=mc\psi.
 \end{equation}
@@ -606,7 +606,7 @@ particle. One can compare this with the particle's de Broglie wavelength
 %\cite{caltech}.
 
 \index{limit!classical}\index{non-relativistic limit}
-\section{The non-relativistic and classical limits}
+\subsection{The non-relativistic and classical limits}
 
 In this section I briefly give some intuition for how mundane Newtonian
 physics can be recovered from the more esoteric relativistic and quantum
@@ -656,7 +656,7 @@ and when $\hbar=0$, you are once again allowed to know position and
 momentum simultaneously.
 
 
-\section{A very brief recap of some SR}
+\subsection{A very brief recap of some SR}
 
 The key concept in special relativity (SR) is that the laws of
 physics\footnote{I have never seen this statement really rigorously defined.
@@ -683,7 +683,7 @@ x^\mu\to x'^{\mu} = \Lambda_\nu^\mu x^\nu
 for some matrix $\Lambda$. The invariance of the line element restricts the form
 of $\Lambda$. If $\eta$ is the metric tensor, we find 
 \begin{equation}\label{eq:LorentzConstraint}
-\eta_{\mu\nu}=\Lambda\mu^\rho\Lambda_\nu^\sigma\eta_{\rho\sigma}.
+\eta_{\mu\nu}=\Lambda_\mu^\rho\Lambda_\nu^\sigma\eta_{\rho\sigma}.
 \end{equation}
 Equations \eqref{eq:boostRot} and \eqref{eq:LorentzConstraint} together put
 $\Lambda$ in the {\it Lorentz} group\index{group!Lorentz}, which is
@@ -695,7 +695,7 @@ notation $\ON(3,1)$.} Preserving the line element also implies
 \end{equation}
 We consider {\it proper}\index{proper} Lorentz
 transformations, i.e. those with $\det\Lambda=1$. If we consider the most
-general coordinate transform, we include boosts, like
+general coordinate transform, we include translations, like
 \begin{equation}\label{eq:boostRot}
 x^\mu\to x'^{\mu} = \Lambda_\nu^\mu x^\nu + a^\mu,
 \end{equation}
@@ -709,8 +709,8 @@ the $z$-direction. This must have the form
 \begin{equation}
   \Lambda=\left(\begin{array}{cccc}
       \Lambda^0_0 &          &        & \Lambda^0_3\\
-               & 1 & 0       & \\
-               & 0 & 1 & \\
+               & 1 &         & \\
+               &   & 1 & \\
       \Lambda^3_0     &          &        & \Lambda^3_3
     \end{array}\right).
 \end{equation}
@@ -795,16 +795,16 @@ have a term of this form?
 \item From a relativistic perspective, we want to include all energy contributions, so we
 need to have something with $m$ in it. 
 \item We also want the freedom to create and annihilate particles. An energy
-term quadratic in $\phi$ has a corresponding ``force" linear in $\phi$. This can
-be interpreted as a linear ``restoring force" that pushes particles into and out
-of existence. Whatever form this ``restoring force" has in reality, we know that
-close enough to equilibrium, we can approximate it linearly.
+term quadratic in $\phi$ has a corresponding ``force" linear in $\phi$.
 \end{itemize}
 This latter point is especially crucial: When we quantize $\phi$, since we have
 what is effectively a simple-harmonic-oscillator Lagrangian, we can take over
 all the tricks using raising and lowering operators, which will be interpreted
 as creation and annihilation operators. Each particle carries $\hbar\omega_p$
-units of energy.
+units of energy.\footnote{Later, when we develop more machinery, we will also
+view $\phi^n$ as an $n$-point interaction. A 2-point interaction can be viewed
+as ``the particle exists (ingoing momentum) and continues existing (outgoing
+momentum)".}
 
 In QM one has the identification
 \begin{equation}
@@ -816,29 +816,267 @@ Klein-Gordon equation}\index{Klein-Gordon equation},
 \left(\square +m^2\right)\phi=0.
 \end{equation}
 Klein-Gordon can be solved by plane waves. The most general,
-Lorentz-covariant solution is
+Lorentz-invariant solution is
 \begin{equation}
 \phi(x)=\int\frac{\dd[3]{p}}{(2\pi)^32E_p}
-\left(a_pe^{ipx}+a^\dagger_pe^{-ipx}\right).
+\left(a(p)e^{ipx}+a^\dagger(p)e^{-ipx}\right).
+\end{equation}
+The integration measure is a rewrite of a manifestly Lorentz-invariant measure,
+often referred to as the {\it Lorentz-invariant phase space}\index{phase
+space!Lorentz-invariant} (LIPS):
+\begin{equation}
+\dd{\rm LIPS}\equiv\frac{\dd[4]{p}}{(2\pi)^4}\delta(p^2-m^2)\theta(p^0)
+=\frac{\dd[3]{p}}{(2\pi)^32E_p}.
 \end{equation}
 
+\subsection{The Dirac equation}\index{Dirac!equation}
 
-% TODO: path integral classical limit
+As mentioned during the mnemonic history, the Klein-Gordon equation has the 
+issue that its probabilities become time-dependent.\footnote{This is eventually
+resolved by reinterpreting the probability current as a charge-probability
+current.} This was resolved by Dirac, who sought an equation linear in its
+differentials, like the Schr\"odinger equation is.
+A thorough examination of the Dirac, Klein-Gordon, and Schr\"odinger equations
+can be found in Ref.~\cite{tsutsui:2025}. 
 
-%\section{The path integral}
+According to Dirac, if we follow the form of Schr\"odinger, we would write
+\begin{equation}\label{eq:protoDirac}
+i\partial_0\psi=i\left(\alpha_k\partial_k-i\beta m\right)\psi,
+\end{equation}
+where we won't specify what kind of objects $\alpha_k$ or $\beta$ are.
+We have also switched to $\psi$ for the field, anticipating that it will have a
+fundamentally different structure than the $\phi$.
+Applying another $\partial_0$, using a plane-wave Ansatz for $\psi$, and
+reorganizing, we get
+\begin{equation}
+E^2\psi=\left(\alpha_i^2p_i^2+m^2\beta^2
++\frac{1}{2}\sum_{i,j\suchthat i\neq
+j}\left(\alpha_i\alpha_j+\alpha_j\alpha_i\right)p_ip_j
++m\left(\alpha_i\beta+\beta\alpha_i\right)p_i\right)\psi.
+\end{equation}
+Thus in order to satisfy the dispersion relation, we must have
+\begin{equation}\label{eq:alphaBetaDirac}
+\alpha_i^2=\beta^2=1,~~~~~
+\alpha_i\alpha_j+\alpha_j\alpha_i=0,~~~~
+\alpha_i\beta+\beta\alpha_i=0
+\end{equation}
+for each $i\neq j$. The equations \eqref{eq:alphaBetaDirac} suggest
+a nontrivial algebra, and objects of any algebra can always be represented by
+matrices. Let its dimension be $n$. The third of these constraints tells us
+\begin{equation}
+\tr \alpha_i = \tr \alpha_i\beta^2 = -\tr \beta\alpha_i\beta=-\tr\alpha_i,
+\end{equation}
+which means the matrices $\alpha_i$ are traceless. Moreover the first constraint
+tells us the eigenvalues are $\pm1$. The only way to get traceless matrices with
+such eigenvalues is if $n$ is even. Setting $n=2$, one might use the Pauli
+matrices. But then only $\beta\propto\id$ is linearly independent of these,
+which commutes with all of them, violating the third constraint. 
 
-%\section{The Dirac equation}\index{Dirac equation}
+Setting $n=4$ works. For example one can take the representation
+\begin{equation}
+\alpha_i
+  =\left(\begin{array}{cc}
+       &  \sigma_i       \\ 
+      \sigma_i  & 
+    \end{array}\right),~~~~~
+\beta
+  =\left(\begin{array}{cc}
+       \id_2& \\ 
+        &-\id_2 
+    \end{array}\right),~~~~~
+\end{equation} 
+which fulfills all the relations \eqref{eq:alphaBetaDirac}. This is
+called the {\it Dirac
+representation}\index{Dirac!representation}\index{representation!Dirac}. 
+At this stage,
+one typically organizes these in terms of the matrices\index{$\gamma$-matrix}
+$\gamma^0\equiv\beta$ and $\gamma^i\equiv\beta\alpha_i$. In terms of these
+matrices, \equatref{eq:protoDirac} becomes the familiar Dirac equation
+\begin{equation}
+\left(i\gamma^\mu\partial_\mu-m\right)\psi=0.
+\end{equation}
+In the Dirac representation, the $\gamma$s can be written 
+\begin{equation}
+\gamma^0
+  =\left(\begin{array}{cc}
+       \id_2& \\ 
+        &-\id_2 
+    \end{array}\right),~~~~~
+\gamma^i
+  =\left(\begin{array}{cc}
+       &  \sigma^i       \\ 
+      -\sigma^i  & 
+    \end{array}\right).
+\end{equation} 
+Another possible representation is
+the {\it chiral} 
+\index{representation!chiral}\index{representation!Weyl}
+or {\it Weyl} representation,
+\begin{equation}
+  \gamma^0=\left(\begin{array}{cc}
+                        & \id_2    \\
+                 \id_2  &  
+           \end{array}\right), \qquad
+  \gamma^i=\left(\begin{array}{cc}
+                           & \sigma^i \\
+                 -\sigma^i &  
+           \end{array}\right).
+\end{equation}
 
-% dirac equation
+The Dirac equation tells us that the $\psi$ must have four components. These are
+called {\it spinors}\index{spinor}. The index running over these four components
+is called the {\it Dirac} or {\it spin}
+index\index{index!Dirac}\index{index!Spin}. Thus each $\gamma$ has two free spin
+indices, and each spinor has one. The $\gamma$s are differentiated by their
+Lorentz index. In a sense, all this extra internal structure for $\psi$
+ultimately follows from formulating Schr\"odinger in a way that respects SR.
+
+The $\gamma$s appear when one works with spin-$1/2$ representations of
+the Lorentz group. Here we collect some of their algebraic properties.
+We see 
+\begin{equation}
+  \left\{\gamma^\mu,\gamma^\nu\right\}=2g^{\mu\nu}\id_4
+\end{equation}
+and
+\begin{equation}
+\left(\gamma^0\right)^2=-\left(\gamma^i\right)^2=-\id_4.
+\end{equation}
+The representation of the Lorentz algebra is
+\begin{equation}
+  S^{\mu\nu}=\frac{i}{4}\left[\gamma^\mu,\gamma^\nu\right].
+\end{equation}
+
+The Hermitian conjugate of the Dirac equation can be written
+most succinctly if one defines the {\it adjoint} Dirac 
+spinor\index{adjoint!spinor} 
+\begin{equation}
+  \bar{\psi}\equiv\psi^\dagger\gamma^0.
+\end{equation}
+The adjoint spinor allows us to write down the Lorentz scalar $\bar{\psi}\psi$ and
+the Lorentz vector $\bar{\psi}\gamma^\mu\psi$. 
+
+%In this representation, generators of boosts and rotations are, respectively,
+%\begin{equation}
+%  S^{0i}=\frac{i}{4}\left[\gamma^0,\gamma^i\right]
+%        =-\frac{i}{2}
+%         \left(\begin{array}{cc}
+%           \sigma^i & 0        \\
+%           0        & -\sigma^i
+%         \end{array}\right)
+%\end{equation}
+%and
+%\begin{equation}
+%  S^{ij}=\frac{i}{4}\left[\gamma^i,\gamma^j\right]
+%        =\frac{1}{2}\epsilon^{ijk}
+%         \left(\begin{array}{cc}
+%           \sigma^k & 0        \\
+%           0        & \sigma^k
+%         \end{array}\right).
+%\end{equation}
+%A four-component field that transforms under boosts and rotations according to
+%\index{spinor}
+%the above generators is called a {\it Dirac spinor}. 
+
+Knowing a little bit about gamma matrices, we can introduce
+``Feynman slash" notation,\index{slash notation}
+\begin{equation}
+  \slashed{p}\equiv\gamma_\mu p^\mu,
+\end{equation}
+and we can then write the Dirac equation as 
+\begin{equation}
+  (i\slashed{\partial}-m)\psi=0.
+\end{equation}
+We close with some derivable algebraic properties of the $\gamma$s:
+\begin{proposition}{}{gammatech}
+Gamma matrix identities in 4-$d$:
+\begin{center}\begin{tabular}{lrcl}
+1. &$\tr\left[\text{odd no. of $\gamma$s}\right]$ &=& $\zd_4$;\\
+2. &$\slashed{a}\slashed{b}$ &=& $-\slashed{b}\slashed{a}-2(ab)\id_4$;\\
+3. &$\tr\gamma^\mu\gamma^\nu$ &=& $-4g^{\mu\nu}\id_4$;\\
+4. &$\gamma_\mu\gamma^\mu$&=& $-4\id_4$. 
+\end{tabular}\end{center}
+\end{proposition}
+
+Solutions to the Dirac equation can be expressed as four linearly independent
+spinor solutions times a plane wave. Rather than write these explicitly, we will
+call the spinor parts $u_1$, $u_2$, $v_1$, and $v_2$, so that a general solution
+will have the form
+\begin{equation}
+\psi(x)=\int\frac{\dd[3]{p}}{(2\pi)^32E_p}
+\sum_{r=1,2}\left(a_r(p)u_r(p)e^{ipx}+b_r(p)v_r(p)e^{-ipx}\right).
+\end{equation}
+
+\subsection{Spin, helicity, and chirality}\index{spin}
+
+The solutions to the Dirac equation 
+turn out to describe fermions. In particular, the spin operator
+is
+\begin{equation}
+S^i=\frac{1}{2}\left(\begin{array}{cc}
+                 \sigma^i  &   \\
+                   &\sigma^i  
+           \end{array}\right)
+=-\frac{i}{2}\alpha_1\alpha_2\alpha_3\alpha_i.
+\end{equation}
+It can be shown that, e.g. picking momentum along the $z$-direction, the spinors
+$u_1$, $u_2$, $v_1$, and $v_2$ are eigenvectors of $S_z$ with eigenvalues $\pm
+1/2$, i.e. they are representing spin-1/2 particles.
+
+The {\it helicity}\index{helicity} of a particle is the projection of its spin
+onto its momentum,
+\begin{equation}
+h\equiv \frac{2p_i S^i}{|\vec{p}|}.
+\end{equation}
+Helicity has eigenvalues $\pm 1$ and it is conserved during dynamical processes.
+However it is not Lorentz invariant.
+
+The matrix
+\begin{equation}
+  \gamma_5=i\gamma^0\gamma^1\gamma^2\gamma^3
+\end{equation}
+is the {\it chirality}\index{chirality} operator, which is Lorentz invariant.
+It allows us to define left-handed and right-handed projection operators
+\begin{equation}\label{eq:projdef}
+  P_L\equiv\frac{1}{2}(1-\gamma_5)~~~~\text{and}~~~~
+  P_R\equiv\frac{1}{2}(1+\gamma_5),
+\end{equation}
+which project out the left-handed and right-handed components of Dirac spinors
+like
+\begin{equation}\label{eq:projact}
+  \psi_R=P_R\psi,~~~~
+  \psi_L=P_L\psi,~~~~
+  \bar{\psi}_R=\bar{\psi}P_L,~~~~\text{and}~~~~
+  \bar{\psi}_L=\bar{\psi}P_R.
+\end{equation}
+For massless particles, chirality and helicity coincide. The chirality of a
+particle is intrinsic to it, but the helicity depends on the reference frame, as
+the spin is intrinsic but the momentum is frame dependent. 
+
+We close this section with some identities related to chiral projection
+operators:
+\begin{proposition}{}{projection}
+Projection operator identities:
+\begin{center}\begin{tabular}{lrcl}
+1. &$\gamma_5^2$ &=& $\id_4$;\\
+2. &$\left\{\gamma^\mu,\gamma_5\right\}$ &=& $\zd_4$;\\
+4. & $P_R^2$ &=& $P_R$;\\
+5. & $P_L^2$ &=& $P_L$;\\
+5. & $\gamma^\mu P_L$ &=& $P_R \gamma^\mu$;\\
+6. & $\gamma^\mu P_R$ &=& $P_L \gamma^\mu$.
+\end{tabular}\end{center}
+\end{proposition}
+
+
+
 % in order to be lorentz invariant we need gamma_0
-% slash notation, maybe algebra rules
 % solutions to dirac eq. look like plane waves (3.45)
 % helicity as interpretation of spin against momentum
 % a dirac spinor can be broken down into into creation/annihilation
 % operators over all possible momenta (fourier), sum over all spins,
 % attached to plane wave u.
 
-\section{Discrete symmetries}\label{sec:discreteSymm}
+
+\subsection{Discrete symmetries}\label{sec:discreteSymm}
 
 A general local meson operator/current/bilinear\footnote{Sometimes in lattice
 QCD you see bilinears of the form $\bar{\psi}^f(x)\Gamma\psi^g(x\pm a\muh)$,
@@ -885,8 +1123,8 @@ $\rho$ meson is much greater than the pion (more than five times greater), which
 reflects the fact that under strong interactions, aligned-spin states are higher
 energy states.}.
 
-\section{Quantum electrodynamics}\label{sec:qed}
-\index{quantum electrodynamics}
+%\section{Quantum electrodynamics}\label{sec:qed}
+%\index{quantum electrodynamics}
 
 
 \section{Spontaneous symmetry breaking}\label{sec:ssb}
@@ -901,9 +1139,8 @@ scalar fields $\phi^i(x)$. Then the Lagrangian
        \equiv\frac{1}{2}\left(\partial_\mu\phi\right)^2
         +V(\phi)
 \end{equation}
-is invariant under the orthogonal group\footnote{Recall orthogonal 
-transformations\index{group!orthogonal} $R$ are the ones with 
-$R^TR=\id$.} O$(N)$. This is the Lagrangian of the\index{sigma model}
+is invariant under the orthogonal group O$(N)$. 
+This is the Lagrangian of the\index{sigma model}
 {\it linear sigma model}. Note that is is a generalization of $\phi^4$ theory,
 but we have replaced the positive mass parameter $m^2$ with a
 negative parameter $-\mu^2$ and rescaled $\lambda$ to eliminate a factor of 6.
@@ -1706,11 +1943,11 @@ different hadron species becomes fixed. Shortly thereafter, the system attains
 {\it kinetic freeze-out}\index{freeze-out!kinetic}, where hadrons can be
 considered as non-interacting hadronic gas.
 
-\section{Magnetic fields in QCD}
-
-Strong magnetic fields manifest in the off-central HICs discussed above, and
-they are also present in neutron stars and the primordial universe. In the case
-of 
+%\section{Magnetic fields in QCD}
+%
+%Strong magnetic fields manifest in the off-central HICs discussed above, and
+%they are also present in neutron stars and the primordial universe. In the case
+%of 
 
 \section{Exactly solvable models}
 
