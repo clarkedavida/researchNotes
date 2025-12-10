@@ -768,6 +768,7 @@ organized as kinetic minus potential terms, which become energy densities.
 This distinction is minor enough that many authors will use the phrases
 ``Lagrangian" and ``Lagrangian density" interchangably, myself included.
 
+%TODO: principle least action i guess. also noether's theorem
 Our starting point no longer distinguishes between space and time, as desired.
 In this formulation, the Euler-Lagrange equations become
 \begin{equation}\label{eq:EL}
@@ -931,6 +932,21 @@ indices, and each spinor has one. The $\gamma$s are differentiated by their
 Lorentz index. In a sense, all this extra internal structure for $\psi$
 ultimately follows from formulating Schr\"odinger in a way that respects SR.
 
+The term $(i\gamma^\mu\partial_\mu-m)$ is often referred to as the {\it Dirac
+operator}\index{Dirac!operator} or {\it Dirac matrix}. The partial derivative
+changes under Lorentz transformations, so to keep the Dirac equation Lorentz
+invariant, it must be that the spinor transforms non-trivially.
+If we write the spinor transformation as
+\begin{equation}
+\psi'(x')=U(\Lambda)\psi(x),
+\end{equation}
+then the requirement that the Dirac equation be Lorentz invariant forces
+the $\gamma$s to transform as
+\begin{equation}\label{eq:gammaLorentz}
+U^{-1}\gamma^\mu U=\Lambda^\mu_\nu\gamma^\nu,
+\end{equation}
+i.e. they are Lorentz vectors. 
+
 The $\gamma$s appear when one works with spin-$1/2$ representations of
 the Lorentz group. Here we collect some of their algebraic properties.
 We see 
@@ -943,7 +959,7 @@ and
 \end{equation}
 The representation of the Lorentz algebra is
 \begin{equation}
-  S^{\mu\nu}=\frac{i}{4}\left[\gamma^\mu,\gamma^\nu\right].
+  \sigma^{\mu\nu}=\frac{i}{4}\left[\gamma^\mu,\gamma^\nu\right].
 \end{equation}
 
 The Hermitian conjugate of the Dirac equation can be written
@@ -952,8 +968,8 @@ spinor\index{adjoint!spinor}
 \begin{equation}
   \bar{\psi}\equiv\psi^\dagger\gamma^0.
 \end{equation}
-The adjoint spinor allows us to write down the Lorentz scalar $\bar{\psi}\psi$ and
-the Lorentz vector $\bar{\psi}\gamma^\mu\psi$. 
+The adjoint spinor allows us to write down {\it bilinears}\index{bilinear}
+of the form $\bar{\psi}\Gamma\psi$ for a generic matrix $\Gamma$ in Dirac space. 
 
 %In this representation, generators of boosts and rotations are, respectively,
 %\begin{equation}
@@ -986,7 +1002,7 @@ and we can then write the Dirac equation as
 \begin{equation}
   (i\slashed{\partial}-m)\psi=0.
 \end{equation}
-We close with some derivable algebraic properties of the $\gamma$s:
+Here are some derivable algebraic properties of the $\gamma$s:
 \begin{proposition}{}{gammatech}
 Gamma matrix identities in 4-$d$:
 \begin{center}\begin{tabular}{lrcl}
@@ -1067,16 +1083,30 @@ Projection operator identities:
 \end{proposition}
 
 
-
-% in order to be lorentz invariant we need gamma_0
-% solutions to dirac eq. look like plane waves (3.45)
-% helicity as interpretation of spin against momentum
-% a dirac spinor can be broken down into into creation/annihilation
-% operators over all possible momenta (fourier), sum over all spins,
-% attached to plane wave u.
-
-
 \subsection{Discrete symmetries}\label{sec:discreteSymm}
+
+The first two discrete symmetries we discuss are examples of Lorentz
+transformations. In particular, the {\it parity}\index{parity} and {\it
+time-reversal}\index{time reversal} transformations can be written as
+\begin{equation}
+P=\left(\begin{array}{cc}
+                 1  &   \\
+                   & -\id_3 
+           \end{array}\right),~~~~~~
+T=\left(\begin{array}{cc}
+                 -1  &   \\
+                   & \id_3 
+           \end{array}\right).
+\end{equation} 
+From \equatref{eq:gammaLorentz} one sees that
+\begin{equation}
+U(P)=\gamma^0
+\end{equation}
+and thus
+\begin{equation}
+U(P)^{-1} \gamma^5 U(P)=-\gamma^5,
+\end{equation}
+i.e. $\gamma_5$ transforms as a pseudoscalar.
 
 A general local meson operator/current/bilinear\footnote{Sometimes in lattice
 QCD you see bilinears of the form $\bar{\psi}^f(x)\Gamma\psi^g(x\pm a\muh)$,
@@ -1084,7 +1114,16 @@ which is called a {\it point-split}\index{point-split} operator.} has the form
 \begin{equation}\label{eq:mesonInterpLat}
   \bar{\psi}^f(x)\Gamma\psi^g(x)
 \end{equation}
-for fermion flavors $f$ and $g$.
+for fermion flavors $f$ and $g$. In \tabref{tab:discreteSymm}, we collect the
+transformation types of various bilinears.
+For instance the $\rho$ meson is a vector meson\footnote{The $\rho$ meson is any 
+spin-1 combination of $u$ and $d$
+quarks/antiquarks, hence their designation as ``vector" mesons in
+\tabref{tab:discreteSymm}. Each quark has spin-1/2, so the $\rho$ meson is the
+aligned state, while the pion is the anti-aligned state. The mass of a
+$\rho$ meson is much greater than the pion (more than five times greater), which
+reflects the fact that under strong interactions, aligned-spin states are higher
+energy states.}.
 
 % you can then think about what P will do to these creation/annihilation
 % states and the plane waves. has the effect of swapping the top and
@@ -1114,14 +1153,7 @@ opposite sign changes under parity as their corresponding objects.}
 \end{table}
 \index{meson!rho@$\rho$}\index{meson!pi@$\pi$}\index{Higgs!boson}
 
-For instance the $\rho$ meson is a vector meson\footnote{The $\rho$ meson is any 
-spin-1 combination of $u$ and $d$
-quarks/antiquarks, hence their designation as ``vector" mesons in
-\tabref{tab:discreteSymm}. Each quark has spin-1/2, so the $\rho$ meson is the
-aligned state, while the pion is the anti-aligned state. The mass of a
-$\rho$ meson is much greater than the pion (more than five times greater), which
-reflects the fact that under strong interactions, aligned-spin states are higher
-energy states.}.
+
 
 %\section{Quantum electrodynamics}\label{sec:qed}
 %\index{quantum electrodynamics}

@@ -165,9 +165,29 @@ the LHS is meant to represent a vector, while $\partial$s on the RHS
 represents just the partial derivative operator.
 
 
+\section{Higher-dimensional calculus}
 
-%\section{Fourier transforms}
+Here we collect a couple of theorems for doing higher-dimensional integrals.
+We work in $\R^N$. Let $v\in\R^N$, $\Omega\subset\R^N$ an $N$-dimensional
+volume, $\partial\Omega$ its boundary, and $\dd S$ be an infinitesimal area
+on $\partial\Omega$, normal to $\partial\Omega$. Then the generalization
+of the divergence theorem can be expressed as follows:\index{divergence theorem}
+\begin{theorem}{Divergence theorem}{}
+$$
+\int_\Omega\dd[N]{x}\partial_\mu v^\mu
+=\int_{\partial\Omega}\dd {S_\mu} v^\mu
+$$
+\end{theorem}
 
+Similarly one can write a generalization for integration by
+parts.\index{integration by parts} Let $u$ be a scalar function.
+\begin{theorem}{Integration by parts}{}
+$$
+\int_\Omega\dd[N]{x}u\,\partial_\mu v^\mu
+=\int_{\partial\Omega}\dd {S_\mu} v^\mu\, u
+-\int_\Omega\dd[N]{x}\left(\partial_\mu u\right) v^\mu.
+$$
+\end{theorem}
 
 \index{Green's function}
 \section{Green's functions}
