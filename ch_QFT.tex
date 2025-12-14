@@ -768,9 +768,8 @@ organized as kinetic minus potential terms, which become energy densities.
 This distinction is minor enough that many authors will use the phrases
 ``Lagrangian" and ``Lagrangian density" interchangably, myself included.
 
-%TODO: principle least action i guess. also noether's theorem
 Our starting point no longer distinguishes between space and time, as desired.
-In this formulation, the Euler-Lagrange equations become
+As we will show in the next subsection, the Euler-Lagrange equations become
 \begin{equation}\label{eq:EL}
 \pdv{\Lagr}{\phi}=\partial_\mu\pdv{\Lagr}{(\partial_\mu\phi)}.
 \end{equation}
@@ -785,8 +784,8 @@ corresponding $\Lagr$ in a relativistically covariant way; and
 
 What is a minimal, relativistically covariant Lagrangian that describes a particle
 of mass $m$ corresponding to real $\phi$ without interactions? It is
-\begin{equation}
-\Lagr\sim\partial_\mu\phi\partial^\mu\phi+m^2\phi^2.
+\begin{equation}\label{eq:simpleScalarLagr}
+\Lagr=\frac{1}{2}\partial_\mu\phi\partial^\mu\phi+m^2\phi^2.
 \end{equation}
 The first term is clearly the kinetic energy term, or equivalently, it's the
 energy coming from how the field changes in space and time. The second term is a
@@ -829,6 +828,180 @@ space!Lorentz-invariant} (LIPS):
 \dd{\rm LIPS}\equiv\frac{\dd[4]{p}}{(2\pi)^4}\delta(p^2-m^2)\theta(p^0)
 =\frac{\dd[3]{p}}{(2\pi)^32E_p}.
 \end{equation}
+
+
+\subsection{Calculus of variations}\label{sec:variations}
+
+In this section we review some concepts from the calculus of variations, which
+gets used extensively in field theories. We then derive the Euler-Lagrange
+equations and Noether's theorem in two forms.
+
+A {\it functional}\index{functional} is a mapping from functions to scalars. 
+We encounter functionals in the context of field theories,
+where the Lagrangian is generically a functional of the fields. So for example 
+\equatref{eq:simpleScalarLagr} shows the Lagrangian as a functional of $\phi$
+and $\partial_\mu\phi$ with $\phi:\R^4\to\R$.
+
+Now I'm going to try to sharpen what is meant by a {\it
+variation}\index{variation} $\delta$ in the context of deriving Euler-Lagrange
+for field theories. First we fix some boundary conditions. In field theories
+that respect SR, the common choice is
+\begin{equation}
+\phi(\infty)=\partial_\mu\phi(\infty)=0,
+\end{equation}
+i.e. the fields vanish everywhere at spacetime infinity.
+Let $\epsilon>0$.  Any variation $\delta$ in $\phi$ can be written as 
+\begin{equation}\label{eq:defineVariation}
+\delta\phi=\epsilon g,
+\end{equation}
+where $g:\R^4\to\R$ s.t.
+\begin{equation}
+g(\infty)=\partial_\mu g(\infty)=0.
+\end{equation}
+Equation \eqref{eq:defineVariation} tells us that the variation $\delta\phi$ is
+essentially a small deformation of $\phi$ at every $x\in\R^4$ without any
+deformation on the \dimens{3} surface at infinity. We will try to reserve
+the variation symbol $\delta$ for functions and functionals.
+From this point of view, the variation is parameterized by $\epsilon$
+and thought of as independent of $x\in\R^4$.
+Taking a partial derivative of \equatref{eq:defineVariation} we then get
+\begin{equation}
+\partial_\mu(\delta\phi)
+=\delta(\partial_\mu\phi).
+\end{equation}
+
+Now let $\Lagr$ be a functional of $\phi$. By Taylor expanding in $\delta\phi$,
+we can write
+\begin{equation}
+\Lagr(\phi+\delta\phi)=\Lagr(\phi)+\delta\phi\pdv{\Lagr}{\phi}+\order{\delta\phi^2}.
+\end{equation}
+This let us define the infinitesimal variation $\delta\Lagr$ induced 
+by infinitesimal $\delta\phi$:
+\begin{equation}
+\delta\Lagr\equiv\Lagr(\phi+\delta\phi)-\Lagr(\phi)
+=\delta\phi\pdv{\Lagr}{\phi}.
+\end{equation}
+In general, $\Lagr$ will also be a functional of $\partial_\mu\phi$. The same
+manipulations let us write a similar equation for $\delta(\partial_\mu\phi)$,
+and thus we can express ``total variations" as 
+\begin{equation}
+\delta\Lagr=\pdv{\Lagr}{\phi}\delta\phi+\pdv{\Lagr}{(\partial_\mu\phi)}\delta(\partial_\mu\phi).
+\end{equation}
+For the following discussion, it is convenient to rearrange the total variation
+as 
+\begin{equation}\label{eq:totalVariation}
+\delta\Lagr=
+\left(\pdv{\Lagr}{\phi}-\partial_\mu\pdv{\Lagr}{(\partial_\mu\phi)}\right)\delta\phi
++\partial_\mu\left(\pdv{\Lagr}{(\partial_\mu\phi)}\delta\phi\right).
+\end{equation}
+
+With this rule for total derivatives, we can work out the consequences of the 
+least-action principle. In particular,
+\begin{equation}
+0=\delta S 
+=\int\dd[4]{x} \delta\Lagr 
+=\int\dd[4]{x}            
+\left(\left(\pdv{\Lagr}{\phi}-\partial_\mu\pdv{\Lagr}{(\partial_\mu\phi)}\right)\delta\phi
++\partial_\mu\left(\pdv{\Lagr}{(\partial_\mu\phi)}\delta\phi\right)\right).
+\end{equation}
+The second term, a total divergence, vanishes under the integral due to our BCs
+for $g$. In order for the first term to vanish for all variations, it must be
+that\index{Euler-Lagrange equations}
+
+\begin{theorem}{Euler-Lagrange equations}{}
+Fields $\phi$ that extremize the action $S$ satisfy
+$$
+\pdv{\Lagr}{\phi}=\partial_\mu\pdv{\Lagr}{(\partial_\mu\phi)}.
+$$
+\end{theorem}
+
+Our next application of the calculus of variations is to ask: What happens if
+our variation $\delta\phi$ leaves $\Lagr$ unchanged? Such variations are
+examples of {\it continuous symmetries} of $\Lagr$. If $\phi$ satisfies
+Euler-Lagrange throughout the variation, then according to
+\equatref{eq:totalVariation}, we find
+\begin{equation}
+0=\partial_\mu\left(\pdv{\Lagr}{(\partial_\mu\phi)}\delta\phi\right)
+\equiv\epsilon\partial_\mu J^\mu,
+\end{equation}
+where we have defined\footnote{Since $\delta\phi=\epsilon g$ for some $g$,
+the term in the parentheses will always be proportional to $\epsilon$.
+Defining $J^\mu$ in this way ensures the $\epsilon$ factor drops out. You
+therefore sometimes see authors write
+$$
+J^\mu\equiv\pdv{\Lagr}{(\partial_\mu\phi)}\frac{\delta\phi}{\delta\epsilon}.
+$$
+While this is elegant when it comes to writing down $J^\mu$, it has the
+difficulty that $\epsilon$ is not really thought of as a function, so that
+I can no longer apply $\delta$ only to functions and functionals.
+Moreover, I don't know a clean way to define the symbol 
+$\delta\phi/\delta\epsilon$.
+}
+the {\it Noether current}\index{Noether!current} $J^\mu$. Since $\epsilon>0$, it
+follows that
+\begin{equation}\label{eq:noetherCurrent}
+\partial_\mu J^\mu=0.
+\end{equation}
+If we define the {\it charge}\index{charge}
+\begin{equation}
+Q\equiv\int\dd[3]{x}J^0,
+\end{equation}
+then according to \equatref{eq:noetherCurrent}
+\begin{equation}
+\partial_0Q
+=\int\dd[3]{x}\partial_0J^0
+=\int\dd[3]{x}\partial_iJ^i
+=0,
+\end{equation}
+which again vanishes due to the divergence theorem along with our BCs for $g$.
+Thus we see this charge is conserved, i.e. it is time-independent.
+
+\index{Noether!theorem}
+\begin{theorem}{Noether's theorem}{}
+Assuming the Euler-Lagrange equations hold, for each continuous symmetry
+$\phi\to\phi+\delta\phi$ of $\Lagr$, there exists a corresponding conserved charge 
+$$
+Q=\int\dd[3]{x}j^0, ~~~~~~~ \epsilon J^\mu=\pdv{\Lagr}{(\partial_\mu\phi)}\delta\phi.
+$$
+\end{theorem}
+
+There is one more useful result we can get from \equatref{eq:totalVariation}.
+We specialize to variations induced by spacetime translations. For infinitesimal
+translations $\xi_\nu$, we can again Taylor expand to write
+\begin{equation}\label{eq:fieldTranslation}
+\delta\phi=\phi(x+\xi)-\phi(x)=\xi_\nu\partial^\nu\phi
+\end{equation}
+and similarly
+\begin{equation}\label{eq:lagrTranslation}
+\delta\Lagr=\xi_\nu\partial^\nu\Lagr.
+\end{equation}
+Spacetime translations are not in general symmetries of $\Lagr$, but they are
+symmetries of $S$, since
+\begin{equation}
+\delta S=\int\dd[4]{x}\delta\Lagr=\xi_\nu\int\dd[4]{x}\partial^\nu\Lagr=0
+\end{equation}
+again due to the divergence theorem and our BCs. Assuming $\phi$ satisfies
+Euler-Lagrange and substituting Eqs. \eqref{eq:fieldTranslation} and
+\eqref{eq:lagrTranslation} into \equatref{eq:totalVariation} we find
+\begin{equation}
+\xi_\nu\partial^\nu\Lagr
+=\xi_\nu\partial_\mu\left(\pdv{\Lagr}{(\partial_\mu\phi)}\partial^\nu\phi\right).
+\end{equation}
+This equation holds for arbitrary spacetime translations, so it holds in
+particular for a translation entirely in the, say, $\nu$ direction.
+Using this fact and moving the LHS term to the RHS we find
+\begin{equation}
+0=\partial_\mu\left(\pdv{\Lagr}{(\partial_\mu\phi)}\partial^\nu\phi
+-g^{\mu\nu}\Lagr\right)\equiv\partial_\mu \Theta^{\mu\nu},
+\end{equation}
+where we have introduced the {\it energy-momentum tensor}\index{energy-momentum
+tensor} $\Theta^{\mu\nu}$. We see that spacetime translations induce four
+currents, collected here in $\Theta$. Since these were not symmetries of
+$\Lagr$, we will not consider them ``Noether" currents, but there is still
+clearly a corresponding conservation law.
+
+
+
 
 \subsection{The Dirac equation}\index{Dirac!equation}
 
@@ -1004,7 +1177,7 @@ and we can then write the Dirac equation as
 \end{equation}
 Here are some derivable algebraic properties of the $\gamma$s:
 \begin{proposition}{}{gammatech}
-Gamma matrix identities in 4-$d$:
+Gamma matrix identities in \dimens{4}:
 \begin{center}\begin{tabular}{lrcl}
 1. &$\tr\left[\text{odd no. of $\gamma$s}\right]$ &=& $\zd_4$;\\
 2. &$\slashed{a}\slashed{b}$ &=& $-\slashed{b}\slashed{a}-2(ab)\id_4$;\\
@@ -1998,7 +2171,7 @@ Its Lagrangian density is given by
          \left(\bar{\psi}\gamma_\mu\psi\right) \left(\bar{\psi}\gamma^\mu
 \psi\right),
 \end{equation}
-where here $\gamma^\mu$ are 2-$d$ gamma matrices.
+where here $\gamma^\mu$ are \dimens{2} gamma matrices.
 This describes a Dirac field with a self-interaction.
 What is special about the massless Thirring model is that it is 
 exactly solvable~\cite{johnson_solution_1961,hagen_new_1967,klaiber_1968}, 

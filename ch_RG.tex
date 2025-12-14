@@ -114,7 +114,7 @@ these notes.
 \begin{figure}
 \centering
 \includegraphics[width=0.6\linewidth]{figs/ising_phase_diagram.png}
-\caption{Phase diagram for the 2-$d$ Ising model. The solid black
+\caption{Phase diagram for the \dimens{2} Ising model. The solid black
 circle indicates the critical temperature; the solid line connected to it is a
 first-order line. Magnetization is indicated by $M$.
 Image taken from Ref.~\cite{ising_picture}.}
@@ -127,7 +127,7 @@ will consider {\it second-order} or {\it continuous} phase
 transitions\index{phase transition!second-order}\index{phase
 transition!continuous}. The Ising model of a ferromagnet in two or more
 dimensions is the quintessential example for second-order transitions.
-The 2-$d$ {\it Ising model}\index{Ising model} 
+The \dimens{2} {\it Ising model}\index{Ising model} 
 imagines a magnet as being comprised of interacting spins
 with nearest-neighbor interactions. Its Hamiltonian is
 \begin{equation}
@@ -168,10 +168,10 @@ This phenomenon is known as {\it universality}\index{universal}, and when two
 systems have the same exponents, they are said to belong to the same {\it
 universality class}\index{universality class}. In the context of lattice QCD,
 it has for example been demonstrated that the chiral transition for $N_f=2+1$
-quark masses in the chiral limit $m_u=m_d\equiv m_l\to0$ belongs to the 3-$d$, 
-$\ON(4)$ universality class~\cite{ding_chiral_2019}, 
+quark masses in the chiral limit $m_u=m_d\equiv m_l\to0$ belongs to the
+\dimens{3}, $\ON(4)$ universality class~\cite{ding_chiral_2019}, 
 the same class as a generalized magnet with spins
-free to rotate on 4-$d$ hyperspheres.
+free to rotate on \dimens{4} hyperspheres.
 
 For the Ising model, at extremely high temperatures, 
 the $TS$ term in the free energy dominates over
@@ -203,7 +203,7 @@ can be seen in both \figref{fig:phase_water} and \figref{fig:phase_ising}.
 At this critical endpoint, the coexistence line fuses into one phase.
 Another possibility is a {\it tricritical point}\index{tricritical point}
 where three phases fuse. This can be seen in water's phase diagram, but
-does not exist in the 2-$d$ Ising model diagram.
+does not exist in the \dimens{2} Ising model diagram.
 Generally for liquid-gas transitions like
 water, the expectation is that the endpoint belongs to the Ising
 model universality
@@ -242,11 +242,11 @@ We note that, generally speaking, the critical behavior of a magnet model
 depends on the geometry of its supporting space. In this section, we assume the
 spins lie on square, cubic, or hypercubic lattices.
 
-We said this was the 2-$d$
+We said this was the \dimens{2} 
 Ising model, but since we are labelling the sites by indices, the form
-will be the same for any $d\in\N$. The 1-$d$ model was shown to
+will be the same for any $d\in\N$. The \dimens{1} model was shown to
 exhibit no phase transition by Ising himself~\cite{ising_beitrag_1924}.
-The 2-$d$ model was solved analytically by 
+The \dimens{2} model was solved analytically by 
 Onsager~\cite{onsager_crystal_1944}, who found a critical temperature of
 \begin{equation}
 \Tc=\frac{2 J}{k_B \log (1+\sqrt{2})}\approx(2.269185) \frac{J}{k_B}.
@@ -259,10 +259,10 @@ in the literature,
 \Tc\approx2.269185.
 \end{equation}
 
-There is no analytic solution to the Ising model in $n$-$d$, when $n>2$.
+There is no analytic solution to the Ising model in $n$ dimensions, when $n>2$.
 Typically we rely on the results of Markov chain Monte Carlo
 simulations\footnote{We discuss such simulations in detail applied to lattice
-field theory in \chref{ch:MCMC}.}. Some $\Tc$ for the 3-$d$
+field theory in \chref{ch:MCMC}.}. Some $\Tc$ for the \dimens{3} 
 Ising model are collected in the first column of
 \tabref{tab:pottsTc}. 
 
@@ -286,9 +286,9 @@ zero magnetic field are essentially equivalent. In fact, sometimes a
 so that one finds $\ev{E}=0$ in the completely disordered
 (random spin orientation) phase, in agreement
 with what happens for the Ising model.
-Estimates of the critical temperature for some 3-$d$ Potts
+Estimates of the critical temperature for some \dimens{3} Potts
 models are collected in \tabref{tab:pottsTc}.
-In 2-$d$, the model is exactly 
+In \dimens{2}, the model is exactly 
 solvable~\cite{baxter_exactly_1982}. It is a first-order
 transition when $q>4$ and second-order when $q\leq4$.
 The critical temperature in units $J=k_B=1$ is given by
@@ -299,8 +299,8 @@ which we see is closely related to the Ising $T_c$ when $q=2$, as expected.
 
 \begin{table}
 \centering
-\caption{Some critical temperatures for various 3-$d$ Potts models. The first
-column is of course the 3-$d$ Ising model.}
+\caption{Some critical temperatures for various \dimens{3} Potts models. The first
+column is of course the \dimens{3} Ising model.}
 \begin{tabularx}{\linewidth}{LR}
 \hline\hline
 $d=3$, $q=2$ & $d=3$, $q=3$  \\
@@ -390,7 +390,7 @@ interaction, however it may be useful for such systems to consider
 next-to-nearest-neighbor interactions. Such interactions can be useful to study,
 e.g., geometric {\it frustration}\index{frustration}, a general phenomenon in
 which competing inter-atomic forces lead to intricate structures such as
-highly degenerate ground states. In the 2-$d$ {\it frustrated Ising model}\index{Ising
+highly degenerate ground states. In the \dimens{2} {\it frustrated Ising model}\index{Ising
 model!frustrated}, one has the Hamiltonian
 \begin{equation}
 H=J_1\sum_{\ev{i j}} \sigma_i \sigma_j + J_2\sum_{\ev{\ev{i j}}} \sigma_i \sigma_j
