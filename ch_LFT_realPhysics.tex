@@ -317,7 +317,16 @@ Note that if $\muh=\muh_f$ with $N_f$ degenerate flavors,
 in Ref.~\cite{allton_thermodynamics_2005}. Using this Proposition along
 with \equatref{eq:dlogZ}, one 
 can start expressing generalized susceptibilities in terms of the fermion
-matrix. For example one finds for any flavor $f$
+matrix. For example one finds for any flavor $f$\footnote{In practical
+calculations, traces are estimated using noise vectors, as discussed in
+\secref{sec:noiseVector}. Then one has to be careful to distinguish between the
+average used to estimate the trace and the expectation value over gauge
+configurations, which is what is indicated by the $\ev{}$ brackets in these
+equations. Furthermore, when using noise vectors to estimate quantities of the
+form $\tr\ev{}^2$, one has to be again careful: The square is computed by the
+product of two sums, and one can show that including diagonal terms, i.e.
+product terms originating from the same random vector, is a biased estimator.
+Removing the diagonal terms eliminates this bias.\index{bias}}
 \begin{equation}\begin{aligned}
   VT^3\,\chi_2^f =\partial_{\muh_f}^{\,2}\log Z
                  =\, & \frac{1}{16}\ev{\left(\tr D_f^{-1}D_f'\right)^2}
