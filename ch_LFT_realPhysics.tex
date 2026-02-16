@@ -665,10 +665,77 @@ $\mu_B=0$, which can be handled on the lattice. Then assuming
 $\mu_B/T$ is small enough, the expansion of some observable in
 $\mu_B/T$ ought to be a reasonable approximation.
 
-\index{phase transition!Roberge-Weiss}
-\subsection{The Roberge-Weiss transition}\label{sec:RW}
+%\index{phase transition!Roberge-Weiss}
+%\subsection{The Roberge-Weiss transition}\label{sec:RW}
 
+\section{Electromagnetic fields}\label{sec:latEM}
+In \secref{sec:EMQCD} we discussed adding electromagnetic fields in the
+continuum theory. We found the classical electric and magnetic fields to be
+recoverable from the field-strength tensor as
+\begin{equation}
+E_i=F^{\rm EM}_{0i},~~~~~~~B_j=\frac{1}{2}\epsilon_{ijk}F^{\rm EM}_{jk}.
+\end{equation}
+Working in a Euclidean metric, the fields are rotated to $A_4=iA_0$.
+This renders the electric field purely imaginary, and it is not directly
+accessible on the lattice. The magnetic field does not have this issue.
+We follow Ref.~\cite{kleinehanding_magnetic_2026}.
 
+Targeting lattice calculations, we first work in the continuum, restricting to
+finite spatial volume $V=L_1L_2L_3$, $-L_i/2\leq x_i\leq L_i/2$. We start as
+usual with periodic BCs. So for instance
+\begin{equation}
+\AmuEM(x+L_i\hat{i})=\AmuEM(x)
+\end{equation}
+Let's first consider the magnetic flux through the 
+$x_i-x_j$ plane at $x_k=0$. From Stokes's theorem, we get
+\begin{equation}\begin{aligned}
+\Phi_{ij}&=\int\dd{x_i}\dd{x_j}B_k(x_i,x_j)\\
+         &=\int\dd{x_i}\left(A^{\rm EM}_i(x_i,-L_j/2)-A^{\rm
+EM}_i(x_i,L_j/2)\right)\\
+&~~~~~~+\int\dd{x_j}\left(A^{\rm EM}_j(L_i/2,x_j)-A^{\rm EM}_j(-L_i/2,x_j)\right).
+\end{aligned}\end{equation}
+So if we continue with our setup, the periodic BCs guarantee zero flux.
+To get a nonzero flux, we instead allow periodicity up to a gauge
+transformation:
+\begin{equation}
+\AmuEM(x+L_i\hat{i})=\AmuEM(x)+\partial_\mu\phi_i(x).
+\end{equation}
+This BC is sometimes called a {\it twist}\index{twist} since the
+potential changes through one revolution of the torus.
+With the twisted BC, the magnetic flux becomes
+\begin{equation}
+\Phi_{ij}=\phi_i(x+L_j\hat{j})-\phi_i(x)-\phi_j(x+L_i\hat{i})+\phi_j(x).
+\end{equation}
+
+Moving on to the fermion fields, we need to make sure their BCs are consistent
+with the gauge field BCs; in particular, we want the covariant derivative
+\eqref{eq:covDerivEM} to remain periodic. Suppressing all spacetime components
+except those on the plane, this leads to BCs
+\begin{equation}\begin{aligned}
+\psi_f(x_i,x_j+L_j)&=e^{-ie_f\phi_j(x_i)}\psi_f(x_i,x_j)\\
+\psi_f(x_i+L_i,x_j)&=e^{-ie_f\phi_i(x_j)}\psi_f(x_i,x_j),
+\end{aligned}\end{equation}
+where $e_f$ is the electric charge of flavor $f$.
+This turns out to place a constraint on $\phi(x)$. To see why, consider two paths
+on the $x_i-x_j$ plane following its edges. The phases the fermions pick up
+when moving along these paths are 
+\begin{equation}\begin{aligned}
+x\to x+L_i\to x+L_i+L_j &:~~~ e^{-ie_f\left(\phi_j(x+L_i)+\phi_i(x)\right)}\\
+x\to x+L_j\to x+L_i+L_j &:~~~ e^{-ie_f\left(\phi_i(x+L_j)+\phi_j(x)\right)}.\\
+\end{aligned}\end{equation}
+To ensure the fermion field is single-valued, it must be that
+\begin{equation}
+e_f\left(\phi_i(x+L_j\hat{j})-\phi_i(x)-\phi_j(x+L_i\hat{i})+\phi_j(x)\right)=2\pi
+N_b^f,
+\end{equation}
+where $N_b^f\in\Z$. 
+It follows that
+\begin{equation}
+\Phi_{ij}=\frac{2\pi}{e_f}N_b^f.
+\end{equation}
+This condition expresses {\it magnetic flux
+quantization}\index{flux quantization}; we learn that in a finite volume, only
+discrete values of the magnetic flux are accessible.
 
 \section{The muon anomalous magnetic moment}\label{sec:muonAnom}
 

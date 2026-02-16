@@ -1991,169 +1991,6 @@ $0.4/0.26\approx1.54$. From the GMOR formula, we would expect the pion mass to
 change by a factor $\sqrt{0.05/0.02}\approx1.58$. Hence we see that the GMOR
 formula holds to good accuracy also in lattice QCD.
 
-\section{Anomalous magnetic moment}\label{sec:magAnom}
-The {\it magnetic moment}\footnote{This is the dipole contribution to the
-magnetic moment. Higher order moments, such as the quadrupole, are forbidden.
-In particular this multipole expansion, which can be expressed in
-terms of spherical harmonics $Y_l^m$, has its $l$ limited to $l=1$
-since the only particles we consider are spin-1/2.}\index{magnetic moment} 
-of a particle $X$, $\vec{M}_X$,
-with $X\in\{e,\mu,\tau\}$
-determines how it responds to an external magnetic field $\vec{B}$. In particular it
-gives a contribution to the energy $-\vec{M}_X\cdot\vec{B}$.
-The magnetic moment itself comes from the particle's intrinsic spin $\vec{S}_X$,
-\begin{equation}
-  \vec{M}_X=g_X\frac{q_X}{2m_X}\vec{S}_X,
-\end{equation}
-where $g_X$ is a constant called the {\it g-factor}\index{g-factor}
-or {\it gyromagnetic ratio}\index{gyromagnetic ratio} and
-$m_X$ and $q_X$ are the particle's mass and charge, respectively.
-Using relativistic quantum mechanics, one can argue $g_X=2$. Any
-deviation from 2 is thus called the {\it anomalous magnetic moment},
-\index{magnetic moment!anomalous}
-\begin{equation}
-  a_X=\frac{g_X-2}{2}.
-\end{equation}
-
-
-\subsection{Vacuum polarization}\label{sec:VP}\index{vacuum polarization}
-
-For this section we closely follow Ref.~\cite{maiani_hadron_2016}, 
-which I found to be quite
-a nice introduction to vacuum polarization.
-
-The simplest case of {\it vacuum polarization} (VP) is a one-loop effect in
-$e^+e^-$ scattering in QED. If the virtual photon has enough energy,
-an $e^+e^-$ pair can be emitted and reabsorbed, and this
-pair will effectively screen\footnote{The name can be remembered in analogy to
-the application of an external magnetic field on a dielectric material.
-In this case the polarized molecules in the material will also screen
-the external field inside the material.} the electromagnetic field, reducing the force
-carried by the photon.
-
-\begin{figure}
-\centering
-\includegraphics[width=0.3\linewidth]{figs/HVP.pdf}
-\caption{HVP contributions to $a_\mu$. {\it Top}: Quark-line
-connected contribution, which is a virtual quark
-bubble inserted in photon propagator. {\it Bottom}:
-Quark-line disconnected contribution, which consists of
-virtual quark bubbles connected by gluons. The bubbles
-include all possible QED interactions.
-Image taken from Ref.~\cite{FermilabLattice:2022izv}.}
-\label{fig:HVPmuon}
-\end{figure}
-
-
-Any possible charged particle-antiparticle pair must be considered,
-for instance $\mu^+\mu^-$ and $\tau^+\tau^-$. Their effects are small compared
-to $e^+e^-$ due to their comparatively large masses, and are hence
-only noticeable for large\index{virtuality} {\it virtuality}, or $q^2$,
-of the exchanged photon. 
-Contributions to VP coming from strongly interacting particles
-is referred to as\index{vacuum polarization!hadronic} 
-{\it hadronic vacuum polarization} (HVP).
-Their effect can be computed perturbatively at large $q^2$,
-but at small $q^2$ this of course fails.
-The HVP contribution to $a_\mu$ is shown in \figref{fig:HVPmuon}.
-
-The first experimental indication of HVP was found at 
-LAL-Orsay~\cite{augustin_evidence_1973},
-which measured the cross section for $e^+e^-\to\mu^+\mu^-$.
-There a characteristic interference pattern was found for
-the $\phi(1020)$ resonance\footnote{A {\it phi meson} $\phi$
-is\index{meson!f@$\phi$} a strange-antistrange pair.}, in concordance with the
-$\phi$ HVP contribution. CERN had a series of experiments
-starting in 
-1958~\cite{charpak_measurement_1961,bailey_precise_1971,bailey_anomalous_1977}, 
-culminating in a measurement of $a_\mu$, which agreed at the time with the 
-SM~\cite{calmet_anomalous_1977}.
-
-
-Since then, higher precision was achieved at Brookhaven
-and J-PARC, and a state-of-the-art determination from 
-Fermilab~\cite{abi_measurement_2021}
-places experimental searches at 4.2$\sigma$ tension
-against data-driven theoretical methods,
-which we will discuss shortly~\cite{aoyama_anomalous_2020}.
-
-
-At the same time that this 4.2$\sigma$ tension was revealed,
-the BMW collaboration offered a lattice calculation with precision competitive
-with data-driven approaches~\cite{borsanyi_leading_2021}.
-Their result tantalizingly lies between the data-driven result and experiment,
-being about 2.1$\sigma$ above the theory and 1.6$\sigma$ below experiment.
-Understanding this 3-fold tension requires careful investigation of
-systematics. We will discuss the lattice perspective
-in more detail in \secref{sec:muonAnom}. 
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{figs/HIC.pdf}
-  \caption{Cartoon of an HIC. Baryons are depicted in the last panel, but of
-course mesons are also produced. See text for explanation.
-Figure taken from Ref.~\cite{valois_thermal_2025}.}
-  \label{fig:HIC}
-\end{figure}
-
-
-\section{Heavy-ion collisions}\index{collision!heavy-ion}
-
-At the moment, heavy-ion collisions (HICs) are the primary direct method to
-experimentally probe strongly interacting matter, especially when one is
-interested in high temperatures and densities. They are the stage on which 
-some of the ``real physics" we discuss later will be investigated; therefore we
-discuss briefly the physics of an HIC and familiarize ourselves with some jargon
-used in the HIC community.
-% TODO : when you have internet, maybe get into some history about
-% HICs, what the big current and upcoming experiments are
-We follow a very nicely written and illustrated thesis~\cite{valois_thermal_2025}.
-
-In an HIC, two heavy ions, e.g. gold ions, are collided at relativistic speeds.
-The region where the ions overlap is extremely hot and dense for a very brief
-time, and we infer characteristics of the overlap region from the ultimate
-products of the collision. 
-In \figref{fig:HIC} we show a cartoon of a HIC. In the left-most frame, we see a
-collision from the center-of-mass frame of the identical heavy ions;
-alternatively you can think of it as the rest frame of the experimenters.
-Protons and neutrons are distinguished by having different colors, and the blue
-arrow shows the initial motion of the heavy ions.
-The two heavy ions look like pancakes--this is because the heavy
-ions move at relativistic speeds w.r.t. the center-of-mass frame, and hence
-this frame sees their shapes get severely Lorentz contracted. The incoming heavy
-ions are depicted as being slightly off center. This is an example
-of an {\it off-central}\index{collision!off-central} collision: it has
-non-zero impact parameter. {\it Central collisions}\index{collision!central} are
-head-on collisions and correspondingly have zero impact parameter.
-
-In the next frame, we see the initial stage of the collision. The heavy ions
-have moved through each other. Nucleons from the region where the heavy ions
-overlapped interact strongly with each other. The nucleons from this overlap
-region, i.e. the nucleons from one heavy ion that interact with nucleons from
-the other, are called the {\it participants}\index{participant}.
-Remaining nucleons are the {\it spectators}\index{spectator}.
-A small red region indicates what
-is sometimes called the {\it fireball}\index{fireball}; in \figref{fig:HIC} only
-participants are touching the fireball. For a very brief time,
-the fireball is expected to be in the QGP phase. As time goes on, the fireball
-expands and cools.
-
-In the next stage of the collision, the fireball is well described by
-relativistic hydrodynamics. This is the hydrodynamic stage. Once the fireball
-has become cool enough, quarks and gluons must bind into hadrons, a stage called
-hadronization, shown in the last panel. After the system has hadronized and
-inelastic collisions between the hadrons has ceased, we reach a stage called
-{\it chemical freeze-out}\index{freeze-out!chemical}, where the relative abundances of
-different hadron species becomes fixed. Shortly thereafter, the system attains
-{\it kinetic freeze-out}\index{freeze-out!kinetic}, where hadrons can be
-considered as non-interacting hadronic gas.
-
-%\section{Magnetic fields in QCD}
-%
-%Strong magnetic fields manifest in the off-central HICs discussed above, and
-%they are also present in neutron stars and the primordial universe. In the case
-%of 
-
 \section{Exactly solvable models}
 
 There is a handful of QFTs that can exactly solved. These QFTs are useful
@@ -2746,7 +2583,205 @@ pure $\SU(3)$ land relatively close to \equatref{eq:chivalue}.
 
 
 
+\section{Anomalous magnetic moment}\label{sec:magAnom}
+The {\it magnetic moment}\footnote{This is the dipole contribution to the
+magnetic moment. Higher order moments, such as the quadrupole, are forbidden.
+In particular this multipole expansion, which can be expressed in
+terms of spherical harmonics $Y_l^m$, has its $l$ limited to $l=1$
+since the only particles we consider are spin-1/2.}\index{magnetic moment} 
+of a particle $X$, $\vec{M}_X$,
+with $X\in\{e,\mu,\tau\}$
+determines how it responds to an external magnetic field $\vec{B}$. In particular it
+gives a contribution to the energy $-\vec{M}_X\cdot\vec{B}$.
+The magnetic moment itself comes from the particle's intrinsic spin $\vec{S}_X$,
+\begin{equation}
+  \vec{M}_X=g_X\frac{q_X}{2m_X}\vec{S}_X,
+\end{equation}
+where $g_X$ is a constant called the {\it g-factor}\index{g-factor}
+or {\it gyromagnetic ratio}\index{gyromagnetic ratio} and
+$m_X$ and $q_X$ are the particle's mass and charge, respectively.
+Using relativistic quantum mechanics, one can argue $g_X=2$. Any
+deviation from 2 is thus called the {\it anomalous magnetic moment},
+\index{magnetic moment!anomalous}
+\begin{equation}
+  a_X=\frac{g_X-2}{2}.
+\end{equation}
 
+
+\subsection{Vacuum polarization}\label{sec:VP}\index{vacuum polarization}
+
+For this section we closely follow Ref.~\cite{maiani_hadron_2016}, 
+which I found to be quite
+a nice introduction to vacuum polarization.
+
+The simplest case of {\it vacuum polarization} (VP) is a one-loop effect in
+$e^+e^-$ scattering in QED. If the virtual photon has enough energy,
+an $e^+e^-$ pair can be emitted and reabsorbed, and this
+pair will effectively screen\footnote{The name can be remembered in analogy to
+the application of an external magnetic field on a dielectric material.
+In this case the polarized molecules in the material will also screen
+the external field inside the material.} the electromagnetic field, reducing the force
+carried by the photon.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.3\linewidth]{figs/HVP.pdf}
+\caption{HVP contributions to $a_\mu$. {\it Top}: Quark-line
+connected contribution, which is a virtual quark
+bubble inserted in photon propagator. {\it Bottom}:
+Quark-line disconnected contribution, which consists of
+virtual quark bubbles connected by gluons. The bubbles
+include all possible QED interactions.
+Image taken from Ref.~\cite{FermilabLattice:2022izv}.}
+\label{fig:HVPmuon}
+\end{figure}
+
+
+Any possible charged particle-antiparticle pair must be considered,
+for instance $\mu^+\mu^-$ and $\tau^+\tau^-$. Their effects are small compared
+to $e^+e^-$ due to their comparatively large masses, and are hence
+only noticeable for large\index{virtuality} {\it virtuality}, or $q^2$,
+of the exchanged photon. 
+Contributions to VP coming from strongly interacting particles
+is referred to as\index{vacuum polarization!hadronic} 
+{\it hadronic vacuum polarization} (HVP).
+Their effect can be computed perturbatively at large $q^2$,
+but at small $q^2$ this of course fails.
+The HVP contribution to $a_\mu$ is shown in \figref{fig:HVPmuon}.
+
+The first experimental indication of HVP was found at 
+LAL-Orsay~\cite{augustin_evidence_1973},
+which measured the cross section for $e^+e^-\to\mu^+\mu^-$.
+There a characteristic interference pattern was found for
+the $\phi(1020)$ resonance\footnote{A {\it phi meson} $\phi$
+is\index{meson!f@$\phi$} a strange-antistrange pair.}, in concordance with the
+$\phi$ HVP contribution. CERN had a series of experiments
+starting in 
+1958~\cite{charpak_measurement_1961,bailey_precise_1971,bailey_anomalous_1977}, 
+culminating in a measurement of $a_\mu$, which agreed at the time with the 
+SM~\cite{calmet_anomalous_1977}.
+
+
+Since then, higher precision was achieved at Brookhaven
+and J-PARC, and a state-of-the-art determination from 
+Fermilab~\cite{abi_measurement_2021}
+places experimental searches at 4.2$\sigma$ tension
+against data-driven theoretical methods,
+which we will discuss shortly~\cite{aoyama_anomalous_2020}.
+
+
+At the same time that this 4.2$\sigma$ tension was revealed,
+the BMW collaboration offered a lattice calculation with precision competitive
+with data-driven approaches~\cite{borsanyi_leading_2021}.
+Their result tantalizingly lies between the data-driven result and experiment,
+being about 2.1$\sigma$ above the theory and 1.6$\sigma$ below experiment.
+Understanding this 3-fold tension requires careful investigation of
+systematics. We will discuss the lattice perspective
+in more detail in \secref{sec:muonAnom}. 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{figs/HIC.pdf}
+  \caption{Cartoon of an HIC. Baryons are depicted in the last panel, but of
+course mesons are also produced. See text for explanation.
+Figure taken from Ref.~\cite{valois_thermal_2025}.}
+  \label{fig:HIC}
+\end{figure}
+
+
+\section{Heavy-ion collisions}\index{collision!heavy-ion}
+
+At the moment, heavy-ion collisions (HICs) are the primary direct method to
+experimentally probe strongly interacting matter, especially when one is
+interested in high temperatures and densities. They are the stage on which 
+some of the ``real physics" we discuss later will be investigated; therefore we
+discuss briefly the physics of an HIC and familiarize ourselves with some jargon
+used in the HIC community.
+% TODO : when you have internet, maybe get into some history about
+% HICs, what the big current and upcoming experiments are
+We follow two very nicely written 
+theses~\cite{valois_thermal_2025,kleinehanding_magnetic_2026}.
+
+In an HIC, two heavy ions, e.g. gold ions, are collided at relativistic speeds.
+The region where the ions overlap is extremely hot and dense for a very brief
+time, and we infer characteristics of the overlap region from the ultimate
+products of the collision. 
+In \figref{fig:HIC} we show a cartoon of a HIC. In the left-most frame, we see a
+collision from the center-of-mass frame of the identical heavy ions;
+alternatively you can think of it as the rest frame of the experimenters.
+Protons and neutrons are distinguished by having different colors, and the blue
+arrow shows the initial motion of the heavy ions.
+The two heavy ions look like pancakes--this is because the heavy
+ions move at relativistic speeds w.r.t. the center-of-mass frame, and hence
+this frame sees their shapes get severely Lorentz contracted. The incoming heavy
+ions are depicted as being slightly off center. This is an example
+of an {\it off-central}\index{collision!off-central} collision: it has
+non-zero impact parameter. {\it Central collisions}\index{collision!central} are
+head-on collisions and correspondingly have zero impact parameter.
+
+In the next frame, we see the initial stage of the collision. The heavy ions
+have moved through each other. Nucleons from the region where the heavy ions
+overlapped interact strongly with each other. The nucleons from this overlap
+region, i.e. the nucleons from one heavy ion that interact with nucleons from
+the other, are called the {\it participants}\index{participant}.
+Remaining nucleons are the {\it spectators}\index{spectator}.
+A small red region indicates what
+is sometimes called the {\it fireball}\index{fireball}; in \figref{fig:HIC} only
+participants are touching the fireball. For a very brief time,
+the fireball is expected to be in the QGP phase. As time goes on, the fireball
+expands and cools.
+
+In the next stage of the collision, the fireball is well described by
+relativistic hydrodynamics. This is the hydrodynamic stage. Once the fireball
+has become cool enough, quarks and gluons must bind into hadrons, a stage called
+hadronization, shown in the last panel. After the system has hadronized and
+inelastic collisions between the hadrons has ceased, we reach a stage called
+{\it chemical freeze-out}\index{freeze-out!chemical}, where the relative abundances of
+different hadron species becomes fixed. Shortly thereafter, the system attains
+{\it kinetic freeze-out}\index{freeze-out!kinetic}, where hadrons can be
+considered as non-interacting hadronic gas.
+
+\section{Electromagnetic fields in QCD}\index{magnetic field}\label{sec:EMQCD}
+
+Strong magnetic fields manifest in the off-central HICs discussed above, and
+they are also present in neutron stars and the primordial universe. In this
+section we discuss QCD with electromagnetic fields.
+
+\subsection{Time-independent background EM fields}
+
+We begin by treating the magnetic field as a time-independent background field,
+i.e. it is externally fixed. We start with infinite volume. The quarks carry
+electric charge, so the covariant derivative becomes
+\begin{equation}\label{eq:covDerivEM}
+\DmuEM=\partial_\mu+iA_\mu+ie_f\AmuEM,
+\end{equation}
+where $e_f$ is the electric charge for quark flavor $f$. This ensures the
+$\U(1)$ gauge symmetry when including the background field. The strong coupling
+is the same for all quarks, so it is absorbed in $A_\mu$. 
+Since gluons do not couple to photons, the pure gluon part of the QCD action will
+remain the same, i.e. it will be the standard Yang-Mills action. The fermionic
+part will be the same, except for the replacement $D_\mu\to\DmuEM$. One also
+needs a kinetic term for the photons
+\begin{equation}
+\frac{1}{4}\int\dd[4]{x}F^{\rm EM}_{\mu\nu} F^{\rm EM,\mu\nu}
+\end{equation} 
+Since the EM field is treated as background, the photon kinetic term can be
+directly factored out of the path integral, as the path integral runs over
+$\SU(3)$ configurations only.
+
+We will consider homogeneous fields.\footnote{Inhomogeneous fields can be
+realized by having an external current that varies within the volume.} The
+medium responds to external currents as
+\begin{equation}
+j_\mu^{\rm tot}=j_\mu^{\rm ext}+\ev{j_\mu}.
+\end{equation}
+The second term on the RHS encodes dynamical QCD effects reacting to the
+external field; since the dynamical photon factors out of the path integral,
+there is no back-reaction. The classical electric and magnetic fields can be
+computed from the field-strength tensor as
+\begin{equation}
+E_i=F^{\rm EM}_{0i},~~~~~~~B_j=\frac{1}{2}\epsilon_{ijk}F^{\rm EM}_{jk}.
+\end{equation}
 
 \bibliographystyle{unsrtnat}
 \bibliography{bibliography}
