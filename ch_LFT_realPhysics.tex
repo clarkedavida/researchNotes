@@ -737,6 +737,56 @@ This condition expresses {\it magnetic flux
 quantization}\index{flux quantization}; we learn that in a finite volume, only
 discrete values of the magnetic flux are accessible.
 
+\subsection{Lattice regularization}
+
+We have hitherto discussed a continuum formulation for time-independent
+background fields. The process of introducing these fields on a lattice is
+similar as for gluon fields, discussed in \secref{sec:latreg}; namely we define
+{\it photonic} link variables\index{link!photonic} by\footnote{In the case of
+the gluonic links, we absorbed the coupling and a factor $i$ in $A_\mu$. Here
+we leave these factors explicit so that we can work with directly with real
+$B$.}
+\begin{equation}
+u_\mu^f(x)=e^{-iae_f\AmuEM(x)}.
+\end{equation}
+For this discussion of discretization, we are going to use the Wilson
+Dirac operator \eqref{eq:WilsonDirac}. The operator with our background fields
+becomes
+\begin{equation}\label{eq:WilsonDirac}
+  D(x,y)^f_{\alpha\beta c_1c_2}
+  =\left(m^f+\frac{4}{a}\right)\delta_{\alpha\beta}
+                               \delta_{c_1c_2}
+                               \delta_{xy}
+   -\frac{1}{2a}\sum_{\mu=\pm 1}^{\pm 4}(\id-\gamma_\mu)_{\alpha\beta}
+      U_\mu(x)_{c_1 c_2}u_\mu^f(x)\delta_{x+a\hat{\mu},y},
+\end{equation}
+i.e. it amounts to a simple dressing of the gluon field $U_\mu$.\footnote{The
+same would hold true for staggered fields.} Again, the
+$u_\mu$ factor out of the path integral, so they do not need to be sampled,
+which makes the calculation easier.
+
+Given an external field, what remains is to find the $u_\mu$ that generates it.
+We can orient $B$ along the $z$-axis WLOG. Since $B$ is the curl of $\AmuEM$,
+this can be accomplished with the gauge choice
+\begin{equation}
+A^{\rm EM}_2=Bx_1,~~~~~~A^{\rm EM}_\mu=0
+\end{equation}
+for $\mu\neq 2$. It follows that the links are
+\begin{equation}
+u^f_2=e^{-iae_fBx_1},~~~~~u^f_\mu=1
+\end{equation}
+for $\mu\neq 2$. With this gauge choice, these links are periodic only up to a
+gauge transformation, as they were in the continuum case; namely
+\begin{equation}
+u^f_2(L_1/2,x_2)=e^{iae_fBL_1}u_2(-L_1/2,x_2).
+\end{equation}
+% Deform gauge choice to get periodicity
+% complete periodicity yields again flux quantization
+% You can check the EM plaquette remains invariant
+% Take the picture from Dean's paper
+% Try to understand/reconcile these two ways of seeing quantization? 
+
+
 \section{The muon anomalous magnetic moment}\label{sec:muonAnom}
 
 This chapter focuses on some phenomenology I worked on as a postdoc at Utah.
