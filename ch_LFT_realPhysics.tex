@@ -673,12 +673,12 @@ In \secref{sec:EMQCD} we discussed adding electromagnetic fields in the
 continuum theory. We found the classical electric and magnetic fields to be
 recoverable from the field-strength tensor as
 \begin{equation}
-E_i=F^{\rm EM}_{0i},~~~~~~~B_j=\frac{1}{2}\epsilon_{ijk}F^{\rm EM}_{jk}.
+E_i=\FEM_{0i},~~~~~~~B_j=\frac{1}{2}\epsilon_{ijk}\FEM_{jk}.
 \end{equation}
 Working in a Euclidean metric, the fields are rotated to $A_4=iA_0$.
 This renders the electric field purely imaginary, and it is not directly
 accessible on the lattice. The magnetic field does not have this issue.
-We follow Ref.~\cite{kleinehanding_magnetic_2026}.
+We follow Refs.~\cite{brandt_thermal_2023,valois_thermal_2025,kleinehanding_magnetic_2026}.
 
 Targeting lattice calculations, we first work in the continuum, restricting to
 finite spatial volume $V=L_1L_2L_3$, $-L_i/2\leq x_i\leq L_i/2$. We start as
@@ -690,9 +690,8 @@ Let's first consider the magnetic flux through the
 $x_i-x_j$ plane at $x_k=0$. From Stokes's theorem, we get
 \begin{equation}\begin{aligned}
 \Phi_{ij}&=\int\dd{x_i}\dd{x_j}B_k(x_i,x_j)\\
-         &=\int\dd{x_i}\left(A^{\rm EM}_i(x_i,-L_j/2)-A^{\rm
-EM}_i(x_i,L_j/2)\right)\\
-&~~~~~~+\int\dd{x_j}\left(A^{\rm EM}_j(L_i/2,x_j)-A^{\rm EM}_j(-L_i/2,x_j)\right).
+         &=\int\dd{x_i}\left(\AEM_i(x_i,-L_j/2)-\AEM_i(x_i,L_j/2)\right)\\
+&~~~~~~+\int\dd{x_j}\left(\AEM_j(L_i/2,x_j)-\AEM_j(-L_i/2,x_j)\right).
 \end{aligned}\end{equation}
 So if we continue with our setup, the periodic BCs guarantee zero flux.
 To get a nonzero flux, we instead allow periodicity up to a gauge
@@ -769,22 +768,99 @@ Given an external field, what remains is to find the $u_\mu$ that generates it.
 We can orient $B$ along the $z$-axis WLOG. Since $B$ is the curl of $\AmuEM$,
 this can be accomplished with the gauge choice
 \begin{equation}
-A^{\rm EM}_2=Bx_1,~~~~~~A^{\rm EM}_\mu=0
+\AEM_2(x)=Bx_1,~~~~~~\AEM_\mu(x)=0
 \end{equation}
 for $\mu\neq 2$. It follows that the links are
 \begin{equation}
-u^f_2=e^{-iae_fBx_1},~~~~~u^f_\mu=1
+u^f_2(x)=e^{-iae_fBx_1},~~~~~u^f_\mu(x)=1
 \end{equation}
 for $\mu\neq 2$. With this gauge choice, these links are periodic only up to a
 gauge transformation, as they were in the continuum case; namely
-\begin{equation}
+\begin{equation}\label{eq:utwisted}
 u^f_2(L_1/2,x_2)=e^{iae_fBL_1}u_2(-L_1/2,x_2).
 \end{equation}
-% Deform gauge choice to get periodicity
-% complete periodicity yields again flux quantization
-% You can check the EM plaquette remains invariant
-% Take the picture from Dean's paper
-% Try to understand/reconcile these two ways of seeing quantization? 
+In terms of $\AmuEM$,
+\begin{equation}\begin{aligned}
+\AEM_2(L_1 / 2, x_2)&=\frac{1}{2} B L_1=\AEM_2(-L_1 / 2, x_2)+B L_1, \\
+\AEM_2(x_1, L_2 / 2)&=\AEM_2(x_1,-L_2 / 2) .
+\end{aligned}\end{equation}
+The first expression can be recast in the form of a gauge transformation:
+\begin{equation}
+\AEM_2(x_1+L_1 / 2, x_2)=\AEM_2(x_1, x_2)+\frac{1}{e_f} \frac{\partial}{\partial
+x_2}(e_f B L_1 x_2).
+\end{equation}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{figs/Bxform.pdf}
+\caption{
+Representation of gauge transform for $u^f_\mu$ fields on the lattice in the
+$x_1$-$x_2$ plane. Red arrows represent transformed $u_2^f$ links while green
+arrows indicate transformed $u_1^f$ links. We see that the gauge transformation
+on the $u_2$ links affects the $u_1$ links on the penultimate slice.
+Image taken from Ref.~\cite{brandt_thermal_2023}.
+}
+\label{fig:Bxform}
+\end{figure}
+
+To make implementing $u_\mu$ easier for the lattice, we are now going to deform
+slightly from this gauge to achieve PBC. This amounts to cancelling the extra
+factor in \equatref{eq:utwisted}. Based on the preceding discussion, we define
+\begin{equation}
+f(x_1, x_2)\equiv\left\{\begin{array}{cc}
+e_f B L_1 x_2 & \text { if } x_1=L_1 / 2 \\
+0 & \text { otherwise }
+\end{array}\right.
+\end{equation}
+If we then define our gauge transformation that deforms away from the original
+gauge by
+\begin{equation}
+\Omega(x_1,x_2)=e^{if(x_1,x_2)},
+\end{equation}
+we find the extra term will indeed be cancelled:
+\begin{equation}
+\begin{aligned}
+u_2^{f\,\prime}\left(L_1 / 2, x_2\right) & =\Omega\left(L_1 / 2, x_2\right) u_2\left(L_1 / 2, x_2\right) \Omega^*\left(L_1 / 2, x_2+a\right) \\
+& =e^{i e_f B L_1 x_2} e^{i a e_f B L_1 / 2} e^{-i e_f B L_1\left(x_2+a\right)} \\
+& =e^{-i a e_f B L_1 / 2} \\
+& =u^f_2\left(-L_1 / 2, x_2\right).
+\end{aligned}
+\end{equation}
+As sketched in \figref{fig:Bxform}, we see this transformation affects $u_1^f$
+links on $L_1/2-a$ slice by
+\begin{equation}
+\begin{aligned}
+u_1^{f\,\prime}\left(L_1 / 2-a, x_2\right) & =\Omega\left(L_1 / 2-a, x_2\right) u_1\left(L_1 / 2-a, x_2\right) \Omega^*\left(L_1 / 2, x_2\right) \\
+& =e^{-i e_f B L_1 x_2}.
+\end{aligned}
+\end{equation} 
+Hence the total prescription for our periodic EM links yielding $B$ in the
+$x_3$-direction is
+\begin{equation}
+\begin{aligned}
+& u_1^f\left(x_1, x_2\right)= \begin{cases}e^{-i e_f B L_1 x_2} & \text { if } x_1=L_1 / 2-a, \\
+1 & \text { otherwise },\end{cases} \\
+& u_2^f\left(x_1, x_2\right)=e^{i e_f B x_1},-L_1 / 2 \leq x_1<L_1 / 2, \\
+& u_3^f\left(x_1, x_2\right)=1, \\
+& u_4^f\left(x_1, x_2\right)=1 .
+\end{aligned}
+\end{equation}
+If we demand also periodicity in the $x_2$-direction for the $u_1^f$ links, we
+see
+\begin{equation}
+\begin{aligned}
+u^f_1\left(L_1 / 2-a, L_2 / 2\right) & =u^f_1\left(L_1 / 2-a,-L_2 / 2\right) \\
+e^{-i e_f B L_1 L_2 / 2} & =e^{i q B L_1 L_2 / 2} \\
+e^{-i e_f B L_1 L_2} & =1,
+\end{aligned}
+\end{equation}
+which implies
+\begin{equation}
+B=\frac{2 \pi N_b}{e_f L_1 L_2}, \quad N_b \in \mathbb{Z} .
+\end{equation}
+We thus recover flux quantization on the lattice.
+This gives us all the tools we need to implement Wilson fermions in QCD with a
+background, homogeneous magnetic field.
 
 
 \section{The muon anomalous magnetic moment}\label{sec:muonAnom}
