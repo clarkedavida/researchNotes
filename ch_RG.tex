@@ -212,7 +212,66 @@ Still, this statement is not without some controversy, with some studies suggest
 it has a universality class of its own, albeit with very similar
 critical exponents~\cite{valls_liquid-gas_1978}.
 
-\section{Models of magnets}
+\section{Models of magnets}\label{sec:magnets}
+
+In 2009, the philosophers Violent J. and Shaggy 2 Dope posed the quintessential
+question: {\it Fucking magnets--how do they work?} In this section we will attempt 
+an answer by examining a handful of classical magnet models. We first remind 
+the reader of a few basic facts about electromagnetism.
+
+Classically, the torque $\vec\tau$ on a magnetic dipole due to an external
+magnetic field $\vec B$ is characterized by its {\it magnetic moment}\index{magnetic 
+moment} $\vec m$:
+\begin{equation}
+\vec\tau = \vec m\times\vec B.
+\end{equation}
+Using that the is the negative gradient of a potential energy, we find
+\begin{equation}\label{eq:magneticmomentU}
+U=-\vec m\cdot\vec B.
+\end{equation}
+The energy is minimized when the magnetic moment aligns with the field.
+For uniform $\vec B$, the torque is minus the derivative of $U$ w.r.t. the angle
+between $\vec m$ and $\vec B$, i.e. the torque tends to align the dipole with
+the field.
+
+There seems to be no magnetic monopoles in nature, so a common, classical,
+microscopic model imagines a small current loop. From this perspective, the
+magnetic moment is 
+\begin{equation}
+\vec m=I\vec{A},
+\end{equation}
+where $I$ is the current and $A$ the area enclosed by the loop.
+This can be generalized such that a distribution of electric charge undergoing
+orbital motion with angular momentum $\vec L$ behaves like a current loop with
+magnetic moment
+\begin{equation}\label{eq:magneticmomentL}
+\vec m=\gamma\vec L,
+\end{equation}
+where $\gamma$ is a constant.
+Thinking about quantum physics, \equatref{eq:magneticmomentL} implies that a
+particle carrying spin, which can be thought of as an intrinsic angular
+momentum, carries an intrinsic magnetic moment with it. 
+In particular the intrinsic magnetic moment coming from a particle's spin turns
+out to be
+\begin{equation}\label{eq:magneticmomentS}
+\vec m = g\frac{q}{2m}\vec\sigma,
+\end{equation}
+where $q$ is the charge, $m$ is the mass, and $\vec \sigma$ is the spin, and $g$
+is the {\it gyromagnetic ratio}\index{gyromagnetic ratio}.
+
+The preceding discussion motivates the following kind of magnet model: One
+imagines a material as a collection of particles with spin that are 
+arranged on the sites of an 
+$n$-dimensional lattice. The simplest models imagine hypercubic lattices.
+The macroscopic {\it magnetization}\index{magnetization} is the sum over all 
+the magnetic moments of the particles. Assuming they are all the same particle
+and ignoring the constant factors, this amounts to summing over the spins, so that 
+the magnetization becomes
+\begin{equation}
+\vec{M}=\sum_i\vec\sigma_i,
+\end{equation}
+where the sum runs over sites. Up to now we have included explicit vector
+symbols, but we will drop them going forward, which is conventional. 
 
 In \secref{sec:typesOfTransitions} we introduced the Ising\footnote{This
 model is named after Ernst Ising, who was given the problem by his
@@ -234,7 +293,7 @@ where the brackets indicate a sum over nearest-neighbors,
 $\sigma_i\in\{+1,-1\}$ is the spin $i$, $h$ is 
 external magnetic field, and $J$ is the
 nearest-neighbor interaction strength. 
-This model tries to capture the
+This model tries to capture \equatref{eq:magneticmomentU}, i.e. the
 idea that spins in a magnet prefer to align, as $H$ lowers when
 $\sigma_i$ and $\sigma_j$ have the same sign. Similarly when there
 is an external field, the model prefers spins to align with it.
