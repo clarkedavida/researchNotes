@@ -387,6 +387,156 @@ They show that the real and imaginary parts of a function $f$ with the given
 properties are closely related to each other along the real line.
 
 
+\section{Analytic continuation}\label{sec:analytic_continuation}\index{analytic
+continuation}
+
+In this section, we discuss how to extend an analytic function beyond its
+original domain while keeping the extension analytic in the new domain.
+Throughout this section, we will assume domains are connected, open sets.
+We prove a few useful facts first
+
+\begin{proposition}{}{continuousZero}
+If $f$ is continuous and nonzero at $z_0$ then it is nonzero in some
+neighborhood of $z_0$
+\begin{proof}
+You can do a proof by contradiction by taking $\epsilon=f(z_0)$. But the
+intuition is that if $f\neq0$ in all neighborhoods of $z_0$, then $f$ has to
+jump from zero to nonzero over an arbitrarily short distance, 
+which violates its continuity.
+\end{proof}
+\end{proposition}
+
+\begin{proposition}{}{zeroAnalytic}
+A function $f$ that is analytic at $z_0$ has a zero of order $m$ iff $\exists g$
+analytic and nonzero at $z_0$ with
+$$
+f(z)=(z-z_0)^m g(z).
+$$
+\begin{proof}
+The crux is that both $f$ and $g$ are analytic at $z_0$. Start with $g$ as
+stated above. Since $g$ is analytic it can be expanded in a neighborhood about
+$z_0$. Plugging that expansion into the above equation looks like
+$$
+f(z)=\sum_{k=1}^\infty \frac{g(z_0)^{(k)}}{k!}(z-z_0)^{m+k}.
+$$
+from which it follows $z_0$ is a zero of order $m$ for $f$.
+Conversely if $z_0$ is a zero of order $m$ for $f$, we can write
+$$
+f(z_0)=f'(z_0)=...=f^{(m-1)}(z_0)=0
+$$
+so that the Taylor series for $f$ must look like
+\begin{equation*}\begin{aligned}
+f(z)&=\sum_{k=m}^\infty \frac{f^{(k)}(z_0)}{k!}(z-z_0)^k\\
+f(z)&=(z-z_0)^m\sum_{k=m}^\infty \frac{f^{(k)}(z_0)}{k!}(z-z_0)^{k-m}.
+\end{aligned}\end{equation*}
+We see that after factoring out $(z-z_0)^m$ we are left with a Taylor expansion
+for $g$, and we see it's nonzero at $z_0$ due to the leading term.
+\end{proof}
+\end{proposition}
+
+The above proposition shows us the zero can be directly factored out of $f$.
+A {\it deleted neighborhood}\index{neighborhood!deleted} of $z_0$ is a neighborhood 
+of $z_0$ without the point $z_0$ included.
+
+\begin{proposition}{}{zeroToZeroNeighborhood}
+Let $f$ be analytic at $z_0$. Suppose $f(z_0)=0$ but $f$ is not identically zero
+in any neighborhood of $z_0$. Then $f(z)\neq0$ in some deleted neighborhood of
+$z_0$.
+\begin{proof}
+Since $f$ is not identically zero in any neighborhood of $z_0$, it must have
+some non-vanishing derivative in its Taylor series. In order for $f$ to be zero
+at $z_0$ then, it must have some zero of some order, call it $m$.
+By \propref{prp:zeroAnalytic}, $\Exists g$ analytic and nonzero at $z_0$ with
+$$
+f(z)=(z-z_0)^mg(z).
+$$
+Since $g$ is analytic, it is continuous, so the fact $g(z_0)\neq0$
+tells us via \propref{prp:zeroAnalytic} that there is a neighborhood of $z_0$
+where $g\neq 0$. That neighborhood, minus $z_0$ is a deleted neighborhood
+with nonzero $f$.
+\end{proof}
+\end{proposition}
+
+In other words, if $f$ is not identically zero in any neighborhood of $z_0$,
+then it's fully nonzero in some deleted neighborhood.
+What we are working toward is an algorithm for extending a function beyond its
+domain. We want to look at differences between the function and its extension,
+which itself is a function. We will need the following lemma for this algorithm.
+
+\begin{lemma}{}{zeroCrawl}
+Let $f$ be analytic in a neighborhood $N_0$ of $z_0$. 
+Suppose $f(z)=0$ at each point $z$ of a line segment or subdomain $D$
+contained in $N_0$. Then $f(z)=0$ everywhere in $N_0$.
+\begin{proof}
+From \propref{prp:zeroToZeroNeighborhood} we see $f$ is identically zero in some
+neighborhood $N$ of $z_0$; otherwise there would be a deleted neighborhood with
+nonzero $f$, violating the assumption it is zero on the line segment or $D$.
+Since it's identically zero in $N$, its Taylor coefficients must be zero there,
+which means it is zero in $N_0$ as well.
+\end{proof}
+\end{lemma}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/analyticContinuation.pdf}
+\caption{A polygonal path $L$ from $z_0$ to $P$ used for the proof
+of \lemref{lem:zeroDomain}.}
+\label{fig:ladder}
+\end{figure}
+
+Up to now, we have proved many results about how knowledge that
+an analytic function is zero at a point can be extended to a neighborhood. The
+next lemma will show that this knowledge can be extended to an entire domain. We
+will then use this lemma to show that if two functions $g$ and $h$ agree in a 
+small region, you can construct a larger region where they also agree. We will
+interpret $g$ as our original function and $h$ as the analytic 
+continuation of $g$.
+
+\begin{lemma}{}{zeroDomain}
+Let $f$ analytic in a domain $D$ with $f(z)=0$ on some line or subdomain
+$S\subseteq D$. Then $f$ is identically zero in $D$.
+\begin{proof}
+Let $z_0$ be one of the points in $S$ and $P$ be any other point in $D$. We are
+going to crawl from $z_0$ to $P$ using finitely many overlapping neighborhoods
+and \lemref{lem:zeroCrawl}.
+In particular since $D$ is open and connected, one can always find a polygonal path
+from $z_0$ to $P$ with finitely many vertices. We pick $n+1$ vertices, 
+$$
+z_0,z_1,...,z_n\equiv P
+$$
+constructed so that
+$$
+|z_k-z_{k-1}|<d
+$$
+$\Forall k$, where $d$ is tuned so that the distance from any $z_k$ to the boundary
+of $D$ is at most $d$. (If $D$ is the entire complex plane, $d$ can be any
+positive number.) Let $N_k$ be the neighborhood about $z_k$ with radius $d$.
+This construction enforces $N_k\subseteq D$ $\Forall k$.
+A sketch of the situation is shown in \figref{fig:ladder}. The important thing
+to note is that $z_1\in N_0$, $P\in\N_{n-1}$, and so on.
+By \lemref{lem:zeroCrawl} $f(z)=0$ $\Forall z\in N_0$. Since $N_0$ overlaps with
+$N_1$, $N_0\cap N_1$ is a subdomain of $N_1$ where $f(z)=0$; hence by the same
+lemma, $f(z)=0$ $\Forall z\in N_1$. By continuing in this manner, we learn
+$f(P)=0$. Since $P$ was arbitrarily chosen in $D$, $f$ must be zero everywhere
+in $D$.
+\end{proof}
+\end{lemma}
+
+Now let $g$ and $h$ analytic and let $f=g-h$. Then $f$ is also analytic. Suppose
+$g=h$ on some subdomain or line segment of a domain $D$. Then by
+\lemref{lem:zeroDomain}, $g=h$ everywhere in $D$. This is our final result:
+
+\begin{theorem}{}{analyticContinuation}
+An analytic function $f$ in a domain $D$ is uniquely determined by its values on
+a subdomain or line segment of $D$.
+\end{theorem}
+
+\thmref{thm:analyticContinuation} can be used to extend the domain of definition
+of an analytic function. In particular consider two domains $D_1$ and $D_2$ with
+$g$ analytic in $D_1$. Then there {\it may} exist a function $h$ analytic in
+$D_2$ with $g=h$ in $D_1\cap D_2$. If there is, we call $h$ an {\it analytic
+continuation}\index{analytic continuation} of $g$ into $D_2$.
+
 \section{The Riemann sphere}\index{Riemann sphere}
 
 

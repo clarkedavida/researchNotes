@@ -2310,6 +2310,14 @@ One can use this fact to show that $H$ is diagonalized by
 \end{equation}
 \index{vacuum angle}
 The parameter $\theta$ is referred to as the {\it vacuum angle}. 
+To see $\ket{\theta}$ is an eigenstate of $H$, note
+\begin{equation}\begin{aligned}
+H\ket{\theta}&=\sum_n e^{-in\theta}H\ket{n}\\
+&=\sum_{n,k} e^{-in\theta}\ket{k}\bra{k}H\ket{n}\\
+&=\sum_{n,k} e^{-in\theta}\ket{k}f(|k-n|)\\
+&=\sum_{k,m} e^{-i(k-m)\theta}\ket{k}f(|m|)\\
+&=\ket{\theta}\sum_{m} e^{im\theta}f(|m|).
+\end{aligned}\end{equation}
 
 
 \subsection{Topological charge and instantons}\index{topological!charge}
