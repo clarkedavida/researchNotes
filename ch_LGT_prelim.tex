@@ -346,11 +346,11 @@ corresponding to \equatref{eq:lagrkin} becomes clear.
             U_{\mu\nu}^\Box(x)^\dagger\right]\right)\\
          &=\beta\sum_{x,\mu<\nu}\left(1-\frac{1}{2N_c}\tr
             \left[2\id+\frac{a^4}{2}F_{\mu\nu}(x)^2
-                  +\order{a^5}\right]\right)\\
+                  +\order{a^6}\right]\right)\\
          &=\beta\sum_{x,\mu<\nu}\left(-\frac{a^4}{2N_c}\tr F_{\mu\nu}(x)^2
-                  +\order{a^5}\right)\\
+                  +\order{a^6}\right)\\
          &=-\frac{\beta}{4N_c}\sum_x a^4\tr F_{\mu\nu}(x)F_{\mu\nu}(x)
-                  +\order{a^5}.
+                  +\order{a^6}.
     \end{aligned}
     \end{equation*}
     The cancellation of the $\order{a^2}$ term can be seen
@@ -360,8 +360,11 @@ corresponding to \equatref{eq:lagrkin} becomes clear.
     Following a plaquette in reverse just interchanges $\mu$ and $\nu$,
     which flips the sign of the leading term in the exponential
     of \propref{prp:plaquette} because $F_{\mu\nu}$
-    is antisymmetric. Meanwhile the $\order{a^3}$ term must vanish
-    since the exponent of $U_{\mu\nu}^\Box(x)$ is traceless. 
+    is antisymmetric. In general, terms of $\order{a^p}$ will be attached
+    to products like $(F_{\mu\nu})^{p-2}$. When $p$ is odd, these terms will
+    vanish, since $F_{\mu\nu}$ to an odd power is antisymmetric under
+    interchange of $\mu$ and $\nu$, so the summation over $\mu<\nu$ will
+    kill them off.
   \end{proof}
 \end{proposition}
 
@@ -373,19 +376,19 @@ $S_G=\int \dd^4x\,\Lagr_G$ when one identifies
 Because of this identification, $\beta$ is also (besides $g$) sometimes 
 referred to as the \index{coupling constant}{\it coupling constant}.
 
-In \propref{prp:wilsonCont} we write the correction is $\order{a^5}$,
-but actually only even powers of $a$ are permitted in the expansion.
-This is not special to the Wilson action, but true of lattice actions
-more generally. Indeed due to \equatref{eq:linkVariable}, you can
-convince yourself that every $a$ comes attached to a Lorentz vector.
-In most cases this is just $A_\mu$ in some direction, but in
-\propref{prp:plaquette} we also see Lorentz indices emerge when
-expanding, e.g., $A_\mu(x+a\hat{\nu})$. In such expansions, each
-new Lorentz index also adds exactly one power of $a$. Hence there
-is an exact correspondence between powers of $a$ and number of Lorentz 
-indices. Therefore odd powers of $a$ are attached to odd numbers
-of Lorentz indices. Such objects are parity-odd, and since the
-action is parity-even, cannot appear in the expansion.
+%In \propref{prp:wilsonCont} we write the correction is $\order{a^5}$,
+%but actually only even powers of $a$ are permitted in the expansion.
+%This is not special to the Wilson action, but true of lattice actions
+%more generally. Indeed due to \equatref{eq:linkVariable}, you can
+%convince yourself that every $a$ comes attached to a Lorentz vector.
+%In most cases this is just $A_\mu$ in some direction, but in
+%\propref{prp:plaquette} we also see Lorentz indices emerge when
+%expanding, e.g., $A_\mu(x+a\hat{\nu})$. In such expansions, each
+%new Lorentz index also adds exactly one power of $a$. Hence there
+%is an exact correspondence between powers of $a$ and number of Lorentz 
+%indices. Therefore odd powers of $a$ are attached to odd numbers
+%of Lorentz indices. Such objects are parity-odd, and since the
+%action is parity-even, cannot appear in the expansion.
 
 \section{The Haar measure}\label{sec:haar}\index{Haar measure}
 

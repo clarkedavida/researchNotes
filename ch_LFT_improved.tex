@@ -454,8 +454,9 @@ fermion action with nearest- and third-nearest-neighbor interactions
 \begin{equation}
   \Delta_\mu-\frac{a^2}{6}\Delta_\mu^3.
 \end{equation}
-The third-nearest-neighbor uses an ordinary link, but the nearest-neighbor
-uses the fat link
+The third-nearest-neighbor is constructed by three thin links going in the same
+direction, which is called a {\it Naik link}\index{link!Naik}. The
+nearest-neighbor interaction is
 \begin{equation}\label{eq:asqtad}
   V_\mu=~c_1U_\mu
            +\sum_\nu\left[c_3U_{\mu\nu}^{(3)}
@@ -478,11 +479,13 @@ where the link constructs are given by
 The last 5-link construct $U^{(L)}_{\mu\nu}$, a 5-link staple that is restricted
 to a plane, is called the {\it LePage}\index{LePage term} term.
 Examples of these constructs are shown in \figref{fig:AsqTadConstructs}.
-The tadpole-improved coefficients are
+The coefficients are
 \begin{equation}
-  c_1=8c_5=48c_7=\frac{1}{8}c_L=-\frac{1}{16}~~~~~~\text{and}~~~~~~
-     c_3=-\frac{5}{16}.
+c_1=\frac{1}{8},~~~c_3=\frac{1}{16},~~~c_5={1}{64},~~~c_7=\frac{1}{384},
+~~~c_L=-\frac{1}{16},~~~c_{\rm Naik}=-\frac{1}{24}.
 \end{equation}
+When $c_L=c_{\rm Naik}=0$, this smear is called {\it Fat7}\index{link!Fat7}.
+
 
 \section{Highly improved staggered fermions}\label{sec:HISQ}
 \index{action!HISQ}
@@ -523,12 +526,12 @@ The basic strategy of HISQ can be summarized as:
          \Delta_\mu\to\Delta_\mu-\frac{a^2}{6}(1+\epsilon)\Delta_\mu^3,
         \end{equation*}
         where $\epsilon$ depends on charm physics. If there are no quarks
-        heavier than a strange in the system, $\epsilon=0$, and this is called a 
-        {\it Naik term}.\index{Naik term} The parameter $\epsilon$ is called
+        heavier than a strange in the system, $\epsilon=0$, and this is
+        exactly the Naik term.\index{link!Naik} The parameter $\epsilon$ is called
         the {\it Naik} $\epsilon$.
   \item Find a smear $U_\mu\to\mathcal{F}_\mu U_\mu$ that vanishes
-        for links carrying momentum $\pi/a$. We start with one
-        called {\it Fat7}.\index{link!Fat7}
+        for links carrying momentum $\pi/a$. We start with
+        Fat7.\index{link!Fat7}
   \item Multiple smearing reduces mass splittings more, so do that.
   \item Remove new $\mathcal{O}(a^2)$ errors introduced by Fat7.
   \item Smearing enhances some one-loop taste exchange processes,
