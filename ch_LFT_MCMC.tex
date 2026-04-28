@@ -138,14 +138,17 @@ The Metropolis algorithm is in some sense the most standard Markov chain
 algorithm used in lattice calculations, with the acceptance step
 \equatref{eq:metupdate} being the most crucial part, in the sense that
 it guarantees your configuration is drawn with the correct probability.
-A Markov algorithm that concludes with the acceptance step is
-said to be an\index{exact algorithm} {\it exact algorithm}\footnote{One
+A Markov algorithm that concludes with the acceptance step, is
+said to be an\index{exact algorithm} {\it exact algorithm}.\footnote{One
 could imagine update steps that may not be guaranteed to draw configurations
 from the desired distribution. This can be corrected by simply adding
 the acceptance step at the end, and the algorithm is still exact.
 One may neglect this acceptance step at the end, if one has reason to
 believe the configuration is still drawn appropriately, but in such
-instances the algorithm is not exact anymore.}.
+instances the algorithm is not exact anymore. We emphasize that the point
+of calling an algorithm ``exact" is that it samples the target distribution,
+which is guaranteed if it fulfills properties 1-3. Having the Metropolis
+step is one such way to do this.} 
 
 In general, one could choose a trial configuration uniformly at random
 from $\SU(N_c)$. On the other hand, as discussed above, if the trial

@@ -581,7 +581,8 @@ because the Wilson term commutes with $\gamma_5$.
 For some calculations one may desire not to break this symmetry entirely,
 in particular when one is investigating phenomena closely related to
 chiral symmetry. This motivates other possible fermion discretizations
-that remove doublers. {\it Staggered fermions} will remove some of the 
+that remove doublers. {\it Staggered fermions}~\cite{kogut_hamiltonian_1975}
+will remove some of the 
 unphysical doublers, while keeping a remnant of this axial symmetry intact. 
 This is accomplished by redistributing the quark degrees of freedom over
 the lattice in such a way that the spacing between each degree of freedom
@@ -825,7 +826,8 @@ D^{\rm stag}=\left(\begin{array}{cccc}
 \end{equation}
 One commonly used strategy to remove the effects of taste-breaking is
 \index{staggered!rooting}
-therefore {\it rooting}. The idea is that $\det D^{\rm stag}$ is
+therefore {\it rooting}\cite{marinari_monte_1981}. 
+The idea is that $\det D^{\rm stag}$ is
 the contribution to the probability distribution from four mass-degenerate
 flavors. To isolate one of the flavors, it is sufficient to use
 $\det D=(\det D^{\rm stag})^{1/4}$. For two degenerate light flavors
@@ -835,6 +837,10 @@ one then samples with probability distribution
   \dd{\rm P}
     =\dd Ue^{-S_G}(\det D_l^{\rm stag})^{1/2}(\det D_s^{\rm stag})^{1/4}.
 \end{equation}
+The hope is that the off-diagonal part of $D^{\rm stag}$ is irrelevant
+in the RG sense,
+so that $D^{\rm stag}$ becomes block-diagonal in the continuum
+limit.
 
 In practice, taste-breaking is present at each lattice spacing, and
 therefore it is not clear whether there is some leftover effect of rooting

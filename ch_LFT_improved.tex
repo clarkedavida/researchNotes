@@ -49,7 +49,8 @@ actions at a given $N_\tau$.
 
 One knows that the Wilson action has
 $\order{a^2}$ discretization errors. If we add to the Wilson action some
-$\order{a^2}$ terms out, we will have eliminated all discretization error
+terms to cancels the $\order{a^2}$ part out, we will have eliminated all 
+discretization error
 up to $\order{a^3}$. This is called an $\order{a^3}$ {\it improved action}
 or an $\order{a^4}$ {\it action}. Ultimately, our goal is to calculate
 expectation values, so we will generally also want to improve our 
@@ -122,8 +123,8 @@ Lorentz indices.}
 \end{aligned}\end{equation}
 If we expand the plaquette in the lattice spacing, all of the above
 operators will appear:
-\begin{equation}
-  \tr \plaq = N_c + \frac{1}{2}a^4O_4+a^6\sum_i r_iO_{6i},
+\begin{equation}\label{eq:trPlaqExpansion}
+  \tr \plaq = N_c + \frac{1}{2}a^4O_4+a^6\sum_i r_iO_{6i} + ...,
 \end{equation}
 where $i\in\{\text{a, b, c}\}$.
 
@@ -136,16 +137,19 @@ where $i\in\{\text{a, b, c}\}$.
   \label{fig:dim6operators}
 \end{figure}
 To improve our gauge action thus requires at least three dimension-six
-lattice operators. The simplest are the rectangle ``rt", the parallelogram
+lattice operators, which should cancel the three dimension-six operators
+appearing in \equatref{eq:trPlaqExpansions}. 
+The simplest are the rectangle ``rt", the parallelogram
 ``pg", and the chair ``ch", which are depicted in 
 \figref{fig:dim6operators}. Their multiplicities are listed in
 \tabref{tab:dim6operators}. An improvement on the Wilson action could
 then be written as
 \begin{equation}
-  S_\text{LW}=\frac{\beta}{3}\sum_i c_i \Re\tr\left(\id-U_i\right),
+  S_\text{LW}=\frac{\beta}{3}\sum_{x,i} c_i \Re\tr\left(\id-U_i(x)\right),
 \end{equation}
 where $i\in\{\text{pl, rt, pg, ch}\}$, with ``pl" standing for plaquette,
-and $U_i$ is the corresponding lattice operator. In their original paper,
+and $U_i$ is the corresponding lattice operator, summed over
+all orientations. In their original paper,
 L\"uscher and Weisz chose the normalization
 \begin{equation}\label{eq:LWnorm}
   c_\text{pl}+8c_\text{rt}+8c_\text{pg}+16c_\text{ch}=1.
@@ -187,8 +191,9 @@ to pick $c_\text{ch}=0$. According to the normalization condition
   c_\text{pl}=\frac{5}{3},~~~~c_\text{rt}=-\frac{1}{12},~~~~
     c_\text{pg}=c_\text{ch}=0,
 \end{equation}
-which is called the {\it L\"uscher-Weisz} action~\cite{luscher_shell_1985}.
-\index{action!L\"uscher-Weisz}
+which is called the {\it L\"uscher-Weisz} action~\cite{luscher_shell_1985}
+\index{action!L\"uscher-Weisz} or {\it tree-level Symanzik} action.
+\index{action!tree-level Symanzik}
 
 Next we turn to an improvement of the Wilson fermionic action. Now the leading
 correction is $\order{a}$, and owing to $\bar{\psi}\psi$ being dimension-three,
@@ -449,23 +454,24 @@ $\order{a^2}$ corrections.
 \end{figure}
 
 Here we present the AsqTad\index{action!AsqTad}
-action~\cite{orginos_variants_1999,lepage_flavor-symmetry_1999}, a staggered
+action~\cite{naik_-shell_1989,orginos_variants_1999,lepage_flavor-symmetry_1999}, a staggered
 fermion action with nearest- and third-nearest-neighbor interactions
 \begin{equation}
   \Delta_\mu-\frac{a^2}{6}\Delta_\mu^3.
 \end{equation}
-The third-nearest-neighbor is constructed by three thin links going in the same
-direction, which is called a {\it Naik link}\index{link!Naik}. The
-nearest-neighbor interaction is
+The smeared links are
 \begin{equation}\label{eq:asqtad}
   V_\mu=~c_1U_\mu
-           +\sum_\nu\left[c_3U_{\mu\nu}^{(3)}
-           +\sum_\rho\left(c_5U_{\mu\nu\rho}^{(5)}
-           +\sum_\sigma c_7U^{(7)}_{\mu\nu\rho\sigma}\right)
+           +c_NU^{(N)}_\mu
+           +\sum_{\nu\neq\mu}\left[c_3U_{\mu\nu}^{(3)}
+           +\sum_{\substack{\rho\neq\mu\\ \rho\neq\nu}}\left(c_5U_{\mu\nu\rho}^{(5)}
+           +\sum_{\substack{\sigma\neq\mu\\ \sigma\neq\nu\\ \sigma\neq\rho}} c_7U^{(7)}_{\mu\nu\rho\sigma}\right)
             +c_LU^{(L)}_{\mu\nu}\right],
 \end{equation}
 where the link constructs are given by
 \begin{equation}\begin{aligned}
+  U_{\mu}^{(N)}(x)
+       &=U_\mu(x)U_\mu(x+a\hat{\mu})U_\mu(x+2a\hat{\mu}),\\
   U_{\mu\nu}^{(3)}(x)
        &=U_\nu(x)U_\mu(x+a\hat{\nu})U_\nu^\dagger(x+a\hat{\mu}),\\
   U_{\mu\nu\rho}^{(5)}(x)
@@ -476,12 +482,14 @@ where the link constructs are given by
   U_{\mu\nu}^{(L)}(x)
        &=U_\nu(x)U_{\mu\nu}^{(3)}(x+a\hat{\nu})U_\nu^\dagger(x+a\hat{\mu}).
 \end{aligned}\end{equation}
+The first 3-link construct represents a third-nearest-neighbor interaction 
+called the {\it Naik} term.
 The last 5-link construct $U^{(L)}_{\mu\nu}$, a 5-link staple that is restricted
 to a plane, is called the {\it LePage}\index{LePage term} term.
 Examples of these constructs are shown in \figref{fig:AsqTadConstructs}.
 The coefficients are
 \begin{equation}
-c_1=\frac{1}{8},~~~c_3=\frac{1}{16},~~~c_5={1}{64},~~~c_7=\frac{1}{384},
+c_1=\frac{1}{8},~~~c_3=\frac{1}{16},~~~c_5=\frac{1}{64},~~~c_7=\frac{1}{384},
 ~~~c_L=-\frac{1}{16},~~~c_{\rm Naik}=-\frac{1}{24}.
 \end{equation}
 When $c_L=c_{\rm Naik}=0$, this smear is called {\it Fat7}\index{link!Fat7}.
