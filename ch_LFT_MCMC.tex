@@ -71,7 +71,11 @@ with the LHS representing the total probability to end up in $C'$ and
 the RHS representing the probability to transition out of $C'$.
 If $W$ satisfies
 \begin{enumerate}
-  \item {\it ergodicity},\index{ergodic} i.e.
+  \item {\it ergodicity}\footnote{Sometimes authors call this
+        {\it relaxed} ergodicity, to be distinguished from {\it strong}
+        ergodicity, where $n=1$. To my knowledge, all algorithms we consider
+        in this book satisfy only relaxed ergodicity, so I do not bother
+        with the distinction.},\index{ergodic} i.e.
         \begin{equation}\label{eq:ergodicity}
           \pr{C}>0\;\;\text{and}\;\;\pr{C'}>0\;\;\Rightarrow\;\;
           \exists\;n\in\N\;\;\text{s.t.}\;\;\big(W^n\big)^{CC'}>0,
@@ -79,9 +83,9 @@ If $W$ satisfies
         which means that every possible configuration is accessible from
         any other configuration in a finite number\footnote{In practice,
         it's important that $n$ is not too large, otherwise some configurations
-        will be sampled poorly. In a sense, this is the problem with
-        topological freezing\index{topological!freezing}
-        in \secref{sec:toplat}.} of Markov steps;
+        will be sampled poorly. This is why e.g.
+        topological freezing\index{topological!freezing}, discussed
+        in \secref{sec:toplat}, is a problem.} of Markov steps;
   \item {\it normalization},\index{normalization} i.e.
         \begin{equation}
           \sum\limits_{C'}W^{CC'}=1,
@@ -90,16 +94,17 @@ If $W$ satisfies
         to move somewhere;
   \item and balance, 
 \end{enumerate}
-then the Markov process is guaranteed to bring the ensemble toward 
-equilibrium. Using normalization, one finds from \equatref{eq:balance}
+then the Markov process is guaranteed to bring the ensemble to the
+target distribution $\pr{C}$. Indeed, using normalization, 
+one finds from \equatref{eq:balance}
 \begin{equation}\label{eq:eigenProb}
     \sum\limits_CW^{CC'}\pr{C}=\pr{C'},
 \end{equation}
-which shows that the equilibrium distribution is a fixed point of
-the Markov chain\footnote{Above, we called $W^{CC'}$ a transition matrix.
+which shows that $\pr{C}$ is a fixed point of
+the Markov chain.\footnote{Above, we called $W^{CC'}$ a transition matrix.
 Equation~\eqref{eq:eigenProb} shows that we can think of the equilibrium
 distribution as an eigenvector of $W$ with eigenvalue 1. Each component
-of this vector thus yields the probability of a particular configuration.}. 
+of this vector thus yields the probability of a particular configuration.} 
 
 \index{Metropolis step}
 Here and the following two sections,
@@ -136,7 +141,7 @@ can show that this update satisfies detailed balance.
 
 The Metropolis algorithm is in some sense the most standard Markov chain
 algorithm used in lattice calculations, with the acceptance step
-\equatref{eq:metupdate} being the most crucial part, in the sense that
+\equatref{eq:metupdate} being the most crucial part, since 
 it guarantees your configuration is drawn with the correct probability.
 A Markov algorithm that concludes with the acceptance step, is
 said to be an\index{exact algorithm} {\it exact algorithm}.\footnote{One
@@ -159,9 +164,11 @@ we will make little movement in configuration space.
 What makes an update efficient then is to suggest configurations that
 have reasonable acceptance probabilities to begin with. This
 strategy is often called {\it importance sampling}\index{importance sampling}.
+All the algorithms we will consider in this book are constructed to be
+efficient in the sense that they have reasonable likelihood to be accepted.
 
 
-\section{General code structure}
+\section{General code structure}\label{sec:generalCodeStructure}
 
 Now that we have introduced MCMC, we can sketch the
 general code structure of an LFT simulation. 
@@ -223,15 +230,16 @@ generating new gauge fields from old ones.
 
 \subsection{Update: Heat bath}\index{heat bath}
 
-The {\it heat bath} (HB) algorithm is designed to tackle pure $\SU(N_c)$
-systems. Here, we construct our trial probability distribution to draw from the
-Boltzmann distribution to begin with. Thus no formal accept/reject
-step is required\footnote{The Kennedy-Pendleton algorithm has a sort
-of accept/reject step on one of the random variables to ensure that
-variable is drawn from the correct distribution.}. For pure gauge
-simulations, it is common practice to generate a new configuration 
-an old one by updating one link. 
-For the $\SU(N_c)$ HB algorithm, the trial link distribution is
+The {\it heat bath} (HB) algorithm is a popular choice for the simulation
+of pure $\SU(N_c)$ systems. Here, we construct our trial probability distribution 
+to draw from the Boltzmann distribution to begin with. Thus no
+Metropolis step is required\footnote{The Kennedy-Pendleton algorithm has a
+accept/reject step on one of the random variables to ensure that
+links are drawn from the correct distribution. This is not 
+a Metropolis step, since it does not directly involve the action difference.}. 
+As mentioned at the beginning of \secref{sec:generalCodeStructure},
+update sweeps proceed one link at a time.
+For the $\SU(N_c)$ HB algorithm, the trial link distribution for that link is
 \begin{equation}\label{eq:PTdist}
   \dd{\prt{U'}}\propto \dd U'\exp\left(\frac{\beta}{N_c}\,\tr\,
   U'U^\sqcup\right).
@@ -251,15 +259,13 @@ that $\SU(2)\leq\SU(N_c)$; in general, an $\SU(N_c)$ matrix
 can be broken down into $N_c(N_c-1)/2$ 
 $\SU(2)$ submatrices~\cite{cabibbo_new_1982}. One generates each
 $\SU(2)$ submatrix using the above HB, then reconstructs
-the $\SU(N_c)$ matrix from those.
+the $\SU(N_c)$ matrix from those, which is sometimes called
+the {\it Cabibbo-Marinari} method\index{Cabibbo-Marinari}.
 
-%Single link Metropolis or HB updates of links carried out in a systematic 
-%(as opposed to random) order fulfill balance, but do not
-%fulfill detailed balance.
 
 \subsection{Update: Over-relaxation}\index{over-relaxation}
 
-An additional useful update for $\SU(N_c)$ is the 
+A useful update for $\SU(N_c)$ is the 
 {\it over-relaxation}\index{over-relaxation} (OR) update. 
 Adler introduced OR algorithms \cite{adler_over-relaxation_1981} and 
 they were further developed by Creutz \cite{creutz_overrelaxation_1987} 
@@ -322,9 +328,13 @@ For $\SU(2)$, the update is given by
 This simple 
 behavior is special to $\U(1)$ and $\SU(2)$ LGT. 
 For $N_c>2$, one can carry out OR updates on the $\SU(2)$ subspaces of the
-$\SU(N_c)$ matrix. This in general does not keep the action constant, but it
+$\SU(N_c)$ matrix, i.e. using the method of Cabibbo and Marinari. 
+This in general does not keep the action constant, but it
 does change the action only very little. Hence it is a good choice to supplement
 HB updates for $\SU(N_c)$ gauge fields in general. 
+
+I close by noting that pairing HB with OR sweeps is the only way I have ever
+seen pure $\SU(N_c)$ configurations generated in modern code.
 
 \subsection{Update: Over-relaxation gauge fixing}\label{sec:ORgaugefix}
 \index{gauge!fixing}
