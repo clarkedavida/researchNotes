@@ -330,44 +330,22 @@ $$
     formula.
   \end{proof}
 \end{proposition}
-After some algebra, the connection between the Wilson action and the action
-corresponding to \equatref{eq:lagrkin} becomes clear.
-\begin{proposition}{}{wilsonCont} 
-  $$S_W=-\frac{\beta}{4N_c}\sum_x a^4\tr F_{\mu\nu}(x)F_{\mu\nu}(x)
-                  +\order{a^5}.$$
-  \begin{proof} Using the definition~\eqref{eq:wilsonaction} and
-    \propref{prp:plaquette} we have
-    \begin{equation*}
-    \begin{aligned}
-      S_W&=\beta\sum_{x,\mu<\nu}\left(1-\frac{1}{N_c}\Re\tr 
-            U_{\mu\nu}^\Box(x)\right)\\
-         &=\beta\sum_{x,\mu<\nu}\left(1-\frac{1}{2N_c}\tr 
-            \left[U_{\mu\nu}^\Box(x)+
-            U_{\mu\nu}^\Box(x)^\dagger\right]\right)\\
-         &=\beta\sum_{x,\mu<\nu}\left(1-\frac{1}{2N_c}\tr
-            \left[2\id+\frac{a^4}{2}F_{\mu\nu}(x)^2
-                  +\order{a^6}\right]\right)\\
-         &=\beta\sum_{x,\mu<\nu}\left(-\frac{a^4}{2N_c}\tr F_{\mu\nu}(x)^2
-                  +\order{a^6}\right)\\
-         &=-\frac{\beta}{4N_c}\sum_x a^4\tr F_{\mu\nu}(x)F_{\mu\nu}(x)
-                  +\order{a^6}.
-    \end{aligned}
-    \end{equation*}
-    The cancellation of the $\order{a^2}$ term can be seen
-    as follows: The role of the $\dagger$ in $\SU(N_c)$ is to take the inverse.
-    For a path of link variables, this is the same as following the path
-    in reverse.
-    Following a plaquette in reverse just interchanges $\mu$ and $\nu$,
-    which flips the sign of the leading term in the exponential
-    of \propref{prp:plaquette} because $F_{\mu\nu}$
-    is antisymmetric. In general, terms of $\order{a^p}$ will be attached
-    to products like $(F_{\mu\nu})^{p-2}$. When $p$ is odd, these terms will
-    vanish, since $F_{\mu\nu}$ to an odd power is antisymmetric under
-    interchange of $\mu$ and $\nu$, so the summation over $\mu<\nu$ will
-    kill them off.
-  \end{proof}
-\end{proposition}
 
+This proposition neglects all $\order{a^3}$ terms; I just wanted you to see
+how this kind of relation can be shown. If one computes the plaquette
+up to $\order{a^4}$, inserting the result into \equatref{eq:wilsonaction}
+and expanding in $a$, one finds\footnote{The $\order{a^2}$ term dies
+because we take the real part. Terms of $\order{a^p}$ with $p$ odd will
+die in the sum because they come attached to terms with $p$ $\mu$ indices
+and $p$ $\nu$ indices that are antisymmetric in $\mu$ and $\nu$.
+For this reason, valid discretizations of QCD actions should contain
+only even powers of $a$, as the QCD Lagrangian is parity-invariant.
+This is worked out in detail in Section 1.5 of Ref.~\cite{Sciarra:2016exn}
+if you are interested.} 
+\begin{equation}
+  S_W=-\frac{\beta}{4N_c}\sum_x a^4\tr F_{\mu\nu}(x)F_{\mu\nu}(x)
+                  +\order{a^6}.
+\end{equation}
 In the limit $a\to0$, the Wilson action coincides with the action
 $S_G=\int \dd^4x\,\Lagr_G$ when one identifies 
 \begin{equation}
@@ -376,8 +354,55 @@ $S_G=\int \dd^4x\,\Lagr_G$ when one identifies
 Because of this identification, $\beta$ is also (besides $g$) sometimes 
 referred to as the \index{coupling constant}{\it coupling constant}.
 
-%In \propref{prp:wilsonCont} we write the correction is $\order{a^5}$,
-%but actually only even powers of $a$ are permitted in the expansion.
+
+
+%After some algebra, the connection between the Wilson action and the action
+%corresponding to \equatref{eq:lagrkin} becomes clear.
+%\begin{proposition}{}{wilsonCont} 
+%  $$S_W=-\frac{\beta}{4N_c}\sum_x a^4\tr F_{\mu\nu}(x)F_{\mu\nu}(x)
+%                  +\order{a^6}.$$
+%  \begin{proof} Using the definition~\eqref{eq:wilsonaction} and
+%    \propref{prp:plaquette} we have
+%    \begin{equation*}
+%    \begin{aligned}
+%      S_W&=\beta\sum_{x,\mu<\nu}\left(1-\frac{1}{N_c}\Re\tr 
+%            U_{\mu\nu}^\Box(x)\right)\\
+%         &=\beta\sum_{x,\mu<\nu}\left(1-\frac{1}{2N_c}\tr 
+%            \left[U_{\mu\nu}^\Box(x)+
+%            U_{\mu\nu}^\Box(x)^\dagger\right]\right)\\
+%         &=\beta\sum_{x,\mu<\nu}\left(1-\frac{1}{2N_c}\tr
+%            \left[2\id+a^4F_{\mu\nu}(x)^2
+%                  +\order{a^6}\right]\right).
+%    \end{aligned}
+%    \end{equation*}
+%    The cancellation of the $\order{a^2}$ term can be seen
+%    as follows: The role of the $\dagger$ in $\SU(N_c)$ is to take the inverse.
+%    For a path of link variables, this is the same as following the path
+%    in reverse.
+%    Following a plaquette in reverse just interchanges $\mu$ and $\nu$,
+%    which flips the sign of the leading term in the exponential
+%    of \propref{prp:plaquette} because $F_{\mu\nu}$
+%    is antisymmetric.
+%    All terms of $\order{a^p}$ with $p$ odd will vanish in the sum.
+%    To see this, note that each power of $a$ has some object with
+%    exactly one $\mu$ and $\nu$ index attached to it.
+%    In general, terms of $\order{a^p}$ will be attached
+%    to products like $(F_{\mu\nu})^{p-2}$. When $p$ is odd, these terms will
+%    vanish, since $F_{\mu\nu}$ to an odd power is antisymmetric under
+%    interchange of $\mu$ and $\nu$, so the summation over $\mu<\nu$ will
+%    kill them off.
+%    \begin{equation*}
+%    \begin{aligned}
+%      S_W&=\beta\sum_{x,\mu<\nu}\left(-\frac{a^4}{2N_c}\tr F_{\mu\nu}(x)^2
+%                  +\order{a^6}\right)\\
+%         &=-\frac{\beta}{4N_c}\sum_x a^4\tr F_{\mu\nu}(x)F_{\mu\nu}(x)
+%                  +\order{a^6}.
+%    \end{aligned}
+%    \end{equation*}
+%  \end{proof}
+%\end{proposition}
+
+%only even powers of $a$ are permitted in the expansion.
 %This is not special to the Wilson action, but true of lattice actions
 %more generally. Indeed due to \equatref{eq:linkVariable}, you can
 %convince yourself that every $a$ comes attached to a Lorentz vector.
