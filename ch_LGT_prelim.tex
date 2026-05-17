@@ -785,6 +785,27 @@ as $a$ approaches zero, which is known as
 \index{asymptotic freedom}{\it asymptotic freedom}, while at low energies,
 $g(a)$ becomes too large for reliable perturbative analysis.
 
+It is perhaps instructive to contrast the QCD beta function with that of QED
+in the continuum. At one loop, the QED beta function is
+\begin{equation}
+\beta_{\rm QED}(e)=\frac{e^3}{12\pi^2},
+\end{equation}
+which leads to, for two energy scales $q>\Lambda$,
+\begin{equation}\label{eq:QEDbeta}
+e(q)^2=\frac{e(\Lambda)^2}{1-e(\Lambda)^2
+\log\left(q/\Lambda\right)/6\pi^2}.
+\end{equation}
+In this case, the coupling $e$ is an increasing function of $q$, which persists
+up to the {\it Landau pole}\index{Landau pole} at
+\begin{equation}
+q=\Lambda\exp\left(\frac{6\pi^2}{e(\Lambda)^2}\right),
+\end{equation}
+where the coupling diverges. Since $\beta_{\rm QED}$ was determined
+perturbatively, this pole exists well beyond the region for reliable
+perturbative analysis; really it indicates only an eventual breakdown of this
+approach. Thus if one were to take a continuum limit, one eventually reaches
+energies where the beta function is no longer well defined.
+
 From \equatref{eq:latRGEsoln} we see that taking $g\to0$ drives $a\to0$.
 However the limit $g\to0$ is not enough to ensure a well defined continuum
 limit. The physical size of the lattice is proportional to $a^4$, and hence
@@ -794,12 +815,7 @@ of interest at different values of the coupling constant, with the
 extensions $N_1$, $N_2$, $N_3$, and $N_4$ chosen so that the physical 
 size of the lattice is large enough for a reliable calculation of 
 the observable of interest. A schematic representation is shown in
-Figure~\ref{fig:climit}. We note that two kinds of systematic uncertainty 
-arise in this context. Namely, to what extent do finite lattice
-spacing (which limits the smallest wavelength) and finite lattice
-size (which limits the largest wavelength) affect our results?
-These questions are discussed in detail in 
-\secref{sec:refscales}.
+Figure~\ref{fig:climit}. 
 
 \section{Finite temperature}\label{sec:finitetemp}
 
