@@ -212,6 +212,31 @@ Still, this statement is not without some controversy, with some studies suggest
 it has a universality class of its own, albeit with very similar
 critical exponents~\cite{valls_liquid-gas_1978}.
 
+\subsection{Percolation}\label{sec:percolation}
+
+Here I formulate percolation following a nice paper that describes it
+very readably~\cite{Fortunato:1999xj}. Imagine placing black stones randomly on
+a Go board of area $V$. Contiguous regions of stones are called {\it
+clusters}\index{cluster}. If a cluster spans the Go board from one side to the
+opposite, this cluster {\it percolates}.\index{percolation}
+Clusters can be characterized by their average cluster size $S$
+\begin{equation}
+S\equiv\frac{1}{N}\sum_s n_s s^2,~~~~~~ N\equiv \sum_s n_s s,
+\end{equation} 
+where the sum runs over cluster size $s$, $n_s$ is the number of clusters of
+this size, and the sum excludes percolating clusters. Suppose a cluster
+of size $s_p$ percolates. Then the {\it percolation
+strength}\index{strength!percolation} $P$ is
+\begin{equation}
+P\equiv \frac{s_p}{V}.
+\end{equation}
+Changing the density of the stones induces a kind of phase transition. To see this,
+note that if there are too few stones, there can be no percolation by
+definition. Eventually, a cluster must percolate, and $P$ changes from 0 to some
+nonzero value, and $P$ can be viewed as an order parameter of a
+{\it percolation phase transition}\index{phase transition!percolation}.
+
+
 \section{Models of magnets}\label{sec:magnets}
 
 In 2009, the philosophers Violent J. and Shaggy 2 Dope posed the quintessential
