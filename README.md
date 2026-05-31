@@ -3,4 +3,9 @@ This "book" is a collection of research notes that I made while researching in p
 
 You can look into the `0_researchnotes.tex` files to see what packages this uses, but I think if you install `texlive-full`, you should have all the packages you need.
 
-This compiles with `./makelatex`. If you encounter issues with this, try `./makelatexDebug`. If you have already compiled once with `./makelatex` or `./makelatexDebug`, you can compile with `./makelatexFast`. Feel free to make an Issue if you have any problems!
+There are three build scripts:
+- `./makelatex` — full build with verbose output; use this first or when debugging errors
+- `./makelatexQuiet` — full build with filtered output; use this for routine full rebuilds
+- `./makelatexFast` — single pdflatex pass, no bibliography or index rebuild; use this when iterating on prose
+
+Run `./distclean` to remove auxiliary files when desired. Feel free to make an Issue if you have any problems!

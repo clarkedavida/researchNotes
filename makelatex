@@ -21,7 +21,7 @@ done
 #
 diagrams=(fr123 fr4to17 fr18to21 fr22to25 fr26 prob1 prob2)
 for diagram in "${diagrams[@]}"; do
-  if [ ! -f ${diagram}.mf ]; then mf ${diagram}; fi
+  if [ ! -f ${diagram}.tfm ]; then mf ${diagram}; fi
 done
 
 #
@@ -36,4 +36,3 @@ pdflatex -interaction=batchmode -shell-escape -draftmode 0_researchnotes.tex > /
 
 
 pdflatex -interaction=batchmode -shell-escape 0_researchnotes.tex
-./distclean

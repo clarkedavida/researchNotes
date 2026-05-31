@@ -14,6 +14,20 @@ _minted-0_researchnotes/
 *.pyg
 mycode_languages.txt
 typsetDerivatives.png
+*.aux
+*.toc
+*.dvi
+*.lof
+*.lot
+*.log
+*.lom
+*.blg
+*.ps
+*.out
+*.idx
+*.ilg
+*.ind
+
 
 # Some tests relying on binaries, which are not ready to be brought over yet.
 testing/corr_fitting/*
