@@ -403,8 +403,8 @@ base 16. This is the {\it hexadecimal} system. Since we have only ten numerals,
 this requires the introduction of some letters for its representation,
 as shown in \tabref{tab:hexadecimal}. In C and C++ programming,
 hexadecimal numbers are preceded by an indentifier \ff{0x} to
-indicate that it's hexadecimal\footnote{Instead it is preceded
-by \ff{0b} if it's binary.}.
+indicate that it is hexadecimal\footnote{Instead it is preceded
+by \ff{0b} if it is binary.}.
 Since hexadecimal is base 16, it follows that each hex digit is equivalent
 to four bits. Hence the length of a hexadecimal number in C and C++
 depends on the size of the object it represents. Finally, sometimes
@@ -693,7 +693,7 @@ The {\it arithmetic intensity}\index{arithmetic intensity} of some code is
 \end{equation}
 where the numerator represents the number of FLOPs needed by that code, and the
 denominator represents how much data you need to move in bytes in order to
-support those FLOPs. From this equation it's clear that the attainable
+support those FLOPs. From this equation it is clear that the attainable
 FLOP/s scales linearly with arithmetic intensity.
 
 Fig.~\ref{fig:roofline} shows a sketch of this model. The vertical
@@ -817,7 +817,7 @@ This happens whenever two
 processes try to write into the same chunk of memory at the same time. In my
 experience, undefined behavior due to a race condition may not even produce the
 same results after two runs of the same compilation.}. Compilers will not always
-catch undefined behavior; hence it's safest to just use the rule of three from
+catch undefined behavior; hence it is safest to just use the rule of three from
 the beginning.
 
 An extension to the rule of three is the {\it rule of five}\index{rule of five},
@@ -964,7 +964,7 @@ Google~\cite{google_ML}.
 Very broadly we can imagine {\it artificial intelligence}\index{artificial
 intelligence} (AI) as trying to get computers to mimic human intelligence. 
 A naive\footnote{Indeed I tried writing a ``chatbot" using QBASIC in this
-manner when I was a little boy. This is why it's crucial to be specific
+manner when I was a little boy. This is why it is crucial to be specific
 when telling a child to make friends.} way of doing this could be to implement tons 
 of conditionals. Machine learning by contrast aims to carry out some
 task without any explicit code to carry out said task. Generically,
@@ -1047,7 +1047,7 @@ In this NN, the output can be written linearly in terms of the input $x_i$;
 in other words, the NN models the labels as a linear function of the features.
 The NN is characterized completely by the weights $w_{ij}$ and the connections
 shown in the diagram. Note that each node in each layer depends on
-every\footnote{This makes sense since it's the most
+every\footnote{This makes sense since it is the most
 general strategy we could take. If a node in a preceding layer turns out
 not to matter, a reasonable NN should compute the corresponding weight to be
 zero. In principle you do not have to construct the NN in this way, and
