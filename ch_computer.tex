@@ -83,7 +83,7 @@ most modern software developers would agree.
 Probably the best way to learn is through an example. To see the basics
 of OOP in action, we will implement a \ff{CAT} class, and 
 introduce some new OOP jargon and concepts along the way.
-The example code, shown in Listing~\ref{lst:CATclass}, 
+The example code, shown in \\listref{lst:CATclass}, 
 definitely works for C++14~\cite{cppDocumentation},
 but it likely also works for earlier standards.
 The first function we define, \ff{narrate}, is not part of the class;
@@ -129,8 +129,8 @@ collection of attributes and methods acting on them.
 
 To understand the constructor and destructor, let us turn to our main
 code where we will use this class, shown
-in Listing~\ref{lst:CATmain}. The output of this code is
-given in Listing~\ref{lst:CATout}. In the first line of
+in \\listref{lst:CATmain}. The output of this code is
+given in \\listref{lst:CATout}. In the first line of
 the main, we declare a
 \ff{CAT}-type\footnote{A {\it type}\index{type} is a category of data
 defined by some properties or characteristics. The type often defines the sorts
@@ -160,7 +160,7 @@ user that it instantiated a \ff{CAT} object.
 
 \begin{code*}
 \mycode{text}{exampleCode/catOutput.txt}
-\caption{Resulting output from main C++ code of Listing~\ref{lst:CATmain}.
+\caption{Resulting output from main C++ code of \\listref{lst:CATmain}.
 This output reflects some of the automatic actions taken when \ff{CAT}
 classes are instantiated and destroyed.}
 \label{lst:CATout}
@@ -191,7 +191,7 @@ automatically exterminated by her destructor.}
 \end{code*}
 \begin{code*}
 \mycode{text}{exampleCode/scopeOutput.txt}
-\caption{Output for the main code of Listing~\ref{lst:scope}.
+\caption{Output for the main code of \\listref{lst:scope}.
 We see that Tallulah-Paige perishes before Ziggy is instantiated.}
 \label{lst:scopeOut}
 \end{code*}
@@ -252,7 +252,7 @@ inherits from \ff{CAT}.}
 \end{code*}
 
 Let us begin by implementing the \ff{CAT} class from before in Python,
-which is shown in Listing~\ref{lst:CATpython}. One nice feature of Python classes
+which is shown in \\listref{lst:CATpython}. One nice feature of Python classes
 is the \ff{\_\_doc\_\_} attribute, which is set here as the first string
 in quotes, giving a description of the class. Note also that Python
 does not have the \ff{private} or \ff{public} distinction that
@@ -285,7 +285,7 @@ interact with class methods and attributes, even within the class itself.
 \end{code*}
 \begin{code*}
 \mycode{text}{exampleCode/pythonCatOutput.txt}
-\caption{Output from the code of Listing~\ref{lst:CATmain}.}
+\caption{Output from the code of \\listref{lst:CATmain}.}
 \label{lst:CATout}
 \end{code*}
 
@@ -304,13 +304,13 @@ in \ff{MEANCAT} overrides that of its parent, \ff{CAT}. One last
 feature to point out is the use of the \ff{del} keyword, which lets you
 call an object's destructor.
 Some main code utilizing the \ff{CAT} and \ff{MEANCAT} classes
-is given in Listing~\ref{lst:CATmain} along with the
-corresponding output in Listing~\ref{lst:CATout}.
+is given in \\listref{lst:CATmain} along with the
+corresponding output in \\listref{lst:CATout}.
 
 Finally we will have a look at operator overloading. For this example we
 will create a rudimentary and wildly incomplete class for a simple math 
 object of interest to high energy physics: the $\SU(2)$ matrix.
-The code is shown in Listing~\ref{lst:SU2}.
+The code is shown in \\listref{lst:SU2}.
 
 \begin{code*}
 \mycodeSnippet{python}{exampleCode/SU2.py}{1}{41}
@@ -330,12 +330,12 @@ enforced through the \ff{setElement} method.
 \begin{code*}
 \mycodeSnippet{python}{exampleCode/SU2.py}{45}{54}
 \caption{Example main code utilizing the \ff{SU2} class
-of Listing~\ref{lst:SU2}.}
+of \\listref{lst:SU2}.}
 \label{lst:SU2main}
 \end{code*}
 \begin{code*}
 \mycode{text}{exampleCode/SU2Output.txt}
-\caption{Output from Listing~\ref{lst:SU2main}.}
+\caption{Output from \\listref{lst:SU2main}.}
 \end{code*}
 
 To use operator overloading, each binary operator has a special function name.
@@ -345,7 +345,7 @@ RHS of the operator, respectively. Python allows also for the overloading
 of other algebraic operators, bitwise operations, and comparison operators.
 In our example, we have edited the \ff{\_\_str\_\_} operator, which
 controls how an \ff{SU2} object is printed to screen.
-In Listing~\ref{lst:SU2main} we give some quick examples of 
+In \\listref{lst:SU2main} we give some quick examples of 
 this \ff{SU2} class in use. 
 %Note that
 %the \ff{=} sign here is not a copy constructor; instead both \ff{g} and
@@ -696,7 +696,7 @@ denominator represents how much data you need to move in bytes in order to
 support those FLOPs. From this equation it is clear that the attainable
 FLOP/s scales linearly with arithmetic intensity.
 
-Fig.~\ref{fig:roofline} shows a sketch of this model. The vertical
+\figref{fig:roofline} shows a sketch of this model. The vertical
 dashed line gives the {\it machine balance point}.\index{machine balance point}
 This analysis is useful to try to diagnose whether one should look into
 memory efficiency or algorithm improvement to try to speed up the code.
