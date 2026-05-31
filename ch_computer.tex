@@ -375,9 +375,6 @@ along with some references to get a feeling for how much information
 they store. This whole two-bit numbering system is, as you probably
 already know, called {\it binary}.
 
-\index{byte!peta}
-\index{byte!exa}
-\index{byte!zetta}
 \begin{table}
 \centering
 \caption{Converting bits to bytes.}
@@ -607,7 +604,7 @@ case. Sometimes this approach is referred to as {\it
 vectorization}\index{vectorization}.
 
 To get a quantitative understanding of performance, one introduces
-the {\it clock cycle},\index{clock cycle} which is the smallest unit of
+the {\it clock cycle},\index{clock!cycle} which is the smallest unit of
 time in a computer\footnote{Most CPUs keep time using a quartz crystal.
 The basic idea is that an electric field will cause the quartz to
 vibrate. The frequency of this vibration is the clock cycle.
@@ -615,7 +612,7 @@ This frequency can be tuned according to the shape and size of the
 crystal, as well the placement of electrodes on it.}.
 In the olden days, only one computation would be carried out per cycle;
 nowadays it is more common to carry out many. The number of
-computations per clock cycle is known as the\index{clock speed} {\it clock speed}.
+computations per clock cycle is known as the\index{clock!speed} {\it clock speed}.
 
 A CPU\index{CPU} is divided into several\index{core} physical {\it cores}, each of which can
 carry operations separately. This is then one way to carry out parallelization:
@@ -831,8 +828,7 @@ following, it needs all five:
   \item move assignment. 
 \end{itemize}
 
-A strategy to help improve code reuse and flexibility is\index{policy!based
-design} {\it policy-based design}.
+A strategy to help improve code reuse and flexibility is\index{policy!based design} {\it policy-based design}.
 In this context, a {\it policy}\index{policy} is a template that encapsulates a 
 behavior or set of behaviors that can be used to customize the behavior of a class. 
 The policy itself is not part of the class, but rather is used to customize it. 
@@ -961,8 +957,7 @@ One of my goals is to familiarize myself with ML jargon. In this section I
 try to string together jargon that was relevant to me from
 Google~\cite{google_ML}.
 
-Very broadly we can imagine {\it artificial intelligence}\index{artificial
-intelligence} (AI) as trying to get computers to mimic human intelligence. 
+Very broadly we can imagine {\it artificial intelligence}\index{artificial intelligence} (AI) as trying to get computers to mimic human intelligence. 
 A naive\footnote{Indeed I tried writing a ``chatbot" using QBASIC in this
 manner when I was a little boy. This is why it is crucial to be specific
 when telling a child to make friends.} way of doing this could be to implement tons 
@@ -1116,8 +1111,7 @@ activation thresholds, which may be necessary to make a model more accurate.
 We now have constructed a relatively elementary, nonlinear NN to 
 model labels as a function of features. How good of a model will this be?
 It is in some sense mathematically guaranteed to be extremely good.
-There are many {\it universal approximation theorems}\index{universal
-approximation theorem} which guarantee that NNs converge to real-world
+There are many {\it universal approximation theorems}\index{universal approximation theorem} which guarantee that NNs converge to real-world
 relationships. More precisely if we imagine our labels as a function $f$ of the
 features and give some closeness criterion $\epsilon>0$, there exists some
 number of neurons such that a NN approximates $f$ within $\epsilon$.
@@ -1266,7 +1260,7 @@ Another example of an unsupervised\footnote{Contrastive learning can also
 be used in supervised contexts. In the parlance of the following discussion,
 in the supervised case, one would label the example $e$ and incorporate
 that label in the loss function.} algorithm is called {\it contrastive
-learning}\index{contrastive learning}. Here one starts with an example $e$,
+learning}\index{learning!contrastive}. Here one starts with an example $e$,
 then applies small transformations to $e$ creating new examples, say $e'$ and
 $e''$. This process of creating these new examples is called {\it data
 augmentation}\index{data augmentation}\footnote{Data augmentation can be
