@@ -1071,7 +1071,13 @@ $X_1,...,X_N$ from some distribution with mean $\hat{x}$ and
 variance $\sigma^2$ and a function $f$ that has a Taylor series 
 expansion near $\hat{x}$, but is not necessarily linear.
 From \secref{sec:bias} we know that $\bar{f}=f(\bar{X})$ is
-an asymptotically unbiased estimator of $\hat{f}=f(\hat{x})$. 
+an asymptotically unbiased estimator of 
+$\hat{f}=f(\hat{x})$.\footnote{While this discussion is framed
+in terms of estimating $f(\hat{x})$, the jackknife can be used
+also for direct estimates of a sample mean; this will be demonstrated
+in the first Example of the section. As we will discuss later, it
+shines for $f(\hat{x})$ as it gives a versatile way to propagate
+error.}
 
 The discussion of \secref{sec:prop} gives us a way to propagate 
 uncertainty from the random variables to $f$, but it is effectively 
@@ -1083,7 +1089,16 @@ The jackknife method is pretty simple to implement, and jackknife error
 bars agree with usual error bars when there is no bias.
 Therefore it makes sense to use the jackknife method generally. 
 
-Here's how the jackknife method works: We throw away the first measurement 
+Here's how the jackknife method works: We throw away the 
+first\footnote{This is also sometimes referred to as a
+{\it remove-1} jackknife. One can generalize the procedure by throwing
+away $m$ measurements at a time, a {\it remove-m} jackknife. The latter
+is helpful to combat autocorrelation in time series, discussed in
+\secref{sec:timeSeries}. A remove-$m$ jackknife is then preferable
+to an unbinned, naive estimate of a mean coming from a time series, giving
+a further use case beyond error propagation. Since I am always looking
+at data from time series, the remove-$m$ jackknife is my go-to approach
+for computing uncertainties.} measurement 
 from our sample, leaving a data set of $N-1$ resampled values. Statistical
 analysis is done on this smaller sample. Then we resample again, this time
 throwing out the second point, and so on.
@@ -1638,7 +1653,7 @@ CDF is continuous. In practice one can proceed as follows:
         say 0.05, then this assumption becomes suspect. 
 \end{enumerate}
 
-\section{Statistical analysis of time series}
+\section{Statistical analysis of time series}\label{sec:timeSeries}
 
 Once we get into lattice calculations, we are going to analyze
 Markov chains, which we will discuss in \chref{ch:MCMC}. There
