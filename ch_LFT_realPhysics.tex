@@ -413,6 +413,87 @@ can integrate this equation starting from a reference temperature $T_0$ to obtai
 If $T_0$ is low enough, this can be estimated from HRG. I have also seen cases
 where the trace anomaly is estimated to be zero at $T_0$.
 
+To get the trace anomaly from the lattice, we follow a common strategy
+exemplified e.g. in Ref.~\cite{bazavov_equation_2014}. Here it is useful
+to write the QCD partition function directly as
+\begin{equation}
+  Z=\int\DD\bar\psi\DD\psi\DD U e^{-\beta S_G+S_F},
+\end{equation}
+i.e. we have not integrated out the fermion measure
+\eqref{eq:fermionIntegrationMeasure}, and we have factored $\beta$ out
+of the gluonic part of the action. Using $V=a^3N_s^3$, $T=1/aN_\tau$,
+and $P\approx (T/V)\log Z$, we find
+\begin{equation}
+\frac{\Theta^{\mu\mu}}{T^4}=-\frac{a}{VT^3}\dv{\log Z}{a}.
+\end{equation}
+Modern simulations generally run directly at physical quark mass. In simulations
+with an up, down, and strange quark only, this often means that $am_s(a)$ is tuned 
+according to the physical value of $m_s$, and then $am_u(a)$ and
+$am_d(a)$ are chosen so that $am_q(a)/am_s(a)=m_q/m_s$.
+Thus all bare quark masses have the same dependence on $a$, up to an overall
+factor. Nothing else depends on on $a$, so the derivative comes out to be
+\begin{equation}
+\dv{\log Z}{a}=-\ev{\dv{(\beta S_G-S_F)}{a}}.
+\end{equation}
+
+The trace anomaly can then be split into parts coming from the gluonic and
+fermionic pieces of the total action. Moreover the derivative w.r.t. $a$ can be
+recast as a derivative w.r.t. $\beta$. The gluonic part is then straightforward:
+\begin{equation}\label{eq:TAGbare}
+\frac{\Theta^{\mu\mu,{\rm bare}}_G}{T^4}=-R_\beta N_\tau^4 \ev{s_G},
+\end{equation}
+where $s_G$ is the gluonic action density, $s_G=S_G/N_s^3N_\tau$, and
+\begin{equation}
+R_\beta\equiv-a\dv{\beta}{a}.
+\end{equation}
+The action density has an additive lattice divergence. This
+additive divergence is temperature-independent; therefore the trace anomaly
+can be renormalized by subtracting $s_G$ evaluated at the same $\beta$ but
+at $T\approx 0$, i.e. from some ensemble with a very large temporal extension.
+Thus the renormalized gluonic contribution reduces to\footnote{We emphasize 
+that in \equatref{eq:TAG} one takes the $N_\tau$ belonging to the $T>0$
+ensemble.}
+\begin{equation}\label{eq:TAG}
+\frac{\Theta^{\mu\mu}_G}{T^4}=R_\beta
+N_\tau^4\left(\ev{s_G}_0-\ev{s_G}_T\right).
+\end{equation}
+
+For the fermionic contribution, note
+\begin{equation}
+\dv{S_F}{a}
+=\frac{\dd}{\dd a}\sum_{q,x} \bar{q}(x)\left(\slashed{D}+m_q\right)q(0)
+=\sum_{q,x} \bar{q}q(x) \dv{m_q}{a}.
+\end{equation}
+Keeping in mind we are on the LCP described above and applying the chain rule,
+we find
+\begin{equation}
+\dv{S_F}{a}
+=-\frac{R_\beta R_m}{a}\sum_{q,x} m_q \bar{q}q(x), 
+\end{equation}
+where
+\begin{equation}
+R_m\equiv\frac{1}{m_s}\dv{m_s}{\beta}.
+\end{equation}
+With the convention $\Theta^{\mu\mu}=\Theta^{\mu\mu}_G+\Theta^{\mu\mu}_F$
+and renormalizing by again subtracting a temperature-independent additive
+divergence, we find
+\begin{equation}
+\frac{\Theta^{\mu\mu}_F}{T^4}=-R_\beta R_mN_\tau^4
+\sum_q m_q\left(\ev{\bar{q}q}_0-\ev{\bar{q}q}_T\right),
+\end{equation}
+where again the condensates $\ev{\bar{q}q}$ have been averaged over
+the 4-volume.
+
+The function $R_\beta$ must be obtained using some reference scale as an
+intermediary. In Ref.~\cite{bazavov_equation_2014}, they use $r_1$, so
+that
+\begin{equation}
+R_\beta=\frac{r_1}{a}\left(\dv{(r_1/a)}{\beta}\right)^-1.
+\end{equation}
+This is a matter of scale setting: Other options like $f_K$ are possible.
+Meanwhile $R_m$ is essentially determined when tuning $am_s(a)$ to its
+physical value. 
+
 
 %\subsection{QCD material parameters}
 %
