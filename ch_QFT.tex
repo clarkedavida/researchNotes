@@ -2704,8 +2704,6 @@ interested in high temperatures and densities. They are the stage on which
 some of the ``real physics" we discuss later will be investigated; therefore we
 discuss briefly the physics of an HIC and familiarize ourselves with some jargon
 used in the HIC community.
-% TODO : when you have internet, maybe get into some history about
-% HICs, what the big current and upcoming experiments are
 We follow two very nicely written 
 theses~\cite{valois_thermal_2025,kleinehanding_magnetic_2026}.
 
@@ -2747,6 +2745,108 @@ inelastic collisions between the hadrons has ceased, we reach a stage called
 different hadron species becomes fixed. Shortly thereafter, the system attains
 {\it kinetic freeze-out}\index{freeze-out!kinetic}, where hadrons can be
 considered as non-interacting hadronic gas.
+
+\subsection{The hydrodynamic stage}
+
+In general, the collisions are going to be off-central. This means that the
+overlap region in general has an almond shape, i.e. there is a large geometric
+anisotropy. The medium at this stage is still strongly interacting, so it makes
+sense to model it as a fluid. Thinking classically for a moment, the outside
+of the almond is at some pressure $p_{\rm out}$ and the pressure inside the
+almond has pressure $p_{\rm in}$. Euler's equations tell us that the particle
+motion is determined by the pressure gradient. An almond has a short axis and a
+long axis, so geometrically, the pressure gradient is larger along the shorter
+axis. Thus the expansion of the fluid will be faster along the short axis than
+the long axis, and hence more particles should be detected along the short-axis
+direction.
+
+In relativistic hydrodynamics, Euler's equations generalize to
+\begin{equation}\label{eq:EMconserve}
+\partial_\mu \Theta^{\mu\nu}=0
+\end{equation}
+with energy-momentum tensor\index{energy-momentum tensor}
+\begin{equation}
+\Theta^{\mu\nu}\equiv\left(\epsilon+p\right)u^\mu u^\nu-pg^{\mu\nu},
+\end{equation}
+where $u^\mu$ is the four-velocity of the fluid and $\epsilon$ is the energy
+density. Thus it generalizes to energy-momentum conservation.
+Let $\phi$ measure the angle in the collision
+plane with $\phi=0$ and $\phi=\pi$ being the two ends of the short axis. Then
+the above argument translates to an expectation that most particles will be
+detected at $\phi=0$ and $\phi=\pi$. More quantitatively,
+\begin{equation}
+\dv{N}{\phi}=N_0\left(1 +2v_1\cos(\phi) + 2v_2 \cos(2\phi) + \cdots\right)
+\end{equation}
+The coefficient $v_2$ is called the {\it elliptic flow}\index{elliptic flow}.
+This coefficient can be predicted in relativistic hydrodynamics, and it agrees
+extremely well with experiment, validating its use. If, for example, the medium
+were non-interacting instead, the expansion would be the same in all directions,
+and we would find $v_i\approx 0$.
+
+Now working in the framework of relativistic hydrodynamics, we would like to
+derive an interesting property of the expanding medium; namely the expansion
+follows lines of constant $s/n_B$. To see this, we will need a couple reminders
+about relativity and thermodynamics.
+
+First, since $\dd\tau^2=g_{\mu\nu}\dd{x}^\mu\dd{x}^\nu$, we have
+\begin{equation}\label{eq:unormal}
+u_\mu u^\mu=g_{\mu\nu}\dv{x^\mu}{\tau}\dv{x^\nu}{\tau}
+=\frac{\dd\tau^2}{\dd\tau^2}=1,
+\end{equation}
+i.e. the four-velocities are normalized. Hitting both sides with
+$\partial_\nu$ and doing a little index gymnastics reveals 
+\begin{equation}\label{eq:updvu}
+u_\nu\partial_\mu u^\nu=0.
+\end{equation}
+We also want to exploit the
+Gibbs-Duhem relation\index{Gibbs-Duhem relation}
+\begin{equation}
+\epsilon+p=Ts+\mu_Bn_B,
+\end{equation}
+where $n_B$ is the net-baryon number density, $\mu_B$ is the corresponding
+chemical potential, and $s$ is the entropy density. Additionally we want the first
+law of thermodynamics written in terms of intensive variables only,
+\begin{equation}
+\dd\epsilon=T\dd s+\mu_B\dd n_B.
+\end{equation}
+Finally it is useful to define currents
+\begin{equation}
+j_B^\mu\equiv n_Bu^\mu,~~~~~~s^\mu\equiv su^\mu,
+\end{equation}
+and the fact that net-baryon number is conserved, set by the initial conditions,
+can be cast as
+\begin{equation}
+\partial_\mu j_B^\mu=0.
+\end{equation}
+
+On to the derivation. We start by contracting \equatref{eq:EMconserve} with
+$u_\nu$
+\begin{equation}\label{eq:snBderiv1}
+0=u_\nu\partial_\mu\Theta^{\mu\nu}
+=u_\nu\partial_\mu\left(\left(\epsilon+p\right)u^\mu u^\nu-pg^{\mu\nu}\right)
+=\partial_\mu\left(\left(\epsilon+p\right)u^\mu\right)-u^\mu\partial_\mu p,
+\end{equation}
+where we used Eqs. \eqref{eq:unormal} and \eqref{eq:updvu}.
+Conservation of net-baryon number lets us write
+\begin{equation}\label{eq:snBderiv2}
+\partial_\mu u^\mu=-\frac{u^\mu\partial_\mu n_B}{n_B}.
+\end{equation}
+Expanding the first term in \equatref{eq:snBderiv1} and substituting
+in \equatref{eq:snBderiv2}, the first law, and Gibbs-Duhem yields 
+\begin{equation}
+0=Tu^\mu\left(\partial_\mu s-\frac{s}{n_B}\partial_\mu n_B\right)
+=Tu^\mu n_B\partial_\mu\left(\frac{s}{n_B}\right). 
+\end{equation}
+Hence,
+\begin{equation}
+u^\mu \partial_\mu\left(\frac{s}{n_B}\right)=0. 
+\end{equation}
+$In fact, plugging net-baryon number conservation into the above
+$equation one even finds
+$\begin{equation}
+$\partial_\mu s^\mu=0,
+$\end{equation}
+$i.e. the entropy is also conserved.
 
 \section{Electromagnetic fields in QCD}\index{magnetic field}\label{sec:EMQCD}
 
