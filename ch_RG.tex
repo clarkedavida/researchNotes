@@ -519,6 +519,7 @@ $\mu$-derivative of the pressure.
 \label{fig:leeYangTheorem}
 \end{figure}
 
+\subsection{The Lee-Yang theorem}
 
 The partition function is also useful to find
 phase transitions. Perhaps the most important work in this regard is by Lee and
@@ -549,8 +550,71 @@ in \figref{fig:leeYangTheorem}, which is taken from Lee and Yang.
     \label{fig:LYE}
 \end{figure}
 
+Let's discuss the Lee-Yang theorem in a bit more detail. Following
+Ref.~\cite{blythe_lee-yang_2003}, we will use a simple
+lattice model of $N$ spins in contact with a thermal reservoir. There, they
+consider complex temperature instead of external field, but the core of the
+argument is the same. Since
+there are $N$ spins this is a system at finite volume by definition. The allowed
+energies can be written $E=n\epsilon$ where $0\leq n\leq M$ and 
+$n,M\in\Z$. Let the number of
+microstates corresponding to level $n$ be $g(n)$. Then the partition function is
+\begin{equation}\label{eq:ZNsimple}
+Z_N=\sum_{n=0}^M g(n)e^{-\beta n\epsilon}.
+\end{equation}
+Introduce $z\equiv e^{-\beta\epsilon}$. For $\beta\in\R$, $z>0$.
+Then by the fundamental theorem of
+algebra, we can rewrite $Z_N$
+\begin{equation}
+Z_N=\sum_{n=1}^M g(n)z^n = \kappa\prod_{n=1}^M\left(1-\frac{z}{z_n}\right),
+\end{equation}
+where $z_n\in\C$ are the zeros of $Z_N$ and $\kappa$ is an irrelevant
+overall factor. By \equatref{eq:ZNsimple}, the fact
+that $g(n)>0$ $\Forall n$ ensures $Z_N$ is strictly positive, and thus none of
+the roots can lie on the real axis. 
 
-The above logic is what happens exactly at the critical point $T=\Tc$ and $h=0$.
+We next write the free energy
+\begin{equation}
+f=\frac{\log(Z_N)}{N}.
+\end{equation}
+Plugging in our polynomial for $Z_N$, dropping the irrelevant constant factor
+that only serves to shift the zero point of the free energy, we get
+\begin{equation}
+f_N=\frac{1}{N}\sum_{n=1}^M\log\left(1-\frac{z}{z_n}\right).
+\end{equation}
+Note that away from the zeroes, this free energy is analytic, and thus
+arbitrarily many times differentiable. We identify phase transitions through
+discontinuities in derivatives of $f_N$ at positive,
+real values of the control parameter,
+in this case $\beta$. Since none of the $z_n$ is real, there is no such
+discontinuity on the real axis, and we learn the following important statement:
+
+\begin{theorem}{Lee-Yang I}{}
+There are no phase transitions at finite volume.
+\end{theorem}
+
+This theorem is completely generic to any lattice system whose partition
+function can be cast in the form \eqref{eq:ZNsimple}. Now let's see what happens
+in the infinite-volume limit, where $N\to\infty$. We assume the limit
+\begin{equation}
+f=\lim_{N\to\infty} f_N
+\end{equation} 
+exists, that this limit drives $M\to\infty$, and that the density
+\begin{equation}
+\rho_N(z')\equiv\frac{1}{N}\sum_{n=1}^M\delta(z'-z_n)
+\end{equation}
+approaches a smooth function $\rho$, the {\it density of zeroes},\index{density
+of zeroes} in this limit.\footnote{These statements
+can be shown rigorously~\cite{ruelle1999statistical}.}
+Then the free energy can be written as
+\begin{equation}
+f=\int\dd{z'}\rho(z')\log\left(1-\frac{z}{z'}\right).
+\end{equation}
+
+
+\subsection{Lee-Yang edges}
+
+The logic of the previous section applies to the critical point $T=\Tc$ and $h=0$.
 When we are away from the critical point, the situation in the complex plane
 changes somewhat. Still in the thermodynamic limit, let us 
 imagine\footnote{In case you forget which way the inequality goes, just

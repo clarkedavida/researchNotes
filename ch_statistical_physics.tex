@@ -402,6 +402,49 @@ U=\frac{Nf}{2}k_B T,
 \end{equation}  
 from which it follows that $U$ is extensive.
 
+\section{Conjugate variables and generalized forces}
+
+Different control parameters like pressure and volume are introduced
+to the energy as products of {\it conjugate variables}\index{conjugate}.
+One is intensive, and one is extensive, so that the product remains extensive,
+like the energy.\footnote{In \secref{sec:legendre} we will introduce
+Legendre transformations. These are always formed by adding/subtracting a
+product of conjugate variables, too.} For example $PV$ is a product of conjugate
+variables. 
+
+Sometimes, the pair is further specified as a {\it generalized
+force}\index{generalized force} and a {\it generalized
+displacement}\index{generalized displacement}. The force is the intensive part,
+and the displacement is the extensive part. In the case of $PV$, this
+association is clear, $P$ being directly related to a literal external force
+applied to the system. Then $V$ changes due to the displacement of the
+boundaries. But a generalized displacement can be, in principle, anything, which
+is useful if you know there exists some control parameter besides $S$, $T$, $P$, 
+or $V$ that affects the system's energy.
+
+The first law of thermodynamics in terms of our most common control parameters
+reads
+\begin{equation}
+  \dd{U}=T\dd{S}-P\dd{V}.
+\end{equation}
+The differential on the LHS is in an extensive variable, and accordingly, the
+differentials on the RHS are in the generalized displacements.
+In this context, consider the effect of adding particles of a particular
+species. We can count the number of particles $N$, which is extensive and thus
+our generalized displacement. If we want to introduce this to the energy, we
+need a conjugate generalized force. For now, let's call that $\mu$. Then
+the first law would be modified as 
+\begin{equation}
+  \dd{U}=T\dd{S}-P\dd{V}+\mu\dd{N},
+\end{equation}
+choosing the sign to be positive since adding a particle should increase the
+energy. A simple perspective to take, then, is that this defines $\mu$; in
+particular,
+\begin{equation}
+  \mu=\pdv{U}{N},
+\end{equation}
+and thus we can view $\mu$ as the change in energy per added particle.
+We call $\mu$ the {\it chemical potential}\index{chemical potential}.
 
 \section{Equations of state}\label{sec:EoS}
 
@@ -419,6 +462,7 @@ first law of thermodynamics,\index{thermodynamics!first law}
 \begin{equation}\label{eq:fslaw}
   \dd{U}=T\dd{S}-P\dd{V}+\sum_i\mu_i\dd{N}_i,
 \end{equation}
+where the sum runs over particle species,
 we know that\footnote{It can be quite confusing to track which variables
 are held fixed and allowed to vary doing these partial derivatives.
 This matters because sometimes different choices of control parameters
@@ -600,7 +644,7 @@ $$
 
 
 
-\section{Legendre transforms}\index{Legendre transformation}
+\section{Legendre transforms}\label{sec:legendre}\index{Legendre transformation}
 
 Equation~\eqref{eq:fslaw} tells us that we can think of the internal energy
 $U$ of a system in equilibrium at $(T,P,\mu)$ as a function of $S$, $V$, and
@@ -608,12 +652,11 @@ $N$. However one of the control parameters, such as $S$, may be
 difficult or impossible to measure, and therefore we would rather
 think in terms of the more accessible quantity $T$, which 
 is the derivative of $U$ with respect to $S$; 
-Hence we want 
+Hence we are looking for a transformation $L$ of $U$ such that
 \begin{enumerate}
-\item to look at $U$ in terms of a derivative with respect to $S$ rather 
-      than $S$ itself; moreover 
-\item we do not want to lose any information we had before, i.e. we want this
-      process to be invertible. 
+\item $LU$ is a function of $\partial_T U$ rather than a function of $T$; and 
+\item we do not want to lose any information we had before, i.e. we want $L$ to
+      be its own inverse.
 \end{enumerate}
 These are the purposes of a Legendre transformation. The second point 
 may seem too obvious to state, but it is worth emphasizing here because 
@@ -621,68 +664,35 @@ what makes thermodynamic potentials such as $U$ special is that you are
 supposed to be able to determine state variables like $T$ from them. 
 Since no information is lost, Legendre transforms guarantee that 
 thermodynamic potentials get transformed to other thermodynamic potentials.
-\index{thermodynamic!potential}\index{potential!thermodynamic}
+Also to keep from losing information, it is convenient to demand $U$ is
+monotonic in $T$ and $LU$ is monotonic in $\partial_T U$. That way there
+is no ambiguity when mapping between $U$ and $LU$. Thankfully we know $U$
+is monotonic in $T$.
 
-Before we define a Legendre transformation, let us look at an example
-due to Markus Deserno~\cite{deserno} where a naive transformation can go
-wrong and information can be lost. 
-\begin{example*}{}
-We consider a function $y(x)$ and define a new variable
-\begin{equation}\label{eq:xlegendre}
-  p\equiv y'(x).
-\end{equation}
-In order to accomplish goal (1) above, one might naively solve
-\equatref{eq:xlegendre} for $x$, obtaining the function $x(p)$
-and then plug this back into $y(x)$ to obtain
+Now let's think about a good approach to define $L$. Consider $f$ monotonic in
+$x$. What would I need to reconstruct $f$? One way to construct it is if you
+know the slope and $y$-intercept at every point; in particular, the function is the
+envelope of its tangent lines. Let
 \begin{equation}
-  Y(p)=y\left(y'^{-1}(p)\right).
+p\equiv \partial_x f.
 \end{equation}
-To see that this procedure destroys information, consider the example
-\begin{equation}\label{eq:badlegendre}
-  y(x)=\frac{1}{2}(x-x_0)^2.
+The {\it Legendre transform} $L$ of $f$ is
+\begin{equation}\label{eq:legendre}
+Lf\equiv f-px.
 \end{equation}
-The derivative is $p=y'(x)=x-x_0$, and hence $x=p+x_0$. Plugging this
-into \equatref{eq:badlegendre} we get the function
+What is genius about this definition is that it encodes both the slope at each point
+through $p$ and its intercept $f-px$. Moreover, $p$ was introduced in such a way
+that $Lf$ is monotonic in $p$, guaranteeing we can meaningfully carry out the
+operation $LLf(p)$. What do we find? Let
 \begin{equation}
-  Y(p)=y(x(p))=\frac{1}{2}\left(x(p)-x_0\right)^2=\frac{1}{2}p^2.
+q\equiv \partial_p (Lf) = -x
+\end{equation} 
+Then
+\begin{equation}\label{eq:legendre}
+LLf= Lf-qp = (f-px)-(-x)p = f,
 \end{equation}
-Evidently all functions of the form~\eqref{eq:badlegendre} get transformed
-to the same function regardless of the value of $x_0$; therefore there is
-no way starting from $Y(p)$ to figure out what $x_0$ was. Hence
-information was destroyed.
-\end{example*}
-
-Now on to the definition. Recall that a function $f$ is {\it convex}
-\index{function!convex} in a region if the graph of the function lies 
-below the line segment connecting any two points in that region. It is 
-{\it concave}\index{function!concave} if $-f$ is convex. Consider
-a function $y:\R\to\R$. Then the 
-{\it Legendre transform} is defined by
-\begin{equation}
-Y(p)=\begin{cases}
-  \min_x [y(x)-xp] & \text{if $y$ is convex}\\
-  \max_x [y(x)-xp] & \text{if $y$ is concave.}
-\end{cases}
-\end{equation}
-This definition makes sense in view of goal (1) at the beginning of this
-section, assuming $y$ is differentiable. To see this, note that the maximum
-or the minimum corresponds to a critical point, and so
-\begin{equation}\label{eq:legendremin}
-  0=\frac{d}{dx}\left[y(x)-xp\right]=y'(x)-p.
-\end{equation}
-
-We now state two useful facts about Legendre transforms. These can
-be relatively straightforwardly proven. We emphasize that Legendre
-transformations are only defined for concave or convex functions, and
-that the concavity or convexity is important to prove the second point,
-because it guarantees that the derivative is monotonic.
-\begin{proposition}{}{}
-  \begin{enumerate}
-    \item The Legendre transformation of a convex function is concave
-          and vice versa.
-    \item The Legendre transformation is its own inverse.
-  \end{enumerate}
-\end{proposition}
+as desired. So $Lf$ is our function depending on $\partial_x f$ with 
+$L=L^{-1}$.
 
 Now that we have some intuition for why one might want to do a
 Legendre transform, we are going to see how some other useful
@@ -692,8 +702,8 @@ thermodynamic potentials arise from carrying them out.
 \index{free energy!Helmholtz}
 Let us now return to our issue of dropping $S$ in favor
 of $T$. According to the above section if we
-Legendre transform $U(S)$ out of the variable $S$, then the minimization
-will guarantee that the new independent variable is $T$. Calling
+Legendre transform $U(S)$ out of the variable $S$, then 
+the new independent variable is $T$. Calling
 this new function $F$, we obtain
 \begin{equation}\label{eq:helmholtz}
   F(V,T,N)=U-TS.

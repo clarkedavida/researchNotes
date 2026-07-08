@@ -583,6 +583,40 @@ density $n_B$ should jump at
 $\mu\approx m_p$ to the {\it nuclear matter density}\index{nuclear matter density} $n_0\approx 0.16$ fm$^{-3}$. This jump is discontinuous, and
 so the expectation is that transition is first-order, with $n_B$
 playing the role of an order parameter.
+
+To better understand this jump, we repeat the argument of
+Ref.~\cite{halasz_phase_1998}. Imagine a grand canonical system, perhaps
+something like the overlap region of two colliding heavy ions. We consider
+this system in contact with a baryonic reservoir, which in this example,
+would be the non-overlapping part of the ions. Isolating the effect of baryonic
+particles only, the grand partition function
+reads
+\begin{equation}
+Z=\sum_\alpha\exp{-\frac{E_\alpha-\mu N_\alpha}{T}},
+\end{equation}
+where the sum runs over states, $E$ is the energy, $N$ the net-baryon number,
+and $\mu$ the baryon chemical potential. In the limit $T\to0$, the lowest-energy
+state dominates $Z$, which at $\mu=0$ is the ground state $E=N=0$. At fixed $T$,
+the only way to change the system's state is to increase $\mu$ until a baryon
+is pulled into the system. Let
+\begin{equation}
+\mu_0\equiv\min_\alpha E_\alpha/N_\alpha
+\end{equation}
+and let $\alpha=0$ be a state that satisfies this minimum. If $\mu<\mu_0$, then
+$E_0-\mu N_0>0$, and due to the $T\to0$ limit, the $\alpha=0$ state is
+exponentially suppressed, i.e. forbidden. Correspondingly, when $\mu>\mu_0$, 
+the argument of the exponential becomes positive, and is thus favored over the
+ground state. Therefore
+\begin{equation}
+n(\mu) = 
+\begin{cases} 
+    0 & \text{if } \mu < \mu_0 \\ 
+    \text{positive} & \text{if } \mu \geq\mu_0, \\
+\end{cases}
+\end{equation}
+i.e. $n(\mu)$ exhibits a discontinuity at $\mu_0$.
+
+We continue our discussion of qualitative features of the phase diagram.
 At sufficiently large $\mu$, color interactions are expected to be screened,
 and hence non-perturbative effects like global symmetry breaking should
 be suppressed. So for massless quarks, one expects for large $\mu$
