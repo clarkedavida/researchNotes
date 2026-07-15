@@ -540,16 +540,6 @@ of the pressure and its $\mu$-derivatives is shown schematically
 in \figref{fig:leeYangTheorem}, which is taken from Lee and Yang. 
 
 
-\begin{figure} 
-    \centering
-    \includegraphics[width=0.5\linewidth]{figs/LYE.pdf}
-    \caption{
-        Generic singularity structure of the Ising model partition function in the
-        complex $h$ plane, for $T>T_c$ in the thermodynamic limit.
-    }
-    \label{fig:LYE}
-\end{figure}
-
 Let's discuss the Lee-Yang theorem in a bit more detail. Following
 Ref.~\cite{blythe_lee-yang_2003}, we will use a simple
 lattice model of $N$ spins in contact with a thermal reservoir. There, they
@@ -560,24 +550,24 @@ energies can be written $E=n\epsilon$ where $0\leq n\leq M$ and
 $n,M\in\Z$. Let the number of
 microstates corresponding to level $n$ be $g(n)$. Then the partition function is
 \begin{equation}\label{eq:ZNsimple}
-Z_N=\sum_{n=0}^M g(n)e^{-\beta n\epsilon}.
+\grandZ_N=\sum_{n=0}^M g(n)e^{-\beta n\epsilon}.
 \end{equation}
 Introduce $z\equiv e^{-\beta\epsilon}$. For $\beta\in\R$, $z>0$.
 Then by the fundamental theorem of
-algebra, we can rewrite $Z_N$
+algebra, we can rewrite $\grandZ_N$
 \begin{equation}
-Z_N=\sum_{n=1}^M g(n)z^n = \kappa\prod_{n=1}^M\left(1-\frac{z}{z_n}\right),
+\grandZ_N=\sum_{n=1}^M g(n)z^n = \kappa\prod_{n=1}^M\left(1-\frac{z}{z_n}\right),
 \end{equation}
-where $z_n\in\C$ are the zeros of $Z_N$ and $\kappa$ is an irrelevant
+where $z_n\in\C$ are the zeros of $\grandZ_N$ and $\kappa$ is an irrelevant
 overall factor. By \equatref{eq:ZNsimple}, the fact
-that $g(n)>0$ $\Forall n$ ensures $Z_N$ is strictly positive, and thus none of
+that $g(n)>0$ $\Forall n$ ensures $\grandZ_N$ is strictly positive, and thus none of
 the roots can lie on the real axis. 
 
 We next write the free energy
 \begin{equation}
-f=\frac{\log(Z_N)}{N}.
+f=\frac{\log(\grandZ_N)}{N}.
 \end{equation}
-Plugging in our polynomial for $Z_N$, dropping the irrelevant constant factor
+Plugging in our polynomial for $\grandZ_N$, dropping the irrelevant constant factor
 that only serves to shift the zero point of the free energy, we get
 \begin{equation}
 f_N=\frac{1}{N}\sum_{n=1}^M\log\left(1-\frac{z}{z_n}\right).
@@ -587,14 +577,39 @@ arbitrarily many times differentiable. We identify phase transitions through
 discontinuities in derivatives of $f_N$ at positive,
 real values of the control parameter,
 in this case $\beta$. Since none of the $z_n$ is real, there is no such
-discontinuity on the real axis, and we learn the following important statement:
+discontinuity on the real axis. We could still spoil the differentiability 
+at a point $z_0$ on the real axis if, for any neighborhood of $z_0$, we
+can find a $z_n$ in that neighborhood, but that there are finitely many $z_n$
+forbids this scenario, too.
+We therefore learn the following important statement:
 
-\begin{theorem}{Lee-Yang I}{}
+\begin{theorem}{Lee-Yang}{}
 There are no phase transitions at finite volume.
 \end{theorem}
 
 This theorem is completely generic to any lattice system whose partition
-function can be cast in the form \eqref{eq:ZNsimple}. Now let's see what happens
+function can be cast in the form \eqref{eq:ZNsimple}. If we want want a phase
+transition at $z_0$, we would need to zeros to become dense enough near
+$z_0$ that we can always find them in neighborhoods of the point. 
+Another useful fact one can see from \equatref{eq:ZNsimple} is the following:
+
+\begin{theorem}{}{}
+If $z_0$ is a zero of $\grandZ$ then so is $z_0^*$.
+\begin{proof}
+Let $\grandZ(z_0)=0$. Then since the $g(n)$ are real,
+$$
+\grandZ(z_0^*)
+=\sum_ng(n)\left(z_0^*\right)^n
+=\sum_ng(n)\left(z_0^n\right)^*
+=\left(\sum_ng(n)z_0^n\right)^*
+=0.
+$$
+\end{proof}
+\end{theorem}
+
+\subsection{First- and second-order transitions}
+
+Let's see what happens
 in the infinite-volume limit, where $N\to\infty$. We assume the limit
 \begin{equation}
 f=\lim_{N\to\infty} f_N
@@ -607,10 +622,138 @@ approaches a smooth function $\rho$, the {\it density of zeroes},\index{density
 of zeroes} in this limit.\footnote{These statements
 can be shown rigorously~\cite{ruelle1999statistical}.}
 Then the free energy can be written as
-\begin{equation}
+\begin{equation}\label{eq:densityZeroIntegral}
 f=\int\dd{z'}\rho(z')\log\left(1-\frac{z}{z'}\right).
 \end{equation}
+Here, writing $z=x+iy$, we have used that
+\begin{equation}
+\delta(z'-z_n)=\delta(x'-x_n)\delta(y'-y_n);
+\end{equation}
+thus we are interpreting \equatref{eq:densityZeroIntegral} as a 2D area integral
+over the complex plane, i.e. $\dd{z}=\dd{x}\dd{y}$ is real. Therefore the 
+potential, which we define as the real part of the free energy, comes out to 
+be\footnote{The easiest way to show this is to write $z=Re^{i\theta}$ and go
+from there.}
+\begin{equation}\label{eq:LYpotential}
+\phi(z)\equiv\Re f(z)
+=\int\dd{z'}\rho(z')\Re\log\left(1-\frac{z}{z'}\right)
+=\int\dd{z'}\rho(z')\log\left|1-\frac{z}{z'}\right|.
+\end{equation}
 
+At this stage, it is worthwhile to point out a subtle but important
+difference compared to the finite-volume case: Since we assumed $\rho$
+approached a smooth function, this logarithmic potential is continuous
+everywhere, also at the zeros of $\grandZ$~\cite{KelloggPot}. In the integral,
+the singularities at $z_n$ now have measure zero, such that the potential
+remains well behaved.\footnote{Basically the same reason that
+$\int_0^1\dd{x}\log{x}$ is integrable.}  
+We will need to exploit the continuity of $\phi$ later, and as always, our
+phase transitions will be defined by discontinuities in derivatives of
+the free energy.
+
+We are now going to work toward an understanding of how the partition function
+zeros are arranged in the complex plane in the thermodynamic limit. To
+accomplish this, we will use \equatref{eq:LYpotential} to write $\rho$ as a
+function of $\phi$, then use our knowledge of $\phi$ to learn about $\rho$.
+We will see that $\rho$ and $\phi$ are formally related the same way as a charge
+density and potential in electrostatics, hence the nomenclature for $\phi$.
+
+First note that $\log|z|$ is the Green function for Laplace's equation,
+\begin{equation}\label{eq:greenLaplace}
+\nabla^2\log|z|=2\pi\delta(z).
+\end{equation}
+To see this, note that $\nabla^2\log|z|=0$ away from $z=0$. To reveal its
+identity as a delta function, you can integrate in a neighborhood $D$
+of radius $r$ about $z=0$:
+\begin{equation}\begin{aligned}
+\int_D\dd{z}\nabla^2\log|z|
+&=\frac{1}{2}\int_D\dd{x}\dd{y}\nabla\cdot\left(\nabla\log\left(x^2+y^2\right)\right)\\
+&=\frac{1}{2}\oint_{\partial D}\dd{\vec n}\cdot\nabla\log\left(x^2+y^2\right)\\
+&=\frac{1}{2}\int_0^{2\pi}\hat{r}r\dd{\theta}\cdot\hat{r}\pdv{}{r}\log{r}\\
+&=\int_0^{2\pi}\dd{\theta} =2\pi.
+\end{aligned}\end{equation}
+Here we used the divergence theorem, so $\dd{\vec n}$ points normal to the
+contour, and switched to cylindrical coordinates. Plugging
+\equatref{eq:greenLaplace} into \equatref{eq:LYpotential} and reminding
+ourselves that the Laplacian acts on $z$ rather than $z'$ yields 
+\begin{equation}\label{eq:LYpoisson}
+\rho(z)=\frac{1}{2\pi}\nabla^2\phi(z),
+\end{equation} 
+which gives us Poisson's equation, i.e. our electrostatics analogy.
+
+
+\begin{figure}
+\centering
+\includegraphics[width=0.4\linewidth]{figs/LYpotential.pdf}
+\caption{The potential $\phi$ with domain in the complex plane.
+A small area $A$ covers an infinitesimal segment $\delta s$
+of the curve $C$ of zeros. $s=0$ corresponds to $z_0$.
+Image taken from Ref.~\cite{blythe_lee-yang_2003}.}
+\label{fig:LYpotential}
+\end{figure}
+
+Just like in electrostatics, if we integrate \equatref{eq:LYpotential} over any
+bounded region containing singularities of $\rho$, $\phi$ is guaranteed to be a
+continuous function~\cite{KelloggPot}. If there is a critical point $z_0$
+on the real axis, then we expect two different phases, one above and one below
+$\Re z_0$. In general we then have two different free energies, corresponding to
+two different potentials. Let $\phi_1$ label the potential in the region ``to
+the left" of $z_0$ and $\phi_2$ label the other phase; see
+\figref{fig:LYpotential}. That $\phi$ is continuous then requires
+$\phi_1(z)=\phi_2(z)$ along the phase boundary, i.e. along a curve $C$
+going through $z_0$, reaching into the complex plane following the density of
+zeros $\rho$. Since phase transitions manifest as discontinuities in derivatives
+of the free energy, or equivalently since $\phi_1$ and $\phi_2$ are different
+functions, we generally expect some derivative of $\phi$ to not exist at points
+along $z$ where the zeros are.
+
+Now parameterize $C$ with $s$ and consider an infinitesimal segment 
+$\delta s$ of this curve, enclosed by an
+area $A$ with two sides parallel to $C$ and two sides perpendicular, as
+in \figref{fig:LYpotential}. The line density of zeros $\mu$, i.e. the density
+of zeros along $C$, at $s$ is
+\begin{equation}
+\mu(s)\delta s=\int_A\dd z\rho(z).
+\end{equation}
+Using \equatref{eq:LYpoisson} and the divergence theorem yields
+\begin{equation}\begin{aligned}\label{eq:LYarea}
+\int_A\dd{z}\rho(z)
+&=\frac{1}{2\pi}\int_A\dd{z}\nabla\cdot\nabla\phi(z)\\
+&=\frac{\delta s}{2\pi}\left(\nabla\phi_2(z^+)-\nabla\phi_1(z^-)\right)\cdot\hat{n},
+\end{aligned}\end{equation}
+where $\hat n$ is the unit vector normal to $C$ at $z$ and $z^{\pm}$ denotes
+the limit approaching $z$ from the $\pm\hat{n}$ side.\footnote{$+\hat{n}$
+lies on the $\phi_2$ side.} 
+Let $\psi$ be the imaginary part of the free energy $f$. 
+In the context of \equatref{eq:LYarea}, the CR equations apply, so we can write
+\begin{equation}
+\partial_x\phi=\partial_y\psi~~~~\text{and}~~~~\partial_y\phi=-\partial_x\psi,
+\end{equation}
+from which it follows that
+\begin{equation}\begin{aligned}
+\hat{n}\cdot\nabla\phi(z)
+&=\hat{n}\cdot\left(\hat{x}\partial_x+\hat{y}\partial_y\right)\phi(z)\\
+&=\hat{n}\cdot\left(\hat{x}\partial_y-\hat{y}\partial_x\right)\psi(z)\\
+&=\hat{t}\cdot\left(\hat{y}\partial_y+\hat{x}\partial_x\right)\psi(z)\\
+&=\hat{t}\cdot\nabla\psi(z),
+\end{aligned}\end{equation}
+where $\hat{t}$ is the unit vector tangent to $C$ at $z$. Thus the scalar
+product in \equatref{eq:LYarea} can be identified as the directional derivative
+of the imaginary part along $C$, i.e. we find
+\begin{equation}
+\mu(s)\frac{1}{2\pi}\dv{}{s}\left(\psi_2(z)-\psi_1(z)\right).
+\end{equation}
+
+
+\begin{figure} 
+    \centering
+    \includegraphics[width=0.5\linewidth]{figs/LYE.pdf}
+    \caption{
+        Generic singularity structure of the Ising model partition function in the
+        complex $h$ plane, for $T>T_c$ in the thermodynamic limit.
+    }
+    \label{fig:LYE}
+\end{figure}
 
 \subsection{Lee-Yang edges}
 
