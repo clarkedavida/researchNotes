@@ -740,9 +740,57 @@ from which it follows that
 where $\hat{t}$ is the unit vector tangent to $C$ at $z$. Thus the scalar
 product in \equatref{eq:LYarea} can be identified as the directional derivative
 of the imaginary part along $C$, i.e. we find
-\begin{equation}
-\mu(s)\frac{1}{2\pi}\dv{}{s}\left(\psi_2(z)-\psi_1(z)\right).
+\begin{equation}\label{eq:lineDensityMu}
+\mu(s)=\frac{1}{2\pi}\dv{}{s}\left(\psi_2(z^+)-\psi_1(z^-)\right).
 \end{equation}
+
+Equation \eqref{eq:lineDensityMu} will let us learn how the density of zeros
+changes as we approach $z_0$ along the phase boundary. Now, we want to learn
+about the direction of the phase boudary near $z_0$. Suppose in the
+thermodynamic limit there is a phase transition at $z_0$. Then on either side of
+the phase boundary, the free energy is analytic, and thus admits an expansion
+\begin{equation}
+f_{1,2}\left(\tilde{z}\right)=f(z_0)+b_{1,2}\tilde{z}+c_{1,2}\tilde{z}^2+\order{\tilde{z}^3},
+\end{equation}
+where $\tilde{z}\equiv z-z_0$, $f_1$ holds for $\Re\tilde{z}<0$ and $f_2$ holds
+for $\Re\tilde{z}>0$. For $f$ to be real along the real axis, it must be that
+the coefficients $b_i$ and $c_i$ are real. As we pointed out earlier, the
+potential, i.e. the real part of $f$, is continuous across the phase boundary,
+which enforces $\Forall z\in C$ that $\Re f_1(z)=\Re f_2(z)$. After some
+algebra, we learn from this condition that points along $C$ satisfy
+\begin{equation}\label{eq:zerosLine}
+\tilde{y}^2\approx\frac{b_2-b_1}{c_2-c_1}\tilde{x}+\tilde{x}^2.
+\end{equation}
+Thus the shape and density of $C$ depends on the order of the phase transition: 
+\begin{enumerate}
+\item For first-order transitions, there must be a discontinuity after one
+derivative of $f$ w.r.t. the control parameter, so $b_1\neq b_2$,
+and from \equatref{eq:zerosLine}, we learn the curve
+is shaped like a hyperbola passing smoothly through $z_0$. Therefore the tangent
+to $C$ is parallel to the imaginary axis at $z_0$, and from
+\equatref{eq:lineDensityMu} we see
+$$
+\mu(0)=\frac{1}{2\pi}(b_2-b_1),
+$$ 
+i.e. the density of zeros is nonzero at $z_0$ for a first-order transition.
+\item For a second-order phase transition (in the Ehrenfest sense), 
+the first derivative exists, and
+$b_1=b_2$. Then the first term in \equatref{eq:zerosLine} drops out, and we
+learn $C$ looks linear near $z_0$. As we argued earlier, zeros of $\grandZ$
+occur in complex-conjugate pairs, so we expect two lines
+$\tilde{y}=\pm\tilde{x}$ passing through $z_0$. Taking the solution
+$\tilde{x}=\tilde{y}=s/\sqrt{2}$ and plugging it into
+\equatref{eq:lineDensityMu} we learn
+$$
+\mu(s)=\frac{c_2-c_1}{\pi}s,
+$$
+i.e. the density decreases linearly to zero as one approaches $z_0$ along $C$.
+\item For a general continuous phase transition, the first nonzero term in the
+Taylor expansion of $f$ will control the density. If the difference 
+goes like $f_2(z)-f_1(z)\sim z^\alpha$, then the density behaves like 
+$s^{\alpha-1}$ near $z_0$, i.e. for a finite density of zeros one 
+needs $\alpha\geq 1$. The approach is at an angle $\pi/2\alpha$.
+\end{enumerate}
 
 
 \begin{figure} 
