@@ -706,7 +706,7 @@ Legendre transform $U(S)$ out of the variable $S$, then
 the new independent variable is $T$. Calling
 this new function $F$, we obtain
 \begin{equation}\label{eq:helmholtz}
-  F(V,T,N)=U-TS.
+  F(V,T,\vec{N})=U-TS.
 \end{equation}
 This new function is guaranteed to be a thermodynamic potential, and
 we give it a special name: the {\it Helmholtz free energy}.
@@ -718,8 +718,7 @@ From \equatref{eq:helmholtz} and the first law, we get
 We can derive some useful thermodynamic relations from these. For
 instance\footnote{In \secref{sec:thermdiff} we outlined the importance of
 specifying which quantities are held fixed. Sometimes it is clear from context
-what is held fixed. For example \equatref{eq:helmholtz1st} makes clear
-that $F(V,T,\vec{N})$. In that context, the partial derivative in
+what is held fixed. For example $F(V,T,\vec{N})$, so the partial derivative in
 \equatref{eq:dfdt} w.r.t. $T$ must be carried out at fixed $V$ and $\vec{N}$.
 Of course it is good practice to write what is fixed explicitly, but some
 authors including me will drop that notation if they deem it clear, not
@@ -734,13 +733,25 @@ where $\beta=1/T$ in natural units.
 
 The {\it enthalpy} is given by the Legendre transformation
 \begin{equation}\label{eq:enthalpy}
- H(S,P,N)=U+PV.
+ H(S,P,\vec{N})=U+PV.
 \end{equation}
 From \equatref{eq:enthalpy} and the first law we obtain
 \begin{equation}
  \dd H = T\dd{S} +V\dd{P} +\sum_i\mu_i\dd N_i.
 \end{equation}
 
+\subsection{Gibbs free energy}
+\index{free energy!Gibbs}
+
+One arrives at the {\it Gibbs} free energy using both the Helmholtz and enthalpy
+Legendre transformations,
+\begin{equation}
+G(P,T,\vec{N})=U+PV-TS,
+\end{equation}
+and using the first law, we find
+\begin{equation}
+dG=V\dd{P}-S\dd{T}+\sum_i\mu_i\dd{N}_i.
+\end{equation}
 
 \section{Ideal quantum gas}
 

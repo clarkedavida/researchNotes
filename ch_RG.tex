@@ -96,8 +96,10 @@ Along phase boundaries, different phases may coexist\footnote{This
 coexistence, which in a sense occurs because there is a latent heat,
 can also be used to characterize first-order transitions.}. For instance along the
 solid-liquid phase boundary one will in general find a mixture of solids and
-liquid, which is sometimes called a {\it slurry}\index{slurry}. We also use
-the common verbiage when crossing the boundaries: the substance {\it
+liquid, which is sometimes called a {\it slurry}\index{slurry}. 
+Shown in \figref{fig:phase_water} is also the {\it triple point}\index{triple
+point}, where all three of the solid, liquid, and gas phases coexist.
+We use common verbiage when crossing the boundaries: the substance {\it
 melts}\index{melt} when going from solid to liquid, {\it
 evaporates}\index{evaporate} when going
 from liquid to gas, and {\it sublimates}\index{sublimate} when going from solid
@@ -234,6 +236,7 @@ note that if there are too few stones, there can be no percolation by
 definition. Eventually, a cluster must percolate, and $P$ changes from 0 to some
 nonzero value, and $P$ can be viewed as an order parameter of a
 {\it percolation phase transition}\index{phase transition!percolation}.
+
 
 
 \section{Models of magnets}\label{sec:magnets}
@@ -1090,6 +1093,176 @@ at all. Indeed, this strategy was used to demonstrate that the QCD phase change
 at physical quark mass and zero baryon chemical potential 
 is a crossover~\cite{aoki_order_2006}.
 
+\section{Stability conditions}\index{stability}
+
+Here we discuss some phenomenological aspects of system stability following the
+nice presentation in Ref.~\cite{debenedetti1996}.
+
+Consider a system in equilibrium described by the control parameters $S$, $V$,
+and $N$, i.e. we are in the microcanonical picture. 
+By the second law of thermodynamics, this is a
+state whose entropy is maximized. It is also a state 
+whose internal energy is minimized. These
+conditions can be expressed in terms of variations from the equilibrium state:
+\begin{equation}\begin{aligned}
+\atFixed{\delta S}{U,V,N} &\leq 0\\
+\atFixed{\delta U}{S,V,N} &\geq 0.
+\end{aligned}\end{equation}
+
+Now consider an equilibrium system described by $N$, $T$, and $V$. This would
+happen e.g. for a system in contact with a thermal reservoir. We consider the
+system and reservoir to be divided by a non-adiabatic boundary, which means no
+work is done, which is consistent with our control variables. The reservoir and
+system then have the same temperature. Consider again variations from the
+equilibrium state. The first and second laws respectively tell us
+\begin{equation}\begin{aligned}\label{eq:stable1}
+\delta S + \delta S^R&\leq 0\\
+\delta U + \delta U^R& = 0,\\
+\end{aligned}\end{equation}
+where the $R$ superscript indicates quantities describing the reservoir.
+Since the reservoir performs no work and has the same temperature as the system,
+its energy change by the first law is
+\begin{equation}\label{eq:Ureservoir}
+\delta U^R = T\delta S^R
+\end{equation}
+Combining \equatref{eq:Ureservoir} with \equatref{eq:stable1} yields
+\begin{equation}\label{eq:Ureservoir}
+\atFixed{\delta F}{T,V,N} \geq 0, 
+\end{equation}
+i.e. the Helmholtz free energy is minimized for an equilibrium system. A
+phenomenological argument using instead a mechanical boundary
+shows that the Gibbs free energy should also be minimized in equilibrium.
+
+
+We want now to study the stability of the system. For a generic free energy $E$
+to be minimized, its first derivative w.r.t. a control parameter vanishes, and
+its second derivatives must be positive. Let $X$ be a generalized force and
+$\xi$ be its conjugate variable. Then 
+\begin{equation}
+\pdv{E}{X}=\xi,
+\end{equation} 
+where the partial derivative as usual has the other primary control variables
+fixed. Thus the condition that second derivatives are positive is equivalent to
+\begin{equation}
+\pdv{\xi}{X}>0.
+\end{equation} 
+At the limit of stability, we have
+\begin{equation}
+\pdv{\xi}{X}=0.
+\end{equation}
+These imply experimentally accessible stability conditions. For example
+substituting $-P$ (due to the sign on the first law) and $V$ we
+learn that for stable systems 
+\begin{equation}\begin{aligned}\label{eq:kTstable}
+-V\atFixed{\pdv{P}{V}}{T}=\frac{1}{\kappa_T}>0
+\end{aligned}\end{equation}
+is a stability condition. Because $P$ and $V$ are thought of as ``mechanical"
+parameters, this is sometimes referred to as a {\it mechanical
+stability}\index{stability!mechanical}
+condition.
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figs/metastable_pheno.pdf}
+\caption{Phenomenological picture of metastability. The image is taken 
+from Ref.~\cite{debenedetti1996}, where they denote Helmholtz free energy with
+$A$ instead of $F$. See text for explanation.} 
+\label{fig:metastability}
+\end{figure}
+
+\subsection{Superheated liquids and supercooled gases}
+
+Next we consider the stability of a pure substance near a first-order liquid-gas
+phase transition. 
+An example could be water, sitting on the curve between the triple
+point and $\Tc$. 
+The situation is shown schematically in \figref{fig:metastability}. 
+Plots (a-c) show some isotherms at temperature $T_1<\Tc$; curves closest
+to the symbol $T_1$ in these plots are part of the isotherm. 
+The points $b$ and $b'$ label saturated
+liquid and vapor phases, respectively. The plots are somewhat complicated
+and connected to each other, so we will jump around between them in this
+presentation.
+
+The coexistence curve in plot (a)
+manifests as a straight line passing through $b$ and $b'$. 
+For suppose we have $N$ total degrees of freedom 
+of which $N_L$ are liquid and $N_G$ are gas, and let $x$ be the fraction
+of liquid. Then $1-x$ is the fraction of gas. The two saturated phases exist
+at volumes 
+\begin{equation}
+V_L=xNv_L,~~~~~~~~V_G=(1-x)Nv_G,
+\end{equation}
+where $v_L$ and $v_G$ indicate volume per degree of freedom in the respective
+phases, and the total volume is $V=V_L+V_G$. Along the coexistence curve, $F$
+is a linear combination of $F_L$ and $F_G$, the equilibrium free energies of
+the saturated phases, and since $F$ scales linearly
+with $N$, 
+\begin{equation}
+F\propto x F_L + (1-x) F_G.
+\end{equation}
+Thus varying $x$ traces out a line in this plane. 
+Plots (a) and (b) are related by
+\begin{equation}\label{eq:FVtoPV}
+P=-\atFixed{\pdv{F}{V}}{T,N}~~~\Rightarrow~~~
+F(T,N,V_2)-F(T,N,V_1)=\int_{V_1}^{V_2}\dd{V}P.
+\end{equation} 
+According to this, since $b$ and $b'$ lie on the same line in the $F$-$V$ plane,
+they have the same slope, i.e. the same pressure.
+
+Next we turn our attention to plot (b). The ``S-shaped" curve, which is both
+dashed and solid, shows the system isotherm ignoring stability. In the region
+between $e$ and $f$, the curve has a positive slope, violating
+\equatref{eq:kTstable}, i.e. this region is not stable and hence unphysical.
+Thus $e$ and $f$ indicate stability limits in all figures. 
+The only way to connect $b$ and $b'$, remaining on the isotherm and
+without violating stability somewhere, is
+therefore to proceed along the dashed, horizontal line at $P_1$. 
+The two phases coexist
+along this line, which is consistent with plot (a) where we saw the slopes at
+$b$ and $b'$ were the same, implying the pressure is the same. Thus the
+horizontal, dashed line in plot (b) corresponds to the line segment connecting
+$b$ and $b'$ in plot (a).
+
+How would one find $P_1$? At the beginning of the section, we argued the Gibbs free
+energy $G$ is minimized at equilibrium, i.e. it is minimized when $T$, $P$,
+and $N=N_L+N_G$ are fixed. So the first law for $G$ reduces to
+\begin{equation}
+0=\dd{G}=\mu_L\dd{N_L}+\mu_G\dd{N_G}.
+\end{equation}
+Since $N$ is fixed, we only can change the particle numbers $N_L$ and $N_G$ by
+converting one into the other, implying $\dd{N_L}=-\dd{N_G}$, from which it
+follows that $\mu_L=\mu_G$, i.e. coexistence demands a common chemical
+potential. In plot (c) of \figref{fig:metastability}, we see curves for the two
+phases in the $\mu$-$P$ plane. Where they cross, i.e. where they have a common
+$\mu$, defines $P_1$. In this plane, the isothermal path would follow one
+of the curves until it hits the kink where $\mu_L=\mu_G$, then proceed
+along the other.
+
+Let us return again to plot (a). We have learned that the line passing through
+$b$ and $b'$ has constant $\mu$. Taking Legendre transforms of
+Gibbs-Duhem\index{Gibbs-Duhem relation} into $F$ and $G$ reveals 
+\begin{equation}
+F=\mu N-PV ~~~~~~\text{and}~~~~~~G=\mu N.
+\end{equation}
+Thus the $y$-intercept of this line is exactly where $F=G$ and has been labelled
+with $G$ accordingly. The isotherms connecting $b$ with $e$ and $f$ with $b'$
+do not have the minimum $F$ in this figure, which is another way of seeing
+that the isothermal system prefers to move along the line segment $bb'$.
+
+Now back to plot (b). Starting on the right-most point of the S-shaped isotherm,
+and decreasing the volume, we find the pressure increases until it hits $P_1$.
+There, the system prefers to condense gas particles into droplets, continuing
+at constant pressure until the system is pure liquid. Thereafter, the pressure
+increases again, this time more steeply because the liquid is less compressible
+than the vapor.
+
+Up to now, we have been considering isotherms, but the plot (b) also shows some
+curves where the temperature is allowed to vary. In particular the curve
+$bcb'$ is another coexistence curve, this time for various $T$. Indeed as $T$
+changes, the curves in plot (c) move, causing the intersection point to move.
+The curve $bcb'$ is the locus of these points, sometimes referred to
+as a {\it binodal}\index{binodal} curve.
 
 \section{The Binder cumulant}\label{sec:binder}\index{Binder cumulant} 
 
