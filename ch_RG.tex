@@ -1147,7 +1147,7 @@ fixed. Thus the condition that second derivatives are positive is equivalent to
 \pdv{\xi}{X}>0.
 \end{equation} 
 At the limit of stability, we have
-\begin{equation}
+\begin{equation}\label{eq:stabilityLimit}
 \pdv{\xi}{X}=0.
 \end{equation}
 These imply experimentally accessible stability conditions. For example
@@ -1214,7 +1214,9 @@ Next we turn our attention to plot (b). The ``S-shaped" curve, which is both
 dashed and solid, shows the system isotherm ignoring stability. In the region
 between $e$ and $f$, the curve has a positive slope, violating
 \equatref{eq:kTstable}, i.e. this region is not stable and hence unphysical.
-Thus $e$ and $f$ indicate stability limits in all figures. 
+Thus $e$ and $f$ indicate stability limits in all figures.\footnote{These points
+manifest as points of inflection in plot (a), which can be seen from
+\equatref{eq:stabilityLimit}.}
 The only way to connect $b$ and $b'$, remaining on the isotherm and
 without violating stability somewhere, is
 therefore to proceed along the dashed, horizontal line at $P_1$. 
@@ -1239,13 +1241,26 @@ $\mu$, defines $P_1$. In this plane, the isothermal path would follow one
 of the curves until it hits the kink where $\mu_L=\mu_G$, then proceed
 along the other.
 
-Let us return again to plot (a). We have learned that the line passing through
-$b$ and $b'$ has constant $\mu$. Taking Legendre transforms of
+Without access to plot (c), we can still use the condition of equal chemical
+potentials to determine $P_1$ from plot (b). Taking Legendre transforms of
 Gibbs-Duhem\index{Gibbs-Duhem relation} into $F$ and $G$ reveals 
-\begin{equation}
+\begin{equation}\label{eq:GibbsDuhemFG}
 F=\mu N-PV ~~~~~~\text{and}~~~~~~G=\mu N.
 \end{equation}
-Thus the $y$-intercept of this line is exactly where $F=G$ and has been labelled
+Thus the integral in \equatref{eq:FVtoPV} along the isotherm $T_1$, when 
+inserting the equilibrium conditions $\mu(b)=\mu(b')$ and $P(b)=P(b')\equiv P$,
+can be expressed as
+\begin{equation}
+PV(b')-PV(b)=\int_{V(b)}^{V(b')}\dd{V}P(V).
+\end{equation}
+This is the statement that the area under the S-shaped curve between $b$ and
+$b'$ is zero. Using this equal area procedure is often called the {\it Maxwell
+construction}\index{Maxwell!construction}.
+
+Let us return again to plot (a). We have learned that the line passing through
+$b$ and $b'$ has constant $\mu$. Using \equatref{eq:GibbsDuhemFG} reveals
+that the $y$-intercept of this line is exactly where $F=\mu N=G$, and 
+this intercept has been labelled
 with $G$ accordingly. The isotherms connecting $b$ with $e$ and $f$ with $b'$
 do not have the minimum $F$ in this figure, which is another way of seeing
 that the isothermal system prefers to move along the line segment $bb'$.
@@ -1261,8 +1276,88 @@ Up to now, we have been considering isotherms, but the plot (b) also shows some
 curves where the temperature is allowed to vary. In particular the curve
 $bcb'$ is another coexistence curve, this time for various $T$. Indeed as $T$
 changes, the curves in plot (c) move, causing the intersection point to move.
-The curve $bcb'$ is the locus of these points, sometimes referred to
-as a {\it binodal}\index{binodal} curve.
+The dome-shaped curve $bcb'$ is the locus of these points, sometimes referred to
+as a {\it binodal}\index{binodal} curve. At coexistence, as $T$ changes, $b$
+and $b'$ move with each other along that curve. As $T$ approaches the critical
+temperature, $b$, $b'$, and $c$ will overlap.
+
+One way to see this is as follows. By \equatref{eq:stabilityLimit}, a limit
+of stability is where second-order derivatives of the free energy vanish.
+One can ask whether the limits of stability are themselves stable. A stable
+limit of stability, in the simplest case, will occur analogously to ordinary
+stability: For a function to be stable, its first derivative needs to vanish
+and its second derivative needs to be positive.\footnote{If its second
+derivative vanishes then we need to look out for the first non-vanishing
+higher-order derivative.} Here the function is the
+second-order derivative of the free energy, so we need the third-order
+derivative of the free energy to vanish and the fourth-order to be positive. 
+For the conjugate variables $\xi=P$ and $X=V$, using the internal energy $U$,
+this translates to
+\begin{equation}\label{eq:stablestable}
+\pdv[2]{P}{V}=0~~~~~~\text{and}~~~~~~\pdv[3]{P}{V}<0.
+\end{equation}
+Critical points are stable limits of stability, so we see the point $c$
+in plot (b) is the critical point, and we learn why the dome-shaped binodal
+curve is concave down. At point $e$, only the first equation of
+\equatref{eq:stablestable} is satisfied, so we see it is not a stable limit of
+stability. The locus of limits of stability for varying $T$, i.e. the curve
+$ecf$, is called the {\it spinodal}\index{spinodal} curve. Point $c$ is the only
+stable point on a pure fluid's spinodal. 
+
+Along the curve between $b$ and $e$ on plot (b), the liquid has a pressure 
+lower than its vapor pressure, which is an example of a {\it
+superheated liquid}\index{superheated liquid}. Let us take a moment to understand this
+nomenclature. We start by writing Gibbs-Duhem in the form
+\begin{equation}\label{eq:Gibbs-DuhemDifferential}
+\dd{\mu}=-s\dd{T}+v\dd{P},
+\end{equation}
+where $s\equiv S/N$ and $v\equiv V/N$.
+Along the coexistence curve, $\dd{\mu(b)}=\dd{\mu(b')}$, so applying Gibbs-Duhem
+in this form reveals
+\begin{equation}
+\dv{P}{T}=\frac{\Delta s}{\Delta v},
+\end{equation}
+where $\Delta s\equiv s(b')-s(b)$ and $\Delta v\equiv v(b')-v(b)$. The
+choice of where to put $b$ and $b'$ is motivated by wanting both $\Delta s$ and
+$\Delta v$ to be positive. Vapor is less dense than liquid and has a higher
+entropy. Intuitively, the entropy of the vapor should be higher since the
+particles are not as constrained by interparticle forces. Alternatively, the
+latent heat $L$ must be positive, since you need to dump positive energy to break
+bonds, and $L=T\Delta s$. This is the {\it Clausius-Clapeyron
+relation}\index{Clausius-Clapeyron relation}, and it implies
+\begin{equation}
+\dv{P}{T}>0
+\end{equation}
+along the coexistence curve, i.e. the pressure is a monotonically increasing
+function of temperature. So saying the pressure is lower than $P_{\rm
+coexist}(T)$ at fixed $T$ is equivalent to saying the temperature is higher
+than $T_{\rm boil}(P)$ at fixed $P$. In other words, if I increase the
+temperature beyond the boiling point between $b$ and $e$, it remains a liquid,
+hence the name. The monotonicity is reflected in plot (d), where all curves are
+monotonically increasing with temperature. Similarly, the points between 
+$f$ and $b'$ correspond to a {\it supercooled gas}\index{supercooled gas}.
+
+We return to plot (c). The stability of isotherms in this plot can be
+seen through as follows: Gibbs-Duhem in the form
+\eqref{eq:Gibbs-DuhemDifferential} reveals
+\begin{equation}
+\atFixed{\pdv{\mu}{P}}{T}=v,
+\end{equation}
+so differentiating once more w.r.t. $P$ shows
+\begin{equation}
+\atFixed{\pdv[2]{\mu}{P}}{T}=\atFixed{\pdv{v}{P}}{T}=-v\kappa_T.
+\end{equation}
+Since \equatref{eq:kTstable} demands $\kappa_T>0$ for stable systems, we learn
+that stability requires stable isotherms in the $\mu$-$P$ plane to be concave down.
+The curve connecting $e$ and $f$ therefore is very mildly concave up.
+
+Finally, we discuss plot (d). We've been looking at temperatures below $\Tc$, so
+the point $c$ is the right-most point for the thick curves. The curve connecting
+$b$ or $b'$ and $c$ is the binodal in this plane. The curves connecting $e$ with
+$c$ or $f$ with $c$ are spinodals. As discussed earlier, at fixed temperature,
+the superheated liquid has a lower pressure than the coexistence (binodal)
+pressure, so it is positioned below the binodal. Correspondingly, the
+supercooled gas has a higher pressure.
 
 \section{The Binder cumulant}\label{sec:binder}\index{Binder cumulant} 
 
