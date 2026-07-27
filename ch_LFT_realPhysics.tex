@@ -782,6 +782,79 @@ $\mu_B/T$ ought to be a reasonable approximation.
 %\index{phase transition!Roberge-Weiss}
 %\subsection{The Roberge-Weiss transition}\label{sec:RW}
 
+\subsection{Experiments}
+
+When I was a grad student, I worked on pure $\SU(2)$ gauge theory. That was fun,
+but I remember wanting to learn physics that can be tested in a laboratory.
+After all, we are striving for an explanation of the world around us, so it only
+makes sense to eventually pit those explanations against observation. In this
+section, I want to talk a bit about the experiments relevant for the QCD phase
+diagram. We will discuss to some extent how they work and what we have learned.
+
+Many of the experiments useful to QCD theorists are examples of collision
+experiments, where composite particles smash into each other in one way or
+another. Often this is accomplished with two particle beams, but one can also
+have {\it fixed-target}\index{fixed-target experiment} experiments, where a beam
+is fired at some stationary (in the lab frame) target. 
+
+\subsubsection{NA61/SHINE}
+
+An example fixed-target experiment is the NA61/SHINE\index{NA61/SHINE} experiment. 
+Some of the fixed targets they use include argon (Ar), xenon (Xe), lead (Pb),
+and lanthanum (La). The beam is accelerated by a {\it
+synchrotron}\index{synchrotron}, which basically accelerates the beams in a
+circular path. As the beam gains energy, it tends to want to drift away from the
+circular path; to correct this, a magnetic field is synchronized with the beam
+such that its strength increases with the beam energy, keeping the beam on the
+path.
+
+Let's discuss in a bit more detail. Two of the components of the synchrotron are
+dipole bending magnets and quadrupole focusing magnets. For both of them, we
+need to recall the Lorentz\index{Lorentz force}
+\begin{equation}
+\vec{F}=q\vec{v}\times\vec{B},
+\end{equation}
+where $\vec{B}$ is the field made by the magnets, $\vec{v}$ is the beam velocity, $q$
+is the electric charge, and $\vec{F}$ is the Lorentz force on the beam. In the
+rest frame of the beam, call the {\it longitudinal}\index{longitudinal} direction,
+i.e. the direction of beam travel, the $z$-axis. Let's also say the circle lies
+in the $x$-$z$ plane. Then orienting $\vec{B}$ in the $y$-direction, will kick
+the particle in the $x$ direction, keeping it in a circular
+trajectory.\footnote{Directions perpendicular to the longitudinal axis are
+called {\it transverse}\index{transverse} directions.} This can be accomplished
+with a single pair of magnets on opposite sides of the pipe surface, 
+i.e. a dipole, hence the name.
+
+We also want to keep the beam from spreading out. This is accomplished with the
+quadrupole focusing magnet. Without getting into too much detail: The beam pipes
+are mostly vacuum, except for the beam. In the rest frame of the beam, there is
+therefore no current, so you can apply Maxwell's equations in a vacuum.  
+This implies $\vec{B}=-\nabla\phi$ for the scalar magnetic potential $\phi$,
+and $\phi$ therefore satisfies Laplace's equation. The solution is a multipole
+expansion, and one sees the quadrupole moment is linear in distance from the
+beam axis. This multipole expansion gives generically what form $\vec{B}$ must
+take inside the pipe, and we can select, say, the quadrupole term by placing
+a pair of magnets with a strategically chosen shape outside the pipe. We learn
+that this pair tends to focus in one transverse direction and defocus in the
+other, so a second pair of magnets is oriented perpendicular to the first pair.
+The combined effect is their defocusing roughly cancels, and we get a radial
+focusing of the beam.
+
+The beam energy is increased with radio frequency (RF) cavities. From Lorentz,
+we see that we need an electric field rather than a magnetic field to give a
+push in the longitudinal direction. The RF cavity is tuned so that it builds up
+an electromagnetic field with a longitudinal $\vec{E}$ field at the beam
+location. The frequency is such that this bump in energy happens right as a
+cluster of particles in the beam passes through it. 
+
+The beam from the synchrotron strikes a nuclear target. The debris from the 
+collision, particles like pions, kaons, protons, etc., fly forward into the 
+detector. The core of the detector is a set of large Time Projection Chambers 
+(TPCs), which are essentially a gas-filled boxes. Charged particles ionize 
+the gas as they pass through, and the freed electrons drift
+in an electric field to a readout plane, which lets you reconstruct 3D tracks.
+
+
 \section{Electromagnetic fields}\label{sec:latEM}
 In \secref{sec:EMQCD} we discussed adding electromagnetic fields in the
 continuum theory. We found the classical electric and magnetic fields to be
