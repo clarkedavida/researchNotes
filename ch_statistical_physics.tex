@@ -402,6 +402,12 @@ U=\frac{Nf}{2}k_B T,
 \end{equation}  
 from which it follows that $U$ is extensive.
 
+The preceding discussion is the standard introduction to intensive and extensive
+quantities. These definitions works well enough for most calculations, in
+particular when the volume is large enough. Some subtleties can emerge, however,
+for smaller systems and when constraints are introduced. We will discuss this in
+more detail in \secref{sec:exactIntens}.
+
 \section{Conjugate variables and generalized forces}
 
 Different control parameters like pressure and volume are introduced
@@ -636,7 +642,7 @@ changes in $V$, and we are no longer guaranteed zero when taking the partial
 derivative. On the other hand, the argument leading to
 \equatref{eq:dfdVintensive} does not depend on the number of 
 intensive quantities held fixed, and hence generalizes: 
-\begin{proposition}{}{}
+\begin{proposition}{}{allintensive}
 $$
 \atFixed{\pdv{f}{V}}{{\rm all~intensive~variables}}=0
 $$
@@ -789,7 +795,8 @@ Since $\log\grandZ$ is extensive, it must be that
 \end{equation}
 for some volume-independent constant $k$. That $k$ is volume-independent usually
 holds in the thermodynamic limit\footnote{Compare with, e.g. the Van der
-Waals pressure \eqref{eq:vanderwaals}.} Hence\footnote{Sometimes it is convenient to work
+Waals pressure \eqref{eq:vanderwaals}. We will discuss this more carefully
+in \secref{sec:exactIntens}.} Hence\footnote{Sometimes it is convenient to work
 with $\muh\equiv\mu/T$ and $T$ instead of $\mu$ and $T$. This equation
 holds for both sets of control variables since both $\mu$ and $T$ are
 held fixed.} from \equatref{eq:1stlawgrand}
@@ -816,6 +823,63 @@ another often useful relation,
 \begin{equation}
   \frac{N_i}{V}=\pdv{P}{\mu_i}.
 \end{equation}
+
+\subsection{Exact intensivity and extensivity}\label{sec:exactIntens}
+\index{intensive}\index{extensive}
+
+Imagine two identical copies of a system, each of volume $V$ and at the same
+$T$, $\mu$, separated by a wall. From \secref{sec:intensiveextensive}, we expect
+that if we remove the wall, the free energy will obey
+\begin{equation}
+\Phi(2V)=2\Phi(V).
+\end{equation}
+If you think about it, this cannot generically be the case. For suppose there
+are inter-particle forces. As soon as the wall is removed, particles on either
+side of the former wall will interact with each other, which changes the energy
+content. We are going to derive a generic form for this correction.
+
+For simplicity, ignore effects of the interaction on $T$ and $\mu$ and assume we
+are far from a critical point. 
+Let $L$ be the length along a given direction: the length along
+any direction is just some multiple of this. Then the area of the wall $A\propto
+L^2$. Consider the local free-energy density $\phi(z)$ as a function of distance
+$z$ from the former wall. Far away from the wall, $\phi$ approaches its bulk
+value, $\phi(z)\to\phi_{\rm bulk}$. In particular, away from a phase
+transition, interactions between two particles generically die off as the
+particles are separated. The {\it correlation length}
+\index{correlation length} $\xi$ is a length scale
+that characterizes distances where interactions can be neglected. Often the fall
+off is exponential, so that we could write something like $\phi(z)-\phi_{\rm
+bulk}\sim e^{-z/L}$; here it is enough to specify this difference falls off
+rapidly. For systems where $L\gg\xi$, the correction to the free energy is
+heuristically
+\begin{equation}
+\Delta\Phi=A\int_0^\infty\dd{z}\left(\phi(z)-\phi_{\rm bulk}\right)\equiv
+A\phi_{\rm surf}.
+\end{equation}
+In other words, this suppression of interaction strength as one moves away from
+the wall renders the correction an area effect rather than a surface effect: it
+is confined to a shell of approximate thickness $\xi$ around the former wall.
+
+This has a clear implication for the pressure. Indeed, we can thus write the
+total free energy as
+\begin{equation}
+\Phi(V)=V\phi_{\rm bulk}+A\phi_{\rm surf}+...
+\end{equation}
+so that the pressure is
+\begin{equation}
+p(V)=-\phi_{\rm bulk}-\frac{\phi_{\rm surf}}{L}+...
+\end{equation}
+since $A=L^2=V^{2/3}$. Thus we see the pressure, which we want to identify as an
+intensive quantity, actually picks up a volume correction away from the
+thermodynamic limit. We learn that exact intensivity and exact extensivity can
+only be consistent concepts in the thermodynamic limit.
+
+A final subtlety that exists also in the thermodynamic limit is that if one
+calculates an intensive quantity $f$ holding some extensive variable fixed, a
+dependence on extensive variables may be reintroduced to $f$. This can be seen
+e.g. in the ideal gas law, holding $N$ and $T$ fixed: $p$ must pick up a volume
+dependence. This is reflected by \propref{prp:allintensive}.
 
 \section{Relativistic quantum gases}
 

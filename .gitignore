@@ -2,6 +2,7 @@
 CLAUDE.md
 
 # LaTeX stuff not needed for repository
+*.swp
 make.log
 *.bbl
 Exported\ Items.bib
