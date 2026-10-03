@@ -597,7 +597,7 @@ be possible in an experiment to fix some other $N$ control parameters that in
 general change with $T$ and $\alpha$; call them $\vec{x}(T,\vec\alpha)$. We
 would like to conveniently switch between $\vec\alpha$ and $\vec{x}$.
 
-\begin{proposition}{}{}
+\begin{proposition}{}{switchFixed}
 \begin{equation*}
 \left( \pdv{f}{T} \right)_{\vec{x}} =  \left(\pdv{f}{T}\right)_{\vec\alpha}
 +\sum_\alpha 
@@ -1132,7 +1132,8 @@ at fixed $\vec{N}$ to \equatref{eq:maxDeriv3} yields
 \frac{1}{T}\left[\atFixed{\pdv{U}{V}}{T,\vec{N}} +P\right].
 \end{equation}
 Using \equatref{eq:CV} for $C_V$ in the above equation and 
-cancelling identical terms yields the {\it energy equation}\index{energy equation}\footnote{The energy equation is useful in that it allows one to
+cancelling identical terms yields the {\it energy equation}\index{energy
+equation}\footnote{The energy equation is useful in that it allows one to
 extract the derivative of the internal energy through the more easily measurable
 quantities $P$, $T$, and $N_i$. It also implies that, for an ideal gas,
 $\partial_V U=0$ at fixed $T$ and $\vec{N}$.},
@@ -1167,6 +1168,32 @@ yields the first relation in \equatref{eq:matparamconstraints}.
 The second relation is derived by equating \equatref{eq:TdS1} and 
 \equatref{eq:TdS2} while holding $P$ and $\vec{N}$ fixed.
 The third relation follows then from the first two. 
+
+By the way, the first constraint can be shown without using Maxwell relations.
+In particular \propref{prp:switchFixed} shows us
+\begin{equation}
+C_p=\atFixed{\pdv{S}{T}}{p}=\atFixed{\pdv{S}{T}}{V}+\atFixed{\pdv{S}{V}}{T}\atFixed{\pdv{V}{T}}{p}.
+\end{equation}
+At the same time, the constrained chain rule, \propref{prp:chainconstrain}
+implies
+\begin{equation}
+\atFixed{\pdv{V}{T}}{p}=-\atFixed{\pdv{p}{T}}{V}\atFixed{\pdv{V}{p}}{T}.
+\end{equation}
+Combining these two equations and carrying out the same steps for $C_V$ gives
+\begin{equation}
+\frac{C_p}{C_V}=1-
+\atFixed{\pdv{S}{V}}{T}\atFixed{\pdv{p}{T}}{V}\atFixed{\pdv{T}{S}}{V}\atFixed{\pdv{V}{p}}{T}.
+\end{equation}
+Playing the same game with the compressibilities gives
+\begin{equation}
+\frac{\kappa_T}{\kappa_s}=1-
+\atFixed{\pdv{S}{V}}{T}\atFixed{\pdv{p}{T}}{V}\atFixed{\pdv{T}{S}}{V}\atFixed{\pdv{V}{p}}{T},
+\end{equation}
+which yields the first relation of \equatref{eq:matparamconstraints}, showing that
+it's generically true, even if you hold additional quantities fixed. Note,
+however, that the second and third constraints cannot be derived in this way: They
+depend explicitly on the first law. 
+
 
 
 \bibliographystyle{unsrtnat}

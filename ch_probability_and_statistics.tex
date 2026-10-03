@@ -1390,14 +1390,14 @@ be continuous. Then $\Forall\epsilon>0$ $\Exists$ a polynomial
 $p\suchthat x\in[a,b]\Rightarrow |y(x)-p(x)|<\epsilon$.
 \end{theorem}
 The Weierstrass approximation theorem\index{Weierstrass approximation theorem}
-tells us that if we ``zoom in" enough on any confinuous $y$, it is approximately
+tells us that if we ``zoom in" enough on any continuous $y$, it is approximately
 like a polynomial. This motivates the idea of a {\it spline}\index{spline}: we
 will approximate $f$ by stitching a bunch of polynomials together.
 
 Order the $X_i$ so that $X_0<...<X_N$, and divide $[X_0,X_N]$ into $k+1$
 subintervals. The boundaries separating the subintervals are called {\it
-knots}\index{knot}; hence there are $k$ knots. The spline $s$ that will
-approximate our function $y$ is
+knots}\index{knot}; hence there are $k$ knots. The spline
+$s$ that will approximate our function $y$ is
 \begin{equation}
 s(x) = \sum_{j=1}^{k+1} p_j(x),
 \end{equation}
@@ -1405,12 +1405,14 @@ where the $p_j$ are polynomials of degree $d$ defined on the disjoint
 subintervals.
 
 How many degrees of freedom does this fit have? Well, each $p_j$ will have $d+1$
-coefficients (we can consider the $a_j$ an overall normalization), and there are
+coefficients, and there are
 $k+1$ of them. On the other hand asking that $y$ be continuous means that the
 polynomials have to agree at the knots, which adds one constraint per knot. 
 Furthermore asking $s$ to be differentiable everywhere means the derivatives of 
 the polynomials also must agree on the knots, which adds one constraint per
-derivative per knot. Altogether we get
+derivative per knot. Since the polynomials are of degree $d$, $s^{(d)}$ is a
+step function with a jump at each knot; so for the derivatives to agree on the
+knots adds $d-1$ constraints per knot. Altogether, 
 \begin{equation}\label{eq:splinedof}
 \text{\# d.o.f.} = (k+1)(d+1)-k-k(d-1) = k + d + 1.
 \end{equation}
@@ -1436,10 +1438,13 @@ include wiggles where there are no data}.
 To try to keep a spline from inventing more structure than is sensible given the
 data, one can add further constraints on the splines besides matching at the
 knots. For example, a {\it natural spline}\index{spline!natural} asks that
-the spline have zero curvature at the endpoints; that is
+a cubic spline have zero curvature at the endpoints; that is
 \begin{equation}
 s''(X_0)=s''(X_N)=0.
 \end{equation}
+Note that this adds two constraints, so natural, cubic splines have
+$k+3+1-2=k+2$ degrees of freedom.
+
 Earlier we mentioned that cubic splines are nice choices. We can actually make
 a nice, rigorous statement about natural, cubic splines. In particular
 let $f\in\continuous^2$ and $a<b$. Define the following measure of smoothness:
@@ -1493,6 +1498,27 @@ $$
 as desired.
 \end{proof}
 \end{theorem}
+
+Another possible constrained spline is the {\it clamped}
+\index{spline!clamped} spline, which
+specifies $s'$ at the endpoints. Again, this introduces two more constraints.
+
+If you have a sufficient number of data points, you can obtain your spline by
+solving a large system of equations, no fitting required. The simplest example
+is if you have two data points: A line goes right through those, and it's a
+special case of a spline. These are referred to as {\it interpolating}
+splines.\index{spline!interpolating}. When doing solves, data points are used as knot
+points. As discussed earlier, a cubic spline has $k+4$ degrees of freedom. If
+every datum is used as a knot, there are still two free parameters. The natural
+or clamped constraints make the solution unique.
+
+When you have a large number of data with uncertainty, you can treat the
+spline as a fit form and use the methods of the previous section.
+In this case, we choose the knots freely; they have no need to be the same as
+the data points. These are called {\it regression}\index{spline!regression}
+splines. In this context, one can still impose extra constraints like the
+natural constraint, which effectively just alters the form of the fit function. 
+
 
 \section{The Kolmogorov test}\label{sec:kolm}\index{Kolmogorov test}
 Let us say we perform an experiment and extract a CDF $\bar{F}$ from 
