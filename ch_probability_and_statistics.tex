@@ -1277,6 +1277,25 @@ The bootstrap estimator for the variance of $\bar{f}_B$ is simply
   \bar\sigma^2_{f_B}=\frac{1}{\nboot-1}\sum_{i=1}^{\nboot}(f_{B,i}-\bar{f}_B)^2.
 \end{equation}
 
+Another bootstrap strategy is called the {\it parametric
+bootstrap}\index{bootstrap!parametric}. This is a resampling strategy that does
+not use the original data at all. Suppose, for example, someone has estimated 
+the pressure as a function of temperature for $M$ temperatures. In particular,
+suppose this experimenter made $N$ measurements at each temperature, then
+computed estimates $\bar p(T_i)$ and $\sigma_{\bar p}(T_i)$, but he is stingy,
+so he provides you only with these estimates and not the original data.
+You want to compute some function of the pressure. What can you do?
+
+For the parametric bootstrap, you assume some PDF $f$ for $p(T_i)$
+and draw from $f$ with mean $\bar p(T_i)$ and variance $\sigma_{\bar p}(T_i)^2$.
+Since you are resampling the mean, in this particular case, you know that you
+can use $f=\Gau$, which is sometimes called a {\it Gaussian
+bootstrap}\index{bootstrap!Gaussian}. In each bootstrap sample, you draw a new
+data point for each temperature, and perform your analysis on these resampled
+data. This can be a cheap way to do analysis even if you have the original
+measurements at your disposal.
+
+
 \section{Fitting data}
 
 In this section we consider the general problem of fitting curves through data.
@@ -2040,7 +2059,7 @@ observer gains the ability to assign numbers representing degrees of certainty t
 situations where the ensemble interpretation is useless.
 
 
-\subsection{Assigning probabilities}
+\subsection{Assigning probabilities}\label{sec:informationEntropy}
 
 
 Now that we've thought about what the probabilities mean in the Bayesian
@@ -2048,12 +2067,11 @@ framework, we need a way to assign them; in the frequentist framework, it was
 sufficient to use ratios of set sizes, but now this assignment is not automatic.
 In general we would like a method of assignment that introduces no extra
 information beyond what is known, whether it be a bias, correlation, or
-whatever. The known information $I$ can be introduced as a constraint
+whatever. The context $I$ can be introduced as a constraint
 on the PDF pr that we seek,
 \begin{equation}
-f({\rm pr},I)={\rm something},
+f({\rm pr}\given I)={\rm something}.
 \end{equation}
-and we refer to $I$ as {\it testable information}\index{information!testable}.
 In this section we will argue\footnote{We tried to repeat a heuristic argument,
 but note that this assignment is justified in other ways as well.
 It reflects common sense~\cite{jaynes_foundations_1963} and
@@ -2084,32 +2102,34 @@ frequentist approach, this allocation yields the probability distribution
 \pr{X_i}=\frac{n_i}{N},
 \end{equation}
 where $n_i$ is the number of balls in box $X_i$. We impose no
-preference for one allocation over another\footnote{Having a preference about
+preference for one allocation $\vec{n}$ over another\footnote{Having a preference about
 how to allocate probability units/balls is equivalent to saying you have some
 idea of what kind of allocation a desirable probability distribution ought to
 have.}, so we treat every
 possible allocation as equally likely. In the literature, this is playfully
 ensured by having monkeys cast the balls in the boxes, hence the name.
-There are $M^N$ ways to allocate balls to boxes, and many such allocations
-may yield the same pr. Our preferred assignment is the pr that occurs the most 
+There are $M^N$ ways to allocate balls to boxes: each ball has $M$ choices where
+it can land, and we pretend for now the balls are distinguishable. Thus many such allocations
+may yield the same $\pr$. Our preferred assignment is the $\pr$ that occurs the most 
 frequently.
 
-To figure out how frequently pr occurs, it remains to count the number of
-allocations that yield $\vec{n}$, i.e. allocations
-that yield $n_i$ balls in box $X_i$. This is
+To figure out how often $\pr$ occurs, it remains to count the number of
+allocations that yield $\vec{n}$. This is
 \begin{equation}
 \frac{N!}{\prod_{i=1}^Mn_i!}.
 \end{equation}
-Hence the frequency of pr is
+Hence the probability of obtaining the distribution $\pr$ is
 \begin{equation}
 F\left({\rm pr}\right)=\frac{N!}{M^N\prod_{i=1}^Mn_i!}.
 \end{equation}
-Taking the logarithm of both sides, using {\it Stirling's
-approximation}\index{Stirling's approximation},
-\begin{equation}
-\log N!\approx N\log N-N,
-\end{equation}
-which is valid whenever $N$ is large, and using
+Again, this probability $F$ assumes all the boxes are on equal footing, i.e.
+that every allocation of balls to boxes is equally likely.
+Taking the logarithm of both sides, using Stirling's
+approximation for the factorials,\footnote{While it's clear the approximation
+holds for $\log N!$, you may worry it does not hold for $\log n_i!$. In
+\apref{sec:stirling}, we treat this logarithm carefully and show that
+the approximation can be employed here, too.}
+and using
 \equatref{eq:entropyProbability}, we get
 \begin{equation}
 \log F \approx  -N\log M -N\sum_{i=1}^M \pr{X_i}\log\pr{X_i}.
@@ -2121,14 +2141,31 @@ entropy}\index{entropy!Shannon} or {\it Kullback number}\index{Kullback number}
 \begin{equation}
 S\equiv  -\sum_{i=1}^M \pr{X_i}\log\pr{X_i}.
 \end{equation}
-Generalizing this to continuous variables gives us
-\equatref{eq:ShannonEntropy}. We introduce a measure $m$ in this case, which
+
+The situation can be generalized. Right now we assume each throw of a ball lands
+in box $i$ with probability $1/M$, but we could imagine the boxes have different
+sizes, so a ball lands in box $i$ with probability $m_i$ instead. In this case
+we would get
+\begin{equation}
+F(\pr)=\frac{N!\prod_{j=1}^M m_j^{n_j}}{\prod_{i=1}^M n_i!}.
+\end{equation}
+and the same sort of algebra would imply
+\begin{equation}
+S=  -\sum_{i=1}^M \pr{X_i}\log\frac{\pr{X_i}}{m_i}.
+\end{equation}
+Generalizing to continuous variables, we arrive at
+\equatref{eq:ShannonEntropy}. Given our understanding of $m$ as something
+like a box size, we can understand its common name, the {\it
+measure}\index{measure}. It 
 ensures that the entropy is invariant under a change of variables.
 
 
-\subsection{The Bayesian view of $\chi^2$}
+\subsection{Applications of information entropy}
 
-
+% applications:
+% likelihood for a fit
+% priors for parameters you roughly know
+% systematic uncertainties
 
 
 \subsection{Model averaging}

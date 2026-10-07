@@ -189,6 +189,154 @@ $$
 $$
 \end{theorem}
 
+\index{Stirling's approximation}
+\section{Stirling's approximation}\label{sec:stirling}
+
+Counting arguments in probability and statistical physics often need $\log N!$
+for large $N$. {\it Stirling's series}\index{Stirling's series} is
+\begin{equation}\label{eq:stirlingSeries}
+  \log N!\approx N\log N - N + \frac12\log(2\pi N). 
+\end{equation}
+Keeping only the first two terms, $\log N!\approx N\log N-N$, is called
+Stirling's approximation. Below we derive the leading order, then the full
+series. 
+
+For the leading order, we
+write $\log N!=\sum_{k=1}^N\log k$ and replace the sum by an integral,
+\begin{equation}
+  \log N! \approx \int_1^N \dd{x}\log x = N\log N - N + 1 .
+\end{equation}
+Since $\log x$ is increasing, the sum is bracketed by the integrals over
+$[1,N]$ and $[1,N+1]$,
+\begin{equation}\label{eq:stirlingBounds}
+  N\log N - N + 1 \le \log N! \le (N+1)\log(N+1) - N .
+\end{equation}
+The two bounds differ by $O(\log N)$, so $N\log N-N$ is correct up to an error
+that grows only logarithmically. This bound will be useful later.
+
+To get a bit more mileage, we rewrite the factorial using the gamma function,
+\begin{equation}
+  N! = \int_0^\infty \dd{x} x^N e^{-x} = \int_0^\infty \dd{x} e^{f(x)},
+  \qquad f(x) = N\log x - x .
+\end{equation}
+The exponent $f$ peaks at $x=N$, where $f(N)=N\log N-N$ and $f''(N)=-1/N$.
+Expanding $f$ to second order about the peak,
+\begin{equation}
+  N! \approx e^{N\log N-N}\int \dd{x} e^{-(x-N)^2/2N} = N^N e^{-N}\sqrt{2\pi N},
+\end{equation}
+which is \equatref{eq:stirlingSeries}. The peak has width $\sqrt N$ at position
+$N$, so the relative width $1/\sqrt N$ of the peak shrinks and the Gaussian
+becomes exact as $N\to\infty$. 
+
+\subsection{Multinomial coefficients}
+Here, we work out more carefully the argument used to derive the information
+entropy in \secref{sec:informationEntropy}.
+Consider $N$ balls in $M$ boxes with counts $n_i$, $\sum_i n_i=N$. The number of
+ways to realize the counts $n_i$ is the multinomial
+coefficient $N!/\prod_i n_i!$. Write
+$q_i=n_i/N$, so $\sum_i q_i=1$. Define the error of the leading-order Stirling
+formula for a single factorial,
+\begin{equation}
+  \epsilon(n) \equiv \log n! - (n\log n - n),
+\end{equation}
+so that $\log n! = n\log n - n + \epsilon(n)$ exactly. For $n=0$, 
+both sides vanish. Then, 
+\begin{equation}
+  \log\frac{N!}{\prod_i n_i!} = \log N! - \sum_i \log n_i! .
+\end{equation}
+Substituting $\log n!=n\log n-n+\epsilon(n)$ into every factorial, we get
+\begin{align}
+  \log\frac{N!}{\prod_i n_i!}
+  &= \bigl(N\log N - N + \epsilon(N)\bigr)
+     - \sum_i\bigl(n_i\log n_i - n_i + \epsilon(n_i)\bigr) \\
+  &= N\log N - N - \sum_i n_i\log n_i + \sum_i n_i + R ,
+  \qquad R \equiv \epsilon(N) - \sum_i\epsilon(n_i) .\nonumber
+\end{align}
+Since $\sum_i n_i=N$, the $-N$ and $+\sum_i n_i$ cancel:
+\begin{equation}
+  \log\frac{N!}{\prod_i n_i!} = N\log N - \sum_i n_i\log n_i + R .
+\end{equation}
+Now put $n_i=Nq_i$ in the sum and split the log of the product:
+\begin{align}
+  \sum_i n_i\log n_i
+  &= \sum_i Nq_i\bigl(\log N + \log q_i\bigr) \\
+  &= N\log N\sum_i q_i + N\sum_i q_i\log q_i \nonumber\\
+  &= N\log N + N\sum_i q_i\log q_i ,\nonumber
+\end{align}
+using $\sum_i q_i=1$ in the last line. A box with $n_i=0$ contributes $0$ on
+both sides. Substituting, the $N\log N$ cancels too, leaving
+\begin{equation}\label{eq:multinomialStirling}
+  \log\frac{N!}{\prod_i n_i!} = -N\sum_i q_i\log q_i + R .
+\end{equation}
+Nothing has been approximated yet; all the error is in $R$. Stirling's
+approximation is the statement that $R$ is negligible.
+
+It may seem that this needs every $n_i=Nq_i$ to be large, which fails for
+boxes with small $q_i$. It does not. Take a box with $n_i=1$: $\log1!=0$ while
+$n\log n-n=-1$, so 
+the error of that term is only $\epsilon(1)=1$.
+The question is therefore how big $\epsilon(n)$ can
+be, and how big $R$ can be, compared with the $O(N)$ leading term.
+
+First, we bound $\epsilon(n)$. For $n=0$, $\epsilon(0)=0$. For $n\ge1$,
+take \equatref{eq:stirlingBounds} with $N$ replaced by $n$, and subtract
+$n\log n-n$ from each part. The left inequality gives
+\begin{equation}
+  \epsilon(n) \ge 1 .
+\end{equation}
+The right inequality gives
+\begin{align}
+  \epsilon(n) &\le (n+1)\log(n+1) - n - (n\log n - n) \\
+  &= (n+1)\log(n+1) - n\log n \nonumber\\
+  &= \log(n+1) + n\bigl(\log(n+1)-\log n\bigr) \nonumber\\
+  &= \log(n+1) + n\log\left(1+\tfrac1n\right) \nonumber\\
+  &\le \log(n+1) + 1 , \nonumber
+\end{align}
+where the last line uses $\log(1+x)\le x$ with $x=1/n$. So for every $n\ge0$,
+\begin{equation}
+  0 \le \epsilon(n) \le 1 + \log(n+1) .
+\end{equation}
+The error of a single factorial grows only logarithmically, and is at most
+about $1$ for small $n$.
+
+Next, we bound each box. Every count satisfies $n_i\le N$, and the
+upper bound increases with $n$, so
+\begin{equation}
+  0 \le \epsilon(n_i) \le 1 + \log(N+1)
+  \qquad\text{for every } i,
+\end{equation}
+whatever $n_i$ is. A box with a small count is not worse than a box with a
+large count; if anything the box with the small count is better.
+
+This lets us bound $R$. Recall $R=\epsilon(N)-\sum_i\epsilon(n_i)$. Both
+$\epsilon(N)$ and $\sum_i\epsilon(n_i)$ are $\ge0$, so 
+\begin{equation}
+  -\sum_i\epsilon(n_i) \le R \le \epsilon(N) .
+\end{equation}
+There are $M$ terms in the sum, each at most $1+\log(N+1)$, and $\epsilon(N)$
+is at most $1+\log(N+1)$ too. Since $M\ge1$,
+\begin{equation}
+  |R| \le M\bigl(1+\log(N+1)\bigr) .
+\end{equation}
+Using the full series~\eqref{eq:stirlingSeries} instead, $\epsilon(n)\approx
+\frac12\log(2\pi n)$ for large $n$, which roughly halves the logarithm, but the
+scaling is the same.
+
+Finally, we compare $R$ with the leading term. The leading term
+$-N\sum_iq_i\log q_i$ is $N$ times a number of order one, so
+\begin{equation}
+  \frac{|R|}{N} \le \frac{M\bigl(1+\log(N+1)\bigr)}{N} \to 0
+  \qquad\text{when } N\gg M\log N .
+\end{equation}
+Up to the logarithm, the condition is $N\gg M$, not $n_i\gg1$ for each box.
+Moreover, the multinomial coefficient is largest when all counts are equal,
+$n_i=N/M$, so near the maximum every $n_i$ is large anyway when $N\gg M$. The
+approximation fails only when $M\log N$ is comparable to $N$.
+
+Since $R$ is effectively negligible under our assumptions, we are left with
+our standard form for information entropy, up to an overall factor $N$ that
+is irrelevant for the purpose of maximizing it.
+
 \index{Green's function}
 \section{Green's functions}
 Using Green's functions is a convenient way to solve differential equations.
