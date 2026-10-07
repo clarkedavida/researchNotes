@@ -124,7 +124,7 @@ One of the most well-known Monte Carlo updates that satisfies detailed
 balance is the {\it Metropolis algorithm}~\cite{metropolis_equation_1953}. 
 In the Metropolis algorithm, a trial configuration $C'$ is selected 
 with some probability distribution $\prt{C'|C}$. Then $C'$
-is accepted with likelihood
+is accepted with probability
 \begin{equation}\label{eq:metupdate}
   \pr{C\to C'}=\min\left[1,\frac{\prt{C|C'}e^{-S_{C'}}}
     {\prt{C'|C}e^{-S_C}}\right],
@@ -165,7 +165,7 @@ What makes an update efficient then is to suggest configurations that
 have reasonable acceptance probabilities to begin with. This
 strategy is often called {\it importance sampling}\index{importance sampling}.
 All the algorithms we will consider in this book are constructed to be
-efficient in the sense that they have reasonable likelihood to be accepted.
+efficient in the sense that they have reasonable probability to be accepted.
 
 
 \section{General code structure}\label{sec:generalCodeStructure}

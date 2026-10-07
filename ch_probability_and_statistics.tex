@@ -1325,7 +1325,7 @@ In this case the PDF of $X^2$ is called the {\it $\chi^2$ distribution}.
       \exp\left[-\frac{1}{2}\sum_{i=1}^Ny_i^2\right].
 \end{equation}
 
-Let us think about a general, non-central $\chi^2$ PDF. The likelihood that the
+Let us think about a general, non-central $\chi^2$ PDF. The probability that the
 data fall within a region near what was observed is 
 \begin{equation}
   \text{P}=\prod_{i=1}^N\frac{1}{\sqrt{2\pi}\sigma_i}
@@ -1335,9 +1335,13 @@ Our strategy for determining the correct fit will be to find the vector $a$
 that maximizes the above probability. The happens when the argument
 of the exponential is closest to zero; i.e. when
 \begin{equation}
-  \chi^2\equiv\sum_{i=1}^N\frac{(y_i-y(x_i;a))^2}{2\sigma_i^2}
+  \chi^2\equiv\sum_{i=1}^N\frac{(y_i-y(x_i;a))^2}{\sigma_i^2}
 \end{equation}
-is minimized. This is an example of a {\it maximum likelihood method}.
+is minimized. Viewed as a function of $a$ with the data held fixed, the above
+probability is called the {\it likelihood}\index{likelihood} of $a$, so this is an
+example of a {\it maximum likelihood method}.
+Heuristically, you can see what $\chi^2$ does: in its numerator it measures how
+far the data lie from the fit compared to the uncertainty.
 Once the parameters are found, one can then ask: What is the probability
 that the discrepancy between the data and the fit is due to chance? 
 
@@ -1867,7 +1871,7 @@ calculation. This knowledge is summarized by probability distributions called
 
 \subsection{Rules for consistent reasoning}\label{sec:consistentReasoning}
 
-In 1946, Cox thought about how to quantitatively assign likelihoods to
+In 1946, Cox thought about how to quantitatively assign degrees of plausibility to
 statements about the world in a consistent manner~\cite{cox_probability_1946}. 
 The idea is that one wants to
 take statements like ``The sun will rise tomorrow" or ``Jerry attacked Tom" and
@@ -1887,9 +1891,35 @@ if the real numbers satisfy
 The vertical bar $|$ in this context means ``given", i.e. everything to the
 right of this bar is taken to be true. In each case we include this symbol $I$
 to indicate some possible background information that is known ahead of time.
-The first of these two equations is sometimes called the {\it sum
+In these notes I will refer to $I$ as a {\it context}\index{context}.
+
+I would like to take a moment to make a perhaps philosophical note. My personal
+view of Bayesian statistics is that it is a formalization of human beliefs about reality.
+Consider any statement you might make about reality; for example, you may have a
+particular view about whether a particular politician is helping your country. 
+Maybe you have a family member with the opposite view, and you've had many
+exhausting Thanksgiving dinners discussing the matter with them. You may wonder:
+``How could my uncle possibly believe this politician is helpful, when I can see
+so clearly that the politician is hurtful?" A consistent
+way to frame the situation is this: You each are effectively assigning a
+different real number to
+\begin{equation}
+\pr{\text{this politician is helpful}\given I_\text{person}},
+\end{equation}
+where ``person" is either you or the family member. That the probability
+assignments disagree is perfectly expected {\it because you each have different
+contexts}. You have a different education, a different friend group, lived
+during different years, etc. So there is no a priori reason the assignments
+should agree. Sometimes people like to imagine reality as a set of
+statements that everyone should agree on. A Bayesian framework would soften this
+statement to something like ``True statements are statements that two people
+with the same context agree on".
+
+Let us continue after that philosophical departure.
+The first of equations 
+\eqref{eq:probabilityAxioms} is sometimes called the {\it sum
 rule}\index{rule!sum} while the second is sometimes called the {\it product
-rule}\index{rule!product}. It can be used to relate conditional probabilities
+rule}\index{rule!product}. The latter can be used to relate conditional probabilities
 in the following manner.
 
 \index{Bayes's Theorem} 
@@ -1911,41 +1941,58 @@ eliminate the LHS and solve for $\pr{A\given B\land I}$.
 This relation between the conditional probabilities is useful especially in the
 context of data analysis, for if we replace $A$ by ``model" and $B$ by ``data",
 we get 
-\begin{equation}
+\begin{equation}\label{eq:modelDataBayes}
 \pr{\text{model}\given \text{data}\land I}
 =\frac{\pr{\text{data}\given \text{model}\land I}\pr{\text{model}\given I}}{\pr{\text{data}\given
 I}}.
 \end{equation}
+
 In particular, in the context of analyzing data, the LHS is what is difficult to
 ascertain. One may have a bunch of competing ways of looking at things and
-desires the way of looking at things that is, given the information $I$ at hand,
+desire the way of looking at things that is, given the information $I$ at hand,
 the most probable. The LHS is called the {\it posterior}\index{posterior}
-probability. It is related to the {\it likelihood}\index{likelihood} that one
-would find these data given the hypothesis, $\pr{\text{data}\given
-\text{model}\land I}$ as well as the {\it prior}\index{prior}
-probability $\pr{\text{model}\given I}$, which represents our state of
+probability. It summarizes what you know about the model, given your data
+and context.
+
+Looking at the RHS, the probability that one would find these data
+given the hypothesis, $\pr{\text{data}\given\text{model}\land I}$, 
+is called the {\it sampling distribution}\index{sampling distribution} 
+or {\it data distribution}\index{data distribution}. With a fixed model and
+context, this is a usual normalized probability distribution. On the other hand,
+keeping the data fixed and integrating over possible models is not normalized.
+This term when the data are fixed is sometimes called a
+{\it likelihood}\index{likelihood} rather than a probability for this
+reason.\footnote{Colloquially, ``probability" and ``likelihood" get used
+interchangably, even sometimes by physicists. Indeed, I often make this mistake
+myself. In these notes, I have tried to be careful about distinguishing between
+these two terms.}
+
+The {\it prior}\index{prior}
+probability $\pr{\text{model}\given I}$ represents our state of
 knowledge about the model before analyzing the data. The denominator term,
-$\pr{\text{data}\given I}$ is called\footnote{It is also sometimes called
-the {\it prior predictive}\index{prior!predictive} or the 
-{\it marginal likelihood}\index{likelihood!marginal}.} 
-the {\it evidence}\index{evidence}. 
+$\pr{\text{data}\given I}$ is called the {\it marginal likelihood}\index{marginal
+likelihood}. 
 
 We note one more useful property of conditional probabilities, that
 \begin{equation}
-\pr{A\land I}=\int_{-\infty}^\infty \dd{B} f(A\given B\land I),
+\pr{A\given I}=\int_{-\infty}^\infty \dd{B} \pr{A\given B\land I}\pr{B\given I},
 \end{equation}
-where $f$ is a PDF to be interpreted like in \secref{sec:probprelim}.
 This is the statement that if $A$ is conditional on $B$, I can arrive at a
-statement involving $A$ alone by exhaustively integrating over all possible
-outcomes for $B$. This process is known\footnote{When we do this in a physics
-context instead of a statistical context, we usually say we are ``integrating
-out" $B$.} as {\it marginalization}\index{marginalization}.
-
+statement involving $A$ alone by exhaustively integrating over all
+possibilities for $B$. This process is known as {\it marginalization}\index{marginalization}.
 Marginalization is useful in the same way integrating out is useful: If we know
 e.g. that a model contains some explicit dependence on some parameter $\lambda$
 but we do not know what it is, the exhaustive integration lets us make statements
 independent of it. In the context of statistical analysis, such quantities are
 often called {\it nuisance parameters}\index{nuisance parameter}.
+
+Marginalization also lets us interpret the marginal likelihood. In particular,
+we see it normalizes \equatref{eq:modelDataBayes}. Indeed if we 
+integrate this equation over all models, we get 1, as expected. 
+Moreover, it tells us something about our models. In a data analysis setting,
+you have many models that you think are plausible. If the marginal likelihood
+turns out to be small, that may indicate that the set of models under
+consideration is incomplete.
 
 \subsection{Interpreting probabilities}
 
@@ -2079,27 +2126,8 @@ Generalizing this to continuous variables gives us
 ensures that the entropy is invariant under a change of variables.
 
 
-% \subsection{Fitting data}
-% 
-% In the context of fitting data $(x_i,y_i)$, the fit function $y(x_i;\vec{a})$,
-% where $\vec{a}$ is the vector of fit parameters, can be
-% thought of as a model. Here, Bayes's theorem reads
-% \begin{equation}
-% \pr{\vec{a}\given\vec{y}\wedge I}\propto\pr{\vec{y}\given\vec{a}\wedge
-% I}\pr{\vec{a}\given I},
-% \end{equation}
-% where again $\pr{\vec{a}\given I}$ is the prior probability for the
-% model $\vec{a}$. Sometimes we have some a priori knowledge of model parameters;
-% for instance we may know they have to be positive. In the cases where we do not,
-% we can simplify
-% \begin{equation}
-% \pr{\vec{a}\given I}=\text{const.}
-% \end{equation}
-% and it follows in such cases that
-% \begin{equation}
-% \pr{\vec{a}\given\vec{y}\wedge I}\propto\pr{\vec{y}\given\vec{a}\wedge
-% I}.
-% \end{equation}
+\subsection{The Bayesian view of $\chi^2$}
+
 
 
 
@@ -2154,7 +2182,7 @@ This expectation value can be expressed as a weighted sum
 \end{equation} 
 where the sum runs over all attempted models, 
 $\ev{f(a^*)}_M$ denotes the expectation value of $f$ computed in $M$ with best-fit
-parameters $a^*$, and $\pr{M\given D}$ signifies the likelihood that model $M$ 
+parameters $a^*$, and $\pr{M\given D}$ signifies the posterior probability that model $M$ 
 is correct given the data $D$. Computing expectation values in this manner
 is known as {\it Bayesian model averaging}\index{Bayesian!model average} (BMA).
 
