@@ -1030,7 +1030,7 @@ the first two hyperscaling relations.
 
 \subsection{Finite size scaling}\index{finite size scaling}
 
-In \secref{sec:leeyang} we saw that phase transitions happen in the $V\to0$
+In \secref{sec:leeyang} we saw that phase transitions happen in the $V\to\infty$
 limit. However when looking at real-word, condensed-matter systems, we deal
 exclusively with finite volumes. Similarly all lattice calculations are on
 configurations stored in computer memory, and are hence themselves finite as
@@ -1097,6 +1097,17 @@ at all. Indeed, this strategy was used to demonstrate that the QCD phase change
 at physical quark mass and zero baryon chemical potential 
 is a crossover~\cite{aoki_order_2006}.
 
+
+To extract $\Tc(L)$, it is common to use the peak location in $\chi$, the peak
+being a remnant of the exact divergence in the thermodynamic limit. Another
+possibility is to look for the inflection point in $|\ev{m}|$. These two
+estimates are not, to my knowledge, formally guaranteed to agree at any finite
+$L$, but they should approach the same $\Tc$ in the thermodynamic limit, as they
+both inherit from {\it scaling functions}\index{scaling function} like $g$ that
+know where the critical point is. I am not aware of an inherent advantage to
+using one over the other, but using $\chi$ seems to be the most common. In
+practice, you can estimate your critical parameters using both approaches and
+ensure they agree within uncertainty.
 
 \section{Stability conditions}\index{stability}
 

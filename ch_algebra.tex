@@ -970,19 +970,36 @@ much point to introduce rings and make the distinction.}
 satisfies its own characteristic equation.
 \end{theorem}
 
-The Cayley-Hamilton theorem finds use as a method for
-efficient computation of matrix inverses. For
-example one can show for a $3\times 3$ matrix
+The Cayley-Hamilton theorem finds many uses in in lattice field theory. In
+particular, note that for a $3\times 3$ matrix, the characteristic equation is
+\begin{equation}\label{eq:3x3characteristic}
+0=-\lambda^3+\lambda^2\tr
+M+\frac{1}{2}\lambda\left(\tr{M^2}-\tr{M}^2\right)+\det M \id_3.
+\end{equation}
+Cayley-Hamilton tells us that if we replace $\lambda$ with $M$, we get a valid
+equation. Thus
 \begin{equation}\label{eq:inv3x3CH}
 M^3-(\tr M) M^2+\frac{1}{2}\left((\tr M)^2-\tr M^2\right) M
--\det M  \id_3=O.
+-\det M  \id_3=0
 \end{equation}
-One can then multiply through by $M^{-1}$, and hence trade
+One application of this result is for matrix inversions. In particular,
+one can multiply through by $M^{-1}$, and hence trade
 the general problem of matrix inversion with a handful for matrix
 multiplications, which may be faster.
 Later we will encounter Lie groups whose representations
 are traceless, which simplifies inverting such
 matrices substantially.
+
+Another application is estimation of the matrix exponential.
+Here we assume $M$ is traceless so that
+\begin{equation}\label{eq:Mestimate}
+M^3-\frac{1}{2}M\tr M^2-\det M  \id_3=0.
+\end{equation}
+Now, the exponential can be written as a Taylor series in $M$,
+so you can truncate it at some order, and \equatref{eq:Mestimate} tells you that
+every power of $M$ can be written as a combination of $M$, $M^3$, and $\id_3$.
+This replaces larger number of matrix multiplications with a small number
+combined with some additions, which leads to a speedup.
 
 \index{spectral theorem}
 \begin{theorem}{Spectral theorem}{spectral}
