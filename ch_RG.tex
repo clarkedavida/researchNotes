@@ -333,7 +333,7 @@ will be the same for any $d\in\N$. The \dimens{1} model was shown to
 exhibit no phase transition by Ising himself~\cite{ising_beitrag_1924}.
 The \dimens{2} model was solved analytically by 
 Onsager~\cite{onsager_crystal_1944}, who found a critical temperature of
-\begin{equation}
+\begin{equation}\label{eq:onsagerTc}
 \Tc=\frac{2 J}{k_B \log (1+\sqrt{2})}\approx(2.269185) \frac{J}{k_B}.
 \end{equation}
 Generally particle physicists work in units where $k_B=1$. Moreover
@@ -972,7 +972,7 @@ be
 \begin{equation}
 S_2=\sum_{i}\sigma_i,
 \end{equation}
-and thus $k_2=h$. The statement that $H'$ has the same functional form means
+and thus $k_2=-h$. The statement that $H'$ has the same functional form means
 \begin{equation}
 H'\left(\{\sigma'\},\vec{k'}\right)=\sum_a k'_a S_a\left(\{\sigma'\}\right).
 \end{equation}
@@ -1028,44 +1028,85 @@ Consider the \dimens{1} Ising chain with
 \end{equation}
 which is \equatref{eq:ising} in \dimens{1}. As in \equatref{eq:RGxformBoltzmann}, the
 Boltzmann weight is $e^{-H}$, i.e. the factor of $\beta$ has been absorbed into
-$J$ and $h$, so that $J>0$ for a ferromagnet. The simplest RG transformation is
-{\it decimation}\index{decimation}: we sum over every other spin, say those on
-even sites, and keep the spins on odd sites unchanged as the coarse spins.
-Hence $b=2$. In terms of \equatref{eq:RGxformBoltzmann}, ``$\set{\sigma}$ giving
-$\set{\sigma'}$" just means that the odd spins of $\set{\sigma}$ equal
-$\set{\sigma'}$.
+$J$ and $h$, so that $J>0$ for a ferromagnet. Here we follow
+Ref.~\cite{cardy_scaling_1996}. We group the sites into blocks of three
+consecutive spins, and for each block keep only the central spin as the coarse
+spin, summing over the two spins at the ends. This is called
+{\it decimation}\index{decimation}, and it has $b=3$. In terms of
+\equatref{eq:RGxformBoltzmann}, ``$\set{\sigma}$ giving $\set{\sigma'}$" just
+means that the central spin of each block equals the corresponding coarse spin.
+At low temperatures, where all the spins in a block tend to point the same way
+anyway, this is essentially the same as a majority rule.
 
-Start with $h=0$. Each even spin, say $\sigma_2$, appears only in the bonds to its
-neighbors $\sigma_1$ and $\sigma_3$, so summing over it gives
+Start with $h=0$. Consider two neighboring blocks $(\sigma_1,\sigma_2,\sigma_3)$ and
+$(\sigma_4,\sigma_5,\sigma_6)$, with coarse spins $\sigma'_1\equiv\sigma_2$ and
+$\sigma'_2\equiv\sigma_5$. The end spins $\sigma_3$ and $\sigma_4$ appear only in the
+three bonds connecting $\sigma'_1$ to $\sigma'_2$, so the factors of the Boltzmann
+weight that involve them are
 \begin{equation}
-  \sum_{\sigma_2=\pm1}e^{J\sigma_2(\sigma_1+\sigma_3)}=2\cosh J(\sigma_1+\sigma_3).
+  e^{J\sigma'_1\sigma_3}\,e^{J\sigma_3\sigma_4}\,e^{J\sigma_4\sigma'_2}.
 \end{equation}
-We would like to write this as $A\,e^{J'\sigma_1\sigma_3}$, i.e. a nearest-neighbor
-interaction on the coarse lattice times a constant. Since $\sigma_1\sigma_3=\pm1$, there
-are only two cases to match:
-\begin{equation}\begin{aligned}
-  \sigma_1=\sigma_3:&~~~~2\cosh2J=Ae^{J'},\\
-  \sigma_1=-\sigma_3:&~~~~2=Ae^{-J'},
-\end{aligned}\end{equation}
-so that
+Since $\sigma_i\sigma_j=\pm1$, each factor can be written as
+\begin{equation}
+  e^{J\sigma_i\sigma_j}=\cosh J\left(1+v\,\sigma_i\sigma_j\right),~~~~~~
+  v\equiv\tanh J,
+\end{equation}
+so the product is
+\begin{equation}
+  (\cosh J)^3\left(1+v\sigma'_1\sigma_3\right)\left(1+v\sigma_3\sigma_4\right)
+  \left(1+v\sigma_4\sigma'_2\right).
+\end{equation}
+Now expand the product and sum over $\sigma_3,\sigma_4=\pm1$. Any term containing an
+odd power of $\sigma_3$ or $\sigma_4$ sums to zero. The only terms with even powers of
+both are $1$ and $v^3\sigma'_1\sigma_3^2\sigma_4^2\sigma'_2=v^3\sigma'_1\sigma'_2$,
+and each of these picks up a factor $2^2$ from the sum. Hence
+\begin{equation}
+  \sum_{\sigma_3,\sigma_4=\pm1}e^{J\sigma'_1\sigma_3}\,e^{J\sigma_3\sigma_4}\,
+  e^{J\sigma_4\sigma'_2}=2^2(\cosh J)^3\left(1+v^3\sigma'_1\sigma'_2\right).
+\end{equation}
+Apart from the constant in front, this has the form of a nearest-neighbor
+Boltzmann factor on the coarse lattice, $\cosh J'(1+v'\sigma'_1\sigma'_2)
+=e^{J'\sigma'_1\sigma'_2}$, with
 \begin{equation}\label{eq:1dIsingRG}
-  e^{2J'}=\cosh2J,~~~~~~A=2\sqrt{\cosh2J}.
+  v'=v^3,~~~~\text{i.e.}~~~~\tanh J'=\tanh^3J.
 \end{equation}
-Equivalently, $\tanh J'=\tanh^2J$. The coarse Hamiltonian has exactly the same
-form as the fine one, only with a new coupling $J'$. The constant $A$ cannot be
-absorbed into $J'$. There is one factor of $A$ for each of the $N/2$ decimated
-spins, so altogether we pick up $A^{N/2}=\exp[(N/2)\log A]$. This is the
-normalization $e^{-\beta G}$ of \equatref{eq:RGxformBoltzmann}, and we see
-explicitly that $G$ is extensive.
+The coarse Hamiltonian has exactly the same form as the fine one, only with a
+new coupling $J'$. What is left over is the constant
+\begin{equation}
+  A=\frac{4\cosh^3J}{\cosh J'},
+\end{equation}
+which cannot be absorbed into $J'$. There is one factor of $A$ for each of the
+$N/3$ blocks, so summing out the end spins gives
+$A^{N/3}e^{-H'}$. Comparing with \equatref{eq:RGxformBoltzmann}, the
+normalization is $e^{-\beta G}=A^{-N/3}$, i.e. $\beta G=(N/3)\log A$, and we see
+explicitly that $G$ is extensive.\footnote{Ref.~\cite{cardy_scaling_1996}
+writes this constant with the opposite sign, as a term $+Ng$ in $H'$, so his
+$g$ is minus ours.}
 
-With $h\neq0$ the same procedure, now matching the three cases $\sigma_1=\sigma_3=1$,
-$\sigma_1=\sigma_3=-1$, and $\sigma_1=-\sigma_3$, gives
-\begin{equation}\label{eq:1dIsingRGh}
-  e^{4J'}=\frac{\cosh(2J+h)\cosh(2J-h)}{\cosh^2h},~~~~~~
-  h'=h+\frac{1}{2}\log\frac{\cosh(2J+h)}{\cosh(2J-h)}.
+With $h\neq0$ the expansion in $v$ no longer closes so neatly, and it is easier
+to do the sum over $\sigma_3$ and $\sigma_4$ directly. The field on the decimated spins
+is $h(\sigma_3+\sigma_4)$, so we need
+\begin{equation}
+  Z(\sigma'_1,\sigma'_2)\equiv\sum_{\sigma_3,\sigma_4=\pm1}
+  e^{(J\sigma'_1+h)\sigma_3+J\sigma_3\sigma_4+(J\sigma'_2+h)\sigma_4}
+  =2e^{J}\cosh\big[J(\sigma'_1+\sigma'_2)+2h\big]
+   +2e^{-J}\cosh\big[J(\sigma'_1-\sigma'_2)\big],
 \end{equation}
-The correction to $h$ arises because each coarse spin neighbors two decimated
-spins, each of which leaves behind a contribution to its field.
+where we split the sum according to $\sigma_3\sigma_4=\pm1$. We would like to write
+this as $A\,e^{J'\sigma'_1\sigma'_2+\frac{1}{2}\delta h(\sigma'_1+\sigma'_2)}$, i.e. a constant
+times a nearest-neighbor coupling and a shift in the field. Each coarse spin borders
+two such pairs of decimated spins, so it picks up $\frac{1}{2}\delta h$ from each,
+and $h'=h+\delta h$. There are three distinct cases,
+$\sigma'_1=\sigma'_2=1$, $\sigma'_1=\sigma'_2=-1$, and $\sigma'_1=-\sigma'_2$, which fix the three
+unknowns $A$, $J'$, and $\delta h$:
+\begin{equation}\label{eq:1dIsingRGh}
+  e^{4J'}=\frac{Z(+,+)\,Z(-,-)}{Z(+,-)^2},~~~~~~
+  h'=h+\frac{1}{2}\log\frac{Z(+,+)}{Z(-,-)}.
+\end{equation}
+The correction to $h$ arises because the decimated spins, which are polarized by
+the field, leave behind a contribution to the field on their neighbors. At $h=0$
+one has $Z(+,+)=Z(-,-)$, so $h'=0$, and $e^{4J'}$ reduces to
+\equatref{eq:1dIsingRG}.
 
 That the coarse Hamiltonian closes on itself is special to \dimens{1}. Consider
 the square lattice at $h=0$, and decimate one sublattice of the checkerboard,
@@ -1104,8 +1145,8 @@ resolution: after $n$ steps, a coarse spin represents a block of linear
 extension $b^n$. The collection of all trajectories is called the
 {\it RG flow}\index{RG flow}, and it is often drawn as arrows in the space of
 couplings, a so-called {\it flow diagram}\index{flow diagram}. A
-{\it fixed point}\index{fixed point} $\vec{k}_0$ is a point that does not
-move, $\vec{R}(\vec{k}_0)=\vec{k}_0$.
+{\it fixed point}\index{fixed point} $\vec{k}^*$ is a point that does not
+move, $\vec{R}(\vec{k}^*)=\vec{k}^*$.
 
 At this point, it is worth pointing out that fixed points do not necessarily
 exist. In practice, it is common to assume the existence of a fixed point and
@@ -1143,17 +1184,16 @@ with a relevant direction. Only points with $\xi=\infty$ can flow into a critica
 fixed point. Second-order transitions are therefore the special case where $\xi$
 diverges.
 
-Let's see how this works in the \dimens{1} Ising model at $h=0$. Introducing
-$u\equiv\tanh J$, which runs from 0 at $T=\infty$ to 1 at $T=0$ since $\beta$
-was absorbed in the coupling,
-\equatref{eq:1dIsingRG} becomes
+Let's see how this works in the \dimens{1} Ising model at $h=0$. The variable
+$v=\tanh J$ runs from 0 at $T=\infty$ to 1 at $T=0$, since $\beta$
+was absorbed in the coupling. By \equatref{eq:1dIsingRG},
 \begin{equation}
-  u'=u^2,
+  v'=v^3,
 \end{equation}
-so the trajectory starting from $u$ is $u^{(n)}=u^{2^n}$. There are two
-fixed points, $u=0$ ($J=0$, $T=\infty$) and $u=1$ ($J=\infty$, $T=0$). One can
+so the trajectory starting from $v$ is $v^{(n)}=v^{3^n}$. There are two
+fixed points, $v=0$ ($J=0$, $T=\infty$) and $v=1$ ($J=\infty$, $T=0$). One can
 check \equatref{eq:RGxi} explicitly: the correlation function of the \dimens{1} Ising
-chain is $\ev{\sigma_0\sigma_r}=u^r$, which is also the connected correlation
+chain is $\ev{\sigma_0\sigma_r}=v^r$, which is also the connected correlation
 function, since $\ev{\sigma_i}=0$ at $h=0$ for all $T>0$.\footnote{By symmetry
 $\ev{\sigma_i}=0$ in any finite chain at $h=0$, but that alone doesn't rule out
 spontaneous magnetization, which requires taking $N\to\infty$ before $h\to0$.
@@ -1161,66 +1201,70 @@ The transfer matrix gives, in the thermodynamic limit,
 $m(h)=\sinh h/\sqrt{\sinh^2h+e^{-4J}}$, which is analytic in $h$ and vanishes at
 $h=0$ for any finite $J$. Only at $J=\infty$ does it become
 $m=\operatorname{sign}(h)$. Equivalently, spontaneous order would require
-$\ev{\sigma_0\sigma_r}\to m^2$ as $r\to\infty$, while $u^r\to0$ for $u<1$.
-At $u=1$ itself $\ev{\sigma_0\sigma_r}=1$ for all $r$, and the connected
-correlator depends on which state one picks, so the statement that $u=1$ has
-$\xi=\infty$ should be understood as the limit $u\to1^-$.}
-Hence $\xi=-1/\log u$, and indeed
-$\xi(u^2)=\xi(u)/2$. The fixed point $u=0$ has $\xi=0$, while $u=1$ has
+$\ev{\sigma_0\sigma_r}\to m^2$ as $r\to\infty$, while $v^r\to0$ for $v<1$.
+At $v=1$ itself $\ev{\sigma_0\sigma_r}=1$ for all $r$, and the connected
+correlator depends on which state one picks, so the statement that $v=1$ has
+$\xi=\infty$ should be understood as the limit $v\to1^-$.}
+Hence $\xi=-1/\log v$, and indeed
+$\xi(v^3)=\xi(v)/3$. The fixed point $v=0$ has $\xi=0$, while $v=1$ has
 $\xi=\infty$; in \dimens{1}, $T=0$ is a critical point.
 
-To figure out whether a fixed point $u_0$ attracts or repels nearby points, we
+To figure out whether a fixed point $v^*$ attracts or repels nearby points, we
 linearize the flow around it. We measure both the starting coupling and its
 image after one RG step from the fixed point, writing
 \begin{equation}
-  u=u_0+\delta u,~~~~~~u'=u_0+\delta u',
+  v=v^*+\delta v,~~~~~~v'=v^*+\delta v',
 \end{equation}
-so that $\delta u'$ is the deviation from $u_0$ after the step. Plugging these
-into $u'=u^2$ gives
+so that $\delta v'$ is the deviation from $v^*$ after the step. Plugging these
+into $v'=v^3$ gives
 \begin{equation}
-  u_0+\delta u'=(u_0+\delta u)^2=u_0^2+2u_0\,\delta u+(\delta u)^2.
+  v^*+\delta v'=(v^*+\delta v)^3
+  =(v^*)^3+3(v^*)^2\,\delta v+3v^*(\delta v)^2+(\delta v)^3.
 \end{equation}
-Since $u_0$ is a fixed point, $u_0^2=u_0$, so the $u_0$ on each side cancels,
-leaving $\delta u'=2u_0\,\delta u+(\delta u)^2$. For small deviations we drop
-the quadratic term to find
+Since $v^*$ is a fixed point, $(v^*)^3=v^*$, so the $v^*$ on each side cancels.
+For small deviations we drop the terms of quadratic and higher order in
+$\delta v$ to find
 \begin{equation}
-  \delta u'=2u_0\,\delta u.
+  \delta v'=3(v^*)^2\,\delta v.
 \end{equation}
-More generally, for a recursion $u'=R(u)$ with $R(u_0)=u_0$, Taylor expanding
-$R(u_0+\delta u)$ gives $\delta u'=R'(u_0)\,\delta u$, so the factor $2u_0$
-is just $R'(u_0)$. We will generalize this to many couplings in
+More generally, for a recursion $v'=R(v)$ with $R(v^*)=v^*$, Taylor expanding
+$R(v^*+\delta v)$ gives $\delta v'=R'(v^*)\,\delta v$, so the factor $3(v^*)^2$
+is just $R'(v^*)$. We will generalize this to many couplings in
 \secref{sec:scalingFields}.
-At $u_0=0$ the factor is $0<1$, so small deviations shrink: the fixed point
-is {\it attractive}, or {\it stable}. At $u_0=1$ the factor is $2>1$, so small
+At $v^*=0$ the factor is $0<1$, so small deviations shrink: the fixed point
+is {\it attractive}, or {\it stable}. At $v^*=1$ the factor is $3>1$, so small
 deviations grow: the fixed point is {\it repulsive}, or {\it unstable}. Every
-starting point with $u<1$, i.e. every $T>0$, flows to $u=0$. Hence at any
+starting point with $v<1$, i.e. every $T>0$, flows to $v=0$. Hence at any
 nonzero temperature, the long-distance physics of the \dimens{1} Ising chain is that
 of uncorrelated spins at $T=\infty$, i.e. the chain is always paramagnetic.
 
-Near the unstable fixed point it is convenient to use $w\equiv1-u\approx2e^{-2J}$,
-which measures the distance from $T=0$. Then $w'=1-(1-w)^2\approx2w$, and
+Near the unstable fixed point it is convenient to use $w\equiv1-v\approx2e^{-2J}$,
+which measures the distance from $T=0$. Then $w'=1-(1-w)^3\approx3w$, and
 $\xi=-1/\log(1-w)\approx1/w$, which diverges like $e^{2J}/2$ as $T\to0$. We can
-also look at the field. As $J\to\infty$ at fixed $h$, the ratio of
-$\cosh$'s in \equatref{eq:1dIsingRGh} approaches $e^{2h}$, so that $h'=2h$.
+also look at the field. As $J\to\infty$ at fixed $h$, the first term of
+$Z(\pm,\pm)$ dominates, so $Z(+,+)/Z(-,-)\to e^{4h}$ in \equatref{eq:1dIsingRGh},
+and $h'=3h$. This makes sense: at $T=0$ the three spins of a block are aligned
+with the coarse spin, so the coarse spin feels three times the field.
 Hence the $T=0$ fixed point has two unstable directions, $w$ and $h$, each
-with factor $2$. Meanwhile at $J=0$, \equatref{eq:1dIsingRGh} gives $h'=h$, so
+with factor $3$. Meanwhile at $J=0$, $Z(+,+)=Z(-,-)$, so $h'=h$, and
 the $T=\infty$ fixed point is really a line of fixed points parameterized by $h$,
 describing free spins in a field.
 
 \subsection{Linearization and scaling fields}\label{sec:scalingFields}
 
 Next, let us think about how to relate the couplings $\vec{k}'$ and $\vec{k}$
-near a general fixed point $\vec{k}_0$.
-We can Taylor expand the renormalization transform $\vec{R}$ in the vicinity of $\vec{k}_0$ to find
+near a general fixed point $\vec{k}^*$. Again, we are using our usual assumption
+that a fixed point exists.
+We can Taylor expand the renormalization transform $\vec{R}$ in the vicinity of $\vec{k}^*$ to find
 \begin{equation}
-  \vec{k}_0+\delta\vec{k}'=\vec{R}\left(\vec{k}_0+\delta\vec{k}\right)
-                          \approx\vec{R}(\vec{k}_0)
+  \vec{k}^*+\delta\vec{k}'=\vec{R}\left(\vec{k}^*+\delta\vec{k}\right)
+                          \approx\vec{R}(\vec{k}^*)
                            +\left[\frac{\partial R_i(\vec{k})}{\partial k_j}
-                              \right]_{\vec{k}=\vec{k}_0}\delta\vec{k}.
+                              \right]_{\vec{k}=\vec{k}^*}\delta\vec{k}.
 \end{equation}
 The first-order term defines a matrix $M$; it's the Jacobian.
 Since the effect of the renormalization transform
-$\vec{R}$ on the fixed point is $\vec{R}(\vec{k}_0)=\vec{k}_0$, we can write
+$\vec{R}$ on the fixed point is $\vec{R}(\vec{k}^*)=\vec{k}^*$, we can write
 \begin{equation}
   \delta\vec{k}'=M\delta\vec{k}.
 \end{equation}
@@ -1263,54 +1307,89 @@ The exponents $y_i$ classify the directions around the fixed point:
 order. These are called {\it marginal}\index{marginal}, and they typically lead
 to logarithmic corrections.
 \end{itemize}
-In the \dimens{1} Ising model, both $w$ and $h$ have $\lambda=2=b^1$ at the $T=0$
+To simplify this discussion, we will not go into marginal cases in any depth.
+In the \dimens{1} Ising model, both $w$ and $h$ have $\lambda=3=b^1$ at the $T=0$
 fixed point, so they are relevant with $y=1$. Note that whether a coupling is
 relevant depends on the fixed point we are expanding around.
 
-The set of all points that flow into $\vec{k}_0$ is called its
-{\it critical surface}\index{critical surface}. This includes $\vec{k}_0$ itself,
-which trivially flows into itself. Near $\vec{k}_0$ we can characterize the
+The set of all points that flow into $\vec{k}^*$ is called its
+{\it critical surface}\index{critical surface},
+\begin{equation}
+  \mathcal{S}\equiv\left\{\vec{k}:\vec{k}^{(n)}\to\vec{k}^*~\text{as}~n\to\infty\right\}.
+\end{equation}
+This includes $\vec{k}^*$ itself,
+which trivially flows into itself. Near $\vec{k}^*$ we can characterize the
 surface with the scaling fields. After $n$ steps, $x_i^{(n)}=b^{ny_i}x_i$, so
 irrelevant components shrink to zero while any nonzero relevant component
-grows. A point therefore flows into $\vec{k}_0$ only if all of its relevant
-components vanish, i.e. near $\vec{k}_0$ the critical surface is
-\begin{equation}
+grows. A point therefore flows into $\vec{k}^*$ only if all of its relevant
+components vanish, i.e. near $\vec{k}^*$ the critical surface is
+\begin{equation}\label{eq:critSurfaceLinear}
   x_i=0~~~~\text{for all relevant}~i,
 \end{equation}
 and it is spanned by the irrelevant directions. Moving along an irrelevant
 direction keeps us on the surface, and the flow carries us back toward
-$\vec{k}_0$, which is the attractor within the surface. The relevant directions
+$\vec{k}^*$, which is the attractor within the surface. The relevant directions
 point off the surface. A point slightly off the surface first approaches
-$\vec{k}_0$ as its irrelevant components die out, then gets pushed away along
-the relevant directions toward some other fixed point. Hence $\vec{k}_0$ is a
-saddle point of the flow. Farther from $\vec{k}_0$ the surface is curved, and
+$\vec{k}^*$ as its irrelevant components die out, then gets pushed away along
+the relevant directions toward some other fixed point. Hence $\vec{k}^*$ is a
+saddle point of the flow. Farther from $\vec{k}^*$ the surface is curved, and
 the condition $x_i=0$ should be replaced by the vanishing of the nonlinear
 scaling fields discussed in \secref{sec:scalingHypothesis}.
 
 Note that the RG flow is a separate thing from choosing a starting point. A
 given microscopic model does not explore all of coupling space; as we vary its
 physical parameters, such as $T$ and $h$, its couplings trace out a
-low-dimensional family $\vec{k}(T,h,...)$. To put the model on the critical
-surface, we have to tune these parameters so that
-\begin{equation}
+low-dimensional family $\vec{k}(T,h,...)$. We call the set of all such couplings
+the {\it physical parameter surface}\index{physical parameter surface},
+\begin{equation}\label{eq:physicalSurface}
+  \mathcal{P}\equiv\left\{\vec{k}(T,h,...):~T>0,~h\in\mathbb{R},~...\right\}.
+\end{equation}
+For example, for the nearest-neighbor Ising model in the basis $S_1$, $S_2$,
+... of \secref{sec:RGflow}, and restoring the factor $1/k_BT$ that we absorbed
+into $H$,
+\begin{equation}\label{eq:physicalSurfaceIsing}
+  \vec{k}(T,h)=\left(-\frac{J}{k_BT},\,-\frac{h}{k_BT},\,0,\,0,\,...\right),
+\end{equation}
+so for this model $\mathcal{P}$ is the half-plane $k_1<0$, $k_a=0$ for $a\geq3$.
+A model with $m$ physical parameters gives an $m$-dimensional $\mathcal{P}$;
+adding a next-nearest-neighbor coupling $J_2$ as a parameter, for instance,
+makes $k_3$ nonzero and $\mathcal{P}$ three-dimensional. For a real material
+such as a fluid, the map from the physical parameters $(T,p)$ to the couplings
+is unknown and generally curved, but the definition is the same.
+
+Note the difference in how the two surfaces are specified: the critical surface
+is defined implicitly by \equatref{eq:critSurfaceLinear}, while $\mathcal{P}$
+is given parametrically. To find where they meet, we substitute the
+parametrization into the implicit equations, i.e. to put the model on the
+critical surface we have to tune its parameters so that
+\begin{equation}\label{eq:tuningCondition}
   x_i\big(\vec{k}(T,h,...)\big)=0~~~~\text{for all relevant}~i.
 \end{equation}
+Since \equatref{eq:critSurfaceLinear} only holds near $\vec{k}^*$, and
+$\mathcal{P}$ generally crosses the critical surface far from $\vec{k}^*$, the
+$x_i$ here should really be read as the nonlinear scaling fields.
 This is one condition per relevant direction, so the number of relevant
-directions is the number of parameters one has to tune. For the Ising
+directions is the number of parameters one has to tune. With $m$ parameters and
+$r$ relevant directions, the solutions generically form an $(m-r)$-dimensional
+set. For the Ising
 model in $d\geq2$ one has to tune both $T$ and $h$, and indeed the critical
 fixed point has exactly two relevant directions. Symmetry helps to identify
 them: since the RG transformation respects the $\mathbb{Z}_2$ symmetry, $M$ does
 not mix $\mathbb{Z}_2$-even and $\mathbb{Z}_2$-odd perturbations. Hence one
 relevant direction is temperature-like and the other is field-like. All other
-directions, of which there are infinitely many, are irrelevant.
+directions, of which there are infinitely many, are irrelevant. The symmetry
+also simplifies \equatref{eq:tuningCondition}: at $h=0$ the Hamiltonian is
+$\mathbb{Z}_2$-symmetric, so the field-like scaling field vanishes
+automatically, and only the temperature-like condition is left to solve for
+$T$. Its solution is $\Tc$.
 
 This is the origin of {\it universality}\index{universality}. Different
 microscopic models that lie on the same critical surface all flow to the same
-$\vec{k}_0$, and their differences, which lie along irrelevant directions, die out
+$\vec{k}^*$, and their differences, which lie along irrelevant directions, die out
 under the flow.
 
 Finally, the scaling fields determine how the correlation length behaves near
-$\vec{k}_0$. Consider a single relevant field $x$ with exponent $y$. By
+$\vec{k}^*$. Consider a single relevant field $x$ with exponent $y$. By
 \equatref{eq:RGxi}, $\xi(b^{\,y}x)=\xi(x)/b$. Since this holds for any $b$, we
 can choose $b=|x|^{-1/y}$ to find
 \begin{equation}
@@ -1355,13 +1434,42 @@ f(\vec{k}')=b^d\left(f(\vec{k})+g(\vec{k})\right).
 \end{equation}
 
 Before going further, it is worth asking where the non-analyticity of a phase
-transition can possibly come from. Iterating \equatref{eq:widom1} along the
-trajectory $\vec{k}^{(n)}$, we find
+transition can possibly come from. To see this, we solve \equatref{eq:widom1}
+for $f(\vec{k})$,
 \begin{equation}
-  f(\vec{k})=-\sum_{n=0}^\infty b^{-nd}\,g\left(\vec{k}^{(n)}\right).
+  f(\vec{k})=-g(\vec{k})+b^{-d}f(\vec{k}'),
 \end{equation}
-Each $g$ comes from summing over the finitely many spins in a block, so it is
-analytic in the couplings, and so is each individual RG step. Any singular
+and apply the same relation to $f(\vec{k}')$, then to $f(\vec{k}'')$, and so on.
+Writing $\vec{k}^{(0)}=\vec{k}$ and $\vec{k}^{(n+1)}=\vec{k}^{(n)\prime}$ for the
+trajectory, two steps give
+\begin{equation}
+  f(\vec{k})=-g\left(\vec{k}^{(0)}\right)-b^{-d}g\left(\vec{k}^{(1)}\right)
+             +b^{-2d}f\left(\vec{k}^{(2)}\right),
+\end{equation}
+and after $\ell$ steps
+\begin{equation}\label{eq:RGfreeEnergyPartialSum}
+  f(\vec{k})=-\sum_{n=0}^{\ell-1} b^{-nd}\,g\left(\vec{k}^{(n)}\right)
+             +b^{-\ell d}f\left(\vec{k}^{(\ell)}\right).
+\end{equation}
+Since $b>1$, the remainder term vanishes as $\ell\to\infty$ provided
+$f(\vec{k}^{(\ell)})$ stays bounded along the trajectory. This is the case when the
+trajectory ends at a fixed point, since $f$ is finite there. Then
+\begin{equation}\label{eq:RGfreeEnergySum}
+  f(\vec{k})=-\sum_{n=0}^\infty b^{-nd}\,g\left(\vec{k}^{(n)}\right)
+\end{equation}
+(see e.g. Refs.~\cite{cardy_scaling_1996,kardar_fields_2007}).
+As a check, if we start at any fixed point, every term in the sum equals the
+value $g_\text{fp}$ that $g$ takes there, and the geometric series gives
+\begin{equation}\label{eq:fFixedPoint}
+  f_\text{fp}=-\frac{g_\text{fp}}{1-b^{-d}},
+\end{equation}
+which is what one finds by setting $\vec{k}'=\vec{k}$ in \equatref{eq:widom1}
+and solving $f_\text{fp}=b^d(f_\text{fp}+g_\text{fp})$ directly.
+
+Each $g$ comes from summing over the finitely many spins in a block, so for a
+well-behaved RG transformation it is analytic in the couplings, and so is each
+individual RG step. This is not guaranteed for every RG transformation; we
+return to this caveat in \secref{sec:scalingHypothesis}. Any singular
 behavior of $f$ must therefore come from the infinite sum, i.e. from the
 behavior of the trajectory $\vec{k}^{(n)}$ as $n\to\infty$. In typical cases,
 trajectories end up at fixed points.
@@ -1372,43 +1480,210 @@ the long-time behavior of $\vec{k}^{(n)}$ to depend non-analytically on the
 starting couplings $\vec{k}$. If all trajectories near some $\vec{k}$ run into the same
 attractive fixed point, then nearby starting points have nearby trajectories,
 and $f$ is analytic there. This is the situation deep inside a phase.
-A singularity requires a fixed point with at least one relevant direction
-sitting on the boundary between the basins of attraction of different
-attractive fixed points. Starting points on either side of this boundary,
-however close, eventually flow to different places.
+A singularity instead requires starting points that, however close, eventually
+flow to different attractive fixed points~\cite{wilson_renormalization_1974,cardy_scaling_1996}.
 
-To see how this produces a power law, suppose we start near such a fixed point,
-with a small relevant component $u$ having exponent $y>0$. This
-component grows like $b^{\,ny}u$, so the trajectory lingers near $\vec{k}_0$ for
-about
+Let us set up some notation for this situation, which we will use from here on.
+Consider two attractive fixed points, which we call $\vec{k}_+$ and $\vec{k}_-$,
+and the boundary between their basins of attraction. This boundary is mapped
+into itself by the flow: $\vec{k}$ flows into $\vec{k}_\pm$ if and only if
+$\vec{k}'$ does, so a point on the boundary can never reach either attractive
+fixed point. In typical cases, points on the boundary instead flow to a fixed
+point that lies on the boundary itself. We call this fixed point $\vec{k}^*$.
+From here on, $\vec{k}^*$ always denotes this fixed point on the boundary, and we
+write $f^*\equiv f(\vec{k}^*)$ and $g^*\equiv g(\vec{k}^*)$, which are related
+by \equatref{eq:fFixedPoint}. A point just off the boundary first approaches
+$\vec{k}^*$ and is then pushed toward $\vec{k}_+$ or $\vec{k}_-$, so $\vec{k}^*$
+has at least one relevant direction, pointing off the boundary. The boundary is
+therefore the critical surface $\mathcal{S}$ of $\vec{k}^*$ from
+\secref{sec:scalingFields}. Finally, a physical model only explores the physical parameter surface
+$\mathcal{P}$ of \equatref{eq:physicalSurface}, and its critical point is where
+$\mathcal{P}$ meets $\mathcal{S}$, i.e. where \equatref{eq:tuningCondition}
+holds. For the Ising model we denote the critical point by
 \begin{equation}
-  n^*\approx-\frac{\log_b|u|}{y}
+  \vec{k}_c\equiv\vec{k}(\Tc,h=0)\in\mathcal{P}\cap\mathcal{S}.
 \end{equation}
-steps before escaping. Stopping the iteration of \equatref{eq:widom1} at $n^*$,
-the singular part is $b^{-n^*d}$ times something of order one, i.e.
+For the nearest-neighbor model, \equatref{eq:physicalSurfaceIsing} gives
+$\vec{k}_c=(-J/k_B\Tc,0,0,...)$, where in \dimens{2}
+$J/k_B\Tc=\frac{1}{2}\log(1+\sqrt{2})$ by \equatref{eq:onsagerTc}.
+Generally $\vec{k}_c\neq\vec{k}^*$. Both lie on $\mathcal{S}$, and the model at
+its critical point flows into $\vec{k}^*$, but it does not start
+there~\cite{cardy_scaling_1996,kardar_fields_2007}. In fact, since the RG
+generates all possible interactions, $\vec{k}^*$ generically has $k^*_a\neq0$
+for $a\geq3$, so it does not lie in $\mathcal{P}$ at all. Where the slice crosses
+$\mathcal{S}$ depends on microscopic details, so $\Tc$ is not universal, while
+the exponents are set by $\vec{k}^*$ alone.
+
+To see concretely how the flow near $\vec{k}^*$ produces a singularity in $f$,
+and what form it takes, suppose we start near $\vec{k}^*$. We describe points
+near $\vec{k}^*$ by their scaling fields from \secref{sec:scalingFields}, and
+for simplicity we assume $\vec{k}^*$ has a single relevant direction, with
+scaling field $u$ and exponent $y>0$, while the irrelevant scaling fields $x_i$
+have $y_i<0$. Under $n$ RG steps,
 \begin{equation}
-  \fsing\sim b^{-n^*d}=|u|^{d/y}.
+  u^{(n)}=b^{ny}u,~~~~~~x_i^{(n)}=b^{ny_i}x_i,
 \end{equation}
-The non-analyticity comes from the number of steps $n^*$ depending on
-$\log|u|$, which diverges at $u=0$.
+as long as all scaling fields stay small enough for the linearization to hold.
+Fix a small number $\delta>0$, independent of $u$, such that the linearization
+is still accurate when $|u^{(n)}|=\delta$. We say the trajectory {\it escapes}
+from $\vec{k}^*$ at the first step $n_\text{esc}$ where $|u^{(n)}|\geq\delta$,
+i.e.
+\begin{equation}
+  n_\text{esc}\approx\frac{\log_b(\delta/|u|)}{y}.
+\end{equation}
+For small $u$ this is a large number of steps.
 
-The \dimens{1} Ising model of \secref{sec:1dIsingRG} illustrates this. Its only
-fixed point with relevant directions is at $T=0$, at the edge of the physical
-parameter space. Every $T>0$ flows to the attractive fixed point at $T=\infty$,
-so $f$ is analytic for all $T>0$, and the only singularity is at $T=0$, where
-$\xi\sim e^{2J}$ diverges. Hence the correct statement is that we seek fixed
-points with relevant directions whose critical surface intersects the physical
-parameter space. Near such fixed points, the RG map also becomes simple enough
-to solve \equatref{eq:widom1}, which we do in \secref{sec:scalingHypothesis}.
-Note that the physical system we started with, e.g. the nearest-neighbor
-Ising model at $\Tc$, is generally {\it not} at $\vec{k}_0$; it merely flows there.
+Now define the two points
+\begin{equation}\label{eq:kesc}
+  \vec{k}_{\text{esc},\pm}:~~~~u=\pm\delta,~~~~x_i=0~\text{for all irrelevant}~i,
+\end{equation}
+i.e. the points a distance $\delta$ from $\vec{k}^*$ along the relevant
+direction, on either side of $\mathcal{S}$. These are not fixed points; under
+further RG steps they flow away from $\vec{k}^*$ toward $\vec{k}_+$ and
+$\vec{k}_-$, respectively. Since $u\neq0$ there, they lie off $\mathcal{S}$,
+where $f$ is analytic.
 
-This picture is consistent with the Lee-Yang result of \secref{sec:leeyang}.
-On a lattice of linear extension $L$, you can only carry out about $\log_b L$
-blocking steps before running out of lattice. The sum above then contains finitely
-many terms, each analytic, so $f$ is analytic and there is no phase transition.
-The sum only becomes infinite as $L\to\infty$; the thermodynamic limit and the
-infinite iteration of the RG are one and the same limit.
+Compare these to where the trajectory actually is at step $n_\text{esc}$:
+\begin{equation}
+  u^{(n_\text{esc})}=b^{n_\text{esc}y}u,~~~~~~
+  x_i^{(n_\text{esc})}=b^{n_\text{esc}y_i}x_i
+  \approx\left(\frac{|u|}{\delta}\right)^{|y_i|/y}x_i.
+\end{equation}
+The irrelevant components go to zero as $u\to0$: the smaller $u$, the longer
+the trajectory stays near $\vec{k}^*$, and the more the irrelevant components
+shrink in the meantime. The relevant component has the sign of $u$ and, by the
+definition of $n_\text{esc}$, magnitude between $\delta$ and $b^{\,y}\delta$.
+This is what we mean by $\vec{k}^{(n_\text{esc})}$ being near
+$\vec{k}_{\text{esc},\pm}$: its irrelevant components agree with those of
+$\vec{k}_{\text{esc},\pm}$ in the limit $u\to0$, and its relevant component
+agrees up to a factor of order one, which comes only from $n_\text{esc}$ being
+an integer. For now we ignore this factor, so that
+$f(\vec{k}^{(n_\text{esc})})\approx f(\vec{k}_{\text{esc},\pm})$, which does
+not depend on $u$. We return to it below.
+
+Now use \equatref{eq:RGfreeEnergyPartialSum} with $\ell=n_\text{esc}$. Since
+$b^{-n_\text{esc}d}\approx(|u|/\delta)^{d/y}$, the remainder term is
+\begin{equation}
+  b^{-n_\text{esc}d}f\left(\vec{k}^{(n_\text{esc})}\right)
+  \approx\left(\frac{|u|}{\delta}\right)^{d/y}f(\vec{k}_{\text{esc},\pm}),
+\end{equation}
+and all of its $u$-dependence sits in the prefactor.
+
+The partial sum depends on $u$ too, through its upper limit. For
+$n<n_\text{esc}$ the trajectory is within $\delta$ of $\vec{k}^*$, so
+$g(\vec{k}^{(n)})\approx g^*$, and this part of the sum is
+\begin{equation}
+  -g^*\sum_{n=0}^{n_\text{esc}-1}b^{-nd}
+  =-\frac{g^*}{1-b^{-d}}\left(1-b^{-n_\text{esc}d}\right)
+  \approx f^*\left[1-\left(\frac{|u|}{\delta}\right)^{d/y}\right].
+\end{equation}
+Adding the partial sum and the remainder term,
+\begin{equation}
+  f(\vec{k})\approx\underbrace{f^*}_{\text{regular}}
+  +\underbrace{\big[f(\vec{k}_{\text{esc},\pm})-f^*\big]
+    \left(\frac{|u|}{\delta}\right)^{d/y}}_{\text{singular}}.
+\end{equation}
+Here we split the free energy as
+\begin{equation}
+  f=f_\text{reg}+\fsing,
+\end{equation}
+where the {\it regular part}\index{regular} $f_\text{reg}$ has a Taylor expansion
+in $u$ around $u=0$, and the {\it singular part}\index{singular} $\fsing$ is the
+rest.\footnote{In case the relevant combination of critical exponents is
+rational, writing an observable as the singular part plus the regular part
+leads to a {\it Puiseux series}\index{Puiseux series}, a generalization of a
+power series that allows for fractional powers.} The constant
+$f^*$ belongs to $f_\text{reg}$. The $|u|^{d/y}$ term belongs to $\fsing$: it is
+non-analytic at $u=0$ for non-integer $d/y$, or when its coefficient
+differs on the two sides of $u=0$.\footnote{If neither holds, i.e. $d/y$ is an
+integer and the coefficients agree, as they do for even $d/y$ when a symmetry
+relates the two sides, then $|u|^{d/y}$ is just a term of the Taylor series and
+there is no singularity, even though $\vec{k}^*$ has a relevant direction. Hence a
+relevant direction is necessary for a singularity but not sufficient. An
+example is the field at the $T=\infty$ fixed point under a majority-rule
+transformation. A block of $b^d$ independent spins in a small field $h$ has net
+magnetization of order $b^dh$, while its typical spread is $b^{d/2}$, so the
+block spin feels an effective field $h'\sim b^{d/2}h$, i.e. $y_h=d/2$. Then
+$\fsing\sim|h|^{d/y_h}=h^2$, which is analytic, consistent with the free-spin
+result $f=-\log(2\cosh h)$. (Under decimation, by contrast, $h'=h$ at $T=\infty$, as we
+saw in \secref{sec:fixedPoints}, so eigenvalues at trivial fixed points can
+depend on the transformation.) This example also shows that trivial fixed points
+can have relevant directions; we will meet more important examples in
+\secref{sec:scalingHypothesis}. Integer $d/y$ can also produce terms like
+$u^{d/y}\log|u|$, which are non-analytic, e.g. the logarithmic specific heat of
+the \dimens{2} Ising model, where $\alpha=0$.} The split is not unique, since an
+analytic function can always be moved from one part to the other, but the
+non-analytic structure, and hence the critical behavior, is entirely in
+$\fsing$.
+The corrections to $g\approx g^*$ come from the growing relevant component and
+contribute terms like $b^{n(y-d)}u$. Summed up to $n_\text{esc}$, these give
+analytic pieces, which belong to $f_\text{reg}$, plus a part proportional to
+$b^{n_\text{esc}(y-d)}u$, which has the same form $|u|^{d/y}$. Hence
+\begin{equation}
+  \fsing\sim|u|^{d/y}.
+\end{equation}
+The non-analyticity comes from the number of steps $n_\text{esc}$ depending on
+$\log|u|$, which diverges at $u=0$. The true $\fsing$ cannot depend on our
+arbitrary choice of $\delta$, while the coefficient above does. This argument
+therefore fixes the exponent $d/y$, but not the coefficient.
+
+Let us summarize the logic so far.
+\begin{enumerate}
+\item Any singularity of $f$ has to come from the infinite sum
+\equatref{eq:RGfreeEnergySum}: each $g$ and each RG step is analytic, so any
+finite number of terms is analytic. This requires the thermodynamic limit. On a
+lattice of linear extension $L$, only about $\log_bL$ RG steps are possible, so
+the sum is finite and $f$ is analytic, consistent with the Lee-Yang result of
+\secref{sec:leeyang}. In the language of this argument, the singularity is cut off once
+$n_\text{esc}$ would exceed $\log_bL$, i.e. once $|u|\lesssim\delta L^{-y}$,
+which is when $\xi\gtrsim L$.
+\item Fixed points by themselves do not produce singularities. What is needed is
+a fixed point $\vec{k}^*$ with at least one relevant direction, whose critical
+surface $\mathcal{S}$ separates the basins of two attractive fixed points
+$\vec{k}_\pm$. The singularity is located on $\mathcal{S}$, which may be far from
+$\vec{k}^*$, e.g. at $\vec{k}_c$. Its form, however, is controlled by
+$\vec{k}^*$. Here we only treated starting points near $\vec{k}^*$; why starting
+points far from $\vec{k}^*$ behave the same way is discussed in
+\secref{sec:scalingHypothesis}.
+\item Starting near $\vec{k}^*$ with a small relevant component $u$, the
+trajectory stays within $\delta$ of $\vec{k}^*$ for
+$n_\text{esc}\approx\log_b(\delta/|u|)/y$ steps. We split
+\equatref{eq:RGfreeEnergyPartialSum} at $\ell=n_\text{esc}$ into the
+partial sum, which covers the steps spent near $\vec{k}^*$, and the remainder
+term, which contains everything after the escape.
+\item During the steps near $\vec{k}^*$, $g\approx g^*$, so the partial sum is a
+geometric series that can be summed explicitly.
+\item At step $n_\text{esc}$, the relevant component has grown to about
+$\pm\delta$ regardless of $u$, and the irrelevant components have shrunk to
+nearly zero. Hence the trajectory is approximately at the point
+$\vec{k}_{\text{esc},\pm}$ of \equatref{eq:kesc} for every small $u$. This
+point lies off $\mathcal{S}$, where $f$ is analytic, so
+$f(\vec{k}_{\text{esc},\pm})$ is a $u$-independent number.
+\item Adding the two pieces, all non-analytic $u$-dependence enters through
+$b^{-n_\text{esc}d}\approx(|u|/\delta)^{d/y}$, so $f=f_\text{reg}+\fsing$ with
+$\fsing\sim|u|^{d/y}$. The exponent $d/y$ is set entirely by the eigenvalue $y$
+at $\vec{k}^*$.
+\end{enumerate}
+
+This argument is only an estimate. The factor of order one that we ignored in
+the relevant component means that the escape point is not exactly
+$\vec{k}_{\text{esc},\pm}$, but somewhere between $u=\pm\delta$ and
+$u=\pm b^{\,y}\delta$, depending on where $\log_b(\delta/|u|)/y$ falls between
+two integers. For a fixed discrete $b$ the coefficient can then oscillate in
+$\log|u|$, i.e. $\fsing=|u|^{d/y}\Phi(\log_b|u|)$ with $\Phi$ periodic. Such
+oscillations are known from hierarchical models~\cite{derrida_oscillatory_1984}.
+The exponent is unaffected. A cleaner derivation, which does not track
+individual trajectories, is the homogeneity relation
+\equatref{eq:fsingHomogeneity} below.
+
+In the \dimens{1} Ising model of \secref{sec:1dIsingRG}, $\vec{k}^*$ is the $T=0$
+fixed point, and since only $T=0$ itself flows there, $\mathcal{S}$ is that single
+point. It lies outside $\mathcal{P}$, which only contains $T>0$, so
+$\mathcal{P}\cap\mathcal{S}$ is empty, and there is no transition. Hence the
+fixed points we seek are those with relevant directions for which
+$\mathcal{P}\cap\mathcal{S}$ is nonempty. Near such fixed points, the RG map also
+becomes simple enough to solve \equatref{eq:widom1}, which we do in
+\secref{sec:scalingHypothesis}.
 
 \section{The scaling hypothesis}\label{sec:scalingHypothesis}
 
@@ -1447,29 +1722,21 @@ $\nu$ & $\xi\sim |t|^{-\nu}$ & \\[3pt]
 \label{tab:scaling}
 \end{table}
 
-We work near a critical fixed point $\vec{k}_0$, in terms of the scaling fields
+We work near a critical fixed point $\vec{k}^*$, in terms of the scaling fields
 $\vec{x}$ of \secref{sec:scalingFields}, which transform as
 $x_i'=b^{\,y_i}x_i$. Hence we can recast \equatref{eq:widom1} as
 \begin{equation}
 f(b^{\,y_1}x_1,b^{\,y_2}x_2,...)=b^d\left(f(x_1,x_2,...)+g(x_1,x_2,...)\right).
 \end{equation}
 
-Now $f$ and $g$ are some kinds of functions of $\vec{x}$. Generally speaking
-there will be some part that is expressible as a Taylor series in the $\vec{x}$;
-this is called the {\it regular} part.\index{regular} There must also be some
-part not expressible as a Taylor series in order that we can obtain the power
-law behavior one finds in the vicinity of a phase transition; this is
-called the {\it singular}\index{singular} part.\footnote{In case the relevant
-combination of critical exponents is rational, writing an observable as the
-singular part plus the regular part leads to a {\it Puiseux
-series}\index{Puiseux series}, a generalization of a power series that allows
-for fractional powers.} In order to proceed we make
-the following assumption: The singular part is completely contained in
-$f$. This is not true of all RG transformations, but it is true
+We split $f$ and $g$ into regular and singular parts as in
+\secref{sec:RGfreeEnergy}. In order to proceed we 
+assume the singular part is completely contained in
+$f$, i.e. $g$ is regular.\footnote{This is not true of all RG transformations, but it is true
 of many; for example it can be shown that this assumption holds for any
 RG transformation whose renormalized block variables depend linearly
-on the original ones. Under this assumption we can write
-\begin{equation}
+on the original ones.} Under this assumption we can write
+\begin{equation}\label{eq:fsingHomogeneity}
   \fsing(b^{\,y_1}x_1,b^{\,y_2}x_2,...)=b^d\fsing(x_1,x_2,...).
 \end{equation}
 
@@ -1479,46 +1746,62 @@ say $x_1=t$ and $x_2=h$.
 
 This deserves some explanation, since being close to the critical point is not
 the same as being close to the fixed point. A physical model at small $t$ and $h$
-sits close to the critical surface, but it may be far from $\vec{k}_0$. The resolution
+sits close to the critical surface, but it may be far from $\vec{k}^*$. The resolution
 is to run the RG for a while first. Under the first $n_0$ steps, the irrelevant
 components shrink like $b^{\,n_0y_i}$ with $y_i<0$, so the flow slides along the
-critical surface toward $\vec{k}_0$. Meanwhile the relevant components grow, but
+critical surface toward $\vec{k}^*$. Meanwhile the relevant components grow, but
 since they started small, they are still small after $n_0$ steps. At this point
-$\vec{k}^{(n_0)}$ is close to $\vec{k}_0$ in every direction, and the linearization
-is valid. Splitting the iterated sum for $f$ at $n_0$,
-\begin{equation}
-  f(\vec{k})=-\sum_{n<n_0} b^{-nd}\,g\left(\vec{k}^{(n)}\right)
-             +b^{-n_0d}f\left(\vec{k}^{(n_0)}\right).
-\end{equation}
+$\vec{k}^{(n_0)}$ is close to $\vec{k}^*$ in every direction, and the linearization
+is valid. Now use \equatref{eq:RGfreeEnergyPartialSum} with $\ell=n_0$.
 The first term is a finite sum of analytic functions, so it only contributes
-to the regular part; the singular part is decided entirely near $\vec{k}_0$.
+to the regular part; the singular part is decided entirely near $\vec{k}^*$.
 
 The price is that the variables entering the scaling form are not exactly $t$
 and $h$. The first $n_0$ steps are an analytic map from the physical couplings to
-coordinates near $\vec{k}_0$, so the eigendirections near $\vec{k}_0$ correspond to
+coordinates near $\vec{k}^*$, so the eigendirections near $\vec{k}^*$ correspond to
 {\it nonlinear scaling fields}\index{scaling field!nonlinear}
 \begin{equation}
-  u_t(t,h)=a_1t+a_2h^2+...,~~~~~~u_h(t,h)=b_1h+b_2th+...,
+  u_t(t,h)=\frac{t}{t_0}+\order{t^2,h^2},~~~~~~
+  u_h(t,h)=\frac{h}{h_0}+\order{t,h^2},
 \end{equation}
 which are analytic in the physical couplings and vanish on the critical
-surface. The constants $a_1$ and $b_1$ are non-universal; they carry the memory
-of where the model started. Being ``sufficiently close" to the critical point
+surface. For the Ising model, the form of the higher-order terms follows from
+its $\mathbb{Z}_2$ symmetry.\footnote{The allowed terms depend on the symmetry
+of the model. For the $O(n)$ models, $\vec{h}$ is a vector, $u_t$ can depend on it
+only through $|\vec{h}|^2$, and $\vec{u}_h$ transforms like $\vec{h}$, so the powers
+are the same as for Ising. For the 3-state Potts model the symmetry is
+$\mathbb{Z}_3$, acting on a complex field as $h\to\omega h$ with
+$\omega=e^{2\pi i/3}$. The lowest invariant is still $|h|^2$, but now
+$(h^*)^2\to\omega^{-2}(h^*)^2=\omega(h^*)^2$ transforms like $h$, so
+$u_h=h/h_0+\order{th,(h^*)^2}$, and the leading correction in $h$ is quadratic
+rather than cubic. Without any symmetry, as for the liquid-gas transition,
+nothing forbids $u_t$ from containing a term linear in the field-like variable,
+or $u_h$ one linear in $t$. Then the physical axes are not the scaling
+directions, and the scaling fields are linear combinations of, e.g., $T$ and
+$\mu$. This is called {\it field mixing}\index{field mixing}, and it has
+observable consequences, such as a singular contribution to the diameter of the
+coexistence curve.} Since the RG does not mix $\mathbb{Z}_2$-even and $\mathbb{Z}_2$-odd
+perturbations, $u_t$ must be even under $h\to-h$, so it contains no terms
+odd in $h$, such as $h$ or $th$; the first correction in $h$ is $h^2$. Likewise
+$u_h$ must be odd in $h$, so every term contains an odd power of $h$. In
+particular $u_h$ vanishes at $h=0$ for any $t$. The constants $t_0$ and $h_0$ are
+non-universal; they carry the memory of where the model
+started~\cite{cardy_scaling_1996}. Being ``sufficiently close" to the critical point
 then means $t$ and $h$ are small enough that
 \begin{enumerate}
-\item the trajectory spends many steps near $\vec{k}_0$, which requires $\xi$ to be
+\item the trajectory spends many steps near $\vec{k}^*$, which requires $\xi$ to be
 large compared to the lattice spacing;
-\item $u_t\approx a_1t$ and $u_h\approx b_1h$, otherwise one gets
+\item $u_t\approx t/t_0$ and $u_h\approx h/h_0$, otherwise one gets
 {\it analytic corrections to scaling}; and
-\item the remaining irrelevant components are negligible, otherwise one gets
+\item the remaining irrelevant components are negligible.\footnote{Otherwise one gets
 {\it Wegner corrections}\index{corrections to scaling} of relative size
 $|t|^{\omega\nu}$, where $\omega=-y_3>0$ is minus the leading irrelevant
 eigenvalue exponent. In the \dimens{3} Ising model $\omega\nu\approx0.52$, so these
-fade slowly and are visible in practice.
+fade slowly and are visible in practice.}
 \end{enumerate}
-How far the model starts from $\vec{k}_0$ along the critical surface only
+How far the model starts from $\vec{k}^*$ along the critical surface only
 affects the size of these corrections, not the exponents. This is
-universality again: the model never needs to be near $\vec{k}_0$;
-only its flow does.
+universality again.
 
 With this identification,
 \begin{equation}
@@ -1543,21 +1826,25 @@ we obtain finally the scaling hypothesis:\index{scaling hypothesis!Widom}
 One can see from the scaling hypothesis that the order parameter, its
 susceptibility, and $C_V$ will scale according to critical exponents
 near the critical point. We choose one or the other of the above forms
-strategically depending on the observable we're looking at:
+strategically depending on the observable we're looking at. Here $m$, $\chi$,
+and $C_V$ are per site, so they are derivatives of the intensive $f$. Only
+$\fsing$ contributes to the leading singular behavior, and constant factors such
+as $T\approx\Tc$ and the $1/\Tc$ from $\partial_T=\Tc^{-1}\partial_t$ are absorbed
+into the $\sim$:
 \begin{equation}\begin{aligned}
-  C_V&=\partial_T^2 F
+  C_V&=-T\partial_T^2 f
      \sim\partial_t^2 |t|^{d/y_t}\fsing\left(\pm1,|t|^{-y_h/y_t}h\right)
      \sim|t|^{d/y_t-2}
      \equiv|t|^{-\alpha}\\
-  m\big|_{h=0}&=\partial_h F\big|_{h=0}
+  m\big|_{h=0}&=-\partial_h f\big|_{h=0}
      \sim\partial_h |t|^{d/y_t}\fsing\left(\pm1,|t|^{-y_h/y_t}h\right)\big|_{h=0}
      \sim|t|^{d/y_t-y_h/y_t}
      \equiv|t|^{\beta}\\
-  \chi\big|_{h=0}&=\partial^2_h F\big|_{h=0}
+  \chi\big|_{h=0}&=-\partial^2_h f\big|_{h=0}
      \sim\partial^2_h |t|^{d/y_t}\fsing\left(\pm1,|t|^{-y_h/y_t}h\right)\big|_{h=0}
      \sim|t|^{d/y_t-2y_h/y_t}
      \equiv|t|^{-\gamma}\\
-  m\big|_{t=0}&=\partial_h F\big|_{t=0}
+  m\big|_{t=0}&=-\partial_h f\big|_{t=0}
      \sim\partial_h h^{d/y_h}\fsing\left(h^{-y_t/y_h}t,1\right)\big|_{t=0}
      \sim h^{d/y_h-1}
      \equiv h^{1/\delta}.
@@ -1590,7 +1877,7 @@ $h\to0$. If $y_h=d$, then $\fsing=-c|h|$ has a kink, and $m=c\,\text{sgn}(h)$
 jumps by $2c$ as $h$ crosses zero; equivalently, $1/\delta=d/y_h-1=0$. That
 is, a first-order transition saturates the bound $y_h=d$. We already saw an
 example in \secref{sec:fixedPoints}: at the $T=0$ fixed point of the \dimens{1} Ising
-chain, $h'=2h$, so $y_h=1=d$, and indeed at $T=0$ the magnetization jumps from
+chain, $h'=3h=b^1h$, so $y_h=1=d$, and indeed at $T=0$ the magnetization jumps from
 $-1$ to $1$ as $h$ crosses zero.
 
 The converse argument shows why $y_h=d$ is forced. Suppose $f$ has a kink with
@@ -1620,48 +1907,10 @@ This is the domain of {\it finite-size scaling}; in particular we are going to a
 how our observables change as a function of the lattice extension, which we will
 call $L$. For simplicity we consider lattices with geometry $L^d$.
 
-We consider systems with $h=0$. 
-Note that, near a second-order critical point, the correlation
-length $\xi$ is, according to \tabref{tab:scaling}, expected to scale like
-$|t|^{-\nu}$. On the other hand, in a finite box, the correlation length is bounded
-from above by $L$. This suggests
-\begin{equation}\label{eq:fssnu}
-    |\Tc(L)-\Tc(\infty)|\sim L^{-1/\nu}.
-\end{equation}
-This hard cutoff can also be utilized to guess how some other observables
-change as $L$ approaches the thermodynamic limit. For instance, the same
-table tells us $\chi\sim|t|^{-\gamma}$. Taking this as inspiration, we
-make the ansatz
-\begin{equation}
-    \chi(L)=|t|^{-\gamma}g\left(\frac{L}{\xi}\right)
-\end{equation}
-for some function $g$.\footnote{This $g$ is just another scaling function; it
-is unrelated to the normalization $g$ of \equatref{eq:widom1}.} To keep our scaling laws consistent, we demand that 
-$g$ has the limiting behavior
-\begin{equation}
-    \lim_{x\to\infty}g(x)=\text{const.},~~~~~~\lim_{x\to0}g(x)\sim x^{\gamma/\nu}.
-\end{equation}
-The former limit ensures that we recover the correct thermodynamic limit scaling law
-for $\chi$ while the latter limit enforces a temperature-independent susceptibility
-as the correlation length diverges. This latter limit also shows us that
-\begin{equation}\label{eq:fss_susc_2nd}
-    \chi_{\text{max}}\sim L^{\gamma/\nu}.
-\end{equation}
-This is extremely helpful, in that it directly permits us to extract a ratio of
-critical exponents, even at finite volume where there is no true transition.
-Similar arguments yield for the specific heat
-\begin{equation}\label{eq:fss_CV}
-    C_{V,\,\text{max}}\sim L^{\alpha/\nu}
-\end{equation}
-and for the magnetization
-\begin{equation}\label{eq:fss_M}
-    m\big|_{T=\Tc(L)}\sim L^{-\beta/\nu}.
-\end{equation}
-
-The above ansatz and its limiting behavior can be justified using the RG
-machinery developed above. Rather than sending $L\to\infty$, we
-treat $L^{-1}$ as one more coupling. An RG step shrinks all lengths by $b$,
-measured in units of the lattice spacing, so $L\to L/b$, or
+We can find the $L$-dependence with the RG machinery developed above. Rather
+than sending $L\to\infty$, we treat $L^{-1}$ as one more coupling. An RG step
+shrinks all lengths by $b$, measured in units of the lattice spacing, so
+$L\to L/b$, or
 \begin{equation}
   L^{-1}\to b\,L^{-1}.
 \end{equation}
@@ -1675,26 +1924,63 @@ and choosing $b=L$ we find
   \fsing(t,h,L^{-1})=L^{-d}\,\Phi\left(tL^{y_t},hL^{y_h}\right)
 \end{equation}
 for some scaling function\index{scaling function} $\Phi$. Taking derivatives
-as before and using the relations of \tabref{tab:scaling} with $\nu=1/y_t$,
+as before, and using the relations of \tabref{tab:scaling} in the form
+$\nu=1/y_t$, $\gamma/\nu=2y_h-d$, and $\alpha/\nu=2y_t-d$, we find at $h=0$
 \begin{equation}\begin{aligned}
-  \chi\big|_{h=0}&\sim L^{2y_h-d}\,\Phi_{hh}\left(tL^{1/\nu},0\right)
-                  =L^{\gamma/\nu}\,\Phi_{hh}\left(tL^{1/\nu},0\right),\\
-  C_V\big|_{h=0}&\sim L^{2y_t-d}\,\Phi_{tt}\left(tL^{1/\nu},0\right)
-                  =L^{\alpha/\nu}\,\Phi_{tt}\left(tL^{1/\nu},0\right),\\
-  m\big|_{h=0}&\sim L^{y_h-d}\,\Phi_{h}\left(tL^{1/\nu},0\right)
-                  =L^{-\beta/\nu}\,\Phi_{h}\left(tL^{1/\nu},0\right),
+  \chi&=-\partial_h^2 f\big|_{h=0}
+     \sim\partial_h^2\,L^{-d}\,\Phi\left(tL^{y_t},hL^{y_h}\right)\big|_{h=0}
+     \sim L^{2y_h-d}\,\tilde{\chi}\left(tL^{1/\nu}\right)
+     =L^{\gamma/\nu}\,\tilde{\chi}\left(tL^{1/\nu}\right),\\
+  C_V&=-T\partial_T^2 f\big|_{h=0}
+     \sim\partial_t^2\,L^{-d}\,\Phi\left(tL^{y_t},hL^{y_h}\right)\big|_{h=0}
+     \sim L^{2y_t-d}\,\tilde{C}\left(tL^{1/\nu}\right)
+     =L^{\alpha/\nu}\,\tilde{C}\left(tL^{1/\nu}\right).
 \end{aligned}\end{equation}
-where subscripts on $\Phi$ denote partial derivatives. At fixed $L$, the
-peak of each observable occurs at some fixed value of the argument $tL^{1/\nu}$,
-which gives \equatref{eq:fssnu}. The prefactors then give
-\equatref{eq:fss_susc_2nd}, \equatref{eq:fss_CV}, and \equatref{eq:fss_M}.
-Finally, since $\xi\sim|t|^{-\nu}$, we can rewrite
-$L^{\gamma/\nu}=|t|^{-\gamma}(L/\xi)^{\gamma/\nu}$, which recovers the
-ansatz with $g(x)=x^{\gamma/\nu}\,\Phi_{hh}(\pm x^{1/\nu},0)$.
-This derivation assumes $L$ is large compared to the lattice spacing, and it
-neglects the regular part of the free energy. The latter matters for $C_V$ when
-$\alpha<0$, where the regular part dominates. The scaling function $\Phi$ is
-universal, but it depends on the boundary conditions and the shape of the box.
+Each derivative with respect to $h$ brings down a factor $L^{y_h}$, and each
+derivative with respect to $t$ a factor $L^{y_t}$, by the chain rule. What
+remains, the second derivative of $\Phi$ with respect to its second or first
+argument, evaluated at $h=0$, is a function of $tL^{y_t}=tL^{1/\nu}$ alone,
+which we call $\tilde{\chi}$ or $\tilde{C}$. At fixed $L$, these
+observables are smooth functions of $t$, since there is no true transition, but
+they have peaks. Each peak occurs at some fixed value of the argument
+$tL^{1/\nu}$, which is independent of $L$. Hence the pseudo-critical temperature
+$\Tc(L)$ defined by the peak position approaches $\Tc\equiv\Tc(\infty)$ as
+\begin{equation}\label{eq:fssnu}
+    |\Tc(L)-\Tc(\infty)|\sim L^{-1/\nu}.
+\end{equation}
+Evaluating the prefactors at the peak, the peak heights scale as
+\begin{equation}\label{eq:fss_susc_2nd}
+    \chi_{\text{max}}\sim L^{\gamma/\nu}
+\end{equation}
+and
+\begin{equation}\label{eq:fss_CV}
+    C_{V,\,\text{max}}\sim L^{\alpha/\nu}.
+\end{equation}
+This is extremely helpful, in that it directly permits us to extract a ratio of
+critical exponents, even at finite volume where there is no true transition.
+
+For the magnetization there is a subtlety. In a finite volume at $h=0$, the
+$\mathbb{Z}_2$ symmetry gives $\ev{m}=0$ exactly. Correspondingly $\Phi$ is even
+in its second argument, so
+$\partial_h\Phi\left(tL^{y_t},hL^{y_h}\right)\big|_{h=0}=0$. What one measures
+instead is $\ev{|m|}$ or $\sqrt{\ev{m^2}}$. Since
+$\chi=L^d\left(\ev{m^2}-\ev{m}^2\right)=L^d\ev{m^2}$ at $h=0$,
+\begin{equation}\label{eq:fss_M}
+  \sqrt{\ev{m^2}}=\sqrt{\chi L^{-d}}\sim L^{y_h-d}=L^{-\beta/\nu}
+\end{equation}
+at fixed $tL^{1/\nu}$, e.g. at $\Tc(L)$, using $\beta/\nu=d-y_h$.
+
+Since $\xi\sim|t|^{-\nu}$, the argument of the scaling functions can also be
+written as $tL^{1/\nu}=\pm(L/\xi)^{1/\nu}$, so finite-size effects are
+controlled by the ratio $L/\xi$. For $L\gg\xi$ the system does not notice the
+boundary, and we recover the infinite-volume behavior, e.g.
+$\chi\sim|t|^{-\gamma}$. For $L\ll\xi$ the box cuts off the growth of
+correlations, and the $t$-dependence is replaced by $L$-dependence, e.g.
+$\chi\sim L^{\gamma/\nu}$. This derivation assumes $L$ is large compared to the
+lattice spacing, and it neglects the regular part of the free energy. The latter
+matters for $C_V$ when $\alpha<0$, where the regular part dominates. The scaling
+function $\Phi$ is universal, but it depends on the boundary conditions and the
+shape of the box.
 
 
 Equations \eqref{eq:fss_susc_2nd}, \eqref{eq:fss_CV}, and \eqref{eq:fss_M} 
@@ -1723,9 +2009,11 @@ being a remnant of the exact divergence in the thermodynamic limit. Another
 possibility is to look for the inflection point in $|\ev{m}|$. These two
 estimates are not, to my knowledge, formally guaranteed to agree at any finite
 $L$, but they should approach the same $\Tc$ in the thermodynamic limit, as they
-both inherit from {\it scaling functions}\index{scaling function} like $g$ that
-know where the critical point is. I am not aware of an inherent advantage to
-using one over the other, but using $\chi$ seems to be the most common. In
+both inherit from {\it scaling functions}\index{scaling function} like $\Phi$ that
+know where the critical point is. Using the peak in $\chi$ seems to be more
+common. In my experience, it leads to smaller uncertainties, likely because
+finding the inflection point requires taking the derivative of an interpolation,
+which is usually numerically less stable than finding a maximum. In 
 practice, you can estimate your critical parameters using both approaches and
 ensure they agree within uncertainty.
 
