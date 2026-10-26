@@ -778,8 +778,10 @@ dG=V\dd{P}-S\dd{T}+\sum_i\mu_i\dd{N}_i.
 % keep discussion general to mu_i N_i
 \index{fugacity}
 \begin{equation}\label{eq:fugacity}
-  z=e^{-N\mu/T}
+  z=e^{\mu/T},
 \end{equation}
+so that a state with $N$ particles and energy $E$ carries the weight
+$e^{-(E-\mu N)/T}=z^Ne^{-E/T}$.
 
 The {\it grand potential} is\index{grand potential}
 \begin{equation}\label{eq:grand}
@@ -823,6 +825,88 @@ another often useful relation,
 \begin{equation}
   \frac{N_i}{V}=\pdv{P}{\mu_i}.
 \end{equation}
+
+\subsubsection{Occupation numbers}\index{occupation number}
+
+For an ideal quantum gas, the grand partition function can be computed
+exactly, and expressions like $\log(1-\eta ze^{-E/T})$ come up all the time.
+Here is where they come from. Consider a single species. Since the particles do
+not interact, the many-body states are completely specified by saying how many
+particles $n_k$ sit in each single-particle state $k$, with energy $E_k$. These
+$n_k$ are the {\it occupation numbers}. The energy and particle number of a
+many-body state are
+\begin{equation}
+  E=\sum_kE_kn_k,\qquad N=\sum_kn_k.
+\end{equation}
+Bosons can pile up in the same state, so $n_k=0,1,2,\ldots$. Fermions obey
+Pauli exclusion, so $n_k=0,1$. Summing over all many-body states means summing
+over each $n_k$ independently, and with $z=e^{\mu/T}$ the Boltzmann weight
+$e^{-(E-\mu N)/T}=\prod_k\left(ze^{-E_k/T}\right)^{n_k}$ factorizes. Hence
+\begin{equation}
+  \grandZ=\prod_k\grandZ_k,\qquad
+  \grandZ_k=\sum_{n_k}\left(ze^{-E_k/T}\right)^{n_k}
+  =\begin{cases}
+     \left(1-ze^{-E_k/T}\right)^{-1} & \text{bosons},\\
+     1+ze^{-E_k/T} & \text{fermions}.
+   \end{cases}
+\end{equation}
+For bosons this is a geometric series. It converges only if $ze^{-E_k/T}<1$ for
+every $k$, i.e. $\mu$ must be below the lowest single-particle
+energy\footnote{When $\mu$ approaches the lowest single-particle energy, the occupation of the
+lowest state grows without bound. This is the origin of Bose-Einstein
+condensation\index{Bose-Einstein condensation}.}. Both cases are
+captured by
+\begin{equation}\label{eq:logZmode}
+  \log\grandZ_k=-\eta\log\left(1-\eta ze^{-E_k/T}\right).
+\end{equation}
+So the log that keeps appearing is the log of the grand partition function of a
+{\it single mode}, and $\log\grandZ$ is just the sum of these over modes.
+
+The average occupation of mode $k$ follows by differentiating with respect to the
+fugacity, since each particle in the mode brings one factor of $z$:
+\begin{equation}\label{eq:occupation}
+  \expval{n_k}=z\pdv{\log\grandZ_k}{z}
+  =\frac{1}{z^{-1}e^{E_k/T}-\eta}
+  =\frac{1}{e^{(E_k-\mu)/T}-\eta}.
+\end{equation}
+This is the {\it Bose-Einstein}\index{Bose-Einstein distribution} distribution
+for $\eta=+1$ and the {\it Fermi-Dirac}\index{Fermi-Dirac distribution}
+distribution for $\eta=-1$. For fermions $\expval{n_k}\leq1$, as Pauli
+exclusion demands. When $ze^{-E_k/T}\ll1$ for all relevant modes, e.g. at low
+density or for $m\gg T$, both reduce to $\expval{n_k}\approx ze^{-E_k/T}$, and
+also $\log\grandZ_k\approx ze^{-E_k/T}$. This is the classical
+{\it Boltzmann}\index{Boltzmann approximation} limit. In this limit the mode is
+almost always empty, so whether a second particle is allowed in it doesn't
+matter.
+
+To go to the thermodynamic limit, put the gas in a box of volume $V$ with
+periodic boundary conditions. The momenta are then quantized as
+$\vec{p}=2\pi\vec{n}/L$, so each momentum state takes up a volume $(2\pi)^3/V$ in
+momentum space. If each momentum state also comes with $g$ internal states,
+e.g. spin, then
+\begin{equation}\label{eq:modesum}
+  \sum_k\to gV\int\frac{\dd[3]{p}}{(2\pi)^3}.
+\end{equation}
+With \equatref{eq:pgrand}, the pressure is
+\begin{equation}\label{eq:pressmode}
+  P=-\eta gT\int\frac{\dd[3]{p}}{(2\pi)^3}\log\left(1-\eta ze^{-E/T}\right).
+\end{equation}
+Other densities are just the occupation numbers weighted by the quantity
+carried per particle:
+\begin{equation}\label{eq:densitiesmode}
+  n=g\int\frac{\dd[3]{p}}{(2\pi)^3}\expval{n_p},\qquad
+  \epsilon=g\int\frac{\dd[3]{p}}{(2\pi)^3}E\expval{n_p}.
+\end{equation}
+The pressure can be written in the same way. For an isotropic dispersion,
+integrate \equatref{eq:pressmode} by parts in $p=|\vec{p}\,|$ using
+$p^2=\frac{1}{3}\dd(p^3)/\dd{p}$. The boundary terms vanish, and
+$\partial_p\log(1-\eta ze^{-E/T})=\eta\expval{n_p}\,(\partial_pE)/T$, so
+\begin{equation}\label{eq:presskinetic}
+  P=g\int\frac{\dd[3]{p}}{(2\pi)^3}\,\frac{p}{3}\pdv{E}{p}\expval{n_p}.
+\end{equation}
+Here $\partial E/\partial p$ is the particle velocity, so this is the kinetic-theory
+statement that pressure is the momentum flux, averaged over directions (the
+$1/3$). For a relativistic particle, $p\,\partial_pE=p^2/E$.
 
 \subsection{Exact intensivity and extensivity}\label{sec:exactIntens}
 \index{intensive}\index{extensive}
@@ -899,7 +983,7 @@ we have
 \begin{equation}\label{eq:dispersion}
   E=\sqrt{p^2+m^2}.  
 \end{equation}
-From the grand canonical formulation,
+Starting from \equatref{eq:pressmode} and
 doing the momentum integral in spherical coordinates, the pressure is
 \begin{equation}
   \frac{P}{T}=-\frac{4\pi\eta g}{(2\pi)^3}\int_0^\infty 
@@ -927,7 +1011,23 @@ $x\equiv E/m$. Performing this variable change and integrating by parts gives
 \end{equation}
 This integral can now be expressed in terms of the
 {\it modified Bessel functions of the second kind}\index{Bessel
-function!modified, second kind}
+function!modified, second kind}\footnote{This is only one of many
+representations. Two others that you may run into are the
+{\it hyperbolic} representation,
+\begin{equation*}
+  K_\nu(a)=\int_0^\infty\dd y\,e^{-a\cosh y}\cosh(\nu y),
+\end{equation*}
+valid for $a>0$, and {\it Basset's integral},
+\begin{equation*}
+  K_\nu(a)=\frac{\Gamma(\nu+1/2)\,(2a)^\nu}{\pi^{1/2}}
+     \int_0^\infty\dd t\,\frac{\cos t}{\left(t^2+a^2\right)^{\nu+1/2}},
+\end{equation*}
+valid for $\Re\nu>-1/2$ and $a>0$. For $\nu=0$ and the substitution $t=au$ it becomes
+$K_0(a)=\int_0^\infty\dd u\,\cos(au)/\sqrt{u^2+1}$.
+The hyperbolic representation is natural for relativistic gases, because
+$y$ can be interpreted as the rapidity. Writing $E=m\cosh y$ and $p=m\sinh y$,
+the Boltzmann factor becomes $e^{-E/T}=e^{-(m/T)\cosh y}$. For $\nu=0$, the
+substitution $x=\cosh y$ gives back the representation below.}
 \begin{equation}
   K_\nu(a)=\frac{\pi^{1/2}(a/2)^\nu}{\Gamma(\nu+1/2)}
              \int_1^\infty\dd x(x^2-1)^{\nu-1/2}e^{-ax}.
@@ -983,11 +1083,311 @@ stable mesons, baryons, and their antiparticles.
 At high temperatures $T\gg\Tpc$, all the hadrons are melted, and the system is
 asymptotically free. Therefore a reasonable model is of a gas of non-interacting
 quarks and anti-quarks. This can also be obtained from \equatref{eq:pressrelQM}
-by setting $\eta=+1$. For a single species of quark, one adds together
+by setting $\eta=-1$. For a single species of quark, one adds together
 contributions in the integrand for both particles and antiparticles.
 After performing an integration by parts, you get a simple expression for the
 pressure~\cite{hegde_lattice_2008}. 
 This can be used to compare against lattice results at high $T$.
+
+\subsection{Quasiparticle models}\label{sec:quasiparticle}
+\index{quasiparticle}\index{gas!quasiparticle}
+
+The HRG and the free quark-gluon gas bracket the temperature range
+we care about, but neither works well in the region
+$\Tpc\lesssim T\lesssim$ a few $\Tpc$. Lattice results there show the
+pressure sitting well below the Stefan-Boltzmann value, which is
+the massless free-gas value, and only approaching it slowly.
+So the medium is not free, but maybe it is ``almost free'' in some
+modified sense. A {\it quasiparticle model} tries to capture this by
+keeping the ideal-gas formulas from above, but letting the
+particle properties, in practice the mass, depend on the medium.
+
+\subsubsection{What is a quasiparticle?}
+
+The idea is old and comes from condensed matter. An electron moving through
+a metal constantly interacts with the other electrons and the ions, so it
+is certainly not a free electron. Nevertheless, Landau
+argued~\cite{landau_theory_1956} that the low-lying excitations of such a
+system can behave like weakly interacting particles with renormalized
+properties, e.g. an effective mass. These excitations are not the bare
+particles; they are the bare particle together with the cloud of
+medium it drags along. We call them quasiparticles. Phonons are another
+example, where the ``particle'' is a collective excitation of the lattice.
+
+In field-theory language, the statement is about the propagator. For a
+bosonic field in a medium, the interactions are packaged into a
+self-energy $\Pi(\omega,\vec{p}\,)$, and schematically
+\begin{equation}
+  \Delta(\omega,\vec{p}\,)=\frac{1}{\omega^2-p^2-\Pi(\omega,\vec{p}\,)}.
+\end{equation}
+In vacuum $\Pi$ just shifts the mass. At finite $T$, $\Pi$ depends on
+$T$, and it does not have to be Lorentz covariant, because the medium picks
+out a rest frame. Excitations live where the propagator has a pole, i.e. at
+solutions of
+\begin{equation}
+  \omega^2=p^2+\Re\Pi(\omega,\vec{p}\,),
+\end{equation}
+while $\Im\Pi$ gives the pole a width $\Gamma$, i.e. a finite lifetime.
+We say there is a quasiparticle when this pole is sharp,
+$\Gamma\ll\omega$, so that the excitation lives long enough to propagate
+like a particle. If moreover $\Re\Pi\approx m^2(T)$ is roughly constant
+for the momenta that matter, we get a free-particle dispersion relation
+with a medium-dependent mass,
+\begin{equation}\label{eq:qpdispersion}
+  \omega(p,T)=\sqrt{p^2+m^2(T)}.
+\end{equation}
+
+For gluons in a hot plasma, perturbation theory backs this up to some extent.
+The leading-order self-energy in the regime $g_sT\ll T$, where $g_s$ is
+the strong coupling, is the {\it hard thermal loop}
+(HTL)\index{hard thermal loop} self-energy~\cite{braaten_soft_1990}.
+The resulting gluon dispersion relation is momentum dependent, but at hard
+momenta $p\sim T$, which dominate the thermodynamics, the transverse gluons
+behave like particles with the {\it asymptotic mass}\index{asymptotic mass}\footnote{``Hard''
+and ``soft'' are relative terms, borrowed from collider language, where hard means a large
+momentum transfer compared with whatever other scales are around. At weak coupling a hot
+plasma has the hierarchy $T\gg g_sT\gg g_s^2T$. The {\it hard} scale $p\sim T$ is where the
+typical particles in the heat bath live. The {\it soft}\index{soft scale} scale $p\sim g_sT$ is
+where collective effects like Debye screening and thermal masses live. The {\it ultrasoft}
+scale $p\sim g_s^2T$ is where magnetic screening lives, and that scale is nonperturbative in
+non-Abelian theories. A hard thermal loop is a loop with hard internal momentum and soft
+external momenta. Such a loop is $\order{g_s^2T^2}$, the same size as a soft $p^2$, so it has to be
+resummed into the propagator instead of being treated as a small correction. Near $\Tpc$ the coupling
+is not small and these scales are not well separated, so there the language is only
+heuristic.}
+\begin{equation}\label{eq:asymptoticmass}
+  m_\infty^2=\frac{1}{2}m_D^2=\frac{N_c}{6}g_s^2T^2
+\end{equation}
+in pure $\SU(N_c)$, where $m_D$ is the Debye (electric screening) mass.
+So at weak coupling the gluon gas really looks like a gas of massive
+particles with $m\propto T$. Quasiparticle models take this structure seriously
+and push it down to $T\sim\Tpc$, where perturbation theory is not reliable.
+There one gives up on calculating $m(T)$ and fits it to lattice data
+instead. Sometimes the fit uses the form \equatref{eq:asymptoticmass}
+with $g_s$ replaced by an effective running coupling $G(T)$, and sometimes
+it uses some other parametrization. That makes these models
+phenomenological. The point is not that $m(T)$ is predicted, but that a
+single function $m(T)$ might capture much of the bulk thermodynamics.
+
+The quasiparticle picture of the gluon plasma was first fit to lattice
+data by Goloviznin and Satz for $\SU(2)$~\cite{goloviznin_refractive_1993}
+and by Peshier et al. for $\SU(3)$~\cite{peshier_massive_1996}.
+The consistent thermodynamic formulation that we derive below is due to
+Gorenstein and Yang~\cite{gorenstein_gluon_1995}. Lévai and Heinz
+extended the approach to include quarks~\cite{levai_massive_1998}.
+
+\subsubsection{The naive model and why it fails}
+
+Let us work at $\mu=0$, so $z=1$, and consider a single bosonic
+species ($\eta=+1$) of degeneracy $g$ with dispersion
+\equatref{eq:qpdispersion}. For gluons, $g=2(N_c^2-1)$, which counts
+color and the two transverse polarizations. The free-gas pressure and energy
+density at fixed mass $m$ are
+\begin{equation}\begin{aligned}\label{eq:qpideal}
+  P_{\rm id}(T,m)&=-\frac{gT}{2\pi^2}\int_0^\infty\dd{p}p^2
+      \log\left(1-e^{-\omega/T}\right),\\
+  \epsilon_{\rm id}(T,m)&=\frac{g}{2\pi^2}\int_0^\infty\dd{p}p^2
+      \,\omega\, n_B(\omega),
+\end{aligned}\end{equation}
+where $n_B(\omega)=1/(e^{\omega/T}-1)$ is the Bose-Einstein occupation
+\equatref{eq:occupation} at $z=1$, and I have used
+$4\pi/(2\pi)^3=1/2\pi^2$.
+
+At fixed $m$ this is just the ideal gas, and it satisfies the
+thermodynamic identity that follows from \equatref{eq:dfdt} with
+$P=-F/V$ at $\mu=0$,
+\begin{equation}\label{eq:qpconsistency}
+  \epsilon=T\dv{P}{T}-P.
+\end{equation}
+To check it, differentiate $P_{\rm id}$ at fixed $m$:
+\begin{equation}\begin{aligned}\label{eq:qpfixedm}
+  \atFixed{\pdv{P_{\rm id}}{T}}{m}
+    &=\frac{P_{\rm id}}{T}-\frac{gT}{2\pi^2}\int_0^\infty\dd{p}p^2
+      \frac{-e^{-\omega/T}\,\omega/T^2}{1-e^{-\omega/T}}
+    =\frac{P_{\rm id}}{T}+\frac{\epsilon_{\rm id}}{T}.
+\end{aligned}\end{equation}
+
+Now let $m=m(T)$. The total derivative picks up an extra piece,
+\begin{equation}\label{eq:qpchain}
+  \dv{P_{\rm id}}{T}=\atFixed{\pdv{P_{\rm id}}{T}}{m}
+     +\atFixed{\pdv{P_{\rm id}}{m}}{T}\dv{m}{T},
+\end{equation}
+so if we take $P=P_{\rm id}$ and $\epsilon=\epsilon_{\rm id}$ with
+$m\to m(T)$, then
+\begin{equation}
+  T\dv{P_{\rm id}}{T}-P_{\rm id}=\epsilon_{\rm id}
+     +T\,\pdv{P_{\rm id}}{m}\dv{m}{T}\neq\epsilon_{\rm id}.
+\end{equation}
+The naive model is thermodynamically inconsistent: $P$ and $\epsilon$
+do not come from the same partition function. The mass derivative is
+\begin{equation}\label{eq:dPdm}
+  \atFixed{\pdv{P_{\rm id}}{m}}{T}
+    =-\frac{gm}{2\pi^2}\int_0^\infty\dd{p}\frac{p^2}{\omega}\,n_B(\omega),
+\end{equation}
+which is negative and only vanishes when $m=0$. This is not because each
+particle pushes less. In the Boltzmann approximation one can integrate by parts
+to find $P=nT$ exactly, for any mass, i.e. every particle contributes $T$ to the
+pressure. Instead, at fixed $T$ and $\mu=0$ the particle number is set by
+thermal equilibrium, and since creating a particle costs at least $m$, the
+number density $n\propto e^{-m/T}$ for $m\gg T$. Heavier species simply have
+fewer thermal excitations. If instead we held $n$ fixed, then within the Boltzmann
+approximation the pressure would not depend on $m$ at all.
+
+Here is a cleaner way to see what went wrong. Suppose the Hamiltonian
+itself depends on temperature, $H=H(\beta)$, as it effectively does when
+the excitation energies depend on $T$. Then with $Z=\tr e^{-\beta H(\beta)}$,
+\begin{equation}
+  -\pdv{\log Z}{\beta}=\expval{H}+\beta\expval{\pdv{H}{\beta}}.
+\end{equation}
+The usual identification of $-\partial_\beta\log Z$ with the energy, which
+is what \equatref{eq:qpconsistency} encodes, fails by the second term. One can
+either give up the identification or modify $Z$ so that the extra term is
+cancelled. Quasiparticle models do the latter.
+
+\subsubsection{Restoring consistency: the bag function}
+
+Following Gorenstein and Yang~\cite{gorenstein_gluon_1995}, we add a
+temperature-dependent, momentum-independent energy density $B(T)$ to
+the system. You can think of it as the energy of the medium that is not
+carried by the quasiparticle excitations, like a mean field or vacuum
+energy, similar to the bag constant of the MIT bag model. The Hamiltonian
+becomes $H=\sum_{\vec{p}}\omega_{\vec{p}}(T)\,n_{\vec{p}}+VB(T)$, so
+\begin{equation}
+  \log Z=\log Z_{\rm id}-\frac{VB}{T}
+\end{equation}
+and
+\begin{equation}\begin{aligned}\label{eq:qpPE}
+  P&=P_{\rm id}(T,m(T))-B(T),\\
+  \epsilon&=\epsilon_{\rm id}(T,m(T))+B(T).
+\end{aligned}\end{equation}
+Plugging these into \equatref{eq:qpconsistency}, expanding $\dd{P_{\rm id}}/\dd{T}$
+with \equatref{eq:qpchain}, and using \equatref{eq:qpfixedm} to replace
+$T(\partial P_{\rm id}/\partial T)_m$ by $P_{\rm id}+\epsilon_{\rm id}$,
+\begin{equation}
+  T\left(\pdv{P_{\rm id}}{m}\dv{m}{T}-\dv{B}{T}\right)=0,
+\end{equation}
+i.e.
+\begin{equation}\label{eq:qpBcondition}
+  \dv{B}{T}=\atFixed{\pdv{P_{\rm id}}{m}}{T}\dv{m}{T}.
+\end{equation}
+Since $m$ and $B$ both depend only on $T$, this is equivalent to
+\begin{equation}\label{eq:qpstationary}
+  \atFixed{\pdv{P}{m}}{T}=\pdv{P_{\rm id}}{m}-\dv{B}{m}=0.
+\end{equation}
+I find this the most illuminating way to state the condition: {\it the
+pressure is stationary with respect to the quasiparticle mass}. It looks
+like a variational principle, where the mass is a variational parameter
+and the thermodynamics comes out right only at the extremum. Because of
+this stationarity, the extra $\dd{m}/\dd{T}$ terms drop out of every
+first derivative of $P$.
+
+Given $m(T)$, \equatref{eq:qpBcondition} determines $B$ up to a constant,
+\begin{equation}\label{eq:qpB}
+  B(T)=B(T_0)+\int_{T_0}^T\dd{T'}
+     \pdv{P_{\rm id}}{m}\bigg|_{T',m(T')}\dv{m}{T'}.
+\end{equation}
+The integration constant $B(T_0)$ is not fixed by thermodynamic
+consistency. It has to be supplied, e.g. by matching $P$ to a lattice
+value at some $T_0$. That is the same issue as the integration constant
+in the integral method for the pressure in \secref{sec:QCDtherm}. Since
+$\partial P_{\rm id}/\partial m<0$, $B$ decreases where $m$ increases
+and increases where $m$ decreases.
+
+For numerics we can again expand $n_B$ in a geometric series. Using
+\begin{equation}
+  \int_0^\infty\dd{p}\frac{p^2}{\sqrt{p^2+m^2}}e^{-a\sqrt{p^2+m^2}}
+     =\frac{m}{a}K_1(am),
+\end{equation}
+with $a=k/T$, \equatref{eq:dPdm} becomes
+\begin{equation}
+  \atFixed{\pdv{P_{\rm id}}{m}}{T}
+    =-\frac{gm^2T}{2\pi^2}\sum_{k=1}^\infty\frac{1}{k}K_1\left(\frac{km}{T}\right).
+\end{equation}
+You can check this by differentiating \equatref{eq:pressrelQM}
+(with $\eta=z=1$) w.r.t. $m$, using the Bessel derivative formula.
+
+\subsubsection{Consequences}
+
+{\it Entropy.} The bag function cancels in the enthalpy,
+$\epsilon+P=\epsilon_{\rm id}+P_{\rm id}$, so from Gibbs-Duhem at $\mu=0$,
+\begin{equation}\label{eq:qpentropy}
+  s=\frac{\epsilon+P}{T}=\frac{\epsilon_{\rm id}+P_{\rm id}}{T}
+   =\atFixed{\pdv{P_{\rm id}}{T}}{m}\Bigg|_{m=m(T)}.
+\end{equation}
+So the entropy density is exactly the entropy of a free gas of
+particles with mass $m(T)$, with no reference to $B$. That fits the
+physical picture: entropy counts the ways of populating the
+excitations, and $B$ is not an excitation. In practice it means
+that $s(T)$ alone determines $m(T)$, one temperature at a time,
+by solving $s_{\rm id}(T,m)=s_{\rm lat}(T)$ for $m$.
+This works because $s_{\rm id}$ is monotonic in $m$. The pressure and energy
+density then need $B$, and so need the extra integration constant.
+
+{\it Trace anomaly.} Using $\epsilon_{\rm id}-3P_{\rm id}
+=\frac{g}{2\pi^2}\int\dd{p}p^2\,(m^2/\omega)\,n_B$,
+\begin{equation}
+  \epsilon-3P=\frac{gm^2}{2\pi^2}\int_0^\infty\dd{p}\frac{p^2}{\omega}\,
+     n_B(\omega)+4B.
+\end{equation}
+To see what this has to do with {\it scale invariance}\index{scale
+invariance}, recall \equatref{eq:thetaPressureDE}, which says
+\begin{equation}
+  \epsilon-3P=T^5\dv{T}\left(\frac{P}{T^4}\right).
+\end{equation}
+A scale-invariant theory has no intrinsic mass or length scale. If
+the only scale in the problem is $T$, dimensional analysis forces $P=cT^4$, and
+hence $\epsilon=3P$. The massless free gas is the standard example; this is the
+Stefan-Boltzmann limit\footnote{More precisely, invariance under dilatations
+$x\to\lambda x$ makes the energy-momentum tensor traceless, and in an
+equilibrium fluid the trace is $\epsilon-3P$. Dilatations are part of
+the larger group of conformal transformations, so you will also see
+$\epsilon-3P$ described as a measure of broken conformal symmetry.}.
+
+A free gas with a fixed mass $m$ breaks scale invariance explicitly. Now
+$P_{\rm id}=T^4f(m/T)$ for some function $f$, and differentiating at fixed $m$,
+\begin{equation}
+  \epsilon_{\rm id}-3P_{\rm id}=T\atFixed{\pdv{P_{\rm id}}{T}}{m}-4P_{\rm id}
+   =-m\atFixed{\pdv{P_{\rm id}}{m}}{T},
+\end{equation}
+which with \equatref{eq:dPdm} is exactly the first term above. The trace of a
+free gas measures how sensitive its pressure is to the mass scale.
+
+In the quasiparticle model one has to be more careful, because $m$ and $B$
+depend on $T$. The two terms in $\epsilon-3P$ are therefore not separately
+signals of broken scale invariance. Suppose $m=aT$ and $B=bT^4$ with constant
+$a$ and $b$. There is then no scale besides $T$, $P/T^4$ is constant, and
+$\epsilon-3P=0$. The consistency condition \equatref{eq:qpBcondition} indeed
+fixes $4b=af'(a)$, so that $4B$ exactly cancels the mass term.
+In general, $P/T^4=f(m/T)-B/T^4$ depends on $T$ only through the
+dimensionless ratios $m/T$ and $B/T^4$, so
+\begin{equation}
+  \frac{\epsilon-3P}{T^4}=T\dv{T}\left[f\left(\frac{m}{T}\right)
+      -\frac{B}{T^4}\right],
+\end{equation}
+which is nonzero only if these ratios change with $T$. Put differently, scale
+invariance is broken only by a scale that is not proportional to $T$. One example
+is the integration constant $B(T_0)$, which is an energy density, just like the
+MIT bag constant.
+
+Where does such a scale come from physically? In pure Yang-Mills there are no
+masses, and the classical theory is scale invariant because $g_s$ is
+dimensionless in four dimensions. Quantum mechanically, however, $g_s$ runs,
+and the running introduces $\Lambda_{\rm QCD}$. This is the trace anomaly
+discussed in \secref{sec:QCDtherm}. In the quasiparticle model it shows up as
+$m/T\propto g_s(T)$ changing with $T$. Asymptotic freedom sends $m/T\to0$, but
+only logarithmically. That is one way to understand why the approach to the
+Stefan-Boltzmann limit is so slow. Near $\Tpc$, the fitted $m/T$ and $B/T^4$ change
+rapidly, which is how the model produces the large peak in $(\epsilon-3P)/T^4$.
+
+{\it Limitations.} These models are fits, and their success depends on
+how much data goes into fixing $m(T)$ and $B(T_0)$. Near $\Tpc$ the
+fitted masses typically become large, several times $T$, and it is
+not obvious that a long-lived quasiparticle exists there: the width
+$\Gamma$ has been set to zero by hand. Also, the stationarity condition
+\equatref{eq:qpstationary} guarantees first-derivative consistency, but
+quantities like the specific heat involve $\dd{m}/\dd{T}$ and
+$\dd[2]{m}/\dd{T^2}$. They are then sensitive to how smooth your
+parametrization of $m(T)$ is.
 
 \section{Bulk properties of matter}
 

@@ -1391,13 +1391,6 @@ The CDF in the form \eqref{eq:chi2num} is well-suited for numerical
 calculation because it is straightforward to compute the incomplete
 gamma function.
 
-In practice the uncertainties $\sigma_i$ are not exactly known, and the
-data are not exactly Gaussian, so the above strategy is at best only
-approximately valid. In cases where the data are sampled well, this
-correction is small, so that it is enough to simply round your
-error bars conservatively.
-
-% If you do not know the number of parameters? Bayes!
 
 \subsection{Without any a priori fit function}
 
@@ -1471,7 +1464,7 @@ $k+3+1-2=k+2$ degrees of freedom.
 Earlier we mentioned that cubic splines are nice choices. We can actually make
 a nice, rigorous statement about natural, cubic splines. In particular
 let $f\in\continuous^2$ and $a<b$. Define the following measure of smoothness:
-\begin{equation}
+\begin{equation}\label{eq:smoothness}
 \mu(f)\equiv\int_a^b \dd{x}(f''(x))^2.
 \end{equation}
 We can sort of see what this definition is doing: Since $f''$ gives the
@@ -1527,10 +1520,11 @@ Another possible constrained spline is the {\it clamped}
 specifies $s'$ at the endpoints. Again, this introduces two more constraints.
 
 If you have a sufficient number of data points, you can obtain your spline by
-solving a large system of equations, no fitting required. The simplest example
+solving a large system of equations, no fitting required. In this case, we ask
+the spline to go through the data $(X_i,Y_i)$ exactly. The simplest example
 is if you have two data points: A line goes right through those, and it's a
 special case of a spline. These are referred to as {\it interpolating}
-splines.\index{spline!interpolating}. When doing solves, data points are used as knot
+splines\index{spline!interpolating}. When doing solves, data points are used as knot
 points. As discussed earlier, a cubic spline has $k+4$ degrees of freedom. If
 every datum is used as a knot, there are still two free parameters. The natural
 or clamped constraints make the solution unique.
@@ -1541,6 +1535,179 @@ In this case, we choose the knots freely; they have no need to be the same as
 the data points. These are called {\it regression}\index{spline!regression}
 splines. In this context, one can still impose extra constraints like the
 natural constraint, which effectively just alters the form of the fit function. 
+One can also adjust the optimization target: Instead of minimizing just the
+$\chi^2$, one could imagine adding penalties for the number of fit parameters
+or the smoothness as defined by \equatref{eq:smoothness}. The latter case is an
+example of a {\it smoothing}\index{spline!smoothing} spline.
+
+
+\subsection{The B-spline basis}\label{sec:BSpline}\index{B-spline}
+
+Fix the number of knots $k$ and spline degree $d$. The set of possible splines
+with these characteristics forms a vector space. For if $s_1$ and $s_2$ are such 
+splines and $\alpha$ is a scalar, then $s_1+s_2$ and
+$\alpha s_1$ are again piecewise polynomials of degree $d$ with $d-1$ continuous
+derivatives at the knots. What is the dimension of this vector space?
+Suppose we had some basis of splines $B_j$. The $B_j$ are defined ahead of time,
+i.e. the $B_j$ know nothing about the data. Then our problem of optimizing
+coefficients of the polynomials going into our spline $s$ translates to the
+problem of optimizing coefficients $c_j$ such that
+\begin{equation}\label{eq:s}
+  s(x)=\sum_{j=0}^{D-1} c_j B_j(x),
+\end{equation}
+where $D$ is the dimension.
+The original problem was specified by the number of degrees of freedom,
+$k+d+1$, so it must be that $D=k+d+1$.
+
+Before we choose a basis, we discuss how the coefficients $\vec{c}$ are found.
+As usual we have $N$ data $(X_i,Y_i)$ with standard deviations $\sigma_i$.
+Represented in the basis, the spline evaluated at the datum $X_i$ is
+\begin{equation}\label{eq:sXi}
+  s(X_i)=\sum_{j=0}^{D-1} B_j(X_i)c_j .
+\end{equation}
+Collect the $B_j(X_i)$ in a
+matrix $B$ with $N+1$ rows and $D$ columns,
+\begin{equation}
+  B_{ij}\equiv B_j(X_i).
+\end{equation}
+This is the {\it design matrix}\index{design matrix}. 
+Row $i$ holds every basis function evaluated at
+the datum $X_i$ and column $j$ holds the basis function $B_j$ evaluated at every
+datum. 
+Defining a vector $s_i\equiv s(X_i)$, \equatref{eq:sXi} can be recast as 
+\begin{equation}\label{eq:Bc}
+  \vec{s} = B\vec{c}.
+\end{equation}
+
+The simplest system to deal with would be an interpolating spline.
+In that case, $s_i=Y_i$, and as we discussed in the last section, one needs to
+supply some more constraints to make \equatref{eq:Bc} solvable. For example a
+natural, cubic, interpolating spline would have $d=3$, and the natural
+conditions on $s''$ at the endpoints provides two more rows in the design
+matrix,
+  \begin{equation}\label{eq:interp}
+    \begin{pmatrix}
+      B\\
+      B_0''(X_0)\cdots B_{D-1}''(X_0)\\
+      B_0''(X_N)\cdots B_{D-1}''(X_N)
+    \end{pmatrix}\vec{c}
+    =
+    \begin{pmatrix}
+      \vec{Y}\\ 0\\ 0
+    \end{pmatrix},
+  \end{equation}
+Now $B$ has $N+1+2=N+3$ rows. Since interpolating splines put a knot at every
+datum and natural conditions add two constraints, it has $D=(N+1)+3+1-2=N+3$ columns, 
+i.e. it is square, and the coefficients are determined by inverting $B$.
+
+For regression splines, $\vec{c}$ will be determined through a least-squares
+procedure. In that case, we see a shining numerical advantage to looking for a
+spline basis: The fit function is linear in the $c_j$.  
+Assuming uncorrelated data and defining 
+$W\equiv\diag(1/\sigma_0^2,\dots,1/\sigma_N^2)$, the $\chi^2$ becomes 
+\begin{equation}
+  \chi^2=\sum_{i=0}^N\frac{\left(Y_i-s(X_i)\right)^2}{\sigma_i^2}
+              =\left(\vec{Y}-B\vec{c}\right)^t W\left(\vec{Y}-B\vec{c}\right).
+\end{equation}
+Its gradient with respect to $\vec{c}$ is $-2B^t W\left(\vec{Y}-B\vec{c}\right)$. 
+Setting the
+gradient to zero gives the best-fit coefficients as the solution of the linear
+{\it normal equations}\index{normal equations}
+\begin{equation}\label{eq:normal}
+  B^t W B\vec{c} = B^t \vec{Y}.
+\end{equation}
+Then no iterative approach is needed.
+
+Now that we have a general strategy to find $\vec{c}$, we are ready to discuss
+basis choice. For pedagogical purposes, we start with the {\it truncated power
+basis}\index{basis!truncated power}, which turns out to suck.
+We begin by introducing knots $t_1<...<t_k$.
+Define the {\it truncated power}\index{truncated power}
+\begin{equation}
+  (x-t)_+^d \equiv 
+  \begin{cases}
+    (x-t)^d & x>t,\\
+    0       & x\le t .
+  \end{cases}
+\end{equation}
+The function $(x-t)_+^d$ is zero to the left of $t$, and to the right of $t$ it
+is a polynomial of degree $d$. At $x=t$ the function and its first $d-1$
+derivatives are zero from both sides, so they are continuous. Only the $d\nth$
+derivative jumps at $t$, from $0$ to $d!$. Now build a spline from left to
+right:
+\begin{enumerate}
+  \item On the first subinterval, $s$ is some polynomial
+  $a_0+a_1x+\dots+a_dx^d$. That is $d+1$ free numbers.
+  \item At the knot $t_1$ the spline may change to a different polynomial, but
+  the value and the first $d-1$ derivatives must stay continuous. Two
+  polynomials of degree $d$ whose values and first $d-1$ derivatives agree at
+  $t_1$ differ by a multiple of $(x-t_1)^d$. So to the right of $t_1$ the spline
+  is the old polynomial plus $c_1(x-t_1)^d$. That is one new free number, $c_1$.
+  \item Every further knot works the same way and adds one free number.
+\end{enumerate}
+The result is
+\begin{equation}\label{eq:truncated}
+  s(x)=\sum_{l=0}^{d} a_l x^l + \sum_{i=1}^{k} c_i\,(x-t_i)_+^d ,
+\end{equation}
+with $d+1+k$ free numbers, which is consistent with the basis having dimension
+$D$. The functions
+$1,x,\dots,x^d,(x-t_1)_+^d,\dots,(x-t_k)_+^d$ form the
+truncated power basis.
+
+For the purpose of solving the normal equations, this basis choice is poor.
+Each $(x-t_i)_+^d$ is nonzero on the whole range to the right of $t_i$, and
+$x^d$ is nonzero almost everywhere. So the basis functions overlap heavily and,
+far to the right, look nearly alike: $(x-t_1)^3$ and $(x-t_2)^3$ differ only a
+little relative to their size when $x\gg t_2$. These functions are columns of the
+design matrix, and nearly alike columns make the fit
+lose digits. One would prefer basis
+functions that are each nonzero on only a few subintervals, which will help
+reduce the overlap. 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figs/BSplineLadder.pdf}
+  \caption{The B-spline $B_{0,d}$ (solid) for $d=0,1,2,3$ on equally spaced
+  knots. For $d\ge1$ the dashed lines are the two B-splines of degree $d-1$ that
+  the recursion \equatref{eq:coxdeboor} blends into $B_{0,d}$. Each step adds
+  one subinterval to the support and one continuous derivative. 
+  Figure created by Claude.}
+  \label{fig:BSplineLadder}
+\end{figure}
+
+The {\it B-spline basis}\index{basis!B-spline} solves this problem.
+We use the notation $B_{j,d}$ to indicate a B-spline that starts at knot $t_j$
+and is of degree $d$.
+The B-splines are built up one degree at a time. Degree $0$ is the box
+\begin{equation}
+  B_{j,0}(x)=
+  \begin{cases}
+    1 & t_j\le x<t_{j+1},\\
+    0 & \text{otherwise},
+  \end{cases}
+\end{equation}
+and each higher degree is a blend of two neighbors of one degree lower
+\begin{equation}\label{eq:coxdeboor}
+  B_{j,d}(x) = \frac{x-t_j}{t_{j+d}-t_j}\,B_{j,d-1}(x)
+             + \frac{t_{j+d+1}-x}{t_{j+d+1}-t_{j+1}}\,B_{j+1,d-1}(x).
+\end{equation}
+This algorithm is sometimes called {\it Cox-de Boor recursion}.\index{Cox-de
+Boor recursion} 
+The first factor rises from $0$ at $t_j$ and the second falls to $0$ at
+$t_{j+d+1}$, so the left parent is faded in from the left and the right parent
+faded out to the right. The recursion enforces 
+\begin{equation}
+  \sum_j B_{j,d}(x)=1,
+\end{equation}
+and each one is nonnegative.
+Cox-de Boor recursion is shown for the first few degrees
+in \figref{fig:BSplineLadder}.
+
+What did all this effort buy us? First, the B-Spline basis by construction has
+little overlap between basis splines, so regression splines can be computed
+efficiently using the normal equations. Moreover a spline $s$ is completely
+determined by the coefficients $\vec{c}$, so with just this vector and the
+knots, one can easily evaluate $s$ and its derivatives at any $x$. 
 
 
 \section{The Kolmogorov test}\label{sec:kolm}\index{Kolmogorov test}
