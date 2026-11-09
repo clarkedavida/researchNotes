@@ -772,6 +772,68 @@ to a chemical potential $\mu$, but the limitation is the same: as
 the volume increases the range where one can extract reliable
 information gets squeezed.
 
+To tell in practice whether a given $\beta'$ is too far from $\beta$, we
+need to know how many independent measurements the reweighted estimate is worth.
+Estimating \equatref{eq:RW} from $N$ measurements $X_i$, $E_i$ taken at $\beta$
+gives the weighted mean
+\begin{equation}\label{eq:RWwmean}
+  \bar{X}_{\beta'}=\frac{\sum_i w_iX_i}{\sum_i w_i},\qquad
+  w_i\equiv e^{(\beta-\beta')E_i}.
+\end{equation}
+Treating the weights as fixed and the $X_i$ as independent with variance
+$\sigma^2$, taking the variance of \equatref{eq:RWwmean} gives
+\begin{equation}\label{eq:RWvar}
+  \sigma^2_{\bar{X}_{\beta'}}=\sigma^2\,\frac{\sum_iw_i^2}{\left(\sum_iw_i\right)^2}.
+\end{equation}
+An unweighted mean of $N_\text{eff}$ independent measurements has variance
+$\sigma^2/N_\text{eff}$. Setting this equal to \equatref{eq:RWvar} defines the
+{\it effective sample size}\index{effective sample size}
+\begin{equation}\label{eq:Neff}
+  N_\text{eff}\equiv\frac{\left(\sum_iw_i\right)^2}{\sum_iw_i^2}.
+\end{equation}
+If all weights are equal,
+\equatref{eq:Neff} gives $N$; if one weight dominates, it gives 1.
+
+To see why \equatref{eq:Neff} measures the overlap between the distributions
+at $\beta$ and $\beta'$, we compute its large-$N$ limit. Dividing the
+numerator of \equatref{eq:Neff} by $N^2$ and the denominator by $N$ turns
+both sums into averages over the simulation at $\beta$, so
+\begin{equation}\label{eq:Neffev}
+  \frac{N_\text{eff}}{N}\to\frac{\ev{w}_\beta^2}{\ev{w^2}_\beta}.
+\end{equation}
+By \equatref{eq:RWwmean}, $w=e^{(\beta-\beta')E}$, 
+so both averages have the form $\ev{e^{aE}}_\beta$ with 
+$a=\beta-\beta'$ for $\ev{w}_\beta$ and $a=2(\beta-\beta')$ for $\ev{w^2}_\beta$.
+To evaluate $\ev{e^{aE}}_\beta$ for general $a$, note that multiplying the
+Boltzmann weight $e^{-\beta E}$ by $e^{aE}$ gives the Boltzmann weight at
+$\beta-a$, so, by the same step that produced $Z_{\beta'}^{-1}Z_\beta$ above,
+\begin{equation}\label{eq:RWZratio}
+  \ev{e^{aE}}_\beta=\frac{Z_{\beta-a}}{Z_\beta}.
+\end{equation}
+Using \equatref{eq:RWZratio} in the numerator and denominator of
+\equatref{eq:Neffev}, and writing
+$\Delta\beta\equiv\beta'-\beta$,
+\begin{equation}\label{eq:NeffZ}
+  \frac{N_\text{eff}}{N}=\frac{Z_{\beta'}^2}{Z_\beta Z_{\beta'+\Delta\beta}}
+  =\exp\left[-\left(\log Z_\beta-2\log Z_{\beta'}+\log Z_{\beta'+\Delta\beta}\right)\right].
+\end{equation}
+The bracket is a second difference of $\log Z$ centered on $\beta'$ with step
+$\Delta\beta$. Taylor expanding it to second order gives
+$\Delta\beta^2\,\partial_\beta^2\log Z$, and differentiating $\log Z$ twice
+with respect to $\beta$ gives the variance $\sigma_E^2$ of the energy. Hence
+\begin{equation}\label{eq:NeffGauss}
+  \frac{N_\text{eff}}{N}\approx e^{-\Delta\beta^2\sigma_E^2}.
+\end{equation}
+The exponent is the square of the ratio between the shift
+$\Delta\beta\,\sigma_E^2$ of the energy histogram, which follows from
+$\partial_\beta\ev{E}=-\sigma_E^2$, and its width $\sigma_E$. This makes
+precise the condition $E\Delta\beta=\order{1}$ from above. If the energy
+histogram is Gaussian, all cumulants beyond the second vanish and
+\equatref{eq:NeffGauss} is exact. In practice one computes
+\equatref{eq:Neff} from the data alongside each reweighted value and stops
+trusting the result once $N_\text{eff}/N$ becomes small.
+
+
 The Taylor series approach introduced earlier can also be used to
 glean some information at $\mu_B>0$. The idea here is that each
 coefficient of the Taylor series is by definition computed at

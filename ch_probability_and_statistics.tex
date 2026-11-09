@@ -1410,7 +1410,7 @@ tells us that if we ``zoom in" enough on any continuous $y$, it is approximately
 like a polynomial. This motivates the idea of a {\it spline}\index{spline}: we
 will approximate $f$ by stitching a bunch of polynomials together.
 
-Order the $X_i$ so that $X_0<...<X_N$, and divide $[X_0,X_N]$ into $k+1$
+Order the $X_i$ so that $X_1<...<X_N$, and divide $[X_1,X_N]$ into $k+1$
 subintervals. The boundaries separating the subintervals are called {\it
 knots}\index{knot}; hence there are $k$ knots. The spline
 $s$ that will approximate our function $y$ is
@@ -1456,7 +1456,7 @@ data, one can add further constraints on the splines besides matching at the
 knots. For example, a {\it natural spline}\index{spline!natural} asks that
 a cubic spline have zero curvature at the endpoints; that is
 \begin{equation}
-s''(X_0)=s''(X_N)=0.
+s''(X_1)=s''(X_N)=0.
 \end{equation}
 Note that this adds two constraints, so natural, cubic splines have
 $k+3+1-2=k+2$ degrees of freedom.
@@ -1470,8 +1470,9 @@ let $f\in\continuous^2$ and $a<b$. Define the following measure of smoothness:
 We can sort of see what this definition is doing: Since $f''$ gives the
 curvature of $f$, we want to add up all curvature of $f$ in the interval
 $[a,b]$, regardless of whether it is concave or convex curvature.
+The following theorem is due to Holladay~\cite{holladay_smoothest_1957}.
 
-\begin{theorem}{}{}
+\begin{theorem}{Holladay's theorem}{}\index{Holladay's theorem}
 Of all functions that interpolate the data $(X_i,Y_i)$, the natural
 cubic spline is the smoothest.
 \begin{proof}
@@ -1505,9 +1506,9 @@ What remains can be split in an integral over each subdomain
 $$
 \begin{aligned}
 -\int_a^b \dd{x}g'(x) s'''(x) 
-& =-\sum_{i=1}^{N} \int_{X^i}^{X_{i+1}^i}\dd{x} g'(x) s'''(x) \\
-& =-\sum_{i=1}^{N} 6 a_i \int_{X_i}^{X_{i+1}}\dd{x} g'(x) \\
-& =-\sum_{i=1}^{N} 6 a_i g(x) t_{X_i}^{X_{i+1}}\\
+& =-\sum_{i=1}^{N-1} \int_{X_i}^{X_{i+1}}\dd{x} g'(x) s'''(x) \\
+& =-\sum_{i=1}^{N-1} 6 a_i \int_{X_i}^{X_{i+1}}\dd{x} g'(x) \\
+& =-\sum_{i=1}^{N-1} 6 a_i \left.g(x)\right|_{X_i}^{X_{i+1}}\\
 & =0,
 \end{aligned}
 $$
@@ -1566,7 +1567,7 @@ Represented in the basis, the spline evaluated at the datum $X_i$ is
   s(X_i)=\sum_{j=0}^{D-1} B_j(X_i)c_j .
 \end{equation}
 Collect the $B_j(X_i)$ in a
-matrix $B$ with $N+1$ rows and $D$ columns,
+matrix $B$ with $N$ rows and $D$ columns,
 \begin{equation}
   B_{ij}\equiv B_j(X_i).
 \end{equation}
@@ -1588,7 +1589,7 @@ matrix,
   \begin{equation}\label{eq:interp}
     \begin{pmatrix}
       B\\
-      B_0''(X_0)\cdots B_{D-1}''(X_0)\\
+      B_0''(X_1)\cdots B_{D-1}''(X_1)\\
       B_0''(X_N)\cdots B_{D-1}''(X_N)
     \end{pmatrix}\vec{c}
     =
@@ -1596,17 +1597,17 @@ matrix,
       \vec{Y}\\ 0\\ 0
     \end{pmatrix},
   \end{equation}
-Now $B$ has $N+1+2=N+3$ rows. Since interpolating splines put a knot at every
-datum and natural conditions add two constraints, it has $D=(N+1)+3+1-2=N+3$ columns, 
+Now $B$ has $N+2$ rows. Since interpolating splines put a knot at every
+interior datum, there are $k=N-2$ knots, so it has $D=k+3+1=N+2$ columns, 
 i.e. it is square, and the coefficients are determined by inverting $B$.
 
 For regression splines, $\vec{c}$ will be determined through a least-squares
 procedure. In that case, we see a shining numerical advantage to looking for a
 spline basis: The fit function is linear in the $c_j$.  
 Assuming uncorrelated data and defining 
-$W\equiv\diag(1/\sigma_0^2,\dots,1/\sigma_N^2)$, the $\chi^2$ becomes 
+$W\equiv\diag(1/\sigma_1^2,\dots,1/\sigma_N^2)$, the $\chi^2$ becomes 
 \begin{equation}
-  \chi^2=\sum_{i=0}^N\frac{\left(Y_i-s(X_i)\right)^2}{\sigma_i^2}
+  \chi^2=\sum_{i=1}^N\frac{\left(Y_i-s(X_i)\right)^2}{\sigma_i^2}
               =\left(\vec{Y}-B\vec{c}\right)^t W\left(\vec{Y}-B\vec{c}\right).
 \end{equation}
 Its gradient with respect to $\vec{c}$ is $-2B^t W\left(\vec{Y}-B\vec{c}\right)$. 
@@ -1614,7 +1615,7 @@ Setting the
 gradient to zero gives the best-fit coefficients as the solution of the linear
 {\it normal equations}\index{normal equations}
 \begin{equation}\label{eq:normal}
-  B^t W B\vec{c} = B^t \vec{Y}.
+  B^t W B\vec{c} = B^t W\vec{Y}.
 \end{equation}
 Then no iterative approach is needed.
 
@@ -1691,8 +1692,9 @@ and each higher degree is a blend of two neighbors of one degree lower
   B_{j,d}(x) = \frac{x-t_j}{t_{j+d}-t_j}\,B_{j,d-1}(x)
              + \frac{t_{j+d+1}-x}{t_{j+d+1}-t_{j+1}}\,B_{j+1,d-1}(x).
 \end{equation}
-This algorithm is sometimes called {\it Cox-de Boor recursion}.\index{Cox-de
-Boor recursion} 
+This algorithm is sometimes called {\it Cox-de Boor
+recursion}~\cite{cox_numerical_1972,deboor_calculating_1972}.\index{Cox-de
+Boor recursion}
 The first factor rises from $0$ at $t_j$ and the second falls to $0$ at
 $t_{j+d+1}$, so the left parent is faded in from the left and the right parent
 faded out to the right. The recursion enforces 
@@ -1702,6 +1704,33 @@ faded out to the right. The recursion enforces
 and each one is nonnegative.
 Cox-de Boor recursion is shown for the first few degrees
 in \figref{fig:BSplineLadder}.
+
+So far we have not said which knots the $B_{j,d}$ are built on. Say the spline
+lives on $[a,b]$ with interior knots $a<t_1<\dots<t_k<b$. At any $x$, exactly
+$d+1$ B-splines are nonzero, namely those starting at the $d+1$ knots at or to
+the left of $x$. For $x$ just to the right of $a$, there must therefore be
+$d+1$ knots at or to the left of $a$, and likewise $d+1$ knots at or to the
+right of $b$. So the full {\it knot vector}\index{knot vector} has $k+2d+2$
+entries. Since each $B_{j,d}$ spans $d+2$ consecutive entries, one can build
+$(k+2d+2)-(d+1)=k+d+1=D$ B-splines on it, consistent with the dimension.
+Where the extra entries sit is a choice. For any placement, the B-splines
+restricted to $[a,b]$ span the same space of splines, so $s$ is unchanged and
+only $\vec{c}$ differs. The usual choice, which we adopt, puts all of them on
+the endpoints. Relabeling the knot vector from zero, it reads
+\begin{equation}
+  a=t_0=\dots=t_d<t_{d+1}<\dots<t_{d+k}<t_{d+k+1}=\dots=t_{k+2d+1}=b ,
+\end{equation}
+and the basis is $B_{0,d},\dots,B_{D-1,d}$. This is called a {\it clamped}
+\index{knot vector!clamped} or {\it open} knot vector; it is unrelated to the
+clamped spline above. In \equatref{eq:coxdeboor}, a repeated knot makes some
+denominators vanish, and such terms are taken to be zero. With this choice, every
+basis function vanishes outside $[a,b]$, the B-splines sum to one on all of
+$[a,b]$, and $s(a)=c_0$ and $s(b)=c_{D-1}$. For a cubic spline with a knot at
+each interior datum, $k=N-2$, so the knot vector has $N+6$ entries and there are
+$D=N+2$ B-splines: four start at $X_1$ and one at each interior knot.
+Repeating an interior knot $m$ times would lower the smoothness there to
+$C^{d-m}$; at the ends this does no harm, since there is no spline on the
+other side to be continuous with.
 
 What did all this effort buy us? First, the B-Spline basis by construction has
 little overlap between basis splines, so regression splines can be computed
@@ -2398,7 +2427,7 @@ $$
 \sigma^2_{f(a)}=
 \sum_M\sigma^2_{f,M}\pr{M\given D}
 +\sum_M\ev{f(a^*)}_M^2\pr{M\given D}
--\ev{f(a)},
+-\ev{f(a)}^2,
 $$
 where $\sigma^2_{f,M}$ indicates the statistical variance of $f$
 within model $M$.
@@ -2412,7 +2441,7 @@ We have, according to \equatref{eq:BMAmean},
 \right)\pr{M|D}.
 \end{aligned}\end{equation}
 That 
-$\sigma^2_{f,M}=\sum_M\ev{f(a^*)^2}_M-\ev{f(a^*)}_M^2$
+$\sigma^2_{f,M}=\ev{f(a^*)^2}_M-\ev{f(a^*)}_M^2$
 completes the proof.
 \end{proof}
 \end{theorem}

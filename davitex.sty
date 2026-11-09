@@ -8,9 +8,13 @@
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Packages needed to use these commands: 
-%\usepackage{amsmath,amssymb}
-%\usepackage{graphicx,multirow,tabularx}
+% Packages needed to use these commands. Loading them again is harmless, but
+% if a document needs options for one of them, load it before davitex.
+%   xcolor:  \definecolor
+%   physics: xparse argument types and \argopen/\argclose used by \pr and \DD
+\RequirePackage{xcolor,physics}
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{graphicx,multirow,tabularx}
 
   % General mathematics
 \newcommand{\set}[1]{\left\{#1\right\}}
@@ -200,6 +204,9 @@
     singlelinecheck=off,
 }
 \setlength{\belowcaptionskip}{20pt}
+% minted's [section] option numbers listings within sections, so classes
+% without sections (letter, moderncv) need a dummy section counter.
+\@ifundefined{c@section}{\newcounter{section}}{}
 \usepackage[section]{minted}
 \usepackage{newfloat}
 \DeclareFloatingEnvironment[
