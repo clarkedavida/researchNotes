@@ -170,21 +170,21 @@ pressure, we find\footnote{Note that this combination on the LHS of
 \equatref{eq:pxpac} is unitless. This is because area has units
 MeV$^{-2}$ and force has units MeV$^2$.}
 \begin{equation}\label{eq:pxpac}
-\frac{P}{T^4}=\sum_{ijk}\frac{1}{i!j!k!}\,\chi_{ijk}^{(u)(d)(s)}(T)\,
+\frac{p}{T^4}=\sum_{ijk}\frac{1}{i!j!k!}\,\chi_{ijk}^{(u)(d)(s)}(T)\,
                \muh_u^i\,\muh_d^j\,\muh_s^k,
 \end{equation}
 where we have defined the {\it generalized
 susceptibility}\index{generalized susceptibility}
 \begin{equation}
 \chi_{ijk}^{(u)(d)(s)}(T)
-  \equiv\frac{\partial^{\,i+j+k}\,P/T^4}{\partial\muh_u^i\partial\muh_d^j
+  \equiv\frac{\partial^{\,i+j+k}\,p/T^4}{\partial\muh_u^i\partial\muh_d^j
                                        \partial\muh_s^k}\Big|_{\muh=0}.
 \end{equation}
 Some example generalized susceptibilities could be
 \begin{equation}
-  \chi_2^u=\frac{\partial^2}{\partial\muh_u^2}\frac{P}{T^4}
+  \chi_2^u=\frac{\partial^2}{\partial\muh_u^2}\frac{p}{T^4}
   ~~~~\text{or}~~~~
-  \chi_{11}^{us}=\frac{\partial^2}{\partial\muh_u\partial\muh_s}\frac{P}{T^4}.
+  \chi_{11}^{us}=\frac{\partial^2}{\partial\muh_u\partial\muh_s}\frac{p}{T^4}.
 \end{equation}
 
 Another set of useful relations is between chemical potentials in the flavor
@@ -208,7 +208,7 @@ or {\it cumulants}\index{cumulant}.},\index{conserved charge fluctuation}
 i.e. susceptibilities like
 \begin{equation}
 \chi_{ijk}^{(B)(Q)(S)}(T)
-  \equiv\frac{\partial^{\,i+j+k}\,P/T^4}{\partial\muh_B^i\partial\muh_Q^j
+  \equiv\frac{\partial^{\,i+j+k}\,p/T^4}{\partial\muh_B^i\partial\muh_Q^j
                                        \partial\muh_S^k}\Big|_{\muh=0}.
 \end{equation}
 Since none of the conserved charges appears directly in the action, one
@@ -226,7 +226,7 @@ practical calculations coming from lattices, it is hence desirable to express
 these formulae in terms of the partition function $Z$. From~\equatref{eq:pgrand}
 we have
 \begin{equation}
-  \frac{P}{T^4}=\frac{1}{VT^3}\log Z,
+  \frac{p}{T^4}=\frac{1}{VT^3}\log Z,
 \end{equation}
 where as usual $V=(aN_s)^3$ and $T=1/aN_\tau$.
 Hence we can instead
@@ -380,17 +380,17 @@ Working in the comoving frame, the elements $\Theta^{0i}$ are zero.
 Assuming the matter is an ideal fluid, shear terms $\Theta^{ij}$, $i\neq j$, drop
 out, and further using the isotropy of the fluid, we are left with 
 \begin{equation}
-\Theta^{\mu\nu}=\diag\left(\epsilon,P,P,P\right),
+\Theta^{\mu\nu}=\diag\left(\epsilon,p,p,p\right),
 \end{equation}
-where $\epsilon\equiv U/V$ is the energy density and $P$ is the pressure. 
+where $\epsilon\equiv U/V$ is the energy density and $p$ is the pressure. 
 The {\it trace anomaly}\index{trace anomaly} or {\it interaction
 measure}\index{interaction measure} is simply the trace,
 \begin{equation}
-\Theta^{\mu\mu}=\epsilon-3P.
+\Theta^{\mu\mu}=\epsilon-3p.
 \end{equation}
 Using appropriate powers of the temperature to make everything unitless, we find
 \begin{equation}\label{eq:thetaPressureDE}
-\frac{\Theta^{\mu\mu}}{T^4}=T\pdv{P/T^4}{T}.
+\frac{\Theta^{\mu\mu}}{T^4}=T\pdv{p/T^4}{T}.
 \end{equation}
 We have a couple expectations of $\Theta^{\mu\mu}$. To leading order in
 high-temperature perturbation theory~\cite{Kapusta:1979fh},
@@ -407,7 +407,7 @@ Equation \eqref{eq:thetaPressureDE} is the fundamental relation to compute
 the leading term of the pressure on the lattice. In particular we see that we
 can integrate this equation starting from a reference temperature $T_0$ to obtain
 \begin{equation}
-\frac{P(T)}{T^4}-\frac{P(T_0)}{T_0^4}
+\frac{p(T)}{T^4}-\frac{p(T_0)}{T_0^4}
 =\int_{T_0}^T \dd{T'}\frac{\Theta^{\mu\mu}(T')}{T'^5}.
 \end{equation}
 If $T_0$ is low enough, this can be estimated from HRG. I have also seen cases
@@ -422,7 +422,7 @@ to write the QCD partition function directly as
 i.e. we have not integrated out the fermion measure
 \eqref{eq:fermionIntegrationMeasure}, and we have factored $\beta$ out
 of the gluonic part of the action. Using $V=a^3N_s^3$, $T=1/aN_\tau$,
-and $P\approx (T/V)\log Z$, we find
+and $p\approx (T/V)\log Z$, we find
 \begin{equation}
 \frac{\Theta^{\mu\mu}}{T^4}=-\frac{a}{VT^3}\dv{\log Z}{a}.
 \end{equation}
@@ -503,26 +503,26 @@ physical value.
 %
 %The speed of sound at fixed control parameter $X$ is defined as
 %\begin{equation}
-%  c_X^2=\left(\pdv{P}{\epsilon}\right)_X.
+%  c_X^2=\left(\pdv{p}{\epsilon}\right)_X.
 %\end{equation}
 %In a simple (1+1)-dimensional, isotropic model of a heavy ion collision, 
 %sometimes referred to as \index{Bjorken flow}{\it Bjorken flow}, 
-%assuming a constant $c_s^2$, one can show~\cite{bjorken_highly_1983} 
+%assuming a constant $c_S^2$, one can show~\cite{bjorken_highly_1983} 
 %that the energy density will decrease with proper time $\tau$ as
 %\begin{equation}
-%  \epsilon(\tau)=\epsilon(\tau_0)\left(\frac{\tau_0}{\tau}\right)^{1+c_s^2}.
+%  \epsilon(\tau)=\epsilon(\tau_0)\left(\frac{\tau_0}{\tau}\right)^{1+c_S^2}.
 %\end{equation}
 %In this picture one thus finds the system cools with longitudinal expansion
 %of the fireball according to the speed of sound. % Henrik's thesis is nice
 %Also in the context of heavy ion collisions, it can be used to look out
 %for a long-lived fireball, which may coincide with a {\it softest point}
 %\index{softest point} where the pressure-to-energy-density ratio,
-%and hence $c_s^2$, attains a minimum\footnote{Another way of looking at
+%and hence $c_S^2$, attains a minimum\footnote{Another way of looking at
 %this is that near the crossover as we increase temperature, this
 %energy serves to change hadronic degrees of freedom to screened
 %quarks and gluons, rather than changing the pressure.}~\cite{hung_hydrodynamics_1995}.
-%In the context of neutron stars, $c_s^2$ is interesting since the relationship
-%between the star masses and radii is influenced by how $c_s^2$ changes with
+%In the context of neutron stars, $c_S^2$ is interesting since the relationship
+%between the star masses and radii is influenced by how $c_S^2$ changes with
 %$n_B$~\cite{ozel_masses_2016}.
 %
 %The speed of sound has been calculated at $\mu_B=0$ on the 

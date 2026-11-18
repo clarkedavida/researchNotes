@@ -2075,12 +2075,12 @@ At the limit of stability, we have
 \pdv{\xi}{X}=0.
 \end{equation}
 These imply experimentally accessible stability conditions. For example
-substituting $-P$ (due to the sign on the first law) and $V$ we
+substituting $-p$ (due to the sign on the first law) and $V$ we
 learn that for stable systems 
 \begin{equation}\begin{aligned}\label{eq:kTstable}
--V\atFixed{\pdv{P}{V}}{T}=\frac{1}{\kappa_T}>0
+-V\atFixed{\pdv{p}{V}}{T}=\frac{1}{\kappa_T}>0
 \end{aligned}\end{equation}
-is a stability condition. Because $P$ and $V$ are thought of as ``mechanical"
+is a stability condition. Because $p$ and $V$ are thought of as ``mechanical"
 parameters, this is sometimes referred to as a {\it mechanical
 stability}\index{stability!mechanical}
 condition.
@@ -2128,8 +2128,8 @@ F\propto x F_L + (1-x) F_G.
 Thus varying $x$ traces out a line in this plane. 
 Plots (a) and (b) are related by
 \begin{equation}\label{eq:FVtoPV}
-P=-\atFixed{\pdv{F}{V}}{T,N}~~~\Rightarrow~~~
-F(T,N,V_2)-F(T,N,V_1)=\int_{V_1}^{V_2}\dd{V}P.
+p=-\atFixed{\pdv{F}{V}}{T,N}~~~\Rightarrow~~~
+F(T,N,V_2)-F(T,N,V_1)=\int_{V_1}^{V_2}\dd{V}p.
 \end{equation} 
 According to this, since $b$ and $b'$ lie on the same line in the $F$-$V$ plane,
 they have the same slope, i.e. the same pressure.
@@ -2143,15 +2143,15 @@ manifest as points of inflection in plot (a), which can be seen from
 \equatref{eq:stabilityLimit}.}
 The only way to connect $b$ and $b'$, remaining on the isotherm and
 without violating stability somewhere, is
-therefore to proceed along the dashed, horizontal line at $P_1$. 
+therefore to proceed along the dashed, horizontal line at $p_1$. 
 The two phases coexist
 along this line, which is consistent with plot (a) where we saw the slopes at
 $b$ and $b'$ were the same, implying the pressure is the same. Thus the
 horizontal, dashed line in plot (b) corresponds to the line segment connecting
 $b$ and $b'$ in plot (a).
 
-How would one find $P_1$? At the beginning of the section, we argued the Gibbs free
-energy $G$ is minimized at equilibrium, i.e. it is minimized when $T$, $P$,
+How would one find $p_1$? At the beginning of the section, we argued the Gibbs free
+energy $G$ is minimized at equilibrium, i.e. it is minimized when $T$, $p$,
 and $N=N_L+N_G$ are fixed. So the first law for $G$ reduces to
 \begin{equation}
 0=\dd{G}=\mu_L\dd{N_L}+\mu_G\dd{N_G}.
@@ -2160,22 +2160,22 @@ Since $N$ is fixed, we only can change the particle numbers $N_L$ and $N_G$ by
 converting one into the other, implying $\dd{N_L}=-\dd{N_G}$, from which it
 follows that $\mu_L=\mu_G$, i.e. coexistence demands a common chemical
 potential. In plot (c) of \figref{fig:metastability}, we see curves for the two
-phases in the $\mu$-$P$ plane. Where they cross, i.e. where they have a common
-$\mu$, defines $P_1$. In this plane, the isothermal path would follow one
+phases in the $\mu$-$p$ plane. Where they cross, i.e. where they have a common
+$\mu$, defines $p_1$. In this plane, the isothermal path would follow one
 of the curves until it hits the kink where $\mu_L=\mu_G$, then proceed
 along the other.
 
 Without access to plot (c), we can still use the condition of equal chemical
-potentials to determine $P_1$ from plot (b). Taking Legendre transforms of
+potentials to determine $p_1$ from plot (b). Taking Legendre transforms of
 Gibbs-Duhem\index{Gibbs-Duhem relation} into $F$ and $G$ reveals 
 \begin{equation}\label{eq:GibbsDuhemFG}
-F=\mu N-PV ~~~~~~\text{and}~~~~~~G=\mu N.
+F=\mu N-pV ~~~~~~\text{and}~~~~~~G=\mu N.
 \end{equation}
 Thus the integral in \equatref{eq:FVtoPV} along the isotherm $T_1$, when 
-inserting the equilibrium conditions $\mu(b)=\mu(b')$ and $P(b)=P(b')\equiv P$,
+inserting the equilibrium conditions $\mu(b)=\mu(b')$ and $p(b)=p(b')\equiv p$,
 can be expressed as
 \begin{equation}
-PV(b')-PV(b)=\int_{V(b)}^{V(b')}\dd{V}P(V).
+pV(b')-pV(b)=\int_{V(b)}^{V(b')}\dd{V}p(V).
 \end{equation}
 This is the statement that the area under the S-shaped curve between $b$ and
 $b'$ is zero. Using this equal area procedure is often called the {\it Maxwell
@@ -2190,7 +2190,7 @@ do not have the minimum $F$ in this figure, which is another way of seeing
 that the isothermal system prefers to move along the line segment $bb'$.
 
 Now back to plot (b). Starting on the right-most point of the S-shaped isotherm,
-and decreasing the volume, we find the pressure increases until it hits $P_1$.
+and decreasing the volume, we find the pressure increases until it hits $p_1$.
 There, the system prefers to condense gas particles into droplets, continuing
 at constant pressure until the system is pure liquid. Thereafter, the pressure
 increases again, this time more steeply because the liquid is less compressible
@@ -2215,10 +2215,10 @@ derivative vanishes then we need to look out for the first non-vanishing
 higher-order derivative.} Here the function is the
 second-order derivative of the free energy, so we need the third-order
 derivative of the free energy to vanish and the fourth-order to be positive. 
-For the conjugate variables $\xi=P$ and $X=V$, using the internal energy $U$,
+For the conjugate variables $\xi=p$ and $X=V$, using the internal energy $U$,
 this translates to
 \begin{equation}\label{eq:stablestable}
-\pdv[2]{P}{V}=0~~~~~~\text{and}~~~~~~\pdv[3]{P}{V}<0.
+\pdv[2]{p}{V}=0~~~~~~\text{and}~~~~~~\pdv[3]{p}{V}<0.
 \end{equation}
 Critical points are stable limits of stability, so we see the point $c$
 in plot (b) is the critical point, and we learn why the dome-shaped binodal
@@ -2233,13 +2233,13 @@ lower than its vapor pressure, which is an example of a {\it
 superheated liquid}\index{superheated liquid}. Let us take a moment to understand this
 nomenclature. We start by writing Gibbs-Duhem in the form
 \begin{equation}\label{eq:Gibbs-DuhemDifferential}
-\dd{\mu}=-s\dd{T}+v\dd{P},
+\dd{\mu}=-s\dd{T}+v\dd{p},
 \end{equation}
 where $s\equiv S/N$ and $v\equiv V/N$.
 Along the coexistence curve, $\dd{\mu(b)}=\dd{\mu(b')}$, so applying Gibbs-Duhem
 in this form reveals
 \begin{equation}
-\dv{P}{T}=\frac{\Delta s}{\Delta v},
+\dv{p}{T}=\frac{\Delta s}{\Delta v},
 \end{equation}
 where $\Delta s\equiv s(b')-s(b)$ and $\Delta v\equiv v(b')-v(b)$. The
 choice of where to put $b$ and $b'$ is motivated by wanting both $\Delta s$ and
@@ -2250,12 +2250,12 @@ latent heat $L$ must be positive, since you need to dump positive energy to brea
 bonds, and $L=T\Delta s$. This is the {\it Clausius-Clapeyron
 relation}\index{Clausius-Clapeyron relation}, and it implies
 \begin{equation}
-\dv{P}{T}>0
+\dv{p}{T}>0
 \end{equation}
 along the coexistence curve, i.e. the pressure is a monotonically increasing
-function of temperature. So saying the pressure is lower than $P_{\rm
+function of temperature. So saying the pressure is lower than $p_{\rm
 coexist}(T)$ at fixed $T$ is equivalent to saying the temperature is higher
-than $T_{\rm boil}(P)$ at fixed $P$. In other words, if I increase the
+than $T_{\rm boil}(p)$ at fixed $p$. In other words, if I increase the
 temperature beyond the boiling point between $b$ and $e$, it remains a liquid,
 hence the name. The monotonicity is reflected in plot (d), where all curves are
 monotonically increasing with temperature. Similarly, the points between 
@@ -2265,14 +2265,14 @@ We return to plot (c). The stability of isotherms in this plot can be
 seen through as follows: Gibbs-Duhem in the form
 \eqref{eq:Gibbs-DuhemDifferential} reveals
 \begin{equation}
-\atFixed{\pdv{\mu}{P}}{T}=v,
+\atFixed{\pdv{\mu}{p}}{T}=v,
 \end{equation}
-so differentiating once more w.r.t. $P$ shows
+so differentiating once more w.r.t. $p$ shows
 \begin{equation}
-\atFixed{\pdv[2]{\mu}{P}}{T}=\atFixed{\pdv{v}{P}}{T}=-v\kappa_T.
+\atFixed{\pdv[2]{\mu}{p}}{T}=\atFixed{\pdv{v}{p}}{T}=-v\kappa_T.
 \end{equation}
 Since \equatref{eq:kTstable} demands $\kappa_T>0$ for stable systems, we learn
-that stability requires stable isotherms in the $\mu$-$P$ plane to be concave down.
+that stability requires stable isotherms in the $\mu$-$p$ plane to be concave down.
 The curve connecting $e$ and $f$ therefore is very mildly concave up.
 
 Finally, we discuss plot (d). We've been looking at temperatures below $\Tc$, so

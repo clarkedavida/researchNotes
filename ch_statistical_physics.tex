@@ -18,9 +18,9 @@ Guericke in 1650. Shortly thereafter, Boyle and Hooke developed an air pump.
 Playing around with this air pump helped reveal {\it Boyle's law}\index{Boyle's
 law}
 \begin{equation}
-  P\propto\frac{1}{V},
+  p\propto\frac{1}{V},
 \end{equation}
-a relationship between the pressure $P$ and volume $V$ of a gas.
+a relationship between the pressure $p$ and volume $V$ of a gas.
 
 In 1697, Denis Papin developed a steam digester, a closed vessel which trapped steam 
 until a high pressure was generated, with a valve to release pressure to keep it
@@ -313,7 +313,7 @@ Q=T\dd{S}.
 It follows that reversible, adiabatic processes are\index{isentropic} isentropic.
 We also get this statement of the first law:\index{thermodynamics!first law}
 \begin{equation}
- \dd U = T\dd{S}+P\dd{V}.
+ \dd U = T\dd{S}+p\dd{V}.
 \end{equation} 
 
 Finally, consider a possibly irreversible path from $A$ to $B$ that is closed
@@ -415,23 +415,23 @@ to the energy as products of {\it conjugate variables}\index{conjugate}.
 One is intensive, and one is extensive, so that the product remains extensive,
 like the energy.\footnote{In \secref{sec:legendre} we will introduce
 Legendre transformations. These are always formed by adding/subtracting a
-product of conjugate variables, too.} For example $PV$ is a product of conjugate
+product of conjugate variables, too.} For example $pV$ is a product of conjugate
 variables. 
 
 Sometimes, the pair is further specified as a {\it generalized
 force}\index{generalized force} and a {\it generalized
 displacement}\index{generalized displacement}. The force is the intensive part,
-and the displacement is the extensive part. In the case of $PV$, this
-association is clear, $P$ being directly related to a literal external force
+and the displacement is the extensive part. In the case of $pV$, this
+association is clear, $p$ being directly related to a literal external force
 applied to the system. Then $V$ changes due to the displacement of the
 boundaries. But a generalized displacement can be, in principle, anything, which
-is useful if you know there exists some control parameter besides $S$, $T$, $P$, 
+is useful if you know there exists some control parameter besides $S$, $T$, $p$, 
 or $V$ that affects the system's energy.
 
 The first law of thermodynamics in terms of our most common control parameters
 reads
 \begin{equation}
-  \dd{U}=T\dd{S}-P\dd{V}.
+  \dd{U}=T\dd{S}-p\dd{V}.
 \end{equation}
 The differential on the LHS is in an extensive variable, and accordingly, the
 differentials on the RHS are in the generalized displacements.
@@ -441,7 +441,7 @@ our generalized displacement. If we want to introduce this to the energy, we
 need a conjugate generalized force. For now, let's call that $\mu$. Then
 the first law would be modified as 
 \begin{equation}
-  \dd{U}=T\dd{S}-P\dd{V}+\mu\dd{N},
+  \dd{U}=T\dd{S}-p\dd{V}+\mu\dd{N},
 \end{equation}
 choosing the sign to be positive since adding a particle should increase the
 energy. A simple perspective to take, then, is that this defines $\mu$; in
@@ -458,15 +458,15 @@ We call $\mu$ the {\it chemical potential}\index{chemical potential}.
 Probably the equation of state that you are most familiar with is the 
 ideal gas law\index{ideal gas law},
 \begin{equation}
-  PV=Nk_BT.
+  pV=Nk_BT.
 \end{equation}
-Based on the discussion in \secref{sec:intensiveextensive}, we see that $P$ is
+Based on the discussion in \secref{sec:intensiveextensive}, we see that $p$ is
 an intensive quantity.
 There is an equation of state for each intensive variable required for the
 description of thermodynamic states. For example from the
 first law of thermodynamics,\index{thermodynamics!first law}
 \begin{equation}\label{eq:fslaw}
-  \dd{U}=T\dd{S}-P\dd{V}+\sum_i\mu_i\dd{N}_i,
+  \dd{U}=T\dd{S}-p\dd{V}+\sum_i\mu_i\dd{N}_i,
 \end{equation}
 where the sum runs over particle species,
 we know that\footnote{It can be quite confusing to track which variables
@@ -502,7 +502,7 @@ their volume can be neglected.
 Van der Waals was the first to attempt to correct for these 
 assumptions~\cite{van_der_waals_over_1873}. The Van der Waals EoS looks like
 \begin{equation}\label{eq:vanderwaals}
-P=\frac{NkT}{V-b}-\frac{A}{V^2}.
+p=\frac{NkT}{V-b}-\frac{A}{V^2}.
 \end{equation}
 We see two corrections. First, the parameter $b$, which is sometimes
 called the {\it excluded volume}\index{excluded volume}, represents the total
@@ -653,7 +653,7 @@ $$
 \section{Legendre transforms}\label{sec:legendre}\index{Legendre transformation}
 
 Equation~\eqref{eq:fslaw} tells us that we can think of the internal energy
-$U$ of a system in equilibrium at $(T,P,\mu)$ as a function of $S$, $V$, and
+$U$ of a system in equilibrium at $(T,p,\mu)$ as a function of $S$, $V$, and
 $N$. However one of the control parameters, such as $S$, may be
 difficult or impossible to measure, and therefore we would rather
 think in terms of the more accessible quantity $T$, which 
@@ -718,7 +718,7 @@ This new function is guaranteed to be a thermodynamic potential, and
 we give it a special name: the {\it Helmholtz free energy}.
 From \equatref{eq:helmholtz} and the first law, we get
 \begin{equation}\label{eq:helmholtz1st}
-  \dd F = -P\dd{V} -S\dd{T} +\sum_i\mu_i\dd{N}_i.
+  \dd F = -p\dd{V} -S\dd{T} +\sum_i\mu_i\dd{N}_i.
 \end{equation}
 
 We can derive some useful thermodynamic relations from these. For
@@ -739,11 +739,11 @@ where $\beta=1/T$ in natural units.
 
 The {\it enthalpy} is given by the Legendre transformation
 \begin{equation}\label{eq:enthalpy}
- H(S,P,\vec{N})=U+PV.
+ H(S,p,\vec{N})=U+pV.
 \end{equation}
 From \equatref{eq:enthalpy} and the first law we obtain
 \begin{equation}
- \dd H = T\dd{S} +V\dd{P} +\sum_i\mu_i\dd N_i.
+ \dd H = T\dd{S} +V\dd{p} +\sum_i\mu_i\dd N_i.
 \end{equation}
 
 \subsection{Gibbs free energy}
@@ -752,11 +752,11 @@ From \equatref{eq:enthalpy} and the first law we obtain
 One arrives at the {\it Gibbs} free energy using both the Helmholtz and enthalpy
 Legendre transformations,
 \begin{equation}
-G(P,T,\vec{N})=U+PV-TS,
+G(p,T,\vec{N})=U+pV-TS,
 \end{equation}
 and using the first law, we find
 \begin{equation}
-dG=V\dd{P}-S\dd{T}+\sum_i\mu_i\dd{N}_i.
+dG=V\dd{p}-S\dd{T}+\sum_i\mu_i\dd{N}_i.
 \end{equation}
 
 
@@ -789,7 +789,7 @@ The {\it grand potential} is\index{grand potential}
 \end{equation}
 from which one gets
 \begin{equation}\label{eq:1stlawgrand}
-  \dd\Phi=-P\dd{V}-S\dd{T}-\sum_i N_i\dd\mu_i.
+  \dd\Phi=-p\dd{V}-S\dd{T}-\sum_i N_i\dd\mu_i.
 \end{equation}
 Since $\log\grandZ$ is extensive, it must be that
 \begin{equation}
@@ -803,19 +803,19 @@ with $\muh\equiv\mu/T$ and $T$ instead of $\mu$ and $T$. This equation
 holds for both sets of control variables since both $\mu$ and $T$ are
 held fixed.} from \equatref{eq:1stlawgrand}
 \begin{equation}
-P=\lim_{V\to\infty}-\pdv{\Phi}{V}=-k,
+p=\lim_{V\to\infty}-\pdv{\Phi}{V}=-k,
 \end{equation}
 which means we can identify\footnote{Often the thermodynamic limit is taken as
 implicit and not always directly written.}
 \begin{equation}\label{eq:pgrand}
-P=\lim_{V\to\infty}\frac{T}{V}\log\grandZ.
+p=\lim_{V\to\infty}\frac{T}{V}\log\grandZ.
 \end{equation}
 
 Reorganizing \equatref{eq:grand} using \equatref{eq:pgrand}
 yields the {\it Gibbs-Duhem relation}
 \index{Gibbs-Duhem relation}
 \begin{equation}
-  s=\frac{\epsilon}{T}+\frac{P}{T}-\sum_i\frac{\mu_i}{T}n_i,
+  s=\frac{\epsilon}{T}+\frac{p}{T}-\sum_i\frac{\mu_i}{T}n_i,
 \end{equation}
 where $s\equiv S/V$ is the entropy density, and $\epsilon$ and $n_i$
 are the energy and number densities.
@@ -823,7 +823,7 @@ Taking a derivative of \equatref{eq:pgrand} w.r.t. $\mu_i$ and
 using \equatref{eq:1stlawgrand} yields
 another often useful relation,
 \begin{equation}
-  \frac{N_i}{V}=\pdv{P}{\mu_i}.
+  \frac{N_i}{V}=\pdv{p}{\mu_i}.
 \end{equation}
 
 \subsubsection{Occupation numbers}\index{occupation number}
@@ -881,32 +881,32 @@ matter.
 
 To go to the thermodynamic limit, put the gas in a box of volume $V$ with
 periodic boundary conditions. The momenta are then quantized as
-$\vec{p}=2\pi\vec{n}/L$, so each momentum state takes up a volume $(2\pi)^3/V$ in
+$\vec{k}=2\pi\vec{n}/L$, so each momentum state takes up a volume $(2\pi)^3/V$ in
 momentum space. If each momentum state also comes with $g$ internal states,
 e.g. spin, then
 \begin{equation}\label{eq:modesum}
-  \sum_k\to gV\int\frac{\dd[3]{p}}{(2\pi)^3}.
+  \sum_k\to gV\int\frac{\dd[3]{k}}{(2\pi)^3}.
 \end{equation}
 With \equatref{eq:pgrand}, the pressure is
 \begin{equation}\label{eq:pressmode}
-  P=-\eta gT\int\frac{\dd[3]{p}}{(2\pi)^3}\log\left(1-\eta ze^{-E/T}\right).
+  p=-\eta gT\int\frac{\dd[3]{k}}{(2\pi)^3}\log\left(1-\eta ze^{-E/T}\right).
 \end{equation}
 Other densities are just the occupation numbers weighted by the quantity
 carried per particle:
 \begin{equation}\label{eq:densitiesmode}
-  n=g\int\frac{\dd[3]{p}}{(2\pi)^3}\expval{n_p},\qquad
-  \epsilon=g\int\frac{\dd[3]{p}}{(2\pi)^3}E\expval{n_p}.
+  n=g\int\frac{\dd[3]{k}}{(2\pi)^3}\expval{n_k},\qquad
+  \epsilon=g\int\frac{\dd[3]{k}}{(2\pi)^3}E\expval{n_k}.
 \end{equation}
 The pressure can be written in the same way. For an isotropic dispersion,
-integrate \equatref{eq:pressmode} by parts in $p=|\vec{p}\,|$ using
-$p^2=\frac{1}{3}\dd(p^3)/\dd{p}$. The boundary terms vanish, and
-$\partial_p\log(1-\eta ze^{-E/T})=\eta\expval{n_p}\,(\partial_pE)/T$, so
+integrate \equatref{eq:pressmode} by parts in $k=|\vec{k}\,|$ using
+$k^2=\frac{1}{3}\dd(k^3)/\dd{k}$. The boundary terms vanish, and
+$\partial_k\log(1-\eta ze^{-E/T})=\eta\expval{n_k}\,(\partial_kE)/T$, so
 \begin{equation}\label{eq:presskinetic}
-  P=g\int\frac{\dd[3]{p}}{(2\pi)^3}\,\frac{p}{3}\pdv{E}{p}\expval{n_p}.
+  p=g\int\frac{\dd[3]{k}}{(2\pi)^3}\,\frac{k}{3}\pdv{E}{k}\expval{n_k}.
 \end{equation}
-Here $\partial E/\partial p$ is the particle velocity, so this is the kinetic-theory
+Here $\partial E/\partial k$ is the particle velocity, so this is the kinetic-theory
 statement that pressure is the momentum flux, averaged over directions (the
-$1/3$). For a relativistic particle, $p\,\partial_pE=p^2/E$.
+$1/3$). For a relativistic particle, $k\,\partial_kE=k^2/E$.
 
 \subsection{Exact intensivity and extensivity}\label{sec:exactIntens}
 \index{intensive}\index{extensive}
@@ -981,24 +981,24 @@ We use units $\hbar=c=k_B=1$ and consider a gas of a single species
 with spin $s$ and rest mass $m$. Working in the rest frame of the gas,
 we have
 \begin{equation}\label{eq:dispersion}
-  E=\sqrt{p^2+m^2}.  
+  E=\sqrt{k^2+m^2}.  
 \end{equation}
 Starting from \equatref{eq:pressmode} and
 doing the momentum integral in spherical coordinates, the pressure is
 \begin{equation}
-  \frac{P}{T}=-\frac{4\pi\eta g}{(2\pi)^3}\int_0^\infty 
-      \dd{p}p^2\log\left(1-\eta z e^{-E/T}\right),
+  \frac{p}{T}=-\frac{4\pi\eta g}{(2\pi)^3}\int_0^\infty 
+      \dd{k}k^2\log\left(1-\eta z e^{-E/T}\right),
 \end{equation}
 where $g=2s+1$ is the {\it degeneracy factor}. \index{degeneracy factor}
 Solving the dispersion relation
-for $p$ and substituting it into the pressure gives
+for $k$ and substituting it into the pressure gives
 \begin{equation}
-  \frac{P}{T}=-\frac{4\pi\eta g}{(2\pi)^3}\int_m^\infty 
+  \frac{p}{T}=-\frac{4\pi\eta g}{(2\pi)^3}\int_m^\infty 
       \dd{E}E\left(E^2-m^2\right)^{1/2}\log\left(1-\eta z e^{-E/T}\right).
 \end{equation}
 Expanding the logarithm yields
 \begin{equation}\label{eq:pressE}
-  \frac{P}{T}=\frac{4\pi g}{(2\pi)^3}\sum_{k=1}^\infty\eta^{k+1}\frac{z^k}{k}\int_m^\infty 
+  \frac{p}{T}=\frac{4\pi g}{(2\pi)^3}\sum_{k=1}^\infty\eta^{k+1}\frac{z^k}{k}\int_m^\infty 
       \dd{E}E\left(E^2-m^2\right)^{1/2}e^{-kE/T},
 \end{equation}
 which is of course only valid for $\eta z\exp(-E/T)<1$.
@@ -1025,7 +1025,7 @@ valid for $a>0$, and {\it Basset's integral},
 valid for $\Re\nu>-1/2$ and $a>0$. For $\nu=0$ and the substitution $t=au$ it becomes
 $K_0(a)=\int_0^\infty\dd u\,\cos(au)/\sqrt{u^2+1}$.
 The hyperbolic representation is natural for relativistic gases, because
-$y$ can be interpreted as the rapidity. Writing $E=m\cosh y$ and $p=m\sinh y$,
+$y$ can be interpreted as the rapidity. Writing $E=m\cosh y$ and $k=m\sinh y$,
 the Boltzmann factor becomes $e^{-E/T}=e^{-(m/T)\cosh y}$. For $\nu=0$, the
 substitution $x=\cosh y$ gives back the representation below.}
 \begin{equation}
@@ -1036,7 +1036,7 @@ In particular we see upon comparison with \equatref{eq:pressint}
 that our integral contains $K_2(mk/T)$. Combining everything,
 using $\Gamma(5/2)=3\pi^{1/2}/4$, we obtain
 \begin{equation}\label{eq:pressrelQM}
-  \frac{P}{T}=\frac{m^2gT}{2\pi^2}\sum_{k=1}^\infty\frac{\eta^{k+1}z^k}{k^2}
+  \frac{p}{T}=\frac{m^2gT}{2\pi^2}\sum_{k=1}^\infty\frac{\eta^{k+1}z^k}{k^2}
                          K_2\left(\frac{mk}{T}\right),
 \end{equation}
 which is a form that is well suited for computer calculations\footnote{What
@@ -1116,16 +1116,16 @@ example, where the ``particle'' is a collective excitation of the lattice.
 
 In field-theory language, the statement is about the propagator. For a
 bosonic field in a medium, the interactions are packaged into a
-self-energy $\Pi(\omega,\vec{p}\,)$, and schematically
+self-energy $\Pi(\omega,\vec{k}\,)$, and schematically
 \begin{equation}
-  \Delta(\omega,\vec{p}\,)=\frac{1}{\omega^2-p^2-\Pi(\omega,\vec{p}\,)}.
+  \Delta(\omega,\vec{k}\,)=\frac{1}{\omega^2-k^2-\Pi(\omega,\vec{k}\,)}.
 \end{equation}
 In vacuum $\Pi$ just shifts the mass. At finite $T$, $\Pi$ depends on
 $T$, and it does not have to be Lorentz covariant, because the medium picks
 out a rest frame. Excitations live where the propagator has a pole, i.e. at
 solutions of
 \begin{equation}
-  \omega^2=p^2+\Re\Pi(\omega,\vec{p}\,),
+  \omega^2=k^2+\Re\Pi(\omega,\vec{k}\,),
 \end{equation}
 while $\Im\Pi$ gives the pole a width $\Gamma$, i.e. a finite lifetime.
 We say there is a quasiparticle when this pole is sharp,
@@ -1134,7 +1134,7 @@ like a particle. If moreover $\Re\Pi\approx m^2(T)$ is roughly constant
 for the momenta that matter, we get a free-particle dispersion relation
 with a medium-dependent mass,
 \begin{equation}\label{eq:qpdispersion}
-  \omega(p,T)=\sqrt{p^2+m^2(T)}.
+  \omega(k,T)=\sqrt{k^2+m^2(T)}.
 \end{equation}
 
 For gluons in a hot plasma, perturbation theory backs this up to some extent.
@@ -1142,16 +1142,16 @@ The leading-order self-energy in the regime $g_sT\ll T$, where $g_s$ is
 the strong coupling, is the {\it hard thermal loop}
 (HTL)\index{hard thermal loop} self-energy~\cite{braaten_soft_1990}.
 The resulting gluon dispersion relation is momentum dependent, but at hard
-momenta $p\sim T$, which dominate the thermodynamics, the transverse gluons
+momenta $k\sim T$, which dominate the thermodynamics, the transverse gluons
 behave like particles with the {\it asymptotic mass}\index{asymptotic mass}\footnote{``Hard''
 and ``soft'' are relative terms, borrowed from collider language, where hard means a large
 momentum transfer compared with whatever other scales are around. At weak coupling a hot
-plasma has the hierarchy $T\gg g_sT\gg g_s^2T$. The {\it hard} scale $p\sim T$ is where the
-typical particles in the heat bath live. The {\it soft}\index{soft scale} scale $p\sim g_sT$ is
+plasma has the hierarchy $T\gg g_sT\gg g_s^2T$. The {\it hard} scale $k\sim T$ is where the
+typical particles in the heat bath live. The {\it soft}\index{soft scale} scale $k\sim g_sT$ is
 where collective effects like Debye screening and thermal masses live. The {\it ultrasoft}
-scale $p\sim g_s^2T$ is where magnetic screening lives, and that scale is nonperturbative in
+scale $k\sim g_s^2T$ is where magnetic screening lives, and that scale is nonperturbative in
 non-Abelian theories. A hard thermal loop is a loop with hard internal momentum and soft
-external momenta. Such a loop is $\order{g_s^2T^2}$, the same size as a soft $p^2$, so it has to be
+external momenta. Such a loop is $\order{g_s^2T^2}$, the same size as a soft $k^2$, so it has to be
 resummed into the propagator instead of being treated as a small correction. Near $\Tpc$ the coupling
 is not small and these scales are not well separated, so there the language is only
 heuristic.}
@@ -1184,9 +1184,9 @@ species ($\eta=+1$) of degeneracy $g$ with dispersion
 color and the two transverse polarizations. The free-gas pressure and energy
 density at fixed mass $m$ are
 \begin{equation}\begin{aligned}\label{eq:qpideal}
-  P_{\rm id}(T,m)&=-\frac{gT}{2\pi^2}\int_0^\infty\dd{p}p^2
+  p_{\rm id}(T,m)&=-\frac{gT}{2\pi^2}\int_0^\infty\dd{k}k^2
       \log\left(1-e^{-\omega/T}\right),\\
-  \epsilon_{\rm id}(T,m)&=\frac{g}{2\pi^2}\int_0^\infty\dd{p}p^2
+  \epsilon_{\rm id}(T,m)&=\frac{g}{2\pi^2}\int_0^\infty\dd{k}k^2
       \,\omega\, n_B(\omega),
 \end{aligned}\end{equation}
 where $n_B(\omega)=1/(e^{\omega/T}-1)$ is the Bose-Einstein occupation
@@ -1195,38 +1195,38 @@ $4\pi/(2\pi)^3=1/2\pi^2$.
 
 At fixed $m$ this is just the ideal gas, and it satisfies the
 thermodynamic identity that follows from \equatref{eq:dfdt} with
-$P=-F/V$ at $\mu=0$,
+$p=-F/V$ at $\mu=0$,
 \begin{equation}\label{eq:qpconsistency}
-  \epsilon=T\dv{P}{T}-P.
+  \epsilon=T\dv{p}{T}-p.
 \end{equation}
-To check it, differentiate $P_{\rm id}$ at fixed $m$:
+To check it, differentiate $p_{\rm id}$ at fixed $m$:
 \begin{equation}\begin{aligned}\label{eq:qpfixedm}
-  \atFixed{\pdv{P_{\rm id}}{T}}{m}
-    &=\frac{P_{\rm id}}{T}-\frac{gT}{2\pi^2}\int_0^\infty\dd{p}p^2
+  \atFixed{\pdv{p_{\rm id}}{T}}{m}
+    &=\frac{p_{\rm id}}{T}-\frac{gT}{2\pi^2}\int_0^\infty\dd{k}k^2
       \frac{-e^{-\omega/T}\,\omega/T^2}{1-e^{-\omega/T}}
-    =\frac{P_{\rm id}}{T}+\frac{\epsilon_{\rm id}}{T}.
+    =\frac{p_{\rm id}}{T}+\frac{\epsilon_{\rm id}}{T}.
 \end{aligned}\end{equation}
 
 Now let $m=m(T)$. The total derivative picks up an extra piece,
 \begin{equation}\label{eq:qpchain}
-  \dv{P_{\rm id}}{T}=\atFixed{\pdv{P_{\rm id}}{T}}{m}
-     +\atFixed{\pdv{P_{\rm id}}{m}}{T}\dv{m}{T},
+  \dv{p_{\rm id}}{T}=\atFixed{\pdv{p_{\rm id}}{T}}{m}
+     +\atFixed{\pdv{p_{\rm id}}{m}}{T}\dv{m}{T},
 \end{equation}
-so if we take $P=P_{\rm id}$ and $\epsilon=\epsilon_{\rm id}$ with
+so if we take $p=p_{\rm id}$ and $\epsilon=\epsilon_{\rm id}$ with
 $m\to m(T)$, then
 \begin{equation}
-  T\dv{P_{\rm id}}{T}-P_{\rm id}=\epsilon_{\rm id}
-     +T\,\pdv{P_{\rm id}}{m}\dv{m}{T}\neq\epsilon_{\rm id}.
+  T\dv{p_{\rm id}}{T}-p_{\rm id}=\epsilon_{\rm id}
+     +T\,\pdv{p_{\rm id}}{m}\dv{m}{T}\neq\epsilon_{\rm id}.
 \end{equation}
-The naive model is thermodynamically inconsistent: $P$ and $\epsilon$
+The naive model is thermodynamically inconsistent: $p$ and $\epsilon$
 do not come from the same partition function. The mass derivative is
 \begin{equation}\label{eq:dPdm}
-  \atFixed{\pdv{P_{\rm id}}{m}}{T}
-    =-\frac{gm}{2\pi^2}\int_0^\infty\dd{p}\frac{p^2}{\omega}\,n_B(\omega),
+  \atFixed{\pdv{p_{\rm id}}{m}}{T}
+    =-\frac{gm}{2\pi^2}\int_0^\infty\dd{k}\frac{k^2}{\omega}\,n_B(\omega),
 \end{equation}
 which is negative and only vanishes when $m=0$. This is not because each
 particle pushes less. In the Boltzmann approximation one can integrate by parts
-to find $P=nT$ exactly, for any mass, i.e. every particle contributes $T$ to the
+to find $p=nT$ exactly, for any mass, i.e. every particle contributes $T$ to the
 pressure. Instead, at fixed $T$ and $\mu=0$ the particle number is set by
 thermal equilibrium, and since creating a particle costs at least $m$, the
 number density $n\propto e^{-m/T}$ for $m\gg T$. Heavier species simply have
@@ -1251,57 +1251,57 @@ temperature-dependent, momentum-independent energy density $B(T)$ to
 the system. You can think of it as the energy of the medium that is not
 carried by the quasiparticle excitations, like a mean field or vacuum
 energy, similar to the bag constant of the MIT bag model. The Hamiltonian
-becomes $H=\sum_{\vec{p}}\omega_{\vec{p}}(T)\,n_{\vec{p}}+VB(T)$, so
+becomes $H=\sum_{\vec{k}}\omega_{\vec{k}}(T)\,n_{\vec{k}}+VB(T)$, so
 \begin{equation}
   \log Z=\log Z_{\rm id}-\frac{VB}{T}
 \end{equation}
 and
 \begin{equation}\begin{aligned}\label{eq:qpPE}
-  P&=P_{\rm id}(T,m(T))-B(T),\\
+  p&=p_{\rm id}(T,m(T))-B(T),\\
   \epsilon&=\epsilon_{\rm id}(T,m(T))+B(T).
 \end{aligned}\end{equation}
-Plugging these into \equatref{eq:qpconsistency}, expanding $\dd{P_{\rm id}}/\dd{T}$
+Plugging these into \equatref{eq:qpconsistency}, expanding $\dd{p_{\rm id}}/\dd{T}$
 with \equatref{eq:qpchain}, and using \equatref{eq:qpfixedm} to replace
-$T(\partial P_{\rm id}/\partial T)_m$ by $P_{\rm id}+\epsilon_{\rm id}$,
+$T(\partial p_{\rm id}/\partial T)_m$ by $p_{\rm id}+\epsilon_{\rm id}$,
 \begin{equation}
-  T\left(\pdv{P_{\rm id}}{m}\dv{m}{T}-\dv{B}{T}\right)=0,
+  T\left(\pdv{p_{\rm id}}{m}\dv{m}{T}-\dv{B}{T}\right)=0,
 \end{equation}
 i.e.
 \begin{equation}\label{eq:qpBcondition}
-  \dv{B}{T}=\atFixed{\pdv{P_{\rm id}}{m}}{T}\dv{m}{T}.
+  \dv{B}{T}=\atFixed{\pdv{p_{\rm id}}{m}}{T}\dv{m}{T}.
 \end{equation}
 Since $m$ and $B$ both depend only on $T$, this is equivalent to
 \begin{equation}\label{eq:qpstationary}
-  \atFixed{\pdv{P}{m}}{T}=\pdv{P_{\rm id}}{m}-\dv{B}{m}=0.
+  \atFixed{\pdv{p}{m}}{T}=\pdv{p_{\rm id}}{m}-\dv{B}{m}=0.
 \end{equation}
 I find this the most illuminating way to state the condition: {\it the
 pressure is stationary with respect to the quasiparticle mass}. It looks
 like a variational principle, where the mass is a variational parameter
 and the thermodynamics comes out right only at the extremum. Because of
 this stationarity, the extra $\dd{m}/\dd{T}$ terms drop out of every
-first derivative of $P$.
+first derivative of $p$.
 
 Given $m(T)$, \equatref{eq:qpBcondition} determines $B$ up to a constant,
 \begin{equation}\label{eq:qpB}
   B(T)=B(T_0)+\int_{T_0}^T\dd{T'}
-     \pdv{P_{\rm id}}{m}\bigg|_{T',m(T')}\dv{m}{T'}.
+     \pdv{p_{\rm id}}{m}\bigg|_{T',m(T')}\dv{m}{T'}.
 \end{equation}
 The integration constant $B(T_0)$ is not fixed by thermodynamic
-consistency. It has to be supplied, e.g. by matching $P$ to a lattice
+consistency. It has to be supplied, e.g. by matching $p$ to a lattice
 value at some $T_0$. That is the same issue as the integration constant
 in the integral method for the pressure in \secref{sec:QCDtherm}. Since
-$\partial P_{\rm id}/\partial m<0$, $B$ decreases where $m$ increases
+$\partial p_{\rm id}/\partial m<0$, $B$ decreases where $m$ increases
 and increases where $m$ decreases.
 
 For numerics we can again expand $n_B$ in a geometric series. Using
 \begin{equation}
-  \int_0^\infty\dd{p}\frac{p^2}{\sqrt{p^2+m^2}}e^{-a\sqrt{p^2+m^2}}
+  \int_0^\infty\dd{k}\frac{k^2}{\sqrt{k^2+m^2}}e^{-a\sqrt{k^2+m^2}}
      =\frac{m}{a}K_1(am),
 \end{equation}
-with $a=k/T$, \equatref{eq:dPdm} becomes
+with $a=\ell/T$, \equatref{eq:dPdm} becomes
 \begin{equation}
-  \atFixed{\pdv{P_{\rm id}}{m}}{T}
-    =-\frac{gm^2T}{2\pi^2}\sum_{k=1}^\infty\frac{1}{k}K_1\left(\frac{km}{T}\right).
+  \atFixed{\pdv{p_{\rm id}}{m}}{T}
+    =-\frac{gm^2T}{2\pi^2}\sum_{\ell=1}^\infty\frac{1}{\ell}K_1\left(\frac{\ell m}{T}\right).
 \end{equation}
 You can check this by differentiating \equatref{eq:pressrelQM}
 (with $\eta=z=1$) w.r.t. $m$, using the Bessel derivative formula.
@@ -1309,10 +1309,10 @@ You can check this by differentiating \equatref{eq:pressrelQM}
 \subsubsection{Consequences}
 
 {\it Entropy.} The bag function cancels in the enthalpy,
-$\epsilon+P=\epsilon_{\rm id}+P_{\rm id}$, so from Gibbs-Duhem at $\mu=0$,
+$\epsilon+p=\epsilon_{\rm id}+p_{\rm id}$, so from Gibbs-Duhem at $\mu=0$,
 \begin{equation}\label{eq:qpentropy}
-  s=\frac{\epsilon+P}{T}=\frac{\epsilon_{\rm id}+P_{\rm id}}{T}
-   =\atFixed{\pdv{P_{\rm id}}{T}}{m}\Bigg|_{m=m(T)}.
+  s=\frac{\epsilon+p}{T}=\frac{\epsilon_{\rm id}+p_{\rm id}}{T}
+   =\atFixed{\pdv{p_{\rm id}}{T}}{m}\Bigg|_{m=m(T)}.
 \end{equation}
 So the entropy density is exactly the entropy of a free gas of
 particles with mass $m(T)$, with no reference to $B$. That fits the
@@ -1323,45 +1323,45 @@ by solving $s_{\rm id}(T,m)=s_{\rm lat}(T)$ for $m$.
 This works because $s_{\rm id}$ is monotonic in $m$. The pressure and energy
 density then need $B$, and so need the extra integration constant.
 
-{\it Trace anomaly.} Using $\epsilon_{\rm id}-3P_{\rm id}
-=\frac{g}{2\pi^2}\int\dd{p}p^2\,(m^2/\omega)\,n_B$,
+{\it Trace anomaly.} Using $\epsilon_{\rm id}-3p_{\rm id}
+=\frac{g}{2\pi^2}\int\dd{k}k^2\,(m^2/\omega)\,n_B$,
 \begin{equation}
-  \epsilon-3P=\frac{gm^2}{2\pi^2}\int_0^\infty\dd{p}\frac{p^2}{\omega}\,
+  \epsilon-3p=\frac{gm^2}{2\pi^2}\int_0^\infty\dd{k}\frac{k^2}{\omega}\,
      n_B(\omega)+4B.
 \end{equation}
 To see what this has to do with {\it scale invariance}\index{scale
 invariance}, recall \equatref{eq:thetaPressureDE}, which says
 \begin{equation}
-  \epsilon-3P=T^5\dv{T}\left(\frac{P}{T^4}\right).
+  \epsilon-3p=T^5\dv{T}\left(\frac{p}{T^4}\right).
 \end{equation}
 A scale-invariant theory has no intrinsic mass or length scale. If
-the only scale in the problem is $T$, dimensional analysis forces $P=cT^4$, and
-hence $\epsilon=3P$. The massless free gas is the standard example; this is the
+the only scale in the problem is $T$, dimensional analysis forces $p=cT^4$, and
+hence $\epsilon=3p$. The massless free gas is the standard example; this is the
 Stefan-Boltzmann limit\footnote{More precisely, invariance under dilatations
 $x\to\lambda x$ makes the energy-momentum tensor traceless, and in an
-equilibrium fluid the trace is $\epsilon-3P$. Dilatations are part of
+equilibrium fluid the trace is $\epsilon-3p$. Dilatations are part of
 the larger group of conformal transformations, so you will also see
-$\epsilon-3P$ described as a measure of broken conformal symmetry.}.
+$\epsilon-3p$ described as a measure of broken conformal symmetry.}.
 
 A free gas with a fixed mass $m$ breaks scale invariance explicitly. Now
-$P_{\rm id}=T^4f(m/T)$ for some function $f$, and differentiating at fixed $m$,
+$p_{\rm id}=T^4f(m/T)$ for some function $f$, and differentiating at fixed $m$,
 \begin{equation}
-  \epsilon_{\rm id}-3P_{\rm id}=T\atFixed{\pdv{P_{\rm id}}{T}}{m}-4P_{\rm id}
-   =-m\atFixed{\pdv{P_{\rm id}}{m}}{T},
+  \epsilon_{\rm id}-3p_{\rm id}=T\atFixed{\pdv{p_{\rm id}}{T}}{m}-4p_{\rm id}
+   =-m\atFixed{\pdv{p_{\rm id}}{m}}{T},
 \end{equation}
 which with \equatref{eq:dPdm} is exactly the first term above. The trace of a
 free gas measures how sensitive its pressure is to the mass scale.
 
 In the quasiparticle model one has to be more careful, because $m$ and $B$
-depend on $T$. The two terms in $\epsilon-3P$ are therefore not separately
+depend on $T$. The two terms in $\epsilon-3p$ are therefore not separately
 signals of broken scale invariance. Suppose $m=aT$ and $B=bT^4$ with constant
-$a$ and $b$. There is then no scale besides $T$, $P/T^4$ is constant, and
-$\epsilon-3P=0$. The consistency condition \equatref{eq:qpBcondition} indeed
+$a$ and $b$. There is then no scale besides $T$, $p/T^4$ is constant, and
+$\epsilon-3p=0$. The consistency condition \equatref{eq:qpBcondition} indeed
 fixes $4b=af'(a)$, so that $4B$ exactly cancels the mass term.
-In general, $P/T^4=f(m/T)-B/T^4$ depends on $T$ only through the
+In general, $p/T^4=f(m/T)-B/T^4$ depends on $T$ only through the
 dimensionless ratios $m/T$ and $B/T^4$, so
 \begin{equation}
-  \frac{\epsilon-3P}{T^4}=T\dv{T}\left[f\left(\frac{m}{T}\right)
+  \frac{\epsilon-3p}{T^4}=T\dv{T}\left[f\left(\frac{m}{T}\right)
       -\frac{B}{T^4}\right],
 \end{equation}
 which is nonzero only if these ratios change with $T$. Put differently, scale
@@ -1377,7 +1377,7 @@ discussed in \secref{sec:QCDtherm}. In the quasiparticle model it shows up as
 $m/T\propto g_s(T)$ changing with $T$. Asymptotic freedom sends $m/T\to0$, but
 only logarithmically. That is one way to understand why the approach to the
 Stefan-Boltzmann limit is so slow. Near $\Tpc$, the fitted $m/T$ and $B/T^4$ change
-rapidly, which is how the model produces the large peak in $(\epsilon-3P)/T^4$.
+rapidly, which is how the model produces the large peak in $(\epsilon-3p)/T^4$.
 
 {\it Limitations.} These models are fits, and their success depends on
 how much data goes into fixing $m(T)$ and $B(T_0)$. Near $\Tpc$ the
@@ -1404,7 +1404,7 @@ parameters}\index{material parameter}.
 The {\it speed of sound}\index{speed of sound} at fixed control parameter $X$
 is given by
 \begin{equation}
-  c_X^2=\atFixed{\pdv{P}{\epsilon}}{X}.
+  c_X^2=\atFixed{\pdv{p}{\epsilon}}{X}.
 \end{equation}
 This is not the only expression one might encounter for a sound speed.
 Qualitatively, the speed of sound should capture something like
@@ -1419,7 +1419,7 @@ material, i.e. if it has a higher inertia, sound speed will decrease.
 
 The {\it compressibility}\index{compressibility} at fixed $X$ is
 \begin{equation}
-  \kappa_X=-\frac{1}{V}\atFixed{\pdv{V}{P}}{X},
+  \kappa_X=-\frac{1}{V}\atFixed{\pdv{V}{p}}{X},
 \end{equation}
 which captures how much the volume changes under a change of pressure.
 Substances that take a lot of pressure to change the volume are not
@@ -1427,7 +1427,7 @@ very compressible; hence the minus sign.
 The {\it thermal expansion coefficient}\index{thermal expansion coefficient}
 is
 \begin{equation}
-  \alpha=\frac{1}{V}\atFixed{\pdv{V}{T}}{P},
+  \alpha=\frac{1}{V}\atFixed{\pdv{V}{T}}{p},
 \end{equation}
 and transparently characterizes how much the volume changes under temperature
 changes.
@@ -1438,15 +1438,15 @@ The {\it specific heat} at constant volume\index{specific heat} is
 \end{equation}
 while the specific heat at constant pressure is
 \begin{equation}
-  C_P=\atFixed{\pdv{H}{T}}{P}.
+  C_p=\atFixed{\pdv{H}{T}}{p}.
 \end{equation}
 The idea of a specific heat in general is to characterize how much heat
 it takes to change the temperature. Actually this is hidden in each of
 these formulae; for instance if we look at \equatref{eq:CV}, we notice
 that according to the first law, if we fix $V$, that
 $\dd U=T\dd{S}$, which is the heat. The same is true of the specific heat
-at constant pressure. Here, the Legendre transform, which adds $PV$,
-switches the dependence from $V$ to $P$, and hence this constrained
+at constant pressure. Here, the Legendre transform, which adds $pV$,
+switches the dependence from $V$ to $p$, and hence this constrained
 partial derivative captures the change in heat once again.
 
 We note that the above expressions for material parameters were
@@ -1467,7 +1467,7 @@ that partial derivatives of the same function at the same fixed
 control parameters commute implies there is a lot of redundancy. 
 For example:
 \begin{equation}
--\atFixed{\pdv{P}{S}}{V,N}
+-\atFixed{\pdv{p}{S}}{V,N}
 =\atFixed{\frac{\partial^2 U}{\partial S\partial V}}{N}
 =\atFixed{\frac{\partial^2 U}{\partial V\partial S}}{N}
 =\atFixed{\pdv{T}{V}}{S,N}.
@@ -1481,9 +1481,9 @@ commutation of partial derivatives between two specific variables holding
 all other control variables fixed, these will hold regardless of
 the number of particle species. One can show:
 \begin{equation}\label{eq:matparamconstraints}
- \frac{\kappa_T}{\kappa_S}=\frac{C_P}{C_V},~~~~~~ C_P-C_V=\frac{\alpha^2
+ \frac{\kappa_T}{\kappa_S}=\frac{C_p}{C_V},~~~~~~ C_p-C_V=\frac{\alpha^2
 T}{\kappa_T}, ~~~~~
- \kappa_T-\kappa_S=\frac{\alpha^2 T}{n C_P}.
+ \kappa_T-\kappa_S=\frac{\alpha^2 T}{n C_p}.
 \end{equation}
 
 To illustrate how to obtain such relations, we consider 
@@ -1503,7 +1503,7 @@ Inserting this into the first law and using the expression
 \equatref{eq:CV} for $C_V$, we get
 \begin{equation}\label{eq:maxDeriv1}
 T\dd{S}=
-\left[ \atFixed{\pdv{U}{V}}{T,\vec{N}} +P\right]\dd{V}
+\left[ \atFixed{\pdv{U}{V}}{T,\vec{N}} +p\right]\dd{V}
 + C_V \dd{T}
 + \sum_i \left[\atFixed{\pdv{U}{N_i}}{T,V,N_j\neq N_i}-\mu_i\right]\dd N_i.
 \end{equation}
@@ -1518,7 +1518,7 @@ we can identify
 \begin{equation}\begin{aligned}\label{eq:maxDeriv3}
 \atFixed{\pdv{S}{T}}{V,\vec{N}}&=\frac{C_V}{T}\\
 \atFixed{\pdv{S}{V}}{T,\vec{N}}&=
-\frac{1}{T}\left[\atFixed{\pdv{U}{V}}{T,\vec{N}} +P\right].
+\frac{1}{T}\left[\atFixed{\pdv{U}{V}}{T,\vec{N}} +p\right].
 \end{aligned}\end{equation}
 Applying the Maxwell relation
 \begin{equation}
@@ -1529,22 +1529,22 @@ at fixed $\vec{N}$ to \equatref{eq:maxDeriv3} yields
 \begin{equation}
 \frac{1}{T}\atFixed{\pdv{C_V}{V}}{\vec{N}}=
 \frac{\partial}{\partial T}
-\frac{1}{T}\left[\atFixed{\pdv{U}{V}}{T,\vec{N}} +P\right].
+\frac{1}{T}\left[\atFixed{\pdv{U}{V}}{T,\vec{N}} +p\right].
 \end{equation}
 Using \equatref{eq:CV} for $C_V$ in the above equation and 
 cancelling identical terms yields the {\it energy equation}\index{energy
 equation}\footnote{The energy equation is useful in that it allows one to
 extract the derivative of the internal energy through the more easily measurable
-quantities $P$, $T$, and $N_i$. It also implies that, for an ideal gas,
+quantities $p$, $T$, and $N_i$. It also implies that, for an ideal gas,
 $\partial_V U=0$ at fixed $T$ and $\vec{N}$.},
 \begin{equation}\label{eq:energyEquation}
 \atFixed{\pdv{U}{V}}{T,\vec{N}}
-=T\atFixed{\pdv{P}{T}}{V,\vec{N}}-P.
+=T\atFixed{\pdv{p}{T}}{V,\vec{N}}-p.
 \end{equation}
 At the same time, \propref{prp:chainconstrain} implies
-\begin{equation}
-\atFixed{\pdv{P}{T}}{V,\vec{N}}
-=-\atFixed{\pdv{V}{T}}{P,\vec{N}}\atFixed{\pdv{V}{P}}{T,\vec{N}}^{-1}
+\begin{equation}\label{eq:dpdTalphakappa}
+\atFixed{\pdv{p}{T}}{V,\vec{N}}
+=-\atFixed{\pdv{V}{T}}{p,\vec{N}}\atFixed{\pdv{V}{p}}{T,\vec{N}}^{-1}
 =\frac{\alpha}{\kappa_T}.
 \end{equation} 
 Combining this result with the energy equation and
@@ -1555,18 +1555,18 @@ T\dd{S} = C_V \dd{T} + \frac{\alpha T}{\kappa_T}\dd{V}
 \end{equation}
 
 We carried out this analysis thinking of $V$, $T$, and $\vec{N}$ as the fixed
-quantities from the outset. If we repeat everything fixing instead $P$, $T$, and
+quantities from the outset. If we repeat everything fixing instead $p$, $T$, and
 $\vec{N}$, we find a different energy equation and correspondingly instead
 \begin{equation}\label{eq:TdS2}
-T\dd{S} = C_P \dd{T} + \alpha T V\dd{P}
-+ \sum_i \left[\atFixed{\pdv{H}{N_i}}{T,P,N_j\neq N_i}-\mu_i\right]\dd N_i.
+T\dd{S} = C_p \dd{T} + \alpha T V\dd{p}
++ \sum_i \left[\atFixed{\pdv{H}{N_i}}{T,p,N_j\neq N_i}-\mu_i\right]\dd N_i.
 \end{equation}
 
 Holding $S$ and $\vec{N}$ fixed in both
 \equatref{eq:TdS1} and \equatref{eq:TdS2} and taking the ratio
 yields the first relation in \equatref{eq:matparamconstraints}.
 The second relation is derived by equating \equatref{eq:TdS1} and 
-\equatref{eq:TdS2} while holding $P$ and $\vec{N}$ fixed.
+\equatref{eq:TdS2} while holding $p$ and $\vec{N}$ fixed.
 The third relation follows then from the first two. 
 
 By the way, the first constraint can be shown without using Maxwell relations.
@@ -1586,13 +1586,65 @@ Combining these two equations and carrying out the same steps for $C_V$ gives
 \end{equation}
 Playing the same game with the compressibilities gives
 \begin{equation}
-\frac{\kappa_T}{\kappa_s}=1-
+\frac{\kappa_T}{\kappa_S}=1-
 \atFixed{\pdv{S}{V}}{T}\atFixed{\pdv{p}{T}}{V}\atFixed{\pdv{T}{S}}{V}\atFixed{\pdv{V}{p}}{T},
 \end{equation}
 which yields the first relation of \equatref{eq:matparamconstraints}, showing that
 it's generically true, even if you hold additional quantities fixed. Note,
 however, that the second and third constraints cannot be derived in this way: They
-depend explicitly on the first law. 
+depend explicitly on the first law.
+
+The sound speeds are tied to the compressibilities by
+\begin{equation}\label{eq:soundCompressibility}
+c_S^2=\frac{1}{\kappa_S(\epsilon+p)},~~~~~
+c_T^2=\frac{1}{(\epsilon+p)\kappa_T-T\alpha},
+\end{equation}
+where $c_S^2$ and $c_T^2$ are taken at fixed $S$ and $T$, respectively, and
+$\vec{N}$ is held fixed throughout. To derive these, we write $c_X^2$ with $X=S$ or
+$X=T$ as a ratio of two derivatives with respect to $V$, since $\kappa_X$ is
+a derivative with respect to $V$. Using \equatref{eq:chainw} and \eqref{eq:inv}
+with $w=(X,\vec{N})$ gives
+\begin{equation}\label{eq:cXratio}
+c_X^2=\atFixed{\pdv{p}{\epsilon}}{X,\vec{N}}
+=\atFixed{\pdv{p}{V}}{X,\vec{N}}\atFixed{\pdv{\epsilon}{V}}{X,\vec{N}}^{-1}
+=-\frac{1}{V\kappa_X}\atFixed{\pdv{\epsilon}{V}}{X,\vec{N}}^{-1},
+\end{equation}
+where in the last step we used the definition of $\kappa_X$.
+To evaluate the remaining derivative, we differentiate $\epsilon=U/V$ at fixed $X$ and
+$\vec{N}$, which gives
+\begin{equation}
+\atFixed{\pdv{\epsilon}{V}}{X,\vec{N}}
+=\frac{1}{V}\left[\atFixed{\pdv{U}{V}}{X,\vec{N}}-\epsilon\right].
+\end{equation}
+Inserting this into \equatref{eq:cXratio} gives
+\begin{equation}\label{eq:cXgeneral}
+c_X^2=\frac{1}{\kappa_X}\left[\epsilon-\atFixed{\pdv{U}{V}}{X,\vec{N}}\right]^{-1}.
+\end{equation}
+The two relations of \equatref{eq:soundCompressibility} follow from evaluating
+$\partial U/\partial V$ for $X=S$ and for $X=T$.
+For $X=S$, the first law \equatref{eq:fslaw} at fixed $S$ and $\vec{N}$ gives
+\begin{equation}
+\atFixed{\pdv{U}{V}}{S,\vec{N}}=-p.
+\end{equation}
+Inserting this into \equatref{eq:cXgeneral} gives
+the first relation.
+For $X=T$, we combine the energy equation \eqref{eq:energyEquation} with
+\equatref{eq:dpdTalphakappa}, which gives
+\begin{equation}
+\atFixed{\pdv{U}{V}}{T,\vec{N}}=\frac{T\alpha}{\kappa_T}-p.
+\end{equation}
+Inserting this into \equatref{eq:cXgeneral} gives
+\begin{equation}
+c_T^2=\frac{1}{\kappa_T}\left[\epsilon+p-\frac{T\alpha}{\kappa_T}\right]^{-1}
+=\frac{1}{(\epsilon+p)\kappa_T-T\alpha},
+\end{equation}
+which is the second relation.
+
+Like the second and third relations of \equatref{eq:matparamconstraints}, both
+relations of \equatref{eq:soundCompressibility} rely on the first law, here through
+$\partial U/\partial V$. If something other than $\vec{N}$ is held fixed,
+\equatref{eq:cXgeneral} still holds, but $\partial U/\partial V$ picks up the
+$\sum_i\mu_i\dd N_i$ term of \equatref{eq:fslaw}.
 
 
 
