@@ -1608,14 +1608,14 @@ Assuming uncorrelated data and defining
 $W\equiv\diag(1/\sigma_1^2,\dots,1/\sigma_N^2)$, the $\chi^2$ becomes 
 \begin{equation}
   \chi^2=\sum_{i=1}^N\frac{\left(Y_i-s(X_i)\right)^2}{\sigma_i^2}
-              =\left(\vec{Y}-B\vec{c}\right)^t W\left(\vec{Y}-B\vec{c}\right).
+              =\trans{\left(\vec{Y}-B\vec{c}\right)} W\left(\vec{Y}-B\vec{c}\right).
 \end{equation}
-Its gradient with respect to $\vec{c}$ is $-2B^t W\left(\vec{Y}-B\vec{c}\right)$. 
+Its gradient with respect to $\vec{c}$ is $-2\trans{B} W\left(\vec{Y}-B\vec{c}\right)$. 
 Setting the
 gradient to zero gives the best-fit coefficients as the solution of the linear
 {\it normal equations}\index{normal equations}
 \begin{equation}\label{eq:normal}
-  B^t W B\vec{c} = B^t W\vec{Y}.
+  \trans{B} W B\vec{c} = \trans{B} W\vec{Y}.
 \end{equation}
 Then no iterative approach is needed.
 

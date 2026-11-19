@@ -44,6 +44,13 @@
 \newcommand{\dual}[1]{{}^{*\hspace{-1mm}}{#1}}
 \newcommand{\sign}{\text{sign}}
 \newcommand{\mat}[2]{\left(#1\right)_{#2}} % matrix element
+\DeclareMathOperator{\adj}{adj}           % adjugate (transposed cofactor matrix)
+% transpose. The empty {} puts t after any subscript (a bare {#1}^t still stacks
+% over it). With a subscript, a negative kern pulls t back snug against it;
+% without one, a small positive kern keeps t clear of \vec arrows.
+\DeclareRobustCommand{\trans}[1]{%
+  \in@{_}{#1}%
+  \ifin@{#1}\mkern-3mu{}^{t}\else{#1}{}^{\mkern1mu t}\fi}
 \DeclareDocumentCommand\DD{ o g d() }{
   % o: optional n for nth differential
   % g: optional argument for readability and to control spacing

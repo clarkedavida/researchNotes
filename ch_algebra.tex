@@ -813,29 +813,18 @@ $n\times n$ matrix is the sum of its diagonal elements,
 \begin{equation}
   \tr M=\sum_i^nM_{ii}.
 \end{equation}
-When you {\it transpose}\index{transpose} a matrix, $M^t$, you interchange all of its
+When you {\it transpose}\index{transpose} a matrix, $\trans{M}$, you interchange all of its
 off-diagonal elements; i.e. the $i,j$-element gets replaced with the
 $j,i$-element, and vice-versa.
 The {\it complex conjugate}\index{complex conjugate}
 of a matrix $M^*$ simply conjugates all its elements.
 Finally we will sometimes need the conjugate-transpose or
 {\it adjoint}\index{adjoint} of a matrix, which is indicated with a
-little dagger\footnote{Hence we sometimes say ``$M$-dagger".},
+little dagger,
 $M^\dagger$. It is
 \begin{equation}
-M^\dagger\equiv (M^*)^t.
+M^\dagger\equiv \trans{(M^*)}.
 \end{equation}
-The {\it determinant}\index{determinant}
-of $M$ is 
-\begin{equation}
-  \det M\equiv\epsilon_{i_1...i_n}M_{1\,i_1}...M_{n\,i_n},
-\end{equation}
-where $\epsilon_{i_1...i_n}$ is the Levi-Civita symbol.
-An important and often-used fact relating determinants
-and inverses is the following:
-\begin{proposition}{}{detSingular}
-A matrix is invertible if and only if its determinant is nonzero.
-\end{proposition}
 
 Matrices will appear in many contexts for us, one of which
 is quantum physics. Quantum physics was historically built up partially in
@@ -852,7 +841,90 @@ represented\footnote{See \secref{sec:represent}.}\index{representation} by matri
 and so we can always think of non-commutative symbols in terms of matrices,
 whenever that helps us.
 
-In the context of quantum physics, observables like position are represented by
+\subsection{Matrix determinants}\label{sec:determinants}
+
+In this section, we will look at the matrix determinant and see how it can be
+used to decide whether a matrix is invertible.
+The {\it determinant}\index{determinant}
+of $M$ is
+\begin{equation}\label{eq:determinant}
+  \det M\equiv\epsilon_{i_1...i_n}M_{1\,i_1}...M_{n\,i_n},
+\end{equation}
+where $\epsilon_{i_1...i_n}$ is the Levi-Civita symbol.
+To find $M^{-1}$, note 
+\begin{equation}\label{eq:inverseColumns}
+  \sum_k M_{ik}\left(M^{-1}\right)_{kj}=\delta_{ij}.
+\end{equation}
+Each term of \equatref{eq:determinant} contains exactly one
+element of row $j$, namely $M_{j\,i_j}$. Collecting the terms according to
+which element $M_{jk}$ appears, i.e. setting $i_j=k$, gives
+the {\it cofactor expansion}\index{cofactor expansion} along row $j$,
+\begin{equation}\label{eq:cofactorExpansion}
+  \det M=\sum_k M_{jk}C_{jk},
+\end{equation}
+with the {\it cofactor}\index{cofactor}
+\begin{equation}\label{eq:cofactor}
+  C_{jk}\equiv\epsilon_{i_1...i_{j-1}\,k\,i_{j+1}...i_n}
+  M_{1\,i_1}...M_{j-1\,i_{j-1}}M_{j+1\,i_{j+1}}...M_{n\,i_n}.
+\end{equation}
+By \equatref{eq:cofactor}, $C_{jk}$ contains no element of row $j$; it is
+built from the other $n-1$ rows only. Comparing \equatref{eq:cofactorExpansion}
+with the $i=j$ case of \equatref{eq:inverseColumns},
+we see immediately that
+$(M^{-1})_{kj}=C_{jk}/\det M$ is a good candidate for the inverse. This motivates the
+{\it adjugate}\index{adjugate}, the transposed matrix of cofactors,
+\begin{equation}
+  (\adj M)_{kj}\equiv C_{jk}.
+\end{equation}
+The candidate works, and $\det M$ is exactly what decides whether it exists:
+\begin{proposition}{}{detSingular}
+A matrix $M$ is invertible if and only if $\det M\neq0$. In that case
+\begin{equation}\label{eq:inverseAdjugate}
+  M^{-1}=\frac{\adj M}{\det M}.
+\end{equation}
+\begin{proof}
+It remains to check the $i\neq j$ case of \equatref{eq:inverseColumns}, i.e.
+the overlap of the cofactors $C_{jk}$ with row $i\neq j$. Let $M'$ be $M$
+with row $j$ replaced by row $i$. Since $C_{jk}$ does not involve row $j$, the cofactors of $M'$ along
+row $j$ are the same $C_{jk}$, and \equatref{eq:cofactorExpansion} applied to
+$M'$ gives
+$$
+  \sum_k M_{ik}C_{jk}=\det M'.
+$$
+Rows $i$ and $j$ of $M'$ are both row $i$ of $M$. Swapping them leaves $M'$
+unchanged, but by the antisymmetry of $\epsilon$ it flips the sign of
+$\det M'$, so $\det M'=0$. Combining this with
+\equatref{eq:cofactorExpansion},
+\begin{equation}\label{eq:rowsDotCofactors}
+  \sum_k M_{ik}C_{jk}=\delta_{ij}\det M,
+\end{equation}
+which in matrix form reads
+\begin{equation}\label{eq:adjugateIdentity}
+  M\adj M=\det M\,\id_n.
+\end{equation}
+If $\det M\neq0$, dividing \equatref{eq:adjugateIdentity} by $\det M$ gives
+\equatref{eq:inverseAdjugate}.
+Conversely, suppose $M^{-1}$ exists. Using $\det(AB)=\det A\det B$, we get
+$\det M\det M^{-1}=\det\id_n=1$, so $\det M\neq0$.
+\end{proof}
+\end{proposition}
+
+\begin{example}{}{}
+Consider a generic $2\times2$ matrix
+$$
+  M=\begin{pmatrix} a & b \\ c & d \end{pmatrix}
+$$
+The cofactors are $C_{11}=d$, $C_{12}=-c$,
+$C_{21}=-b$, and $C_{22}=a$, so \equatref{eq:inverseAdjugate} becomes
+$$
+  M^{-1}
+  =\frac{1}{ad-bc}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}.
+$$
+\end{example}
+
+Determinants are also how we compute eigenvalues, which we need in quantum
+physics.
+There, observables like position are represented by
 matrices. But what we measure for an observable cannot depend on how we
 represent\footnote{I mean ``represent" here in the colloquial sense.} it,
 so we would like information about a matrix that is e.g. independent of
@@ -872,7 +944,10 @@ of $M$ with {\it eigenvalue}\index{eigenvalue} $\lambda$.
 \propref{prp:eigenvalue} shows that eigenvalues are a great candidate
 for measurable quantities, and indeed this is what we use in practice.
 Finding eigenvectors and eigenvalues is pretty straightforward.
-All eigenvalues of $M$ satisfy the
+By \equatref{eq:eigen}, $\lambda$ is an eigenvalue exactly when
+$(\lambda\id_n-M)v=0$ for some $v\neq0$, i.e. when $\lambda\id_n-M$ is not
+invertible. Hence by \propref{prp:detSingular},
+all eigenvalues of $M$ satisfy the
 {\it characteristic polynomial}\index{characteristic polynomial}
 \begin{equation}\label{eq:characteristicPolynomial}
 \det\left(\lambda\id_n-M\right)=0,
@@ -888,6 +963,40 @@ In case the eigenvalues are real, a matrix is
 if its eigenvalues are all positive, and
 {\it positive semidefinite}\index{positive semidefinite} 
 if the eigenvalues are all nonnegative.
+
+We close this section with some geometric intuition for the determinant
+and cofactors.
+Here it helps to treat rows as vectors: we write $r_i$ for row $i$ of $M$,
+i.e. $(r_i)_k=M_{ik}$, and $C_j$ for the vector with components
+$(C_j)_k=C_{jk}$.
+For real $M$, $\det M$ is the signed volume of the parallelepiped spanned by
+the rows $r_1,...,r_n$. By \equatref{eq:rowsDotCofactors} with $i\neq j$,
+$C_j$ is orthogonal to the $n-1$ rows $r_i$, so it is normal to the
+face $F_j$ spanned by them. Splitting $r_j$ into a part in $F_j$ and a part
+along the unit normal $\hat{n}_j=C_j/|C_j|$, only the latter survives in
+\equatref{eq:cofactorExpansion}, which becomes
+\begin{equation}
+  \det M=|C_j|\,(r_j\cdot\hat{n}_j).
+\end{equation}
+Here $r_j\cdot\hat{n}_j$ is the height of the parallelepiped above $F_j$, and
+a volume is base times height, so $|C_j|$ is the $(n-1)$-dimensional volume of
+$F_j$. The cofactor vector $C_j$ is therefore the area vector of the face
+opposite $r_j$. For $n=3$, \equatref{eq:cofactor} gives
+$C_{1k}=\epsilon_{k\,i_2i_3}M_{2\,i_2}M_{3\,i_3}=(r_2\times r_3)_k$, and
+\equatref{eq:cofactorExpansion} becomes the triple product
+$\det M=r_1\cdot(r_2\times r_3)$; the cofactor vector generalizes the cross
+product to $n$ dimensions. 
+
+The inverse also has a geometric reading. By
+\equatref{eq:inverseColumns}, column $j$ of $M^{-1}$ is normal to $F_j$ and
+gives 1 against $r_j$, so it equals $\hat{n}_j/(r_j\cdot\hat{n}_j)$, a vector
+whose length is one over the height above $F_j$. As the parallelepiped is flattened,
+some height goes to zero and the corresponding column of $M^{-1}$ blows up,
+which is the problem with nearly singular matrices discussed in
+\secref{sec:numerics}.
+
+
+\subsection{Special matrices}\label{sec:specialMatrices}
 
 A matrix $U$ is said to be {\it unitary}\index{unitary} if
 \begin{equation}\label{eq:unitary}
@@ -925,12 +1034,12 @@ Another nice property of hermitian matrices is the following:
 
 A matrix $S$ is {\it symmetric}\index{symmetric} if
 \begin{equation}
-S^t=S,
+\trans{S}=S,
 \end{equation}
 i.e. if the elements are symmetric about the diagonal.
 Meanwhile a matrix $O$ is {\it orthogonal}\index{orthogonal} if 
 \begin{equation}
-O^tO=\id_n.
+\trans{O}O=\id_n.
 \end{equation}
 This is
 the real counterpart of a unitary matrix. 
@@ -974,7 +1083,7 @@ The Cayley-Hamilton theorem finds many uses in in lattice field theory. In
 particular, note that for a $3\times 3$ matrix, the characteristic equation is
 \begin{equation}\label{eq:3x3characteristic}
 0=-\lambda^3+\lambda^2\tr
-M+\frac{1}{2}\lambda\left(\tr{M^2}-\tr{M}^2\right)+\det M \id_3.
+M+\frac{1}{2}\lambda\left(\tr M^2 -\left(\tr M\right)^2\right)+\det M \id_3.
 \end{equation}
 Cayley-Hamilton tells us that if we replace $\lambda$ with $M$, we get a valid
 equation. Thus
@@ -1007,7 +1116,7 @@ Let $S$ be an $n\times n$ symmetric, complex matrix with
 eigenvalues $\lambda_i$ and eigenvectors $u_i$. Then
 We can decompose $S$ as
 $$
-S=U^t\Lambda U,
+S=\trans{U}\Lambda U,
 $$
 where $\Lambda\equiv\diag\left(\lambda_1,...,\lambda_n\right)$ and
 $U=\left(u_1,...,u_n\right)$.
@@ -1022,14 +1131,14 @@ Any square\footnote{There is a statement also for non-square matrices.
 But again, that is that not what we're interested in.}
 matrix $M$ can be factorized as
 $$
-M=USV^t,
+M=US\trans{V},
 $$
 where $S=\diag\left(s_1,...,s_n\right)$, $s_i\geq 0$,
 and $U$ and $V$ are orthogonal matrices.
 \end{theorem} 
 SVD shows us that we can think of the action of any matrix on a real vector 
 in three steps. More precisely, since $U$ and 
-$V^t$ are orthogonal, they can be thought of
+$\trans{V}$ are orthogonal, they can be thought of
 as rotations, and since $S$ is diagonal, it stretches each cardinal axis 
 by $s_i$. These $s_i$ are called {\it singular values}\index{singular!value},
 hence the name.
@@ -1209,7 +1318,7 @@ the tensor product is associative and distributive.
 If $A$ is hermitian and $B$ is hermitian then so is $A\otimes B$.
 
 \begin{example}{}{}
-Let $u=(1,0)^t$ and $v=(0,1)^t$, which is the standard
+Let $u=\trans{(1,0)}$ and $v=\trans{(0,1)}$, which is the standard
 basis for $\R^2$. Then
 $$
 u \otimes u=\left(\begin{array}{l}
