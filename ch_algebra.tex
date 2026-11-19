@@ -184,11 +184,12 @@ definition of that structure. Therefore you can expect to see $gh$ instead of
 $g\bullet h$ from here on out.
 
 \begin{proposition}{}{}
-  A subset $H$ of $G$ is a subgroup of $G$ if and only if
+  A non-empty subset $H$ of $G$ is a subgroup of $G$ if and only if
   $$a,b\in H\Rightarrow ab^{-1}\in H$$
   \begin{proof}
-    ($\Rightarrow$) Follows immediately from the definition of a subgroup. To 
-    show ($\Leftarrow$) let $b\in H$. Then by the above conditional, $bb^{-1}
+    ($\Rightarrow$) Follows immediately from the definition of a subgroup. To
+    show ($\Leftarrow$) note that since $H$ is non-empty, there is some
+    $b\in H$. Then by the above conditional, $bb^{-1}
     \in H$, which shows $\id\in H$. To show the existence of inverses in $H$, 
     note $\id,b\in H\Rightarrow \id b^{-1}\in H\Rightarrow b^{-1}\in H$. 
     Finally, associativity is inherited from G.
@@ -196,7 +197,7 @@ $g\bullet h$ from here on out.
 \end{proposition}
 
 An {\it equivalence relation}\index{equivalence relation} $\sim$ on a
-set $G$ is a binary operation that has the following properties
+set $G$ is a binary relation that has the following properties
 $\Forall x,y,z\in G$:
 \begin{enumerate}
   \item it is {\it reflexive}\index{reflexive}, i.e. $x\sim x$;
@@ -379,7 +380,7 @@ is defined component wise.
 The {\it direct sum}\index{direct!sum} is a subgroup
 of the direct product. It is the restriction to elements of
 the direct product that are $\id$ in all but finitely
-many of the components. For finitely many abelian groups,
+many of the components. For finitely many groups,
 the direct sum and direct product are the same. The
 salient feature of a direct sum is that it introduces
 some notion of independence: Enforcing that component $i$
@@ -428,7 +429,7 @@ called a {\it representative} of the coset.
 
 
 We are now going to see that cosets define equivalence classes. To begin with
-let $H\le G$; $x,y\in H$; and define a binary relation\footnote{You can
+let $H\le G$; $x,y\in G$; and define a binary relation\footnote{You can
 heuristically think of this equation as the statement that if I go ``forward" by
 $x$, then ``backward" by $y$, I remain in $H$.} $\sim$ by
 \begin{equation}\label{eq:cosetEquivalence}
@@ -467,18 +468,20 @@ instead defined the equivalence relation by $x\sim y$ $\Leftrightarrow$
 $x^{-1}y\in H$, we would have found the equivalence classes to be the left
 cosets of $H$.
 \begin{proposition}{}{cosetPartition}
-  The cosets of $H$ partition $G$.
+  The right cosets of $H$ partition $G$.
   \begin{proof}
-    Let $g\in G$. We have to check that (1) $g$ belongs to some coset of $H$,
-    and further that (2) $g$ does not belong to two different cosets.
+    Let $g\in G$. We have to check that (1) $g$ belongs to some right coset
+    of $H$, and further that (2) $g$ does not belong to two different right
+    cosets.
     \begin{enumerate}
-      \item Let $h\in H$. Then $g=h(h^{-1}g)$, i.e. it is in the right
-            coset of $H$. A similar computation shows it is in the left
-            coset of $H$ as well. 
+      \item Since $\id\in H$, $g=\id g\in Hg$.
       \item Let $x,y\in G$. If $g\sim x$ and $g\sim y$, i.e. it belongs in
-            the $x$-coset and $y$-coset of $H$, then $x\sim y$ since
-            $\sim$ is transitive. 
+            $Hx$ and $Hy$, then $x\sim y$ since $\sim$ is transitive. Hence
+            $xy^{-1}=h_0$ for some $h_0\in H$, so $Hx=Hh_0y=Hy$, where we
+            used $Hh_0=H$ since $H$ is closed under multiplication.
     \end{enumerate}
+    The same argument with $x\sim y\Leftrightarrow x^{-1}y\in H$ shows that
+    the left cosets also partition $G$.
   \end{proof}
 \end{proposition}
 
@@ -551,7 +554,7 @@ partition $G$. Hence $|G|=n|H|$, where $n$ is the number of cosets of $H$.
   representations, which we will discuss in \secref{sec:represent}.
 
   Let $F$ be a field. A {\it vector space}\index{vector!space} over $F$ is a set
-  $V$ together with a binary operation $+$ under which $F$ is abelian and a
+  $V$ together with a binary operation $+$ under which $V$ is abelian and a
   mapping $F\times V\to V$, denoted $av\ \Forall a\in F$ and $v\in V$,
   satisfying
   \begin{enumerate}
@@ -627,11 +630,12 @@ We will formulate these ideas in terms of inner products.
   Let $V$ be a vector space over $\C$. An {\it inner
   product} or {\it scalar product} is a mapping
   $(\ ,\ ):V\times V\to \C$
-  satisfying $\Forall x,y,z\in V$ and $\alpha \in F$
+  satisfying $\Forall x,y,z\in V$ and $\alpha \in \C$
   \begin{enumerate}
     \item $(x,y)=(y,x)^{*}$,
-    \item $(x,y+z)=(x,y)+(x,z)$
-    \item $(x,\alpha y)=\alpha(x,y)$
+    \item $(x,y+z)=(x,y)+(x,z)$,
+    \item $(x,\alpha y)=\alpha(x,y)$, and
+    \item $(x,x)\geq0$, with equality if and only if $x=0$.
   \end{enumerate}
   Note that the above properties also imply $(x+y,z)=(x,z)+(y,z)$ and
   \index{vector!magnitude}\index{vector!norm}
@@ -643,10 +647,10 @@ We will formulate these ideas in terms of inner products.
 
 \begin{proposition}{}{orthog}
   Let $V$ be a vector space with inner product and let $W$ be a subspace
-  of $V$ with basis $\set{w_1,...,w_N}$. Consider the mapping $P:V\to W$
-  defined by
+  of $V$ with orthogonal basis $\set{w_1,...,w_N}$. Consider the mapping
+  $P:V\to W$ defined by
   $$
-    Pv=\sum_{i=1}^N\frac{(v,w_i)}{|w_i|^2}w_i.
+    Pv=\sum_{i=1}^N\frac{(w_i,v)}{|w_i|^2}w_i.
   $$
   (This map is the {\it orthogonal
   projection}\index{orthogonal!projection}.)
@@ -933,7 +937,7 @@ matrices. But what we measure for an observable cannot depend on how we
 represent\footnote{I mean ``represent" here in the colloquial sense.} it,
 so we would like information about a matrix that is e.g. independent of
 basis choice. The most important example of such information is as follows:
-Let $V$ be a vector space over a field $F$ and let $v\in V$,
+Let $V$ be a vector space over a field $F$ and let $v\in V$ with $v\neq0$,
 and suppose the matrix $M$ satisfies
 \begin{equation}\label{eq:eigen}
 Mv = \lambda v
@@ -1027,7 +1031,7 @@ The matrix is {\it antihermitian} if
 \begin{equation}
 H^\dagger=-H. 
 \end{equation}
-Hermitian matrices by definition have real eigenvalues.
+Hermitian matrices have real eigenvalues.
 This is useful in the context of quantum physics, since physical observables
 correspond to matrices, and eigenvalues of those matrices are measurable
 quantities, which ought to be real.
@@ -1102,7 +1106,7 @@ One application of this result is for matrix inversions. In particular,
 one can multiply through by $M^{-1}$, and hence trade
 the general problem of matrix inversion with a handful of matrix
 multiplications, which may be faster.
-Later we will encounter Lie groups whose representations
+Later we will encounter Lie algebras whose elements
 are traceless, which simplifies inverting such
 matrices substantially.
 
@@ -1153,7 +1157,7 @@ by $s_i$. These $s_i$ are called {\it singular values}\index{singular!value},
 hence the name.
 
 \begin{proposition}{}{semidefinite}
-If $M$ is positive semidefinite, then its eigenvalues equal its singular values.
+If $M$ is hermitian and positive semidefinite, then its eigenvalues equal its singular values.
 \end{proposition}
 
 \propref{prp:semidefinite} is especially useful in the context of statistics,
@@ -1251,8 +1255,8 @@ $\kappa$ of a matrix $M$ to be the ratio of the largest
 \end{equation}
 $M$ is said to be {\it ill-conditioned}\index{ill-conditioned}
 if $\kappa(M)$ is too large, i.e. if $1/\kappa(M)$ approaches
-machine precision\footnote{Roughly less than $10^{-6}$ for
-single precision and $10^{-12}$ for double.}.
+machine precision\footnote{Roughly $10^{-7}$ for
+single precision and $10^{-16}$ for double.}.
 
 One strategy to increase the stability of an inversion is to use
 SVD to single out the problematic singular values of a matrix.
@@ -1374,7 +1378,7 @@ Just as with the direct product for groups, one can show that
 the tensor product preserves component-wise multiplication.
 In particular when $A$, $B$, $C$, and $D$ are appropriately
 sized matrices, then
-\begin{equation}
+\begin{equation}\label{eq:mixedProduct}
 (A\otimes B)(C\otimes D)=(AC)\otimes(BD),
 \end{equation}
 where on the RHS we indicate ordinary matrix multiplication.
@@ -1674,7 +1678,7 @@ rules because $S$ cancels with its inverse.
 Let $D$ be a representation of $G$ over a vector space $V$ with
 subspace $W$. $W$ is an {\it invariant subspace}\index{subspace!invariant} 
 of $D$ if
-$\Forall w\in W$
+$\Forall g\in G$ and $w\in W$
 \begin{equation}
   D(g)w\in W.
 \end{equation}
@@ -1703,8 +1707,8 @@ reducible}. This can be written as the direct sum\index{direct!sum}
 
 \begin{theorem}{}{}
   Every representation of a finite group is equivalent to a
-  unitary transformation.
-%  \begin{proof} 
+  unitary representation.
+%  \begin{proof}
 %  Let $D$ be a representation of a finite group $G$. Define
 %  $$
 %    S\equiv\sum_{g\in G}D(g)^\dagger D(g).
@@ -1725,7 +1729,7 @@ can be displayed in matrix form like in \equatref{eq:reducible}.
 
 Direct products of group representations can be formed as
 tensor products of matrices. The group structure is guaranteed
-to be kept by the first result in \propref{prp:tensorProps}.
+to be kept by \equatref{eq:mixedProduct}.
 
 % Talk about simple, schur's lemma.
 
@@ -1790,7 +1794,10 @@ an interchange, all this does is switch the basis vectors
 $\ket{i}$ and $\ket{j}$, which clearly has no impact on the cycle
 structure of $D(g)$. Since any permutation can be built from interchanges,
 it follows that an arbitrary conjugation preserves the cycle
-structure. 
+structure. Conversely, if $\sigma$ and $\sigma'$ have the same cycle
+structure, write them in cycle notation with cycles of equal length
+aligned, and let $g$ send each entry of $\sigma$ to the corresponding
+entry of $\sigma'$. Then $\sigma'=g\sigma g^{-1}$.
 \end{proof}
 \end{proposition}
 
@@ -2087,7 +2094,7 @@ Additionally this parameterization is useful for carrying out
 matrix multiplications on the computer.
 
 \begin{proposition}{}{su2add}
-  Let $A,B\in\SU(2)$. Then
+  Let $A,B\in\SU(2)$ with $A+B\neq0$. Then
   $$
   \frac{A+B}{\sqrt{\det(A+B)}}\in\SU(2).
   $$
@@ -2120,9 +2127,7 @@ where the sign reflects the $\Z_2$ part.
 
 \begin{table}
 \centering
-\caption{Collection of properties of some groups.
-Every group in the table, except $\ON(1)\cong\Z_2$
-is a Lie group. }
+\caption{Collection of properties of some Lie groups.}
 \begin{tabularx}{\linewidth}{lCr}
 \hline\hline
 Group & Dimension & Notes\\
@@ -2132,7 +2137,7 @@ $\U(2)$  & 4          & $\cong (\U(1)\times \SU(2))/\Z_2$\\
 $\U(N)$  & $N^2$      & \\ 
 $\SU(2)$ & 3          & $\cong S^3$\\ 
 $\SU(N)$ & $N^2-1$    & \\
-$\ON(1)$ &            & $\cong\Z_2$\\
+$\ON(1)$ & 0          & $\cong\Z_2$\\
 $\ON(N)$ & $N(N-1)/2$ & $N>1$\\
 $\SO(3)$ & 3          & $\cong\SU(2)/\Z_2$\\
 $\SO(N)$ & $N(N-1)/2$ & \\
